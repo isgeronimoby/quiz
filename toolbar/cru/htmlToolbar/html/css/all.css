@@ -1,0 +1,762 @@
+/*----------------------------------------------------------------------------------*/
+/*------------------------------RESET DEFAULT STYLES--------------------------------*/
+/*----------------------------------------------------------------------------------*/
+html,body                       { width:100%; height:100%; }
+body                            { padding:0; margin:0; font:12px Tahoma, sans-serif; background:#fff; color:#000; }
+div,p,a,span,em,strong,img,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,td,tr,form,fieldset,label,select,checkbox,input,textarea {
+	padding:0;
+	margin:0;
+	outline:none;
+	list-style:none;
+}
+select, input, textarea        { font-size:12px; vertical-align:middle; }
+textarea                       { vertical-align:top; }
+:focus                         { outline:none; }
+input[type=submit]             { cursor:pointer; -webkit-appearance: none; -moz-appearance: none; appearance: none; }
+img, fieldset                  { border:0; }
+table                          { border-collapse:collapse; border-spacing:0; }
+a:link, a:visited              { font:12px Tahoma, sans-serif; color:#000; text-decoration:underline; }
+a:hover                        { text-decoration:none; }
+/*----------------------------------------------------------------------------------*/
+/*-------------------------------------DEFAULT CLASSES------------------------------*/
+/*----------------------------------------------------------------------------------*/
+.float-r           	           { float:right !important; }
+.float-l                       { float:left !important; }
+.no-float                      { float:none !important; }
+.no-border                     { border:0 !important; }
+.no-bg                         { background:none !important; }
+.no-margin                     { margin:0 !important; }
+.no-padding                    { padding:0 !important; }
+.no-display                    { display:none !important; }
+.display                       { display:block !important; }
+.inline                        { display:inline !important; }
+.overflow                      { overflow:hidden !important; }
+.align-r                       { text-align:right !important; }
+.align-l                       { text-align:left !important; }
+.align-c                       { text-align:center !important; }
+.clear                         { clear:both; }
+
+/*----------------------------------------------------------------------------------*/
+/*--------------------------------------IMPORT FONTS--------------------------------*/
+/*----------------------------------------------------------------------------------*/
+
+@font-face {
+	font-family: 'HelveticaNeueLTCom-Bd';
+	src: url('{HTML_PATH}f/HelveticaNeueLTCom-Bd.eot?#iefix') format('embedded-opentype'),  url('{HTML_PATH}f/HelveticaNeueLTCom-Bd.woff') format('woff'), url('{HTML_PATH}f/HelveticaNeueLTCom-Bd.ttf')  format('truetype'), url('{HTML_PATH}f/HelveticaNeueLTCom-Bd.svg#HelveticaNeueLTCom-Bd') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+@font-face {
+	font-family: 'HelveticaNeueLTCom-Md';
+	src: url('{HTML_PATH}f/HelveticaNeueLTCom-Md.eot?#iefix') format('embedded-opentype'),  url('{HTML_PATH}f/HelveticaNeueLTCom-Md.woff') format('woff'), url('{HTML_PATH}f/HelveticaNeueLTCom-Md.ttf')  format('truetype'), url('{HTML_PATH}f/HelveticaNeueLTCom-Md.svg#HelveticaNeueLTCom-Md') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+@font-face {
+	font-family: 'HelveticaNeueLTCom-Roman';
+	src: url('{HTML_PATH}f/HelveticaNeueLTCom-Roman.eot');
+	src: local('?'), url('{HTML_PATH}f/HelveticaNeueLTCom-Roman.woff') format('woff'), url('{HTML_PATH}f/HelveticaNeueLTCom-Roman.ttf') format('truetype'), url('{HTML_PATH}f/HelveticaNeueLTCom-Roman.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/*----------------------------------------------------------------------------------*/
+/*--------------------------------------WRAPPER-------------------------------------*/
+/*----------------------------------------------------------------------------------*/
+
+.extension-wrap * {
+	text-align: left;
+}
+
+/*.extension-wrap a,*/
+.extension-wrap p,
+.extension-wrap dt,
+.extension-wrap dd,
+.extension-wrap label,
+/*.extension-wrap span,*/
+/*.extension-wrap a:hover,*/
+/*.extension-wrap span:hover,*/
+.extension-wrap h1 {
+	font-family: HelveticaNeueLTCom-Roman;
+	font-weight: normal;
+}
+
+.extension-wrap h1 {
+	background: none;
+	clear: both;
+	display: inline-block;
+	float: none;
+	font-size: 24px;
+	height: auto;
+	margin: 0;
+	padding: 0;
+	text-indent: 0;
+	color: #000000;
+}
+
+
+
+.extension-wrap a,
+.extension-wrap a:hover {
+	font-family: HelveticaNeueLTCom-Roman;
+}
+
+.extension-wrap span {
+	font-family: HelveticaNeueLTCom-Roman;
+}
+
+.extension-wrap {
+	overflow: hidden;
+	display: table;
+	background: rgba(0, 0, 0, 0.22);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 999999;
+}
+
+.extension-wrap > div {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.extension-wrap .ext-container {
+	float: none;
+	overflow: hidden;
+	width: 650px;
+	margin: auto;
+	background-color: #ffffff;
+	border: solid 1px #5C5C5C;
+}
+
+.genie-logo {
+	float: left;
+	display: inline-block;
+	margin: 28px 0 0 28px;
+}
+
+.sign-up-top-link {
+	float: right;
+	overflow: hidden;
+	margin: 0 21px 0 0;
+	height: 31px;
+	border: solid 1px #DEDCD1;
+	text-align: center;
+}
+
+.sign-up-top-link li {
+	float: left;
+	overflow: hidden;
+}
+
+.extension-wrap .ext-content {
+	clear: both;
+	overflow: hidden;
+	margin: 0 30px;
+}
+
+.sign-up-top-link a {
+	display: block;
+	height: 31px;
+	padding: 0 18px;
+	font-family: HelveticaNeueLTCom-Bd;
+	font-size: 12px;
+	line-height: 31px;
+	background-color: #F3F2ED;
+	text-decoration: none;
+	color: #5F5F5F;
+}
+
+.sign-up-top-link a:hover {
+	font-family: HelveticaNeueLTCom-Bd;
+	text-decoration: none;
+	background-color: #ecebe6;
+	color: #5F5F5F;
+}
+
+/*-------------------Sign up complete--------------------*/
+
+.sign-up-complete .vertical-align-container {
+	margin: 0 auto;
+	display: table;
+	height: 223px;
+	width: 290px;
+}
+
+.sign-up-complete .vertical-align-container .logo-holder {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.sign-up-complete h1 {
+	display: block;
+	margin-bottom: 36px;
+	font-size: 24px;
+	text-align: center;
+	color: #000000;
+}
+
+.ext-summary {
+	width: 370px;
+	margin: 0 auto;
+}
+
+.ext-summary p {
+	margin-bottom: 60px;
+	text-align: center;
+	font-size: 14px;
+}
+
+.extension-wrap .ext-btn {
+	max-width: 290px;
+	display: block;
+	background-color: #73a559;
+	font-family: HelveticaNeueLTCom-Bd !important;
+	font-size: 18px;
+	line-height: 53px;
+	height: 53px;
+	padding: 0 25px;
+	text-align: center;
+	text-decoration: none;
+	color: #ffffff;
+}
+
+.extension-wrap .ext-btn:hover {
+	font-family: HelveticaNeueLTCom-Bd !important;
+	background-color: #699b4f;
+	text-align: center;
+	text-decoration: none;
+	color: #ffffff;
+}
+
+.sign-up-complete .ext-continue-btn {
+	margin: 0 auto 70px;
+}
+
+.extension-wrap .terms-wishgenie {
+	line-height: 19px;
+}
+
+.extension-wrap .sign-in a,
+.extension-wrap .terms-wishgenie a {
+	color: #54A753;
+	text-decoration: none;
+}
+
+.extension-wrap .sign-in a:hover,
+.extension-wrap .terms-wishgenie a:hover {
+	text-decoration: none;
+	color: #0a8b26;
+}
+
+/*-------------------Sign up page--------------------*/
+
+.sign-up-page h1 {
+	display: inline-block;
+	margin: 0 0 20px 0;
+	font-size: 24px;
+	color: #000000;
+}
+
+.sign-up-page .logo-holder {
+	overflow: hidden;
+	margin: 25px 0 0 0;
+	float: right;
+}
+
+.sign-up-page .ext-summary {
+	width: 356px;
+	margin: 0;
+}
+
+.sign-up-page .ext-summary p {
+	text-align: left;
+	margin: 0 0 18px 0;
+}
+
+.sign-up-page .sign-in {
+	display: block;
+	margin: 0 0 20px 0;
+}
+
+.sign-up-page .form-holder {
+	width: 100%;
+	clear: both;
+}
+
+.sign-up-page .ext-sign-up-l-block {
+	float: left;
+	margin: 0;
+	width: 224px;
+}
+
+.sign-up-page .ext-sign-up-l-block label {
+	display: block;
+	margin: 0 0 10px 0;
+}
+
+.sign-up-page .ext-sign-up-l-block input[type=text],
+.sign-up-page .ext-sign-up-l-block input[type=password]{
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	padding: 10px 8px;
+	display: block;
+	height: 33px;
+	width: 100%;
+	margin: 0 0 20px 0;
+	background-color: #e7e7e3;
+	border: none;
+	outline: none;
+}
+
+.sign-up-page .ext-sign-up-l-block input[type=submit] {
+	height: 37px;
+	width: 134px;
+	padding: 0;
+	line-height: 37px;
+	margin: 0 0 20px 0;
+	border: none;
+	outline: none;
+}
+
+.sign-up-page .terms-wishgenie {
+	margin: 0 0 17px 0;
+	clear: both;
+	text-align: left;
+}
+
+.sign-up-page .ext-sign-up-r-block {
+	text-align: center;
+	float: right;
+	margin: 101px 0 0 0;
+	width: 340px;
+}
+
+.ext-sign-up-r-block .choose-or {
+	display: block;
+	margin: 5px 0 0 0;
+	float: left;
+	overflow: hidden;
+	font-size: 24px;
+	line-height: 24px;
+}
+
+.ext-sign-up-r-block .ext-fb-sign {
+	float: right;
+	overflow: hidden;
+	width: 289px;
+}
+
+.ext-sign-up-r-block .ext-fb-sign a {
+	display: block;
+	width: 100%;
+	height: 37px;
+	margin: 0 0 13px 0;
+	font-size: 16px;
+	font-family: HelveticaNeueLTCom-Bd !important;
+	line-height: 37px;
+	text-align: center;
+	color: #ffffff;
+	text-decoration: none;
+	text-transform: none;
+	border: none;
+	outline: none;
+	background-color: #4e5aa6;
+}
+
+.ext-sign-up-r-block .ext-fb-sign a:hover {
+	font-size: 16px;
+	font-family: HelveticaNeueLTCom-Bd !important;
+	color: #ffffff;
+	text-decoration: none;
+	text-transform: none;
+	border: none;
+	outline: none;
+	background-color: #5265b5;
+}
+
+.ext-sign-up-r-block .fb-permissions {
+	display: block;
+	text-align: center;
+}
+
+.sign-up-page .ext-error {
+	border: solid 1px #c48a88 !important;
+}
+
+.sign-up-page .ext-validation-summary {
+	overflow: hidden;
+	width: 356px;
+	margin: 0 0 19px 0;
+	border: solid 1px #6b0000;
+	color: #6b0000;
+	background-color: #e0c6c6;
+
+}
+
+.sign-up-page .ext-validation-summary li p {
+	padding: 11px 15px;
+	line-height: 14px;
+}
+
+/*-------------------Sign in page--------------------*/
+
+.ext-sign-in .logo-holder {
+	overflow: hidden;
+	margin: 0 0 0 0;
+	float: right;
+	position: relative;
+	top: -53px;
+}
+
+.ext-sign-in .ext-sign-up-r-block {
+	margin: 0;
+}
+
+/*---------- policy terms FAQ pages-----------------*/
+
+.extension-wrap .back-top-link {
+	float: left;
+	margin: 0 0 0 21px;
+	width: 76px;
+	height: 31px;
+	border: solid 1px #DEDCD1;
+	text-align: center;
+}
+
+.extension-wrap .back-top-link a {
+	display: block;
+	width: 76px;
+	height: 31px;
+	font-size: 12px;
+	font-family: HelveticaNeueLTCom-Bd;
+	line-height: 31px;
+	text-align: center;
+	background-color: #F3F2ED;
+	text-decoration: none;
+	color: #5F5F5F;
+}
+
+.extension-wrap .back-top-link a:hover {
+	text-decoration: none;
+	background-color: #ecebe6;
+	color: #5F5F5F;
+	text-align: center;
+}
+
+.extension-wrap .ext-info {
+	margin: 72px 23px 0 30px;
+}
+
+.extension-wrap .ext-info h1 {
+	margin: 0 0 22px 0;
+}
+
+.ext-text-holder {
+	padding: 0 30px 0 0;
+	height: 405px;
+	overflow-x: auto;
+	margin-bottom: 17px;
+}
+
+.extension-wrap .ext-info p {
+	margin: 0 0 17px 0;
+	font-size: 14px;
+	color: #000000;
+}
+
+.extension-wrap .ext-info ul {
+	padding: 0 0 7px 15;
+}
+
+.extension-wrap .ext-info ul li p {
+	margin: 0 0 8px 0;
+	font-size: 14px;
+	color: #000000;
+}
+
+.extension-wrap .ext-info dt {
+	float: none;
+	display: block;
+	font-size: 18px;
+	margin-bottom: 2px;
+}
+
+.extension-wrap .ext-info dd {
+	float: none;
+	display: block;
+	font-size: 14px;
+	margin-bottom: 18px;
+}
+
+.bottom-menu-wrap {
+	text-align: center;
+}
+
+.extension-wrap .ext-info-bottom-menu {
+	display: inline-block;
+	overflow: hidden;
+	margin: 0 auto 17px;
+}
+
+.extension-wrap .ext-info-bottom-menu li {
+	float: left;
+	margin: 0 17px;
+
+}
+
+.extension-wrap .ext-info-bottom-menu li a{
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+}
+
+.extension-wrap .ext-info-bottom-menu li a:hover {
+	font-size: 12px;
+	color: #54A753;
+	text-decoration: none;
+}
+
+.extension-wrap .ext-info-bottom-menu li .ext-active {
+	font-size: 12px;
+	color: #54A753;
+	text-decoration: none;
+}
+
+/*---------------- Wallet page ------------------*/
+
+.ext-wallet h1 {
+	float: left;
+	margin-bottom: 30px;
+}
+
+
+.extension-wrap .ext-wallet .ext-btn {
+	float: right;
+	width: 105px;
+	height: 37px;
+	line-height: 37px;
+}
+
+.extension-wrap .ext-statistics {
+	overflow: hidden;
+	clear: both;
+	margin: 0 0 20px 0;
+}
+
+.extension-wrap .ext-statistics li {
+	margin: 0 13px 0 0;
+	float: left;
+	overflow: hidden;
+	width: 180px;
+	height: 106px;
+	background-color: #f2f2ec;
+}
+
+.extension-wrap .ext-statistics .ext-img-statistic {
+	background: none;
+	margin: 5px 0 0 18px;
+}
+
+.ext-statistics .ext-title {
+	display: block;
+	margin: 11px 18px 14px 17px;
+	font-size: 14px;
+	line-height: 14px;
+	color: #000000;
+}
+
+.ext-statistics .ext-sum {
+	display: block;
+	margin: 11px 0 14px 17px;
+	font-family: HelveticaNeueLTCom-Bd;
+	font-size: 36px;
+	line-height: 36px;
+	color: #565656;
+}
+
+.ext-history-empty {
+	margin: 0 0 10px 0;
+	background-color: #f2f2ec;
+}
+
+.ext-history-empty p {
+	font-size: 14px;
+	line-height: 22px;
+	margin: 0 0 10px 0;
+	padding: 18px 18px 36px;
+}
+
+.ext-history {
+	margin: 0 0 10px 0;
+}
+
+.ext-history li:nth-child(odd) {
+	background-color: #f2f2ec;
+}
+
+.ext-history li p {
+	padding: 0 17px;
+	font-size: 14px;
+	line-height: 29px;
+}
+
+.ext-wallet .ext-sign-up-wallet {
+	overflow: hidden;
+	float: right;
+	font-size: 12px;
+	line-height: 12px;
+	text-decoration: none;
+	overflow: hidden;
+	color: #54A753;
+}
+
+.ext-wallet .ext-sign-up-wallet:hover {
+	overflow: hidden;
+	float: right;
+	font-size: 12px;
+	line-height: 12px;
+	text-decoration: none;
+	overflow: hidden;
+	color: #0a8b26;
+}
+
+.ext-wallet-desc {
+	margin: 0 0 24px 0;
+}
+
+.ext-wallet-desc h2 {
+	font-family: HelveticaNeueLTCom-Roman;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 24px;
+	margin: 24px 0 20px 0;
+ }
+
+.ext-wallet-desc p {
+	font-size: 14px;
+	line-height: 18px;
+}
+
+.ext-logged-wallet .ext-history {
+	height: 230px;
+	overflow-y: auto;
+}
+
+.etx-user-logged-name {
+	float: right;
+	overflow: hidden;
+}
+
+.ext-u-name {
+	display: block;
+	font-size: 18px;
+	line-height: 18px;
+	text-align: right;
+}
+
+.etx-user-logged-name a {
+	display: inline-block;
+	text-decoration: none;
+	text-align: right;
+	font-size: 11px;
+	left: 11px;
+	color: #54A753;
+}
+
+.etx-user-logged-name a:hover {
+	display: inline-block;
+	text-decoration: none;
+	text-align: right;
+	font-size: 11px;
+	left: 11px;
+	color: #0a8b26;
+}
+
+/*----------------Landing Screen----------------*/
+
+.ext-landing .prev-raised {
+	margin: 0;
+	border-left: solid 1px #DEDCD1;
+}
+
+.ext-landing .ext-summary p {
+	font-family: HelveticaNeueLTCom-Md;
+	font-size: 24px;
+	line-height: 32px;
+	color: #000000;
+}
+
+.ext-landing .ext-summary .ext-cost {
+	font-family: HelveticaNeueLTCom-Roman;
+}
+
+.ext-landing .ext-btn-like-to-help {
+	height: 48px;
+	width: 258px;
+	margin: 0 0 18px 0;
+	padding: 0;
+	line-height: 48px;
+}
+
+.ext-landing .not-support-research {
+	font-size: 14px;
+	line-height: 14px;
+}
+
+.ext-landing .ext-powered-by {
+	float: right;
+	position: relative;
+	top: -5px;
+	color: #000000;
+}
+
+.ext-landing .ext-powered-by a {
+	text-decoration: underline;
+	color: #000000;
+}
+
+.ext-landing .ext-powered-by a:hover {
+	text-decoration: none;
+	color: #000000;
+}
+
+.ext-landing .ext-powered-by span {
+	display: block;
+	float: left;
+	overflow: hidden;
+	margin: 5px 8px 0 0;
+	font-family: HelveticaNeueLTCom-Bd	;
+}
+
+.ext-landing .ext-powered-by .genie-logo {
+	float: right;
+	margin: 0 0 7px 0;
+}
+
+.ext-landing .ext-jumbotron {
+	overflow: hidden;
+	clear: both;
+	margin: 0 0 14px 0;
+	padding: 10px;
+	background-color: #dfeaf2;
+}
+
+.ext-landing .ext-jumbotron p {
+	float: left;
+	overflow: hidden;
+	width: 300px;
+}
+
+.ext-landing .ext-jumbotron img {
+	display: block;
+	float: right;
+}

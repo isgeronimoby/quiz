@@ -1,0 +1,28 @@
+{
+  "name": "HTML",
+  "manifest_version": 2,
+  "version": "1.0.0",
+  "description": "EarnRewards every time you shop online for free!",
+  "icons": { "48": "Images/48.png" },
+  "background": {
+	"page": "global.html"
+  },
+  "permissions": ["webNavigation","webRequest", "tabs", "<all_urls>", "cookies"],
+  "browser_action": {
+	"default_title": "",
+	"default_icon": "Images/tb-logo-small.png",
+	"default_popup": ""
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+   "web_accessible_resources":[
+  "html/*/*.*",
+  "html/*.*"
+  ],
+  "content_scripts": [
+	{
+	  "matches": ["http://*/*","https://*/*"],
+	  
+	  "js": ["inject_content.js","content.adapter.js"]
+	}
+	]
+}
