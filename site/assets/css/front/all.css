@@ -1213,8 +1213,8 @@ a.read-more:visited {
     text-decoration: none;
 }
 .popup-article-image {
-    width: 117px;
-    height: 117px;
+    max-width: 117px;
+    max-height: 117px;
 }
 .popup-article .send-settings {
     text-decoration: none;
@@ -2465,6 +2465,11 @@ body .modal-fancy .gg.alt:hover {
 	font-family: 'Roboto', sans-serif;
 	font-size: 13px;
 	color: #7c7c7c;
+}
+.main-holder .content-area .profile-content p {
+    font-size: 14px;
+    color: #333333;
+    margin: 0;
 }
 
 .main-holder {
@@ -4220,6 +4225,19 @@ body .n-found .ie-true,
 }
 
 /*============================================================================*/
+/*NEW UTILS*/
+/*============================================================================*/
+.padding-top-15 {
+    padding-top: 15px;
+}
+.padding-bottom-15 {
+    padding-bottom: 15px;
+}
+/*============================================================================*/
+/*END OF NEW UTILS*/
+/*============================================================================*/
+
+/*============================================================================*/
 /*MEDIA STYLES*/
 /*============================================================================*/
 
@@ -5223,8 +5241,8 @@ body .n-found .ie-true,
 		padding: 13px 15px;
 	}
     .popup-article-image {
-        width: 95px;
-        height: 95px;
+        max-width: 95px;
+        max-height: 95px;
     }
 }
 
