@@ -1963,6 +1963,11 @@ body .modal-fancy .gg.alt:hover {
 	background: #e5412d;
 	color: #fff;
 }
+.aside-list a:focus,
+.aside-list a:visited {
+    text-decoration: none;
+}
+
 
 .aside-sep {
 	height: 8px;
