@@ -305,9 +305,9 @@ ul, ol, li, h1, h2, h3, h4, h5, h6 {
 	float: left;
 	padding: 0 29px 0 27px;
 	font-family: Arial;
-	margin: 5px 7px 0 0;
-	line-height: 30px;
-	height: 30px;
+	margin: 0 7px 0 0;
+	line-height: 40px;
+	height: 40px;
 	-webkit-transition: background-color 0.25s ease 0s;
 	-moz-transition: background-color 0.25s ease 0s;
 	-o-transition: background-color 0.25s ease 0s;
@@ -1213,8 +1213,8 @@ a.read-more:visited {
     text-decoration: none;
 }
 .popup-article-image {
-    max-width: 117px;
-    max-height: 117px;
+    width: 117px;
+    height: 117px;
 }
 .popup-article .send-settings {
     text-decoration: none;
@@ -1963,11 +1963,6 @@ body .modal-fancy .gg.alt:hover {
 	background: #e5412d;
 	color: #fff;
 }
-.aside-list a:focus,
-.aside-list a:visited {
-    text-decoration: none;
-}
-
 
 .aside-sep {
 	height: 8px;
@@ -2470,11 +2465,6 @@ body .modal-fancy .gg.alt:hover {
 	font-family: 'Roboto', sans-serif;
 	font-size: 13px;
 	color: #7c7c7c;
-}
-.main-holder .content-area .profile-content p {
-    font-size: 14px;
-    color: #333333;
-    margin: 0;
 }
 
 .main-holder {
@@ -4230,19 +4220,6 @@ body .n-found .ie-true,
 }
 
 /*============================================================================*/
-/*NEW UTILS*/
-/*============================================================================*/
-.padding-top-15 {
-    padding-top: 15px;
-}
-.padding-bottom-15 {
-    padding-bottom: 15px;
-}
-/*============================================================================*/
-/*END OF NEW UTILS*/
-/*============================================================================*/
-
-/*============================================================================*/
 /*MEDIA STYLES*/
 /*============================================================================*/
 
@@ -4338,10 +4315,6 @@ body .n-found .ie-true,
 		display: block;
 	}
 
-	.offers-btn {
-		display: none;
-	}
-
 	.navbar.active .search {
 		display: block;
 	}
@@ -4360,7 +4333,8 @@ body .n-found .ie-true,
 		display: none;
 	}
 
-	.navbar.active .btn-shop {
+	.navbar.active .btn-shop,
+	.navbar.active .offers-btn {
 		display: none;
 	}
 
@@ -5152,6 +5126,9 @@ body .n-found .ie-true,
 }
 
 @media all and (max-width: 460px) {
+	.offers-btn {
+		display: none;
+	}
 
 	/*Redirect amazon*/
 	.amazon-redirect .wrapper-link a {
@@ -5189,7 +5166,7 @@ body .n-found .ie-true,
 	}
 
 	.toolbar .button {
-		margin: 5px 5px 0 0;
+		margin: 0 5px 0 0;
 		padding: 0 17px;
 	}
 
@@ -5246,8 +5223,8 @@ body .n-found .ie-true,
 		padding: 13px 15px;
 	}
     .popup-article-image {
-        max-width: 95px;
-        max-height: 95px;
+        width: 95px;
+        height: 95px;
     }
 }
 

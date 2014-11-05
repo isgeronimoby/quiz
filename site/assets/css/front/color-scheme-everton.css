@@ -7,11 +7,11 @@ html.front.top-full .navbar.main {
   color: #00369c;
 }
 .toolbar .button {
-  color: #00369c;
-  background-color: #ffd739;
+  color: #ffffff;
+  background-color: #00369c;
 }
 .toolbar .button:hover {
-  background-color: #eec738;
+  background-color: #00295c;
 }
 .number {
   background-color: #ffd739;
