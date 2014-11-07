@@ -2498,9 +2498,9 @@ body .modal-fancy .gg.alt:hover {
 }
 
 .separator-sign-in {
-	display: inline-block;
-	width: 1px;
-	height: 12px;
+	display: inline-block !important;
+	width: 1px !important;
+	height: 12px !important;
 	margin: 0 4px 0 7px;
 	background-color: #e5412d;;
 }
@@ -2605,16 +2605,18 @@ body .modal-fancy .gg.alt:hover {
 	display: inline-block;
 	position: absolute;
 	padding: 0;
-	top: 9px;
+	top: 10px;
 	right: 11px;
-	width: 13px;
-	height: 14px;
+	width: 14px;
+	height: 13px;
 	border: none !important;
 	color: #000000;
-	background: url(../../images/front/triangle-small-icon.png) no-repeat top left;
+	background: url(../../images/front/triangle-small-icon.png) no-repeat;
+    background-size: cover;
 	-webkit-user-select:none;
 	-webkit-touch-callout:none;
 	-webkit-tap-highlight-color:rgba(0,0,0,0);
+    z-index: 8000;
 }
 
 .profile-statistic .triangle-btn:active {
@@ -4417,7 +4419,7 @@ body .n-found .ie-true,
 		border-bottom: none;
 		font-family: 'Roboto', sans-serif;
 		font-size: 19px;
-		line-height: 23px;
+		line-height: 25px;
 		color: #4f4f4f;
 		float: left;
 		overflow: hidden;
