@@ -4100,19 +4100,20 @@ body .n-found .ie-true,
 /*AMAZON redirect landing page*/
 /*============================================================================*/
 .wish-genie-logo-pos {
-    position: absolute;
-    top:10px;
-    left:10px;
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 .wish-genie-logo-pos img {
     width: 90px;
 }
 .cancer-research-landing hr {
-    margin-top: 60px;
+    margin-top: 5px;
 }
 
 .cancer-research-landing .amazon-redirect {
     padding-top: 18px;
+    padding-bottom: 80px;
 }
 .cancer-research-landing .amazon-redirect img {
     width: 270px;
@@ -4145,8 +4146,10 @@ body .n-found .ie-true,
 }
 .cancer-research-landing > div:last-child {
     background-color: #cee1eb;
-    margin-top: 150px;
     min-height: 70px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
 }
 .cancer-research-landing > div:last-child .container{
     width: 650px;
@@ -4156,6 +4159,14 @@ body .n-found .ie-true,
     color: #0d355b;
     font-size: 15px;
     padding: 4px 18px;
+}
+
+@media all and (max-height: 600px) {
+    .cancer-research-landing .amazon-redirect {
+        padding-bottom: 0;
+    }
+    .cancer-research-landing > div:last-child {
+         position: relative;
 }
 /*============================================================================*/
 /*END of AMAZON redirect landing page*/
