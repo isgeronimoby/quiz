@@ -1214,7 +1214,7 @@ a.read-more:visited {
 }
 .popup-article-image {
     width: 117px;
-    height: 117px;
+    height: auto;
 }
 .popup-article .send-settings {
     text-decoration: none;
@@ -1231,7 +1231,7 @@ a.read-more:visited {
     text-decoration: none;
 }
 .popup-article p {
-    max-height: 82px;
+    max-height: 76px;
     overflow: hidden;
 }
 .popup-article .supporting {
@@ -2713,6 +2713,8 @@ body .modal-fancy .gg.alt:hover {
 
 .main-holder .profile-content {
 	border-top: 1px solid #efefef;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .profile-content #footer {
@@ -3189,7 +3191,7 @@ body .datepicker .datepicker-days .table-condensed {
 /************Gift to a Friend tab********************/
 
 .profile-content  p {
-	margin: 0 0 22px 0;
+	margin: 0;
 }
 
 .profile-content .search-block {
@@ -5226,7 +5228,7 @@ body .n-found .ie-true,
 	}
     .popup-article-image {
         width: 95px;
-        height: 95px;
+        height: auto;
     }
 }
 
