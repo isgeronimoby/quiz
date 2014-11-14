@@ -1,0 +1,20 @@
+html body #x10sion-wg-wrap .ext-btn {
+  background-color: #dd411e;
+}
+html body #x10sion-wg-wrap .ext-btn:hover {
+  background-color: #f97800;
+}
+html body #x10sion-wg-wrap .sign-in a,
+html body #x10sion-wg-wrap .terms-wishgenie a,
+html body #x10sion-wg-wrap .ext-wallet .ext-sign-up-wallet,
+html body #x10sion-wg-wrap .etx-user-logged-name a {
+  color: #dd411e;
+}
+html body #x10sion-wg-wrap .sign-in a:hover,
+html body #x10sion-wg-wrap .terms-wishgenie a:hover,
+html body #x10sion-wg-wrap .ext-info-bottom-menu li a:hover,
+html body #x10sion-wg-wrap .ext-info-bottom-menu li .ext-active,
+html body #x10sion-wg-wrap .ext-wallet .ext-sign-up-wallet:hover,
+html body #x10sion-wg-wrap .etx-user-logged-name a:hover {
+  color: #f97800;
+}

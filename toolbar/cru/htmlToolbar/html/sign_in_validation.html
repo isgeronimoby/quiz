@@ -1,38 +1,38 @@
 <link rel="stylesheet" href="css/all.css" type="text/css"/>
 
 <!--{CONTENT_PATH}html/-->
-<div class="extension-wrap sign-up-page ext-sign-in">
+<div id="x10sion-wg-wrap" class="sign-up-page ext-sign-in">
 	<div>
 		<div class="ext-container">
 			<ul class="sign-up-top-link">
 				<li>
-					<a href="#">I just want to shop for now</a>
+					<a href="#" id="x10sion-wg-continue-shopping">I just want to shop for now</a>
 				</li>
 			</ul>
-			<a class="genie-logo" href="#"><img src="{CONTENT_PATH}html/images/wishgenie-logo.jpg" width="82" height="39" alt="wishgenie"/></a>
+			<img class="genie-logo genie-logo-top" src="{CONTENT_PATH}html/images/wishgenie-logo.jpg" width="82" height="39" alt="wishgenie"/>
 			<div class="ext-content">
-				<h1>Sign up</h1>
-				<span class="sign-in">Not registered? <a href="#">sign up</a></span>
+				<h1>Sign in</h1>
+				<span class="sign-in">Not registered? <a href="#"  id="x10sion-wg-sign-up">sign up</a></span>
 				<ul class="ext-validation-summary">
-					<li><p>Passwords should be at least 8 charecters longd</p></li>
+					<li><p>Passwords should be at least 8 characters long</p></li>
 				</ul>
-				<div class="logo-holder">
-					<a href="#"><img src="{CONTENT_PATH}html/images/company-logo.png" alt="Company name"/></a>
+				<div class="logo-holder form-with-err">
+					<img src="{CONTENT_PATH}html/images/cancer-research-uk.png" alt="Cancer Research UK"/>
 				</div>
 
 				<div class="ext-sign-up-l-block">
-					<form action="#">
+					<form action="#" id="x10sion-wg-sign-in-form">
 						<ul>
 							<li>
 								<label for="ext-user-email">Your email address:</label>
 								<input id="ext-user-email" type="text"/>
 							</li>
 							<li>
-								<label for="ext-pass">Choose a password</label>
+								<label for="ext-pass">Password:</label>
 								<input class="ext-error" id="ext-pass" type="password"/>
 							</li>
 							<li>
-								<input class="ext-btn" type="submit" value="Sign me up"/>
+								<input class="ext-btn" type="submit" value="Sign in"/>
 							</li>
 						</ul>
 					</form>
@@ -40,7 +40,7 @@
 				<div class="ext-sign-up-r-block">
 					<span class="choose-or">Or</span>
 					<div class="ext-fb-sign">
-						<a href="#">Connect instantly with Facebook</a>
+						<a href="#">Connect again with Facebook</a>
 						<span class="fb-permissions">We'll never post anything without your permission</span>
 					</div>
 				</div>
