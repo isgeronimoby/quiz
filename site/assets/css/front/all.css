@@ -1231,8 +1231,8 @@ a.read-more:visited {
     text-decoration: none;
 }
 .popup-article p {
-    max-height: 76px;
-    overflow: hidden;
+    /*max-height: 76px;*/
+    /*overflow: hidden;*/
 }
 .popup-article .supporting {
     color: #539f25;
@@ -4165,8 +4165,10 @@ body .n-found .ie-true,
     .cancer-research-landing .amazon-redirect {
         padding-bottom: 0;
     }
+
     .cancer-research-landing > div:last-child {
-         position: relative;
+        position: relative;
+    }
 }
 /*============================================================================*/
 /*END of AMAZON redirect landing page*/
@@ -5297,13 +5299,6 @@ body .n-found .ie-true,
 	html.front #footer ul li a {
 		margin-right: 26px;
 	}
-
-
-
-
-
-
-
 
 	.resent-activity .date {
 		margin: 0 10px 0 0;
