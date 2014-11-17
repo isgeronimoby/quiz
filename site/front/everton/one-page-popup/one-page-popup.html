@@ -10,23 +10,20 @@
 <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <style type="text/css" rel="stylesheet">
     /* RESET */
-    .everton-popup-clearfix:before,
-    .everton-popup-clearfix:after {
+    .everton-amazing-popups .everton-popup-clearfix:before,
+    .everton-amazing-popups .everton-popup-clearfix:after {
         content:"";
         display:table;
     }
-    .everton-popup-clearfix:after {
+    .everton-amazing-popups .everton-popup-clearfix:after {
         clear:both;
     }
-    .everton-popup-clearfix {
+    .everton-amazing-popups .everton-popup-clearfix {
         zoom:1; /* For IE 6/7 (trigger hasLayout) */
     }
     /* END OF RESET */
 
-    .everton-amazing-popups {
-
-    }
-    .everton-popup-container {
+    .everton-amazing-popups .everton-popup-container {
         display: none;
         opacity: 0;
         transition: opacity 0.3s;
@@ -40,7 +37,7 @@
         line-height: 15px;
         font-family: Roboto,sans-serif;
     }
-    .everton-popup {
+    .everton-amazing-popups .everton-popup-container .everton-popup {
         background-color: #ffffff;
         max-width: 650px;
         max-height: 90%;
@@ -53,16 +50,16 @@
         box-shadow: 0 10px 25px rgba(0,0,0,.5);
     }
     @media all and (max-width: 670px) {
-        .everton-popup {
+        .everton-amazing-popups .everton-popup-container .everton-popup {
             max-width: 90%;
         }
     }
-    .everton-popup-header {
+    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-header {
         background-color: #00369c;
         overflow: hidden;
         padding: 14px 18px 14px 30px;
     }
-    .everton-popup-header h1 {
+    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-header h1 {
         float: left;
         font-size: 18px;
         line-height: 18px;
@@ -71,17 +68,17 @@
         padding: 0;
         font-weight: 200;
     }
-    .everton-popup-header .everton-popup-close {
+    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-header .everton-popup-close {
         float: right;
         display: block;
         background: url('./images/btn-close.png') no-repeat;
         width: 20px;
         height: 20px;
     }
-    .everton-popup-body {
+    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body {
         padding: 5px 24px 34px 30px;
     }
-    .everton-popup-body h2 {
+    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body h2 {
         margin-top: 40px;
         margin-bottom: 40px;
         color: #00369c;
@@ -90,7 +87,7 @@
         font-weight: 500;
         line-height: 1.1;
     }
-    .everton-popup-body .everton-popup-yellow-btn {
+    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .everton-popup-yellow-btn {
         display: inline-block;
         padding: 20px 15px;
         margin-bottom: 40px;
@@ -105,16 +102,16 @@
         border: 0;
         border-bottom: solid 4px #e4981f;
     }
-    .everton-popup-body .everton-popup-btn-holder {
+    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .everton-popup-btn-holder {
         text-align: center;
     }
 
-    .everton-popup-body p {
+    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body p {
         color: #444;
         margin: 10px 0 0;
     }
-    .everton-popup-btn-holder .not-ie,
-    .everton-popup-btn-holder .ie-true{
+    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .everton-popup-btn-holder .not-ie,
+    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .everton-popup-btn-holder .ie-true{
         display: none;
     }
 </style>
