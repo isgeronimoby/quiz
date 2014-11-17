@@ -41,21 +41,6 @@ $(document).ready(function () {
 		trigger: 'hover'
 	})
 
-//    jquery autocomplete header search
-
-	var searchArray = ['Amazon', 'Debenhams', 'Argos', 'Argos', 'Argos'];
-
-	$('#header-search').autocomplete({
-		lookup: searchArray,
-		minChars: 0,
-		onSelect: function (suggestion) {
-			$('#selection').html('You selected: ' + suggestion.value + ', ' + suggestion.data);
-		},
-		showNoSuggestionNotice: true,
-		noSuggestionNotice: 'Sorry, no matching results',
-		zIndex: 10000
-	});
-
 //    profile hover menu
 
 	$('.no-touch .profile.logged-in, .no-touch .profile-hover').mouseover(function () {
