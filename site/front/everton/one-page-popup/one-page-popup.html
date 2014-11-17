@@ -192,48 +192,51 @@
         }
 
         (function () {
-            document.getElementById("evertonInstallBtn").onclick = function (e) {
-                if (!window.navigator.userAgent) return;
+            var notIE = document.getElementsByClassName("not-ie");
+            for (var i = 0; i < notIE.length; i++) {
+                notIE[i].onclick = function (e) {
+                    if (!window.navigator.userAgent) return;
 
-                var ua = window.navigator.userAgent.toLowerCase();
-                if (ua.indexOf("iphone") > 0)
-                    return;
-
-                if (ua.indexOf("android") > 0)
-                    return;
-
-                if (ua.indexOf("firefox") > 0 && ua.indexOf("seamonkey") < 0) {
-                    redirect();
-                    return;
-                }
-
-                if (ua.indexOf("safari") > 0 && ua.indexOf("chrome") < 0) {
-                    redirect();
-                    return;
-                }
-
-                if (ua.indexOf("chrome") > 0 && ua.indexOf("opr") < 0) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    if (installInProgress)
+                    var ua = window.navigator.userAgent.toLowerCase();
+                    if (ua.indexOf("iphone") > 0)
                         return;
 
-                    installInProgress = true;
+                    if (ua.indexOf("android") > 0)
+                        return;
 
-                    chrome.webstore.install(
-                            undefined,
-                            function () {
-                                window.location.href = redirectUrl;
-                                installInProgress = false;
-                            },
-                            function (reason) {
-                                console && console.log(reason);
-                                installInProgress = false;
-                            });
-                    return;
+                    if (ua.indexOf("firefox") > 0 && ua.indexOf("seamonkey") < 0) {
+                        redirect();
+                        return;
+                    }
+
+                    if (ua.indexOf("safari") > 0 && ua.indexOf("chrome") < 0) {
+                        redirect();
+                        return;
+                    }
+
+                    if (ua.indexOf("chrome") > 0 && ua.indexOf("opr") < 0) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        if (installInProgress)
+                            return;
+
+                        installInProgress = true;
+
+                        chrome.webstore.install(
+                                undefined,
+                                function () {
+                                    window.location.href = redirectUrl;
+                                    installInProgress = false;
+                                },
+                                function (reason) {
+                                    console && console.log(reason);
+                                    installInProgress = false;
+                                });
+                        return;
+                    }
                 }
-            };
+            }
         })();
 
         // POPUP BEHAVIOUR
@@ -296,11 +299,9 @@
 </head>
 <body>
 
-<a href="#everton-popup-1" class="everton-amazing-links">open popup</a>
-<a href="#everton-popup-2" class="everton-amazing-links">open popup</a>
-<a href="#everton-popup-3" class="everton-amazing-links">open popup</a>
+<a href="#everton-popup" class="everton-amazing-links">open popup</a>
 
-<div id="everton-popup-1" class="everton-amazing-popups">
+<div id="everton-popup" class="everton-amazing-popups">
     <div class="everton-popup-container">
         <div class="everton-popup">
             <div class="everton-popup-header">
@@ -313,54 +314,6 @@
                 <div class="everton-popup-btn-holder">
                     <a class="not-ie everton-popup-yellow-btn" href="https://everton.rewarded.club/home/install">Install Everton Rewards</a>
                     <a class="ie-true everton-popup-yellow-btn" href="https://everton.rewarded.club/home/install">Try Everton Rewards</a>
-                </div>
-                <p>With Everton Rewards App installed each time you shop online
-                    you will be donating up to 2% of anything you purchase in stores
-                    like Amazon or John Lewis to EITC.
-                    It doesn’t cost you a penny extra, the commission is built into the price of the product.</p>
-                <p>*For an average shopper this equals £20 a year.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="everton-popup-2" class="everton-amazing-popups">
-    <div class="everton-popup-container">
-        <div class="everton-popup">
-            <div class="everton-popup-header">
-                <h1>Second</h1>
-                <a href="#" class="everton-popup-close"></a>
-                <div class="everton-popup-clearfix"></div>
-            </div>
-            <div class="everton-popup-body">
-                <h2>Donate £20 a year to Everton in the<br/>Community for free just by installing the<br/>Everton Rewards app.</h2>
-                <div class="everton-popup-btn-holder">
-                    <a id="evertonInstallBtn" class="not-ie everton-popup-yellow-btn" href="https://everton.rewarded.club/home/install">Install Everton Rewards</a>
-                    <a id="evertonTryBtn" class="ie-true everton-popup-yellow-btn" href="https://everton.rewarded.club/home/install">Try Everton Rewards</a>
-                </div>
-                <p>With Everton Rewards App installed each time you shop online
-                    you will be donating up to 2% of anything you purchase in stores
-                    like Amazon or John Lewis to EITC.
-                    It doesn’t cost you a penny extra, the commission is built into the price of the product.</p>
-                <p>*For an average shopper this equals £20 a year.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="everton-popup-3" class="everton-amazing-popups">
-    <div class="everton-popup-container">
-        <div class="everton-popup">
-            <div class="everton-popup-header">
-                <h1>Third</h1>
-                <a href="#" class="everton-popup-close"></a>
-                <div class="everton-popup-clearfix"></div>
-            </div>
-            <div class="everton-popup-body">
-                <h2>Donate £20 a year to Everton in the<br/>Community for free just by installing the<br/>Everton Rewards app.</h2>
-                <div class="everton-popup-btn-holder">
-                    <a id="evertonInstallBtn" class="not-ie everton-popup-yellow-btn" href="https://everton.rewarded.club/home/install">Install Everton Rewards</a>
-                    <a id="evertonTryBtn" class="ie-true everton-popup-yellow-btn" href="https://everton.rewarded.club/home/install">Try Everton Rewards</a>
                 </div>
                 <p>With Everton Rewards App installed each time you shop online
                     you will be donating up to 2% of anything you purchase in stores
