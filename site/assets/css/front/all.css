@@ -2501,6 +2501,8 @@ body .modal-fancy .gg.alt:hover {
 	display: inline-block !important;
 	width: 1px !important;
 	height: 12px !important;
+    position: relative;
+    z-index: 500;
 	margin: 0 4px 0 7px;
 	background-color: #e5412d;;
 }
