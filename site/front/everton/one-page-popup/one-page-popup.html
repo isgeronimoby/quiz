@@ -9,7 +9,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <style type="text/css" rel="stylesheet">
-    /* RESET */
     .everton-amazing-popups .everton-popup-clearfix:before,
     .everton-amazing-popups .everton-popup-clearfix:after {
         content:"";
@@ -27,7 +26,7 @@
         display: none;
         opacity: 0;
         transition: opacity 0.3s;
-
+        background-color: rgba(0,0,0,0.3);
         position: absolute;
         top: 0;
         left: 0;
@@ -113,6 +112,21 @@
     .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .everton-popup-btn-holder .not-ie,
     .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .everton-popup-btn-holder .ie-true{
         display: none;
+    }
+    .everton-amazing-popups .everton-popup-container .everton-popup .show-desktop {
+        display: inherit;
+    }
+    .everton-amazing-popups .everton-popup-container .everton-popup .show-mobile {
+        display: none;
+    }
+
+    @media all and (max-width:1024px) {
+        .everton-amazing-popups .everton-popup-container .everton-popup .show-desktop {
+            display: none;
+        }
+        .everton-amazing-popups .everton-popup-container .everton-popup .show-mobile {
+            display: inherit;
+        }
     }
 </style>
 
@@ -302,17 +316,26 @@
     <div class="everton-popup-container">
         <div class="everton-popup">
             <div class="everton-popup-header">
-                <h1>Everton Rewards browser app</h1>
+                <h1 class="show-desktop">Everton Rewards browser app</h1>
+                <h1 class="show-mobile">Everton Rewards browser</h1>
                 <a href="#" class="everton-popup-close"></a>
                 <div class="everton-popup-clearfix"></div>
             </div>
             <div class="everton-popup-body">
-                <h2>Donate £20 a year to Everton in the<br/>Community for free just by installing the<br/>Everton Rewards app.</h2>
-                <div class="everton-popup-btn-holder">
+                <h2 class="show-desktop">Donate £20* a year to Everton in the<br/>Community for free just by installing<br/>the Everton Rewards app.</h2>
+                <h2 class="show-mobile">Donate £20* a year to Everton in the Community for free just by installing the Everton Browser.</h2>
+                <div class="everton-popup-btn-holder show-desktop">
                     <a class="not-ie everton-popup-yellow-btn" href="https://everton.rewarded.club/home/install">Install Everton Rewards</a>
                     <a class="ie-true everton-popup-yellow-btn" href="https://everton.rewarded.club/home/install">Try Everton Rewards</a>
                 </div>
-                <p>With Everton Rewards App installed each time you shop online
+                <div class="everton-popup-btn-holder show-mobile">
+                    <a class="everton-popup-yellow-btn" href="https://everton.rewarded.club/home/install">Install Everton Browser</a>
+                </div>
+                <p class="show-desktop">With Everton Rewards App installed each time you shop online
+                    you will be donating up to 2% of anything you purchase in stores
+                    like Amazon or John Lewis to EITC.
+                    It doesn’t cost you a penny extra, the commission is built into the price of the product.</p>
+                <p class="show-mobile">With Everton Browser App installed each time you shop online
                     you will be donating up to 2% of anything you purchase in stores
                     like Amazon or John Lewis to EITC.
                     It doesn’t cost you a penny extra, the commission is built into the price of the product.</p>
