@@ -12,7 +12,6 @@
 <head>
 	<title>Install Everton Rewards</title>
 	<link rel="icon" type="image/x-icon" href="images/favicon.ico" />
-	<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/jnhbihkcgjchgmolfdekbahagpgipggc">
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
@@ -110,60 +109,43 @@
 		var redirectTimeout = 5000;
 		var redirectUrl = "https://everton.rewarded.club";
 
-		function redirect() {
+		function redirectAfterInstall() {
 			setTimeout(function () {
-				window.location.href = redirectUrl;
+				window.top.location.href = redirectUrl;
 			}, redirectTimeout);
 		}
 
 		$(function () {
 			$(".installApp").click(function (e) {
-				if (!window.navigator.userAgent) return;
+				if (!window.navigator.userAgent) return true;
 
 				var ua = window.navigator.userAgent.toLowerCase();
 				if (ua.indexOf("iphone") > 0)
-					return;
+					return true;
 
 				if (ua.indexOf("android") > 0)
-					return;
+					return true;
 
 				if (ua.indexOf("firefox") > 0 && ua.indexOf("seamonkey") < 0) {
-					redirect();
-					return;
+					redirectAfterInstall();
+					return true;
 				}
 
 				if (ua.indexOf("safari") > 0 && ua.indexOf("chrome") < 0) {
-					redirect();
-					return;
+					redirectAfterInstall();
+					return true;
 				}
 
-				if (ua.indexOf("chrome") > 0 && ua.indexOf("opr") < 0) {
-					e.preventDefault();
+				if (ua.indexOf("chrome") > 0 && ua.indexOf("opr") < 0)
+					return true;
 
-					if (installInProgress)
-						return;
-					
-					installInProgress = true;
-
-					chrome.webstore.install(
-					undefined,
-					function () {
-						window.location.href = redirectUrl;
-						installInProgress = false;
-					},
-					function (reason) {
-						console && console.log(reason);
-						installInProgress = false;
-					});
-
-					return;
-				}
+				return true;
 			});
 		});
 	</script>
 </head>
 <body>
-<!--<script>
+<script>
 	(function (i, s, o, g, r, a, m) {
 		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
 			(i[r].q = i[r].q || []).push(arguments)
@@ -172,8 +154,9 @@
 	})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
 	ga('create', 'UA-51923524-20', 'auto');
+	ga('require', 'displayfeatures');
 	ga('send', 'pageview');
-</script>-->
+</script>
 <!-- Main Container Fluid -->
 <div class="container-fluid menu-hidden">
 <!-- Content -->
@@ -183,8 +166,8 @@
 		<h1 class="col-xs-40 col-xs-offset-4 col-sm-30 col-sm-offset-7 col-md-22 col-md-offset-13 col-lg-22 col-lg-offset-13">
 			Get money off Everton merchandise for free!
 		</h1>
-		<a class="not-ie installApp" href="https://everton.rewarded.club/home/install">Install Everton Rewards</a>
-		<a class="ie-true installApp" href="https://everton.rewarded.club/home/install">Try Everton Rewards</a>
+		<a class="not-ie installApp" href="https://everton.rewarded.club/home/install" target="_top">Install Everton Rewards</a>
+		<a class="ie-true" href="https://everton.rewarded.club/home/install" target="_top">Try Everton Rewards</a>
 		<p class="col-sx-30 col-sx-offset-9 col-sm-30 col-sm-offset-9 col-md-30 col-md-offset-9 col-lg-30 col-lg-offset-9">The Everton Rewards App is the smart, simple
 			and secure way to earn discounts on Everton
 			products just for shopping online as you
@@ -244,7 +227,7 @@
 			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="images/retailer-3.jpg" width="99" height="24" alt=""/></span></li>
 			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="images/retailer-4.jpg" width="110" height="17" alt=""/></span></li>
 			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="images/retailer-5.jpg" width="90" height="27" alt=""/></span></li>
-			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="images/retailer-6.jpg" width="69"height="27" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="images/retailer-6.jpg" width="69" height="27" alt=""/></span></li>
 			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="images/retailer-7.jpg" width="122" height="43" alt=""/></span></li>
 			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="images/retailer-8.jpg" width="48" height="35" alt=""/></span></li>
 			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="images/retailer-9.jpg" width="74" height="37" alt=""/></span></li>
@@ -258,8 +241,8 @@
 			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="images/retailer-17.jpg" width="81" height="27" alt=""/></span></li>
 			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="images/retailer-18.jpg" width="119" height="68" alt=""/></span></li>
 		</ul>
-		<a class="not-ie installApp" href="https://everton.rewarded.club/home/install">Install Everton Rewards</a>
-		<a class="ie-true installApp" href="https://everton.rewarded.club/home/install">Try Everton Rewards</a>
+		<a class="not-ie installApp" href="https://everton.rewarded.club/home/install" target="_top">Install Everton Rewards</a>
+		<a class="ie-true" href="https://everton.rewarded.club/home/install" target="_top">Try Everton Rewards</a>
 	</div>
 </div>
 </div>
@@ -269,14 +252,13 @@
 		<div class="row">
 			<div class="col-xs-48 col-sm-48 col-md-48 col-lg-48 clear-side-padding">
 				<ul>
-					<li><a href="#">Contact</a></li>
-					<li><a href="#">Terms</a></li>
-					<li><a href="#">Privacy</a></li>
-					<li class="active"><a href="#">Cookies</a></li>
+					<li><a href="https://everton.rewarded.club/home/contact" target="_top">Contact</a></li>
+					<li><a href="https://everton.rewarded.club/home/terms" target="_top">Terms</a></li>
+					<li><a href="https://everton.rewarded.club/home/privacy" target="_top">Privacy</a></li>
+					<li><a href="https://everton.rewarded.club/home/cookies" target="_top">Cookies</a></li>
 				</ul>
 			</div>
 		</div>
-
 	</div>
 </div>
 </body>
