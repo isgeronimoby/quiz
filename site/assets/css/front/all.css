@@ -3900,6 +3900,7 @@ body .n-found .ie-true,
 	resize: none;
 	border: 1px solid #efefef;
 	margin-bottom: 5px;
+    width: 100%;
 }
 
 .contact-area .contact-form label {
