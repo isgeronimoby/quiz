@@ -76,7 +76,6 @@ $(document).ready(function () {
 
 	//	sign up show form slideDown
 	$('.fake-btn').on('click', function(e) {
-		e.stopPropagation();
 		$(this).css('display', 'none');
 		$('.fancybox-wrap').addClass('custom-transition');
 		$('.switch-wrapp').slideDown(300);
