@@ -3616,7 +3616,7 @@ body .datepicker .datepicker-days .table-condensed {
 
 .dashboard-content .product-item .img-wrapper .holder img {
 	display: block;
-	width: 100%;
+	max-width: 100%;
 	height: auto;
 }
 
