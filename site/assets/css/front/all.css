@@ -2188,7 +2188,7 @@ body .modal-fancy .gg.alt:hover {
 	border: 1px solid #eaeaea;
 }
 .product-item .img-wrapper .holder a img {
-    width: 100%;
+    max-width: 100%;
 }
 
 .product-item .text-area {
