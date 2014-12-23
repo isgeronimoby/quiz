@@ -1,332 +1,311 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head lang="en">
 <title>Install Everton Rewards</title>
-
-<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/jnhbihkcgjchgmolfdekbahagpgipggc">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <style type="text/css" rel="stylesheet">
-    .everton-amazing-popups .everton-popup-clearfix:before,
-    .everton-amazing-popups .everton-popup-clearfix:after {
-        content:"";
-        display:table;
-    }
-    .everton-amazing-popups .everton-popup-clearfix:after {
-        clear:both;
-    }
-    .everton-amazing-popups .everton-popup-clearfix {
-        zoom:1; /* For IE 6/7 (trigger hasLayout) */
-    }
-    /* END OF RESET */
+	.everton-amazing-popups .everton-popup-clearfix:before,
+	.everton-amazing-popups .everton-popup-clearfix:after {
+		content:"";
+		display:table;
+	}
+	.everton-amazing-popups .everton-popup-clearfix:after {
+		clear:both;
+	}
+	.everton-amazing-popups .everton-popup-clearfix {
+		zoom:1; /* For IE 6/7 (trigger hasLayout) */
+	}
+	/* END OF RESET */
 
-    .everton-amazing-popups .everton-popup-container {
-        display: none;
-        opacity: 0;
-        transition: opacity 0.3s;
-        background-color: rgba(0,0,0,0.3);
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        font-size: 12px;
-        line-height: 15px;
-        font-family: Roboto,sans-serif;
-    }
-    .everton-amazing-popups .everton-popup-container .everton-popup {
-        background-color: #ffffff;
-        max-width: 650px;
-        max-height: 90%;
-        position: relative;
-        overflow: auto;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        -moz-transform: translate(-50%, -50%);
-        -webkit-transform: translate(-50%, -50%);
+	.everton-amazing-popups .everton-popup-container {
+		display: none;
+		opacity: 0;
+		transition: opacity 0.3s;
+		background-color: rgba(0,0,0,0.3);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		font-size: 12px;
+		line-height: 15px;
+		font-family: Roboto,sans-serif;
+	}
+	.everton-amazing-popups .everton-popup-container .everton-popup {
+		background-color: #ffffff;
+		max-width: 650px;
+		max-height: 90%;
+		position: relative;
+		overflow: auto;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		-moz-transform: translate(-50%, -50%);
+		-webkit-transform: translate(-50%, -50%);
 
-        box-shadow: 0 10px 25px rgba(0,0,0,.5);
-    }
-    @media all and (max-width: 670px) {
-        .everton-amazing-popups .everton-popup-container .everton-popup {
-            max-width: 90%;
-        }
-    }
-    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-header {
-        background-color: #00369c;
-        overflow: hidden;
-        padding: 14px 18px 14px 30px;
-    }
-    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-header h1 {
-        float: left;
-        font-size: 18px;
-        line-height: 18px;
-        color: #fff;
-        margin: 0;
-        padding: 0;
-        font-weight: 200;
-    }
-    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-header .everton-popup-close {
-        float: right;
-        display: block;
-        background: url('./images/btn-close.png') no-repeat;
-        width: 20px;
-        height: 20px;
-    }
-    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body {
-        padding: 5px 24px 34px 30px;
-    }
-    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body h2 {
-        margin-top: 40px;
-        margin-bottom: 40px;
-        color: #00369c;
-        text-align: center;
-        font-size: 34px;
-        font-weight: 700;
-        line-height: 1.1;
-    }
-    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .everton-popup-yellow-btn {
-        display: inline-block;
-        padding: 20px 15px;
-        margin-bottom: 40px;
-        background-color: #ffd739;;
-        font-family: Roboto,sans-serif;
-        font-weight: 700;
-        font-size: 28px;
-        line-height: 32px;
-        text-decoration: none;
-        color: #000;
-        text-align: center;
-        border: 0;
-        border-bottom: solid 4px #e4981f;
-    }
-    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .everton-popup-btn-holder {
-        text-align: center;
-    }
+		box-shadow: 0 10px 25px rgba(0,0,0,.5);
+	}
+	@media all and (max-width: 670px) {
+		.everton-amazing-popups .everton-popup-container .everton-popup {
+			max-width: 90%;
+		}
+	}
+	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-header {
+		background-color: #00369c;
+		overflow: hidden;
+		padding: 14px 18px 14px 30px;
+	}
+	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-header h1 {
+		float: left;
+		font-size: 18px;
+		line-height: 18px;
+		color: #fff;
+		margin: 0;
+		padding: 0;
+		font-weight: 200;
+	}
+	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-header .everton-popup-close {
+		float: right;
+		display: block;
+		background: url('./images/btn-close.png') no-repeat;
+		width: 20px;
+		height: 20px;
+	}
+	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body {
+		padding: 5px 24px 34px 30px;
+	}
+	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body h2 {
+		margin-top: 40px;
+		margin-bottom: 40px;
+		color: #00369c;
+		text-align: center;
+		font-size: 34px;
+		font-weight: 700;
+		line-height: 1.1;
+	}
+	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .everton-popup-yellow-btn {
+		display: inline-block;
+		padding: 20px 15px;
+		margin-bottom: 40px;
+		background-color: #ffd739;;
+		font-family: Roboto,sans-serif;
+		font-weight: 700;
+		font-size: 28px;
+		line-height: 32px;
+		text-decoration: none;
+		color: #000;
+		text-align: center;
+		border: 0;
+		border-bottom: solid 4px #e4981f;
+	}
+	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .everton-popup-btn-holder {
+		text-align: center;
+	}
 
-    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body p {
-        color: #444;
-        margin: 10px 0 0;
-        font-size: 16px;
-        line-height: 20px;
-    }
-    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .everton-popup-btn-holder .not-ie,
-    .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .everton-popup-btn-holder .ie-true{
-        display: none;
-    }
-    .everton-amazing-popups .everton-popup-container .everton-popup .show-desktop {
-        display: inherit;
-    }
-    .everton-amazing-popups .everton-popup-container .everton-popup .show-mobile {
-        display: none;
-    }
+	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body p {
+		color: #444;
+		margin: 10px 0 0;
+		font-size: 16px;
+		line-height: 20px;
+	}
+	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .everton-popup-btn-holder .not-ie,
+	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .everton-popup-btn-holder .ie-true{
+		display: none;
+	}
+	.everton-amazing-popups .everton-popup-container .everton-popup .show-desktop {
+		display: inherit;
+	}
+	.everton-amazing-popups .everton-popup-container .everton-popup .show-mobile {
+		display: none;
+	}
 
-    @media all and (max-width:1024px) {
-        .everton-amazing-popups .everton-popup-container .everton-popup .show-desktop {
-            display: none;
-        }
-        .everton-amazing-popups .everton-popup-container .everton-popup .show-mobile {
-            display: inherit;
-        }
-    }
+	@media all and (max-width:1024px) {
+		.everton-amazing-popups .everton-popup-container .everton-popup .show-desktop {
+			display: none;
+		}
+		.everton-amazing-popups .everton-popup-container .everton-popup .show-mobile {
+			display: inherit;
+		}
+	}
 
-    @media all and (max-width:420px) {
-        .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body h2 {
-            font-size: 24px;
-            line-height: 1.4;
-            margin-top: 24px;
-            margin-bottom: 24px;
-        }
-        .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .everton-popup-yellow-btn {
-            font-size: 24px;
-            padding: 12px 15px;
-            margin-bottom: 24px;
-        }
-        .everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body p {
-            font-size: 14px;
-        }
-    }
+	@media all and (max-width:420px) {
+		.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body h2 {
+			font-size: 24px;
+			line-height: 1.4;
+			margin-top: 24px;
+			margin-bottom: 24px;
+		}
+		.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .everton-popup-yellow-btn {
+			font-size: 24px;
+			padding: 12px 15px;
+			margin-bottom: 24px;
+		}
+		.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body p {
+			font-size: 14px;
+		}
+	}
 </style>
 
 <script>
-    // IE function.bind polyfill
-    if (!Function.prototype.bind) {
-        Function.prototype.bind = function (oThis) {
-            if (typeof this !== "function") {
-                // closest thing possible to the ECMAScript 5 internal IsCallable function
-                throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
-            }
+	// IE function.bind polyfill
+	if (!Function.prototype.bind) {
+		Function.prototype.bind = function (oThis) {
+			if (typeof this !== "function") {
+				// closest thing possible to the ECMAScript 5 internal IsCallable function
+				throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+			}
 
-            var aArgs = Array.prototype.slice.call(arguments, 1),
-                    fToBind = this,
-                    fNOP = function () {},
-                    fBound = function () {
-                        return fToBind.apply(this instanceof fNOP && oThis ? this : oThis,
-                                aArgs.concat(Array.prototype.slice.call(arguments)));
-                    };
+			var aArgs = Array.prototype.slice.call(arguments, 1),
+					fToBind = this,
+					fNOP = function () {},
+					fBound = function () {
+						return fToBind.apply(this instanceof fNOP && oThis ? this : oThis,
+								aArgs.concat(Array.prototype.slice.call(arguments)));
+					};
 
-            fNOP.prototype = this.prototype;
-            fBound.prototype = new fNOP();
+			fNOP.prototype = this.prototype;
+			fBound.prototype = new fNOP();
 
-            return fBound;
-        };
-    }
+			return fBound;
+		};
+	}
 </script>
 <script>
-    if (/*@cc_on!@*/false && document.documentMode === 10) {
-        document.documentElement.className += ' ie ie10';
-    }
+	if (/*@cc_on!@*/false && document.documentMode === 10) {
+		document.documentElement.className += ' ie ie10';
+	}
 </script>
 
 <script type="text/javascript">
-    window.onload = function() {
-        function GetIEVersion() {
-            var sAgent = window.navigator.userAgent;
-            var Idx = sAgent.indexOf("MSIE");
+	window.onload = function() {
+		function GetIEVersion() {
+			var sAgent = window.navigator.userAgent;
+			var Idx = sAgent.indexOf("MSIE");
 
-            // If IE, return version number.
-            var ieTrue = document.getElementsByClassName("ie-true");
-            var notIE = document.getElementsByClassName("not-ie");
-            if (Idx > 0) {
-                for (var i = 0; i < ieTrue.length; i++) {
-                    ieTrue[i].style.display = "inline-block";
-                }
-                return parseInt(sAgent.substring(Idx + 5, sAgent.indexOf(".", Idx)));
-            }
+			// If IE, return version number.
+			var ieTrue = document.getElementsByClassName("ie-true");
+			var notIE = document.getElementsByClassName("not-ie");
+			if (Idx > 0) {
+				for (var i = 0; i < ieTrue.length; i++) {
+					ieTrue[i].style.display = "inline-block";
+				}
+				return parseInt(sAgent.substring(Idx + 5, sAgent.indexOf(".", Idx)));
+			}
 
-            // If IE 11 then look for Updated user agent string.
-            else if (!!navigator.userAgent.match(/Trident\/7\./)) {
-                for (var i = 0; i < ieTrue.length; i++) {
-                    ieTrue[i].style.display = "inline-block";
-                }
-            }
+			// If IE 11 then look for Updated user agent string.
+			else if (!!navigator.userAgent.match(/Trident\/7\./)) {
+				for (var i = 0; i < ieTrue.length; i++) {
+					ieTrue[i].style.display = "inline-block";
+				}
+			}
 
-            else {
-                for (var i = 0; i < notIE.length; i++) {
-                    notIE[i].style.display = "inline-block";
-                }
-                return 0; //It is not IE
-            }
-        }
-        GetIEVersion();
+			else {
+				for (var i = 0; i < notIE.length; i++) {
+					notIE[i].style.display = "inline-block";
+				}
+				return 0; //It is not IE
+			}
+		}
+		GetIEVersion();
 
-        var installInProgress = false;
-        var redirectTimeout = 5000;
-        var redirectUrl = "https://everton.rewarded.club";
+		var redirectTimeout = 5000;
+		var redirectUrl = "https://everton.rewarded.club";
 
-        function redirect() {
-            setTimeout(function () {
-                window.location.href = redirectUrl;
-            }, redirectTimeout);
-        }
+		function redirectAfterInstall() {
+			setTimeout(function () {
+				window.top.location.href = redirectUrl;
+			}, redirectTimeout);
+		}
 
-        (function () {
-            var notIE = document.getElementsByClassName("not-ie");
-            for (var i = 0; i < notIE.length; i++) {
-                notIE[i].onclick = function (e) {
-                    if (!window.navigator.userAgent) return;
+		(function () {
+			var notIE = document.getElementsByClassName("not-ie");
+			for (var i = 0; i < notIE.length; i++) {
+				notIE[i].onclick = function (e) {
+					if (!window.navigator.userAgent) return;
 
-                    var ua = window.navigator.userAgent.toLowerCase();
-                    if (ua.indexOf("iphone") > 0)
-                        return;
+					var ua = window.navigator.userAgent.toLowerCase();
+					if (ua.indexOf("iphone") > 0)
+						return;
 
-                    if (ua.indexOf("android") > 0)
-                        return;
+					if (ua.indexOf("android") > 0)
+						return;
 
-                    if (ua.indexOf("firefox") > 0 && ua.indexOf("seamonkey") < 0) {
-                        redirect();
-                        return;
-                    }
+					if (ua.indexOf("firefox") > 0 && ua.indexOf("seamonkey") < 0) {
+						redirectAfterInstall();
+						return;
+					}
 
-                    if (ua.indexOf("safari") > 0 && ua.indexOf("chrome") < 0) {
-                        redirect();
-                        return;
-                    }
+					if (ua.indexOf("safari") > 0 && ua.indexOf("chrome") < 0) {
+						redirectAfterInstall();
+						return;
+					}
 
-                    if (ua.indexOf("chrome") > 0 && ua.indexOf("opr") < 0) {
-                        e.preventDefault();
-                        e.stopPropagation();
+					if (ua.indexOf("chrome") > 0 && ua.indexOf("opr") < 0) {
+						return;
+					}
+				}
+			}
+		})();
 
-                        if (installInProgress)
-                            return;
+		// POPUP BEHAVIOUR
+		var popupLinks = document.getElementsByClassName('everton-amazing-links');
+		var popups = document.querySelectorAll('.everton-amazing-popups');
+		var closeBtn = document.getElementsByClassName('everton-popup-close');
+		var popupConts = document.getElementsByClassName('everton-popup-container');
 
-                        installInProgress = true;
+		function stopEvent(evt) {
+			(evt && evt.stopPropagation) ? evt.stopPropagation() : window.event.cancelBubble = true;
+		}
 
-                        chrome.webstore.install(
-                                undefined,
-                                function () {
-                                    window.location.href = redirectUrl;
-                                    installInProgress = false;
-                                },
-                                function (reason) {
-                                    console && console.log(reason);
-                                    installInProgress = false;
-                                });
-                        return;
-                    }
-                }
-            }
-        })();
+		function showBlock(elem){
+			elem.style.display = "block";
+			setTimeout(function(){
+				elem.style.opacity = 1;
+			}, 0);
+		}
 
-        // POPUP BEHAVIOUR
-        var popupLinks = document.getElementsByClassName('everton-amazing-links');
-        var popups = document.querySelectorAll('.everton-amazing-popups');
-        var closeBtn = document.getElementsByClassName('everton-popup-close');
-        var popupConts = document.getElementsByClassName('everton-popup-container');
+		function hideBlock(elem){
+			var transDuration = 300;
+			elem.style.opacity = 0;
+			setTimeout(function(){
+				elem.style.display = "none";
+			}, transDuration);
+		}
 
-        function stopEvent(evt) {
-            (evt && evt.stopPropagation) ? evt.stopPropagation() : window.event.cancelBubble = true;
-        }
-
-        function showBlock(elem){
-            elem.style.display = "block";
-            setTimeout(function(){
-                elem.style.opacity = 1;
-            }, 0);
-        }
-
-        function hideBlock(elem){
-            var transDuration = 300;
-            elem.style.opacity = 0;
-            setTimeout(function(){
-                elem.style.display = "none";
-            }, transDuration);
-        }
-
-        for (var i = 0; i < popupConts.length; i++) {
-            popupConts[i].onclick = function (e) {
-                stopEvent(e);
-                if (e.target == this) {
-                    for (var i = 0; i < popups.length; i++) {
-                        hideBlock(popups[i].querySelector('.everton-popup-container'));
-                    }
-                }
-            }
-        }
-        for (var i = 0; i < closeBtn.length; i++) {
-            closeBtn[i].onclick = function (e) {
-                e.preventDefault();
-                for (var i = 0; i < popups.length; i++) {
-                    hideBlock(popups[i].querySelector('.everton-popup-container'));
-                }
-            }
-        }
-        if (popupLinks.length > 0) {
-            for (var i = 0; i < popupLinks.length; i++ ) {
-                popupLinks[i].onclick = function(e) {
-                    e.preventDefault();
-                    for (var i = 0; i < popups.length; i++ ) {
-                        if (this.getAttribute("href").substring(1) == popups[i].id) {
-                            showBlock(popups[i].querySelector('.everton-popup-container'));
-                        }
-                    }
-                }
-            }
-        }
-    }
+		for (var i = 0; i < popupConts.length; i++) {
+			popupConts[i].onclick = function (e) {
+				stopEvent(e);
+				if (e.target == this) {
+					for (var i = 0; i < popups.length; i++) {
+						hideBlock(popups[i].querySelector('.everton-popup-container'));
+					}
+				}
+			}
+		}
+		for (var i = 0; i < closeBtn.length; i++) {
+			closeBtn[i].onclick = function (e) {
+				e.preventDefault();
+				for (var i = 0; i < popups.length; i++) {
+					hideBlock(popups[i].querySelector('.everton-popup-container'));
+				}
+			}
+		}
+		if (popupLinks.length > 0) {
+			for (var i = 0; i < popupLinks.length; i++ ) {
+				popupLinks[i].onclick = function(e) {
+					e.preventDefault();
+					for (var i = 0; i < popups.length; i++ ) {
+						if (this.getAttribute("href").substring(1) == popups[i].id) {
+							showBlock(popups[i].querySelector('.everton-popup-container'));
+						}
+					}
+				}
+			}
+		}
+	}
 </script>
 </head>
 <body>
@@ -334,36 +313,36 @@
 <a href="#everton-popup" class="everton-amazing-links">open popup</a>
 
 <div id="everton-popup" class="everton-amazing-popups">
-    <div class="everton-popup-container">
-        <div class="everton-popup">
-            <div class="everton-popup-header">
-                <h1 class="show-desktop">Everton Rewards browser app</h1>
-                <h1 class="show-mobile">Everton Rewards browser</h1>
-                <a href="#" class="everton-popup-close"></a>
-                <div class="everton-popup-clearfix"></div>
-            </div>
-            <div class="everton-popup-body">
-                <h2 class="show-desktop">Donate £20* a year to Everton in the<br/>Community for free just by installing<br/>the Everton Rewards app.</h2>
-                <h2 class="show-mobile">Donate £20* a year to Everton in the Community for free just by installing the Everton Browser.</h2>
-                <div class="everton-popup-btn-holder show-desktop">
-                    <a class="not-ie everton-popup-yellow-btn" href="https://everton.rewarded.club/home/install">Install Everton Rewards</a>
-                    <a class="ie-true everton-popup-yellow-btn" href="https://everton.rewarded.club/home/install">Try Everton Rewards</a>
-                </div>
-                <div class="everton-popup-btn-holder show-mobile">
-                    <a class="everton-popup-yellow-btn" href="https://everton.rewarded.club/home/install">Install Everton Browser</a>
-                </div>
-                <p class="show-desktop">With Everton Rewards App installed each time you shop online
-                    you will be donating up to 2% of anything you purchase in stores
-                    like Amazon or John Lewis to EITC.
-                    It doesn’t cost you a penny extra, the commission is built into the price of the product.</p>
-                <p class="show-mobile">With Everton Browser App installed each time you shop online
-                    you will be donating up to 2% of anything you purchase in stores
-                    like Amazon or John Lewis to EITC.
-                    It doesn’t cost you a penny extra, the commission is built into the price of the product.</p>
-                <p>*For an average shopper this equals £20 a year.</p>
-            </div>
-        </div>
-    </div>
+	<div class="everton-popup-container">
+		<div class="everton-popup">
+			<div class="everton-popup-header">
+				<h1 class="show-desktop">Everton Rewards browser app</h1>
+				<h1 class="show-mobile">Everton Rewards browser</h1>
+				<a href="#" class="everton-popup-close"></a>
+				<div class="everton-popup-clearfix"></div>
+			</div>
+			<div class="everton-popup-body">
+				<h2 class="show-desktop">Donate £20* a year to Everton in the<br/>Community for free just by installing<br/>the Everton Rewards app.</h2>
+				<h2 class="show-mobile">Donate £20* a year to Everton in the Community for free just by installing the Everton Browser.</h2>
+				<div class="everton-popup-btn-holder show-desktop">
+					<a class="not-ie everton-popup-yellow-btn" href="https://everton.rewarded.club/home/install" target="_top">Install Everton Rewards</a>
+					<a class="ie-true everton-popup-yellow-btn" href="https://everton.rewarded.club/home/install" target="_top">Try Everton Rewards</a>
+				</div>
+				<div class="everton-popup-btn-holder show-mobile">
+					<a class="everton-popup-yellow-btn" href="https://everton.rewarded.club/home/install" target="_top">Install Everton Browser</a>
+				</div>
+				<p class="show-desktop">With Everton Rewards App installed each time you shop online
+					you will be donating up to 2% of anything you purchase in stores
+					like Amazon or John Lewis to EITC.
+					It doesn’t cost you a penny extra, the commission is built into the price of the product.</p>
+				<p class="show-mobile">With Everton Browser App installed each time you shop online
+					you will be donating up to 2% of anything you purchase in stores
+					like Amazon or John Lewis to EITC.
+					It doesn’t cost you a penny extra, the commission is built into the price of the product.</p>
+				<p>*For an average shopper this equals £20 a year.</p>
+			</div>
+		</div>
+	</div>
 </div>
 
 </body>
