@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bussiness website</title>
+
+    <link href="./css/animate.css" type="text/css" rel="stylesheet"/>
+    <link href="./css/flipclock.css" type="text/css" rel="stylesheet"/>
+    <link href="//fonts.googleapis.com/css?family=Roboto:900,500,300,700,400" rel='stylesheet' type="text/css">
+    <link href="./css/style.css" type="text/css" rel="stylesheet" />
+
+    <style>
+        #stateHolder {
+            margin-top: 0;
+        }
+        #stateHolder button {
+            padding: 5px 20px;
+            margin-top: 10px;
+        }
+
+        #screenFBConnect {
+            display: none;
+        }
+        #screenShare {
+            display: none;
+        }
+        #screenShareTW {
+            display: none;
+        }
+        #screenShareFB {
+            display: none;
+        }
+        #screenLinkDevice {
+            display: none;
+        }
+        #screenEnterEmailForLinking {
+            display: none;
+        }
+        #screenFourDays {
+            display: none;
+        }
+        #screenDashboardStart {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<header class="everton-header">
+    <div class="container">
+        <div class="company-logo">
+            <a href="#">
+                <img src="./images/company-logo.png" class="big-logo" alt="logo">
+                <img src="./images/small-logo.png" class="small-logo" alt="logo">
+            </a>
+        </div>
+        <div class="autorization">
+            <a href="#">Sign In</a>
+            <span class="separator"></span>
+            <a href="#">Join</a>
+            <a href="#" class="mobMenu" id="mobMenu">
+            </a>
+        </div>
+    </div>
+</header>
+
+
+<div class="overlay">
+    <button id="test01">FadeIn and Down</button>
+    <button id="test02" data-anijs="if: click, do: bounceInLeft animated, to: #goldenBall">From left to Goals</button>
+    <button id="test03">Dropped Ball</button>
+    <hr/>
+    <div id="stateHolder"></div>
+</div>
+
+
+<div class="mainBody">
+    <!-- TODO: use this method for changing background image -->
+    <!--<img class="bgImage" src="//placehold.it/1500x1000" />-->
+
+    <section id="screenFBConnect">
+        <div class="centeredContent">
+            <h1>Now connect with Facebook and<br/>gain a ball and your first chance to win</h1>
+
+            <a href="#" class="btnFacebook">Connect with Facebook</a>
+            <p class="smallNotes">We'll never post anything on your Timeline</p>
+            <a href="#" class="btnStroked">or Sign up with email</a>
+        </div>
+    </section>
+
+    <section id="screenShare">
+        <div class="centeredContent">
+            <h1>Get another ball and get another<br/>chance to win by sharing</h1>
+
+            <a href="#" class="btnFacebook">Share on Facebook</a>
+            <p class="smallNotes">or</p>
+            <a href="#" class="btnTwitter">Share on Twitter</a>
+        </div>
+    </section>
+
+    <section id="screenShareTW">
+        <div class="centeredContent">
+            <h1>Get another ball by<br/>sharing on Twitter too</h1>
+            <a href="#" class="btnTwitter">Share on Twitter</a>
+        </div>
+    </section>
+
+    <section id="screenShareFB">
+        <div class="centeredContent">
+            <h1>Get another ball by<br/>sharing on Facebook too</h1>
+            <a href="#" class="btnFacebook">Share on Facebook</a>
+        </div>
+    </section>
+
+    <section id="screenLinkDevice">
+        <div class="centeredContent">
+            <h1>Continue earning balls</h1>
+            <img class="imgIcon" src="./images/iphone.png" />
+            <h3>Link a phone or tablet to your account</h3>
+            <a href="#" class="btnGold">Email myself a link</a>
+        </div>
+    </section>
+
+    <section id="screenEnterEmailForLinking">
+        <div class="centeredContent">
+            <div class="whiteBGOuter">
+                <div class="whiteBGInner">
+                    <h2>Enter your email address</h2>
+                    <form>
+                        <input type="email" placeholder="mail@domain.com" name="email"/>
+                        <p>We'll send you a single email with a link in it, open the<br/>
+                            email on your phone or tablet and click on the link to<br/>
+                            install the app.</p>
+                        <input type="submit" class="btnGold" value="Send link" id="submitEmail" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="screenFourDays">
+        <div class="centeredContent">
+            <h1>Earn a ball every 4 days for opening<br/>the browser on your phone everyday</h1>
+            <img class="imgIconLarge" src="./images/calendar-outline.png" />
+            <h3>One ball for every 4 consectutive days</h3>
+        </div>
+    </section>
+
+    <section id="screenDashboardStart">
+        <div class="centeredContent">
+            <div class="clock">
+                <h2 class="clockHeader">Countdown to draw</h2>
+                <div class="countdownClock2"></div>
+                <div class="clockInfo"><h2 style="left:2px;">days</h2><h2 style="left:-5px;">hours</h2><h2 style="left:-12px;">mins</h2><h2 style="left:-7px;">secs</h2></div>
+            </div>
+            <div class="divInliner">
+                <div class="imageOnYellow">
+                    <img src="./images/blue-bg-01.jpg" />
+                    <h3>Meet the team, get signed t-shirts<br/>and watch a training session</h3>
+                </div>
+                <p class="addText text-right">Learn more</p>
+            </div><br/>
+
+            <a href="#" class="goldText btnDark">Enter the free draw</a>
+        </div>
+    </section>
+
+    <section id="screenDashboard">
+        <div class="centeredContent">
+            <div class="clock">
+                <h2 class="clockHeader">Countdown to draw</h2>
+                <div class="countdownClock"></div>
+                <div class="clockInfo"><h2 style="left:2px;">days</h2><h2 style="left:-5px;">hours</h2><h2 style="left:-12px;">mins</h2><h2 style="left:-7px;">secs</h2></div>
+            </div>
+            <div class="goldenBall"></div>
+            <span class="goldText btnDark">5</span>
+            <div class="profileImage">
+                <img src="http://placehold.it/60"/>
+            </div>
+
+            <div class="progressContainer">
+                <p>Earned</p>
+                <div class="progressBar"><div class="progressBarProgress"></div></div>
+                <p>Potential</p>
+            </div>
+
+            <div class="earnMoreOptions">
+                <h3>Earn more balls</h3>
+                <ul>
+                    <li><a href="#">Connect with Facebook</a></li>
+                    <li><a href="#">Share on Facebook
+                        <p>You can share on Facebook again tomorrow</a></p>
+                    </li>
+
+                    <li><a href="#">Share on Twitter
+                        <p>You can share on Twitter again in 4 days</a></p>
+                    </li>
+
+                </ul>
+                <ul>
+                    <li><a href="#">Link another device</a></li>
+                    <li><a href="#">Open browser 4 days in a row</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="footballHolder">
+    <div class="footballFadeIn" id="footballFadeIn"></div>
+</div>
+
+<div class="goldenBall" id="goldenBallAbs"></div>
+
+<footer class="pageFooter">
+    <div class="container">
+        <div class="footerScore">
+            <div class="goals">
+                <div class="goalsInner">
+                    <div class="goldenBallDummy"></div>
+                    <div class="goldenBall" id="goldenBall"></div>
+                    <div class="ballScore goldText">10</div>
+                </div>
+            </div>
+            <div class="earnMoreContainer goldText">
+                <p>Earn<br/>more</p>
+            </div>
+            <div class="profileImage">
+                <img src="http://placehold.it/60"/>
+                <p>John Smith</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div class="techAdditions" id="techAdditions"></div>
+
+<script type="text/javascript" src="./js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="./js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="./js/flipclock.min.js"></script>
+<script type="text/javascript" src="./js/anijs.js"></script>
+<script type="text/javascript" src="./js/app.js"></script>
+</body>
+</html>

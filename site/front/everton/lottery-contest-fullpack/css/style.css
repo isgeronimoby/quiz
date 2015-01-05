@@ -1,0 +1,899 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    font-size: 14px;
+    line-height: 1.42857;
+    color: #333;
+    background: url('../images/blue-bg-01.jpg') no-repeat #00369c;
+    background-size: cover;
+    overflow: hidden;
+}
+.mainBody {
+    position: static;
+    padding-top: 120px;
+}
+section {
+    position: static;
+}
+.divInliner {
+    display: inline-block;
+}
+.bgImage {
+    z-index:-1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: auto;
+    width: 100%;
+}
+.container {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+h1,h2,h3,h4,h5,h6,p,span,a,.ballScore,ul,li {
+    /*font-family: ev-helvetica, "Helvetica Neue","Helvetica", "Calibri", "Arial", sans-serif;*/
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+.text-left {
+    text-align: left;
+}
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+img {
+    vertical-align: middle;
+    border: 0 none;
+}
+
+.everton-header {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #00369c;
+    min-height: 40px;
+}
+.company-logo {
+    float: left;
+    height: 31px;
+    margin-right: 16px;
+    margin-top: 4px;
+}
+.big-logo, .small-logo {
+    display: block;
+    height: 100%;
+}
+.small-logo {
+    display: none;
+}
+
+.autorization {
+    height: 40px;
+    line-height: 40px;
+    float: right;
+}
+.autorization .separator {
+    margin: 0 3px;
+    width: 2px;
+    height: 12px;
+    background-color: white;
+}
+.autorization * {
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    /*font-family: 'Roboto', sans-serif;*/
+}
+
+.centeredContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    width: 100%;
+    max-width: 960px;
+    padding: 30px;
+    text-align: center;
+}
+
+h1, h2, h3,h4, h5, h6 {
+    color: #ffffff;
+    font-weight: 700;
+}
+p, span {
+    color: #dddddd;
+}
+h1 {
+    font-size: 38px;
+}
+.smallNotes {
+    font-size: 14px;
+}
+h3 {
+    font-size: 24px;
+}
+.imgIcon {
+    max-width: 40px;
+    margin: 40px 0;
+}
+
+.imgIconLarge {
+    max-width: 80px;
+    margin: 40px 0;
+}
+
+.whiteBGInner {
+    background: #ffffff;
+    display: inline-block;
+    padding: 30px 40px 15px;
+}
+.whiteBGInner h2{
+    color: #222222;
+    font-size: 28px;
+}
+.whiteBGInner p{
+    color: #333333;
+}
+.whiteBGInner input[type=email]{
+    background: rgb(210, 232, 242);
+    border: 2px solid transparent;
+    line-height: 40px;
+    padding: 0 20px;
+    min-width: 400px;
+    font-size: 18px;
+    text-align: center;
+    margin: 30px 0;
+    color: #222222;
+}
+
+.pageFooter {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+}
+.footerScore {
+    float: right;
+    margin-right: 14px;
+}
+.goals {
+    background: url('../images/goals.png') no-repeat;
+    background-size: cover;
+    width: 180px;
+    height: 90px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.goalsInner {
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+}
+.goldenBall {
+    background: url('../images/football-gold-thick-512.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    vertical-align: middle;
+}
+#goldenBall {
+    display: none;
+}
+#goldenBallAbs {
+    position: absolute;
+    top: 200px;
+    left: -60px;
+}
+.goldenBallDummy {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.goldText {
+    background-color: rgba(0,0,0,0.6);
+    color: #dabf48;
+    font-weight: bold;
+}
+.goldText p {
+    color: #dabf48;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+    vertical-align: middle;
+    display: inline-block;
+}
+.ballScore {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    font-size: 30px;
+    line-height: 50px;
+    border-radius: 5px;
+    min-width: 60px;
+}
+.earnMoreContainer {
+    display: inline-block;
+    vertical-align: middle;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 90px;
+    padding: 20px 24px;
+    margin: 0 10px;
+    text-align: center;
+}
+.profileImage {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+.profileImage img {
+    display: inline-block;
+    border-radius: 50%;
+}
+.profileImage p {
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    padding-top: 4px;
+}
+.footballHolder, .scoreHolder {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.footballFadeIn {
+    display: inline-block;
+    position: relative;
+    background: url('../images/football-gold-512.png');
+    width: 512px;
+    height: 512px;
+}
+.scoreFadeIn {
+    display: inline-block;
+    position: relative;
+    font-size: 10px;
+}
+.scoreFadeIn span {
+    opacity: 0;
+}
+.techAdditions {
+    display: none;
+}
+
+.clock h2{
+    text-transform: uppercase;
+    font-size: 30px;
+}
+.clock .clockInfo h2{
+    display: inline-block;
+    position: relative;
+    margin: 0 20px;
+    font-weight: 200;
+}
+.imageOnYellow {
+    display: inline-block;
+    width: auto;
+    background: #F0BB49;
+    padding: 4px;
+    margin-top: 30px;
+    border-radius: 5px;
+}
+.imageOnYellow img {
+    display: inline-block;
+    max-width: 500px;
+    height: auto;
+}
+.imageOnYellow h3{
+    margin: 8px 0;
+    color: #00369c;
+    font-weight: 800;
+}
+.addText {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.progressContainer p {
+    display: inline-block;
+    vertical-align: middle;
+}
+.progressContainer .progressBar {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 10px;
+    width: 100%;
+    max-width: 300px;
+    height: 5px;
+    background: rgba(255,255,255,0.3);
+}
+.progressContainer .progressBar .progressBarProgress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 70%;
+    max-width: 100%;
+    height: 5px;
+    background: rgba(255,255,255,0.8);
+}
+.earnMoreOptions {
+    margin-top: 50px;
+}
+.earnMoreOptions ul {
+    list-style: none;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    margin: 0 20px;
+}
+.earnMoreOptions ul li {
+    color: #fff;
+    font-size: 24px;
+    background: url('../images/white-ball-41.png') no-repeat;
+    margin: 30px 0;
+    min-height: 42px;
+    padding-left: 66px;
+}
+
+.earnMoreOptions ul li p {
+    font-size: 14px;
+}
+.earnMoreOptions ul li p input[type=checkbox]{
+    width: 12px;
+    height: 12px;
+    background: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    border: 2px solid #bbb;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 6px;
+    border-radius: 2px;
+}
+.earnMoreOptions ul li p input[type=checkbox]:checked{
+    background: #fff;
+}
+
+
+.service-message {
+    top: 40px;
+}
+
+.inputError {
+    border: 2px solid red !important;
+}
+.macbookLogo {
+    display: inline-block;
+    margin: 40px 0;
+}
+.iphoneLogo {
+    display: none;
+    margin: 0;
+}
+
+.whiteBgFooter {
+    background: #ffffff;
+}
+.whiteBgFooter h3 {
+    color: #333333;
+    margin: 30px 0;
+}
+.whiteBgFooter h4 a{
+    color: #939292;
+    margin: 40px 0;
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
+}
+.whiteBgFooter p {
+    color: #333333;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 10px;
+}
+.showMobile {
+    display: none;
+}
+.showDesktop {
+    display: block;
+}
+/*********************************************/
+/*****              BUTTONS              *****/
+/*********************************************/
+.btnFacebook {
+    background: url('../images/facebook.png') no-repeat;
+    background-color: #136CE2;
+    background-position: left 6px center;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 20px 10px 42px;
+    min-width: 220px;
+    display: inline-block;
+    box-shadow: 1px 2px 6px rgba(0,0,0,0.5);
+
+    margin: 30px 0;
+
+    -webkit-transition-property: box-shadow;
+    -moz-transition-property: box-shadow;
+    -o-transition-property: box-shadow;
+    transition-property: box-shadow;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: linear;
+    -moz-transition-timing-function: linear;
+    -o-transition-timing-function: linear;
+    transition-timing-function: linear;
+}
+.btnFacebook:hover {
+    box-shadow: 1px 2px 6px rgba(255,255,255,0.4);
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.btnTwitter {
+    background: url('../images/twitter.png') no-repeat;
+    background-color: #6cbbd3;
+    background-position: left 6px center;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 20px 10px 42px;
+    min-width: 220px;
+    display: inline-block;
+    box-shadow: 1px 2px 6px rgba(0,0,0,0.5);
+
+    margin: 30px 0;
+
+    -webkit-transition-property: box-shadow;
+    -moz-transition-property: box-shadow;
+    -o-transition-property: box-shadow;
+    transition-property: box-shadow;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: linear;
+    -moz-transition-timing-function: linear;
+    -o-transition-timing-function: linear;
+    transition-timing-function: linear;
+}
+.btnTwitter:hover {
+    box-shadow: 1px 2px 6px rgba(255,255,255,0.4);
+    text-decoration: none;
+}
+
+.btnGold {
+    background-color: #F7CF06;
+    border: 0;
+    cursor: pointer;
+    border-bottom: 3px solid #DD9819;
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 80px;
+    min-width: 220px;
+    display: inline-block;
+
+    margin: 30px 0;
+}
+.btnGold.fontBigger {
+    font-size: 24px;
+}
+.btnGold:hover {
+    text-decoration: none;
+}
+
+.btnStroked {
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #ffffff;
+    border: 1px solid #dddddd;
+    background: transparent;
+
+    margin: 30px 0;
+
+    -webkit-transition-property: background, color;
+    -moz-transition-property: background, color;
+    -o-transition-property: background, color;
+    transition-property: background, color;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: linear;
+    -moz-transition-timing-function: linear;
+    -o-transition-timing-function: linear;
+    transition-timing-function: linear;
+}
+.btnStroked:hover {
+    background: #dddddd;
+    color: #111111;
+    text-decoration: none;
+}
+
+.btnDark {
+    text-decoration: none;
+    font-size: 26px;
+    display: inline-block;
+    padding: 14px 24px;
+    border-radius: 6px;
+    margin: 20px 10px;
+    vertical-align: middle;
+}
+.btnMobile {
+    display: none;
+}
+/*********************************************/
+/*****               CLOCK               *****/
+/*********************************************/
+.flip-clock-wrapper {
+    width: auto;
+    display: inline-block;
+    margin: 10px 0 -25px;
+}
+.flip-clock-divider .flip-clock-label {
+    display: none;
+}
+.flip-clock-wrapper ul li a div div.inn {
+    color: #cccccc;
+    background-color: #00369C;
+    border-radius: 0;
+    text-shadow: none;
+    border: 2px solid #cccccc;
+    width: 90%;
+    font-size: 50px;
+}
+.flip-clock-wrapper ul li a div.down {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.flip-clock-wrapper .flip {
+    box-shadow: none;
+    width: 40px;
+    height: 70px;
+    font-size: 50px;
+}
+.flip-clock-wrapper ul {
+    border-radius: 0;
+    background: transparent;
+}
+.flip-clock-wrapper ul li a div.up:after,
+.flip-clock-wrapper ul li a div .shadow {
+    width: 90%;
+}
+.flip-clock-wrapper ul li a div.up:after {
+    top: 34px;
+    height: 4px;
+}
+.flip-clock-dot {
+    background: #dddddd;
+    width: 8px;
+    height: 8px;
+    box-shadow: none;
+}
+.flip-clock-wrapper ul li {
+    line-height: 70px;
+}
+/*********************************************/
+/*****           MEDIA QUERIES           *****/
+/*********************************************/
+
+@media all and (max-width: 1090px) {
+    .company-logo {
+        margin-left: 10px;
+    }
+    .autorization {
+        margin-right: 10px;
+    }
+}
+
+@media all and (max-width: 950px) {
+    .earnMoreOptions ul {
+        min-width: 380px;
+    }
+}
+
+@media all and (max-width: 600px) {
+    section {
+        position: relative;
+    }
+    .mainBody {
+        padding-top: 40px;
+    }
+    .goals {
+        background-size: contain;
+        background-position: center 10px;
+        width: 46%;
+        height: auto;
+        vertical-align: bottom;
+    }
+    .earnMoreContainer {
+        text-align: center;
+        vertical-align: bottom;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        height: 60px;
+        width: 25%;
+        padding: 11px 16px;
+        margin: 0;
+    }
+    .earnMoreContainer p {
+        font-size: 16px;
+        line-height: 18px;
+    }
+    .profileImage {
+        vertical-align: middle;
+        text-align: center;
+        width: 25%;
+    }
+    .profileImage p {
+        display: none;
+    }
+    .footerScore {
+        float: none;
+        margin-right: 0;
+    }
+    .ballScore {
+        font-size: 26px;
+        line-height: 44px;
+        min-width: 50px;
+    }
+    .progressContainer .progressBar {
+        width: 50%;
+    }
+    .earnMoreOptions ul {
+        display: block;
+        min-width: initial;
+        margin: 0;
+    }
+    .macbookLogo, .showDesktop {
+        display: none;
+    }
+    .iphoneLogo {
+        display: inline-block;
+        max-width: 200px;
+    }
+    .btnMobile {
+        display: inline-block;
+    }
+    .showMobile {
+        display: block;
+    }
+
+    /*********************************************/
+    /*****               CLOCK               *****/
+    /*********************************************/
+    .flip-clock-wrapper {
+        width: auto;
+        display: inline-block;
+        margin: 10px 0 -25px;
+    }
+    .flip-clock-divider .flip-clock-label {
+        display: none;
+    }
+    .flip-clock-wrapper ul li a div div.inn {
+        color: #cccccc;
+        background-color: #00369C;
+        border-radius: 0;
+        text-shadow: none;
+        border: 2px solid #cccccc;
+        width: 90%;
+        font-size: 26px;
+    }
+    .flip-clock-wrapper ul li a div.down {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .flip-clock-wrapper .flip {
+        box-shadow: none;
+        width: 28px;
+        height: 40px;
+        font-size: 26px;
+    }
+    .flip-clock-wrapper ul {
+        border-radius: 0;
+        background: transparent;
+        margin: 1px;
+    }
+    .flip-clock-wrapper ul li a div.up:after,
+    .flip-clock-wrapper ul li a div .shadow {
+        width: 90%;
+    }
+    .flip-clock-wrapper ul li a div.up:after {
+        top: 34px;
+        height: 4px;
+    }
+    .flip-clock-dot {
+        background: #dddddd;
+        width: 2px;
+        height: 2px;
+        box-shadow: none;
+    }
+    .flip-clock-wrapper ul li {
+        line-height: 37px;
+    }
+    .flip-clock-dot.top {
+        top: 14px;
+        left: 1px;
+    }
+    .flip-clock-dot.bottom {
+        bottom: 22px;
+        left: 1px;
+    }
+    .flip-clock-divider {
+        width: 7px;
+        height: 50px;
+    }
+    .clock .clockInfo h2 {
+        font-size: 14px;
+        margin: 10px 15px;
+    }
+    .clock h2 {
+        font-size: 20px;
+    }
+    /***********************************************/
+    .earnMoreOptions ul {
+        margin: 0;
+    }
+    .earnMoreOptions ul li {
+        font-size: 18px;
+        margin: 15px 0;
+        min-height: 30px;
+        padding-left: 40px;
+        background-size: 28px;
+    }
+
+    .earnMoreOptions ul li p {
+        font-size: 14px;
+    }
+    .centeredContent {
+        padding: 10px;
+        padding-top: 0;
+        position: relative;
+        left: 0;
+        -webkit-transform: translate(0,0);
+        -moz-transform: translate(0,0);
+        -o-transform: translate(0,0);
+        transform: translate(0,0);
+        padding-bottom: 70px;
+    }
+    .imageOnYellow img {
+        max-width: 100%;
+    }
+    .imageOnYellow h3 {
+        font-size: 20px;
+    }
+    h1 {
+        font-size: 26px;
+        line-height: 30px;
+    }
+    h3 {
+        font-size: 18px;
+    }
+    .whiteBGInner h2 {
+        font-size: 20px;
+    }
+    .whiteBGInner input[type=email] {
+        min-width: 100%;
+        margin: 20px 0;
+        padding: 0 10px;
+        font-size: 16px;
+    }
+
+    .btnDark, .btnFacebook, .btnGold, .btnStroked, .btnTwitter {
+        margin: 16px 0;
+    }
+    .btnGold {
+        padding: 10px 40px;
+    }
+    .whiteBGInner {
+        padding: 30px 20px 15px;
+    }
+}
+
+/*********************************************/
+/*****             ANIMATIONS            *****/
+/*********************************************/
+@-moz-keyframes rotatebox /*--for firefox--*/{
+    from{
+        -moz-transform:rotate(0deg);
+    }
+    to{
+        -moz-transform:rotate(1080deg);
+    }
+}
+
+@-webkit-keyframes rotatebox /*--for webkit--*/{
+    from{
+        -webkit-transform:rotate(0deg);
+    }
+    to{
+        -webkit-transform:rotate(1080deg);
+    }
+}
+
+@keyframes rotatebox {
+    from{
+        transform:rotate(0deg);
+    }
+    to{
+        transform:rotate(1080deg);
+    }
+}
+
+.ballRotates {
+-moz-animation-name:rotatebox;
+-moz-animation-duration:1s;
+-moz-animation-iteration-count:1;
+-moz-animation-fill-mode:forwards;
+
+-webkit-animation-name:rotatebox;
+-webkit-animation-duration:1s;
+-webkit-animation-iteration-count:1;
+-webkit-animation-fill-mode:forwards;
+
+animation-name:rotatebox;
+animation-duration:1s;
+animation-iteration-count:1;
+animation-fill-mode: forwards;
+}
+
+
+
+
+
+.overlay {
+    position: absolute;
+    background: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+    text-align: center;
+    display: none;
+    overflow: auto;
+}
+.overlay button{
+    display: inline-block;
+    margin: 5px;
+}
+.mobMenu {
+    width: 35px;
+    height: 35px;
+    background: white;
+    vertical-align: middle;
+}
