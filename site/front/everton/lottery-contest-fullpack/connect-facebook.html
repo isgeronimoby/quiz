@@ -60,6 +60,9 @@
         .goldenBallDummy {
             display: none;
         }
+        #screenMailAuthorizationPopup {
+            display: none;
+        }
     </style>
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -214,11 +217,36 @@
 
             <a href="#" class="btnFacebook">Connect with Facebook</a>
             <p class="smallNotes">We'll never post anything on your Timeline</p>
-            <a href="#" class="btnStroked">or Sign up with email</a>
+            <a href="#" class="btnStroked" id="btnSignUpEmail">or Sign up with email</a>
         </div>
     </section>
 
 </div>
+
+
+ <section id="screenMailAuthorizationPopup">
+     <div class="centeredContent">
+         <div class="whiteBGOuter">
+             <div class="whiteBGInner">
+
+                 <a href="#" class="btnClose">&#x00D7;</a>
+
+                 <h2>Sign up with Email</h2>
+                 <p class="errorHolder" id="errorGlobal"></p>
+                 <form id="emailAuthorization">
+                     <input type="email" placeholder="mail@domain.com" name="email"/>
+                     <p class="errorHolder" id="errorWrongMail"></p>
+                     <input type="password" placeholder="" name="password"/>
+                     <p class="errorHolder" id="errorWrongPassword"></p>
+                     <input type="submit" class="btnGold" value="Sign Up" id="signUp" />
+                 </form>
+                 <p class="smallNotes">By signing up I agree to the <a href="#">Terms and Conditions</a></p>
+             </div>
+         </div>
+     </div>
+ </section>
+
+
 
 
  <footer class="pageFooter">

@@ -181,13 +181,22 @@ $(document).ready(function(){
     startClock('.countdownClock2');
 
 
+    $('.countdown').countdown('2015/12/31', function(event) {
+        $(this).html(event.strftime('<div><span class="numbers">%D</span><span>day%!d</span></div>' +
+            '<div><span class="numbers">%H</span><span>hrs</span></div>' +
+            '<div><span class="numbers">%M</span><span>mins</span></div>' +
+            '<div><span class="numbers">%S</span><span>secs</span></div>'));
+    });
+
+
     $('#mobMenu').click(function(){
         $('.overlay').fadeIn(300);
     });
 
 
     // Input check and AJAX forms
-    $('#showLinkPopup').click(function(){
+    $('#showLinkPopup').click(function(e){
+        e.preventDefault();
         $('#screenEnterEmailForLinking').fadeIn(300);
         $('#screenLinkDevice').css('display','none');
     });
@@ -223,4 +232,61 @@ $(document).ready(function(){
         $(this).removeClass('inputError');
     });
 
+
+    // Signing Up with email
+    $('#btnSignUpEmail').click(function(e){
+        e.preventDefault();
+        $('#screenMailAuthorizationPopup').fadeIn(300);
+        $('#screenFBConnect').css('display','none');
+    });
+    $('#screenMailAuthorizationPopup .btnClose').click(function(e){
+        e.preventDefault();
+        $('#screenMailAuthorizationPopup').fadeOut(200);
+        $('#screenFBConnect').css('display','inline-block');
+    });
+
+    $("#signUp").click(function() {
+        var email   = $('#screenMailAuthorizationPopup input[type=email]');
+        var pass   = $('#screenMailAuthorizationPopup input[type=password]');
+        var emailReg = /^[a-zA-Z0-9._+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,4}(\.[a-zA-Z]{2,3})?(\.[a-zA-Z]{2,3})?$/;
+
+        // client-side validation
+        function checkFields() {
+            if(emailReg.test(email.val()) == false) {
+                email.addClass('inputError');
+            } else {
+                email.removeClass('inputError');
+            }
+
+            if (pass.val() < 1) {
+                pass.addClass('inputError');
+            }else {
+                pass.removeClass('inputError');
+            }
+            return false;
+        }
+
+        if(checkFields() == false) return false;
+
+        $.ajax({
+            type: "post",
+            url: "save-email.php",
+            data: $('#emailLinking').serialize(),
+            cache: false,
+            success: function(data) {
+
+            },
+            error: function() {
+
+            }
+        });
+        return false;
+    });
+
+    $('#screenMailAuthorizationPopup input[type=email]').focus(function(){
+        $(this).removeClass('inputError');
+    });
+    $('#screenMailAuthorizationPopup input[type=password]').focus(function(){
+        $(this).removeClass('inputError');
+    });
 });
