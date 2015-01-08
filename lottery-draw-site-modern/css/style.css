@@ -1,0 +1,511 @@
+/*****   CUSTOM FONTS   *****/
+@font-face {
+    font-family: 'ev-helvetica';
+    src: url('../fonts/helvetica-neue-light.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/helvetica-neue-light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/helvetica-neue-light.woff') format('woff'), /* Modern Browsers */
+    url('../fonts/helvetica-neue-light.ttf')  format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/helvetica-neue-light.svg#helvetica') format('svg'); /* Legacy iOS */
+    font-weight: 200;
+}
+@font-face {
+    font-family: 'ev-helvetica';
+    src: url('../fonts/helvetica-neue-regular.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/helvetica-neue-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/helvetica-neue-regular.woff') format('woff'), /* Modern Browsers */
+    url('../fonts/helvetica-neue-regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/helvetica-neue-regular.svg#helvetica') format('svg'); /* Legacy iOS */
+    font-weight: 400;
+}
+/*****   CUSTOM FONTS END  *****/
+/*****   GLOBAL STYLES   *****/
+* {
+    box-sizing: border-box;
+}
+body {
+    font-size: 14px;
+    line-height: 1.42857;
+    color: #333;
+    background-color: #1c2028;
+
+    margin: 0;
+    width: 100%;
+}
+h1,h2,h3,h4,h5,h6,p,a,span,div {
+    font-family: ev-helvetica, "Helvetica Neue","Helvetica", "Calibri", "Arial", sans-serif;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+
+    color: #ffffff;
+    text-transform: uppercase;
+}
+h3 {
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 22px;
+    font-weight: 800;
+    margin-top: 8px;
+}
+
+.condensedFont {
+    font-weight: 200;
+}
+.text-left {
+    text-align: left;
+}
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+img {
+    display: inline-block;
+    vertical-align: middle;
+    border: 0 none;
+}
+.subtopic {
+    font-size: 12px;
+}
+.color-aqua {
+    color: #7ebae9;
+}
+.color-gold {
+    color: #bda234;
+}
+.clearfix:before,
+.clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after {
+    clear:both;
+}
+.clearfix {
+    zoom:1; /* For IE 6/7 (trigger hasLayout) */
+}
+/*****   GLOBAL STYLES END   *****/
+
+.draw-wrapper {
+    width: 100%;
+    text-align: center;
+}
+.draw-container {
+    display: inline-block;
+    max-width: 600px;
+    width: 100%;
+    /*border-left: 2px solid #dddddd;*/
+    /*border-right: 2px solid #dddddd;*/
+
+    margin: 0;
+    padding: 0 4px;
+}
+.header {
+    width: 100%;
+    padding: 15px 0;
+}
+.footer {
+    width: 100%;
+    padding: 15px 0;
+    padding-right: 8px;
+    /*text-align: right;*/
+}
+.sectionLayout {
+
+}
+.sectionLayout > img{
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+.greyBox {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #364158;
+    width: 100%;
+}
+
+.thinLink {
+    text-transform: none;
+    font-weight: 100;
+    text-decoration: none;
+    font-size: 16px;
+}
+.thinLink:hover {
+    color: #eee;
+}
+
+.article {
+    margin-top: 10px;
+    margin-bottom: -15px;
+    opacity: 0;
+}
+.article > div{
+    width: 50%;
+    height: 100%;
+    margin: 0;
+    vertical-align: middle;
+    display: inline-block;
+}
+.article > .articleImage {
+    /*background: url('http://pestorestaurants.co.uk/wp-content/uploads/2012/07/Everton.jpeg') no-repeat;*/
+    background: url('../images/everton-training.png') no-repeat;
+    background-size: cover;
+    float: left;
+    overflow: hidden;
+}
+
+.article > .greyBox {
+    text-align: left;
+    float: right;
+}
+.article > .greyBox h3 {
+    /*margin-bottom: 15px;*/
+}
+
+.earningOptions {
+    width: 100%;
+    margin: 0;
+    margin-top: 10px;
+}
+.earningOptions ul {
+    list-style: none;
+    list-style-position: inside;
+
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.earningOptions ul li {
+    display: inline-block;
+    margin: 0;
+    width: 100%;
+    opacity: 0;
+}
+.earningOptions ul li .listArrow {
+    display: inline-block;
+    vertical-align: middle;
+    width: 18px;
+    background: url('../images/linked-list-style.png') no-repeat;
+    background-position: left center;
+    background-size: cover;
+    height: 65px;
+
+    margin-right: 5px;
+}
+.earningOptions ul li .tickets, .greyBox .tickets {
+    display: inline-block;
+    background-color: #293140;
+    color: #7bb3e5;
+    font-size: 10px;
+    width: 20%;
+    vertical-align: middle;
+    height: 55px;
+    padding: 5px;
+    margin-right: 5px;
+}
+.greyBox .tickets {
+    margin-left: 10px;
+    width: 22%;
+}
+.greyBox .tickets,
+.greyBox .button {
+    margin-top: 10px !important;
+}
+.earningOptions ul li .tickets span, .greyBox .tickets span{
+    font-size: 20px;
+    font-weight: 700;
+    color: #7bb3e5;
+}
+.earningOptions ul li .button, .greyBox .button {
+    width: 70%;
+    vertical-align: middle;
+    font-size: 15px;
+    padding: 0 5px;
+    line-height: 50px;
+    margin-top: 0;
+}
+
+.scoreHolder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+
+    display: none;
+}
+
+.score {
+    font-size: 1px;
+    opacity: 0;
+}
+
+#connectFBBox {
+    opacity: 0;
+}
+.circleDaysSection {
+    opacity: 0;
+}
+
+:-webkit-full-screen {
+    width: 100%;
+    height: 100%;
+}
+/*****   COUNTDOWN STYLES   *****/
+.countdown {
+    text-align: center;
+    margin-top: 5px;
+    width: 100%;
+}
+.countdown > div {
+    display: inline-block;
+    width: 25%;
+}
+.countdown > div:not(:last-child) {
+    padding-right: 4px;
+}
+.countdown > div:not(:first-child) {
+    padding-left: 4px;
+}
+.countdown > div > div {
+    background-color: #364158;
+    padding: 4px 0;
+}
+.countdown > div > div span {
+    color: #7ebae9;
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+.countdown > div > div span.numbers {
+    font-size: 24px;
+    font-weight: 800;
+    color: #ffffff;
+}
+/*****   COUNTDOWN STYLES END  *****/
+
+/*****   BUTTONS  *****/
+.button {
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    text-decoration: none;
+    text-shadow: 2px 0 3px rgba(0,0,0,0.75);
+}
+
+.buttonLarge {
+    border-bottom: 10px solid;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 20px;
+}
+.buttonDefault {
+    border-bottom: 5px solid;
+    font-size: 20px;
+    font-weight: 100;
+    padding: 16px;
+}
+
+.buttonBlue {
+    background-color: #00369c;
+    border-bottom-color: #012a85;
+}
+.buttonBlue:hover,
+.buttonBlue:active,
+.buttonBlue:focus {
+    background-color: #012a85;
+    border-bottom-color: #012a85;
+}
+.buttonLightBlue {
+    background-color: #3782d7;
+    border-bottom-color: #1c68bd;
+}
+.buttonLightBlue:hover,
+.buttonLightBlue:active,
+.buttonLightBlue:focus {
+    background-color: #1c68bd;
+    border-bottom-color: #1c68bd;
+}
+.buttonYellow {
+    background-color: #bda234;
+    border-bottom-color: #7a640c;
+}
+.buttonYellow:hover,
+.buttonYellow:active,
+.buttonYellow:focus {
+    background-color: #7a640c;
+    border-bottom-color: #7a640c;
+}
+/*****   BUTTONS END   *****/
+
+
+/*****   CIRCLES CIRCLES   *****/
+.circularChart {
+    position: relative;
+    width: 75%;
+    padding-top: 75%;
+    display: inline-block;
+    margin: 15px 0;
+}
+.circleAbsolute {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+
+    z-index: 1;
+}
+#overallProgressCircle {
+    background: #364158;
+    width: 100%;
+    padding-top: 100%;
+}
+.newCircleDummy {
+    width: 94%;
+    padding-top: 94%;
+    background: #1c2028;
+}
+#daysProgressCircle {
+    width: 96%;
+    padding-top: 96%;
+    background: #364158;
+}
+.innerCircleDummy {
+    width: 96%;
+    padding-top: 96%;
+    background: #1c2028;
+}
+
+svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+.circleCenterHolder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    z-index: 10;
+    width: 100%;
+}
+.circleToggles {
+    display: inline-block;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    margin-left: -20px;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    z-index: 10;
+    width: 100%;
+    list-style: none;
+    list-style-position: outside;
+}
+.circleToggles li {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #364158;
+    border-radius: 50%;
+    margin: 0 2px;
+}
+.circleToggles li.active {
+    background: #364158;
+}
+.circleSection .circleTicketsSection {
+    margin-bottom: 5px;
+    margin-top: -18px;
+}
+.circleSection .circleTicketsSection p{
+    line-height: 32px;
+}
+.circleSection .circleTicketsSection .circlePercentage{
+    font-size: 46px;
+    font-weight: 200;
+}
+
+.circleSection .circleDaysSection p {
+    color: #bda234;
+    font-size: 16px;
+    display: inline-block;
+}
+#infoDays .circleDaysSection{
+    margin-top: 6px;
+}
+
+
+.circularChart .circularPortrait{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: -20px;
+    margin-right: -30px;
+}
+.circularChart .circularPortrait .portraitHolder {
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #364158;
+}
+.circularChart .circularPortrait .portraitHolder img{
+    max-width: 70px;
+    max-height: 70px;
+}
+#infoTickets, #infoDays {
+    display: none;
+}
+/*****   CIRCLES CIRCLES END  *****/
+
+/*****   ANIMATIONS  *****/
+.rotateInViewStart {
+    transform: scale(0);
+    transform-origin: center top;
+    transition: transform 0.3s ease-in;
+    -ms-transform: scale(0);
+    -ms-transform-origin: center top;
+    -ms-transition: transform 0.3s ease-in;
+    -moz-transform: scale(0);
+    -moz-transform-origin: center top;
+    -moz-transition: transform 0.3s ease-in;
+    -webkit-transform: scale(0);
+    -webkit-transform-origin: center top;
+    -webkit-transition: transform 0.3s ease-in;
+}
+.rotateInViewFinish {
+    transform: scale(1);
+    -ms-transform: scale(1);
+    -moz-transform: scale(1);
+    -webkit-transform: scale(1);
+}
+/*****   ANIMATIONS END *****/
+
+/*****   MEDIA QUERIES  *****/
+@media all and (min-width:430px) and (max-width:585px) {
+    .earningOptions ul li .button {
+        width: 73%;
+    }
+}
+@media all and (min-width:585px) {
+    .earningOptions ul li .button {
+        width: 75%;
+    }
+}
+/*****   MEDIA QUERIES END *****/
+
+#dashboard {
+    display: none;
+}

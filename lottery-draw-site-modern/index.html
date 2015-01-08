@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <title>Everton. Lottery draw</title>
+
+    <link href="./css/animate.css" rel="stylesheet" type="text/css" />
+    <link href="./css/style.css" rel="stylesheet" type="text/css" />
+
+    <style>
+
+    </style>
+</head>
+<body>
+
+<div class="draw-wrapper">
+    <div class="draw-container text-center">
+
+        <!--<header class="header">
+            <a href="#"><img src="./images/company-logo.png"/></a>
+        </header>-->
+
+        <div class="countdown"></div>
+
+        <section id="enterDraw" class="sectionLayout">
+            <img src="./images/everton-training.png" alt="" />
+
+            <div class="greyBox">
+                <h3 class="condensedFont">Meet the team, get signed T-shirts and watch a training session</h3>
+            </div>
+
+            <a href="#" class="button buttonBlue buttonLarge" id="btnEnterDraw">Enter the free draw</a>
+
+            <div class="greyBox">
+                <h3>The more you do the more chance you have to win! <span class="color-aqua">It's totally free</span></h3>
+            </div>
+        </section>
+
+        <section id="dashboard" class="sectionLayout">
+
+
+            <h1>Your progress</h1>
+            <!--<p class="color-aqua subtopic">Each action - another entry into the draw</p>-->
+
+            <div class="circularChart">
+                <div id="overallProgressCircle" class="circleAbsolute">
+                    <div class="newCircleDummy circleAbsolute">
+                        <div id="daysProgressCircle" class="circleAbsolute">
+                            <div class="innerCircleDummy circleAbsolute" >
+                                <div class="circleCenterHolder">
+                                    <div class="circleSection" id="infoOverall">
+                                        <div class="circleTicketsSection">
+                                            <p class="circlePercentage color-aqua"></p>
+                                            <p class="color-aqua">tickets</p>
+                                        </div>
+                                        <div class="circleDaysSection">
+                                            <p class="daysPercentage">1/4</p>
+                                            <p>days</p>
+                                        </div>
+                                    </div>
+                                    <div class="circleSection" id="infoTickets">
+                                        <div class="circleTicketsSection">
+                                            <p class="circlePercentage color-aqua"></p>
+                                            <p class="color-aqua">tickets</p>
+                                        </div>
+                                        <div>
+                                            <p class="color-aqua">Each ticket gets you an extra entry into the draw</p>
+                                        </div>
+                                    </div>
+                                    <div class="circleSection" id="infoDays">
+                                        <div>
+                                            <p class="color-gold">Open the app 4 days <br>in a row<br>get extra ticket</p>
+                                        </div>
+                                        <div class="circleDaysSection">
+                                            <p class="daysPercentage">1/4</p>
+                                            <p>days</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="circleToggles">
+                                    <li class="active"></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="circularPortrait">
+                    <div class="portraitHolder">
+                        <img src="./images/profile-image.png"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="greyBox" id="connectFBBox">
+                <h3><span class="color-aqua">Earn 5 more tickets</span> by connecting to facebook</h3>
+                <div class="tickets"><span>+5</span><br/>tickets</div><a href="#" class="button buttonBlue buttonDefault">Connect with facebook</a>
+            </div>
+
+            <div class="earningOptions">
+                <ul>
+                    <li><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#" class="button buttonDefault buttonBlue">Share on facebook</a></li>
+                    <li><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#" class="button buttonDefault buttonLightBlue">Share on twitter</a></li>
+                    <li><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#" class="button buttonDefault buttonYellow">Connect device</a></li>
+                </ul>
+            </div>
+
+            <article class="article">
+                <div class="articleImage"></div>
+                <div class="greyBox">
+                    <a href="#" class="thinLink"><h3 class="color-aqua"><b>find out about the prize</b></h3></a>
+                    <!--<h3 class="condensedFont">Meet the team, get signed T-shirts and watch a training session</h3>
+                    <a href="#" class="color-aqua thinLink">Learn more</a>-->
+                </div>
+                <div class="clearfix"></div>
+            </article>
+
+        </section>
+
+        <footer class="footer">
+            <a href="#"><img src="./images/company-logo.png"/></a>
+        </footer>
+
+        <div class="scoreHolder">
+            <p class="score">SCORE</p>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="./js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="./js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="./js/jquery.countdown.min.js"></script>
+<script type="text/javascript" src="./js/progressbar.min.js"></script>
+<script type="text/javascript" src="./js/screenfull.min.js"></script>
+<script type="text/javascript" src="./js/app.js"></script>
+
+<script>
+    overallProgress = 0.4;
+    daysInRow = 0.5;
+    pointsCurrent = 12;
+</script>
+
+</body>
+</html>
