@@ -62,6 +62,15 @@ h1 {
 .text-right {
     text-align: right;
 }
+.pull-left {
+    float: left;
+}
+.pull-right {
+    float: right;
+}
+.pull-none {
+    float: none;
+}
 img {
     display: inline-block;
     vertical-align: middle;
@@ -87,18 +96,24 @@ img {
 .clearfix {
     zoom:1; /* For IE 6/7 (trigger hasLayout) */
 }
-/*****   GLOBAL STYLES END   *****/
-
 .draw-wrapper {
     width: 100%;
     text-align: center;
 }
+.showDesktop {
+    display: none;
+}
+.showMobile {
+    display: inline-block;
+}
+/*****   GLOBAL STYLES END   *****/
+
 .draw-container {
     display: inline-block;
     max-width: 600px;
     width: 100%;
-    /*border-left: 2px solid #dddddd;*/
-    /*border-right: 2px solid #dddddd;*/
+/*    border-left: 2px solid #dddddd;
+    border-right: 2px solid #dddddd;*/
 
     margin: 0;
     padding: 0 4px;
@@ -115,6 +130,11 @@ img {
 }
 .sectionLayout {
 
+}
+
+.marginTopText {
+    margin-top: 15px;
+    padding: 0 8px;
 }
 .sectionLayout > img{
     width: 100%;
@@ -142,6 +162,7 @@ img {
     margin-top: 10px;
     margin-bottom: -15px;
     opacity: 0;
+    width: 100%;
 }
 .article > div{
     width: 50%;
@@ -193,7 +214,8 @@ img {
     background-position: left center;
     background-size: cover;
     height: 65px;
-
+    float: left;
+    margin-top: -4px;
     margin-right: 5px;
 }
 .earningOptions ul li .tickets, .greyBox .tickets {
@@ -211,9 +233,8 @@ img {
     margin-left: 10px;
     width: 22%;
 }
-.greyBox .tickets,
-.greyBox .button {
-    margin-top: 10px !important;
+.optionsGroup .greyBox .button {
+    margin: 10px 0;
 }
 .earningOptions ul li .tickets span, .greyBox .tickets span{
     font-size: 20px;
@@ -227,6 +248,13 @@ img {
     padding: 0 5px;
     line-height: 50px;
     margin-top: 0;
+}
+.earningOptions ul li.optionDisabled .tickets {
+    color: #888;
+    background: rgba(88, 88, 88, 0.45);
+}
+.earningOptions ul li.optionDisabled .tickets span{
+    color: #888;
 }
 
 .scoreHolder {
@@ -260,6 +288,7 @@ img {
 .countdown {
     text-align: center;
     margin-top: 5px;
+    display: inline-block;
     width: 100%;
 }
 .countdown > div {
@@ -341,6 +370,26 @@ img {
 .buttonYellow:focus {
     background-color: #7a640c;
     border-bottom-color: #7a640c;
+}
+
+.buttonStroke {
+    border: 2px solid #bbbbbb;
+    color: #bbbbbb;
+}
+.buttonStroke:hover,
+.buttonStroke:active,
+.buttonStroke:focus {
+    border: 2px solid #364158;
+    background: #bbbbbb;
+    color: #222222;
+    text-shadow: none;
+}
+.buttonDisabled {
+    border: 2px solid #555;
+    color: #888;
+    background: rgba(88, 88, 88, 0.45);
+    cursor: default;
+    text-shadow: none;
 }
 /*****   BUTTONS END   *****/
 

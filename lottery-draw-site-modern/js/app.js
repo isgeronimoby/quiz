@@ -32,13 +32,21 @@ $(document).ready(function(){
     });
 
     function init(){
-        $('.article > .articleImage').height($('.article > .greyBox').outerHeight());
+        $('.article > .articleMobileImage').height($('.article > .greyBoxMobile').outerHeight());
+        $('.article > .articleImageDesktop').height($('.article > .greyBoxDesktop').outerHeight());
 
+        if ($(window).width() > 900) {
+            $($('#connectFBBox .button')[0]).width($($('#connectFBBox .button')[1]).width()+10);
+        } else {
+            $($('#connectFBBox .button')[0]).width('auto');
+        }
         if ($(window).width() < 600) {
             if ($(window).width() > $(window).height()) {
                 var maxCircleSize = Math.round($(window).outerHeight() * 0.7);
                 $('.circularChart').css('width', maxCircleSize).css('padding-top', maxCircleSize);
             }
+        } else {
+
         }
     }
 
@@ -58,7 +66,6 @@ $(document).ready(function(){
         var elemTop = $(elem).offset().top;
         var elemBottom = elemTop + $(elem).height();
         return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
-//        return ((docViewTop < elemTop) && (docViewBottom > elemBottom));
     }
 
 
@@ -67,11 +74,8 @@ $(document).ready(function(){
         e.preventDefault();
         $('#enterDraw').css('display','none');
 
-/*        if (screenfull.enabled) {
-            screenfull.request();
-        } else {
-            // Ignore or do something else
-        }*/
+        //Creating sticky footer
+        $('.footer.showDesktop').addClass('footerAbsolute');
 
         $('.scoreHolder').css('display','inline-block');
         $('.score').animate({'font-size': '70px', 'opacity': 1},500, function(){
@@ -168,4 +172,5 @@ $(document).ready(function(){
     });
 
     init();
+
 });

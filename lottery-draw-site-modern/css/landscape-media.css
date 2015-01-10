@@ -1,0 +1,158 @@
+@media all and (min-width:900px) {
+    h3 {
+        font-size: 16px;
+    }
+    h1 {
+        font-size: 30px;
+    }
+    .greyBox {
+        margin-top: 10px;
+        padding: 20px;
+        width: auto;
+    }
+    .draw-wrapper {
+        height: 99%;
+        position: absolute;
+    }
+    .draw-container {
+        position: relative;
+        height: 100%;
+        max-width: 1080px;
+        width: 100%;
+        margin: 0;
+        padding: 0 20px;
+    }
+    .buttonLarge {
+        font-size: 26px;
+        font-weight: 600;
+        padding: 30px;
+    }
+    .article,
+    .earningOptions ul li,
+    #connectFBBox {
+        opacity: 1;
+    }
+    .showDesktop {
+        display: inline-block;
+    }
+    .showMobile {
+        display: none;
+    }
+    .staticTop {
+        margin-top: 20px;
+    }
+    .staticTop .countdown {
+        float: left;
+        width: 41%;
+        max-height: 108px;
+    }
+    .countdown > div > div {
+        padding: 18px 0;
+    }
+    .countdown > div > div span {
+        font-size: 14px;
+    }
+    .countdown > div > div span.numbers {
+        font-size: 32px;
+    }
+    .staticTop .showDesktop {
+        float: right;
+        width: 58%;
+        text-align: right;
+        margin-top: 5px;
+        max-height: 108px;
+        overflow: hidden;
+    }
+    .staticTop .showDesktop .greyBox{
+        float: none;
+        width: 68%;
+        margin-left: 6px;
+    }
+    .staticTop .showDesktop .articleImage{
+        width: 30%;
+        float: none;
+    }
+    .circularChartsGroup {
+        float: left;
+        width: 42%;
+    }
+    .circularChartsGroup h1{
+        margin-top: 40px;
+    }
+    .circularChartsGroup .circularChart {
+        width: 60%;
+        padding-top: 60%;
+        margin: 15px 0;
+    }
+    .optionsGroup {
+        float: right;
+        width: 58%;
+    }
+    .optionsGroup .earningOptions ul li .button {
+        width: 81%;
+    }
+    .optionsGroup .earningOptions ul li .tickets, .greyBox .tickets {
+        width: 12%;
+    }
+    .optionsGroup .greyBox .tickets {
+        display: none;
+    }
+    .optionsGroup .greyBox {
+        padding: 30px;
+    }
+    .optionsGroup .greyBox p {
+        color: #bbbbbb;
+    }
+    .optionsGroup h3 {
+        font-size: 26px;
+    }
+    .optionsGroup .greyBox .button {
+        margin: 30px 0;
+    }
+
+
+    .footer {
+        position: relative;
+        bottom: 10px;
+        left: 0;
+        padding: 0 10px;
+
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    .footer .pull-right a{
+        color: #aaaaaa;
+        font-size: 14px;
+        margin-left: 20px;
+        vertical-align: bottom;
+        display: inline-block;
+        margin-bottom: -10px;
+
+    }
+    .footerAbsolute {
+        position: absolute;
+        padding: 0 20px;
+    }
+    .footer .pull-right a:hover{
+        color: #eeeeee;
+    }
+}
+
+@media all and (max-height: 800px) {
+    .draw-wrapper {
+        height: 100%;
+        position: inherit;
+    }
+    .draw-container {
+
+    }
+    .footer {
+        margin-top: 20px;
+        position: relative;
+        bottom: 10px;
+        left: 0;
+    }
+    .footerAbsolute {
+        position: relative;
+    }
+}
