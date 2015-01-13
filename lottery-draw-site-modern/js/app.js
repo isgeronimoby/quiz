@@ -181,12 +181,14 @@ jQuery(document).ready(function($){
     }
 
     function muteOptionItem(item) {
+        item = $('#' + item);
         item.find('.tickets').addClass('muted');
         item.find('.button').addClass('muted').click(function(e){
             e.preventDefault();
         });
     }
     function unmuteOptionItem(item) {
+        item = $('#' + item);
         item.find('.tickets').removeClass('muted');
         item.find('.button').removeClass('muted').unbind('click').click();
     }
@@ -275,6 +277,7 @@ jQuery(document).ready(function($){
 
 
 //    $('#btnEnterDraw').trigger('click');
+    LotteryApp.muteOptionItem('exampleMutedItem');
     init();
 
 });
