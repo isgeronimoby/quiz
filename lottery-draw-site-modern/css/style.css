@@ -106,6 +106,13 @@ img {
 .showMobile {
     display: inline-block;
 }
+.marginBottom {
+    margin-bottom: 20px;
+}
+.muted {
+    opacity: 0.4;
+    cursor: default;
+}
 /*****   GLOBAL STYLES END   *****/
 
 .draw-container {
@@ -273,17 +280,127 @@ img {
     opacity: 0;
 }
 
-#connectFBBox {
-    opacity: 0;
-}
 .circleDaysSection {
     opacity: 0;
 }
 
-:-webkit-full-screen {
+/*****   POPUP STYLES   *****/
+.everton-amazing-popups .everton-popup-clearfix:before,
+.everton-amazing-popups .everton-popup-clearfix:after {
+    content:"";
+    display:table;
+}
+.everton-amazing-popups .everton-popup-clearfix:after {
+    clear:both;
+}
+.everton-amazing-popups .everton-popup-clearfix {
+    zoom:1; /* For IE 6/7 (trigger hasLayout) */
+}
+/* END OF RESET */
+
+.everton-amazing-popups .everton-popup-container {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    z-index: 100;
 }
+.everton-amazing-popups .everton-popup-container .everton-popup {
+    background-color: #ffffff;
+    max-width: 650px;
+    max-height: 90%;
+    position: relative;
+    overflow: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+
+    box-shadow: 0 10px 25px rgba(0,0,0,.5);
+}
+@media all and (max-width: 900px) {
+    .everton-amazing-popups .everton-popup-container .everton-popup {
+        max-width: 90%;
+    }
+}
+.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-header .everton-popup-close {
+    float: right;
+    display: block;
+    text-decoration: none;
+    color: #000;
+    width: 40px;
+    height: 40px;
+    line-height: 34px;
+    font-size: 30px;
+}
+.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body {
+    padding: 5px 24px 34px 30px;
+}
+
+.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body {
+    text-align: center;
+}
+
+.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body h2{
+    font-weight: 800;
+    color: #222222;
+}
+.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .formError{
+    color: red;
+    display: block;
+    text-align: left;
+    line-height: 46px;
+    padding: 0 20px;
+    border: 1px solid red;
+    background-color: #ffc3c3;
+    text-transform: none;
+    margin: 20px 0;
+}
+.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .popupForm {
+
+}
+.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .popupForm label{
+    display: block;
+    color: #222222;
+    text-align: left;
+    font-weight: 600;
+    text-transform: none;
+    margin-top: 25px;
+    margin-bottom: 2px;
+}
+.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .popupForm input:not([type="submit"]){
+    display: block;
+    color: #222222;
+    min-height: 46px;
+    font-size: 14px;
+    width: 100%;
+    padding: 0 20px;
+    line-height: 46px;
+    border: 0;
+    background-color: #eeeeee;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .popupForm input[type=submit]{
+    color: #ffffff;
+    margin-top: 25px;
+    cursor: pointer;
+}
+.inputError {
+    box-shadow: inset 0 0 0 2px #f00;
+}
+
+
+
+
+/*****   POPUP STYLES END  *****/
 /*****   COUNTDOWN STYLES   *****/
 .countdown {
     text-align: center;
@@ -335,6 +452,7 @@ img {
     padding: 20px;
 }
 .buttonDefault {
+    border-style: hidden;
     border-bottom: 5px solid;
     font-size: 20px;
     font-weight: 100;
@@ -390,6 +508,11 @@ img {
     background: rgba(88, 88, 88, 0.45);
     cursor: default;
     text-shadow: none;
+}
+.insteadButtonText {
+    display: inline-block;
+    vertical-align: middle;
+    width: 70%;
 }
 /*****   BUTTONS END   *****/
 

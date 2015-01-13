@@ -36,7 +36,7 @@
         display: inline-block;
     }
     .showMobile {
-        display: none;
+        display: none !important;
     }
     .staticTop {
         margin-top: 20px;
@@ -93,9 +93,6 @@
     }
     .optionsGroup .earningOptions ul li .tickets, .greyBox .tickets {
         width: 12%;
-    }
-    .optionsGroup .greyBox .tickets {
-        display: none;
     }
     .optionsGroup .greyBox {
         padding: 30px;
