@@ -6,6 +6,8 @@ var LotteryApp = {
 
 jQuery(document).ready(function($){
 
+    var maxDaysInRow = 5;
+
     LotteryApp.showScoreFunction = showScore;
     LotteryApp.showCurrentOptionBox = showCurOption;
     LotteryApp.muteOptionItem = muteOptionItem;
@@ -94,13 +96,13 @@ jQuery(document).ready(function($){
                 /* CIRCLES PROGRESS */
                 circleOverall.animate(LotteryApp.overallProgress, function () {
                     $('.circleDaysSection').animate({'opacity': 1}, 500);
-                    circleDays.animate(LotteryApp.daysInRow, function () {
+                    circleDays.animate(LotteryApp.daysInRow / maxDaysInRow, function () {
                         //$('body').scrollTop($('.earningOptions').offset().top - 300)
                         $('html,body').animate({scrollTop: $('.earningOptions').offset().top - 100}, 2000, 'swing');
                     });
                 });
 
-                $('.daysPercentage').html(Math.floor(4 * LotteryApp.daysInRow) + '/4');
+                $('.daysPercentage').html(LotteryApp.daysInRow + '/5');
                 showCurOption(curOption);
             }, 700);
         });
@@ -150,7 +152,7 @@ jQuery(document).ready(function($){
                     $(circleToggles[2]).addClass('active');
                     console.log(circleOverall.duration);
                     circleOverall.animate(0, {duration: 800});
-                    circleDays.animate(LotteryApp.daysInRow);
+                    circleDays.animate(LotteryApp.daysInRow / maxDaysInRow);
                     break;
             }
         });
