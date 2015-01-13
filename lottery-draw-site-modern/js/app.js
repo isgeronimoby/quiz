@@ -11,6 +11,7 @@ jQuery(document).ready(function($){
     LotteryApp.muteOptionItem = muteOptionItem;
     LotteryApp.unmuteOptionItem = unmuteOptionItem;
 
+
     /* CLOCKDOWN TIMER */
     $('.countdown').countdown('2015/12/31', function(event) {
         $(this).html(event.strftime('<div><div><span class="numbers">%D</span><span>day%!d</span></div></div>' +
@@ -59,11 +60,6 @@ jQuery(document).ready(function($){
         return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
     }
 
-
-    showScoreVar = showScore;
-    showCurOptionVar = showCurOption;
-
-
     var circleOverall = new ProgressBar.Circle('#overallProgressCircle', {
         color: '#3782d7',
         strokeWidth: 3,
@@ -76,8 +72,10 @@ jQuery(document).ready(function($){
         easing: 'bouncePast'
     });
 
-    function showScore(openFrame) {
-
+    function showScore(curOption) {
+/*        if (!openFrame) openFrame = 'dashboard';
+        openFrame = $('#' + openFrame);*/
+        var openFrame = $('#dashboard');
         circleDays.animate(0,{duration: 1});
         circleOverall.animate(0,{duration: 1});
 
@@ -103,7 +101,7 @@ jQuery(document).ready(function($){
                 });
 
                 $('.daysPercentage').html(Math.floor(4 * LotteryApp.daysInRow) + '/4');
-
+                showCurOption(curOption);
             }, 700);
         });
     }
@@ -117,9 +115,7 @@ jQuery(document).ready(function($){
         $('.footer.showDesktop').addClass('footerAbsolute');
 
 
-        showScore($('#dashboard'));
-        showCurOption($('#connectFBBox'));
-
+        showScore('connectFBBox');
 
         var clickCounter = 0;
         $('.newCircleDummy').click(function(e){
@@ -179,6 +175,7 @@ jQuery(document).ready(function($){
 
 
     function showCurOption(option) {
+        option = $('#' + option);
         $('.curOptionBox').css('display','none');
         if (option) option.fadeIn(300);
     }
