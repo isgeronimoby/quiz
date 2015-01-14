@@ -6,10 +6,13 @@ var LotteryApp = {
 
 jQuery(document).ready(function($){
 
+    var maxDaysInRow = 5;
+
     LotteryApp.showScoreFunction = showScore;
     LotteryApp.showCurrentOptionBox = showCurOption;
     LotteryApp.muteOptionItem = muteOptionItem;
     LotteryApp.unmuteOptionItem = unmuteOptionItem;
+
 
     /* CLOCKDOWN TIMER */
     $('.countdown').countdown('2015/12/31', function(event) {
@@ -59,11 +62,6 @@ jQuery(document).ready(function($){
         return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
     }
 
-
-    showScoreVar = showScore;
-    showCurOptionVar = showCurOption;
-
-
     var circleOverall = new ProgressBar.Circle('#overallProgressCircle', {
         color: '#3782d7',
         strokeWidth: 3,
@@ -76,8 +74,10 @@ jQuery(document).ready(function($){
         easing: 'bouncePast'
     });
 
-    function showScore(openFrame) {
-
+    function showScore(curOption) {
+/*        if (!openFrame) openFrame = 'dashboard';
+        openFrame = $('#' + openFrame);*/
+        var openFrame = $('#dashboard');
         circleDays.animate(0,{duration: 1});
         circleOverall.animate(0,{duration: 1});
 
@@ -96,14 +96,14 @@ jQuery(document).ready(function($){
                 /* CIRCLES PROGRESS */
                 circleOverall.animate(LotteryApp.overallProgress, function () {
                     $('.circleDaysSection').animate({'opacity': 1}, 500);
-                    circleDays.animate(LotteryApp.daysInRow, function () {
+                    circleDays.animate(LotteryApp.daysInRow / maxDaysInRow, function () {
                         //$('body').scrollTop($('.earningOptions').offset().top - 300)
                         $('html,body').animate({scrollTop: $('.earningOptions').offset().top - 100}, 2000, 'swing');
                     });
                 });
 
-                $('.daysPercentage').html(Math.floor(4 * LotteryApp.daysInRow) + '/4');
-
+                $('.daysPercentage').html(LotteryApp.daysInRow + '/5');
+                showCurOption(curOption);
             }, 700);
         });
     }
@@ -117,9 +117,7 @@ jQuery(document).ready(function($){
         $('.footer.showDesktop').addClass('footerAbsolute');
 
 
-        showScore($('#dashboard'));
-        showCurOption($('#connectFBBox'));
-
+        showScore('connectFBBox');
 
         var clickCounter = 0;
         $('.newCircleDummy').click(function(e){
@@ -154,7 +152,7 @@ jQuery(document).ready(function($){
                     $(circleToggles[2]).addClass('active');
                     console.log(circleOverall.duration);
                     circleOverall.animate(0, {duration: 800});
-                    circleDays.animate(LotteryApp.daysInRow);
+                    circleDays.animate(LotteryApp.daysInRow / maxDaysInRow);
                     break;
             }
         });
@@ -179,17 +177,20 @@ jQuery(document).ready(function($){
 
 
     function showCurOption(option) {
+        option = $('#' + option);
         $('.curOptionBox').css('display','none');
         if (option) option.fadeIn(300);
     }
 
     function muteOptionItem(item) {
+        item = $('#' + item);
         item.find('.tickets').addClass('muted');
         item.find('.button').addClass('muted').click(function(e){
             e.preventDefault();
         });
     }
     function unmuteOptionItem(item) {
+        item = $('#' + item);
         item.find('.tickets').removeClass('muted');
         item.find('.button').removeClass('muted').unbind('click').click();
     }
@@ -278,6 +279,7 @@ jQuery(document).ready(function($){
 
 
 //    $('#btnEnterDraw').trigger('click');
+    LotteryApp.muteOptionItem('exampleMutedItem');
     init();
 
 });
