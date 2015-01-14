@@ -1,0 +1,233 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    font-size: 14px;
+    line-height: 1.42857;
+    color: #333;
+    background-image: url('../images/blue-bg-01.jpg');
+    background-color: #00369c;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+.mainBody {
+    position: static;
+    padding-top: 120px;
+}
+section {
+    position: static;
+}
+.divInliner {
+    display: inline-block;
+}
+.bgImage {
+    z-index:-1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: auto;
+    width: 100%;
+}
+.container {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+h1,h2,h3,h4,h5,h6,p,span,a,.ballScore,ul,li {
+    /*font-family: ev-helvetica, "Helvetica Neue","Helvetica", "Calibri", "Arial", sans-serif;*/
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+.text-left {
+    text-align: left;
+}
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+img {
+    vertical-align: middle;
+    border: 0 none;
+}
+
+.centeredContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    width: 100%;
+    max-width: 960px;
+    padding: 30px;
+    text-align: center;
+}
+h1, h2, h3,h4, h5, h6 {
+    color: #ffffff;
+    font-weight: 700;
+}
+p, span {
+    color: #dddddd;
+}
+h1 {
+    font-size: 38px;
+}
+.smallNotes {
+    font-size: 14px;
+}
+h3 {
+    font-size: 24px;
+}
+.imgIcon {
+    max-width: 40px;
+    margin: 40px 0;
+}
+
+.imgIconLarge {
+    max-width: 80px;
+    margin: 40px 0;
+}
+
+.macbookLogo {
+    display: inline-block;
+    margin: 40px 0;
+}
+.iphoneLogo {
+    display: none;
+    margin: 0;
+}
+
+.whiteBgFooter {
+    background: #ffffff;
+}
+.whiteBgFooter h3 {
+    color: #333333;
+    margin: 30px 0;
+}
+.whiteBgFooter h4 a{
+    color: #939292;
+    margin: 40px 0;
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
+}
+.whiteBgFooter p {
+    color: #333333;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 10px;
+}
+.showMobile {
+    display: none;
+}
+.showDesktop {
+    display: block;
+}
+
+/*********************************************/
+/*****              BUTTONS              *****/
+/*********************************************/
+
+.btnGold {
+    background-color: #F7CF06;
+    border: 0;
+    cursor: pointer;
+    border-bottom: 3px solid #DD9819;
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 80px;
+    min-width: 220px;
+    display: inline-block;
+
+    margin: 30px 0;
+}
+.btnGold.fontBigger {
+    font-size: 24px;
+}
+.btnGold:hover {
+    text-decoration: none;
+}
+
+/*********************************************/
+/*****               CLOCK               *****/
+/*********************************************/
+
+.countdown {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.countdown div {
+    display: inline-block;
+    margin: 0 4px;
+    background-color: #00369c;
+    border-bottom: 3px solid #ffffff;
+    padding: 8px;
+    width: 80px;
+}
+
+.countdown div span {
+    display: block;
+    font-size: 12px;
+}
+.countdown div span.numbers {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+/*********************************************/
+/*****           MEDIA QUERIES           *****/
+/*********************************************/
+
+@media all and (max-width: 600px) {
+    section {
+        position: relative;
+    }
+    .mainBody {
+        padding-top: 40px;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .macbookLogo, .showDesktop {
+        display: none;
+    }
+    .iphoneLogo {
+        display: inline-block;
+        max-width: 200px;
+    }
+    .btnMobile {
+        display: inline-block;
+    }
+    .showMobile {
+        display: block;
+    }
+
+
+    h1 {
+        font-size: 26px;
+        line-height: 30px;
+    }
+    h3 {
+        font-size: 18px;
+    }
+    .whiteBGInner h2 {
+        font-size: 20px;
+    }
+    .btnGold {
+        margin: 16px 0;
+        padding: 10px 40px;
+    }
+    .whiteBGInner {
+        padding: 30px 20px 15px;
+    }
+}
+
