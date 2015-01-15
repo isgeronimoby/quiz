@@ -3119,7 +3119,7 @@ img.flag {
 
 /* --- LOADING [less.alerts] from assets/components/modules/admin/ui/alerts/assets/alerts.less */
 .alert {
-	margin: 0 0 15px;
+	margin: 15px 0 15px;
 }
 
 .alert h4 {
