@@ -186,13 +186,16 @@ img {
     display: inline-block;
 }
 .article > .articleImage {
-    /*background: url('http://pestorestaurants.co.uk/wp-content/uploads/2012/07/Everton.jpeg') no-repeat;*/
-    background: url('../images/everton-training.png') no-repeat;
-    background-size: cover;
     float: left;
     overflow: hidden;
+    max-height: 108px;
 }
 
+.article > .articleImage img {
+    width: 100%;
+    height: auto;
+    max-height: 108px;
+}
 .article > .greyBox {
     text-align: left;
     float: right;
@@ -290,7 +293,9 @@ img {
 .circleDaysSection {
     opacity: 0;
 }
-
+.curOptionBox {
+    display: none;
+}
 /*****   POPUP STYLES   *****/
 .everton-amazing-popups .everton-popup-clearfix:before,
 .everton-amazing-popups .everton-popup-clearfix:after {
@@ -686,7 +691,3 @@ svg {
     }
 }
 /*****   MEDIA QUERIES END *****/
-
-#dashboard {
-    display: none;
-}

@@ -105,8 +105,8 @@
     }
     .optionsGroup .greyBox .button {
         margin: 30px 0;
+        min-width: 350px;
     }
-
 
     .footer {
         position: relative;

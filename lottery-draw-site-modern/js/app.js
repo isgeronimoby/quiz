@@ -28,8 +28,8 @@ jQuery(document).ready(function($){
     });
 
     function init(){
-        $('.article > .articleMobileImage').height($('.article > .greyBoxMobile').outerHeight());
-        $('.article > .articleImageDesktop').height($('.article > .greyBoxDesktop').outerHeight());
+//        $('.article > .articleMobileImage').height($('.article > .greyBoxMobile').outerHeight());
+//        $('.article > .articleImageDesktop').height($('.article > .greyBoxDesktop').outerHeight());
 
         if ($(window).width() > 900) {
             $($('#connectFBBox .button')[1]).width($($('#connectFBBox .button')[0]).width()+10);
@@ -42,6 +42,8 @@ jQuery(document).ready(function($){
         } else {
 
         }
+        // add it if needed later
+        // $('.footer.showDesktop').addClass('footerAbsolute');
     }
 
     function addScore(maxBalls){
@@ -108,61 +110,59 @@ jQuery(document).ready(function($){
         });
     }
 
+    var clickCounter = 0;
+    $('.newCircleDummy').click(function(e) {
+        var allCirclesInfo = $('.circleSection');
+        var circleToggles = $('.circleToggles li');
 
+        if (clickCounter == 2) {
+            clickCounter = 0;
+        } else {
+            clickCounter++;
+        }
 
-    $('#btnEnterDraw').click(function(e){
-        e.preventDefault();
+        switch (clickCounter) {
+            case 0:
+                allCirclesInfo.css('display', 'none');
+                $('#infoOverall').fadeIn(300);
+                circleToggles.removeClass('active');
+                $(circleToggles[0]).addClass('active');
+                circleOverall.animate(LotteryApp.overallProgress, {duration: 1000});
+                break;
+            case 1:
+                allCirclesInfo.css('display', 'none');
+                $('#infoTickets').fadeIn(300);
+                circleToggles.removeClass('active');
+                $(circleToggles[1]).addClass('active');
+                circleDays.animate(0);
+                break;
+            case 2:
+                allCirclesInfo.css('display', 'none');
+                $('#infoDays').fadeIn(300);
+                circleToggles.removeClass('active');
+                $(circleToggles[2]).addClass('active');
+                console.log(circleOverall.duration);
+                circleOverall.animate(0, {duration: 800});
+                circleDays.animate(LotteryApp.daysInRow / maxDaysInRow);
+                break;
+        }
+    });
 
+    if (document.location.hash.substr(1) == 'first') {
+        dashboardFirstOpen();
+    } else {
+        dashboardOpen();
+    }
+
+    // for opening DASHBOARD for the first time
+    function dashboardFirstOpen() {
         //Creating sticky footer
-        $('.footer.showDesktop').addClass('footerAbsolute');
-
-
         showScore('connectFBBox');
-
-        var clickCounter = 0;
-        $('.newCircleDummy').click(function(e){
-            var allCirclesInfo = $('.circleSection');
-            var circleToggles = $('.circleToggles li');
-
-            if (clickCounter == 2) {
-                clickCounter = 0;
-            } else {
-                clickCounter++;
-            }
-
-            switch (clickCounter) {
-                case 0:
-                    allCirclesInfo.css('display','none');
-                    $('#infoOverall').fadeIn(300);
-                    circleToggles.removeClass('active');
-                    $(circleToggles[0]).addClass('active');
-                    circleOverall.animate(LotteryApp.overallProgress, {duration: 1000});
-                    break;
-                case 1:
-                    allCirclesInfo.css('display','none');
-                    $('#infoTickets').fadeIn(300);
-                    circleToggles.removeClass('active');
-                    $(circleToggles[1]).addClass('active');
-                    circleDays.animate(0);
-                    break;
-                case 2:
-                    allCirclesInfo.css('display','none');
-                    $('#infoDays').fadeIn(300);
-                    circleToggles.removeClass('active');
-                    $(circleToggles[2]).addClass('active');
-                    console.log(circleOverall.duration);
-                    circleOverall.animate(0, {duration: 800});
-                    circleDays.animate(LotteryApp.daysInRow / maxDaysInRow);
-                    break;
-            }
-        });
 
         setTimeout(function(){
             $(window).scroll(function(){
                 var earningOptions = $('.earningOptions li');
                 var prize = $('.article');
-
-//                if (isScrolledIntoView(connectFB)) connectFB.animate({opacity:1},600);
 
                 earningOptions.each(function(index){
                     if(isScrolledIntoView($(this))) $(this).animate({opacity:1},600);
@@ -170,11 +170,27 @@ jQuery(document).ready(function($){
 
                 if (isScrolledIntoView(prize)) prize.animate({opacity:1},600);
             });
-
-
         }, 2000);
-    });
+    }
 
+    // Opening DASHBOARD any other time
+    function dashboardOpen() {
+        circleDays.animate(0,{duration: 1});
+        circleOverall.animate(0,{duration: 1});
+
+        addScore(LotteryApp.pointsCurrent);
+        init();
+        /* CIRCLES PROGRESS */
+        circleOverall.animate(LotteryApp.overallProgress, function () {
+            $('.circleDaysSection').animate({'opacity': 1}, 500);
+            circleDays.animate(LotteryApp.daysInRow / maxDaysInRow, function () {});
+        });
+
+        $('.daysPercentage').html(LotteryApp.daysInRow + '/5');
+
+        $('.article').css('opacity','1');
+        $('.earningOptions ul li').css('opacity','1');
+    }
 
     function showCurOption(option) {
         option = $('#' + option);
@@ -276,9 +292,6 @@ jQuery(document).ready(function($){
         $(this).removeClass('inputError');
     });
 
-
-
-//    $('#btnEnterDraw').trigger('click');
     LotteryApp.muteOptionItem('exampleMutedItem');
     init();
 

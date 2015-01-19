@@ -9,22 +9,17 @@
     <link href="./css/style.css" rel="stylesheet" type="text/css" />
     <link href="./css/landscape-media.css" rel="stylesheet" type="text/css" />
 
-    <style>
-
-    </style>
 </head>
 <body>
 
 <div class="draw-wrapper">
     <div class="draw-container text-center">
-
-        <!--<header class="header">
-            <a href="#"><img src="./images/company-logo.png"/></a>
-        </header>-->
         <div class="staticTop">
             <div class="countdown"></div>
             <a href="#"><article class="article showDesktop">
-                <div class="articleImage articleImageDesktop"></div>
+                <div class="articleImage articleImageDesktop">
+                    <img src="./images/everton-training.png" />
+                </div>
                 <div class="greyBox greyBoxDesktop">
                     <h3 class="color-aqua"><b>the prize</b></h3>
                     <h3 class="condensedFont">Meet the team, get signed T-shirts and watch a training session</h3>
@@ -33,18 +28,6 @@
             </article></a>
             <div class="clearfix"></div>
         </div>
-        <section id="enterDraw" class="sectionLayout">
-            <div class="marginTopText showMobile">
-                <h3 class="condensedFont">Meet the team, get signed T-shirts and watch a training session</h3>
-            </div>
-            <img src="./images/everton-training.png" alt="" />
-
-            <a href="#" class="button buttonBlue buttonLarge" id="btnEnterDraw">Enter the free draw</a>
-
-            <div class="greyBox">
-                <h3>The more you do the more chance you have to win! <span class="color-aqua">It's totally free</span></h3>
-            </div>
-        </section>
 
         <section id="dashboard" class="sectionLayout">
             <div class="circularChartsGroup">
@@ -106,7 +89,7 @@
             <div class="optionsGroup">
                 <div class="greyBox curOptionBox" id="connectFBBox">
                     <h3><span class="color-aqua">Earn 5 more tickets</span> by connecting to facebook</h3>
-                    <div class="tickets showMobile"><span>+5</span><br/>tickets</div><a href="#" class="button buttonBlue buttonDefault">Connect with facebook</a>
+                    <div class="tickets showMobile"><span>+5</span><br/>tickets</div><a href="#" class="button buttonBlue buttonDefault">Facebook Connect</a>
 
                     <div class="showDesktop">
                         <p>we'll never post anything without your permission</p>
@@ -140,17 +123,17 @@
                         <li id="shareFacebookItem"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#" class="button buttonDefault buttonBlue">Share on facebook</a></li>
                         <li id="shareTwitterItem"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#" class="button buttonDefault buttonLightBlue">Share on twitter</a></li>
                         <li id="connectDeviceItem"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#connectDevice" class="button buttonDefault buttonYellow everton-amazing-links">Connect device</a></li>
-                        <li id="exampleMutedItem"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#" class="button buttonDefault buttonLightBlue">Example Muted Button</a></li>
-                        <li class="optionDisabled"><div class="listArrow"></div><div class="tickets"><span>5</span><br/>earned</div><div class="button buttonDefault buttonDisabled">Example Disabled Button</div></li>
+                        <li id="exampleMutedItem"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#" class="button buttonDefault buttonLightBlue">Muted Button</a></li>
+                        <li class="optionDisabled"><div class="listArrow"></div><div class="tickets"><span>5</span><br/>earned</div><div class="button buttonDefault buttonDisabled">Disabled Button</div></li>
                     </ul>
                 </div>
 
                 <article class="article showMobile">
-                    <div class="articleImage articleMobileImage"></div>
+                    <div class="articleImage articleMobileImage">
+                        <img src="./images/everton-training.png" />
+                    </div>
                     <div class="greyBox greyBoxMobile">
                         <a href="#" class="thinLink"><h3 class="color-aqua"><b>find out about the prize</b></h3></a>
-                        <!--<h3 class="condensedFont">Meet the team, get signed T-shirts and watch a training session</h3>
-                        <a href="#" class="color-aqua thinLink">Learn more</a>-->
                     </div>
                     <div class="clearfix"></div>
                 </article>
@@ -243,6 +226,11 @@
     LotteryApp.overallProgress = 0.4;
     LotteryApp.daysInRow = 3;
     LotteryApp.pointsCurrent = 12;
+
+    window.onload = function() {
+        LotteryApp.showCurrentOptionBox('connectDeviceBox');
+    }
+
 </script>
 
 </body>
