@@ -55,6 +55,7 @@ jQuery(document).ready(function($){
         menuBack();
     });
 
+
     $(window).scroll(function(e) {
         var winTop = $(window).scrollTop();
 //        if (winTop > 100) winTop -= 100;
@@ -62,6 +63,7 @@ jQuery(document).ready(function($){
         if (activeSlide > -1) {
                 $('.sideMenu a').removeClass('active').eq(activeSlide).addClass('active');
         }
+
     });
 
     function makemenu() {
@@ -84,9 +86,10 @@ jQuery(document).ready(function($){
         }
         allLinks.click(function(e){
             $(window).scrollTop(e.currentTarget["curFrame"]);
-            setTimeout(function(){$(window).scrollTop(e.currentTarget["curFrame"]);},100);
+            setTimeout(function(){$(window).scrollTop(e.currentTarget["curFrame"] + 700);},100);
         });
-        $('.bottom-arrow').click(function(){
+        $('.bottom-arrow-separate').click(function(e){
+			e.preventDefault();
             $('.sideLinks')[1].click();
         });
 
@@ -96,5 +99,23 @@ jQuery(document).ready(function($){
         }*/
     }
 
+	$(document).keydown(function(e){
+		e.preventDefault();
+
+		var curMenu = $('.sideMenu a.active').parent().index();
+		if (curMenu == -1) $('.sideLinks')[0].click();
+
+		if (e.keyCode == '38') {
+			// UP key
+			if (curMenu != 0) $('.sideLinks')[curMenu - 1].click();
+
+		}
+		else if (e.keyCode == '40') {
+			// DOWN key
+			if (curMenu != 6) $('.sideLinks')[curMenu + 1].click();
+		}
+
+
+	});
 
 });
