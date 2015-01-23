@@ -392,14 +392,15 @@ img {
 .mobile-menu:hover .menu-container {
     cursor: pointer;
 }
+
 .mobile-menu:hover .menu-container .one-line {
     background-color: #333333;
 }
 .mobile-menu .menu-container .one-line {
     height: 3px;
     margin: 5px 0;
-    background-color: #aaa;
     width: 100%;
+    background-color: #aaaaaa;
 }
 .sliding-menu {
     width: 100%;

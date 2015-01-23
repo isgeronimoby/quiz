@@ -25,13 +25,19 @@ jQuery(document).ready(function($){
     $('.mobile-menu').click(function(e){
         var navHeight = navigation.height() + 1;
         if (menuState == 0) {
+            $('.mobile-menu .menu-container .one-line').css('background-color','#333333');
             navigation.animate({top:0}, 300, function(){
 
             });
+
             menuState = 1;
 
         } else {
-            navigation.animate({top:-navHeight}, 300);
+            $('.mobile-menu .menu-container .one-line').css('background-color','#aaaaaa');
+            navigation.animate({top:-navHeight}, 300, function(){
+
+            });
+
             menuState = 0;
         }
         /*navigation.animate({top:-(navigation.height())}, 300, function() {
@@ -42,6 +48,7 @@ jQuery(document).ready(function($){
     function menuBack() {
         if (menuState == 1) {
             navigation.animate({top:-(navigation.height()+1)}, 300);
+            $('.mobile-menu .menu-container .one-line').css('background-color','#aaaaaa');
             menuState = 0;
         }
     }
@@ -100,7 +107,7 @@ jQuery(document).ready(function($){
     }
 
 	$(document).keydown(function(e){
-		e.preventDefault();
+
 
 		var curMenu = $('.sideMenu a.active').parent().index();
 		if (curMenu == -1) $('.sideLinks')[0].click();
@@ -108,11 +115,13 @@ jQuery(document).ready(function($){
 		if (e.keyCode == '38') {
 			// UP key
 			if (curMenu != 0) $('.sideLinks')[curMenu - 1].click();
+            e.preventDefault();
 
 		}
 		else if (e.keyCode == '40') {
 			// DOWN key
-			if (curMenu != 6) $('.sideLinks')[curMenu + 1].click();
+			if (curMenu != 6) $('.sideLinks')[curMenu + 1].click()
+            e.preventDefault();
 		}
 
 
