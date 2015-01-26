@@ -4188,6 +4188,86 @@ body .n-found .ie-true,
 /*END of AMAZON redirect landing page*/
 /*============================================================================*/
 
+/*============================================================================*/
+/*Lottery first page*/
+/*============================================================================*/
+
+.lotteryFootballBG {
+	background: url('../../../assets/images/front/everton/bg-team-training.png') no-repeat;
+	background-size: cover;
+	background-position: center center;
+	padding: 30px 0;
+}
+.lotteryFootballBG h3 {
+	color: #FFFFFF;
+}
+.lotteryFootballBG h3 span.goldText{
+	color: #ffd739;
+}
+.lotteryFootballBG h3,
+.lotteryFootballBG h3 span.goldText {
+	font-size: 32px;
+	top: 0;
+	font-style: normal;
+	line-height: 40px;
+}
+.lotteryFootballBG a {
+	display: inline-block;
+	background-color: #ffd739;
+	border-color: #e4981f;
+	padding-left: 43px;
+	padding-right: 43px;
+	font-weight: bold;
+	font-size: 28px;
+	line-height: 64px;
+	text-decoration: none;
+	text-align: center;
+	border-bottom: solid 4px #e4981f;
+
+	margin: 30px 0;
+}
+.lotteryFootballBG p {
+	font-size: 24px;
+	color: #FFFFFF;
+}
+
+.lotteryStartPage h2 {
+	color: #000;
+}
+.lotteryStartPage .instructions h4 {
+	color: #888888;
+	margin-bottom: 30px;
+	font-size: 20px;
+}
+.lotteryStartPage .instructions p {
+	font-size: 20px;
+}
+
+.lotteryStartPage .instructions .greyDot {
+	display: inline-block;
+	background-color: #BBBBBB;
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	margin: 4px 50%;
+}
+.lotteryStartPage .tellMore {
+	margin-top: 30px;
+}
+.lotteryStartPage .tellMore a{
+	color: #888888;
+	font-size: 20px;
+}
+.lotteryStartPage .tellMore a img{
+	margin-left: 5px;
+}
+.lotteryStartPage .instructions .lotteryDescImage {
+	width: 128px;
+	height: 116px;
+}
+/*============================================================================*/
+/*End of lottery first page*/
+/*============================================================================*/
 
 /*============================================================================*/
 /*LOADERS*/
@@ -4992,6 +5072,22 @@ body .n-found .ie-true,
 
 	.profile-statistic .title {
 		padding-left: 8% !important;
+	}
+	.lotteryFootballBG h3,
+	.lotteryFootballBG h3 span.goldText {
+		font-size: 24px;
+	}
+	.lotteryFootballBG a {
+		line-height: 32px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+	.lotteryFootballBG p {
+		font-size: 20px;
+	}
+	.lotteryFootballBG img {
+		max-width: 250px;
+		margin: 15px 0;
 	}
 }
 
