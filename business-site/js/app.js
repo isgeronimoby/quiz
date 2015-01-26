@@ -40,9 +40,6 @@ jQuery(document).ready(function($){
 
             menuState = 0;
         }
-        /*navigation.animate({top:-(navigation.height())}, 300, function() {
-                //callback
-            });*/
     });
 
     function menuBack() {
@@ -65,20 +62,17 @@ jQuery(document).ready(function($){
 
     $(window).scroll(function(e) {
         var winTop = $(window).scrollTop();
-//        if (winTop > 100) winTop -= 100;
         var activeSlide = Math.floor(winTop / 1000);
         if (activeSlide > -1) {
-                $('.sideMenu a').removeClass('active').eq(activeSlide).addClass('active');
+        	$('.sideMenu a').removeClass('active').eq(activeSlide).addClass('active');
         }
 
     });
 
     function makemenu() {
-        //This is the main meat of the app
         $('.sideMenu ul').remove();
         $('.sideMenu').append('<ul class="nav"></ul>');
-//        $('.sliding-menu nav').remove();
-//        $('.sliding-menu').append('<nav><ul></ul></nav>');
+
         $('.full-page').each( function (index, el) {
             $('.sideMenu > ul').append('<li><a class="sideLinks" href="#'+$(this).attr('id')+'"'+'></a></li>');
             $('.sliding-menu > nav > ul > li > a')[index].href = '#'+$(this).attr('id');
@@ -100,10 +94,6 @@ jQuery(document).ready(function($){
             $('.sideLinks')[1].click();
         });
 
-/*        var topMenuLinks = $('.sliding-menu > nav > ul > li > a');
-        for (var i=0; i < topMenuLinks.length; i++) {
-            topMenuLinks[i].text = menuItems[i];
-        }*/
     }
 
 	$(document).keydown(function(e){
@@ -114,17 +104,34 @@ jQuery(document).ready(function($){
 
 		if (e.keyCode == '38') {
 			// UP key
-			if (curMenu != 0) $('.sideLinks')[curMenu - 1].click();
+			if (curMenu != 0) $($('.sideLinks')[curMenu - 1]).click();
             e.preventDefault();
 
 		}
 		else if (e.keyCode == '40') {
 			// DOWN key
-			if (curMenu != 6) $('.sideLinks')[curMenu + 1].click()
+			if (curMenu != 6) $($('.sideLinks')[curMenu + 1]).click();
             e.preventDefault();
 		}
 
-
 	});
 
+
+	$(window).on('hashchange', function() {
+		hashUrl();
+	});
+
+	var hashUrl = function (){
+		var menuItems = $('.sideLinks');
+		var curSlide = window.location.hash;
+		if (curSlide == "") return;
+
+		menuItems.each(function(){
+			if ($(this).attr('href') == curSlide) {
+				$(this).trigger('click');
+			}
+		});
+	};
+
+	hashUrl();
 });
