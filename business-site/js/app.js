@@ -21,6 +21,7 @@ jQuery(document).ready(function($){
 
     var menuState = 0;
     var navigation = $('.sliding-menu nav');
+
     navigation.css('top',-(navigation.height()+1));
     $('.mobile-menu').click(function(e){
         var navHeight = navigation.height() + 1;
@@ -65,6 +66,10 @@ jQuery(document).ready(function($){
         var activeSlide = Math.floor(winTop / 1000);
         if (activeSlide > -1) {
         	$('.sideMenu a').removeClass('active').eq(activeSlide).addClass('active');
+			if($(window).width() > 1024) {
+				window.location.hash = $('.sideMenu a.active').attr('href');
+			}
+
         }
 
     });
@@ -97,8 +102,6 @@ jQuery(document).ready(function($){
     }
 
 	$(document).keydown(function(e){
-
-
 		var curMenu = $('.sideMenu a.active').parent().index();
 		if (curMenu == -1) $('.sideLinks')[0].click();
 
@@ -117,9 +120,14 @@ jQuery(document).ready(function($){
 	});
 
 
-	$(window).on('hashchange', function() {
-		hashUrl();
+	$('a.social').click(function(){
+		window.location.href = $(this).attr('href');
 	});
+
+
+/*	$(window).on('hashchange', function() {
+		hashUrl();
+	});*/
 
 	var hashUrl = function (){
 		var menuItems = $('.sideLinks');
