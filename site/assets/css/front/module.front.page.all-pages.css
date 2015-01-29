@@ -1458,7 +1458,8 @@ html.sidebar .menu-right #content {
 
 	html.no-touch.sticky-top:not(.animations-gpu).front #content {
 		padding-top: 88px;
-		margin: 0 !important;
+		/*margin: 0 !important;*/
+		/*TODO: Change back if something ruined*/
 	}
 }
 

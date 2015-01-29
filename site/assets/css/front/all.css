@@ -126,7 +126,7 @@ html.no-touch .service-message {
 }
 
 * {
-	max-height: 20000px;
+	max-height: 30000px;
 }
 
 body {
@@ -1005,6 +1005,8 @@ a.ctm_btn {
 .offers ul li a h3 {
 	font: 14px 'Arial';
 	font-weight: bold;
+	overflow: hidden;
+	max-height: 48px;
 }
 
 .newsbar ul li a p,
@@ -2186,6 +2188,8 @@ body .modal-fancy .gg.alt:hover {
 	display: table-cell;
 	width: 103px;
 	height: 103px;
+	max-height: 103px;
+	max-width: 103px;
 	background: #e2e2e2;
 	border: 1px solid #eaeaea;
 }
@@ -5096,6 +5100,8 @@ body .n-found .ie-true,
 	.product-item .img-wrapper .holder {
 		width: 80px;
 		height: 80px;
+		max-height: 80px;
+		max-width: 80px;
 	}
 
 	/*Profile*/
