@@ -2,7 +2,7 @@ var LotteryApp = {
 	overallProgress: 0,
 	daysInRow: 0,
 	pointsCurrent: 0,
-	maxDaysInRow: 1,
+	maxDaysInRow: 3,
 	drawEndDate: '2015/12/31'
 };
 
@@ -27,8 +27,8 @@ jQuery(document).ready(function($){
 	});
 
 	function init(){
-//        $('.article > .articleMobileImage').height($('.article > .greyBoxMobile').outerHeight());
-//        $('.article > .articleImageDesktop').height($('.article > .greyBoxDesktop').outerHeight());
+        $('.article > .greyBoxMobile').height($('.article >  .articleMobileImage').outerHeight() - 20);
+        $('.article > .greyBoxDesktop').height($('.article >  .articleImageDesktop').outerHeight());
 
 		if ($(window).width() > 900) {
 			$($('#connectFBBox .button')[1]).width($($('#connectFBBox .button')[0]).width()+10);
@@ -220,6 +220,7 @@ jQuery(document).ready(function($){
 	var connectDeviceForm = $('#connectDeviceForm');
 
 	emailSignUpForm.find("input[type=submit]").click(function() {
+/*
 		console.log($(this));
 		var name     = emailSignUpForm.find('input[name=name]');
 		var email    = emailSignUpForm.find('input[type=email]');
@@ -245,6 +246,7 @@ jQuery(document).ready(function($){
 		}
 
 		if(checkFields() == false) return false;
+*/
 
 		$.ajax({
 			type: "post",

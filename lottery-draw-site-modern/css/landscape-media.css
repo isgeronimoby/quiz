@@ -70,7 +70,7 @@
     }
     .staticTop .showDesktop .articleImage{
         width: 30%;
-        float: none;
+        /*float: none;*/
     }
     .circularChartsGroup {
         float: left;

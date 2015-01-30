@@ -1,7 +1,6 @@
 jQuery(document).ready(function($){
 
     var popupLinks = document.getElementsByClassName('everton-amazing-links');
-    var popups = document.querySelectorAll('.everton-amazing-popups');
     var closeBtn = document.getElementsByClassName('everton-popup-close');
     var popupConts = document.getElementsByClassName('everton-popup-container');
 
@@ -10,7 +9,7 @@ jQuery(document).ready(function($){
     }
 
     function showBlock(elem){
-        elem.style.display = "block";
+        elem.parentNode.style.display = "block";
         setTimeout(function(){
             elem.style.opacity = 1;
         }, 0);
@@ -20,7 +19,7 @@ jQuery(document).ready(function($){
         var transDuration = 300;
         elem.style.opacity = 0;
         setTimeout(function(){
-            elem.style.display = "none";
+            elem.parentNode.style.display = "none";
         }, transDuration);
     }
 
@@ -28,8 +27,8 @@ jQuery(document).ready(function($){
         popupConts[i].onclick = function (e) {
             stopEvent(e);
             if (e.target == this) {
-                for (var i = 0; i < popups.length; i++) {
-                    hideBlock(popups[i].querySelector('.everton-popup-container'));
+                for (var i = 0; i < popupConts.length; i++) {
+                    hideBlock(popupConts[i]);
                 }
             }
         }
@@ -37,8 +36,8 @@ jQuery(document).ready(function($){
     for (var i = 0; i < closeBtn.length; i++) {
         closeBtn[i].onclick = function (e) {
             e.preventDefault();
-            for (var i = 0; i < popups.length; i++) {
-                hideBlock(popups[i].querySelector('.everton-popup-container'));
+            for (var i = 0; i < popupConts.length; i++) {
+                hideBlock(popupConts[i]);
             }
         }
     }
@@ -46,9 +45,9 @@ jQuery(document).ready(function($){
         for (var i = 0; i < popupLinks.length; i++ ) {
             popupLinks[i].onclick = function(e) {
                 e.preventDefault();
-                for (var i = 0; i < popups.length; i++ ) {
-                    if (this.getAttribute("href").substring(1) == popups[i].id) {
-                        showBlock(popups[i].querySelector('.everton-popup-container'));
+                for (var i = 0; i < popupConts.length; i++ ) {
+                    if (this.getAttribute("href").substring(1) == popupConts[i].id) {
+                        showBlock(popupConts[i]);
                     }
                 }
             }
