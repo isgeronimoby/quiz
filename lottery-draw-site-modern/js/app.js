@@ -19,6 +19,7 @@ jQuery(document).ready(function($){
 			'<div><div><span class="numbers">%H</span><span>hrs</span></div></div>' +
 			'<div><div><span class="numbers">%M</span><span>mins</span></div></div>' +
 			'<div><div><span class="numbers">%S</span><span>secs</span></div></div>'));
+			$('.countdown > div').css('width','25%');
 	});
 	/* CLOCKDOWN TIMER END */
 

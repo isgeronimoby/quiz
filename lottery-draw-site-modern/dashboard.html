@@ -6,7 +6,7 @@
     <title>Everton. Lottery draw</title>
 
 
-	<link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<!--<link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
 	<link href="./css/fancybox-styles.css" rel="stylesheet" type="text/css" />
     <link href="./css/style.css" rel="stylesheet" type="text/css" />
     <link href="./css/landscape-media.css" rel="stylesheet" type="text/css" />
@@ -17,7 +17,32 @@
 <div class="draw-wrapper">
     <div class="draw-container text-center">
         <div class="staticTop">
-            <div class="countdown"></div>
+			<div class="countdown">
+				<div>
+					<div>
+						<span class="numbers">0</span>
+						<span>days</span>
+					</div>
+				</div>
+				<div>
+					<div>
+						<span class="numbers">00</span>
+						<span>hrs</span>
+					</div>
+				</div>
+				<div>
+					<div>
+						<span class="numbers">00</span>
+						<span>mins</span>
+					</div>
+				</div>
+				<div>
+					<div>
+						<span class="numbers">00</span>
+						<span>secs</span>
+					</div>
+				</div>
+			</div>
             <a href="#"><article class="article showDesktop">
                 <div class="articleImage articleImageDesktop">
                     <img src="./images/everton-training.png" />
@@ -143,17 +168,13 @@
             <div class="clearfix"></div>
         </section>
 
-        <footer class="footer showMobile">
-            <a href="#"><img src="./images/company-logo.png"/></a>
-        </footer>
-
-        <footer class="footer showDesktop">
+        <footer class="footer">
             <div class="pull-left">
                 <a href="#"><img src="./images/company-logo.png"/></a>
             </div>
             <div class="pull-right">
-                <a href="#" class="thinLink">Terms and Conditions</a>
-                <a href="#" class="thinLink">FAQs</a>
+                <a href="/terms-and-conditions.html" class="thinLink">Terms and Conditions</a>
+                <a href="/faq.html" class="thinLink">FAQs</a>
                 <a href="#" class="thinLink">Contact Us</a>
             </div>
             <div class="clearfix"></div>
@@ -163,7 +184,6 @@
             <p class="score">SCORE</p>
         </div>
     </div>
-
 
     <!-- POPUPS -->
 
@@ -179,9 +199,13 @@
 					<h2>Send a link to yourself</h2>
 					<!-- Alert -->
 					<div class="alert alert-danger">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<strong>Warning!</strong> Best check yo self, you're not looking
-						too good.
+						<button data-dismiss="alert" class="close" type="button">&times;</button>
+						<strong>Warning!</strong>
+						<div data-valmsg-summary="true" class="validation-summary-errors">
+							<ul><li>Email is required.</li>
+								<li>Some other error.</li>
+							</ul>
+						</div>
 					</div>
 					<!-- // Alert END -->
 					<!-- Form -->
@@ -213,9 +237,13 @@
 					<h2>Sign up with email</h2>
 					<!-- Alert -->
 					<div class="alert alert-danger">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<strong>Warning!</strong> Best check yo self, you're not looking
-						too good.
+						<button data-dismiss="alert" class="close" type="button">&times;</button>
+						<strong>Warning!</strong>
+						<div data-valmsg-summary="true" class="validation-summary-errors">
+							<ul><li>Email is required.</li>
+								<li>Some other error.</li>
+							</ul>
+						</div>
 					</div>
 					<!-- // Alert END -->
 					<!-- Form -->

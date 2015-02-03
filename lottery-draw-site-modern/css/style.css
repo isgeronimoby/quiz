@@ -50,6 +50,17 @@ h1,h2,h3,h4,h5,h6,p,a,span,div {
 h3 {
     font-size: 16px;
 }
+.no-transform {
+	text-transform: none;
+}
+.infoTextNoTransform .no-transform {
+	text-align: left;
+	padding: 8px;
+}
+.infoTextNoTransform .no-transform + .no-transform {
+	margin-top: 4px;
+
+}
 
 h1 {
     font-size: 22px;
@@ -142,6 +153,7 @@ img {
     padding-right: 8px;
     /*text-align: right;*/
 }
+
 .sectionLayout {
 
 }
@@ -348,7 +360,111 @@ img {
     margin: 20px 0;
 }
 .alert {
-	margin-top: 20px;
+	padding: 15px;
+	margin: 20px 0;
+	border: 1px solid transparent;
+	border-radius: 0;
+}
+.alert h4 {
+	margin-top: 0;
+	color: inherit;
+}
+.alert .alert-link {
+	font-weight: bold;
+}
+.alert > p,
+.alert > ul {
+	margin-bottom: 0;
+}
+.alert > div > ul {
+	padding: 0;
+	list-style: none;
+	color: #BE2B28;
+	font-weight: 500;
+	margin: 15px 0 0;
+}
+.alert > p + p {
+	margin-top: 5px;
+}
+.alert-dismissable,
+.alert-dismissible {
+	padding-right: 35px;
+}
+.alert-dismissable .close,
+.alert-dismissible .close {
+	position: relative;
+	top: -2px;
+	right: -21px;
+	color: inherit;
+}
+.alert-success {
+	color: #3c763d;
+	background-color: #dff0d8;
+	border-color: #d6e9c6;
+}
+.alert-success hr {
+	border-top-color: #c9e2b3;
+}
+.alert-success .alert-link {
+	color: #2b542c;
+}
+.alert-info {
+	color: #31708f;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+}
+.alert-info hr {
+	border-top-color: #a6e1ec;
+}
+.alert-info .alert-link {
+	color: #245269;
+}
+.alert-warning {
+	color: #8a6d3b;
+	background-color: #fcf8e3;
+	border-color: #faebcc;
+}
+.alert-warning hr {
+	border-top-color: #f7e1b5;
+}
+.alert-warning .alert-link {
+	color: #66512c;
+}
+.alert-danger {
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+}
+.alert-danger hr {
+	border-top-color: #e4b9c0;
+}
+.alert-danger .alert-link {
+	color: #843534;
+}
+.close {
+	float: right;
+	font-size: 21px;
+	font-weight: bold;
+	line-height: 1;
+	color: #000;
+	text-shadow: 0 1px 0 #fff;
+	filter: alpha(opacity=20);
+	opacity: .2;
+}
+.close:hover,
+.close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+	filter: alpha(opacity=50);
+	opacity: .5;
+}
+button.close {
+	-webkit-appearance: none;
+	padding: 0;
+	cursor: pointer;
+	background: transparent;
+	border: 0;
 }
 
 .everton-popup-container .everton-popup .everton-popup-body .popupForm label{
@@ -398,7 +514,7 @@ img {
 }
 .countdown > div {
     display: inline-block;
-    width: 25%;
+    width: 24%;
 }
 .countdown > div:not(:last-child) {
     padding-right: 4px;
@@ -630,6 +746,67 @@ svg {
 }
 /*****   CIRCLES CIRCLES END  *****/
 
+
+/***** ADDITIONAL PAGES *****/
+
+.sectionLayout > .additionalContent{
+	margin-top: 20px;
+	padding: 0 15px;
+}
+.sectionLayout > .additionalContent > h1{
+	font-size: 36px;
+}
+.sectionLayout > .additionalContent > div{
+	margin: 30px 0;
+}
+.sectionLayout > .additionalContent > div > h3{
+	font-weight: 900;
+	font-size: 20px;
+	text-transform: none;
+	text-align: left;
+	margin-bottom: 10px;
+}
+.sectionLayout > .additionalContent > div > h3 ~ h3 {
+	margin-top: 30px;
+}
+.sectionLayout > .additionalContent > div p{
+	color: #7ebae9;
+	text-align: left;
+	text-transform: none;
+	font-size: 15px;
+	margin-bottom: 20px;
+}
+.sectionLayout > .additionalContent > div ul > li,
+.sectionLayout > .additionalContent > div ol > li {
+	color: #7ebae9;
+	text-align: left;
+	text-transform: none;
+	font-size: 15px;
+}
+.sectionLayout > .additionalContent > div ul,
+.sectionLayout > .additionalContent > div ol {
+	color: #7ebae9;
+	text-align: left;
+	text-transform: none;
+	padding: 0;
+	list-style-position: inside;
+}
+
+.sectionLayout .winnerHolder {
+	display: inline-block;
+	max-width: 200px;
+	margin: 15px 0;
+	border-radius: 50%;
+	overflow: hidden;
+	border: 8px solid #364158;
+}
+.sectionLayout .winnerHolder img{
+	width: 100%;
+	height: auto;
+}
+/****************************/
+
+
 /*****   ANIMATIONS  *****/
 .rotateInViewStart {
     transform: scale(0);
@@ -654,6 +831,17 @@ svg {
 /*****   ANIMATIONS END *****/
 
 /*****   MEDIA QUERIES  *****/
+@media all and (max-width: 900px) {
+	.footer .pull-left, .footer .pull-right{
+		float: none !important;
+	}
+	.footer .pull-left a, .footer .pull-right a{
+		color: #aaaaaa;
+		font-size: 14px;
+		margin: 0 10px;
+		line-height: 30px;
+	}
+}
 @media all and (min-width:430px) and (max-width:585px) {
     .earningOptions ul li .button {
         width: 73%;
