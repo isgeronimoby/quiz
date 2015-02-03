@@ -26,6 +26,28 @@ jQuery(document).ready(function($){
 		init();
 	});
 
+	// Fancybox default values
+	$(".fancybox").fancybox({
+		maxWidth	: 600,
+		maxHeight	: 600,
+		fitToView	: false,
+		width		: '100%',
+		height		: 'auto',
+		autoSize	: false,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none',
+		autoResize: true,
+		onUpdate: function() {
+			$('.fancybox-inner').height('auto');
+		}
+	});
+	// End of fancybox default values
+
+	$('.everton-popup-close').click(function(e){
+		e.preventDefault();
+		$.fancybox.close();
+	});
 	function init(){
         $('.article > .greyBoxMobile').height($('.article >  .articleMobileImage').outerHeight() - 20);
         $('.article > .greyBoxDesktop').height($('.article >  .articleImageDesktop').outerHeight());

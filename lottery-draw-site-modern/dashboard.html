@@ -7,6 +7,7 @@
 
 
 	<link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="./css/fancybox-styles.css" rel="stylesheet" type="text/css" />
     <link href="./css/style.css" rel="stylesheet" type="text/css" />
     <link href="./css/landscape-media.css" rel="stylesheet" type="text/css" />
 
@@ -94,7 +95,7 @@
 
                     <div class="showDesktop">
                         <p>we'll never post anything without your permission</p>
-                        <a href="#signUpWithEmailPopup" class="button buttonDefault buttonStroke everton-amazing-links">or sign up with email</a>
+                        <a href="#signUpWithEmailPopup" class="button buttonDefault buttonStroke fancybox">or sign up with email</a>
                     </div>
                 </div>
 
@@ -110,7 +111,7 @@
 
                 <div class="greyBox curOptionBox" id="connectDeviceBox">
                     <h3><span class="color-aqua">Earn 5 more tickets</span> connecting another device</h3>
-                    <div class="tickets"><span>+5</span><br/>tickets</div><a href="#connectDevice" class="button buttonYellow buttonDefault everton-amazing-links">Connect device</a>
+                    <div class="tickets"><span>+5</span><br/>tickets</div><a href="#connectDevice" class="button buttonYellow buttonDefault fancybox">Connect device</a>
                 </div>
 
                 <div class="greyBox curOptionBox" id="openBrowserBox">
@@ -120,10 +121,10 @@
 
                 <div class="earningOptions">
                     <ul>
-                        <li id="signUpWithEmailItem" class="showMobile"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#signUpWithEmailPopup" class="button buttonDefault buttonStroke everton-amazing-links">Sign up with email</a></li>
+                        <li id="signUpWithEmailItem" class="showMobile"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#signUpWithEmailPopup" class="button buttonDefault buttonStroke fancybox">Sign up with email</a></li>
                         <li id="shareFacebookItem"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#" class="button buttonDefault buttonBlue">Share on facebook</a></li>
                         <li id="shareTwitterItem"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#" class="button buttonDefault buttonLightBlue">Share on twitter</a></li>
-                        <li id="connectDeviceItem"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#connectDevice" class="button buttonDefault buttonYellow everton-amazing-links">Connect device</a></li>
+                        <li id="connectDeviceItem"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#connectDevice" class="button buttonDefault buttonYellow fancybox">Connect device</a></li>
                         <li id="exampleMutedItem"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#" class="button buttonDefault buttonLightBlue">Muted Button</a></li>
                         <li class="optionDisabled"><div class="listArrow"></div><div class="tickets"><span>5</span><br/>earned</div><div class="button buttonDefault buttonDisabled">Disabled Button</div></li>
                     </ul>
@@ -176,6 +177,13 @@
 				<!-- Box -->
 				<div class="everton-popup-body popupInner">
 					<h2>Send a link to yourself</h2>
+					<!-- Alert -->
+					<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Warning!</strong> Best check yo self, you're not looking
+						too good.
+					</div>
+					<!-- // Alert END -->
 					<!-- Form -->
 					<form method="post" class="popupForm login-form" id="connectDeviceForm" action="index.html?lang=en">
 						<div class="form-group email-group">
@@ -203,6 +211,13 @@
 				<!-- Box -->
 				<div class="everton-popup-body popupInner">
 					<h2>Sign up with email</h2>
+					<!-- Alert -->
+					<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Warning!</strong> Best check yo self, you're not looking
+						too good.
+					</div>
+					<!-- // Alert END -->
 					<!-- Form -->
 					<form method="post" class="popupForm login-form" id="signUpWithEmailForm" action="index.html?lang=en">
 						<div class="form-group">
@@ -229,7 +244,6 @@
 			</div>
 		</div>
 	</div>
-
 </div>
 
 <script type="text/javascript" src="./js/jquery-2.1.1.min.js"></script>
@@ -239,7 +253,7 @@
 <script type="text/javascript" src="./js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="./js/form-validator.init.js"></script>
 <script type="text/javascript" src="./js/progressbar.min.js"></script>
-<script type="text/javascript" src="./js/everton-popup.js"></script>
+<script type="text/javascript" src="./js/jquery.fancybox.js"></script>
 <script type="text/javascript" src="./js/app.js"></script>
 
 <script>
