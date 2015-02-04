@@ -28,7 +28,7 @@ jQuery(document).ready(function($){
 	});
 
 	// Fancybox default values
-	$(".fancybox").fancybox({
+	$('.fancybox').fancybox({
 		maxWidth	: 600,
 		maxHeight	: 600,
 		fitToView	: false,
@@ -45,10 +45,32 @@ jQuery(document).ready(function($){
 	});
 	// End of fancybox default values
 
+	$('.historyBack').click(function(e){
+		e.preventDefault();
+		window.history.back();
+	});
+
 	$('.everton-popup-close').click(function(e){
 		e.preventDefault();
 		$.fancybox.close();
 	});
+
+
+	var textState = 0;
+	var currentText = $('#aboutContainer').html();
+	$('.showMoreAboutPrize').click(function(){
+		if (textState == 0) {
+			$('#aboutContainer').html($('#infoTextToCopy').html());
+			textState = 1;
+		} else {
+			$('#aboutContainer').html(currentText);
+			textState = 0;
+		}
+		$(this).css('bottom',-1 * $('.showMoreAboutPrize').parent().height() + 50+'px');
+	});
+
+
+
 	function init(){
         $('.article > .greyBoxMobile').height($('.article >  .articleMobileImage').outerHeight() - 20);
         $('.article > .greyBoxDesktop').height($('.article >  .articleImageDesktop').outerHeight());
@@ -67,6 +89,7 @@ jQuery(document).ready(function($){
 		// add it if needed later
 		// $('.footer.showDesktop').addClass('footerAbsolute');
 	}
+
 
 	function addScore(maxBalls){
 		for (var i = 0; i <= maxBalls; i++) {

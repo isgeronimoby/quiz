@@ -131,6 +131,31 @@ img {
     opacity: 0.4;
     cursor: default;
 }
+.historyBack {
+	width: 50px;
+	position: absolute;
+	top: -2px;
+	left: 10px;
+	text-decoration: none;
+	font-size: 60px;
+	font-weight: 100;
+	font-family: sans-serif;
+	color: #7ebae9;
+}
+.infoTextToCopy {
+	display: none;
+}
+.showMoreAboutPrize {
+	cursor: pointer;
+	width: 40px;
+	height: 40px;
+	background: url('../images/read-more.png') no-repeat;
+	background-size: 50%;
+	background-position: center;
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+}
 /*****   GLOBAL STYLES END   *****/
 
 .draw-container {
@@ -166,6 +191,12 @@ img {
     width: 100%;
     height: auto;
     margin-top: 10px;
+}
+#aboutContainer {
+	position: relative;
+	display: inline-block;
+	max-width: 950px;
+	text-align: left;
 }
 .greyBox {
     margin-top: 10px;
@@ -325,27 +356,40 @@ img {
 	display: none;
 
 }
-.everton-popup-container .everton-popup .everton-popup-header .everton-popup-close {
-    float: right;
-    display: block;
-    text-decoration: none;
-    color: #000;
-    width: 40px;
-    height: 40px;
-    line-height: 34px;
-    font-size: 30px;
-}
-.everton-popup-container .everton-popup .everton-popup-body {
-    padding: 40px 24px 34px 30px;
+.everton-popup-container .everton-popup .everton-popup-header {
+	width: 100%;
+	height: 50px;
+	background: #3782d7;
+	line-height: 50px;
+	padding-left: 20px;
+	font-size: 18px;
 }
 
+
+.everton-popup-container .everton-popup .everton-popup-header .everton-popup-close {
+	float: right;
+	display: block;
+	text-decoration: none;
+	color: #fff;
+	width: 35px;
+	height: 35px;
+	line-height: 28px;
+	font-size: 30px;
+	background: #364158;
+	padding: 0 9px;
+	border-radius: 50%;
+	margin-right: 10px;
+	margin-top: 7px;
+}
 .everton-popup-container .everton-popup .everton-popup-body {
+	padding: 20px 24px 34px 30px;
     text-align: center;
+	background: #364158;
 }
 
 .everton-popup-container .everton-popup .everton-popup-body h2{
     font-weight: 800;
-    color: #222222;
+    color: #fff;
 	font-size: 1.5em;
 }
 .everton-popup-container .everton-popup .everton-popup-body .formError{
@@ -358,6 +402,9 @@ img {
     background-color: #ffc3c3;
     text-transform: none;
     margin: 20px 0;
+}
+.has-error {
+	color: #DB7C7A;;
 }
 .alert {
 	padding: 15px;
@@ -376,11 +423,20 @@ img {
 .alert > ul {
 	margin-bottom: 0;
 }
-.alert > div > ul {
-	padding: 0;
-	list-style: none;
+.alert-danger > div > ul {
 	color: #BE2B28;
-	font-weight: 500;
+	font-weight: 600;
+	list-style: disc;
+	text-transform: lowercase;
+}
+.alert-success > div > ul {
+	list-style: none;
+	padding: 0;
+	color: #fff;
+}
+
+.alert > div > ul {
+
 	margin: 15px 0 0;
 }
 .alert > p + p {
@@ -399,8 +455,8 @@ img {
 }
 .alert-success {
 	color: #3c763d;
-	background-color: #dff0d8;
-	border-color: #d6e9c6;
+	background-color: rgba(173, 221, 153, 0.65);
+	border-color: #98D366;
 }
 .alert-success hr {
 	border-top-color: #c9e2b3;
@@ -432,8 +488,9 @@ img {
 }
 .alert-danger {
 	color: #a94442;
-	background-color: #f2dede;
-	border-color: #ebccd1;
+	background-color: rgba(239, 200, 200, 0.67);
+	border-color: #DA6376;
+	text-align: left;
 }
 .alert-danger hr {
 	border-top-color: #e4b9c0;
@@ -449,7 +506,7 @@ img {
 	color: #000;
 	text-shadow: 0 1px 0 #fff;
 	filter: alpha(opacity=20);
-	opacity: .2;
+	opacity: .5;
 }
 .close:hover,
 .close:focus {
@@ -469,7 +526,7 @@ button.close {
 
 .everton-popup-container .everton-popup .everton-popup-body .popupForm label{
     display: block;
-    color: #222222;
+    color: #6EAFFA;;
     text-align: left;
     font-weight: 600;
     text-transform: none;
@@ -547,6 +604,7 @@ button.close {
     margin-top: 10px;
     text-decoration: none;
     text-shadow: 2px 0 3px rgba(0,0,0,0.75);
+    cursor: pointer;
 }
 
 .buttonLarge {
@@ -563,44 +621,44 @@ button.close {
     padding: 16px;
 }
 
-.buttonBlue {
+.buttonBlue,
+.buttonBlue:active,
+.buttonBlue:focus {
     background-color: #00369c;
     border-bottom-color: #012a85;
 }
-.buttonBlue:hover,
-.buttonBlue:active,
-.buttonBlue:focus {
+.buttonBlue:hover {
     background-color: #012a85;
     border-bottom-color: #012a85;
 }
-.buttonLightBlue {
+.buttonLightBlue,
+.buttonLightBlue:active,
+.buttonLightBlue:focus {
     background-color: #3782d7;
     border-bottom-color: #1c68bd;
 }
-.buttonLightBlue:hover,
-.buttonLightBlue:active,
-.buttonLightBlue:focus {
+.buttonLightBlue:hover {
     background-color: #1c68bd;
     border-bottom-color: #1c68bd;
 }
-.buttonYellow {
+.buttonYellow,
+.buttonYellow:active,
+.buttonYellow:focus {
     background-color: #bda234;
     border-bottom-color: #7a640c;
 }
-.buttonYellow:hover,
-.buttonYellow:active,
-.buttonYellow:focus {
+.buttonYellow:hover {
     background-color: #7a640c;
     border-bottom-color: #7a640c;
 }
 
-.buttonStroke {
+.buttonStroke,
+.buttonStroke:active,
+.buttonStroke:focus {
     border: 2px solid #bbbbbb;
     color: #bbbbbb;
 }
-.buttonStroke:hover,
-.buttonStroke:active,
-.buttonStroke:focus {
+.buttonStroke:hover {
     border: 2px solid #364158;
     background: #bbbbbb;
     color: #222222;

@@ -27,6 +27,9 @@
         font-weight: 600;
         padding: 30px;
     }
+    .historyBack {
+    	display: none;
+    }
     .article,
     .earningOptions ul li,
     #connectFBBox {
