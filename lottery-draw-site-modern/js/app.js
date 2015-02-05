@@ -66,9 +66,8 @@ jQuery(document).ready(function($){
 			$('#aboutContainer').html(currentText);
 			textState = 0;
 		}
-		$(this).css('bottom',-1 * $('.showMoreAboutPrize').parent().height() + 50+'px');
+		$(this).css('bottom','15px');
 	});
-
 
 
 	function init(){
