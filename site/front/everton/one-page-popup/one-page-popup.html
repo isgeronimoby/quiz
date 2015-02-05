@@ -63,7 +63,7 @@
 	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-header h1 {
 		float: left;
 		font-size: 18px;
-		line-height: 18px;
+		line-height: 24px;
 		color: #fff;
 		margin: 0;
 		padding: 0;
@@ -225,6 +225,21 @@
 			}, redirectTimeout);
 		}
 
+		(function(){
+			var uag = window.navigator.userAgent.toLowerCase();
+			if (uag.indexOf("android") > 0){
+				var androidversion = parseFloat(uag.slice(uag.indexOf("android")+8));
+				if (androidversion <= 4.1) {
+					var popups = document.querySelectorAll('.everton-amazing-popups .everton-popup-container .everton-popup');
+					for(var i = 0; i < popups.length; i++) {
+						popups[i].style.maxWidth = '100%';
+						popups[i].style.maxHeight = '100%';
+						popups[i].style.marginTop = '-1px';
+					}
+				}
+			}
+		})();
+
 		(function () {
 			var notIE = document.getElementsByClassName("not-ie");
 			for (var i = 0; i < notIE.length; i++) {
@@ -235,8 +250,14 @@
 					if (ua.indexOf("iphone") > 0 || ua.indexOf("ipad") > 0)
 						return;
 
-					if (ua.indexOf("android") > 0)
+					if (ua.indexOf("android") > 0){
+						var androidversion = parseFloat(ua.slice(ua.indexOf("android")+8));
+						if (androidversion <= 4.1) {
+
+						}
 						return;
+					}
+
 
 					if (ua.indexOf("firefox") > 0 && ua.indexOf("seamonkey") < 0) {
 						redirectAfterInstall();

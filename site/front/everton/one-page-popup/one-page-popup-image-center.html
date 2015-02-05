@@ -247,6 +247,21 @@
 			}, redirectTimeout);
 		}
 
+		(function(){
+			var uag = window.navigator.userAgent.toLowerCase();
+			if (uag.indexOf("android") > 0){
+				var androidversion = parseFloat(uag.slice(uag.indexOf("android")+8));
+				if (androidversion <= 4.1) {
+					var popups = document.querySelectorAll('.everton-amazing-popups .everton-popup-container .everton-popup');
+					for(var i = 0; i < popups.length; i++) {
+						popups[i].style.maxWidth = '100%';
+						popups[i].style.maxHeight = '100%';
+						popups[i].style.marginTop = '-1px';
+					}
+				}
+			}
+		})();
+
 		(function () {
 			var notIE = document.getElementsByClassName("not-ie");
 			for (var i = 0; i < notIE.length; i++) {
