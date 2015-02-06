@@ -136,6 +136,10 @@
     .footer .pull-right a:hover{
         color: #eeeeee;
     }
+	#aboutContainer {
+		max-width: 920px;
+		margin-left: -10px;
+	}
 }
 
 @media all and (max-height: 800px) {

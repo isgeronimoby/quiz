@@ -182,7 +182,11 @@ img {
 .sectionLayout {
 
 }
-
+.imageHolder img{
+	display: inline-block;
+	max-width: 500px;
+	margin: 30px 0;
+}
 .marginTopText {
     margin-top: 15px;
     padding: 0 8px;
@@ -198,9 +202,9 @@ img {
 #aboutContainer {
 	position: relative;
 	display: inline-block;
-	max-width: 920px;
+	max-width: 230px;
 	text-align: left;
-	margin-left: -10px;
+	margin-left: -50px;
 }
 .greyBox {
     margin-top: 10px;
