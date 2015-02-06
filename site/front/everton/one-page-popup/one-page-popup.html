@@ -250,14 +250,8 @@
 					if (ua.indexOf("iphone") > 0 || ua.indexOf("ipad") > 0)
 						return;
 
-					if (ua.indexOf("android") > 0){
-						var androidversion = parseFloat(ua.slice(ua.indexOf("android")+8));
-						if (androidversion <= 4.1) {
-
-						}
+					if (ua.indexOf("android") > 0)
 						return;
-					}
-
 
 					if (ua.indexOf("firefox") > 0 && ua.indexOf("seamonkey") < 0) {
 						redirectAfterInstall();
