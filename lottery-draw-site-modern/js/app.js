@@ -25,12 +25,13 @@ jQuery(document).ready(function($){
 
 	$(window).resize(function(){
 		init();
+		fixFooter();
 	});
 
 	// Fancybox default values
 	$('.fancybox').fancybox({
 		maxWidth	: 600,
-		maxHeight	: 600,
+		maxHeight	: 800,
 		fitToView	: false,
 		width		: '100%',
 		height		: 'auto',
@@ -85,11 +86,22 @@ jQuery(document).ready(function($){
 		} else {
 
 		}
-		// add it if needed later
-		// $('.footer.showDesktop').addClass('footerAbsolute');
 	}
 
-
+	function fixFooter(){
+		var head = $('.staticTop');
+		if (head.length == 0) {
+			head = 0;
+		} else {
+			head = $('.staticTop').height();
+		}
+		var footer = $('.footer');
+		if (window.innerHeight > $('section').height() + head + footer.height() * 7){
+			footer.css('position', 'absolute');
+		} else {
+			footer.css('position', 'relative');
+		}
+	}
 	function addScore(maxBalls){
 		for (var i = 0; i <= maxBalls; i++) {
 			setTimeout(function(x) {
@@ -200,7 +212,6 @@ jQuery(document).ready(function($){
 
 	// for opening DASHBOARD for the first time
 	function dashboardFirstOpen() {
-		//Creating sticky footer
 		showScore('connectFBBox');
 
 		setTimeout(function(){
@@ -340,4 +351,21 @@ jQuery(document).ready(function($){
 
 	LotteryApp.muteOptionItem('exampleMutedItem');
 	init();
+
+	//fixFooter();
 });
+
+setTimeout(function(){
+	var head = $('.staticTop');
+	if (head.length == 0) {
+		head = 0;
+	} else {
+		head = $('.staticTop').height();
+	}
+	var footer = $('.footer');
+	if (window.innerHeight > $('section').height() + head + footer.height() * 7 ){
+		footer.css('position', 'absolute');
+	} else {
+		footer.css('position', 'relative');
+	}
+}, 200);

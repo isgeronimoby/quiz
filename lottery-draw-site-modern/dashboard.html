@@ -168,23 +168,24 @@
             <div class="clearfix"></div>
         </section>
 
-        <footer class="footer">
-            <div class="pull-left">
-                <a href="#"><img src="./images/company-logo.png"/></a>
-            </div>
-            <div class="pull-right">
-                <a href="/terms-and-conditions.html" class="thinLink">Terms and Conditions</a>
-                <a href="/faq.html" class="thinLink">FAQs</a>
-                <a href="#" class="thinLink">Contact Us</a>
-            </div>
-            <div class="clearfix"></div>
-        </footer>
+
 
         <div class="scoreHolder">
             <p class="score">SCORE</p>
         </div>
     </div>
 
+	<footer class="footer">
+		<div class="pull-left">
+			<a href="#"><img src="./images/company-logo.png"/></a>
+		</div>
+		<div class="pull-right">
+			<a href="/terms-and-conditions.html" class="thinLink">Terms and Conditions</a>
+			<a href="/faq.html" class="thinLink">FAQs</a>
+			<a href="#" class="thinLink">Contact Us</a>
+		</div>
+		<div class="clearfix"></div>
+	</footer>
     <!-- POPUPS -->
 
 	<div class="everton-amazing-popups">
@@ -193,11 +194,11 @@
 				<div class="everton-popup-header">
 					<a href="#" class="everton-popup-close">&times;</a>
 					<div class="everton-popup-clearfix"></div>
-					<h4>Device connect</h4>
+					<h4></h4>
 				</div>
 				<!-- Box -->
 				<div class="everton-popup-body popupInner">
-					<h2>Send a link to yourself</h2>
+					<h2></h2>
 					<!-- Alert -->
 					<div class="alert alert-danger">
 						<button data-dismiss="alert" class="close" type="button">&times;</button>
@@ -219,14 +220,25 @@
 					</div>
 					<!-- // Alert END -->
 					<!-- Form -->
+					<div class="showMobile">
+						<img src="./images/macbook_logo.png">
+					</div>
+					<div class="showDesktop">
+						<img src="./images/iphone_circle_zoom.png">
+					</div>
+					<h2 class="popup-heading showMobile">Email yourself a link to install the browser extension on your pc</h2>
+					<h2 class="popup-heading showDesktop">Email yourself a link to install the Everton browser app on your phone</h2>
 					<form method="post" class="popupForm login-form" id="connectDeviceForm" action="index.html?lang=en">
 						<div class="form-group email-group">
 							<label for="email" class="strong">Enter your email</label>
 							<input type="text" id="connect-email" name="connect-email"
 								   class="input-block-level form-control" placeholder="john@example.com" autofocus/>
 						</div>
-						<button type="submit" class="button buttonDefault buttonYellow"><i></i><span
-								class="align-wrapp"><span>CONNECT</span></span></button>
+						<button type="submit" class="button buttonDefault buttonYellow"><i></i>
+						<span class="align-wrapp">
+							<span class="showMobile">Get Everton PC extension</span>
+							<span class="showDesktop">Get the Everton Browser app on your phone</span>
+						</span></button>
 					</form>
 					<!-- // Form END -->
 				</div>
@@ -277,6 +289,33 @@
 								class="align-wrapp"><span>SIGN UP</span></span></button>
 					</form>
 					<!-- // Form END -->
+				</div>
+				<!-- // Box END -->
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- SUCCESS POPUPS -->
+	<div class="everton-amazing-popups">
+		<div id="successConnect" class="everton-popup-container">
+			<div class="everton-popup">
+				<div class="everton-popup-header">
+					<a href="#" class="everton-popup-close">&times;</a>
+					<div class="everton-popup-clearfix"></div>
+				</div>
+				<!-- Box -->
+				<div class="everton-popup-body popupInner">
+					<!-- Form -->
+					<div class="showMobile">
+						<img src="./images/macbook_logo.png">
+					</div>
+					<div class="showDesktop">
+						<img src="./images/iphone_circle_zoom.png">
+					</div>
+					<h2 class="popup-heading showMobile">Success!<br/>Please check your email to install the browser extension on your pc</h2>
+					<h2 class="popup-heading showDesktop">Success!<br/>Please check your email to install the Everton browser app on your phone</h2>
 				</div>
 				<!-- // Box END -->
 			</div>

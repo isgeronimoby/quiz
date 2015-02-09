@@ -4215,7 +4215,9 @@ body .n-found .ie-true,
 	font-style: normal;
 	line-height: 40px;
 }
-.lotteryFootballBG a {
+.lotteryFootballBG a,
+.lotteryFootballBG a:focus,
+.lotteryFootballBG a:active {
 	display: inline-block;
 	background-color: #ffd739;
 	border-color: #e4981f;
@@ -4259,7 +4261,9 @@ body .n-found .ie-true,
 	margin-top: 30px;
 	margin-bottom: 50px;
 }
-.lotteryStartPage .tellMore a{
+.lotteryStartPage .tellMore a,
+.lotteryStartPage .tellMore a:active,
+.lotteryStartPage .tellMore a:focus {
 	color: #888888;
 	font-size: 20px;
 }
@@ -4450,7 +4454,8 @@ body .n-found .ie-true,
 	}
 
 	.navbar.active .btn-shop,
-	.navbar.active .offers-btn {
+	.navbar.active .offers-btn,
+	.navbar.active .button[href="/prize"]  {
 		display: none;
 	}
 
@@ -5083,9 +5088,9 @@ body .n-found .ie-true,
 		font-size: 24px;
 	}
 	.lotteryFootballBG a {
+		font-size: 20px;
 		line-height: 32px;
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding: 10px 30px;
 	}
 	.lotteryFootballBG p {
 		font-size: 20px;

@@ -112,12 +112,8 @@
     }
 
     .footer {
-        position: relative;
-        bottom: 10px;
-        left: 0;
-        padding: 0 10px;
-
-        margin-top: 20px;
+		padding: 0 20px;
+		margin-top: 25px;
         margin-bottom: 10px;
     }
     .footer .pull-right a{
@@ -129,10 +125,10 @@
         margin-bottom: -10px;
 
     }
-    .footerAbsolute {
+/*    .footerAbsolute {
         position: absolute;
         padding: 0 20px;
-    }
+    }*/
     .footer .pull-right a:hover{
         color: #eeeeee;
     }
@@ -150,7 +146,7 @@
     .draw-container {
 
     }
-    .footer {
+/*    .footer {
         margin-top: 20px;
         position: relative;
         bottom: 10px;
@@ -158,5 +154,5 @@
     }
     .footerAbsolute {
         position: relative;
-    }
+    }*/
 }

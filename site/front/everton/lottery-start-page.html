@@ -44,8 +44,16 @@
 			display: none;
 		}
 		html.no-touch body #content {
-			/* padding: 80px 0 180px !important; */
+			padding-top: 40px !important;
 			margin-bottom: 0 !important;
+		}
+		html.no-touch .service-message {
+			display: none;
+		}
+		@media (max-width: 990px){
+			html.no-touch body #content {
+				padding-top: 0 !important;
+			}
 		}
 	</style>
 
@@ -186,7 +194,12 @@
 	<p>Add the free Everton Rewards browser extension and<br/>
 	sign up it's that simple!</p>
 
-	<img src="../../assets/images/front/everton/macbook_logo.png" alt="Application"/>
+	<div class="visible-lg visible-md">
+		<img src="../../assets/images/front/everton/macbook_logo.png" alt="Application"/>
+	</div>
+	<div class="visible-sm visible-xs">
+		<img src="../../assets/images/front/everton/iphone_circle_zoom.png" alt="Application"/>
+	</div>
 
 </div>
 
