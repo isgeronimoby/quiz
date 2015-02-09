@@ -38,6 +38,19 @@
 	<!--Color Scheme original file .less with color variables situate in "../../assets/less/front/color-scheme-everton.less" -->
 	<link rel="stylesheet" href="../../assets/css/front/color-scheme-everton.css"/>
 
+
+	<style>
+		#moreInfo {
+			display: none;
+		}
+		html.no-touch body #content {
+			/* padding: 80px 0 180px !important; */
+			margin-bottom: 0 !important;
+		}
+	</style>
+
+
+
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -234,9 +247,65 @@
 		</div>
 	</div>
 	<div class="text-center">
-		<h4 class="tellMore"><a href="#">Tell me more about Everton Rewards <img src="../../assets/images/front/everton/arrow-down.png"/></a></h4>
+		<h4 class="tellMore"><a href="#" onclick="$('#moreInfo').toggle();event.preventDefault();">Tell me more about Everton Rewards <img src="../../assets/images/front/everton/arrow-down.png"/></a></h4>
 	</div>
 </div>
+
+
+<div id="moreInfo" class="main-holder wrap clearfix">
+	<div class="row n-found landing-page clear-side-indent">
+
+		<h2 class="glyphicons charts"><i></i>Shop as normal and get amazing Everton products for free</h2>
+
+		<div class="shop">
+			<p class="col-xs-48 col-sm-23 col-md-23 col-lg-23 clear-side-padding">Simply install the Everton app and shop as normal at any retailer.
+				When you visit their site you will see the option to generate
+				Everton credit at the same time. Our clever system then tracks
+				your visit and once the retailer has confirmed a sale, we put
+				the credit in your account. Normally 5% of whatever you spend.
+				When you want to redeem it, just click through to the Everton
+				store via our link and complete your purchase using a code we
+				provide you.</p>
+			<div class="img-holder col-xs-28 col-xs-offset-10 col-sm-20 col-sm-offset-4 col-md-20 col-md-offset-4 col-lg-20 col-lg-offset-4 clear-side-padding">
+				<img src="../../assets/images/front/everton/club-items.jpg" width="190" height="224" alt="club items"/>
+			</div>
+		</div>
+
+		<h3 class="glyphicons charts"><i></i>The Everton reward app works with all your favourite retailers ...</h3>
+
+		<ul class="retailers row">
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-1.jpg" width="104" height="16" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-2.jpg" width="88" height="29" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-3.jpg" width="99" height="24" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-4.jpg" width="110" height="17" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-5.jpg" width="90" height="27" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-6.jpg" width="69"height="27" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-7.jpg" width="122" height="43" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-8.jpg" width="48" height="35" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-9.jpg" width="74" height="37" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-10.jpg" width="58" height="37" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-11.jpg" width="106" height="21" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-12.jpg" width="99" height="39" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-13.jpg" width="98" height="33" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-14.jpg" width="73" height="47" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-15.jpg" width="46" height="46" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-16.jpg" width="99" height="36" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-17.jpg" width="81" height="27" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-18.jpg" width="119" height="68" alt=""/></span></li>
+		</ul>
+
+		<a class="not-ie" href="#">Install to enter the draw</a>
+		<a class="ie-true" href="#">Try to enter the draw</a>
+
+	</div>
+</div>
+
+
+
+
+
+
+
 <div class="offers">
 	<div class="gallery-holder carouse48">
 		<div class="gallery">

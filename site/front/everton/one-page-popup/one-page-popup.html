@@ -57,24 +57,28 @@
 	}
 	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-header {
 		background-color: #00369c;
-		overflow: hidden;
-		padding: 14px 18px 14px 30px;
+		height: 40px;
+		width: 100%;
 	}
 	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-header h1 {
 		float: left;
 		font-size: 18px;
-		line-height: 24px;
+		line-height: 40px;
 		color: #fff;
 		margin: 0;
 		padding: 0;
 		font-weight: 200;
+		margin-left: 15px;
 	}
 	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-header .everton-popup-close {
 		float: right;
 		display: block;
 		background: url('./images/btn-close.png') no-repeat;
-		width: 20px;
-		height: 20px;
+		background-size: cover;
+		width: 25px;
+		height: 25px;
+		margin-right: 10px;
+		margin-top: 7px;
 	}
 	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body {
 		padding: 5px 24px 34px 30px;
@@ -229,7 +233,7 @@
 			var uag = window.navigator.userAgent.toLowerCase();
 			if (uag.indexOf("android") > 0){
 				var androidversion = parseFloat(uag.slice(uag.indexOf("android")+8));
-				if (androidversion <= 4.1) {
+				if (androidversion <= 4.4) {
 					var popups = document.querySelectorAll('.everton-amazing-popups .everton-popup-container .everton-popup');
 					for(var i = 0; i < popups.length; i++) {
 						popups[i].style.maxWidth = '100%';

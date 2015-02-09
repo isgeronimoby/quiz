@@ -57,24 +57,28 @@
 	}
 	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-header {
 		background-color: #00369c;
-		overflow: hidden;
-		padding: 14px 18px 14px 30px;
+		height: 40px;
+		width: 100%;
 	}
 	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-header h1 {
 		float: left;
 		font-size: 18px;
-		line-height: 18px;
+		line-height: 40px;
 		color: #fff;
 		margin: 0;
 		padding: 0;
 		font-weight: 200;
+		margin-left: 15px;
 	}
 	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-header .everton-popup-close {
 		float: right;
 		display: block;
 		background: url('./images/btn-close.png') no-repeat;
-		width: 20px;
-		height: 20px;
+		background-size: cover;
+		width: 25px;
+		height: 25px;
+		margin-right: 10px;
+		margin-top: 7px;
 	}
 	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body {
 		padding: 5px 24px 34px 30px;
@@ -100,7 +104,7 @@
 		width: 100%;
 		text-align: center;
 	}
-	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .text-center img {
+	.everton-amazing-popups .everton-popup-container .everton-popup .everton-popup-body .text-center img.phoneImage {
 		display: inline-block;
 		max-width: 240px;
 		margin-right: -30px;
@@ -251,7 +255,7 @@
 			var uag = window.navigator.userAgent.toLowerCase();
 			if (uag.indexOf("android") > 0){
 				var androidversion = parseFloat(uag.slice(uag.indexOf("android")+8));
-				if (androidversion <= 4.1) {
+				if (androidversion <= 4.3) {
 					var popups = document.querySelectorAll('.everton-amazing-popups .everton-popup-container .everton-popup');
 					for(var i = 0; i < popups.length; i++) {
 						popups[i].style.maxWidth = '100%';
@@ -381,8 +385,11 @@
 				<div class="everton-popup-btn-holder show-mobile">
 					<a class="everton-popup-yellow-btn" href="https://everton.rewarded.club/home/install" target="_top">Install Everton Browser</a>
 				</div>
-				<div class="text-center">
-					<img src="./images/iphone_circle_zoom.png" />
+				<div class="text-center show-mobile">
+					<img class="phoneImage" src="./images/iphone_circle_zoom.png" />
+				</div>
+				<div class="text-center show-desktop">
+					<img src="./images/macbook_logo.png" />
 				</div>
 
 				<div class="text-center">
