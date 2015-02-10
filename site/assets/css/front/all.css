@@ -5145,6 +5145,11 @@ body .n-found .ie-true,
     }
 }
 
+@media all and (max-width: 490px) {
+	.offers-btn {
+		display: none;
+	}
+}
 @media all and (max-width: 480px) {
 
 	.user-holder {
@@ -5273,13 +5278,11 @@ body .n-found .ie-true,
 	.amazon-redirect .wrapper-link a {
 		font-size: 16px;
 	}
+
+
 }
 
 @media all and (max-width: 460px) {
-	.offers-btn {
-		display: none;
-	}
-
 	/*Redirect amazon*/
 	.amazon-redirect .wrapper-link a {
 		padding-left: 30px;
@@ -5459,7 +5462,9 @@ body .n-found .ie-true,
 }
 
 @media all and (max-width: 320px) {
-
+	.btn-shop {
+		display: none;
+	}
 	/**Profile page**/
 	.member-info .profile-summary {
 		width: 200px !important;
