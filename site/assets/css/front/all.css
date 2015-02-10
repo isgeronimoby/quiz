@@ -4264,11 +4264,22 @@ body .n-found .ie-true,
 .lotteryStartPage .tellMore a,
 .lotteryStartPage .tellMore a:active,
 .lotteryStartPage .tellMore a:focus {
+	text-decoration: none;
 	color: #888888;
 	font-size: 20px;
 }
+.lotteryStartPage .tellMore a:hover {
+	text-decoration: underline;
+}
 .lotteryStartPage .tellMore a img{
 	margin-left: 5px;
+}
+.lotteryStartPage .tellMore a img.opened{
+	transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
 }
 .lotteryStartPage .instructions .lotteryDescImage {
 	width: 128px;

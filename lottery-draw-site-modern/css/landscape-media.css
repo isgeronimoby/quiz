@@ -11,8 +11,7 @@
         width: auto;
     }
     .draw-wrapper {
-        height: 99%;
-        position: absolute;
+		min-height: 100%;
     }
     .draw-container {
         position: relative;
@@ -113,8 +112,6 @@
 
     .footer {
 		padding: 0 20px;
-		margin-top: 25px;
-        margin-bottom: 10px;
     }
     .footer .pull-right a{
         color: #aaaaaa;
@@ -125,10 +122,7 @@
         margin-bottom: -10px;
 
     }
-/*    .footerAbsolute {
-        position: absolute;
-        padding: 0 20px;
-    }*/
+
     .footer .pull-right a:hover{
         color: #eeeeee;
     }
@@ -136,23 +130,4 @@
 		max-width: 920px;
 		margin-left: -10px;
 	}
-}
-
-@media all and (max-height: 800px) {
-    .draw-wrapper {
-        height: 100%;
-        position: inherit;
-    }
-    .draw-container {
-
-    }
-/*    .footer {
-        margin-top: 20px;
-        position: relative;
-        bottom: 10px;
-        left: 0;
-    }
-    .footerAbsolute {
-        position: relative;
-    }*/
 }

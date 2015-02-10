@@ -25,7 +25,6 @@ jQuery(document).ready(function($){
 
 	$(window).resize(function(){
 		init();
-		fixFooter();
 	});
 
 	// Fancybox default values
@@ -88,20 +87,6 @@ jQuery(document).ready(function($){
 		}
 	}
 
-	function fixFooter(){
-		var head = $('.staticTop');
-		if (head.length == 0) {
-			head = 0;
-		} else {
-			head = $('.staticTop').height();
-		}
-		var footer = $('.footer');
-		if (window.innerHeight > $('section').height() + head + footer.height() * 7){
-			footer.css('position', 'absolute');
-		} else {
-			footer.css('position', 'relative');
-		}
-	}
 	function addScore(maxBalls){
 		for (var i = 0; i <= maxBalls; i++) {
 			setTimeout(function(x) {
@@ -276,34 +261,6 @@ jQuery(document).ready(function($){
 	var connectDeviceForm = $('#connectDeviceForm');
 
 	emailSignUpForm.find("input[type=submit]").click(function() {
-/*
-		console.log($(this));
-		var name     = emailSignUpForm.find('input[name=name]');
-		var email    = emailSignUpForm.find('input[type=email]');
-		var pass     = emailSignUpForm.find('input[type=password]');
-
-		// client-side validation
-		function checkFields() {
-
-			if (checkEmail(email)) email.removeClass('inputError'); else email.addClass('inputError');
-
-			if (name.val() < 1) {
-				name.addClass('inputError');
-			}else {
-				name.removeClass('inputError');
-			}
-
-			if (pass.val() < 1) {
-				pass.addClass('inputError');
-			}else {
-				pass.removeClass('inputError');
-			}
-			return false;
-		}
-
-		if(checkFields() == false) return false;
-*/
-
 		$.ajax({
 			type: "post",
 			url: "signUpEmail.php",
@@ -351,21 +308,4 @@ jQuery(document).ready(function($){
 
 	LotteryApp.muteOptionItem('exampleMutedItem');
 	init();
-
-	//fixFooter();
 });
-
-setTimeout(function(){
-	var head = $('.staticTop');
-	if (head.length == 0) {
-		head = 0;
-	} else {
-		head = $('.staticTop').height();
-	}
-	var footer = $('.footer');
-	if (window.innerHeight > $('section').height() + head + footer.height() * 7 ){
-		footer.css('position', 'absolute');
-	} else {
-		footer.css('position', 'relative');
-	}
-}, 200);
