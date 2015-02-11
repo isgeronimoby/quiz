@@ -5446,6 +5446,9 @@ body .n-found .ie-true,
 		padding-right: 0px;
 	}
 
+	.btn-shop {
+		display: none;
+	}
 }
 
 @media all and (max-width: 350px) {
@@ -5462,9 +5465,7 @@ body .n-found .ie-true,
 }
 
 @media all and (max-width: 320px) {
-	.btn-shop {
-		display: none;
-	}
+
 	/**Profile page**/
 	.member-info .profile-summary {
 		width: 200px !important;
