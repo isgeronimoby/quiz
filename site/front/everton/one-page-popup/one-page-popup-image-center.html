@@ -20,7 +20,6 @@
 		zoom:1; /* For IE 6/7 (trigger hasLayout) */
 	}
 	/* END OF RESET */
-
 	.everton-amazing-popups .everton-popup-container {
 		display: none;
 		opacity: 0;
@@ -36,6 +35,9 @@
 		font-family: Roboto,sans-serif;
 	}
 	.everton-amazing-popups .everton-popup-container .everton-popup {
+		-webkit-transition: -webkit-transform 0ms;
+		-webkit-transform-origin: 0px 0px;
+		-webkit-transform: translate3d(0px, 0px, 0px);
 		background-color: #ffffff;
 		max-width: 650px;
 		max-height: 90%;
@@ -263,6 +265,10 @@
 						popups[i].style.maxHeight = '100%';
 						popups[i].style.marginTop = '-1px';
 					}
+					var css = document.createElement("style");
+					css.type = "text/css";
+					css.innerHTML = "::-webkit-scrollbar{width:15px;height:15px;} ::-webkit-scrollbar-thumb{background-color:#e1e1e1;}";
+					document.body.appendChild(css);
 				}
 			}
 		})();
