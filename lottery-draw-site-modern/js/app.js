@@ -309,3 +309,9 @@ jQuery(document).ready(function($){
 	LotteryApp.muteOptionItem('exampleMutedItem');
 	init();
 });
+
+
+function connectSuccess(popupID) {
+	$('#' + popupID).find('.everton-popup-body img').hide();
+	$('#' + popupID).find('.popup-heading').html('<span class="animationSuccess">SUCCESS! PLEASE CHECK YOUR EMAIL TO INSTALL THE EVERTON BROWSER APP ON YOUR PHONE</span>');
+}

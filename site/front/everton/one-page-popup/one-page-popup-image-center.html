@@ -42,7 +42,7 @@
 		max-width: 650px;
 		max-height: 90%;
 		position: relative;
-		overflow: scroll;
+		overflow: auto;
 		-webkit-overflow-scrolling: touch;
 		top: 50%;
 		left: 50%;
@@ -261,12 +261,9 @@
 				if (androidversion <= 4.3) {
 					var popups = document.querySelectorAll('.everton-amazing-popups .everton-popup-container .everton-popup');
 					for(var i = 0; i < popups.length; i++) {
-//						popups[i].style.maxWidth = '100%';
-//						popups[i].style.maxHeight = '100%';
-						popups[i].style.height = 'auto';
-						popups[i].style.maxHeight = 'auto';
-//						popups[i].style.marginTop = '-1px';
-//						popups[i].style.overflow = 'initial';
+						popups[i].style.maxWidth = '100%';
+						popups[i].style.maxHeight = '100%';
+						popups[i].style.marginTop = '-1px';
 					}
 					var css = document.createElement("style");
 					css.type = "text/css";
