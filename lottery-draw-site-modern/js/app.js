@@ -12,6 +12,7 @@ jQuery(document).ready(function($){
 	LotteryApp.showCurrentOptionBox = showCurOption;
 	LotteryApp.muteOptionItem = muteOptionItem;
 	LotteryApp.unmuteOptionItem = unmuteOptionItem;
+	LotteryApp.connectSuccess = connectSuccess;
 
 	/* CLOCKDOWN TIMER */
 	$('.countdown').countdown(LotteryApp.drawEndDate, function (event) {
@@ -300,18 +301,21 @@ jQuery(document).ready(function($){
 		return false;
 
 	});
-
-
 	emailSignUpForm.find('input').focus(function(){
 		$(this).removeClass('inputError');
 	});
 
+	function connectSuccess(popupID) {
+		var successPlace = $('#' + popupID);
+		var successText = successPlace.find('.connectSuccessMessage');
+		successPlace.find('.everton-popup-body img').hide();
+		successPlace.find('.popup-heading').hide();
+		successText.addClass('connectSuccessMessageAnimated');
+		setTimeout(function(){
+			successText.addClass('connectSuccessMessageAnimationFinished').removeClass('connectSuccessMessageAnimated');
+		}, 1200)
+	}
+
 	LotteryApp.muteOptionItem('exampleMutedItem');
 	init();
 });
-
-
-function connectSuccess(popupID) {
-	$('#' + popupID).find('.everton-popup-body img').hide();
-	$('#' + popupID).find('.popup-heading').html('<span class="animationSuccess">SUCCESS! PLEASE CHECK YOUR EMAIL TO INSTALL THE EVERTON BROWSER APP ON YOUR PHONE</span>');
-}

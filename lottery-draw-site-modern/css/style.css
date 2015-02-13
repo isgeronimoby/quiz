@@ -614,28 +614,35 @@ button.close {
 		opacity: 1;
 	}
 }
-
 /* Standard syntax */
 @keyframes connectSuccess {
 	0% {
 		font-size: 1px;
 		opacity: 0;
+		display: inline-block;
 	}
 	100% {
+		display: inline-block;
 		font-size: 26px;
 		opacity: 1;
 	}
 }
-.animationSuccess {
+.connectSuccessMessage {
+	display: none;
+	font-weight: 900;
+	line-height: 30px;
+	margin-bottom: 30px;
 	font-size: 26px;
 	opacity: 1;
-	font-weight: 900;
-	line-height: 26px;
-	margin-bottom: 30px;
-	-webkit-animation: connectSuccess 1s;
-	animation: connectSuccess 1s;
 }
-
+.connectSuccessMessageAnimated {
+	display: inline-block;
+	-webkit-animation: connectSuccess 1s 1;
+	animation: connectSuccess 1s 1;
+}
+.connectSuccessMessageAnimationFinished {
+	display: inline-block;
+}
 /*****   POPUP STYLES END  *****/
 /*****   COUNTDOWN STYLES   *****/
 .countdown {

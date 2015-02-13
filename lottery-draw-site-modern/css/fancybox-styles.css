@@ -174,9 +174,7 @@
 	left: 0;
 	overflow: hidden;
 	display: none;
-	/* z-index: 8010;
-	background: url(../../images/front/bg-opacity.png) repeat; */
-	z-index:10001;
+	z-index:1000;
 }
 
 .fancybox-overlay-fixed {
