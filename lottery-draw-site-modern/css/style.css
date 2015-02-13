@@ -255,18 +255,20 @@ img {
     overflow: hidden;
     max-height: 108px;
 }
-
+.article.showMobile > .greyBoxMobile {
+	min-height: 108px;
+}
 .article > .articleImage img {
     width: 100%;
     height: auto;
-    max-height: 108px;
+    /*max-height: 108px;*/
 }
 .article > .greyBox {
     text-align: left;
     float: right;
 }
 .article > .greyBox h3 {
-    /*margin-bottom: 15px;*/
+	text-align: center;
 }
 
 .earningOptions {
@@ -1009,7 +1011,6 @@ button.close {
 		font-size: 14px;
 		margin: 0 10px;
 		line-height: 30px;
-		display: block;
 	}
 }
 @media all and (min-width:430px) and (max-width:585px) {

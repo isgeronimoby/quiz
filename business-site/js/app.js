@@ -4,6 +4,9 @@ jQuery(document).ready(function($){
 	makemenu();
 
 	var s = 0;
+	var menuState = 0;
+	var navigation = $('.sliding-menu nav');
+
 	if($(window).width() > 1024) {
 		s = skrollr.init({forceheight: false});
 	}
@@ -19,8 +22,10 @@ jQuery(document).ready(function($){
 		$('#contactContent').fadeIn(700);
 	});
 
-	var menuState = 0;
-	var navigation = $('.sliding-menu nav');
+	window.addEventListener("orientationchange", function() {
+		// Announce the new orientation number
+		navigation.css('top',-(navigation.height()+1));
+	}, false);
 
 	navigation.css('top',-(navigation.height()+1));
 	$('.mobile-menu').click(function(e){
