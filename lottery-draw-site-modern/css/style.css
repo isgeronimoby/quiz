@@ -608,24 +608,34 @@ button.close {
 /* Chrome, Safari, Opera */
 @-webkit-keyframes connectSuccess {
 	from {
-		font-size: 1px;
+		-webkit-transform: scale(0);
 		opacity: 0;
 	}
 	to {
-		font-size: 26px;
+		-webkit-transform: scale(1);
+		opacity: 1;
+	}
+}
+@-moz-keyframes connectSuccess {
+	from {
+		-moz-transform: scale(0);
+		opacity: 0;
+	}
+	to {
+		-moz-transform: scale(1);
 		opacity: 1;
 	}
 }
 /* Standard syntax */
 @keyframes connectSuccess {
 	0% {
-		font-size: 1px;
+		transform: scale(0);
 		opacity: 0;
 		display: inline-block;
 	}
 	100% {
+		transform: scale(1);
 		display: inline-block;
-		font-size: 26px;
 		opacity: 1;
 	}
 }
@@ -639,10 +649,13 @@ button.close {
 }
 .connectSuccessMessageAnimated {
 	display: inline-block;
-	-webkit-animation: connectSuccess 1s 1;
-	animation: connectSuccess 1s 1;
+	-webkit-animation: connectSuccess 0.8s 1;
+	-moz-animation: connectSuccess 0.8s 1;
+	-ms-animation: connectSuccess 0.8s 1;
+	animation: connectSuccess 0.8s 1;
 }
 .connectSuccessMessageAnimationFinished {
+	transform: scale(1);
 	display: inline-block;
 }
 /*****   POPUP STYLES END  *****/
