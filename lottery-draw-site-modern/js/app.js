@@ -309,11 +309,16 @@ jQuery(document).ready(function($){
 		var successPlace = $('#' + popupID);
 		var successText = successPlace.find('.connectSuccessMessage');
 		successPlace.find('.everton-popup-body img').hide();
-		successPlace.find('.popup-heading').hide();
+		successPlace.find('.text-holder').hide();
 		successText.addClass('connectSuccessMessageAnimated');
 		setTimeout(function(){
 			successText.addClass('connectSuccessMessageAnimationFinished').removeClass('connectSuccessMessageAnimated');
-		}, 1200)
+		}, 1200);
+		successPlace.find('.everton-popup-close').click(function(){
+			successPlace.find('.everton-popup-body img').show();
+			successPlace.find('.text-holder').show();
+			successText.removeClass('connectSuccessMessageAnimationFinished');
+		});
 	}
 
 	LotteryApp.muteOptionItem('exampleMutedItem');
