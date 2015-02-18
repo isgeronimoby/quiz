@@ -76,7 +76,6 @@ jQuery(document).ready(function($){
 			}
 
 		}
-
 	});
 
 	function makemenu() {
@@ -101,14 +100,14 @@ jQuery(document).ready(function($){
 		});
 		$('.bottom-arrow-separate').click(function(e){
 			e.preventDefault();
-			$('.sideLinks')[1].click();
+			$($('.sideLinks')[1]).click();
 		});
 
 	}
 
 	$(document).keydown(function(e){
 		var curMenu = $('.sideMenu a.active').parent().index();
-		if (curMenu == -1) $('.sideLinks')[0].click();
+		if (curMenu == -1 || curMenu == undefined) $($('.sideLinks')[0]).click();
 
 		if (e.keyCode == '38') {
 			// UP key
@@ -147,4 +146,8 @@ jQuery(document).ready(function($){
 	};
 
 	hashUrl();
+
+	if ( (window.location.hash).substr(1) == 'contacts') {
+		$('#findMore').trigger('click');
+	}
 });
