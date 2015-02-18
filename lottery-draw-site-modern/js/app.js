@@ -72,7 +72,7 @@ jQuery(document).ready(function($){
 
 
 	function init(){
-//        $('.article > .greyBoxMobile').height($('.article >  .articleMobileImage').outerHeight() - 20);
+        $('.article > .greyBoxMobile').height($('.article >  .articleMobileImage').outerHeight() - 20);
         $('.article > .greyBoxDesktop').height($('.article >  .articleImageDesktop').outerHeight());
 
 		if ($(window).width() > 900) {

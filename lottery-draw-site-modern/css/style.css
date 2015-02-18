@@ -256,7 +256,7 @@ img {
     max-height: 108px;
 }
 .article.showMobile > .greyBoxMobile {
-	min-height: 108px;
+
 }
 .article > .articleImage img {
     width: 100%;
@@ -328,7 +328,7 @@ img {
 .earningOptions ul li .button, .greyBox .button {
     width: 70%;
     vertical-align: middle;
-    font-size: 15px;
+    font-size: 14px;
     padding: 0 5px;
     line-height: 50px;
     margin-top: 0;
@@ -704,6 +704,12 @@ button.close {
     cursor: pointer;
 }
 
+.button.muted {
+	line-height: 20px !important;
+	padding: 5px 0 !important;
+	font-size: 14px !important;
+}
+
 .buttonLarge {
     border-bottom: 10px solid;
     font-size: 20px;
@@ -716,6 +722,7 @@ button.close {
     font-size: 20px;
     font-weight: 100;
     padding: 16px;
+    height: 55px;
 }
 
 .buttonBlue,

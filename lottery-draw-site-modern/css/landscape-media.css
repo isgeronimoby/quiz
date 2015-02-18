@@ -92,6 +92,7 @@
     }
     .optionsGroup .earningOptions ul li .button {
         width: 81%;
+		font-size: 15px;
     }
     .optionsGroup .earningOptions ul li .tickets, .greyBox .tickets {
         width: 12%;
@@ -109,6 +110,12 @@
         margin: 30px 0;
         min-width: 350px;
     }
+
+	.button.muted {
+		line-height: 20px !important;
+		padding: 15px 0 !important;
+		font-size: 15px !important;
+	}
 
     .footer {
 		padding: 0 20px;
