@@ -253,7 +253,6 @@ img {
 .article > .articleImage {
     float: left;
     overflow: hidden;
-    max-height: 108px;
 }
 .article.showMobile > .greyBoxMobile {
 
