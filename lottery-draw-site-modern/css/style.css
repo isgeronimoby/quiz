@@ -668,7 +668,7 @@ button.close {
 }
 .countdown > div {
     display: inline-block;
-    width: 24%;
+    width: 23%;
 }
 .countdown > div:not(:last-child) {
     padding-right: 4px;
@@ -678,7 +678,7 @@ button.close {
 }
 .countdown > div > div {
     background-color: #364158;
-    padding: 4px 0;
+    padding: 2px 0;
 }
 .countdown > div > div span {
     color: #7ebae9;
@@ -688,7 +688,7 @@ button.close {
     margin-bottom: 4px;
 }
 .countdown > div > div span.numbers {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 800;
     color: #ffffff;
 }
@@ -850,7 +850,7 @@ button.close {
 .circleToggles {
     display: inline-block;
     position: absolute;
-    top: 80%;
+    top: 75%;
     left: 50%;
     margin-left: -20px;
     transform: translate(-50%, -50%);
@@ -894,19 +894,18 @@ button.close {
 }
 
 
-.circularChart .circularPortrait{
+.circularChartsGroup .circularPortrait{
     position: absolute;
-    bottom: 0;
-    right: 0;
-    margin-bottom: -20px;
-    margin-right: -30px;
+    bottom: -10px;
+    right: -20px;
 }
-.circularChart .circularPortrait .portraitHolder {
-    border-radius: 50%;
+.circularChartsGroup .circularPortrait canvas{
+    position: relative;
+}
+.circularChartsGroup .circularPortrait .portraitHolder {
     overflow: hidden;
-    border: 3px solid #364158;
 }
-.circularChart .circularPortrait .portraitHolder img{
+.circularChartsGroup .circularPortrait .portraitHolder img{
     max-width: 70px;
     max-height: 70px;
 }
@@ -1034,8 +1033,9 @@ button.close {
 	}
 }
 @media all and (min-width:430px) and (max-width:585px) {
-    .earningOptions ul li .button {
-        width: 73%;
+    .earningOptions ul li .button, .greyBox .button, .earningOptions ul li .buttonDisabled,
+    .earningOptions ul li .buttonStroke {
+        width: 55%;
     }
 }
 @media all and (min-width:585px) {
@@ -1043,4 +1043,43 @@ button.close {
         width: 75%;
     }
 }
+@media all and (max-width:500px) {
+    .earningOptions ul li .button, .greyBox .button, .earningOptions ul li .buttonDisabled,
+    .earningOptions ul li .buttonStroke {
+        width: 55%;
+    }
+}
 /*****   MEDIA QUERIES END *****/
+
+
+/******* NEW PROGRESS CHARTS *******/
+canvas {
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.canvasHolder {
+    position: relative;
+    display: inline-block;
+}
+.infoBlock {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+.infoBlock:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.infoHolder {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 60%;
+}

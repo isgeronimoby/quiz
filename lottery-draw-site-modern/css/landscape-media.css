@@ -48,6 +48,9 @@
         width: 41%;
         max-height: 108px;
     }
+    .countdown > div {
+        width: 25% !important;
+    }
     .countdown > div > div {
         padding: 18px 0;
     }
@@ -75,6 +78,7 @@
         /*float: none;*/
     }
     .circularChartsGroup {
+        position: relative;
         float: left;
         width: 42%;
     }

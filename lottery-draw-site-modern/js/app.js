@@ -2,7 +2,7 @@ var LotteryApp = {
 	overallProgress: 0,
 	daysInRow: 0,
 	pointsCurrent: 0,
-	maxDaysInRow: 3,
+	maxDaysInRow: 5,
 	drawEndDate: '2015/12/31'
 };
 
@@ -20,7 +20,7 @@ jQuery(document).ready(function($){
 			'<div><div><span class="numbers">%H</span><span>hrs</span></div></div>' +
 			'<div><div><span class="numbers">%M</span><span>mins</span></div></div>' +
 			'<div><div><span class="numbers">%S</span><span>secs</span></div></div>'));
-			$('.countdown > div').css('width','25%');
+			$('.countdown > div').css('width','20%');
 	});
 	/* CLOCKDOWN TIMER END */
 
@@ -106,24 +106,145 @@ jQuery(document).ready(function($){
 		return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
 	}
 
-	var circleOverall = new ProgressBar.Circle('#overallProgressCircle', {
-		color: '#3782d7',
-		strokeWidth: 3,
-		easing: 'bounce',
-		duration: 1500
-	});
-	var circleDays = new ProgressBar.Circle('#daysProgressCircle', {
-		color: '#bda234',
-		strokeWidth: 2,
-		easing: 'bouncePast'
-	});
+    /************************ NEW PROGRESS CHARTS ***************************/
+
+    var daysCircleCanvas = document.getElementById('daysCircleProgress');
+    var overallCircleCanvas = document.getElementById('overallCircleProgress');
+
+    var progressCircles = {
+        days: undefined,
+        days_max: LotteryApp.daysInRow / LotteryApp.maxDaysInRow,
+        overall: undefined,
+        overall_max: LotteryApp.overallProgress
+    };
+
+    var daysCircle;
+    var overallCircle;
+
+    $(window).resize(function(){
+        circlesSize();
+    });
+
+    function circlesSize(){
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height();
+        var maxWidth = $('.countdown').width() - 10;
+
+        if (windowWidth < 900 && windowWidth > windowHeight) {
+            maxWidth = maxWidth * 0.6;
+        } else {
+            maxWidth = maxWidth * 0.8;
+        }
+
+        $(daysCircleCanvas).attr('width', maxWidth);
+        $(daysCircleCanvas).attr('height', maxWidth);
+        $(overallCircleCanvas).attr('width', maxWidth);
+        $(overallCircleCanvas).attr('height', maxWidth);
+        daysCircle.stop();
+        overallCircle.stop();
+        drawProgressCircles();
+        canvasHolderSize();
+    }
+    function canvasHolderSize() {
+        $('.canvasHolder').width($(daysCircleCanvas).attr('width'));
+        $('.canvasHolder').height($(daysCircleCanvas).attr('height'));
+    }
+
+    function drawProgressCircles(){
+        daysCircle = new ProgressCircle({
+            canvas: daysCircleCanvas,
+            arcWidth: 5,
+            gapWidth: -5,
+            minRadius: $(daysCircleCanvas).attr('width') * 0.4
+        });
+        daysCircle.addEntry({
+            fillColor: 'rgba(54, 65, 87, 1)',
+            progressListener: function() {
+                return 1;
+            }
+        }).addEntry({
+            fillColor: 'rgba(189, 162, 52, 1)',
+            progressListener: function() {
+                return progressCircles.days;
+            }
+        }).start(30);
+        overallCircle = new ProgressCircle({
+            canvas: overallCircleCanvas,
+            arcWidth: 8,
+            gapWidth: -8,
+            minRadius: $(overallCircleCanvas).attr('width') * 0.4 + 10
+        });
+        overallCircle.addEntry({
+            fillColor: 'rgba(54, 65, 87, 1)',
+            progressListener: function() {
+                return 1;
+            }
+        }).addEntry({
+            fillColor: 'rgba(55, 130, 215, 1)',
+            progressListener: function() {
+                return progressCircles.overall;
+            }
+        }).start(30);
+    }
+
+    // all canvases and sizes initialisation
+    drawProgressCircles();
+    circlesSize();
+    canvasHolderSize();
+
+    function playOverallCircleAnimation(start, end) {
+        $({n: start}).animate({n: end}, {
+            duration: 1500,
+            step: function(now, fx) {
+                progressCircles.overall = now;
+            },
+            easing: 'easeOutBounce'
+        });
+    }
+    function playDaysCircleAnimation(start, end) {
+        $({n: start}).animate({n: end}, {
+            duration: 1500,
+            step: function(now, fx) {
+                progressCircles.days = now;
+            },
+            easing: 'easeOutBounce'
+        });
+    }
+
+
+    // GENERATING CIRCULAR CANVAS FROM IMAGE FOR AVATAR
+    function renderAvatar(src, size) {
+        console.log(src);
+        var c = document.getElementsByClassName("portraitHolder")[0];
+        $(c).find('img').remove();
+        $(c).append('<canvas width="70" height="70" id="portraitCanvas">');
+        c = document.getElementById('portraitCanvas');
+        c.width = size+5;
+        c.height = size+5;
+        var ctx = c.getContext("2d");
+        var img = new Image();
+        img.src = src;
+        img.onload = function(){
+            var pattern = ctx.createPattern(img, 'repeat');
+            ctx.beginPath();
+            ctx.arc(size/2+2,
+                    size/2+2,
+                    size/2,
+                0,2*Math.PI);
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = '#364158';
+            ctx.stroke();
+            ctx.fillStyle = pattern;
+            ctx.fill();
+        };
+    }
+    renderAvatar($('.portraitHolder img').attr('src'), 70);
+
+    /************************ NEW PROGRESS CHARTS END ***************************/
 
 	function showScore(curOption) {
-/*        if (!openFrame) openFrame = 'dashboard';
-		openFrame = $('#' + openFrame);*/
+
 		var openFrame = $('#dashboard');
-		circleDays.animate(0,{duration: 1});
-		circleOverall.animate(0,{duration: 1});
 
 		$('section').fadeOut(5);
 		$('footer').css('visibility', 'hidden');
@@ -138,13 +259,15 @@ jQuery(document).ready(function($){
 				addScore(LotteryApp.pointsCurrent);
 				init();
 				/* CIRCLES PROGRESS */
-				circleOverall.animate(LotteryApp.overallProgress, function () {
-					$('.circleDaysSection').animate({'opacity': 1}, 500);
-					circleDays.animate(LotteryApp.daysInRow / LotteryApp.maxDaysInRow, function () {
-						//$('body').scrollTop($('.earningOptions').offset().top - 300)
-						$('html,body').animate({scrollTop: $('.earningOptions').offset().top - 100}, 2000, 'swing');
-					});
-				});
+
+                playOverallCircleAnimation (0, progressCircles.overall_max);
+                setTimeout(function(){
+                    $('.circleDaysSection').animate({'opacity': 1}, 500);
+                    playDaysCircleAnimation (0, progressCircles.days_max);
+                    setTimeout(function(){
+                        $('html,body').animate({scrollTop: $('.earningOptions').offset().top - 100}, 2000, 'swing');
+                    }, 1000);
+                }, 1000);
 
 				$('.daysPercentage').html(LotteryApp.daysInRow + '/' + LotteryApp.maxDaysInRow);
 				showCurOption(curOption);
@@ -153,7 +276,7 @@ jQuery(document).ready(function($){
 	}
 
 	var clickCounter = 0;
-	$('.newCircleDummy').click(function(e) {
+	$('.infoBlock').click(function(e) {
 		var allCirclesInfo = $('.circleSection');
 		var circleToggles = $('.circleToggles li');
 
@@ -169,23 +292,22 @@ jQuery(document).ready(function($){
 				$('#infoOverall').fadeIn(300);
 				circleToggles.removeClass('active');
 				$(circleToggles[0]).addClass('active');
-				circleOverall.animate(LotteryApp.overallProgress, {duration: 1000});
+                playOverallCircleAnimation (0, progressCircles.overall_max);
 				break;
 			case 1:
 				allCirclesInfo.css('display', 'none');
 				$('#infoTickets').fadeIn(300);
 				circleToggles.removeClass('active');
 				$(circleToggles[1]).addClass('active');
-				circleDays.animate(0);
+                playDaysCircleAnimation (progressCircles.days_max, 0);
 				break;
 			case 2:
 				allCirclesInfo.css('display', 'none');
 				$('#infoDays').fadeIn(300);
 				circleToggles.removeClass('active');
 				$(circleToggles[2]).addClass('active');
-				console.log(circleOverall.duration);
-				circleOverall.animate(0, {duration: 800});
-				circleDays.animate(LotteryApp.daysInRow / LotteryApp.maxDaysInRow);
+                playOverallCircleAnimation (progressCircles.overall_max, 0);
+                playDaysCircleAnimation (0, progressCircles.days_max);
 				break;
 		}
 	});
@@ -216,16 +338,15 @@ jQuery(document).ready(function($){
 
 	// Opening DASHBOARD any other time
 	function dashboardOpen() {
-		circleDays.animate(0,{duration: 1});
-		circleOverall.animate(0,{duration: 1});
-
 		addScore(LotteryApp.pointsCurrent);
 		init();
+
 		/* CIRCLES PROGRESS */
-		circleOverall.animate(LotteryApp.overallProgress, function () {
-			$('.circleDaysSection').animate({'opacity': 1}, 500);
-			circleDays.animate(LotteryApp.daysInRow / LotteryApp.maxDaysInRow, function () { });
-		});
+        playOverallCircleAnimation (0, progressCircles.overall_max);
+        setTimeout(function(){
+            $('.circleDaysSection').animate({'opacity': 1}, 500);
+            playDaysCircleAnimation (0, progressCircles.days_max);
+        }, 1000);
 
 		$('.daysPercentage').html(LotteryApp.daysInRow + '/' + LotteryApp.maxDaysInRow);
 
