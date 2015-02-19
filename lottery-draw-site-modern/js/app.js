@@ -20,7 +20,12 @@ jQuery(document).ready(function($){
 			'<div><div><span class="numbers">%H</span><span>hrs</span></div></div>' +
 			'<div><div><span class="numbers">%M</span><span>mins</span></div></div>' +
 			'<div><div><span class="numbers">%S</span><span>secs</span></div></div>'));
-			$('.countdown > div').css('width','20%');
+            if( $(window).width() < 900 ) {
+                $('.countdown > div').css('width','20%');
+            } else {
+                $('.countdown > div').css('width', '24%');
+            }
+
 	});
 	/* CLOCKDOWN TIMER END */
 
@@ -441,6 +446,17 @@ jQuery(document).ready(function($){
 			$.fancybox.close();
 		}, 4000);
 	}
+
+    var uag = window.navigator.userAgent.toLowerCase();
+    if (uag.indexOf("android") > 0){
+        var androidversion = parseFloat(uag.slice(uag.indexOf("android")+8));
+        if (androidversion <= 2.4) {
+            $('.articleMobileImage').width($(window).width() / 2 - 10);
+            $('.greyBoxMobile').width($('.articleMobileImage').width() - 10);
+            $('.draw-wrapper').width($(window).width());
+            $('.draw-wrapper').css('overflow','hidden');
+        }
+    }
 
 	LotteryApp.muteOptionItem('exampleMutedItem');
 	init();
