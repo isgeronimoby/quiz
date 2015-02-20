@@ -217,33 +217,7 @@ jQuery(document).ready(function($){
     }
 
 
-    // GENERATING CIRCULAR CANVAS FROM IMAGE FOR AVATAR
-    function renderAvatar(src, size) {
-        console.log(src);
-        var c = document.getElementsByClassName("portraitHolder")[0];
-        $(c).find('img').remove();
-        $(c).append('<canvas width="70" height="70" id="portraitCanvas">');
-        c = document.getElementById('portraitCanvas');
-        c.width = size+5;
-        c.height = size+5;
-        var ctx = c.getContext("2d");
-        var img = new Image();
-        img.src = src;
-        img.onload = function(){
-            var pattern = ctx.createPattern(img, 'repeat');
-            ctx.beginPath();
-            ctx.arc(size/2+2,
-                    size/2+2,
-                    size/2,
-                0,2*Math.PI);
-            ctx.lineWidth = 5;
-            ctx.strokeStyle = '#364158';
-            ctx.stroke();
-            ctx.fillStyle = pattern;
-            ctx.fill();
-        };
-    }
-    renderAvatar($('.portraitHolder img').attr('src'), 70);
+
 
     /************************ NEW PROGRESS CHARTS END ***************************/
 
@@ -459,5 +433,38 @@ jQuery(document).ready(function($){
     }
 
 	LotteryApp.muteOptionItem('exampleMutedItem');
+
+	// GENERATING CIRCULAR CANVAS FROM IMAGE FOR AVATAR
+	function renderAvatar(src) {
+		var size = document.querySelector('.portraitHolder img').naturalWidth;
+		src = src.attr('src');
+		var c = document.getElementsByClassName("portraitHolder")[0];
+		$(c).find('img').hide();
+		$(c).append('<canvas id="portraitCanvas">');
+		c = document.getElementById('portraitCanvas');
+		c.width = size+5;
+		c.height = size+5;
+		var ctx = c.getContext("2d");
+		var img = document.createElement('IMG');
+		img.onload = function(){
+			var pattern = ctx.createPattern(img, 'no-repeat');
+//            ctx.drawImage(img, size/2+2, size/2+2, 70, 70);
+			ctx.beginPath();
+			ctx.arc(size/2+2,
+					size/2+2,
+					size/2,
+				0,2*Math.PI);
+			ctx.lineWidth = 8;
+			ctx.strokeStyle = '#364158';
+			ctx.stroke();
+			ctx.fillStyle = pattern;
+			ctx.fill();
+		};
+		img.src = src;
+	}
+	$('.portraitHolder img').load(function(){
+		renderAvatar($('.portraitHolder img'));
+	});
+
 	init();
 });
