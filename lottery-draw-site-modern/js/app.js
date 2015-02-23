@@ -25,7 +25,6 @@ jQuery(document).ready(function($){
             } else {
                 $('.countdown > div').css('width', '24%');
             }
-
 	});
 	/* CLOCKDOWN TIMER END */
 
@@ -82,6 +81,9 @@ jQuery(document).ready(function($){
 
 		if ($(window).width() > 900) {
 			$($('#connectFBBox .button')[1]).width($($('#connectFBBox .button')[0]).width()+10);
+			$('.countdown > div').css('width', '24%');
+		} else {
+			$('.countdown > div').css('width','20%');
 		}
 		if ($(window).width() < 600) {
 			if ($(window).width() > $(window).height()) {
@@ -112,7 +114,6 @@ jQuery(document).ready(function($){
 	}
 
     /************************ NEW PROGRESS CHARTS ***************************/
-
     var daysCircleCanvas = document.getElementById('daysCircleProgress');
     var overallCircleCanvas = document.getElementById('overallCircleProgress');
 
@@ -150,7 +151,7 @@ jQuery(document).ready(function($){
         drawProgressCircles();
         canvasHolderSize();
     }
-    function canvasHolderSize() {
+        function canvasHolderSize() {
         $('.canvasHolder').width($(daysCircleCanvas).attr('width'));
         $('.canvasHolder').height($(daysCircleCanvas).attr('height'));
     }
@@ -220,7 +221,6 @@ jQuery(document).ready(function($){
 
 
     /************************ NEW PROGRESS CHARTS END ***************************/
-
 	function showScore(curOption) {
 
 		var openFrame = $('#dashboard');
@@ -448,7 +448,6 @@ jQuery(document).ready(function($){
 		var img = document.createElement('IMG');
 		img.onload = function(){
 			var pattern = ctx.createPattern(img, 'no-repeat');
-//            ctx.drawImage(img, size/2+2, size/2+2, 70, 70);
 			ctx.beginPath();
 			ctx.arc(size/2+2,
 					size/2+2,
