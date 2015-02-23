@@ -51,6 +51,9 @@
     .countdown > div > div {
         padding: 18px 0;
     }
+	.countdown > div {
+		width: 24%;
+	}
     .countdown > div > div span {
         font-size: 14px;
     }

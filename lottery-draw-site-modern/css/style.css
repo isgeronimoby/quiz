@@ -680,7 +680,7 @@ button.close {
 }
 .countdown > div {
     display: inline-block;
-    width: 23%;
+    width: 20%;
 }
 .countdown > div:not(:last-child) {
     padding-right: 4px;
