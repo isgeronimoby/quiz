@@ -919,6 +919,7 @@ button.close {
 }
 .circularChartsGroup .circularPortrait .portraitHolder img{
 	border-radius: 50%;
+	border: 3px solid #364158;
 }
 #infoTickets, #infoDays {
     display: none;
