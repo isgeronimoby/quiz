@@ -164,6 +164,9 @@ img {
 	bottom: 12px;
 	right: 30px;
 }
+.fullwidth {
+	width: 100%;
+}
 /*****   GLOBAL STYLES END   *****/
 
 .draw-container {
