@@ -240,6 +240,19 @@ img {
     color: #eee;
 }
 
+.simpleLink, .simpleLink:active, .simpleLink:focus {
+	display: block;
+	font-weight: 900;
+	text-decoration: none;
+	color: #6EAFFA;
+	padding: 14px 0;
+}
+
+.simpleLink:hover {
+	text-decoration: underline;
+	color: #74defa;
+}
+
 .article {
     margin-top: 10px;
     margin-bottom: -15px;
@@ -336,11 +349,11 @@ img {
     margin-top: 0;
     text-align: center;
 }
-.earningOptions ul li .button > span, .greyBox .button > span {
+.earningOptions ul li .button > span, .greyBox .button > span, .everton-popup-body .button > span {
 	display: inline-block;
 	height: 100%;
 }
-.earningOptions ul li .button > span > span, .greyBox .button > span > span {
+.earningOptions ul li .button > span > span, .greyBox .button > span > span, .everton-popup-body .button > span > span {
 	display: table-cell;
 	vertical-align: middle;
 	height: 53px;
@@ -422,6 +435,12 @@ img {
     text-align: center;
 	background: #364158;
 }
+.everton-popup-container .everton-popup .everton-popup-body .form-group .simpleLink{
+	text-align: left;
+	margin: 20px 0 6px;
+	text-transform: none;
+}
+
 
 .everton-popup-container .everton-popup .everton-popup-body .terms,
 .everton-popup-container .everton-popup .everton-popup-body .terms a{
@@ -600,6 +619,7 @@ button.close {
     box-sizing:border-box;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
+	border-radius: 0;
 }
 
 .everton-popup-container .everton-popup .everton-popup-body .popupForm input[type=submit]{
@@ -725,9 +745,9 @@ button.close {
 .buttonDefault {
     border-style: hidden;
     border-bottom: 5px solid;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 100;
-    padding: 16px;
+    padding: 0 15px;
     height: 55px;
 }
 
@@ -916,9 +936,12 @@ button.close {
 .circularChartsGroup .circularPortrait .portraitHolder canvas {
 	width: 100%;
 	height: auto;
+	max-height: 80px;
 }
 .circularChartsGroup .circularPortrait .portraitHolder img{
 	border-radius: 50%;
+	max-width: 80px;
+	max-height: 80px;
 	border: 3px solid #364158;
 }
 #infoTickets, #infoDays {

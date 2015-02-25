@@ -20,11 +20,6 @@ jQuery(document).ready(function($){
 			'<div><div><span class="numbers">%H</span><span>hrs</span></div></div>' +
 			'<div><div><span class="numbers">%M</span><span>mins</span></div></div>' +
 			'<div><div><span class="numbers">%S</span><span>secs</span></div></div>'));
-            if( $(window).width() < 900 ) {
-                $('.countdown > div').css('width','20%');
-            } else {
-                $('.countdown > div').css('width', '24%');
-            }
 	});
 	/* CLOCKDOWN TIMER END */
 
@@ -81,10 +76,8 @@ jQuery(document).ready(function($){
 
 		if ($(window).width() > 900) {
 			$($('#connectFBBox .button')[1]).width($($('#connectFBBox .button')[0]).width()+10);
-			$('.countdown > div').css('width', '24%');
-		} else {
-			$('.countdown > div').css('width','20%');
 		}
+
 		if ($(window).width() < 600) {
 			if ($(window).width() > $(window).height()) {
 				var maxCircleSize = Math.round($(window).outerHeight() * 0.7);
@@ -461,8 +454,12 @@ jQuery(document).ready(function($){
 		};
 		img.src = src;
 	}
+
 	$('.portraitHolder img').load(function(){
-		renderAvatar($('.portraitHolder img'));
+		setTimeout(function(){
+			renderAvatar($('.portraitHolder img'));
+		}, 300);
+
 	});
 
 	init();

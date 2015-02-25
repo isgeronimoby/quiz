@@ -113,10 +113,11 @@
 			<div class="greyBox curOptionBox" id="connectFBBox">
 				<h3><span class="color-aqua">Earn 5 more tickets</span> by connecting to facebook</h3>
 				<div class="tickets showMobile"><span>+5</span><br/>tickets</div><a href="#" class="button buttonBlue buttonDefault"><span><span>Connect with Facebook</span></span></a>
-
+				<div class="showMobile"><a href="#alreadyMemberPopup" class="simpleLink fancybox">Already a member?</a></div>
 				<div class="showDesktop">
 					<p>we'll never post anything without your permission</p>
 					<a href="#signUpWithEmailPopup" class="button buttonDefault buttonStroke fancybox"><span><span>or sign up with email</span></span></a>
+					<a href="#alreadyMemberPopup" class="simpleLink fancybox">Already a member?</a>
 				</div>
 			</div>
 
@@ -216,7 +217,12 @@
 					<h2 class="popup-heading showMobile">Email yourself a link to install the browser extension on your pc</h2>
 					<h2 class="popup-heading showDesktop">Email yourself a link to install the Everton browser app on your phone</h2>
 				</div>
-				<span class="connectSuccessMessage">SUCCESS!<br/>PLEASE CHECK YOUR EMAIL TO INSTALL THE EVERTON BROWSER APP ON YOUR PHONE</span>
+				<div class="showDesktop">
+					<span class="connectSuccessMessage">SUCCESS!<br/>PLEASE CHECK YOUR EMAIL TO INSTALL THE EVERTON BROWSER APP ON YOUR PHONE</span>
+				</div>
+				<div class="showMobile">
+					<span class="connectSuccessMessage">SUCCESS!<br/>PLEASE CHECK YOUR EMAIL TO INSTALL THE EVERTON BROWSER EXTENSION ON YOUR PC</span>
+				</div>
 				<form method="post" class="popupForm login-form" id="connectDeviceForm" action="index.html?lang=en">
 					<div class="form-group email-group">
 						<label for="email" class="strong">Enter your email</label>
@@ -226,8 +232,8 @@
 					<button type="submit" class="button buttonDefault buttonYellow"><i></i>
 						<span class="align-wrapp">
 							<span>
-								<span class="showMobile">Send email</span>
-								<span class="showDesktop">Send email</span>
+								<span class="showMobile">Get Everton PC extension</span>
+								<span class="showDesktop">Get the Everton Browser app on your phone</span>
 							</span>
 						</span></button>
 				</form>
@@ -281,6 +287,53 @@
 				</form>
 				<!-- // Form END -->
 				<p class="terms no-transform">By signing up to Everton Rewards I agree to the <a class="no-transform" href="/terms-and-conditions.html">Terms and Conditions</a></p>
+			</div>
+			<!-- // Box END -->
+		</div>
+	</div>
+</div>
+
+
+<div class="everton-amazing-popups">
+	<div id="alreadyMemberPopup" class="everton-popup-container">
+		<div class="everton-popup">
+			<div class="everton-popup-header">
+				<a href="#" class="everton-popup-close">&times;</a>
+				<div class="everton-popup-clearfix"></div>
+			</div>
+			<!-- Box -->
+			<div class="everton-popup-body popupInner">
+				<h2>Sign in</h2>
+				<!-- Alert -->
+				<div class="alert alert-danger">
+					<button data-dismiss="alert" class="close" type="button">&times;</button>
+					<strong>Warning!</strong>
+					<div data-valmsg-summary="true" class="validation-summary-errors">
+						<ul><li>Email is required.</li>
+							<li>Some other error.</li>
+						</ul>
+					</div>
+				</div>
+				<!-- // Alert END -->
+				<!-- Form -->
+				<form method="post" class="popupForm login-form" id="signInForm" action="index.html?lang=en">
+					<div class="form-group email-group">
+						<label for="email" class="strong">Email address</label>
+						<input type="text" id="emailRegistered" name="email"
+							   class="input-block-level form-control" placeholder="john@example.com"/>
+					</div>
+					<div class="form-group">
+						<label for="password" class="strong">Password</label>
+						<input type="password" id="passwordRegistered" name="password"
+							   class="input-block-level form-control" placeholder="Your Password"/>
+					</div>
+					<div class="form-group">
+						<a href="#forgot" class="simpleLink">Forgot password?</a>
+					</div>
+					<button type="submit" class="button buttonDefault buttonYellow"><i></i>
+						<span class="align-wrapp"><span>SIGN IN</span></span></button>
+				</form>
+				<!-- // Form END -->
 			</div>
 			<!-- // Box END -->
 		</div>

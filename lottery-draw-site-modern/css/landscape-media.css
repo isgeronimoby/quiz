@@ -51,9 +51,6 @@
     .countdown > div > div {
         padding: 18px 0;
     }
-	.countdown > div {
-		width: 24%;
-	}
     .countdown > div > div span {
         font-size: 14px;
     }
@@ -115,6 +112,10 @@
         min-width: 350px;
     }
 
+	.simpleLink, .simpleLink:active, .simpleLink:focus {
+		padding: 0;
+	}
+
     .footer {
 		padding: 0 20px;
     }
@@ -134,5 +135,11 @@
 	#aboutContainer {
 		max-width: 920px;
 		margin-left: -10px;
+	}
+}
+
+@media all and (min-width: 1025px) {
+	.countdown > div {
+		width: 24%;
 	}
 }
