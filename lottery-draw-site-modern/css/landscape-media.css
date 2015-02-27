@@ -1,6 +1,6 @@
 @media all and (min-width:900px) {
     h3 {
-        font-size: 16px;
+        font-size: 15px;
     }
     h1 {
         font-size: 30px;
@@ -47,7 +47,9 @@
         float: left;
         width: 41%;
         max-height: 108px;
-    }
+    
+        display: table;
+}
     .countdown > div > div {
         padding: 18px 0;
     }
@@ -63,6 +65,7 @@
         text-align: right;
         margin-top: 5px;
         max-height: 108px;
+        height: 108px;
         overflow: hidden;
     }
     .staticTop .showDesktop .greyBox{
