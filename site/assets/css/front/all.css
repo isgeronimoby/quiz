@@ -3226,7 +3226,14 @@ body .datepicker .datepicker-days .table-condensed {
 
  .profile-content .send-sum .jq-selectbox__dropdown {
 	border-color: white !important;
-	 max-height: 400px !important;
+	max-height: 400px !important;
+    bottom: auto !important;
+    top: auto !important;
+     overflow: auto;
+}
+.profile-content .send-sum .jq-selectbox__dropdown ul{
+    max-height: 300px !important;
+    overflow: auto;
 }
 
 .send-sum .jq-selectbox__select-text,
