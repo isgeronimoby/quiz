@@ -36,11 +36,10 @@ function initCarousel() {
         pauseOnHover: false,
         autoRotation: true,
         maskAutoSize: false,
-        switchTime: 3000,
+        switchTime: 300,
         animSpeed: 500,
         step: 1
     });
-
 
 }
 
@@ -98,6 +97,7 @@ function initCarousel() {
                 this.refreshState(true);
                 this.resumeRotation();
                 this.makeCallback('onInit', this);
+                this.onWindowResize();
             }
         },
         findElements: function() {
@@ -234,7 +234,8 @@ function initCarousel() {
                 this.refreshPosition();
                 this.buildPagination();
                 this.refreshState();
-                this.resizeQueue = false;
+                // Changed both resize to be true, to refresh slider
+                this.resizeQueue = true;
             } else {
                 this.resizeQueue = true;
             }
@@ -254,7 +255,10 @@ function initCarousel() {
 
             this.maskSize = this.mask[this.innerSizeFunction]();
             this.sumSize = this.getSumSize();
-            this.maxOffset = this.maskSize - this.sumSize;
+
+            //TODO: check window size for ex.: "this.maxOffset = this.maskSize - this.sumSize + window.innerWidth - 250"
+            this.maxOffset = this.maskSize - this.sumSize ;
+            console.log(this.maxOffset);
 
             // vertical gallery with single size step custom behavior
             if(this.options.vertical && this.options.maskAutoSize) {
@@ -464,7 +468,6 @@ function initCarousel() {
             }
         }
     }
-
     // detect device type
     var isTouchDevice = (function() {
         try {
