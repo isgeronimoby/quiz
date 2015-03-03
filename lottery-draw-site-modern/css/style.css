@@ -97,7 +97,7 @@ img {
     vertical-align: middle;
     border: 0 none;
 	
-    /* max-width: 100%; */
+    max-width: 100%;
 }
 .img-responsive, .article > .articleImage img.img-responsive {
 	width: 100%;
@@ -301,6 +301,7 @@ img {
     width: auto;
     height: 100%;
     /* max-height: 108px; */
+    max-width: initial;
 }
 .article > .greyBox {
     text-align: left;
