@@ -36,7 +36,7 @@ function initCarousel() {
         pauseOnHover: false,
         autoRotation: true,
         maskAutoSize: false,
-        switchTime: 300,
+        switchTime: 3000,
         animSpeed: 500,
         step: 1
     });
