@@ -131,10 +131,10 @@ img {
 	margin: 0 auto -40px;
     text-align: center;
 }
-.showDesktop {
+.showDesktop, .showDesktopBlock {
     display: none;
 }
-.showMobile {
+.showMobile, .showMobileBlock {
     display: inline-block;
 }
 
@@ -1110,6 +1110,16 @@ button.close {
     .earningOptions ul li .buttonStroke {
         width: 55%;
     }
+}
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)  {
+	.showDesktop {
+		display: none;
+	}
+	.showMobile {
+		display: inline-block;
+	}
 }
 /*****   MEDIA QUERIES END *****/
 

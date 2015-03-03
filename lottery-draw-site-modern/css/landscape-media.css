@@ -34,10 +34,10 @@
     #connectFBBox {
         opacity: 1;
     }
-    .showDesktop {
+    .showDesktopBlock {
         display: inline-block;
     }
-    .showMobile {
+    .showMobileBlock {
         display: none !important;
     }
     .staticTop {
@@ -59,7 +59,7 @@
     .countdown > div > div span.numbers {
         font-size: 32px;
     }
-    .staticTop .showDesktop {
+    .staticTop .showDesktopBlock {
         float: right;
         width: 58%;
         text-align: right;
@@ -68,12 +68,12 @@
         height: 108px;
         overflow: hidden;
     }
-    .staticTop .showDesktop .greyBox{
+    .staticTop .showDesktopBlock .greyBox{
         float: none;
         width: 68%;
         margin-left: 6px;
     }
-    .staticTop .showDesktop .articleImage{
+    .staticTop .showDesktopBlock .articleImage{
         width: 30%;
         /*float: none;*/
     }
@@ -144,5 +144,11 @@
 @media all and (min-width: 1025px) {
 	.countdown > div {
 		width: 24%;
+	}
+	.showDesktop {
+		display: inline-block;
+	}
+	.showMobile {
+		display: none !important;
 	}
 }
