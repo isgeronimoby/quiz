@@ -17,7 +17,7 @@
 			idSuffix: '-styler',
 			filePlaceholder: 'Файл не выбран',
 			fileBrowse: 'Обзор...',
-			selectSearch: true,
+			selectSearch: false,
 			selectSearchLimit: 10,
 			selectSearchNotFound: 'Совпадений не найдено',
 			selectSearchPlaceholder: 'Поиск...',
