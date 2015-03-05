@@ -1155,3 +1155,73 @@ canvas {
     vertical-align: middle;
     max-width: 60%;
 }
+
+/******** STYLES FOR EXTENSIONS NOTIFICATIONS *********/
+
+.extension-notification {
+	display: none;
+}
+
+.extension-notification .extension-overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.5);
+}
+
+.extension-notification .extension-overlay .extension-notification-holder {
+	display: inline-block;
+	position: relative;
+}
+.extension-notification .extension-overlay .extension-notification-holder.winChrome {
+	top: 285px;
+	left: 50%;
+	transform: translate(-50%);
+	-webkit-transform: translate(-50%);
+}
+.extension-notification .extension-overlay .extension-notification-holder.winFF {
+	left: 0;
+	top: 110px;
+}
+
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body {
+	position: relative;
+	text-align: center;
+	background: #23279c;
+	display: inline-block;
+	border-bottom: 12px solid #1b217d;
+	padding: 22px 50px;
+	margin-top: 65px;
+}
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body h2{
+	color: #ffffff;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-bottom: 30px;
+}
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body img{
+	display: inline-block;
+}
+
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow {
+	background: url('../images/arrow_top.png') no-repeat;
+	width: 53px;
+	height: 70px;
+	background-size: cover;
+
+	position: absolute;
+	top: -70px;
+}
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow.winChrome {
+	right: 145px;
+}
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow.winFF {
+	right: 135px;
+}
+@media all and (max-width:460px) {
+	.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow {
+		display: none;
+	}
+}
