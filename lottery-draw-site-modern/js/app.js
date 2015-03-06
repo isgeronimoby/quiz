@@ -72,9 +72,13 @@ jQuery(document).ready(function($){
 		// At least Safari 3+: "[object HTMLElementConstructor]"
 		var isChrome = !!window.chrome && !isOpera;              // Chrome 1+
 		var isIE = /*@cc_on!@*/false || !!document.documentMode;   // At least IE6
-		// TODO: add showDesktop here
+		//show elements if desktop detected
+		$('.showDesktop').css('display','inline-block');
+		$('.showMobile').css('display','none');
 	} else {
-		//TODO: add showMobile here
+		//show elements if mobile detected
+		$('.showMobile').css('display','inline-block');
+		$('.showDesktop').css('display','none');
 	}
 	/*********** END OF CHECKING ***********/
 

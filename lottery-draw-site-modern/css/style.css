@@ -131,10 +131,10 @@ img {
 	margin: 0 auto -40px;
     text-align: center;
 }
-.showDesktop, .showDesktopBlock {
+.showDesktopBlock {
     display: none;
 }
-.showMobile, .showMobileBlock {
+.showMobileBlock {
     display: inline-block;
 }
 
@@ -1114,12 +1114,12 @@ button.close {
 @media only screen
 and (min-device-width : 768px)
 and (max-device-width : 1024px)  {
-	.showDesktop {
+/*	.showDesktop {
 		display: none;
 	}
 	.showMobile {
 		display: inline-block;
-	}
+	}*/
 }
 /*****   MEDIA QUERIES END *****/
 

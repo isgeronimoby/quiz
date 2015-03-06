@@ -145,10 +145,4 @@
 	.countdown > div {
 		width: 24%;
 	}
-	.showDesktop {
-		display: inline-block;
-	}
-	.showMobile {
-		display: none !important;
-	}
 }
