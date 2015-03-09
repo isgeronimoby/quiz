@@ -44,14 +44,12 @@ body{
 }
 
 img {
-    outline:none;
-    text-decoration:none;
-    -ms-interpolation-mode: bicubic;
-    width: auto;
-    max-width: 100%;
-    float: left;
-    clear: both;
-    display: block;
+	outline:none;
+	text-decoration:none;
+	-ms-interpolation-mode: bicubic;
+	width: auto;
+	display: block;
+	float: left;
 }
 
 center {
@@ -145,6 +143,11 @@ td.sub-column, td.sub-columns {
 table.row td.last,
 table.container td.last {
     padding-right: 0px;
+}
+
+table.container table.row table.twelve img {
+	width: 100%;
+	float: none;
 }
 
 table.one { width: 30px; }
@@ -867,13 +870,22 @@ body.outlook p {
                                 </tr>
                             </table>
 
-                            <table style="width:100%;">
-                                <tr>
-                                    <td style="padding-top:10px;padding-left:10px;padding-right:10px;padding-bottom:0;position:relative;">
-                                        <img style="width:100%;" src="http://football.cool-link.com/emailImages/everton-training.jpg" />
-                                    </td>
-                                </tr>
-                            </table>
+							<table class="row">
+								<tr>
+									<td class="wrapper last">
+
+										<table class="twelve columns">
+											<tr>
+												<td>
+													<img src="http://football.cool-link.com/emailImages/everton-training.jpg" />
+												</td>
+												<td class="expander"></td>
+											</tr>
+										</table>
+
+									</td>
+								</tr>
+							</table>
 
                             <table class="row callout">
                                 <tr>
