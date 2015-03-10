@@ -5499,18 +5499,7 @@ body .n-found .ie-true,
 /****************************************************************/
 /* Custom visibility */
 /****************************************************************/
-.show-mobile {
-	display: none;
-}
-.show-desktop {
+.shown {
 	display: inherit;
 }
 
-@media all and (max-width: 1024px) {
-	.show-desktop {
-		display: none;
-	}
-	.show-mobile {
-		display: inherit;
-	}
-}

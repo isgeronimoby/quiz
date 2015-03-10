@@ -138,6 +138,13 @@ img {
     display: inline-block;
 }
 
+.hidden {
+	display: none;
+}
+.shown {
+	display: inline-block;
+}
+
 .allCenterHolder {
 	display: inline-block;
 	height: 100%;
