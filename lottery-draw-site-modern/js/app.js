@@ -73,10 +73,11 @@ jQuery(document).ready(function ($) {
 		if (uag.indexOf("android") > 0) {
 			var androidversion = parseFloat(uag.slice(uag.indexOf("android") + 8));
 			if (androidversion <= 2.4) {
-				$('.articleMobileImage').width($(window).width() / 2 - 10);
-				$('.greyBoxMobile').width($('.articleMobileImage').width() - 10);
+//				$('.articleMobileImage').width($(window).width() / 2 - 10);
+//				$('.greyBoxMobile').width($('.articleMobileImage').width() - 10);
 				$('.draw-wrapper').width($(window).width());
 				$('.draw-wrapper').css('overflow', 'hidden');
+				$('.thinLink h3').css('font-size','12px');
 			}
 		}
 	}
