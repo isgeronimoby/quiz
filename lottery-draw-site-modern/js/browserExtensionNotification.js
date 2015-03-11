@@ -1,3 +1,4 @@
+var showExtensionPopupFunc;
 $(function(){
 	if (!window.mobilecheck()) {
 		var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
@@ -8,9 +9,7 @@ $(function(){
 		var isChrome = !!window.chrome && !isOpera;              // Chrome 1+
 		var isIE = /*@cc_on!@*/false || !!document.documentMode;   // At least IE6
 
-		currentPlatform = "desktop";
-	} else {
-		currentPlatform = "mobile";
+		var isMac = navigator.platform.toUpperCase().indexOf('MAC')>=0;
 	}
 
 	/*********** SHOW NOTIFICATIONS FOR EXTENSIONS ***********/
@@ -23,7 +22,11 @@ $(function(){
 		if ( isChrome || isFirefox ) {
 			if ( isChrome ) {
 				notificationPopup.removeClass('winFF').addClass('winChrome');
-				notifPopupArrow.removeClass('winFF').addClass('winChrome');
+				if (!isMac) {
+					notifPopupArrow.removeClass('winFF').removeClass('macChrome').addClass('winChrome');
+				} else { // Chrome on Mac
+					notifPopupArrow.removeClass('winFF').removeClass('winChrome').addClass('macChrome');
+				}
 			} else { // is Firefox
 				notificationPopup.removeClass('winChrome').addClass('winFF');
 				notifPopupArrow.removeClass('winChrome').addClass('winFF');
@@ -33,6 +36,6 @@ $(function(){
 		}
 	}
 
-	showExtensionPopup();
+	showExtensionPopupFunc = showExtensionPopup;
 });
 /*********** END OF NOTIFICATIONS ***********/

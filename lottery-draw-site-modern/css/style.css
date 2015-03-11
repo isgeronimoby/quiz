@@ -999,6 +999,14 @@ button.close {
 	line-height: 30px;
 	margin-bottom: 30px;
 }
+.sectionLayout.embarassing{
+	max-width: 500px;
+	margin: 0 auto;
+}
+.sectionLayout > .extraPage > h1.embarassing{
+	margin-top: 50px;
+	line-height: 40px;
+}
 .sectionLayout > .extraPage > h2{
 	font-size: 18px;
 	font-weight: 900;
@@ -1012,6 +1020,19 @@ button.close {
 	font-size: 16px;
 	text-transform: none;
 	color: #71a5cf;
+}
+.sectionLayout.embarassing > .extraPage > p {
+	margin-bottom: 50px;
+}
+.sectionLayout > .extraPage > p a{
+	font-size: 16px;
+	text-transform: none;
+	text-decoration: underline;
+	color: #71a5cf;
+}
+.sectionLayout > .extraPage > .button {
+	line-height: 55px;
+	margin: 30px 0;
 }
 .sectionLayout > .additionalContent{
 	margin-top: 20px;
@@ -1194,6 +1215,7 @@ canvas {
 	transform: translate(-50%);
 	-webkit-transform: translate(-50%);
 }
+
 .extension-notification .extension-overlay .extension-notification-holder.winFF {
 	left: 0;
 	top: 110px;
@@ -1229,6 +1251,9 @@ canvas {
 }
 .extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow.winChrome {
 	right: 145px;
+}
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow.macChrome {
+	right: 50px;
 }
 .extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow.winFF {
 	right: 135px;
