@@ -260,6 +260,9 @@ img {
     background-color: #364158;
     width: 100%;
 }
+.greyBox.greyBoxMobile{
+	padding: 20px;
+}
 
 .thinLink {
     text-transform: none;
@@ -317,7 +320,9 @@ img {
 .article > .greyBox h3 {
 	text-align: center;
 }
-
+.article.showMobileBlock{
+	background: #364158;
+}
 .earningOptions {
     width: 100%;
     margin: 0;
@@ -1180,7 +1185,8 @@ canvas {
 
 .extension-notification .extension-overlay .extension-notification-holder {
 	display: inline-block;
-	position: relative;
+	position: absolute;
+	min-width: 300px;
 }
 .extension-notification .extension-overlay .extension-notification-holder.winChrome {
 	top: 285px;

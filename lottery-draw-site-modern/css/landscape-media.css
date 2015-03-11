@@ -110,6 +110,9 @@
     .optionsGroup h3 {
         font-size: 26px;
     }
+	.optionsGroup .thinLink h3 {
+		font-size: 20px;
+	}
     .optionsGroup .greyBox .button {
         margin: 30px 0;
         min-width: 350px;

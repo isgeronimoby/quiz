@@ -53,11 +53,11 @@ jQuery(document).ready(function ($) {
 
 
 	function init() {
-		$('.article > .greyBoxMobile').height($('.article >  .articleMobileImage').outerHeight() - 20);
 		$('.article > .greyBoxDesktop').height($('.article >  .articleImageDesktop').outerHeight());
-
 		if ($(window).width() > 900) {
 			$($('#connectFBBox .button')[1]).width($($('#connectFBBox .button')[0]).width() + 10);
+		} else {
+
 		}
 
 		if ($(window).width() < 600) {
