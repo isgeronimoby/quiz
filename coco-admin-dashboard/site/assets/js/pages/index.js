@@ -12,6 +12,7 @@ $(document).ready(function(){
         120.71,
         300.32
     ];
+
     $('#vector-map').vectorMap({
         map: 'world_mill_en',
         normalizeFunction: 'polynomial',
@@ -72,7 +73,8 @@ $(document).ready(function(){
         }
     });
 
-	$('#reportrange').daterangepicker(
+	var datePicker = $('#reportrange');
+	datePicker.daterangepicker(
 		{
 			ranges: {
 				'Today': [moment(), moment()],
@@ -86,9 +88,35 @@ $(document).ready(function(){
 			endDate: moment()
 		},
 		function(start, end) {
-			$('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+			datePicker.find('span').html('From: ' + '<span class="startDate">' + start.format('MMMM D, YYYY') + '</span>'
+			+ ' to ' + '<span class="endDate">' + end.format('MMMM D, YYYY') + '</span>');
 		}
 	);
+	datePicker.on('apply.daterangepicker', function(ev, picker) {
+		console.log(picker.startDate.format('YYYY-MM-DD'));
+		console.log(picker.endDate.format('YYYY-MM-DD'));
+	});
+
+	// SORTABLE ELEMENTS -> UNCOMMENT AJAX TO SEND POSITIONS
+	$( ".portlets" ).sortable({
+		connectWith: ".portlets",
+		handle: ".widget-header",
+		cancel: ".modal-widget",
+		opacity: 0.5,
+		dropOnEmpty: true,
+		forcePlaceholderSize: true,
+		receive: function(event, ui) {$("body").trigger("resize")},
+		update: function (event, ui) {
+			var data = $(this).sortable('serialize');
+			console.log(data);
+			// POST to server using $.post or $.ajax
+			/*		$.ajax({
+			 data: data,
+			 type: 'POST',
+			 url: '/your/url/here'
+			 });*/
+		}
+	});
 
   load_charts();
 });
@@ -96,7 +124,6 @@ $(document).ready(function(){
 
 function reload_charts(){
   	window.morrisLineGraphic.redraw();
-
 }
 
 

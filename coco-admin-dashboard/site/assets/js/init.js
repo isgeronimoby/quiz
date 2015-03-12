@@ -40,7 +40,7 @@ var changeptype = function(){
 
 	}
 	toggle_slimscroll(".slimscrollleft");
-}
+};
 
 $(document).ready(function(){
 	FastClick.attach(document.body);
@@ -50,7 +50,7 @@ $(document).ready(function(){
 
 	$('.animate-number').each(function(){
 		$(this).animateNumbers($(this).attr("data-value"), true, parseInt($(this).attr("data-duration"))); 
-	})
+	});
 
 //TOOLTIP
 $('body').tooltip({
@@ -61,11 +61,11 @@ $('body').tooltip({
 //RESPONSIVE SIDEBAR
 
 
-$(".open-right").click(function(e){
+/*$(".open-right").click(function(e){
 	$("#wrapper").toggleClass("open-right-sidebar");
 	e.stopPropagation();
 	$("body").trigger("resize");
-});
+});*/
 
 
 $(".open-left").click(function(e){
@@ -169,28 +169,6 @@ $(document).on("click", ".widget-header .widget-popout", function(event){
   },300);
 });
 
-$("a[data-app]").each(function(e){
-    var app = $(this).data("app");
-    var status = $(this).data("status");
-    $("#"+app).data("is-app",true);
-    if(status == "inactive"){
-      $("#"+app).hide();
-      $(this).addClass("clickable");
-    }
-});
-
-$(document).on("click", "a[data-app].clickable", function(event){
-    event.preventDefault();
-    $(this).removeClass("clickable");
-    var app = $(this).data("app");
-    $("#"+app).show();
-    $("#"+app+" .widget-popout").click();
-    topd = $("#"+app).offset().top - $(window).scrollTop();
-    $("#"+app).css({"left":"10","top":-(topd-60)+"px"}).addClass("fadeInDown animated");
-    window.setTimeout(function () {
-      $("#"+app).removeClass("fadeInDown animated");
-    }, 300);
-});
 
 $(document).on("click", ".widget", function(){
     if($(this).hasClass("modal-widget")){
@@ -217,18 +195,6 @@ $(document).on("click", ".widget-header .widget-maximize", function(event){
     return false;
 });
 
-$( ".portlets" ).sortable({
-    connectWith: ".portlets",
-    handle: ".widget-header",
-    cancel: ".modal-widget",
-    opacity: 0.5,
-    dropOnEmpty: true,
-    forcePlaceholderSize: true,
-    receive: function(event, ui) {$("body").trigger("resize")}
-});
-
-// Init Code Highlighter
-prettyPrint();
 
 //RUN RESIZE ITEMS
 $(window).resize(debounce(resizeitems,100));
@@ -240,7 +206,6 @@ $('.selectpicker').selectpicker();
 
 //FILE INPUT
 $('input[type=file]').bootstrapFileInput();
-
 
 });
 
@@ -258,7 +223,7 @@ var debounce = function(func, wait, immediate) {
     if (callNow) result = func.apply(context, args);
     return result;
   };
-}
+};
 
 function resizeitems(){
   if($.isArray(resizefunc)){  

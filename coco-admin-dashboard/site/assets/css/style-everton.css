@@ -5708,9 +5708,21 @@ footer .footer-links a:last-child {
 /* REPORT */
 .report-heading {
   margin-bottom: 15px;
+  background: #ffffff;
+  padding: 10px 20px;
+  border-radius: 2px;
 }
 .report-heading i {
   margin-right: 5px;
+}
+.report-heading span.startDate {
+  font-weight: bold;
+  padding: 0 6px;
+}
+.report-heading span.endDate {
+  font-weight: bold;
+  padding: 0 6px;
+  color: #00369c;
 }
 /* BOOTSTRAP OVERRIDES */
 .navbar-default .navbar-nav > li > a {
