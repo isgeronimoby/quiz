@@ -5118,9 +5118,6 @@ section.step {
 #home-chart-2 {
   margin-top: 24px;
 }
-.morris-chart svg {
-  width: 100% !important;
-}
 .statistic-chart-dark h4 {
   color: #ffffff;
 }
@@ -5736,6 +5733,9 @@ footer .footer-links a:last-child {
   color: #afb3bf;
 }
 /* CUSTOM CHARTS */
+.morris-hover {
+  z-index: 5;
+}
 .morrisCharts h4 {
   margin-left: 10px;
   font-size: 16px;
@@ -5757,4 +5757,10 @@ footer .footer-links a:last-child {
 .morrisCharts.morrisChartsDark svg text tspan {
   fill: #e6e6e6;
   stroke-width: 0;
+}
+.morris-chart {
+  min-height: 370px;
+}
+.amcharts-main-div a[title="JavaScript charts"] {
+  display: none !important;
 }

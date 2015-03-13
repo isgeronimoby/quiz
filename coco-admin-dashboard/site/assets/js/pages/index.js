@@ -1,26 +1,30 @@
-var timer;
+var dashboardCharts = {};
 
 $(document).ready(function(){
-      var cityAreaData = [
-        500.70,
-        410.16,
-        210.69,
-        120.17,
-        64.31,
-        150.35,
-        130.22,
-        120.71,
-        300.32
-    ];
+	var vectorMapObject = $('#vector-map');
 
-    $('#vector-map').vectorMap({
+	dashboardCharts.vectorMapData = [
+		[
+			{latLng: [35.85, -77.88], name: 'Rocky Mt,NC - ' + 10000 + ' users'},
+			{latLng: [32.90, -97.03], name: 'Dallas/FW,TX - ' + 700 + ' users'},
+			{latLng: [41.00, 28.96], name: 'Istanbul, TR - ' + 350 + ' users'},
+			{latLng: [39.37, -75.07], name: 'Millville,NJ - ' + 5000 + ' users'}
+		],
+		[
+			10000,
+			700,
+			350,
+			5000]
+	];
+
+	vectorMapObject.vectorMap({
         map: 'world_mill_en',
         normalizeFunction: 'polynomial',
         zoomOnScroll:true,
         focusOn:{
-            x: 0,
-            y: 0,
-            scale: 0.9
+            x: 0.5,
+            y: 0.4,
+            scale: 4
         },
         zoomMin:0.9,
         hoverColor: false,
@@ -43,7 +47,7 @@ $(document).ready(function(){
                 "fill-opacity": 1,
                 "stroke-width": 9,
                 "stroke-opacity": 0.5,
-                r: 3
+                r: 4
             },
             hover: {
                 stroke: 'black',
@@ -56,22 +60,29 @@ $(document).ready(function(){
             }
         },
         backgroundColor: '#ffffff',
-        markers :[
-
-            {latLng: [35.85, -77.88], name: 'Rocky Mt,NC'},
-            {latLng: [32.90, -97.03], name: 'Dallas/FW,TX'},
-            {latLng: [41.00, 28.96], name: 'Istanbul, TR'},
-            {latLng: [39.37, -75.07], name: 'Millville,NJ'}
-
-        ],
+        markers: dashboardCharts.vectorMapData[0],
         series: {
             markers: [{
                 attribute: 'r',
-                scale: [3, 7],
-                values: cityAreaData
+				scale: [4, 15],
+				min: jvm.min(dashboardCharts.vectorMapData[1]),
+				max: jvm.max(dashboardCharts.vectorMapData[1]),
+                values: dashboardCharts.vectorMapData[1]
             }]
-        }
+		}
     });
+
+	dashboardCharts.updateVectorMap = function() {
+		dashboardCharts.vectorMap = vectorMapObject.vectorMap('get', 'mapObject');
+		dashboardCharts.vectorMap.removeAllMarkers();
+		dashboardCharts.vectorMap.addMarkers(dashboardCharts.vectorMapData[0]);
+		dashboardCharts.vectorMap.series.markers[0].setValues(dashboardCharts.vectorMapData[1]);
+		dashboardCharts.vectorMap.series.markers[0].scale.setMin(jvm.min(dashboardCharts.vectorMapData[1]));
+		dashboardCharts.vectorMap.series.markers[0].scale.setMax(jvm.max(dashboardCharts.vectorMapData[1]));
+		dashboardCharts.vectorMap.series.markers[0].setNormalizeFunction('linear');
+	};
+
+	dashboardCharts.updateVectorMap();
 
 	var datePicker = $('#reportrange');
 	datePicker.daterangepicker(
@@ -123,60 +134,61 @@ $(document).ready(function(){
 
 
 function reload_charts(){
-  	window.morrisLineGraphic.redraw();
+	dashboardCharts.overallLineChart.validateData(); // call this method after data in graphic changed
+	dashboardCharts.appInstallsFrom.draw();
+	dashboardCharts.extInstallsBrowser.draw();
+	dashboardCharts.updateVectorMap();
 }
 
-
+dashboardCharts.overallLineChartData = [
+	{
+		"date": "2014-01-28",
+		"ios": 8,
+		"android": 5
+	},
+	{
+		"date": "2014-01-29",
+		"ios": 6,
+		"android": 7
+	},
+	{
+		"date": "2014-01-30",
+		"ios": 2,
+		"android": 3
+	},
+	{
+		"date": "2014-02-01",
+		"ios": 1,
+		"android": 3
+	},
+	{
+		"date": "2014-02-02",
+		"ios": 2,
+		"android": 1
+	},
+	{
+		"date": "2014-02-03",
+		"ios": 3,
+		"android": 2
+	},
+	{
+		"date": "2014-02-04",
+		"ios": 6,
+		"android": 8
+	}
+];
 // LINE BAR
 function load_charts(){
-    //MORRIS
-    window.morrisLineGraphic = Morris.Line({
-        element: 'morris-home',
-        padding: 20,
-        behaveLikeLine: true,
-        gridEnabled: false,
-        gridLineColor: '#dddddd',
-        axes: true,
-        resize: true,
-        smooth: false,
-        pointSize: 3,
-        lineWidth: 2,
-        fillOpacity:0.85,
-        data: [
-          {period: '2012-02-11', iphone: 4666, ipad: 3666, itouch: 2666},
-          {period: '2012-02-12', iphone: 4441, ipad: 3441, itouch: 2441},
-          {period: '2012-02-13', iphone: 16501, ipad: 14501, itouch: 3501},
-          {period: '2012-02-14', iphone: 7689, ipad: 6689, itouch: 5689},
-          {period: '2012-02-15', iphone: 4666, ipad: 3666, itouch: 2666},
-          {period: '2012-02-16', iphone: 4441, ipad: 3441, itouch: 2441},
-          {period: '2012-02-17', iphone: 6501, ipad: 4501, itouch: 2501},
-          {period: '2012-02-18', iphone: 7689, ipad: 6689, itouch: 5689},
-          {period: '2012-02-19', iphone: 2293, ipad: 1293, itouch: 293},
-          {period: '2012-02-20', iphone: 5881, ipad: 3881, itouch: 1881},
-          {period: '2012-02-21', iphone: 5588, ipad: 3588, itouch: 1588},
-          {period: '2012-02-22', iphone: 15073, ipad: 8967, itouch: 5175},
-          {period: '2012-02-23', iphone: 10687, ipad: 4460, itouch: 2028},
-          {period: '2012-02-24', iphone: 12432, ipad: 5713, itouch: 3791}
-        ],
-        lineColors:['#abb7b7','#ABC8E2','#183152'],
-        xkey: 'period',
-        redraw: true,
-        ykeys: ['iphone', 'ipad', 'itouch'],
-        labels: ['All Visitors', 'Returning Visitors'],
-        hideHover: 'auto'
-    });
-
 
 	var chartColors = ["#679BDF","#edce8c","#afb3bf"];
 
-	window.appInstallsFrom = Morris.Bar({
+	dashboardCharts.appInstallsFrom = Morris.Bar({
 		element: 'app-installs-from',
 		resize: true,
 		data: [
 			{ platform: 'iOS', facebook: 45,  emails: 25, annonymous: 40 },
 			{ platform: 'Android', facebook: 17,  emails: 40, annonymous: 30 },
-			{ platform: 'WinPhone', facebook: 75,  emails: 15, annonymous: 35 },
-			{ platform: 'BlackBerry', facebook: 50,  emails: 36, annonymous: 24 }
+			{ platform: 'WinPhone', facebook: 75,  emails: 15, annonymous: 35 }
 		],
 		xkey: 'platform',
 		ykeys: ['facebook', 'emails', 'annonymous'],
@@ -184,7 +196,7 @@ function load_charts(){
 		barColors: chartColors
 	});
 
-	window.extInstallsBrowser = Morris.Bar({
+	dashboardCharts.extInstallsBrowser = Morris.Bar({
 		element: 'ext-installs-from-browser',
 		resize: true,
 		data: [
@@ -199,5 +211,74 @@ function load_charts(){
 		labels: ['Facebook', 'Emails', 'Annon'],
 		barColors: chartColors
 	});
+
+	dashboardCharts.overallLineChart = AmCharts.makeChart("amchart-line-graphic",
+		{
+			"type": "serial",
+			"pathToImages": "http://cdn.amcharts.com/lib/3/images/",
+			"categoryField": "date",
+			"columnWidth": 1,
+			"dataDateFormat": "YYYY-MM-DD",
+			"mouseWheelScrollEnabled": false,
+			"startDuration": 0.7,
+			"startEffect": "easeOutSine",
+			"theme": "light",
+			"categoryAxis": {
+				"minPeriod": "DD",
+				"parseDates": true
+			},
+			"chartCursor": {
+				"categoryBalloonDateFormat": "MMM YYYY",
+				"fullWidth": true,
+				"valueLineAlpha": 0,
+				"valueLineBalloonEnabled": true,
+				"color": "#ffffff",
+				"cursorAlpha": 0.3,
+				"cursorColor": "#00369c"
+			},
+			"chartScrollbar": {
+				"backgroundAlpha": 0.6,
+				"backgroundColor": "#00369c",
+				"color": "#ffffff",
+				"gridAlpha": 0.7,
+				"gridCount": 4
+			},
+			"trendLines": [],
+			"graphs": [
+				{
+					"balloonText": "[[value]] - users",
+					"bullet": "round",
+					"lineColor": "#008000",
+					"balloonColor": "#008000",
+					"id": "ios-graph",
+					"title": "iOS",
+					"valueField": "ios"
+				},
+				{
+					"balloonText": "[[value]] - users",
+					"bullet": "square",
+					"id": "android-graph",
+					"title": "Android",
+					"valueField": "android"
+				}
+			],
+			"guides": [],
+			"valueAxes": [
+				{
+					"id": "users-axis",
+					"title": "Users"
+				}
+			],
+			"allLabels": [],
+			"balloon": {},
+			"legend": {
+				"useGraphSettings": true
+			},
+			"titles": [],
+			"dataProvider": dashboardCharts.overallLineChartData
+		}
+	);
+
 }
-//http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20csv%20where%20url%3D%27http%3A%2F%2Fdownload.finance.yahoo.com%2Fd%2Fquotes.csv%3Fs%3dDOW%2CNASDAQ%2CSP%26f%3Dsl1d1t1c1ohgv%26e%3D.csv%27%20and%20columns%3D%27symbol%2Cprice%2Cdate%2Ctime%2Cchange%2Ccol1%2Chigh%2Clow%2Ccol2%27&format=json&diagnostics=true&callback=
+
+// dashboardCharts.overallLineChart.validateData(); // call this method after data in graphic changed

@@ -19,7 +19,6 @@
 	<link href="assets/libs/sortable/sortable-theme-bootstrap.css" rel="stylesheet"/>
 	<link href="assets/libs/date-range/daterangepicker-bs3.css" rel="stylesheet"/>
 	<!-- Code Highlighter for Demo -->
-	<!--<link href="assets/libs/prettify/github.css" rel="stylesheet"/>-->
 
 	<!-- Extra CSS Libraries Start -->
 	<link href="assets/libs/morrischart/morris.css" rel="stylesheet" type="text/css"/>
@@ -46,6 +45,12 @@
 	<link rel="apple-touch-icon" sizes="120x120" href="assets/img/apple-touch-icon-120x120.png"/>
 	<link rel="apple-touch-icon" sizes="144x144" href="assets/img/apple-touch-icon-144x144.png"/>
 	<link rel="apple-touch-icon" sizes="152x152" href="assets/img/apple-touch-icon-152x152.png"/>
+
+	<!-- amchart scripts -->
+	<script type="text/javascript" src="./assets/libs/amcharts/amcharts.js"></script>
+	<script type="text/javascript" src="./assets/libs/amcharts/serial.js"></script>
+	<script type="text/javascript" src="./assets/libs/amcharts/light.js"></script>
+
 </head>
 <body class="fixed-left">
 <!-- Modal Start -->
@@ -314,33 +319,7 @@
 				<div id="website-statistic" class="statistic-chart">
 					<div class="row stacked">
 						<div class="col-sm-12">
-							<div class="toolbar">
-								<div class="pull-left">
-									<div class="btn-group">
-										<a href="#" class="btn btn-default btn-xs">Daily</a>
-										<a href="#" class="btn btn-default btn-xs active">Monthly</a>
-										<a href="#" class="btn btn-default btn-xs">Yearly</a>
-									</div>
-								</div>
-								<div class="pull-right">
-									<div class="btn-group">
-										<a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-											Export <i class="icon-down-open-2"></i>
-										</a>
-										<ul class="dropdown-menu pull-right" role="menu">
-											<li><a href="#">Export as PDF</a></li>
-											<li><a href="#">Export as CSV</a></li>
-											<li><a href="#">Export as PNG</a></li>
-											<li class="divider"></li>
-											<li><a href="#">Separated link</a></li>
-										</ul>
-									</div>
-									<a href="#" class="btn btn-primary btn-xs"><i class="icon-cog-2"></i></a>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="clearfix"></div>
-							<div id="morris-home" class="morris-chart" style="height: 270px;"></div>
+							<div id="amchart-line-graphic" class="morris-chart"></div>
 						</div>
 					</div>
 				</div>
@@ -372,7 +351,8 @@
 							<h4><i class="fa fa-bug"></i></h4>
 						</div>
 						<div>
-							<h5> CHROME</h5>
+							<h5 class="pull-left"> CHROME</h5><h5 class="pull-right">40</h5>
+							<div class="clearfix"></div>
 							<div class="progress progress-xs">
 								<div style="width: 40%;" class="progress-bar bg-lightblue-1"></div>
 							</div>
@@ -384,7 +364,8 @@
 							<h4><i class="fa fa-bug"></i></h4>
 						</div>
 						<div>
-							<h5> FIREFOX</h5>
+							<h5 class="pull-left"> FIREFOX</h5><h5 class="pull-right">40</h5>
+							<div class="clearfix"></div>
 							<div class="progress progress-xs">
 								<div style="width: 40%;" class="progress-bar bg-lightblue-1"></div>
 							</div>
@@ -396,7 +377,8 @@
 							<h4><i class="fa fa-bug"></i></h4>
 						</div>
 						<div>
-							<h5> SAFARI</h5>
+							<h5 class="pull-left"> SAFARI</h5><h5 class="pull-right">20</h5>
+							<div class="clearfix"></div>
 							<div class="progress progress-xs">
 								<div style="width: 20%;" class="progress-bar bg-lightblue-1"></div>
 							</div>
@@ -408,7 +390,8 @@
 							<h4><i class="fa fa-bug"></i></h4>
 						</div>
 						<div>
-							<h5> IE</h5>
+							<h5 class="pull-left"> IE</h5><h5 class="pull-right">5</h5>
+							<div class="clearfix"></div>
 							<div class="progress progress-xs">
 								<div style="width: 5%;" class="progress-bar bg-lightblue-1"></div>
 							</div>
@@ -448,7 +431,8 @@
 							<h4><i class="fa fa-apple text-white-1"></i></h4>
 						</div>
 						<div>
-							<h5> iOS</h5>
+							<h5 class="pull-left"> iOS</h5><h5 class="pull-right">40</h5>
+							<div class="clearfix"></div>
 							<div class="progress progress-xs">
 								<div style="width: 40%;" class="progress-bar bg-lightblue-1"></div>
 							</div>
@@ -460,7 +444,8 @@
 							<h4><i class="fa fa-android text-white-1"></i></h4>
 						</div>
 						<div>
-							<h5> ANDROID</h5>
+							<h5 class="pull-left"> ANDROID</h5><h5 class="pull-right">40</h5>
+							<div class="clearfix"></div>
 							<div class="progress progress-xs">
 								<div style="width: 40%;" class="progress-bar bg-lightblue-1"></div>
 							</div>
@@ -472,7 +457,8 @@
 							<h4><i class="fa fa-windows text-white-1"></i></h4>
 						</div>
 						<div>
-							<h5> WINDOWS</h5>
+							<h5 class="pull-left"> WINDOWS</h5><h5 class="pull-right">20</h5>
+							<div class="clearfix"></div>
 							<div class="progress progress-xs">
 								<div style="width: 20%;" class="progress-bar bg-lightblue-1"></div>
 							</div>
