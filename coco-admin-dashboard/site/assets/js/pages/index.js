@@ -101,12 +101,11 @@ $(document).ready(function(){
 		function(start, end) {
 			datePicker.find('span').html('From: ' + '<span class="startDate">' + start.format('MMMM D, YYYY') + '</span>'
 			+ ' to ' + '<span class="endDate">' + end.format('MMMM D, YYYY') + '</span>');
+			ReloadReports(start, end);
 		}
 	);
-	datePicker.on('apply.daterangepicker', function(ev, picker) {
-		console.log(picker.startDate.format('YYYY-MM-DD'));
-		console.log(picker.endDate.format('YYYY-MM-DD'));
-	});
+
+	
 
 	// SORTABLE ELEMENTS -> UNCOMMENT AJAX TO SEND POSITIONS
 	$( ".portlets" ).sortable({
@@ -138,6 +137,83 @@ function reload_charts(){
 	dashboardCharts.appInstallsFrom.draw();
 	dashboardCharts.extInstallsBrowser.draw();
 	dashboardCharts.updateVectorMap();
+}
+
+function ReloadReports(start, end) {
+	$.ajax({
+		type: "POST",
+		url: getReportsUrl,
+		data: { From: start.format('YYYY-MM-DD'), To: end.format('YYYY-MM-DD') },
+		dataType: "json",
+		success: function (response) {
+			if (response.status == "success") {
+				$("#totalInstalls").attr("data-value", response.totals.TotalAppInstalls);
+				$("#totalSales").attr("data-value", response.totals.TotalSales);
+				$("#totalAffiliateRevenue").attr("data-value", response.totals.TotalAffiliateRevenue);
+				$("#totalActiveUsers").attr("data-value", response.totals.TotalNewUsers);
+
+				$('.animate-number').each(function () {
+					$(this).animateNumbers($(this).attr("data-value"), true, parseInt($(this).attr("data-duration")));
+				});
+
+				var iphone = findApp("IPhone", response.installs);
+				var android = findApp("Android", response.installs);
+
+				var chrome = findApp("Chrome", response.installs);
+				var firefox = findApp("Firefox", response.installs);
+				var safari = findApp("Safari", response.installs);
+
+				dashboardCharts.appInstallsFrom.setData([
+					{ platform: 'iOS', facebook: iphone.FacebookRegistrations, emails: iphone.EmailRegistrations, annonymous: iphone.AnonymusRegistrations },
+					{ platform: 'Android', facebook: android.FacebookRegistrations, emails: android.EmailRegistrations, annonymous: android.AnonymusRegistrations },
+					{ platform: 'Windows', facebook: 0, emails: 0, annonymous: 0 }]);
+
+				dashboardCharts.extInstallsBrowser.setData([
+					{ browser: 'Chrome', facebook: chrome.FacebookRegistrations, emails: chrome.EmailRegistrations, annonymous: chrome.AnonymusRegistrations },
+					{ browser: 'Safari', facebook: safari.FacebookRegistrations, emails: safari.EmailRegistrations, annonymous: safari.AnonymusRegistrations },
+					{ browser: 'Firefox', facebook: firefox.FacebookRegistrations, emails: firefox.EmailRegistrations, annonymous: firefox.AnonymusRegistrations },
+					{ browser: 'IE', facebook: 0, emails: 0, annonymous: 0 }
+				]);
+
+				var totalMobiles = iphone.TotalInstalls + android.TotalInstalls;
+				var totalExtensions = chrome.TotalInstalls + firefox.TotalInstalls + safari.TotalInstalls;
+
+				var iphonePercent = getPercentage(iphone.TotalInstalls, totalMobiles);
+				var androidPercent = getPercentage(android.TotalInstalls, totalMobiles);
+
+				var chromePercent = getPercentage(chrome.TotalInstalls, totalExtensions);
+				var firefoxPercent = getPercentage(firefox.TotalInstalls, totalExtensions);
+				var safariPercent = getPercentage(safari.TotalInstalls, totalExtensions);
+
+				$("#progressIphone").css("width", iphonePercent).parent().siblings(".pull-right").text(iphonePercent);
+				$("#progressAndroid").css("width", androidPercent).parent().siblings(".pull-right").text(androidPercent);
+
+				$("#progressChrome").css("width", chromePercent).parent().siblings(".pull-right").text(chromePercent);
+				$("#progressFirefox").css("width", firefoxPercent).parent().siblings(".pull-right").text(firefoxPercent);
+				$("#progressSafari").css("width", safariPercent).parent().siblings(".pull-right").text(safariPercent);
+			}
+		},
+		error: function (error) {
+			console.log(error);
+		}
+	});
+}
+
+function findApp(appName, installsObjects) {
+	var result = $.grep(installsObjects, function (item) {
+		return item.HaveThisApp.toUpperCase().indexOf(appName.toUpperCase()) >= 0;
+	});
+
+	if (result.length > 0)
+		return result[0];
+	else
+	{
+		return { FacebookRegistrations: 0, EmailRegistrations: 0, AnonymusRegistrations: 0 };
+	}
+};
+
+function getPercentage(part, total) {
+	return Math.round(part * 100 / total) + "%"
 }
 
 dashboardCharts.overallLineChartData = [
@@ -185,30 +261,18 @@ function load_charts(){
 	dashboardCharts.appInstallsFrom = Morris.Bar({
 		element: 'app-installs-from',
 		resize: true,
-		data: [
-			{ platform: 'iOS', facebook: 45,  emails: 25, annonymous: 40 },
-			{ platform: 'Android', facebook: 17,  emails: 40, annonymous: 30 },
-			{ platform: 'WinPhone', facebook: 75,  emails: 15, annonymous: 35 }
-		],
 		xkey: 'platform',
 		ykeys: ['facebook', 'emails', 'annonymous'],
-		labels: ['Facebook', 'Emails', 'Annon'],
+		labels: ['Facebook', 'Emails', 'Annonymous'],
 		barColors: chartColors
 	});
 
 	dashboardCharts.extInstallsBrowser = Morris.Bar({
 		element: 'ext-installs-from-browser',
 		resize: true,
-		data: [
-			{ browser: 'Chrome', facebook: 45,  emails: 25, annonymous: 40 },
-			{ browser: 'Safari', facebook: 17,  emails: 40, annonymous: 30 },
-			{ browser: 'Firefox', facebook: 75,  emails: 15, annonymous: 35 },
-
-			{ browser: 'IE', facebook: 50,  emails: 36, annonymous: 24 }
-		],
 		xkey: 'browser',
 		ykeys: ['facebook', 'emails', 'annonymous'],
-		labels: ['Facebook', 'Emails', 'Annon'],
+		labels: ['Facebook', 'Emails', 'Annonymous'],
 		barColors: chartColors
 	});
 
