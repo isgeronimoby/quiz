@@ -152,6 +152,11 @@ function ReloadReports(start, end) {
 				$("#totalAffiliateRevenue").attr("data-value", response.totals.TotalAffiliateRevenue);
 				$("#totalActiveUsers").attr("data-value", response.totals.TotalNewUsers);
 
+				setPercentageDynamics(response.totalsPrev.TotalAppInstalls, response.totals.TotalAppInstalls, "traffic", $("#totalInstallsPercent"));
+				setPercentageDynamics(response.totalsPrev.TotalSales, response.totals.TotalSales, "sales", $("#totalSalesPercent"));
+				setPercentageDynamics(response.totalsPrev.TotalAffiliateRevenue, response.totals.TotalAffiliateRevenue, "income", $("#totalAffiliatePercent"));
+				setPercentageDynamics(response.totalsPrev.TotalNewUsers, response.totals.TotalNewUsers, "users", $("#totalActiveUsersPercent"));
+
 				$('.animate-number').each(function () {
 					$(this).animateNumbers($(this).attr("data-value"), true, parseInt($(this).attr("data-duration")));
 				});
@@ -191,30 +196,7 @@ function ReloadReports(start, end) {
 				$("#progressChrome").css("width", chromePercent).parent().siblings(".pull-right").text(chromePercent);
 				$("#progressFirefox").css("width", firefoxPercent).parent().siblings(".pull-right").text(firefoxPercent);
 				$("#progressSafari").css("width", safariPercent).parent().siblings(".pull-right").text(safariPercent);
-			}
-		},
-		error: function (error) {
-			console.log(error);
-		}
-	});
-}
 
-function findApp(appName, installsObjects) {
-	var result = $.grep(installsObjects, function (item) {
-		return item.HaveThisApp.toUpperCase().indexOf(appName.toUpperCase()) >= 0;
-	});
-
-	if (result.length > 0)
-		return result[0];
-	else
-	{
-		return { FacebookRegistrations: 0, EmailRegistrations: 0, AnonymusRegistrations: 0 };
-	}
-};
-
-function getPercentage(part, total) {
-	return Math.round(part * 100 / total) + "%"
-}
 
 dashboardCharts.overallLineChartData = [
 	{
@@ -253,6 +235,70 @@ dashboardCharts.overallLineChartData = [
 		"android": 8
 	}
 ];
+
+				dashboardCharts.overallLineChart.dataProvider = dashboardCharts.overallLineChartData;
+
+				reload_charts();
+
+				}
+			},
+			error: function (error) {
+				console.log(error);
+			}
+	});
+
+	
+}
+
+function findApp(appName, installsObjects) {
+	var result = $.grep(installsObjects, function (item) {
+		return item.HaveThisApp.toUpperCase().indexOf(appName.toUpperCase()) >= 0;
+	});
+
+	if (result.length > 0)
+		return result[0];
+	else
+	{
+		return { FacebookRegistrations: 0, EmailRegistrations: 0, AnonymusRegistrations: 0 };
+	}
+};
+
+function getPercentage(part, total) {
+	return Math.round(part * 100 / total) + "%"
+}
+
+function setPercentageDynamics(prevNumber, currentNumber, text, span) {
+	var i = span.siblings("i");
+
+	if (prevNumber == null || currentNumber == null || prevNumber == 0 || currentNumber == 0)
+	{
+		span.hide();
+		i.hide();
+		return;
+	}
+
+	var percentage = Math.round(((currentNumber - prevNumber) / (currentNumber)) * 100);
+
+	if (percentage == 0) {
+		span.hide();
+		i.hide();
+		return;
+	}
+	else if (percentage > 0) {
+		span.html("<b>" + percentage + "%</b> increase in " + text);
+		i.removeClass("fa-caret-down").addClass("fa-caret-up");
+	}
+	else {
+		span.html("<b>" + (-1 * percentage) + "%</b> decrease in " + text);
+		i.removeClass("fa-caret-up").addClass("fa-caret-down");
+	}
+
+	i.show();
+	span.show();
+}
+
+
+
 // LINE BAR
 function load_charts(){
 
@@ -321,7 +367,7 @@ function load_charts(){
 			"trendLines": [],
 			"graphs": [
 				{
-					"balloonText": "[[value]] - users",
+					"balloonText": "[[value]] - IOS installs",
 					"bullet": "round",
 					"lineColor": "#008000",
 					"balloonColor": "#008000",
@@ -330,7 +376,7 @@ function load_charts(){
 					"valueField": "ios"
 				},
 				{
-					"balloonText": "[[value]] - users",
+					"balloonText": "[[value]] - Android installs",
 					"bullet": "square",
 					"id": "android-graph",
 					"title": "Android",
@@ -341,7 +387,7 @@ function load_charts(){
 			"valueAxes": [
 				{
 					"id": "users-axis",
-					"title": "Users"
+					"title": "Installs"
 				}
 			],
 			"allLabels": [],
