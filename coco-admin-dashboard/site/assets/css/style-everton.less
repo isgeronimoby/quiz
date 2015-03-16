@@ -1068,6 +1068,7 @@ iframe {
 
 .progress.progress-xs {
 	height: 5px;
+  	max-height: 5px;
 	margin-top: 25px;
 	margin-bottom: 20px;
 	border-radius: 0px;
@@ -1082,7 +1083,9 @@ iframe {
 
 .progress.progress-xs .progress-bar {
 	font-size: 11px;
-	line-height: 16px;
+	line-height: 5px;
+	height: 5px;
+	max-height: 5px;
 	color: @white-1;
 	-webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0);
 	box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0);
@@ -2843,6 +2846,9 @@ button.navbar-toggle {
 	padding:4px 15px;
 	font-size:12px;
 	color: rgba(255,255,255,0.9);
+}
+.top-summary .widget .widget-footer .col-sm-12{
+	min-height: 17px;
 }
 
 .top-summary .widget .widget-footer .rel-change{

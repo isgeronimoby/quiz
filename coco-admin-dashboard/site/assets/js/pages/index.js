@@ -101,7 +101,7 @@ $(document).ready(function(){
 		function(start, end) {
 			datePicker.find('span').html('From: ' + '<span class="startDate">' + start.format('MMMM D, YYYY') + '</span>'
 			+ ' to ' + '<span class="endDate">' + end.format('MMMM D, YYYY') + '</span>');
-			ReloadReports(start, end);
+//			ReloadReports(start, end);
 		}
 	);
 
@@ -261,6 +261,11 @@ function load_charts(){
 	dashboardCharts.appInstallsFrom = Morris.Bar({
 		element: 'app-installs-from',
 		resize: true,
+		data: [
+			{ platform: 'iOS', facebook: 45,  emails: 25, annonymous: 40 },
+			{ platform: 'Android', facebook: 17,  emails: 40, annonymous: 30 },
+			{ platform: 'WinPhone', facebook: 75,  emails: 15, annonymous: 35 }
+		],
 		xkey: 'platform',
 		ykeys: ['facebook', 'emails', 'annonymous'],
 		labels: ['Facebook', 'Emails', 'Annonymous'],
@@ -270,6 +275,12 @@ function load_charts(){
 	dashboardCharts.extInstallsBrowser = Morris.Bar({
 		element: 'ext-installs-from-browser',
 		resize: true,
+		data: [
+			{ browser: 'Chrome', facebook: 45,  emails: 25, annonymous: 40 },
+			{ browser: 'Safari', facebook: 17,  emails: 40, annonymous: 30 },
+			{ browser: 'Firefox', facebook: 75,  emails: 15, annonymous: 35 },
+			{ browser: 'IE', facebook: 50,  emails: 36, annonymous: 24 }
+		],
 		xkey: 'browser',
 		ykeys: ['facebook', 'emails', 'annonymous'],
 		labels: ['Facebook', 'Emails', 'Annonymous'],
