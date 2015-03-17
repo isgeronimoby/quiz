@@ -2796,8 +2796,8 @@ button.navbar-toggle {
   z-index: 2;
 }
 .widget:hover .additional-btn > a.hidden {
-  display: inline-block !important;
-  visibility: visible !important;
+  /*	display: inline-block !important;
+	visibility: visible !important;*/
 }
 .widget:hover .additional-btn > a.hidden.nevershow,
 .widget:hover .additional-btn > a.nevershow,

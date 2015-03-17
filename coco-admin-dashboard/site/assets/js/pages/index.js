@@ -18,59 +18,59 @@ $(document).ready(function(){
 	];
 
 	vectorMapObject.vectorMap({
-        map: 'world_mill_en',
-        normalizeFunction: 'polynomial',
-        zoomOnScroll:true,
-        focusOn:{
-            x: 0.5,
-            y: 0.4,
-            scale: 4
-        },
-        zoomMin:0.9,
-        hoverColor: false,
-        regionStyle:{
-            initial: {
-                fill: '#bbbbbb',
-                "fill-opacity": 1,
-                stroke: '#a5ded9',
-                "stroke-width": 0,
-                "stroke-opacity": 0
-            },
-            hover: {
-                "fill-opacity": 0.8
-            }
-        },
-        markerStyle: {
-            initial: {
-                fill: '#F57A82',
-                stroke: 'rgba(230,140,110,.8)',
-                "fill-opacity": 1,
-                "stroke-width": 9,
-                "stroke-opacity": 0.5,
-                r: 4
-            },
-            hover: {
-                stroke: 'black',
-                "stroke-width": 2
-            },
-            selected: {
-                fill: 'blue'
-            },
-            selectedHover: {
-            }
-        },
-        backgroundColor: '#ffffff',
-        markers: dashboardCharts.vectorMapData[0],
-        series: {
-            markers: [{
-                attribute: 'r',
+		map: 'world_mill_en',
+		normalizeFunction: 'polynomial',
+		zoomOnScroll:true,
+		focusOn:{
+			x: 0.5,
+			y: 0.4,
+			scale: 4
+		},
+		zoomMin:0.9,
+		hoverColor: false,
+		regionStyle:{
+			initial: {
+				fill: '#bbbbbb',
+				"fill-opacity": 1,
+				stroke: '#a5ded9',
+				"stroke-width": 0,
+				"stroke-opacity": 0
+			},
+			hover: {
+				"fill-opacity": 0.8
+			}
+		},
+		markerStyle: {
+			initial: {
+				fill: '#F57A82',
+				stroke: 'rgba(230,140,110,.8)',
+				"fill-opacity": 1,
+				"stroke-width": 9,
+				"stroke-opacity": 0.5,
+				r: 4
+			},
+			hover: {
+				stroke: 'black',
+				"stroke-width": 2
+			},
+			selected: {
+				fill: 'blue'
+			},
+			selectedHover: {
+			}
+		},
+		backgroundColor: '#ffffff',
+		markers: dashboardCharts.vectorMapData[0],
+		series: {
+			markers: [{
+				attribute: 'r',
 				scale: [4, 15],
 				min: jvm.min(dashboardCharts.vectorMapData[1]),
 				max: jvm.max(dashboardCharts.vectorMapData[1]),
-                values: dashboardCharts.vectorMapData[1]
-            }]
+				values: dashboardCharts.vectorMapData[1]
+			}]
 		}
-    });
+	});
 
 	dashboardCharts.updateVectorMap = function() {
 		dashboardCharts.vectorMap = vectorMapObject.vectorMap('get', 'mapObject');
@@ -131,6 +131,26 @@ $(document).ready(function(){
 	});
 
   load_charts();
+
+	$(window).resize(function(){
+		dashboardCharts.overallLineChart.validateNow();
+	});
+
+	var minHeight = $('#amchart-line-graphic').css('min-height');
+	$('#website-statistic').parent().parent().find('.widget-maximize').click(function(e){
+		if( !$('.widget-line-statistic').hasClass('maximized') ) {
+			setTimeout(function () {
+				$('#amchart-line-graphic').height($('.widget-line-statistic').height() - 50);
+			}, 5);
+		} else {
+			$('#amchart-line-graphic').height('auto');
+		}
+		setTimeout(function(){
+			dashboardCharts.overallLineChart.validateNow();
+		}, 10);
+
+	});
+
 });
 
 
@@ -320,7 +340,9 @@ function load_charts(){
 		xkey: 'platform',
 		ykeys: ['facebook', 'emails', 'annonymous'],
 		labels: ['Facebook', 'Emails', 'Annonymous'],
-		barColors: chartColors
+		barColors: chartColors,
+		xLabelxLabelMargin: 1,
+		xLabelAngle: 45
 	});
 
 	dashboardCharts.extInstallsBrowser = Morris.Bar({
@@ -335,7 +357,9 @@ function load_charts(){
 		xkey: 'browser',
 		ykeys: ['facebook', 'emails', 'annonymous'],
 		labels: ['Facebook', 'Emails', 'Annonymous'],
-		barColors: chartColors
+		barColors: chartColors,
+		xLabelxLabelMargin: 1,
+		xLabelAngle: 45
 	});
 
 	dashboardCharts.overallLineChart = AmCharts.makeChart("amchart-line-graphic",

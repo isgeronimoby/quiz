@@ -143,6 +143,7 @@ $(".widget-header .widget-close").on("click",function(event){
 $(document).on("click", ".widget-header .widget-toggle", function(event){
   event.preventDefault();
   $(this).toggleClass("closed").parents(".widget:first").find(".widget-content").slideToggle();
+  $(this).parent().find('a:not(:last-of-type)').toggle();
 });
 
 $(document).on("click", ".widget-header .widget-popout", function(event){
