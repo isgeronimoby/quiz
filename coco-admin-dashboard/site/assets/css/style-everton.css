@@ -2846,12 +2846,17 @@ button.navbar-toggle {
   -o-transition: All 0.4s ease;
 }
 .ui-sortable-placeholder {
-  background: #bcbecc !important;
-  display: block;
+  display: inline-block;
   visibility: visible !important;
-  min-height: 100%;
-  -webkit-box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  height: 415px;
+  background: rgba(110, 110, 110, 0);
+  background: -moz-linear-gradient(left, rgba(110, 110, 110, 0) 0%, rgba(110, 110, 110, 0) 3%, rgba(110, 110, 110, 0.4) 3%, rgba(110, 110, 110, 0.4) 50%, rgba(110, 110, 110, 0.4) 97%, rgba(110, 110, 110, 0) 97%, rgba(110, 110, 110, 0) 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(110, 110, 110, 0)), color-stop(3%, rgba(110, 110, 110, 0)), color-stop(3%, rgba(110, 110, 110, 0.4)), color-stop(50%, rgba(110, 110, 110, 0.4)), color-stop(97%, rgba(110, 110, 110, 0.4)), color-stop(97%, rgba(110, 110, 110, 0)), color-stop(100%, rgba(110, 110, 110, 0)));
+  background: -webkit-linear-gradient(left, rgba(110, 110, 110, 0) 0%, rgba(110, 110, 110, 0) 3%, rgba(110, 110, 110, 0.4) 3%, rgba(110, 110, 110, 0.4) 50%, rgba(110, 110, 110, 0.4) 97%, rgba(110, 110, 110, 0) 97%, rgba(110, 110, 110, 0) 100%);
+  background: -o-linear-gradient(left, rgba(110, 110, 110, 0) 0%, rgba(110, 110, 110, 0) 3%, rgba(110, 110, 110, 0.4) 3%, rgba(110, 110, 110, 0.4) 50%, rgba(110, 110, 110, 0.4) 97%, rgba(110, 110, 110, 0) 97%, rgba(110, 110, 110, 0) 100%);
+  background: -ms-linear-gradient(left, rgba(110, 110, 110, 0) 0%, rgba(110, 110, 110, 0) 3%, rgba(110, 110, 110, 0.4) 3%, rgba(110, 110, 110, 0.4) 50%, rgba(110, 110, 110, 0.4) 97%, rgba(110, 110, 110, 0) 97%, rgba(110, 110, 110, 0) 100%);
+  background: linear-gradient(to right, rgba(110, 110, 110, 0) 0%, rgba(110, 110, 110, 0) 3%, rgba(110, 110, 110, 0.4) 3%, rgba(110, 110, 110, 0.4) 50%, rgba(110, 110, 110, 0.4) 97%, rgba(110, 110, 110, 0) 97%, rgba(110, 110, 110, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#6e6e6e', endColorstr='#6e6e6e', GradientType=1);
 }
 .widget.ui-sortable-placeholder * {
   visibility: hidden;
@@ -5736,6 +5741,15 @@ footer .footer-links a:last-child {
 .navbar-default .navbar-nav > li > a:focus {
   color: #afb3bf;
 }
+/*.ui-sortable-placeholder {
+  	margin-left: 0 !important;
+	padding: 0 !important;
+}
+
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}*/
 /* CUSTOM CHARTS */
 .morris-hover {
   z-index: 5;

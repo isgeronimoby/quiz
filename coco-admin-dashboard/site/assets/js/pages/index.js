@@ -108,13 +108,15 @@ $(document).ready(function(){
 	
 
 	// SORTABLE ELEMENTS -> UNCOMMENT AJAX TO SEND POSITIONS
-	$( ".portlets" ).sortable({
-		connectWith: ".portlets",
+	$( "#sortableArea" ).sortable({
 		handle: ".widget-header",
 		cancel: ".modal-widget",
 		opacity: 0.5,
-		dropOnEmpty: true,
+		revert: 300,
+		dropOnEmpty: false,
+		tolerance: "pointer",
 		forcePlaceholderSize: true,
+		helper: 'clone',
 		receive: function(event, ui) {$("body").trigger("resize")},
 		update: function (event, ui) {
 			var data = $(this).sortable('serialize');
@@ -198,6 +200,70 @@ function ReloadReports(start, end) {
 				$("#progressSafari").css("width", safariPercent).parent().siblings(".pull-right").text(safariPercent);
 
 
+
+
+				reload_charts();
+
+			}
+		},
+		error: function (error) {
+			console.log(error);
+		}
+	});
+
+	
+}
+
+function findApp(appName, installsObjects) {
+	var result = $.grep(installsObjects, function (item) {
+		return item.HaveThisApp.toUpperCase().indexOf(appName.toUpperCase()) >= 0;
+	});
+
+	if (result.length > 0)
+		return result[0];
+	else
+	{
+		return { FacebookRegistrations: 0, EmailRegistrations: 0, AnonymusRegistrations: 0 };
+	}
+}
+
+function getPercentage(part, total) {
+	return Math.round(part * 100 / total) + "%"
+}
+
+function setPercentageDynamics(prevNumber, currentNumber, text, span) {
+	var i = span.siblings("i");
+
+	if (prevNumber == null || currentNumber == null || prevNumber == 0 || currentNumber == 0)
+	{
+		span.hide();
+		i.hide();
+		return;
+	}
+
+	var percentage = Math.round(((currentNumber - prevNumber) / (currentNumber)) * 100);
+
+	if (percentage == 0) {
+		span.hide();
+		i.hide();
+		return;
+	}
+	else if (percentage > 0) {
+		span.html("<b>" + percentage + "%</b> increase in " + text);
+		i.removeClass("fa-caret-down").addClass("fa-caret-up");
+	}
+	else {
+		span.html("<b>" + (-1 * percentage) + "%</b> decrease in " + text);
+		i.removeClass("fa-caret-up").addClass("fa-caret-down");
+	}
+
+	i.show();
+	span.show();
+}
+
+
+
+
 dashboardCharts.overallLineChartData = [
 	{
 		"date": "2014-01-28",
@@ -236,68 +302,7 @@ dashboardCharts.overallLineChartData = [
 	}
 ];
 
-				dashboardCharts.overallLineChart.dataProvider = dashboardCharts.overallLineChartData;
-
-				reload_charts();
-
-				}
-			},
-			error: function (error) {
-				console.log(error);
-			}
-	});
-
-	
-}
-
-function findApp(appName, installsObjects) {
-	var result = $.grep(installsObjects, function (item) {
-		return item.HaveThisApp.toUpperCase().indexOf(appName.toUpperCase()) >= 0;
-	});
-
-	if (result.length > 0)
-		return result[0];
-	else
-	{
-		return { FacebookRegistrations: 0, EmailRegistrations: 0, AnonymusRegistrations: 0 };
-	}
-};
-
-function getPercentage(part, total) {
-	return Math.round(part * 100 / total) + "%"
-}
-
-function setPercentageDynamics(prevNumber, currentNumber, text, span) {
-	var i = span.siblings("i");
-
-	if (prevNumber == null || currentNumber == null || prevNumber == 0 || currentNumber == 0)
-	{
-		span.hide();
-		i.hide();
-		return;
-	}
-
-	var percentage = Math.round(((currentNumber - prevNumber) / (currentNumber)) * 100);
-
-	if (percentage == 0) {
-		span.hide();
-		i.hide();
-		return;
-	}
-	else if (percentage > 0) {
-		span.html("<b>" + percentage + "%</b> increase in " + text);
-		i.removeClass("fa-caret-down").addClass("fa-caret-up");
-	}
-	else {
-		span.html("<b>" + (-1 * percentage) + "%</b> decrease in " + text);
-		i.removeClass("fa-caret-up").addClass("fa-caret-down");
-	}
-
-	i.show();
-	span.show();
-}
-
-
+//dashboardCharts.overallLineChart.dataProvider = dashboardCharts.overallLineChartData;
 
 // LINE BAR
 function load_charts(){
