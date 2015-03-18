@@ -59,4 +59,15 @@ $(function () {
 			'connect-email': "Please enter a valid email address"
 		}
 	});
+
+	$('#provideDetailsForm').validate({
+		rules: {
+			'address1': {
+				required: true
+			}
+		},
+		messages: {
+			'address1': "Please fill in at least first field"
+		}
+	});
 });

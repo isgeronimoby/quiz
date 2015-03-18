@@ -198,6 +198,9 @@ img {
 .fullwidth {
 	width: 100%;
 }
+.bottomMargin10 {
+	margin-bottom: 10px !important;
+}
 /*****   GLOBAL STYLES END   *****/
 
 .draw-container {
@@ -633,7 +636,7 @@ button.close {
 	border: 0;
 }
 
-.everton-popup-container .everton-popup .everton-popup-body .popupForm label{
+.everton-popup-container .everton-popup .everton-popup-body .popupForm label, .details-form label{
     display: block;
     color: #6EAFFA;;
     text-align: left;
@@ -642,7 +645,7 @@ button.close {
     margin-top: 25px;
     margin-bottom: 2px;
 }
-.everton-popup-container .everton-popup .everton-popup-body .popupForm input:not([type="submit"]){
+.everton-popup-container .everton-popup .everton-popup-body .popupForm input:not([type="submit"]), .details-form input:not([type="submit"]){
     display: block;
     color: #222222;
     min-height: 46px;
@@ -659,7 +662,7 @@ button.close {
 	border-radius: 0;
 }
 
-.everton-popup-container .everton-popup .everton-popup-body .popupForm input[type=submit]{
+.everton-popup-container .everton-popup .everton-popup-body .popupForm input[type=submit], .details-form input[type=submit]{
     color: #ffffff;
     margin-top: 25px;
     cursor: pointer;
@@ -672,8 +675,12 @@ button.close {
 .fancybox-overlay {
 	background: rgba(0,0,0,0.5);
 }
-
-
+.winnerSection {
+	display: none;
+}
+.details-form-block {
+	display: none;
+}
 /* Chrome, Safari, Opera */
 @-webkit-keyframes connectSuccess {
 	from {
@@ -1087,9 +1094,9 @@ button.close {
 }
 .sectionLayout .winnerHolderEmbedded {
 	display: inline-block;
-	max-width: 160px;
+	max-width: 140px;
 	margin: 0;
-	margin-top: -80px;
+	margin-top: -70px;
 	border-radius: 50%;
 	overflow: hidden;
 	border: 5px solid #364158;

@@ -313,7 +313,7 @@ jQuery(document).ready(function ($) {
 			twttr.events.bind('tweet', function (event) {
 				$.ajax({
 					type: "POST",
-					url: twitterRewardUrl,
+					url: twitterRewardUrl
 				}).done(function (content) {
 					DrawApp.ticketsCurrent = content;
 
@@ -354,7 +354,7 @@ jQuery(document).ready(function ($) {
 	function facebookSDKShareDialog() {
 		FB.ui({
 			method: 'share',
-			href: prizeUrl,
+			href: prizeUrl
 		}, function (response) {
 			fbShareDialogOpened = false;
 
@@ -371,7 +371,7 @@ jQuery(document).ready(function ($) {
 				
 			$.ajax({
 				type: "POST",
-				url: facebookRewardUrl,
+				url: facebookRewardUrl
 			}).done(function (content) {
 				DrawApp.ticketsCurrent = content;
 

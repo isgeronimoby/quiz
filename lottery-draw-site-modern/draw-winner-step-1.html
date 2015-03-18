@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Everton. Lottery draw</title>
+	<link href="./css/style.css" rel="stylesheet" type="text/css" />
+	<link href="./css/landscape-media.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div class="draw-wrapper">
+	<div class="draw-container text-center">
+		<div class="staticTop">
+			<div class="countdown">
+				<div>
+					<div>
+						<span class="numbers">0</span>
+						<span>days</span>
+					</div>
+				</div>
+				<div>
+					<div>
+						<span class="numbers">00</span>
+						<span>hrs</span>
+					</div>
+				</div>
+				<div>
+					<div>
+						<span class="numbers">00</span>
+						<span>mins</span>
+					</div>
+				</div>
+				<div>
+					<div>
+						<span class="numbers">00</span>
+						<span>secs</span>
+					</div>
+				</div>
+			</div>
+
+			<a href="#"><article class="article showDesktopBlock">
+				<div class="articleImage articleImageDesktop">
+					<img src="./images/everton-training.png" />
+				</div>
+				<div class="greyBox greyBoxDesktop">
+					<h3 class="color-aqua"><b>the prize</b></h3>
+					<h3 class="condensedFont">Meet the team, get signed T-shirts and watch a training session</h3>
+				</div>
+				<div class="clearfix"></div>
+			</article></a>
+			<div class="clearfix"></div>
+		</div>
+
+		<section class="sectionLayout">
+			<div class="marginTopText">
+				<h3 class="condensedFont">Congratulations < name ><br/>You've won the < opportunity to meet the team and get signed t-shirts at Finch Farm ></h3>
+			</div>
+
+			<img class="noVAlign" src="./images/everton-training.png" alt="" />
+			<div class="winnerHolderEmbedded">
+				<img src="http://placehold.it/200" />
+			</div>
+
+			<div class="marginTopText">
+				<h3 class="condensedFont">Please enter your address so we can send you more details on the prize</h3>
+			</div>
+
+			<div class="enter-details-block">
+				<a href="#" id="show-details-btn" class="button buttonDefault buttonYellow"><span><span>Enter details</span></span></a>
+			</div>
+
+			<div class="details-form-block">
+				<!-- Alert -->
+				<div class="alert alert-danger">
+					<button data-dismiss="alert" class="close" type="button">&times;</button>
+					<strong>Warning!</strong>
+					<div data-valmsg-summary="true" class="validation-summary-errors">
+						<ul><li>Email is required.</li>
+							<li>Some other error.</li>
+						</ul>
+					</div>
+				</div>
+				<!-- // Alert END -->
+				<!-- Form -->
+				<form method="post" class="details-form" id="provideDetailsForm" action="index.html?lang=en">
+					<div class="form-group">
+						<label form="address1" class="strong">Your address line 1*</label>
+						<input type="text" class="input-block-level form-control" id="address1"
+							   name="address1" placeholder="House or building name"/>
+					</div>
+					<div class="form-group">
+						<label form="address2" class="strong">Your address line 2</label>
+						<input type="text" class="input-block-level form-control" id="address2"
+							   name="address2" placeholder="Road or street name"/>
+					</div>
+					<div class="form-group">
+						<label form="county" class="strong">County</label>
+						<input type="text" class="input-block-level form-control" id="county"
+							   name="county" placeholder="Merseyside"/>
+					</div>
+					<div class="form-group">
+						<label form="postcode" class="strong">Postcode</label>
+						<input type="text" class="input-block-level form-control" id="postcode"
+							   name="postcode" placeholder="Postcode"/>
+					</div>
+
+					<button type="submit" class="button buttonDefault buttonYellow"><i></i>
+						<span class="align-wrapp"><span>CONFIRM</span></span></button>
+				</form>
+				<!-- // Form END -->
+			</div>
+		</section>
+	</div>
+	<div class="push"></div>
+</div>
+
+<footer class="footer">
+	<div class="pull-left">
+		<a href="#"><img src="./images/company-logo.png"/></a>
+	</div>
+	<div class="pull-right">
+		<a href="/terms-and-conditions.html" class="thinLink">T&Cs</a>
+		<a href="/faq.html" class="thinLink">FAQs</a>
+		<a href="#" class="thinLink">Contact</a>
+	</div>
+	<div class="clearfix"></div>
+</footer>
+
+<script type="text/javascript" src="./js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="./js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="./js/form-validator.init.js"></script>
+<script type="text/javascript" src="./js/draw-winner-steps.js"></script>
+
+</body>
+</html>
