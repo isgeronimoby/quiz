@@ -39,3 +39,9 @@ $(function(){
 	showExtensionPopupFunc = showExtensionPopup;
 });
 /*********** END OF NOTIFICATIONS ***********/
+$(document).ready(function(){
+	if (!window.mobilecheck()) {
+		$('section').hide();
+		$('.loading-holder').show();
+	}
+});
