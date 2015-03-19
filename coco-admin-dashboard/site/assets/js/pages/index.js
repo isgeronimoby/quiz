@@ -1,10 +1,5 @@
 var dashboardCharts = {};
 
-var maplace = new Maplace({
-	map_div: '#vector-map',
-	type: 'circle'
-});
-
 $(document).ready(function(){
 
 	var dataForMap = [
@@ -109,7 +104,7 @@ $(document).ready(function(){
 });
 
 function getMaplaceRadius(locData) {
-	var maximumRadius = 1000;
+	var maximumRadius = 10000;
 	var max = 0;
 
 	for (var i = 0; i < locData.length; i++) {
