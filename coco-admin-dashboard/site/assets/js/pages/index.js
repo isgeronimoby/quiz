@@ -1,5 +1,10 @@
 var dashboardCharts = {};
 
+var maplace = new Maplace({
+	map_div: '#vector-map',
+	type: 'circle'
+});
+
 $(document).ready(function(){
 
 	var dataForMap = [
@@ -15,59 +20,11 @@ $(document).ready(function(){
 		}
 	];
 
-	function getMaplaceRadius(locData){
-		var maximumRadius = 100;
-		var max = 0;
-
-		for( var i = 0; i < locData.length; i++ ) {
-			if(locData[i].number > max) max = locData[i].number;
-		}
-		for( var i = 0; i < locData.length; i++ ) {
-			locData[i].radius =  locData[i].number / max * maximumRadius;
-		}
-		return locData;
-	}
-
 	dataForMap = getMaplaceRadius(dataForMap);
 
-	function fillMapLocations(locData){
-		var locations = [];
-
-		for(var i=0; i < locData.length; i++){
-			locations.push({
-				lat: locData[i].lat,
-				lon: locData[i].lon,
-				title: String(locData[i].number),
-				html: '<h4>' + locData[i].number + '</h4>',
-				icon: 'http://maps.google.com/mapfiles/markerA.png',
-				animation: google.maps.Animation.DROP,
-				circle_options: {
-					radius: locData[i].radius
-				},
-				stroke_options: {
-					strokeColor: '#aaaa00',
-					fillColor: '#eeee00'
-				},
-				draggable: false
-			});
-		}
-		return locations;
-	}
-
-	var maplace = new Maplace({
-		map_div: '#vector-map',
-		type: 'circle'
-	});
-
-	maplace.Load();
-
-	function changeMapData(){
-		maplace.RemoveLocations();
-		maplace.AddLocations(fillMapLocations(dataForMap));
 		maplace.Load();
-	}
 
-	changeMapData();
+	changeMapData(dataForMap);
 
 	var datePicker = $('#reportrange');
 	datePicker.daterangepicker(
@@ -90,8 +47,6 @@ $(document).ready(function(){
 		}
 	);
 
-	
-
 	// SORTABLE ELEMENTS -> UNCOMMENT AJAX TO SEND POSITIONS
 	$( "#sortableArea" ).sortable({
 		handle: ".widget-header",
@@ -104,14 +59,29 @@ $(document).ready(function(){
 		helper: 'clone',
 		receive: function(event, ui) {$("body").trigger("resize")},
 		update: function (event, ui) {
-			var data = $(this).sortable('serialize');
-			console.log(data);
-			// POST to server using $.post or $.ajax
-			/*		$.ajax({
-			 data: data,
-			 type: 'POST',
-			 url: '/your/url/here'
-			 });*/
+			if (this === ui.item.parent()[0]) {
+				var data = $(this).sortable('toArray');
+
+				var layout = "";
+
+				var widgets = $("#sortableArea>div.col-lg-4");
+
+				$.each(widgets, function (index, value) {
+					layout += $(value).attr("id") + ";";
+				});
+
+				//$.ajax({
+				//	type: "POST",
+				//	url: updateLayoutUrl,
+				//	data: { layout: layout },
+				//	dataType: "json",
+				//	success: function (response) {
+				//	},
+				//	error: function (error) {
+				//		console.log(error);
+				//	}
+				//});
+			}
 		}
 	});
 
@@ -138,12 +108,54 @@ $(document).ready(function(){
 
 });
 
+function getMaplaceRadius(locData) {
+	var maximumRadius = 1000;
+	var max = 0;
+
+	for (var i = 0; i < locData.length; i++) {
+		if (locData[i].number > max) max = locData[i].number;
+	}
+	for (var i = 0; i < locData.length; i++) {
+		locData[i].radius = locData[i].number / max * maximumRadius;
+	}
+	return locData;
+}
+
+function fillMapLocations(locData) {
+	var locations = [];
+
+	for (var i = 0; i < locData.length; i++) {
+		locations.push({
+			lat: locData[i].lat,
+			lon: locData[i].lon,
+			title: String(locData[i].number),
+			html: '<h4>' + locData[i].number + '</h4>',
+			icon: 'http://maps.google.com/mapfiles/markerA.png',
+			animation: google.maps.Animation.DROP,
+			circle_options: {
+				radius: locData[i].radius
+			},
+			stroke_options: {
+				strokeColor: '#aaaa00',
+				fillColor: '#eeee00'
+			},
+			draggable: false
+		});
+	}
+	return locations;
+}
+
+function changeMapData(data) {
+	maplace.RemoveLocations();
+	maplace.AddLocations(fillMapLocations(data));
+	maplace.Load();
+}
+
 
 function reload_charts(){
 	dashboardCharts.overallLineChart.validateData(); // call this method after data in graphic changed
 	dashboardCharts.appInstallsFrom.draw();
 	dashboardCharts.extInstallsBrowser.draw();
-	changeMapData();
 }
 
 function ReloadReports(start, end) {
@@ -154,10 +166,18 @@ function ReloadReports(start, end) {
 		dataType: "json",
 		success: function (response) {
 			if (response.status == "success") {
-				$("#totalInstalls").attr("data-value", response.totals.TotalAppInstalls);
-				$("#totalSales").attr("data-value", response.totals.TotalSales);
-				$("#totalAffiliateRevenue").attr("data-value", response.totals.TotalAffiliateRevenue);
-				$("#totalActiveUsers").attr("data-value", response.totals.TotalNewUsers);
+				if (response.widgets != null) {
+					var sortableArea = $("#sortableArea");
+
+					$.each(response.widgets, function (index, value) {
+						$("#" + value).appendTo(sortableArea);
+					});
+				}
+
+				setTotalValue("#totalInstalls", response.totals.TotalAppInstalls);
+				setTotalValue("#totalSales", response.totals.TotalSales);
+				setTotalValue("#totalAffiliateRevenue", response.totals.TotalAffiliateRevenue);
+				setTotalValue("#totalActiveUsers", response.totals.TotalNewUsers);
 
 				setPercentageDynamics(response.totalsPrev.TotalAppInstalls, response.totals.TotalAppInstalls, "traffic", $("#totalInstallsPercent"));
 				setPercentageDynamics(response.totalsPrev.TotalSales, response.totals.TotalSales, "sales", $("#totalSalesPercent"));
@@ -204,11 +224,27 @@ function ReloadReports(start, end) {
 				$("#progressFirefox").css("width", firefoxPercent).parent().siblings(".pull-right").text(firefoxPercent);
 				$("#progressSafari").css("width", safariPercent).parent().siblings(".pull-right").text(safariPercent);
 
+				var chartData = [];
 
+				$.each(response.groupedInstalls, function (key, value) {
+					var iosCount = findAppInstalls("iphone", value);
+					var androidCount = findAppInstalls("android", value);
 
+					chartData.push({
+						"date": key,
+						"ios": iosCount,
+						"android": androidCount
+					});
+				});
+
+				dashboardCharts.overallLineChartData = chartData;
+				dashboardCharts.overallLineChart.dataProvider = dashboardCharts.overallLineChartData;
+
+				var dataForMap = getMaplaceRadius(response.locations);
+
+				changeMapData(dataForMap);
 
 				reload_charts();
-
 			}
 		},
 		error: function (error) {
@@ -217,6 +253,13 @@ function ReloadReports(start, end) {
 	});
 
 	
+}
+
+function setTotalValue(id, totalCount) {
+	if (totalCount == null)
+		totalCount = 0;
+
+	$(id).attr("data-value", totalCount);
 }
 
 function findApp(appName, installsObjects) {
@@ -230,9 +273,24 @@ function findApp(appName, installsObjects) {
 	{
 		return { FacebookRegistrations: 0, EmailRegistrations: 0, AnonymusRegistrations: 0 };
 	}
+};
+
+function findAppInstalls(appName, installsObjects) {
+	var result = $.grep(installsObjects, function (item) {
+		return item.Title.toUpperCase().indexOf(appName.toUpperCase()) >= 0;
+	});
+
+	if (result.length > 0)
+		return result[0].TotalInstalls;
+	else {
+		return null;
+	}
 }
 
 function getPercentage(part, total) {
+	if (total == null || part == null || total == 0)
+		return "0%";
+
 	return Math.round(part * 100 / total) + "%"
 }
 
@@ -386,7 +444,7 @@ function load_charts(){
 					"lineColor": "#008000",
 					"balloonColor": "#008000",
 					"id": "ios-graph",
-					"title": "iOS",
+					"title": "IOS",
 					"valueField": "ios"
 				},
 				{
@@ -400,7 +458,7 @@ function load_charts(){
 			"guides": [],
 			"valueAxes": [
 				{
-					"id": "users-axis",
+					"id": "installs-axis",
 					"title": "Installs"
 				}
 			],
