@@ -1,88 +1,73 @@
 var dashboardCharts = {};
 
 $(document).ready(function(){
-	var vectorMapObject = $('#vector-map');
 
-	dashboardCharts.vectorMapData = [
-		[
-			{latLng: [35.85, -77.88], name: 'Rocky Mt,NC - ' + 10000 + ' users'},
-			{latLng: [32.90, -97.03], name: 'Dallas/FW,TX - ' + 700 + ' users'},
-			{latLng: [41.00, 28.96], name: 'Istanbul, TR - ' + 350 + ' users'},
-			{latLng: [39.37, -75.07], name: 'Millville,NJ - ' + 5000 + ' users'}
-		],
-		[
-			10000,
-			700,
-			350,
-			5000]
+	var dataForMap = [
+		{
+			lat: 51.51386,
+			lon: -0.09559,
+			number: 8000
+		},
+		{
+			lat: 51.51420,
+			lon: -0.09303,
+			number: 5000
+		}
 	];
 
-	vectorMapObject.vectorMap({
-		map: 'world_mill_en',
-		normalizeFunction: 'polynomial',
-		zoomOnScroll:true,
-		focusOn:{
-			x: 0.5,
-			y: 0.4,
-			scale: 4
-		},
-		zoomMin:0.9,
-		hoverColor: false,
-		regionStyle:{
-			initial: {
-				fill: '#bbbbbb',
-				"fill-opacity": 1,
-				stroke: '#a5ded9',
-				"stroke-width": 0,
-				"stroke-opacity": 0
-			},
-			hover: {
-				"fill-opacity": 0.8
-			}
-		},
-		markerStyle: {
-			initial: {
-				fill: '#F57A82',
-				stroke: 'rgba(230,140,110,.8)',
-				"fill-opacity": 1,
-				"stroke-width": 9,
-				"stroke-opacity": 0.5,
-				r: 4
-			},
-			hover: {
-				stroke: 'black',
-				"stroke-width": 2
-			},
-			selected: {
-				fill: 'blue'
-			},
-			selectedHover: {
-			}
-		},
-		backgroundColor: '#ffffff',
-		markers: dashboardCharts.vectorMapData[0],
-		series: {
-			markers: [{
-				attribute: 'r',
-				scale: [4, 15],
-				min: jvm.min(dashboardCharts.vectorMapData[1]),
-				max: jvm.max(dashboardCharts.vectorMapData[1]),
-				values: dashboardCharts.vectorMapData[1]
-			}]
+	function getMaplaceRadius(locData){
+		var maximumRadius = 100;
+		var max = 0;
+
+		for( var i = 0; i < locData.length; i++ ) {
+			if(locData[i].number > max) max = locData[i].number;
 		}
+		for( var i = 0; i < locData.length; i++ ) {
+			locData[i].radius =  locData[i].number / max * maximumRadius;
+		}
+		return locData;
+	}
+
+	dataForMap = getMaplaceRadius(dataForMap);
+
+	function fillMapLocations(locData){
+		var locations = [];
+
+		for(var i=0; i < locData.length; i++){
+			locations.push({
+				lat: locData[i].lat,
+				lon: locData[i].lon,
+				title: String(locData[i].number),
+				html: '<h4>' + locData[i].number + '</h4>',
+				icon: 'http://maps.google.com/mapfiles/markerA.png',
+				animation: google.maps.Animation.DROP,
+				circle_options: {
+					radius: locData[i].radius
+				},
+				stroke_options: {
+					strokeColor: '#aaaa00',
+					fillColor: '#eeee00'
+				},
+				draggable: false
+			});
+		}
+		return locations;
+	}
+
+	var maplace = new Maplace({
+		map_div: '#vector-map',
+		type: 'circle'
 	});
 
-	dashboardCharts.updateVectorMap = function() {
-		dashboardCharts.vectorMap = vectorMapObject.vectorMap('get', 'mapObject');
-		dashboardCharts.vectorMap.removeAllMarkers();
-		dashboardCharts.vectorMap.addMarkers(dashboardCharts.vectorMapData[0]);
-		dashboardCharts.vectorMap.series.markers[0].setValues(dashboardCharts.vectorMapData[1]);
-		dashboardCharts.vectorMap.series.markers[0].scale.setMin(jvm.min(dashboardCharts.vectorMapData[1]));
-		dashboardCharts.vectorMap.series.markers[0].scale.setMax(jvm.max(dashboardCharts.vectorMapData[1]));
-		dashboardCharts.vectorMap.series.markers[0].setNormalizeFunction('linear');
-	};
+	maplace.Load();
 
-	dashboardCharts.updateVectorMap();
+	function changeMapData(){
+		maplace.RemoveLocations();
+		maplace.AddLocations(fillMapLocations(dataForMap));
+		maplace.Load();
+	}
+
+	changeMapData();
 
 	var datePicker = $('#reportrange');
 	datePicker.daterangepicker(
@@ -158,7 +143,7 @@ function reload_charts(){
 	dashboardCharts.overallLineChart.validateData(); // call this method after data in graphic changed
 	dashboardCharts.appInstallsFrom.draw();
 	dashboardCharts.extInstallsBrowser.draw();
-	dashboardCharts.updateVectorMap();
+	changeMapData();
 }
 
 function ReloadReports(start, end) {
