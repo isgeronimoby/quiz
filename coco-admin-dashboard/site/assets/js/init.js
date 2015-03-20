@@ -2,6 +2,8 @@ var w;
 var h;
 var dw;
 var dh;
+var dashboardCharts = {};
+
 
 function executeFunctionByName(functionName, context /*, args */) {
   var args = [].slice.call(arguments).splice(2);

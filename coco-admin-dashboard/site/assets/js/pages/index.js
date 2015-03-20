@@ -1,25 +1,27 @@
-var dashboardCharts = {};
+var dataForMap = [
+	{
+		lat: 51.71386,
+		lon: -0.09559,
+		number: 8000
+	},
+	{
+		lat: 51.51420,
+		lon: -0.09303,
+		number: 5000
+	},
+	{
+		lat: 53.51386,
+		lon: -0.09559,
+		number: 3000
+	},
+	{
+		lat: 51.21420,
+		lon: -0.09303,
+		number: 1000
+	}
+];
 
 $(document).ready(function(){
-
-	var dataForMap = [
-		{
-			lat: 51.51386,
-			lon: -0.09559,
-			number: 8000
-		},
-		{
-			lat: 51.51420,
-			lon: -0.09303,
-			number: 5000
-		}
-	];
-
-	dataForMap = getMaplaceRadius(dataForMap);
-
-		maplace.Load();
-
-	changeMapData(dataForMap);
 
 	var datePicker = $('#reportrange');
 	datePicker.daterangepicker(
@@ -101,51 +103,23 @@ $(document).ready(function(){
 
 	});
 
+	$('#vector-map').parent().parent().find('.widget-maximize').click(function(e){
+		var mapWidget = $(this).parent().parent().parent();
+		if( !mapWidget.hasClass('maximized') ) {
+			setTimeout(function () {
+				$('#vector-map').height(mapWidget.height());
+			}, 5);
+		} else {
+			$('#vector-map').height(minHeight);
+		}
+		setTimeout(function(){
+			google.maps.event.trigger(dashboardCharts.maplace, "resize");
+			dashboardCharts.maplace.panTo(new google.maps.LatLng(52.240496, -0.988263));
+		}, 10);
+	});
+
+	dashboardCharts.mapInit();
 });
-
-function getMaplaceRadius(locData) {
-	var maximumRadius = 10000;
-	var max = 0;
-
-	for (var i = 0; i < locData.length; i++) {
-		if (locData[i].number > max) max = locData[i].number;
-	}
-	for (var i = 0; i < locData.length; i++) {
-		locData[i].radius = locData[i].number / max * maximumRadius;
-	}
-	return locData;
-}
-
-function fillMapLocations(locData) {
-	var locations = [];
-
-	for (var i = 0; i < locData.length; i++) {
-		locations.push({
-			lat: locData[i].lat,
-			lon: locData[i].lon,
-			title: String(locData[i].number),
-			html: '<h4>' + locData[i].number + '</h4>',
-			icon: 'http://maps.google.com/mapfiles/markerA.png',
-			animation: google.maps.Animation.DROP,
-			circle_options: {
-				radius: locData[i].radius
-			},
-			stroke_options: {
-				strokeColor: '#aaaa00',
-				fillColor: '#eeee00'
-			},
-			draggable: false
-		});
-	}
-	return locations;
-}
-
-function changeMapData(data) {
-	maplace.RemoveLocations();
-	maplace.AddLocations(fillMapLocations(data));
-	maplace.Load();
-}
-
 
 function reload_charts(){
 	dashboardCharts.overallLineChart.validateData(); // call this method after data in graphic changed
