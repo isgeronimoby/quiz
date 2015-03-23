@@ -280,12 +280,17 @@ dashboardCharts.mapInit = function () {
 		maxZoom: 9,
 		minZoom: 6,
 		disableDefaultUI: true,
+		zoomControl: true,
+		zoomControlOptions: {
+			style: google.maps.ZoomControlStyle.LARGE
+		},
 		mapTypeId: 'Default'
 	};
 	dashboardCharts.maplace = new google.maps.Map(document.getElementById("vector-map"),mapOptions);
 	var styledMapType = new google.maps.StyledMapType(map_styles, { name: 'Default' });
 	dashboardCharts.maplace.mapTypes.set('Default', styledMapType);
-}
+
+};
 
 
 dashboardCharts.mapMarkersArray = [];
@@ -349,8 +354,6 @@ dashboardCharts.addDataToMap = function (locData){
 		});
 	}
 };
-
-//TODO: need to delete all markers and circles and then add them from updated file, also need to handle resized widget size
 
 // google.maps.event.trigger(maplace, "resize");
 // trigger when map is resized

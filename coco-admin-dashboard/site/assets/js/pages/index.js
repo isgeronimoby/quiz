@@ -117,9 +117,52 @@ $(document).ready(function(){
 			dashboardCharts.maplace.panTo(new google.maps.LatLng(52.240496, -0.988263));
 		}, 10);
 	});
-
 	dashboardCharts.mapInit();
+
+	var mapFiltersNumber = $('#mapOptions').parent().find('ul li.divider').prevAll();
+	var mapFiltersDevices = $('#mapOptions').parent().find('ul li.divider').nextAll();
+
+	// Filtering devices by installs number
+	mapFiltersNumber.find('a').click(function(e){
+		e.preventDefault();
+
+		switch ($(this).attr('data-trigger')) {
+			case 'ten':
+				console.log('Show only more than ten');
+				break;
+			default:
+				console.log('Show all installs')
+		}
+
+		mapFiltersNumber.removeClass('active');
+		$(this).parent().addClass('active');
+	});
+
+	// Filtering devices by the device manufacturer
+	mapFiltersDevices.find('a').click(function(e){
+		e.preventDefault();
+
+		switch ($(this).attr('data-trigger')) {
+			case 'ios':
+				console.log('Show only iOS devices');
+				break;
+			case 'android':
+				console.log('Show only Android devices');
+				break;
+			default:
+				console.log('Show all devices')
+		}
+
+		mapFiltersDevices.removeClass('active');
+		$(this).parent().addClass('active');
+	});
+
+
 });
+
+
+
+
 
 function reload_charts(){
 	dashboardCharts.overallLineChart.validateData(); // call this method after data in graphic changed

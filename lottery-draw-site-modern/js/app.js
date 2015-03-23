@@ -54,6 +54,9 @@ jQuery(document).ready(function ($) {
 
 	function init() {
 		$('.article > .greyBoxDesktop').height($('.article >  .articleImageDesktop').outerHeight());
+
+		$('.article > .greyBoxMobile').parent().height($('.article >  .articleMobileImage > img').height());
+		$('.article > .greyBoxMobile').height($('.article >  .articleMobileImage > img').height());
 		if ($(window).width() > 900) {
 			$($('#connectFBBox .button')[1]).width($($('#connectFBBox .button')[0]).width() + 10);
 		} else {
@@ -122,6 +125,9 @@ jQuery(document).ready(function ($) {
 
 	$(window).resize(function () {
 		circlesSize();
+
+		$('.article > .greyBoxMobile').parent().height($('.article >  .articleMobileImage > img').height());
+		$('.article > .greyBoxMobile').height($('.article >  .articleMobileImage > img').height());
 	});
 
 	function circlesSize() {
