@@ -211,6 +211,11 @@ $(document).on("click", ".widget", function(){
 		$(this).toggleClass('mouseHover');
 	});
 
+// HIDING FULLSCREEN BUTTON IF IT IS NOT AVAILABLE
+	if (screenfull.enabled) {
+		$('.icon-resize-full-2').parent().show();
+	} else $('.icon-resize-full-2').parent().hide();
+
 });
 
 var debounce = function(func, wait, immediate) {
