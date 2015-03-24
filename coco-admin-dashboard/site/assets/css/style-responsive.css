@@ -8,6 +8,8 @@
 
 }
 
+/* Mobile and Tablets */
+
 /*Small desktop or tablet*/
 @media (min-width: 768px) and (max-width: 991px) {
 	body{overflow-x: hidden;}
@@ -19,6 +21,9 @@
 		border: 1px solid #dddddd;
 		-ms-overflow-style: -ms-autohiding-scrollbar;
 		-webkit-overflow-scrolling: touch;
+	}
+	.widget-maximize {
+		display: none;
 	}
 	.table-responsive > .table {
 		margin-bottom: 0;
@@ -89,7 +94,7 @@
 /*Phone*/
 @media (max-width: 767px) {
 	body{overflow-x: hidden;}
-
+	.widget-maximize {display: none;}
 	.mobile-sidebar{left: 0px;}
 	.mobile-content{left: 250px;right: -250px;}
 	.box-info table{margin: 0 0 0 0;}
