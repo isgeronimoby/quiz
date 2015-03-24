@@ -206,6 +206,7 @@ function ReloadReports(start, end) {
 				var chrome = findApp("Chrome", response.installs);
 				var firefox = findApp("Firefox", response.installs);
 				var safari = findApp("Safari", response.installs);
+				var ie = findApp("Internet Explorer", response.installs);
 
 				dashboardCharts.appInstallsFrom.setData([
 					{ platform: 'iOS', facebook: iphone.FacebookRegistrations, emails: iphone.EmailRegistrations, annonymous: iphone.AnonymusRegistrations },
@@ -214,13 +215,13 @@ function ReloadReports(start, end) {
 
 				dashboardCharts.extInstallsBrowser.setData([
 					{ browser: 'Chrome', facebook: chrome.FacebookRegistrations, emails: chrome.EmailRegistrations, annonymous: chrome.AnonymusRegistrations },
-					{ browser: 'Safari', facebook: safari.FacebookRegistrations, emails: safari.EmailRegistrations, annonymous: safari.AnonymusRegistrations },
 					{ browser: 'Firefox', facebook: firefox.FacebookRegistrations, emails: firefox.EmailRegistrations, annonymous: firefox.AnonymusRegistrations },
-					{ browser: 'IE', facebook: 0, emails: 0, annonymous: 0 }
+					{ browser: 'Safari', facebook: safari.FacebookRegistrations, emails: safari.EmailRegistrations, annonymous: safari.AnonymusRegistrations },
+					{ browser: 'IE', facebook: ie.FacebookRegistrations, emails: ie.EmailRegistrations, annonymous: ie.AnonymusRegistrations }
 				]);
 
 				var totalMobiles = iphone.TotalInstalls + android.TotalInstalls;
-				var totalExtensions = chrome.TotalInstalls + firefox.TotalInstalls + safari.TotalInstalls;
+				var totalExtensions = chrome.TotalInstalls + firefox.TotalInstalls + safari.TotalInstalls + ie.TotalInstalls;
 
 				var iphonePercent = getPercentage(iphone.TotalInstalls, totalMobiles);
 				var androidPercent = getPercentage(android.TotalInstalls, totalMobiles);
@@ -228,6 +229,7 @@ function ReloadReports(start, end) {
 				var chromePercent = getPercentage(chrome.TotalInstalls, totalExtensions);
 				var firefoxPercent = getPercentage(firefox.TotalInstalls, totalExtensions);
 				var safariPercent = getPercentage(safari.TotalInstalls, totalExtensions);
+				var iePercent = getPercentage(ie.TotalInstalls, totalExtensions);
 
 				$("#progressIphone").css("width", iphonePercent).parent().siblings(".pull-right").text(iphonePercent);
 				$("#progressAndroid").css("width", androidPercent).parent().siblings(".pull-right").text(androidPercent);
@@ -235,6 +237,7 @@ function ReloadReports(start, end) {
 				$("#progressChrome").css("width", chromePercent).parent().siblings(".pull-right").text(chromePercent);
 				$("#progressFirefox").css("width", firefoxPercent).parent().siblings(".pull-right").text(firefoxPercent);
 				$("#progressSafari").css("width", safariPercent).parent().siblings(".pull-right").text(safariPercent);
+				$("#progressIe").css("width", iePercent).parent().siblings(".pull-right").text(iePercent);
 
 				var chartData = [];
 
