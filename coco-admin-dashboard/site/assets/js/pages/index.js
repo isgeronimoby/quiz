@@ -255,9 +255,7 @@ function ReloadReports(start, end) {
 				dashboardCharts.overallLineChartData = chartData;
 				dashboardCharts.overallLineChart.dataProvider = dashboardCharts.overallLineChartData;
 
-				var dataForMap = getMaplaceRadius(response.locations);
-
-				changeMapData(dataForMap);
+				var dataForMap = dashboardCharts.addDataToMap(response.locations);
 
 				reload_charts();
 			}
