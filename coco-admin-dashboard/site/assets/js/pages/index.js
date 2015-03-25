@@ -1,23 +1,24 @@
-var dataForMap = [
+var dashboardCharts = {};
+dashboardCharts.dataForMap = [
 	{
 		lat: 51.71386,
 		lon: -0.09559,
-		number: 8000
+		number: 15
 	},
 	{
 		lat: 51.51420,
 		lon: -0.09303,
-		number: 5000
+		number: 12
 	},
 	{
 		lat: 53.51386,
 		lon: -0.09559,
-		number: 3000
+		number: 5
 	},
 	{
 		lat: 51.21420,
 		lon: -0.09303,
-		number: 1000
+		number: 2
 	}
 ];
 
@@ -38,7 +39,7 @@ $(document).ready(function(){
 			endDate: moment()
 		},
 		function(start, end) {
-			datePicker.find('span').html('From: ' + '<span class="startDate">' + start.format('MMMM D, YYYY') + '</span>'
+			datePicker.find('span').html('<span class="hidden-xs">From: </span>' + '<span class="startDate">' + start.format('MMMM D, YYYY') + '</span>'
 			+ ' to ' + '<span class="endDate">' + end.format('MMMM D, YYYY') + '</span>');
 //			ReloadReports(start, end);
 		}
@@ -93,9 +94,11 @@ $(document).ready(function(){
 		if( !$('.widget-line-statistic').hasClass('maximized') ) {
 			setTimeout(function () {
 				$('#amchart-line-graphic').height($('.widget-line-statistic').height() - 50);
+				$('body').bind('touchmove', function(e){e.preventDefault()});
 			}, 5);
 		} else {
 			$('#amchart-line-graphic').height('auto');
+			$('body').unbind('touchmove');
 		}
 		setTimeout(function(){
 			dashboardCharts.overallLineChart.validateNow();
@@ -108,9 +111,11 @@ $(document).ready(function(){
 		if( !mapWidget.hasClass('maximized') ) {
 			setTimeout(function () {
 				$('#vector-map').height(mapWidget.height());
+				$('body').bind('touchmove', function(e){e.preventDefault()});
 			}, 5);
 		} else {
 			$('#vector-map').height(minHeight);
+			$('body').unbind('touchmove');
 		}
 		setTimeout(function(){
 			google.maps.event.trigger(dashboardCharts.maplace, "resize");
@@ -119,8 +124,7 @@ $(document).ready(function(){
 	});
 	dashboardCharts.mapInit();
 
-	var mapFiltersNumber = $('#mapOptions').parent().find('ul li.divider').prevAll();
-	var mapFiltersDevices = $('#mapOptions').parent().find('ul li.divider').nextAll();
+	var mapFiltersNumber = $('#mapOptions').parent().find('ul li');
 
 	// Filtering devices by installs number
 	mapFiltersNumber.find('a').click(function(e){
@@ -129,34 +133,21 @@ $(document).ready(function(){
 		switch ($(this).attr('data-trigger')) {
 			case 'ten':
 				console.log('Show only more than ten');
+				var tempMapData =
+					dashboardCharts.dataForMap.filter(function(elem){
+						if (elem.number >= 10) return true;
+					});
+				dashboardCharts.addDataToMap(tempMapData);
 				break;
 			default:
-				console.log('Show all installs')
+				dashboardCharts.addDataToMap(dashboardCharts.dataForMap)
 		}
 
 		mapFiltersNumber.removeClass('active');
 		$(this).parent().addClass('active');
 	});
-
-	// Filtering devices by the device manufacturer
-	mapFiltersDevices.find('a').click(function(e){
-		e.preventDefault();
-
-		switch ($(this).attr('data-trigger')) {
-			case 'ios':
-				console.log('Show only iOS devices');
-				break;
-			case 'android':
-				console.log('Show only Android devices');
-				break;
-			default:
-				console.log('Show all devices')
-		}
-
-		mapFiltersDevices.removeClass('active');
-		$(this).parent().addClass('active');
-	});
-
+    
+    //ReloadReports(moment().subtract('days', 29), moment());
 
 });
 
@@ -206,6 +197,7 @@ function ReloadReports(start, end) {
 				var chrome = findApp("Chrome", response.installs);
 				var firefox = findApp("Firefox", response.installs);
 				var safari = findApp("Safari", response.installs);
+				var ie = findApp("Internet Explorer", response.installs);
 
 				dashboardCharts.appInstallsFrom.setData([
 					{ platform: 'iOS', facebook: iphone.FacebookRegistrations, emails: iphone.EmailRegistrations, annonymous: iphone.AnonymusRegistrations },
@@ -214,13 +206,13 @@ function ReloadReports(start, end) {
 
 				dashboardCharts.extInstallsBrowser.setData([
 					{ browser: 'Chrome', facebook: chrome.FacebookRegistrations, emails: chrome.EmailRegistrations, annonymous: chrome.AnonymusRegistrations },
-					{ browser: 'Safari', facebook: safari.FacebookRegistrations, emails: safari.EmailRegistrations, annonymous: safari.AnonymusRegistrations },
 					{ browser: 'Firefox', facebook: firefox.FacebookRegistrations, emails: firefox.EmailRegistrations, annonymous: firefox.AnonymusRegistrations },
-					{ browser: 'IE', facebook: 0, emails: 0, annonymous: 0 }
+					{ browser: 'Safari', facebook: safari.FacebookRegistrations, emails: safari.EmailRegistrations, annonymous: safari.AnonymusRegistrations },
+					{ browser: 'IE', facebook: ie.FacebookRegistrations, emails: ie.EmailRegistrations, annonymous: ie.AnonymusRegistrations }
 				]);
 
 				var totalMobiles = iphone.TotalInstalls + android.TotalInstalls;
-				var totalExtensions = chrome.TotalInstalls + firefox.TotalInstalls + safari.TotalInstalls;
+				var totalExtensions = chrome.TotalInstalls + firefox.TotalInstalls + safari.TotalInstalls + ie.TotalInstalls;
 
 				var iphonePercent = getPercentage(iphone.TotalInstalls, totalMobiles);
 				var androidPercent = getPercentage(android.TotalInstalls, totalMobiles);
@@ -228,6 +220,7 @@ function ReloadReports(start, end) {
 				var chromePercent = getPercentage(chrome.TotalInstalls, totalExtensions);
 				var firefoxPercent = getPercentage(firefox.TotalInstalls, totalExtensions);
 				var safariPercent = getPercentage(safari.TotalInstalls, totalExtensions);
+				var iePercent = getPercentage(ie.TotalInstalls, totalExtensions);
 
 				$("#progressIphone").css("width", iphonePercent).parent().siblings(".pull-right").text(iphonePercent);
 				$("#progressAndroid").css("width", androidPercent).parent().siblings(".pull-right").text(androidPercent);
@@ -235,6 +228,7 @@ function ReloadReports(start, end) {
 				$("#progressChrome").css("width", chromePercent).parent().siblings(".pull-right").text(chromePercent);
 				$("#progressFirefox").css("width", firefoxPercent).parent().siblings(".pull-right").text(firefoxPercent);
 				$("#progressSafari").css("width", safariPercent).parent().siblings(".pull-right").text(safariPercent);
+				$("#progressIe").css("width", iePercent).parent().siblings(".pull-right").text(iePercent);
 
 				var chartData = [];
 
@@ -252,10 +246,10 @@ function ReloadReports(start, end) {
 				dashboardCharts.overallLineChartData = chartData;
 				dashboardCharts.overallLineChart.dataProvider = dashboardCharts.overallLineChartData;
 
-				var dataForMap = getMaplaceRadius(response.locations);
+				var dataForMap = dashboardCharts.addDataToMap(response.locations);
 
-				changeMapData(dataForMap);
 
+				dashboardCharts.dataForMap = response.locations; // so I could use it for filtering
 				reload_charts();
 			}
 		},
@@ -283,7 +277,7 @@ function findApp(appName, installsObjects) {
 		return result[0];
 	else
 	{
-		return { FacebookRegistrations: 0, EmailRegistrations: 0, AnonymusRegistrations: 0 };
+		return { FacebookRegistrations: 0, EmailRegistrations: 0, AnonymusRegistrations: 0, TotalInstalls: 0 };
 	}
 };
 
@@ -397,7 +391,8 @@ function load_charts(){
 		labels: ['Facebook', 'Emails', 'Annonymous'],
 		barColors: chartColors,
 		xLabelxLabelMargin: 1,
-		xLabelAngle: 45
+		xLabelAngle: 45,
+		hideHover: 'auto'
 	});
 
 	dashboardCharts.extInstallsBrowser = Morris.Bar({
@@ -414,7 +409,8 @@ function load_charts(){
 		labels: ['Facebook', 'Emails', 'Annonymous'],
 		barColors: chartColors,
 		xLabelxLabelMargin: 1,
-		xLabelAngle: 45
+		xLabelAngle: 45,
+		hideHover: 'auto'
 	});
 
 	dashboardCharts.overallLineChart = AmCharts.makeChart("amchart-line-graphic",
@@ -477,7 +473,9 @@ function load_charts(){
 			"allLabels": [],
 			"balloon": {},
 			"legend": {
-				"useGraphSettings": true
+				"useGraphSettings": true,
+				"showEntries": true,
+				"valueText": "[[value]]" // issue FAN-1029, use empty String if problem is still there, but it mostly not the chart problem
 			},
 			"titles": [],
 			"dataProvider": dashboardCharts.overallLineChartData

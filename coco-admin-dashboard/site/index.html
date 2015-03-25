@@ -53,24 +53,7 @@
 
 </head>
 <body class="fixed-left">
-<!-- Modal Start -->
 
-<!-- Modal Logout -->
-<div class="md-modal md-just-me" id="logout-modal">
-	<div class="md-content">
-		<h3><strong>Logout</strong> Confirmation</h3>
-
-		<div>
-			<p class="text-center">Are you sure want to logout from this awesome system?</p>
-
-			<p class="text-center">
-				<button class="btn btn-danger md-close">Nope!</button>
-				<a href="login.html" class="btn btn-success md-close">Yeah, I'm sure</a>
-			</p>
-		</div>
-	</div>
-</div>
-<!-- Modal End -->
 <!-- Begin page -->
 <div id="wrapper">
 
@@ -96,12 +79,12 @@
 								class="rounded-image topbar-profile-image"><img src="./images/photo_placeholder.jpg"></span>
 							Jane <strong>Doe</strong> <i class="fa fa-caret-down"></i></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">My Profile</a></li>
+<!--							<li><a href="#">My Profile</a></li>
 							<li><a href="#">Change Password</a></li>
-							<li><a href="#">Account Setting</a></li>
+							<li><a href="#">Account Setting</a></li>-->
 							<li class="divider"></li>
 							<li><a href="#"><i class="icon-help-2"></i> Help</a></li>
-							<li><a href="lockscreen.html"><i class="icon-lock-1"></i> Lock me</a></li>
+							<!--<li><a href="lockscreen.html"><i class="icon-lock-1"></i> Lock me</a></li>-->
 							<li><a class="md-trigger" data-modal="logout-modal"><i class="icon-logout-1"></i> Logout</a>
 							</li>
 						</ul>
@@ -176,10 +159,9 @@
 
 
 <div class="row">
-	<div class="col-lg-8">&nbsp;</div>
-	<div class="col-lg-4">
+	<div class="col-lg-12">
 		<div id="reportrange" class="pull-right report-heading">
-			<i class="fa fa-calendar fa-lg"></i>
+			<i class="fa fa-calendar fa-lg hidden-xs"></i>
 			<span>Choose date range for your reports</span> <b class="caret"></b>
 		</div>
 
@@ -324,7 +306,7 @@
 
 				<div class="additional-btn">
 					<a href="#" class="widget-popout tt" title="Pop Out/In"><i class="icon-publish"></i></a>
-					<a href="#" class="widget-maximize"><i class="icon-resize-full-1"></i></a>
+					<!--<a href="#" class="widget-maximize"><i class="icon-resize-full-1"></i></a>-->
 					<a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
 				</div>
 			</div>
@@ -402,7 +384,7 @@
 
 				<div class="additional-btn">
 					<a href="#" class="widget-popout tt" title="Pop Out/In"><i class="icon-publish"></i></a>
-					<a href="#" class="widget-maximize"><i class="icon-resize-full-1"></i></a>
+					<!--<a href="#" class="widget-maximize"><i class="icon-resize-full-1"></i></a>-->
 					<a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
 				</div>
 			</div>
@@ -474,10 +456,6 @@
 					<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="mapOptions">
 						<li><a href="#" data-trigger="ten">Show only >10</a></li>
 						<li class="active"><a href="#" data-trigger="all">Show all</a></li>
-						<li class="divider"></li>
-						<li><a href="#" data-trigger="ios">iOS only</a></li>
-						<li><a href="#" data-trigger="android">Android only</a></li>
-						<li class="active"><a href="#" data-trigger="every">All devices</a></li>
 					</ul>
 
 					<a href="#" class="widget-popout tt" title="Pop Out/In"><i class="icon-publish"></i></a>
@@ -513,11 +491,31 @@
 <!-- End right content -->
 
 </div>
-
 <!-- End of page -->
+
+<!-- Modal Logout -->
+<div class="md-modal md-just-me" id="logout-modal">
+	<div class="md-content">
+		<h3><strong>Logout</strong> Confirmation</h3>
+
+		<div>
+			<p class="text-center">Are you sure want to logout from this awesome system?</p>
+
+			<p class="text-center">
+				<button class="btn btn-danger md-close">Nope!</button>
+				<a href="login.html" class="btn btn-success md-close">Yeah, I'm sure</a>
+			</p>
+		</div>
+	</div>
+</div>
+<!-- Modal End -->
 <!-- the overlay modal element -->
 <div class="md-overlay"></div>
 <!-- End of overlay modal -->
+<!-- Modal Start -->
+
+
+
 <script>
 	var resizefunc = [];
 </script>
@@ -542,10 +540,10 @@
 <script src="assets/libs/bootstrap-select2/select2.min.js"></script>
 <script src="assets/libs/date-range/moment.min.js"></script>
 <script src="assets/libs/date-range/daterangepicker.js"></script>
+<script src="assets/libs/screenfull/screenfull.min.js"></script>
 
 <script src="assets/js/init.js"></script>
 <!-- Page Specific JS Libraries -->
-<script src="assets/libs/maplace/map-init.js"></script>
 <script src="assets/libs/raphael/raphael-min.js"></script>
 <script src="assets/libs/morrischart/morris.min.js"></script>
 
@@ -554,5 +552,6 @@
 <script src="assets/libs/bootstrap-xeditable/js/bootstrap-editable.min.js"></script>
 
 <script src="assets/js/pages/index.js"></script>
+<script src="assets/libs/maplace/map-init.js"></script>
 </body>
 </html>

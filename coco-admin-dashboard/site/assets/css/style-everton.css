@@ -1750,6 +1750,9 @@ iframe {
   margin-bottom: -12px;
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
+.rounded-image img {
+  border-radius: 50%;
+}
 .topbar-profile > a {
   font-family: "Open Sans";
 }
@@ -2186,38 +2189,38 @@ button.navbar-toggle {
 #wrapper.enlarged .left.side-menu #sidebar-menu ul > li > ul {
   display: none;
 }
-#wrapper.enlarged .left.side-menu #sidebar-menu ul > li:hover > a {
+#wrapper.enlarged .left.side-menu #sidebar-menu ul > li.mouseHover > a {
   background: #00369c;
 }
 #wrapper.enlarged #sidebar-menu ul ul li a.active {
   background: #445280 !important;
 }
 #wrapper.enlarged #sidebar-menu > ul > li:hover > a.open:after,
-#wrapper.enlarged #sidebar-menu > ul > li:hover > a.active:after {
+#wrapper.enlarged #sidebar-menu > ul > li.mouseHover > a.active:after {
   display: none;
 }
-#wrapper.enlarged .left.side-menu #sidebar-menu ul > li:hover > ul {
+#wrapper.enlarged .left.side-menu #sidebar-menu ul > li.mouseHover > ul {
   position: absolute;
   left: 50px;
   width: 230px;
   display: block;
 }
-#wrapper.enlarged .left.side-menu #sidebar-menu ul ul li:hover > a {
+#wrapper.enlarged .left.side-menu #sidebar-menu ul ul li.mouseHover > a {
   background: #59646E !important;
   color: #ffffff;
 }
-#wrapper.enlarged .left.side-menu #sidebar-menu ul ul li:hover > a i {
+#wrapper.enlarged .left.side-menu #sidebar-menu ul ul li.mouseHover > a i {
   background: #59646E !important;
   color: #ffffff;
 }
-#wrapper.enlarged .left.side-menu #sidebar-menu ul ul li:hover > ul {
+#wrapper.enlarged .left.side-menu #sidebar-menu ul ul li.mouseHover > ul {
   position: absolute;
   left: 230px;
   margin-top: -36px;
   width: 230px;
   display: block;
 }
-#wrapper.enlarged .left.side-menu #sidebar-menu ul > li:hover > ul a {
+#wrapper.enlarged .left.side-menu #sidebar-menu ul > li.mouseHover > ul a {
   background: #4d5d91;
   color: #ffffff !important;
   padding-left: 10px;
@@ -2241,19 +2244,19 @@ button.navbar-toggle {
   display: none;
   padding-left: 10px;
 }
-#wrapper.enlarged .left.side-menu #sidebar-menu ul > li:hover > a span.pull-right {
+#wrapper.enlarged .left.side-menu #sidebar-menu ul > li.mouseHover > a span.pull-right {
   position: absolute;
   right: 10px;
   top: 12px;
 }
-#wrapper.enlarged .left.side-menu #sidebar-menu ul > li:hover > a {
+#wrapper.enlarged .left.side-menu #sidebar-menu ul > li.mouseHover > a {
   width: 280px;
   position: relative;
 }
 #wrapper.enlarged .left.side-menu #sidebar-menu ul > li {
   position: relative;
 }
-#wrapper.enlarged .left.side-menu #sidebar-menu ul > li:hover a span {
+#wrapper.enlarged .left.side-menu #sidebar-menu ul > li.mouseHover a span {
   display: inline;
 }
 #wrapper.enlarged .left.side-menu .navbar-form .search-button {
@@ -5726,7 +5729,7 @@ footer .footer-links a:last-child {
 .report-heading {
   margin-bottom: 15px;
   background: #ffffff;
-  padding: 10px 20px;
+  padding: 10px;
   border-radius: 2px;
 }
 .report-heading i {
