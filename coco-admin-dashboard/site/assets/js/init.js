@@ -57,6 +57,7 @@ $(document).ready(function(){
 
 	var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
 	if(isSafari) {
+		$('body').addClass('safari');
 		$('.md-just-me').removeClass('md-just-me');
 	}
 
