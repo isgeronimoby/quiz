@@ -48,9 +48,7 @@ $(document).ready(function(){
 	resizefunc.push("initscrolls");
 	resizefunc.push("changeptype");
 	$('.sparkline').sparkline('html', { enableTagOptions: true });
-
-//	ReloadReports(moment().subtract('days', 29), moment());
-
+    
 //TOOLTIP
 	$('body').tooltip({
 		selector: "[data-toggle=tooltip]",

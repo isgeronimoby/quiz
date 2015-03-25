@@ -146,6 +146,8 @@ $(document).ready(function(){
 		mapFiltersNumber.removeClass('active');
 		$(this).parent().addClass('active');
 	});
+    
+    //ReloadReports(moment().subtract('days', 29), moment());
 
 });
 
