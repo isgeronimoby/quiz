@@ -275,7 +275,7 @@ function findApp(appName, installsObjects) {
 		return result[0];
 	else
 	{
-		return { FacebookRegistrations: 0, EmailRegistrations: 0, AnonymusRegistrations: 0 };
+		return { FacebookRegistrations: 0, EmailRegistrations: 0, AnonymusRegistrations: 0, TotalInstalls: 0 };
 	}
 };
 
