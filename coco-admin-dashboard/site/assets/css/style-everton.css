@@ -797,7 +797,7 @@ h4 {
 h3 small,
 h4 small,
 h5 small {
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', Arial, sans-serif;
   font-weight: 300;
   color: #444;
 }
@@ -807,9 +807,17 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', Arial, sans-serif;
   font-weight: 300;
-  color: #505458;
+}
+body.safari h1,
+body.safari h2,
+body.safari h3,
+body.safari h4,
+body.safari h5,
+body.safari h6 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
 }
 * {
   outline: none !important;
