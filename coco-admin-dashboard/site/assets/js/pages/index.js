@@ -279,7 +279,7 @@ function findApp(appName, installsObjects) {
 	{
 		return { FacebookRegistrations: 0, EmailRegistrations: 0, AnonymusRegistrations: 0, TotalInstalls: 0 };
 	}
-};
+}
 
 function findAppInstalls(appName, installsObjects) {
 	var result = $.grep(installsObjects, function (item) {
