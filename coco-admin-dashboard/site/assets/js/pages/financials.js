@@ -1,3 +1,5 @@
+var Financials = {};
+
 $(document).ready(function(){
 
 	var datePicker = $('#reportrange');
@@ -25,12 +27,12 @@ $(document).ready(function(){
 	);
 
 	// example of the JSON
-	var tableJSON = [
+	Financials.tableJSON = [
 		{
 			appname: 'Firefox',
 			installs: 1000,
 			active: 300,
-			purchasers: 122,
+			purchasers: 1,
 			purchases: 450,
 			purchasedAmount: 301,
 			afRevenue: 15,
@@ -40,45 +42,78 @@ $(document).ready(function(){
 			appname: 'Chrome',
 			installs: 1300,
 			active: 350,
-			purchasers: 162,
+			purchasers: 12,
 			purchases: 420,
 			purchasedAmount: 256,
 			afRevenue: 18,
-			installRevenue: 1.2
+			installRevenue: 1.01
+		},
+		{
+			appname: 'Safari',
+			installs: 1300,
+			active: 350,
+			purchasers: 150,
+			purchases: 420,
+			purchasedAmount: 256,
+			afRevenue: 18,
+			installRevenue: 2.2
+		},
+		{
+			appname: 'Internet Explorer',
+			installs: 1300,
+			active: 350,
+			purchasers: 8,
+			purchases: 420,
+			purchasedAmount: 256,
+			afRevenue: 18,
+			installRevenue: 1.0
 		}
 	];
 
-	// updating data in the table
-	function addRowsToTable(data){
-
-		$.each(data, function(index, value){
+	Financials.formatTableData = function(data) {
+		var tempArray = $.extend(true, [], data);
+		$.each(tempArray, function(index, value){
 			value.purchasedAmount = '&pound;' + value.purchasedAmount;
 			value.afRevenue = '&pound;' + value.afRevenue;
 			value.installRevenue = '&pound;' + value.installRevenue.toFixed(2);
 		});
 
-		$('#export-table-apps').DataTable( {
-			dom: 'T<"clear">lfrtip',
-			tableTools: {
-				"sSwfPath": "./assets/libs/jquery-datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf"
-			},
-			paging: false,
-			info: false,
-			data: data,
-			searching: false,
-			"columns": [
-				{ "data": "appname" },
-				{ "data": "installs" },
-				{ "data": "active" },
-				{ "data": "purchasers" },
-				{ "data": "purchases" },
-				{ "data": "purchasedAmount" },
-				{ "data": "afRevenue" },
-				{ "data": "installRevenue" }
-			]
-		});
+		return tempArray;
+	};
+
+	// initializing table with default data
+	var tableExportButtonsArray = !($.browser.mobile) ? ["copy", "csv", "xls", "pdf", "print"] : [];
+	Financials.tableRows = $('#export-table-apps').DataTable({
+		dom: 'T<"clear">lfrtip',
+		tableTools: {
+			"sSwfPath": "./assets/libs/jquery-datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+			aButtons: tableExportButtonsArray
+		},
+		paging: false,
+		info: false,
+		data: Financials.formatTableData(Financials.tableJSON),
+		searching: false,
+		"columns": [
+			{ "data": "appname" },
+			{ "data": "installs" },
+			{ "data": "active" },
+			{ "data": "purchasers" },
+			{ "data": "purchases" },
+			{ "data": "purchasedAmount" },
+			{ "data": "afRevenue" },
+			{ "data": "installRevenue" }
+		],
+		columnDefs: [
+			{ type: 'natural', targets: 0 }
+		]
+	});
+
+	//update table with your data
+	Financials.updateTableRows = function(data){
+		if(data) {
+			Financials.tableRows.clear().draw();
+			Financials.tableRows.rows.add(Financials.formatTableData(data)).draw();
+		}
 	}
-
-	addRowsToTable(tableJSON);
-
 });
+
