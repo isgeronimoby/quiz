@@ -278,7 +278,7 @@ dashboardCharts.mapInit = function () {
 		center: new google.maps.LatLng(52.240496, -0.988263),
 		zoom: 7,
 		maxZoom: 9,
-		minZoom: 6,
+//		minZoom: 6,
 		disableDefaultUI: true,
 		zoomControl: true,
 		zoomControlOptions: {

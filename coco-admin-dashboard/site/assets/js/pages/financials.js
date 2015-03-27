@@ -36,7 +36,7 @@ $(document).ready(function(){
 			purchases: 450,
 			purchasedAmount: 301,
 			afRevenue: 15,
-			installRevenue: 1.5
+			installRevenue: 1.45
 		},
 		{
 			appname: 'Chrome',
@@ -46,7 +46,7 @@ $(document).ready(function(){
 			purchases: 420,
 			purchasedAmount: 256,
 			afRevenue: 18,
-			installRevenue: 1.01
+			installRevenue: 156.68
 		},
 		{
 			appname: 'Safari',
@@ -56,7 +56,7 @@ $(document).ready(function(){
 			purchases: 420,
 			purchasedAmount: 256,
 			afRevenue: 18,
-			installRevenue: 2.2
+			installRevenue: 3.37
 		},
 		{
 			appname: 'Internet Explorer',
@@ -66,7 +66,7 @@ $(document).ready(function(){
 			purchases: 420,
 			purchasedAmount: 256,
 			afRevenue: 18,
-			installRevenue: 1.0
+			installRevenue: 4.71
 		}
 	];
 
@@ -94,17 +94,14 @@ $(document).ready(function(){
 		data: Financials.formatTableData(Financials.tableJSON),
 		searching: false,
 		"columns": [
-			{ "data": "appname" },
-			{ "data": "installs" },
-			{ "data": "active" },
-			{ "data": "purchasers" },
-			{ "data": "purchases" },
-			{ "data": "purchasedAmount" },
-			{ "data": "afRevenue" },
-			{ "data": "installRevenue" }
-		],
-		columnDefs: [
-			{ type: 'natural', targets: 0 }
+			{ "data": "appname", type: 'natural' },
+			{ "data": "installs", type: 'natural' },
+			{ "data": "active", type: 'natural' },
+			{ "data": "purchasers", type: 'natural' },
+			{ "data": "purchases", type: 'natural' },
+			{ "data": "purchasedAmount", type: 'natural' },
+			{ "data": "afRevenue", type: 'natural' },
+			{ "data": "installRevenue", type: 'natural' }
 		]
 	});
 
