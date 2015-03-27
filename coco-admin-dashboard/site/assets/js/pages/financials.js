@@ -112,5 +112,32 @@ $(document).ready(function(){
 			Financials.tableRows.rows.add(Financials.formatTableData(data)).draw();
 		}
 	}
+
+	ReloadReports(moment().subtract('days', 29), moment());
 });
 
+function ReloadReports(start, end) {
+	$.ajax({
+		type: "POST",
+		url: getFinancialsUrl,
+		data: { From: start.format("YYYY-MM-DD"), To: end.format("YYYY-MM-DD") },
+		dataType: "json",
+		success: function (response) {
+			if (response.status == "success") {
+				setTotalValue("#totalUsersEarned", response.totals.UsersEarned);
+				setTotalValue("#totalDonations", response.totals.Donations);
+				setTotalValue("#totalLRProfit", response.totals.LRProfit);
+				setTotalValue("#totalAffiliateRevenue", response.totals.TotalAffiliateRevenue);
+
+				$('.animate-number').each(function () {
+					$(this).animateNumbers($(this).attr("data-value"), true, parseInt($(this).attr("data-duration")));
+				});
+
+				Financials.updateTableRows(response.tableData);
+			}
+		},
+		error: function (error) {
+			console.log(error);
+		}
+	});
+}

@@ -319,3 +319,9 @@ function toggle_fullscreen(){
 		else screenfull.exit();
 	}
 }
+function setTotalValue(id, totalCount) {
+	if (totalCount == null)
+		totalCount = 0;
+
+	$(id).attr("data-value", totalCount);
+}
