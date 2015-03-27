@@ -155,9 +155,6 @@ $(document).ready(function(){
 });
 
 
-
-
-
 function reload_charts(){
 	dashboardCharts.overallLineChart.validateData(); // call this method after data in graphic changed
 	dashboardCharts.appInstallsFrom.draw();
@@ -249,9 +246,7 @@ function ReloadReports(start, end) {
 				dashboardCharts.overallLineChartData = chartData;
 				dashboardCharts.overallLineChart.dataProvider = dashboardCharts.overallLineChartData;
 
-				var dataForMap = dashboardCharts.addDataToMap(response.locations);
-
-
+				dashboardCharts.addDataToMap(response.locations);
 				dashboardCharts.dataForMap = response.locations; // so I could use it for filtering
 				reload_charts();
 			}
@@ -260,15 +255,6 @@ function ReloadReports(start, end) {
 			console.log(error);
 		}
 	});
-
-	
-}
-
-function setTotalValue(id, totalCount) {
-	if (totalCount == null)
-		totalCount = 0;
-
-	$(id).attr("data-value", totalCount);
 }
 
 function findApp(appName, installsObjects) {
@@ -313,7 +299,7 @@ function setPercentageDynamics(prevNumber, currentNumber, text, span) {
 		return;
 	}
 
-	var percentage = Math.round(((currentNumber - prevNumber) / (currentNumber)) * 100);
+	var percentage = Math.round(((currentNumber - prevNumber) / (prevNumber)) * 100);
 
 	if (percentage == 0) {
 		span.hide();
@@ -478,7 +464,7 @@ function load_charts(){
 			"legend": {
 				"useGraphSettings": true,
 				"showEntries": true,
-				"valueText": "[[value]]" // issue FAN-1029, use empty String if problem is still there, but it mostly not the chart problem
+				"valueText": " " // issue FAN-1029, use empty String if problem is still there, but it mostly not the chart problem
 			},
 			"titles": [],
 			"dataProvider": dashboardCharts.overallLineChartData
