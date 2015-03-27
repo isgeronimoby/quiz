@@ -635,8 +635,24 @@
         // when a date is typed into the start to end date textboxes
         inputsChanged: function (e) {
             var el = $(e.target);
-            var date = moment(el.val(), this.format);
+
+			var dateFirstPart = (/^.+[ /.-]/.exec(el.val()))[0];
+			var dateYearPart = (/[0-9]+?$/.exec(el.val()))[0];
+
+			if ( dateYearPart.length >= 4 ) {
+				if ( dateYearPart < 2000 ) dateYearPart = 2000;
+				if ( dateYearPart > 2030 ) dateYearPart = 2030;
+			} else if (dateYearPart === 3){
+				dateYearPart = '';
+			} else {
+				dateYearPart = '2000'.substring(0, 4 - dateYearPart.length) + dateYearPart;
+			}
+
+			var input = dateFirstPart + dateYearPart;
+
+            var date = moment(input, this.format);
             if (!date.isValid()) return;
+
 
             var startDate, endDate;
             if (el.attr('name') === 'daterangepicker_start') {

@@ -22,9 +22,6 @@
 		-ms-overflow-style: -ms-autohiding-scrollbar;
 		-webkit-overflow-scrolling: touch;
 	}
-	.widget-maximize {
-		display: none;
-	}
 	.table-responsive > .table {
 		margin-bottom: 0;
 	}
@@ -94,7 +91,7 @@
 /*Phone*/
 @media (max-width: 767px) {
 	body{overflow-x: hidden;}
-	.widget-maximize {display: none;}
+	.widget-maximize, .widget-toggle, .widget-popout {display: none;}
 	.mobile-sidebar{left: 0px;}
 	.mobile-content{left: 250px;right: -250px;}
 	.box-info table{margin: 0 0 0 0;}
@@ -207,7 +204,7 @@
 	.gallery-wrap .column,.gallery-wrap .column-3,.gallery-wrap .column-4{width: 33.33333333333333%;}
 	.gallery-wrap .column .inner .img-wrap,.gallery-wrap .column-3 .inner .img-wrap,.gallery-wrap .column-4 .inner .img-wrap{height: 70px;}
 	.login-wrap{margin: 20px 0 0 0;}
-	
+
 	.navbar-default {
 	  border: none;
 	}
@@ -246,6 +243,14 @@
 		margin-left: 15px;
 	}
 	.button-menu-mobile{display: block;}
+
+	.simple-progress-bars > div:nth-child(2){
+		width: 100%;
+	}
+	.simple-progress-bars > div:first-child {
+		display: none;
+		width: 0;
+	}
 }
 
 @media (max-width: 420px){
