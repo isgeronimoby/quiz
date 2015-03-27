@@ -27,6 +27,9 @@ $(document).ready(function(){
 	var datePicker = $('#reportrange');
 	datePicker.daterangepicker(
 		{
+			format: 'DD-MM-YYYY',
+			minDate: '01/01/2012',
+			maxDate: '12/31/2018',
 			ranges: {
 				'Today': [moment(), moment()],
 				'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
