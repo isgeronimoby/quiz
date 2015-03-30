@@ -641,7 +641,6 @@ i.i-xs {
 }
 
 .navbar-nav > li > .dropdown-menu.grid-dropdown{
-	width: 300px;
 	text-align: center;
 	font-size: 16px;
 	color: @darkblue-1;
@@ -657,8 +656,8 @@ i.i-xs {
 	font-weight: 300;
 	font-family: "Open Sans";
 	vertical-align: middle;
-	opacity: 0.7;
-	cursor:default;
+	opacity: 1;
+	cursor:pointer;
 }
 
 .navbar-nav > li > .dropdown-menu.grid-dropdown a.clickable:hover{
@@ -676,6 +675,17 @@ i.i-xs {
 	height:30px;
 	display: block;
 	color: darken(@lightblue-1,25%);
+}
+
+.navbar-nav > li > .dropdown-menu.grid-dropdown a img{
+  height:40px;
+  width: 40px;
+  display: block;
+  opacity: 0.7;
+}
+
+.navbar-nav > li > .dropdown-menu.grid-dropdown a img:hover{
+  opacity: 1;
 }
 
 .navbar-nav > li > .dropdown-menu.grid-dropdown a.clickable{
