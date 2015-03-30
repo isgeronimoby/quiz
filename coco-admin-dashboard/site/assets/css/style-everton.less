@@ -10,6 +10,8 @@
 @color-club-gold: #D0A638;
 @color-club-gold-dark: #93721D;
 @color-club-grey-dark: #364158;
+@color-club-cru: #e40085;
+
 
 /* COMMON COLORS */
 @transparent: rgba(0,0,0,0);
@@ -42,6 +44,7 @@
 @maincolor: #f5f5ff;
 @hovercolor: #68C39F;
 @topbar_color: @color-club-brand;
+@topbar_color_cru: @color-club-cru;
 @topbar_left_color: @color-club-brand;
 @brand_color: #343838;
 @contentbg: #E4E6F0;
@@ -1271,6 +1274,10 @@ iframe {
 	box-shadow: 1px 0 3px 0 rgba(0,0,0,0.2);
 }
 
+body.cru .topbar {
+  background:@topbar_color_cru;
+}
+
 .topbar .topbar-left{
 	float:left;
 	height:50px;
@@ -1279,9 +1286,26 @@ iframe {
 	width:@left_sidebar_width;
 	background: @topbar_left_color;
 }
+body.cru .topbar .topbar-left{
+  background: @topbar_color_cru;
+}
 
-.logo{
+.logo a{
+	display: inline-block;
+	height: 30px;
+	width: 104px;
+	background: url('../img/logo-everton.png') no-repeat;
+	vertical-align: middle;
+}
 
+body.cru .logo a{
+  display: inline-block;
+  height: 37px;
+  width: 240px;
+  background: url('../img/logo-cru.png') no-repeat;
+  vertical-align: middle;
+  background-size: cover;
+  margin-left: -40px;
 }
 
 .logo h1{

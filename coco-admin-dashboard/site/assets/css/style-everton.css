@@ -1737,6 +1737,9 @@ iframe {
   -webkit-box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.2);
   box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.2);
 }
+body.cru .topbar {
+  background: #e40085;
+}
 .topbar .topbar-left {
   float: left;
   height: 50px;
@@ -1744,6 +1747,25 @@ iframe {
   z-index: 1;
   width: 280px;
   background: #00369c;
+}
+body.cru .topbar .topbar-left {
+  background: #e40085;
+}
+.logo a {
+  display: inline-block;
+  height: 30px;
+  width: 104px;
+  background: url('../img/logo-everton.png') no-repeat;
+  vertical-align: middle;
+}
+body.cru .logo a {
+  display: inline-block;
+  height: 37px;
+  width: 240px;
+  background: url('../img/logo-cru.png') no-repeat;
+  vertical-align: middle;
+  background-size: cover;
+  margin-left: -40px;
 }
 .logo h1 {
   margin: 0px auto;
