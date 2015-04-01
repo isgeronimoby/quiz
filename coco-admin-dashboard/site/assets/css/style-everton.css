@@ -1738,7 +1738,7 @@ iframe {
   box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.2);
 }
 body.cru .topbar {
-  background: #e40085;
+  background: #ffffff;
 }
 .topbar .topbar-left {
   float: left;
@@ -1749,7 +1749,7 @@ body.cru .topbar {
   background: #00369c;
 }
 body.cru .topbar .topbar-left {
-  background: #e40085;
+  background: #ffffff;
 }
 .logo a {
   display: inline-block;
@@ -1788,7 +1788,6 @@ body.cru .logo a {
 }
 .navbar-right .iconify > a > i {
   font-size: 18px;
-  color: #ffffff;
   line-height: 17px;
 }
 .navbar-right .iconify > a:hover > i {
@@ -1969,7 +1968,11 @@ body.fixed-left .left-footer {
   color: #ffffff;
   border: none;
 }
-.button-menu-mobile:hover {
+body.cru .button-menu-mobile {
+  color: #000000;
+}
+.button-menu-mobile:hover,
+body.cru .button-menu-mobile:hover {
   color: #afb3bf;
 }
 button.navbar-toggle {
@@ -5779,8 +5782,12 @@ footer .footer-links a:last-child {
   color: #ffffff;
 }
 .navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
+.navbar-default .navbar-nav > li > a:focus,
+body.cru .navbar-default .navbar-nav > li > a:hover {
   color: #afb3bf;
+}
+body.cru .navbar-default .navbar-nav > li > a {
+  color: #000000;
 }
 /*.ui-sortable-placeholder {
   	margin-left: 0 !important;

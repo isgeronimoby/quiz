@@ -10,7 +10,7 @@
 @color-club-gold: #D0A638;
 @color-club-gold-dark: #93721D;
 @color-club-grey-dark: #364158;
-@color-club-cru: #e40085;
+@color-club-cru: #fff;
 
 
 /* COMMON COLORS */
@@ -1332,7 +1332,7 @@ body.cru .logo a{
 
 .navbar-right .iconify > a > i{
 	font-size:18px;
-	color:@white-1;
+//	color:@white-1;
 	line-height:17px;
 }
 
@@ -1559,7 +1559,11 @@ body.fixed-left .left-footer {
 	border: none;
 }
 
-.button-menu-mobile:hover {
+body.cru .button-menu-mobile {
+  color: #000000;
+}
+
+.button-menu-mobile:hover, body.cru .button-menu-mobile:hover {
 	color:@lightblue-1;
 }
 
@@ -5728,8 +5732,12 @@ footer .footer-links a:last-child{
 .navbar-default .navbar-nav > li > a {
 	color: @white-1;
 }
-.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus, body.cru .navbar-default .navbar-nav > li > a:hover {
 	color: @lightblue-1;
+}
+
+body.cru .navbar-default .navbar-nav > li > a {
+  color: #000000;
 }
 /*.ui-sortable-placeholder {
   	margin-left: 0 !important;
