@@ -2634,6 +2634,9 @@ button.navbar-toggle {
   border-radius: 0 0 2px 2px;
   max-height: 370px;
 }
+.widget-content.widget-content-unlimited {
+  max-height: none;
+}
 .widget-content.widget-square {
   height: 370px;
 }
@@ -3068,6 +3071,7 @@ button.navbar-toggle {
 .widget table tr td {
   padding-left: 15px;
   padding-right: 15px;
+  vertical-align: middle;
 }
 .widget .widget-icon {
   font-size: 50px;
