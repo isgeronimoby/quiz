@@ -82,7 +82,7 @@ $(document).ready(function(){
 	};
 
 	// initializing table with default data
-	var tableExportButtonsArray = !($.browser.mobile) ? ["copy", "csv", "xls", "pdf", "print"] : [];
+	var tableExportButtonsArray = !($.browser.mobile) ? ["copy", "csv", "xls", "pdf"] : [];
 	Financials.tableRows = $('#export-table-apps').DataTable({
 		dom: 'T<"clear">lfrtip',
 		tableTools: {
@@ -111,7 +111,7 @@ $(document).ready(function(){
 			Financials.tableRows.clear().draw();
 			Financials.tableRows.rows.add(Financials.formatTableData(data)).draw();
 		}
-	}
+	};
 
 	ReloadReports(moment().subtract('days', 29), moment());
 });

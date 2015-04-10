@@ -209,11 +209,27 @@ $(document).on("click", ".widget", function(){
 	$('#sidebar-menu ul > li').on('click', function () {
 		$(this).toggleClass('mouseHover');
 	});
+	$('button.button-menu-mobile.open-left').click(function(){
+		$('#sidebar-menu ul > li').removeClass('mouseHover');
+	});
 
 // HIDING FULLSCREEN BUTTON IF IT IS NOT AVAILABLE
 	if (screenfull.enabled) {
 		$('.icon-resize-full-2').parent().show();
 	} else $('.icon-resize-full-2').parent().hide();
+
+
+	// on androids lower than 4.4 no popup on logout, just simple logout
+	var uag = window.navigator.userAgent.toLowerCase();
+	if (uag.indexOf("android") > 0) {
+		var androidversion = parseFloat(uag.slice(uag.indexOf("android") + 8));
+		if (androidversion <= 4.4) {
+			$('a[data-modal="logout-modal"]').click(function(e){
+				window.location.href = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + $('#logout-modal a.btn.btn-success.md-close').attr('href');
+			});
+
+		}
+	}
 
 });
 
