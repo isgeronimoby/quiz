@@ -231,6 +231,10 @@ $(document).on("click", ".widget", function(){
 		}
 	}
 
+	$('.dropdown > ul li a').click(function(e){
+		$(this).parent().parent().parent().find('button').html( $(this).html() );
+	});
+
 });
 
 var debounce = function(func, wait, immediate) {

@@ -5790,3 +5790,45 @@ body.cru .navbar-default .navbar-nav > li > a {
  	display: none !important;
 }
 
+/* Other custom styles */
+.dropdown {
+	margin-bottom: 15px;
+}
+
+@media all and (max-width:600px) {
+  .pull-left.dropdown, .pull-left.dropdown button, .pull-left.dropdown ul {
+  	width: 100%;
+  }
+  .report-heading {
+  	width: 100%;
+  }
+}
+
+.btn-default.dropdown-generic {
+  background-color: #ffffff;
+  border: 0;
+  color: #000000;
+  padding: 10px;
+  padding-right: 24px;
+  border-radius: 2px;
+  position: relative;
+}
+.dropdown .btn-default.dropdown-generic:after {
+  position:absolute;
+  font-family: FontAwesome;
+  right: 8px;
+  content: "\f107";
+}
+.dropdown.open .btn-default.dropdown-generic:after {
+  content: "\f106";
+}
+.btn-default.dropdown-generic:hover, .btn-default.dropdown-generic:focus, .btn-default.dropdown-generic:active,
+.btn-default.dropdown-generic.active, .open .dropdown-toggle.dropdown-generic.btn-default {
+  background-color: #ffffff;
+  border: 0;
+  color: #000000;
+}
+
+.dropdown .dropdown-menu li b {
+	text-transform: uppercase;
+}

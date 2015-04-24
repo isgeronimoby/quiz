@@ -1,4 +1,4 @@
-var Analytics = {};
+var Campaigns = {};
 
 $(document).ready(function(){
 
@@ -26,7 +26,7 @@ $(document).ready(function(){
 		}
 	);
 
-	Analytics.funnelAllTrafficSource = [
+	Campaigns.funnelAllTrafficSource = [
 		{
 			"title": "Website visits",
 			"value": 300
@@ -57,7 +57,7 @@ $(document).ready(function(){
 		}
 	];
 
-	Analytics.amchartFunnelAllTraffic = AmCharts.makeChart("amchart-funnel-traffic",
+	Campaigns.amchartFunnelAllTraffic = AmCharts.makeChart("amchart-funnel-traffic",
 		{
 			"type": "funnel",
 			"pathToImages": "http://cdn.amcharts.com/lib/3/images/",
@@ -72,12 +72,12 @@ $(document).ready(function(){
 			"startY": 100,
 			"valueRepresents": "area",
 			"colors": [
-				"#010173",
-				"#235B8C",
-				"#4586BF",
-				"#73B2D9",
-				"#9CC8D9",
-				"#4F818C",
+				"#adb7b7",
+				"#4c5160",
+				"#73c39c",
+				"#f6c442",
+				"#d75953",
+				"#75b9d8",
 				"#F0900D",
 				"#02029B"
 			],
@@ -110,11 +110,17 @@ $(document).ready(function(){
 				"verticalPadding": 12
 			},
 			"titles": [],
-			"dataProvider": Analytics.funnelAllTrafficSource
+			"dataProvider": Campaigns.funnelAllTrafficSource,
+			"export": {
+				"enabled": true,
+				"libs": {
+					"path": "./assets/libs/amcharts/plugins/export/libs/"
+				}
+			}
 		}
 	);
 
-	Analytics.amchartFunnelFacebook = AmCharts.makeChart("amchart-funnel-facebook",
+	Campaigns.amchartFunnelFacebook = AmCharts.makeChart("amchart-funnel-facebook",
 		{
 			"type": "funnel",
 			"pathToImages": "http://cdn.amcharts.com/lib/3/images/",
@@ -129,7 +135,7 @@ $(document).ready(function(){
 			"startX": 400,
 			"startY": 100,
 			"valueRepresents": "area",
-			"colors": Analytics.amchartFunnelAllTraffic.colors,
+			"colors": Campaigns.amchartFunnelAllTraffic.colors,
 			"gradientRatio": [],
 			"labelTickAlpha": 0.25,
 			"marginBottom": 40,
@@ -145,13 +151,13 @@ $(document).ready(function(){
 			"valueField": "value",
 			"handDrawScatter": 1,
 			"allLabels": [],
-			"balloon": Analytics.amchartFunnelAllTraffic.balloon,
+			"balloon": Campaigns.amchartFunnelAllTraffic.balloon,
 			"titles": [],
-			"dataProvider": Analytics.funnelAllTrafficSource
+			"dataProvider": Campaigns.funnelAllTrafficSource
 		}
 	);
 
-	Analytics.amchartFunnelTwitter = AmCharts.makeChart("amchart-funnel-twitter",
+	Campaigns.amchartFunnelAdwords = AmCharts.makeChart("amchart-funnel-adwords",
 		{
 			"type": "funnel",
 			"pathToImages": "http://cdn.amcharts.com/lib/3/images/",
@@ -166,7 +172,7 @@ $(document).ready(function(){
 			"startX": 400,
 			"startY": 100,
 			"valueRepresents": "area",
-			"colors": Analytics.amchartFunnelAllTraffic.colors,
+			"colors": Campaigns.amchartFunnelAllTraffic.colors,
 			"gradientRatio": [],
 			"labelTickAlpha": 0.25,
 			"marginBottom": 40,
@@ -182,36 +188,152 @@ $(document).ready(function(){
 			"valueField": "value",
 			"handDrawScatter": 1,
 			"allLabels": [],
-			"balloon": Analytics.amchartFunnelAllTraffic.balloon,
+			"balloon": Campaigns.amchartFunnelAllTraffic.balloon,
 			"titles": [],
-			"dataProvider": Analytics.funnelAllTrafficSource
+			"dataProvider": Campaigns.funnelAllTrafficSource
 		}
 	);
 
-	Analytics.reloadFunnels = function(){
-		Analytics.amchartFunnelAllTraffic.validateData();
-		Analytics.amchartFunnelFacebook.validateData();
-		Analytics.amchartFunnelTwitter.validateData();
+	Campaigns.amchartFunnelBing = AmCharts.makeChart("amchart-funnel-bing",
+		{
+			"type": "funnel",
+			"pathToImages": "http://cdn.amcharts.com/lib/3/images/",
+			"angle": 35,
+			"balloonText": "[[title]]:<b>[[value]]</b>",
+			"baseWidth": "100%",
+			"depth3D": 150,
+			"labelPosition": "right",
+			"neckHeight": "0%",
+			"neckWidth": "0%",
+			"labelsEnabled": false,
+			"startX": 400,
+			"startY": 100,
+			"valueRepresents": "area",
+			"colors": Campaigns.amchartFunnelAllTraffic.colors,
+			"gradientRatio": [],
+			"labelTickAlpha": 0.25,
+			"marginBottom": 40,
+			"marginLeft": 40,
+			"marginRight": 40,
+			"marginTop": 40,
+			"outlineAlpha": 0.16,
+			"outlineThickness": 2,
+			"pullOutEffect": "easeInSine",
+			"pullOutOnlyOne": true,
+			"startEffect": "easeOutSine",
+			"titleField": "title",
+			"valueField": "value",
+			"handDrawScatter": 1,
+			"allLabels": [],
+			"balloon": Campaigns.amchartFunnelAllTraffic.balloon,
+			"titles": [],
+			"dataProvider": Campaigns.funnelAllTrafficSource
+		}
+	);
 
-		Analytics.amchartFunnelAllTraffic.validateNow();
-		Analytics.amchartFunnelFacebook.validateNow();
-		Analytics.amchartFunnelTwitter.validateNow();
+	Campaigns.amchartFunnelAllTraffic.dataProvider = Campaigns.funnelAllTrafficSource;
+
+
+
+
+// example of the JSON
+	Campaigns.tableJSON = [
+		{
+			source: 'All Traffic',
+			clicks: 1000,
+			installs: 300,
+			signups: 1,
+			sharefacebook: 450,
+			sharetwitter: 301,
+			linkeddevices: 15,
+			mobilebilling: 1.45
+		},
+		{
+			source: 'Adwords',
+			clicks: 1000,
+			installs: 300,
+			signups: 1,
+			sharefacebook: 450,
+			sharetwitter: 301,
+			linkeddevices: 15,
+			mobilebilling: 1.45
+		},
+		{
+			source: 'BING',
+			clicks: 1000,
+			installs: 300,
+			signups: 1,
+			sharefacebook: 450,
+			sharetwitter: 301,
+			linkeddevices: 15,
+			mobilebilling: 1.45
+		}
+	];
+
+	// initializing table with default data
+	var tableExportButtonsArray = !($.browser.mobile) ? ["copy", "csv", "xls", "pdf"] : [];
+	Campaigns.tableRows = $('#export-table-apps').DataTable({
+		dom: 'T<"clear">lfrtip',
+		tableTools: {
+			"sSwfPath": "./assets/libs/jquery-datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+			aButtons: tableExportButtonsArray
+		},
+		paging: false,
+		info: false,
+		data: Campaigns.tableJSON,
+		searching: false,
+		"columns": [
+			{ "data": "source", type: 'natural' },
+			{ "data": "clicks", type: 'natural' },
+			{ "data": "installs", type: 'natural' },
+			{ "data": "signups", type: 'natural' },
+			{ "data": "sharefacebook", type: 'natural' },
+			{ "data": "sharetwitter", type: 'natural' },
+			{ "data": "linkeddevices", type: 'natural' },
+			{ "data": "mobilebilling", type: 'natural' }
+		]
+	});
+
+	//update table with your data
+	Campaigns.updateTableRows = function( data ){
+		if( data ) {
+			Campaigns.tableRows.clear().draw();
+			Campaigns.tableRows.rows.add( data ).draw();
+		}
 	};
-	Analytics.amchartFunnelAllTraffic.dataProvider = Analytics.funnelAllTrafficSource;
+
+	Campaigns.reloadFunnels = function(){
+		Campaigns.amchartFunnelAllTraffic.validateData();
+		Campaigns.amchartFunnelFacebook.validateData();
+		Campaigns.amchartFunnelAdwords.validateData();
+		Campaigns.amchartFunnelBing.validateData();
+
+		Campaigns.amchartFunnelAllTraffic.validateNow();
+		Campaigns.amchartFunnelFacebook.validateNow();
+		Campaigns.amchartFunnelAdwords.validateNow();
+		Campaigns.amchartFunnelBing.validateNow();
+	};
+
+	// Select campaign list
+	$('.dropdown > ul li a').click(function(e){
+		e.preventDefault();
+		// do something
+	});
+
 
 	$(window).resize(function(){
 		if ( window.outerHeight == screen.availHeight || window.outerWidth == screen.availWidth ) {
 			setTimeout(function(){
-				Analytics.reloadFunnels();
+				Campaigns.reloadFunnels();
 			}, 300);
 		}
-		Analytics.reloadFunnels();
+		Campaigns.reloadFunnels();
 	});
 
 	// hack to force funnels reloading if small-screen detected
 	setTimeout(function(){
 		if ( $('body').hasClass('smallscreen') ) {
-			Analytics.reloadFunnels();
+			Campaigns.reloadFunnels();
 		}
 	}, 1000);
 });

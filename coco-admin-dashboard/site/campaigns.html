@@ -21,6 +21,7 @@
 	<!-- Code Highlighter for Demo -->
 
 	<!-- Extra CSS Libraries Start -->
+	<link href="assets/libs/amcharts/plugins/export/export.css" rel="stylesheet" type="text/css"/>
 	<link href="assets/libs/bootstrap-xeditable/css/bootstrap-editable.css" rel="stylesheet" type="text/css"/>
 	<link href="assets/libs/jquery-datatables/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="assets/libs/jquery-datatables/extensions/TableTools/css/dataTables.tableTools.css" rel="stylesheet" type="text/css" />
@@ -48,6 +49,7 @@
 	<!-- amchart scripts -->
 	<script type="text/javascript" src="./assets/libs/amcharts/amcharts.js"></script>
 	<script type="text/javascript" src="./assets/libs/amcharts/funnel.js"></script>
+	<script type="text/javascript" src="./assets/libs/amcharts/plugins/export/export.min.js"></script>
 	<script type="text/javascript" src="./assets/libs/amcharts/serial.js"></script>
 	<script type="text/javascript" src="./assets/libs/amcharts/light.js"></script>
 
@@ -175,113 +177,20 @@
 			<span>Choose date range for your reports</span> <b class="caret"></b>
 		</div>
 
+		<div class="pull-left dropdown">
+			<button class="btn btn-default dropdown-toggle dropdown-generic" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+				Select Campaign
+			</button>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Campaign: <b>1001 - Signed Tshirt prize draw</b></a></li>
+				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Campaign: <b>1002 - Lamborgini prize draw</b></a></li>
+				<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Campaign: <b>1003 - Sluty Girls prize draw</b></a></li>
+			</ul>
+		</div>
+
 	</div>
 </div>
 
-<!-- Start info box -->
-<div class="row top-summary">
-	<div class="col-lg-3 col-md-6">
-		<div class="widget lightblue-1">
-			<div class="widget-content padding">
-				<div class="widget-icon">
-
-				</div>
-				<div class="text-box">
-					<p class="maindata">SITE <b>CLICKS</b></p>
-
-					<h2>&pound;<span class="animate-number" data-value="25153" data-duration="3000">0</span></h2>
-
-					<div class="clearfix"></div>
-				</div>
-			</div>
-			<div class="widget-footer">
-				<div class="row">
-					<div class="col-sm-12">
-
-					</div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-
-	<div class="col-lg-3 col-md-6">
-		<div class="widget green-1">
-			<div class="widget-content padding">
-				<div class="widget-icon">
-
-				</div>
-				<div class="text-box">
-					<p class="maindata">APP <b>INSTALLS</b></p>
-
-					<h2>&pound;<span class="animate-number" data-value="6399" data-duration="3000">0</span></h2>
-
-					<div class="clearfix"></div>
-				</div>
-			</div>
-			<div class="widget-footer">
-				<div class="row">
-					<div class="col-sm-12">
-
-					</div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-
-	<div class="col-lg-3 col-md-6">
-		<div class="widget orange-4">
-			<div class="widget-content padding">
-				<div class="widget-icon">
-
-				</div>
-				<div class="text-box">
-					<p class="maindata">TOTAL <b>SIGNUPS</b></p>
-
-					<h2>&pound;<span class="animate-number" data-value="70389" data-duration="3000">0</span></h2>
-
-					<div class="clearfix"></div>
-				</div>
-			</div>
-			<div class="widget-footer">
-				<div class="row">
-					<div class="col-sm-12">
-
-					</div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-
-	<div class="col-lg-3 col-md-6">
-		<div class="widget darkblue-2">
-			<div class="widget-content padding">
-				<div class="widget-icon">
-
-				</div>
-				<div class="text-box">
-					<p class="maindata">COMPLETE <b>ALL ACTIONS</b></p>
-
-					<h2>&pound;<span class="animate-number" data-value="18648" data-duration="3000">0</span></h2>
-
-					<div class="clearfix"></div>
-				</div>
-			</div>
-			<div class="widget-footer">
-				<div class="row">
-					<div class="col-sm-12">
-
-					</div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-
-</div>
-<!-- End of info box -->
 
 	<div class="row">
 		<div class="col-lg-12">
@@ -333,7 +242,7 @@
 		<div class="col-lg-4">
 			<div class="widget widget-line-statistic">
 				<div class="widget-header transparent">
-					<h2><i class="icon-chart-line"></i> <strong>Twitter</strong> Traffic</h2>
+					<h2><i class="icon-chart-line"></i> <strong>Adwords</strong> Traffic</h2>
 
 					<div class="additional-btn">
 						<a href="#" class="widget-popout tt" title="Pop Out/In"><i class="icon-publish"></i></a>
@@ -344,9 +253,82 @@
 					<div class="statistic-chart">
 						<div class="row stacked">
 							<div class="col-sm-12">
-								<div id="amchart-funnel-twitter" class="morris-chart"></div>
+								<div id="amchart-funnel-adwords" class="morris-chart"></div>
 							</div>
 						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-4">
+			<div class="widget widget-line-statistic">
+				<div class="widget-header transparent">
+					<h2><i class="icon-chart-line"></i> <strong>Bing</strong> Traffic</h2>
+
+					<div class="additional-btn">
+						<a href="#" class="widget-popout tt" title="Pop Out/In"><i class="icon-publish"></i></a>
+						<a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+					</div>
+				</div>
+				<div class="widget-content">
+					<div class="statistic-chart">
+						<div class="row stacked">
+							<div class="col-sm-12">
+								<div id="amchart-funnel-bing" class="morris-chart"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="widget widget-line-statistic">
+				<div class="widget-header transparent">
+					<h2><i class="icon-export-1"></i> <strong>Export</strong> Data</h2>
+
+					<div class="additional-btn">
+						<a href="#" class="widget-popout tt" title="Pop Out/In"><i class="icon-publish"></i></a>
+						<a href="#" class="widget-maximize"><i class="icon-resize-full-1"></i></a>
+						<a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+					</div>
+				</div>
+				<div class="widget-content widget-content-unlimited">
+					<br>
+					<div class="table-responsive">
+						<form class='form-horizontal' role='form'>
+							<table id="export-table-apps" class="table table-striped table-bordered" cellspacing="0" width="100%">
+								<thead>
+								<tr>
+									<th>Sources</th>
+									<th>Clicks</th>
+									<th>Installs</th>
+									<th>Sign Ups</th>
+									<th>Share on FB</th>
+									<th>Share on TW</th>
+									<th>Linked Devices</th>
+									<th>Mobile Billing</th>
+								</tr>
+								</thead>
+
+								<tbody>
+								<tr>
+									<td>Source</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								</tbody>
+							</table>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -425,6 +407,11 @@
 
 <script src="assets/js/init.js"></script>
 <!-- Page Specific JS Libraries -->
+
+<script src="assets/libs/jquery-datatables/js/jquery.dataTables.min.js"></script>
+<script src="assets/libs/jquery-datatables/js/dataTables.bootstrap.js"></script>
+<script src="assets/libs/jquery-datatables/extensions/TableTools/js/dataTables.tableTools.min.js"></script>
+<script src="assets/libs/jquery-datatables/extensions/NaturalSorting/natural.js"></script>
 
 <script src="assets/js/pages/campaigns.js"></script>
 </body>
