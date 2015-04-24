@@ -16,7 +16,7 @@
 			position: absolute;
 			top: 0;
 			left: 0;
-			background: url('http://static.guim.co.uk/sys-images/Football/Pix/pictures/2015/1/8/1420724254803/everton-training-012.jpg');
+			background: url('everton-training.jpg');
 			background-size: cover;
 			background-position: center;
 		}
@@ -136,8 +136,18 @@
 			font-size: 28px;
 			line-height: 22px;
 		}
+		.quiz-holder .winning-flow > p.wrong:before {
+			font-size: 42px;
+			font-weight: 700;
+			content: "\00D7";
+			color: #f13a0c;
+		}
 
-		form, .q_answer, .winning-flow, #bill {
+		.color-wrong {
+			color: #f13a0c;
+		}
+
+		form, .q_answer, .q_wrong, .winning-flow, #bill, .add-info {
 			display: none;
 		}
 		#q1 {
@@ -152,6 +162,7 @@
 
 	<div class="quiz-holder">
 		<div class="quiz-content">
+
 			<form id="q1">
 				<h2>Who was Everton's manager before Martinez?</h2>
 				<div class="inputHolder">
@@ -167,7 +178,14 @@
 						David Moyes was Everton's manager before Martinez</h2>
 					<p>David Moyes</p>
 				</div>
+				<div class="q_wrong">
+					<h2><span class="color-wrong">Incorrect!</span><br/>
+						Try again with another question</h2>
+					<p class="wrong">Walter Smith</p>
+				</div>
+				<p class="add-info">53% of fans got this right</p>
 			</form>
+
 			<form id="q2">
 				<h2>Which year was Everton founded?</h2>
 				<div class="inputHolder">
@@ -183,7 +201,14 @@
 						Everton was founded in 1878</h2>
 					<p>1878</p>
 				</div>
+				<div class="q_wrong">
+					<h2><span class="color-wrong">Incorrect!</span><br/>
+						Try again with another question</h2>
+					<p class="wrong">1857</p>
+				</div>
+				<p class="add-info">24% of fans got this right</p>
 			</form>
+
 			<form id="q3">
 				<h2>What's Everton training ground called?</h2>
 				<div class="inputHolder">
@@ -199,7 +224,14 @@
 						Everton training ground is called Finch Farm</h2>
 					<p>Finch Farm</p>
 				</div>
+				<div class="q_wrong">
+					<h2><span class="color-wrong">Incorrect!</span><br/>
+						Try again with another question</h2>
+					<p class="wrong">Stanley Park</p>
+				</div>
+				<p class="add-info">67% of fans got this right</p>
 			</form>
+
 			<form id="q4">
 				<h2>Who is Everton's assistant manager?</h2>
 				<div class="inputHolder">
@@ -215,7 +247,14 @@
 						Everton's assistant manager is Graeme Jones</h2>
 					<p>Graeme Jones</p>
 				</div>
+				<div class="q_wrong">
+					<h2><span class="color-wrong">Incorrect!</span><br/>
+						Try again with another question</h2>
+					<p class="wrong">Ian Irving</p>
+				</div>
+				<p class="add-info">42% of fans got this right</p>
 			</form>
+
 			<form id="q5">
 				<h2>Who makes Everton's shirts?</h2>
 				<div class="inputHolder">
@@ -231,12 +270,18 @@
 						Umbro makes Everton's shirts</h2>
 					<p>Umbro</p>
 				</div>
+				<div class="q_wrong">
+					<h2><span class="color-wrong">Incorrect!</span><br/>
+						Try again with another question</h2>
+					<p class="wrong">Nike</p>
+				</div>
+				<p class="add-info">31% of fans got this right</p>
 			</form>
-			<div class="winning-flow">
 
-			</div>
+			<div class="winning-flow"></div>
+
 		</div>
-		<p class="additional">31% of fans got this right</p>
+		<p class="additional"></p>
 
 		<button id="next" disabled>NEXT</button>
 
@@ -252,7 +297,8 @@
 		btnBill = document.getElementById('bill'),
 		forms = Array.prototype.slice.call( document.querySelectorAll('form')),
 		inputs = Array.prototype.slice.call( document.querySelectorAll('form input')),
-		winFlow = document.querySelector('.winning-flow');
+		winFlow = document.querySelector('.winning-flow'),
+		addText = document.querySelector('.quiz-holder .additional');
 	var currentQuiz = 1;
 
 	inputs.forEach(function(input){
@@ -260,6 +306,8 @@
 			btnNext.disabled = false;
 		}
 	});
+
+	addText.innerHTML = forms[currentQuiz - 1].querySelector('.add-info').innerHTML;
 
 	btnNext.addEventListener("click",function(e){
 		var checkedInput = inputs.filter(function(input){
@@ -283,8 +331,14 @@
 			inputs.forEach(function( input ){
 				input.checked = false;
 			});
-			document.getElementById('q' + currentQuiz).style.display = 'block';
 			btnNext.disabled = true;
+			setTimeout(function(){
+				winFlow.style.display = 'none';
+				document.getElementById('q' + currentQuiz).style.display = 'block';
+				addText.innerHTML = forms[currentQuiz - 1].querySelector('.add-info').innerHTML;
+			}, 3000);
+			winFlow.innerHTML = checkedInput.parentNode.parentNode.querySelector('.q_wrong').innerHTML;
+			winFlow.style.display = 'block';
 		}
 	}, false);
 
