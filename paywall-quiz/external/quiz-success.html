@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Quiz</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			font-family: "Calibri", "Helvetica", "Helvetica Neue", "Arial", sans-serif;
+		}
+		.wrapper {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: url('everton-training.jpg');
+			background-size: cover;
+			background-position: center;
+		}
+		.quiz-holder {
+			margin: 20px auto 0;
+			max-width: 400px;
+			text-align: center;
+		}
+		.quiz-holder > .quiz-content {
+			border-radius: 8px;
+			background: rgba(17, 50, 82, 0.90);
+			padding: 20px 30px 30px;
+			margin: 0 20px 0;
+		}
+		.quiz-holder > .quiz-content h2 {
+			text-align: center;
+			margin-bottom: 24px;
+			color: #d3ff63;
+			font-size: 24px;
+		}
+
+		button, .button {
+			width: 280px;
+			height: 52px;
+			font-size: 15px;
+			line-height: 52px;
+			text-align: center;
+			border-radius: 8px;
+			border: 0;
+			cursor: pointer;
+			background: #d3ff63;
+			color: #87b414;
+			display: inline-block;
+			text-decoration: none;
+		}
+		button:disabled {
+			cursor: default;
+			background: #d3ff63;
+			color: #87b414;
+		}
+		.button > h4 {
+			text-transform: uppercase;
+			font-size: 14px;
+			line-height: 30px;
+		}
+		.button > p {
+			font-size: 14px;
+			line-height: 12px;
+		}
+		.quiz-holder > .quiz-content form .inputHolder > input {
+			display: none;
+		}
+
+		.quiz-holder > .quiz-content form .inputHolder > label {
+			font-size: 18px;
+			display: inline-block;
+			cursor: pointer;
+			position: relative;
+			padding-left: 25px;
+			vertical-align: middle;
+			color: #ffffff;
+			text-transform: uppercase;
+		}
+		.quiz-holder > .quiz-content form .inputHolder > label:before {
+			content: "";
+			display: inline-block;
+			vertical-align: middle;
+			width: 18px;
+			height: 18px;
+
+			margin-right: 10px;
+			position: absolute;
+			left: 0;
+			bottom: 1px;
+			background-color: #aaa;
+			box-shadow: inset 0 1 0 10px rgba(255, 255, 255, 1);
+			border-radius: 4px;
+		}
+		.quiz-holder > .quiz-content form .inputHolder input:checked + label:before {
+			content: "\2714";
+			color: #87b414;
+			font-size: 22px;
+			text-align: center;
+			line-height: 22px;
+		}
+		.quiz-holder > p {
+			margin: 10px 0 30px;
+			font-size: 14px;
+			color: #ffffff;
+			font-weight: 700;
+		}
+		.quiz-holder .winning-flow > p {
+			position: relative;
+			display: inline-block;
+			color: #ffffff;
+			padding-left: 30px;
+			font-size: 20px;
+			text-transform: uppercase;
+			margin-bottom: 11px;
+		}
+		.quiz-holder .winning-flow > p:before {
+			position: absolute;
+			left: 0;
+			content: "\2714";
+			color: #87b414;
+			font-size: 28px;
+			line-height: 22px;
+		}
+	</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+	<div class="quiz-holder">
+		<div class="quiz-content">
+
+			<div class="winning-flow">
+				<h2>Correct!<br/>
+					David Moyes was Everton's manager before Martinez</h2>
+				<p>David Moyes</p>
+			</div>
+
+		</div>
+		<p class="additional">53% of fans got this right</p>
+
+		<a id="bill" class="button" href="#"><h4>Get 5 tickets into the draw</h4><p>Buy now for &#163;1.50</p></a>
+
+	</div>
+
+</div>
+
+</body>
+</html>
