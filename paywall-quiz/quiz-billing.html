@@ -27,8 +27,8 @@
 		}
 		.quiz-holder > .quiz-content {
 			border-radius: 8px;
-			background: rgba(8, 40, 113, 0.58);
-			padding: 20px 30px 1px;
+			background: rgba(17, 50, 82, 0.90);
+			padding: 20px 30px 30px;
 			margin: 0 20px 0;
 		}
 		.quiz-holder > .quiz-content h2 {
@@ -40,7 +40,7 @@
 		.quiz-holder > .quiz-content form .inputHolder {
 			display: block;
 			text-align: left;
-			margin-bottom: 20px;
+			margin-top: 20px;
 		}
 		button, .button {
 			width: 280px;
@@ -56,10 +56,15 @@
 			display: inline-block;
 			text-decoration: none;
 		}
-		button:hover, .button:hover {
+		button:disabled {
+			cursor: default;
+			background: #d3ff63;
+			color: #87b414;
+		}
+/*		button:hover, .button:hover {
 			background: #87b414;
 			color: #fff;
-		}
+		}*/
 		.button > h4 {
 			text-transform: uppercase;
 			font-size: 14px;
@@ -108,6 +113,8 @@
 		.quiz-holder > p {
 			margin: 10px 0 30px;
 			font-size: 14px;
+			color: #ffffff;
+			font-weight: 700;
 		}
 		.quiz-holder .winning-flow > h2 {
 
@@ -119,7 +126,7 @@
 			padding-left: 30px;
 			font-size: 20px;
 			text-transform: uppercase;
-			margin-bottom: 20px;
+			margin-bottom: 11px;
 		}
 		.quiz-holder .winning-flow > p:before {
 			position: absolute;
@@ -130,7 +137,7 @@
 			line-height: 22px;
 		}
 
-		form {
+		form, .q_answer, .winning-flow, #bill {
 			display: none;
 		}
 		#q1 {
@@ -146,71 +153,94 @@
 	<div class="quiz-holder">
 		<div class="quiz-content">
 			<form id="q1">
-				<h2>Who is Everton's most expensive player?</h2>
+				<h2>Who was Everton's manager before Martinez?</h2>
 				<div class="inputHolder">
-					<input type="radio" name="q1_answer" id="q1_answer_1" value="1" />
-					<label for="q1_answer_1">Wayne Rooney</label>
+					<input type="radio" name="q1_answer" id="q1_answer_1" value="0" />
+					<label for="q1_answer_1">Walter Smith</label>
 				</div>
 				<div class="inputHolder">
-					<input type="radio" name="q1_answer" id="q1_answer_0" value="0" />
-					<label for="q1_answer_0">Fellani</label>
+					<input type="radio" name="q1_answer" id="q1_answer_2" value="1" />
+					<label for="q1_answer_2">David Moyes</label>
+				</div>
+				<div class="q_answer">
+					<h2>Correct!<br/>
+						David Moyes was Everton's manager before Martinez</h2>
+					<p>David Moyes</p>
 				</div>
 			</form>
 			<form id="q2">
-				<h2>Who is Everton's most expensive player?</h2>
+				<h2>Which year was Everton founded?</h2>
 				<div class="inputHolder">
 					<input type="radio" name="q2_answer" id="q2_answer_1" value="1" />
-					<label for="q2_answer_1">Wayne Rooney</label>
+					<label for="q2_answer_1">1878</label>
 				</div>
 				<div class="inputHolder">
-					<input type="radio" name="q2_answer" id="q2_answer_0" value="0" />
-					<label for="q2_answer_0">Fellani</label>
+					<input type="radio" name="q2_answer" id="q2_answer_2" value="0" />
+					<label for="q2_answer_2">1857</label>
+				</div>
+				<div class="q_answer">
+					<h2>Correct!<br/>
+						Everton was founded in 1878</h2>
+					<p>1878</p>
 				</div>
 			</form>
 			<form id="q3">
-				<h2>Who is Everton's most expensive player?</h2>
+				<h2>What's Everton training ground called?</h2>
 				<div class="inputHolder">
-					<input type="radio" name="q3_answer" id="q3_answer_1" value="1" />
-					<label for="q3_answer_1">Wayne Rooney</label>
+					<input type="radio" name="q3_answer" id="q3_answer_1" value="0" />
+					<label for="q3_answer_1">Stanley Park</label>
 				</div>
 				<div class="inputHolder">
-					<input type="radio" name="q3_answer" id="q3_answer_0" value="0" />
-					<label for="q3_answer_0">Fellani</label>
+					<input type="radio" name="q3_answer" id="q3_answer_2" value="1" />
+					<label for="q3_answer_2">Finch Farm</label>
+				</div>
+				<div class="q_answer">
+					<h2>Correct!<br/>
+						Everton training ground is called Finch Farm</h2>
+					<p>Finch Farm</p>
 				</div>
 			</form>
 			<form id="q4">
-				<h2>Who is Everton's most expensive player?</h2>
+				<h2>Who is Everton's assistant manager?</h2>
 				<div class="inputHolder">
 					<input type="radio" name="q4_answer" id="q4_answer_1" value="1" />
-					<label for="q4_answer_1">Wayne Rooney</label>
+					<label for="q4_answer_1">Graeme Jones</label>
 				</div>
 				<div class="inputHolder">
-					<input type="radio" name="q4_answer" id="q4_answer_0" value="0" />
-					<label for="q4_answer_0">Fellani</label>
+					<input type="radio" name="q4_answer" id="q4_answer_2" value="0" />
+					<label for="q4_answer_2">Ian Irving</label>
+				</div>
+				<div class="q_answer">
+					<h2>Correct!<br/>
+						Everton's assistant manager is Graeme Jones</h2>
+					<p>Graeme Jones</p>
 				</div>
 			</form>
 			<form id="q5">
-				<h2>Who is Everton's most expensive player?</h2>
+				<h2>Who makes Everton's shirts?</h2>
 				<div class="inputHolder">
-					<input type="radio" name="q5_answer" id="q5_answer_1" value="1" />
-					<label for="q5_answer_1">Wayne Rooney</label>
+					<input type="radio" name="q5_answer" id="q5_answer_1" value="0" />
+					<label for="q5_answer_1">Nike</label>
 				</div>
 				<div class="inputHolder">
-					<input type="radio" name="q5_answer" id="q5_answer_0" value="0" />
-					<label for="q5_answer_0">Fellani</label>
+					<input type="radio" name="q5_answer" id="q5_answer_2" value="1" />
+					<label for="q5_answer_2">Umbro</label>
+				</div>
+				<div class="q_answer">
+					<h2>Correct!<br/>
+						Umbro makes Everton's shirts</h2>
+					<p>Umbro</p>
 				</div>
 			</form>
 			<div class="winning-flow">
-				<h2>Correct!<br/>
-				Wayne Rooney was the highest paid player</h2>
-				<p>Wayne Rooney</p>
+
 			</div>
 		</div>
 		<p class="additional">31% of fans got this right</p>
 
-		<button id="next">NEXT</button>
+		<button id="next" disabled>NEXT</button>
 
-		<a id="bill" class="button" href="#"><h4>Get 5 tickets into the draw</h4><p>Buy now for 1.50</p></a>
+		<a id="bill" class="button" href="#"><h4>Get 5 tickets into the draw</h4><p>Buy now for &#163;1.50</p></a>
 
 	</div>
 
@@ -218,7 +248,48 @@
 
 
 <script type="text/javascript">
+	var btnNext = document.getElementById('next'),
+		btnBill = document.getElementById('bill'),
+		forms = Array.prototype.slice.call( document.querySelectorAll('form')),
+		inputs = Array.prototype.slice.call( document.querySelectorAll('form input')),
+		winFlow = document.querySelector('.winning-flow');
+	var currentQuiz = 1;
+
+	inputs.forEach(function(input){
+		input.onchange = function() {
+			btnNext.disabled = false;
+		}
+	});
+
+	btnNext.addEventListener("click",function(e){
+		var checkedInput = inputs.filter(function(input){
+			return input.checked;
+		})[0];
+
+		if ( checkedInput.value == 1 ) {
+			btnNext.style.display = 'none';
+			btnBill.style.display = 'inline-block';
+			forms.forEach(function( form ){
+				form.style.display = 'none';
+			});
+			winFlow.innerHTML = checkedInput.parentNode.parentNode.querySelector('.q_answer').innerHTML;
+			winFlow.style.display = 'block';
+		} else {
+			currentQuiz++;
+			if ( currentQuiz > forms.length ) currentQuiz = 1;
+			forms.forEach(function( form ){
+				form.style.display = 'none';
+			});
+			inputs.forEach(function( input ){
+				input.checked = false;
+			});
+			document.getElementById('q' + currentQuiz).style.display = 'block';
+			btnNext.disabled = true;
+		}
+	}, false);
+
 
 </script>
+
 </body>
 </html>
