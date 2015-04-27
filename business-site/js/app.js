@@ -1,6 +1,5 @@
 jQuery(document).ready(function($){
 
-	var menuItems = ['Club Browser','Sponsorship','Detailed Reports','Reward Program','Foundation','Cross Platform','Contact'];
 	makemenu();
 
 	var s = 0;
@@ -124,7 +123,9 @@ jQuery(document).ready(function($){
 	});
 
 
-	$('a.social').click(function(){
+
+
+	$('a.social').add('a.link').click(function(){
 		window.location.href = $(this).attr('href');
 	});
 

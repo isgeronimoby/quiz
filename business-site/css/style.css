@@ -24,7 +24,7 @@ body {
     line-height: 1.42857;
     color: #333;
 }
-h1,h2,h3,h4,h5,h6,p {
+h1,h2,h3,h4,h5,h6,p,a {
     font-family: ev-helvetica, "Helvetica Neue","Helvetica", "Calibri", "Arial", sans-serif;
     font-weight: 200;
     margin: 0;
@@ -64,6 +64,20 @@ img {
     position: relative;
 }
 
+.head-partners {
+	float: right;
+	margin-top: 20px;
+	margin-right: 50px;
+}
+.head-partners > * {
+	display: inline-block;
+	vertical-align: middle;
+}
+.head-partners > img {
+	max-width: 100px;
+	margin-left: 10px;
+}
+
 .full-page:nth-child(even) {
     background-color: #f3f3f3;
 }
@@ -78,13 +92,13 @@ img {
 }
 .logo-wrapper {
     display: inline-block;
-    width: 100%;
+    /*width: 100%;*/
     max-width: 1100px;
     text-align: left;
     padding-top: 20px;
     padding-bottom: 20px;
     margin-left: 20px;
-    float:none;
+    float: left;
 }
 .logo-wrapper img {
 
@@ -103,6 +117,11 @@ img {
     left: 0;
 }
 
+.fixed-wrapper {
+	max-width: 1280px;
+	margin: 0 auto;
+}
+
 .full-page {
     position: fixed;
     width: 100%;
@@ -112,6 +131,54 @@ img {
 .section-wrapper {
     padding-top: 100px;
 }
+
+.text-wrapper {
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+.text-wrapper p{
+	position: relative;
+}
+
+.text-wrapper p:before{
+	position: absolute;
+	top: 0;
+	left: -30px;
+	content: "\201C";
+	font-size: 60px;
+	color: #777;
+	line-height: 1px;
+}
+.text-wrapper p:after{
+	position: absolute;
+	bottom: -20px;
+	right: -30px;
+	content: "\201D";
+	font-size: 60px;
+	color: #777;
+	line-height: 1px;
+}
+
+.text-plus-logo {
+	margin-top: 80px;
+	margin-left: 250px;
+	position: relative;
+}
+.text-plus-logo > * {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.text-plus-logo > img {
+	max-width: 60px;
+	margin-right: 15px;
+}
+
+.text-plus-logo > div {
+	text-align: left;
+}
+
 
 .image-first-slide {
     max-width: 700px;
@@ -301,6 +368,14 @@ img {
     text-align: center;
 }
 
+.contacts-holder h1 {
+	margin-top: 70px;
+}
+
+.contacts-holder h1 a{
+	text-decoration: none;
+}
+
 .contacts-holder .btn-find-more {
     font-family: "HelveticaNeueThin", "HelveticaNeue-Thin", "Helvetica Neue Thin", ev-helvetica, "Helvetica Neue","Helvetica", "Calibri", "Arial", sans-serif;
     font-weight: 200;
@@ -317,7 +392,7 @@ img {
     box-shadow: 0 0 10px #cccccc;
 }
 .contacts-holder h2 {
-    margin-bottom: 100px;
+    margin-bottom: 70px;
 }
 .contacts-holder .social-buttons .social {
     display: inline-block;
@@ -497,6 +572,16 @@ img {
         margin: 0 8px;
         background-size: cover !important;
     }
+}
+
+@media all and (max-width: 830px) {
+	.head-partners {
+		display: none;
+	}
+	.text-plus-logo {
+		margin-top: 80px;
+		margin-left: 0;
+	}
 }
 
 @media (min-height: 781px) and (max-height: 860px) and (min-width: 1024px){
@@ -733,6 +818,7 @@ img {
     .sliding-menu nav {
         display: block;
     }
+
 }
 
 @media all and (max-width:1305px) {
