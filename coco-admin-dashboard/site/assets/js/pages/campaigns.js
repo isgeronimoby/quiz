@@ -151,7 +151,19 @@ $(document).ready(function(){
 			"valueField": "value",
 			"handDrawScatter": 1,
 			"allLabels": [],
-			"balloon": Campaigns.amchartFunnelAllTraffic.balloon,
+			"balloon": {
+				"borderColor": "#FD0000",
+				"borderThickness": 6,
+				"color": "#FFFFFF",
+				"cornerRadius": 20,
+				"fillAlpha": 0.5,
+				"fillColor": "#235B8C",
+				"fontSize": 12,
+				"horizontalPadding": 20,
+				"shadowAlpha": 0,
+				"showBullet": true,
+				"verticalPadding": 12
+			},
 			"titles": [],
 			"dataProvider": Campaigns.funnelAllTrafficSource
 		}
@@ -188,7 +200,19 @@ $(document).ready(function(){
 			"valueField": "value",
 			"handDrawScatter": 1,
 			"allLabels": [],
-			"balloon": Campaigns.amchartFunnelAllTraffic.balloon,
+			"balloon": {
+				"borderColor": "#FD0000",
+				"borderThickness": 6,
+				"color": "#FFFFFF",
+				"cornerRadius": 20,
+				"fillAlpha": 0.5,
+				"fillColor": "#235B8C",
+				"fontSize": 12,
+				"horizontalPadding": 20,
+				"shadowAlpha": 0,
+				"showBullet": true,
+				"verticalPadding": 12
+			},
 			"titles": [],
 			"dataProvider": Campaigns.funnelAllTrafficSource
 		}
@@ -225,7 +249,19 @@ $(document).ready(function(){
 			"valueField": "value",
 			"handDrawScatter": 1,
 			"allLabels": [],
-			"balloon": Campaigns.amchartFunnelAllTraffic.balloon,
+			"balloon": {
+				"borderColor": "#FD0000",
+				"borderThickness": 6,
+				"color": "#FFFFFF",
+				"cornerRadius": 20,
+				"fillAlpha": 0.5,
+				"fillColor": "#235B8C",
+				"fontSize": 12,
+				"horizontalPadding": 20,
+				"shadowAlpha": 0,
+				"showBullet": true,
+				"verticalPadding": 12
+			},
 			"titles": [],
 			"dataProvider": Campaigns.funnelAllTrafficSource
 		}
