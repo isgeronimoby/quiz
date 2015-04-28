@@ -233,9 +233,6 @@ $(document).ready(function(){
 
 	Campaigns.amchartFunnelAllTraffic.dataProvider = Campaigns.funnelAllTrafficSource;
 
-
-
-
 // example of the JSON
 	Campaigns.tableJSON = [
 		{
@@ -243,17 +240,17 @@ $(document).ready(function(){
 			clicks: 1000,
 			installs: 300,
 			signups: 1,
-			sharefacebook: 450,
+			sharefacebook: 400,
 			sharetwitter: 301,
 			linkeddevices: 15,
-			mobilebilling: 1.45
+			mobilebilling: 1.22
 		},
 		{
 			source: 'Adwords',
 			clicks: 1000,
 			installs: 300,
 			signups: 1,
-			sharefacebook: 450,
+			sharefacebook: 300,
 			sharetwitter: 301,
 			linkeddevices: 15,
 			mobilebilling: 1.45
@@ -282,7 +279,7 @@ $(document).ready(function(){
 		info: false,
 		data: Campaigns.tableJSON,
 		searching: false,
-		"columns": [
+		columns: [
 			{ "data": "source", type: 'natural' },
 			{ "data": "clicks", type: 'natural' },
 			{ "data": "installs", type: 'natural' },
@@ -291,7 +288,9 @@ $(document).ready(function(){
 			{ "data": "sharetwitter", type: 'natural' },
 			{ "data": "linkeddevices", type: 'natural' },
 			{ "data": "mobilebilling", type: 'natural' }
-		]
+		],
+		order: [ [2, 'asc'] ] // first par - column index, "source" - 0, "clicks" - 1, and so on, second direction:
+		// "asc" - highest at the top, "desc" - lowest at the top
 	});
 
 	//update table with your data
@@ -336,4 +335,8 @@ $(document).ready(function(){
 			Campaigns.reloadFunnels();
 		}
 	}, 1000);
+});
+
+AmCharts.ready(function() {
+
 });
