@@ -135,7 +135,7 @@
 		position: absolute;
 		background:#fff;
 		right:0px;
-		left:auto;
+		/*left:auto;*/
 		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 	}
 
@@ -146,6 +146,10 @@
 
 	.open > .dropdown-menu {
 	    display: block;
+	}
+
+	body.fixed-left .nav.navbar-nav {
+		display: none;
 	}
 
 	.nav-tabs.nav-justified > li {
