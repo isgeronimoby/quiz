@@ -17,6 +17,10 @@
 	vertical-align: top;
 }
 
+body.androidLow .fancybox-wrap {
+	top: 20px !important;
+}
+
 .fancybox-wrap {
 	position: absolute;
 	top: 0;

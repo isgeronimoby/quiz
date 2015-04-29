@@ -23,23 +23,39 @@ jQuery(document).ready(function ($) {
 		init();
 	});
 
-	if ( $('.fancybox').length > 0 ) {
-	// Fancybox default values
-	$('.fancybox').fancybox({
-		maxWidth: 600,
-		maxHeight: 800,
-		fitToView: false,
-		width: '100%',
-		height: 'auto',
-		autoSize: false,
-		closeClick: false,
-		openEffect: 'none',
-		closeEffect: 'none',
-		autoResize: true,
-		onUpdate: function () {
-			$('.fancybox-inner').height('auto');
-		}
-	});
+	var fancyboxes = $('.fancybox');
+
+	if ( fancyboxes.length > 0 ) {
+		// Fancybox default values
+		fancyboxes.fancybox({
+			maxWidth: 600,
+			maxHeight: 800,
+			fitToView: false,
+			width: '100%',
+			height: '100%',
+			autoSize: false,
+			closeClick: false,
+			openEffect: 'none',
+			closeEffect: 'none',
+			autoResize: true,
+			onUpdate: function () {
+				$('.fancybox-inner').height('auto');
+			},
+			afterShow: function(){
+				var uag = window.navigator.userAgent.toLowerCase();
+				if (uag.indexOf("android") > 0) {
+					var androidversion = parseFloat(uag.slice(uag.indexOf("android") + 8));
+					if ( androidversion && androidversion <= 4.1 ) {
+						$('body, html').scrollTop( 0 );
+						$('body').addClass('androidLow');
+						$('input[type="password"]').add('input[type="text"]').addClass('androidLow');
+					}
+				}
+			},
+			afterClose: function(){
+				$('body').removeClass('androidLow');
+			}
+		});
 		// End of fancybox default values
 	}
 

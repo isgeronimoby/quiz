@@ -34,6 +34,12 @@ body {
     margin: 0;
     width: 100%;
 }
+
+body.androidLow {
+	overflow: hidden;
+	outline: none;
+}
+
 h1,h2,h3,h4,h5,h6,p,a,span,div {
     font-family: ev-helvetica, "Helvetica Neue","Helvetica", "Calibri", "Arial", sans-serif;
     font-weight: 100;
@@ -1174,7 +1180,24 @@ button.close {
     .earningOptions ul li .buttonStroke {
         width: 55%;
     }
+
+	body.androidLow .fancybox-wrap.fancybox-opened {
+    	height: 90% !important;
+		overflow: auto !important;
+    }
+
+	body.androidLow input[type="password"].androidLow, body.androidLow input[type="text"].androidLow {
+		position: relative;
+		top: -500px;
+		-webkit-transform: translate3d(0, 500px, 0);
+	}
 }
+
+.overthrow-enabled .overthrow {
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
 @media only screen
 and (min-device-width : 768px)
 and (max-device-width : 1024px)  {
