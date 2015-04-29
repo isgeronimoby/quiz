@@ -19,6 +19,23 @@ $.validator.setDefaults(
 		}
 	});
 
+jQuery.validator.addMethod(
+	"multiemails",
+	function(value, element) {
+		if (this.optional(element)) // return true on optional element
+			return true;
+		var emails = value.split(/[;,]+/); // split element by , and ;
+		valid = true;
+		for (var i in emails) {
+			value = emails[i];
+			valid = valid &&
+				jQuery.validator.methods.email.call(this, $.trim(value), element);
+		}
+		return valid;
+	},
+	jQuery.validator.messages.multiemails
+);
+
 $(function () {
 	$("#signUpWithEmailForm").validate({
 		rules: {
@@ -56,7 +73,9 @@ $(function () {
 			}
 		},
 		messages: {
-			'connect-email': "Please enter a valid email address"
+			'connect-email': {
+				email: "Please enter a valid email address"
+			}
 		}
 	});
 
@@ -68,6 +87,21 @@ $(function () {
 		},
 		messages: {
 			'address1': "Please fill in at least first field"
+		}
+	});
+
+	$("#challengeafriendForm").validate({
+		rules: {
+			'challenge-email': {
+				required: true,
+				multiemails: true
+			}
+		},
+		messages: {
+			'connect-email': {
+				required: "Please enter at least one email address",
+				multiemails: "Some of your emails are incorrect"
+			}
 		}
 	});
 });
