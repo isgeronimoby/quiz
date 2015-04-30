@@ -157,8 +157,16 @@ $(document).ready(function(){
 
 function reload_charts(){
 	dashboardCharts.overallLineChart.validateData(); // call this method after data in graphic changed
-	dashboardCharts.appInstallsFrom.draw();
-	dashboardCharts.extInstallsBrowser.draw();
+/*	dashboardCharts.appInstallsFrom.draw();
+	dashboardCharts.extInstallsBrowser.draw();*/
+
+	dashboardCharts.appInstallsFromIos.draw();
+	dashboardCharts.appInstallsFromAndroid.draw();
+	dashboardCharts.appInstallsFromWin.draw();
+	dashboardCharts.extInstallsBrowserChrome.draw();
+	dashboardCharts.extInstallsBrowserFirefox.draw();
+	dashboardCharts.extInstallsBrowserSafari.draw();
+	dashboardCharts.extInstallsBrowserIe.draw();
 }
 
 function ReloadReports(start, end) {
@@ -367,7 +375,7 @@ function load_charts(){
 
 	var chartColors = ["#679BDF","#edce8c","#afb3bf"];
 
-	dashboardCharts.appInstallsFrom = Morris.Bar({
+	/*dashboardCharts.appInstallsFrom = Morris.Donut({
 		element: 'app-installs-from',
 		resize: true,
 		data: [
@@ -382,9 +390,45 @@ function load_charts(){
 		xLabelxLabelMargin: 1,
 		xLabelAngle: 45,
 		hideHover: 'auto'
+	});*/
+
+	dashboardCharts.appInstallsFromIos = Morris.Donut({
+		element: 'app-installs-from-ios',
+		resize: true,
+		data: [
+			{ label: "Facebook", value: 45 },
+			{ label: "Emails", value: 25 },
+			{ label: "Annonymous", value: 40 }
+		],
+		barColors: chartColors,
+		hideHover: 'auto'
 	});
 
-	dashboardCharts.extInstallsBrowser = Morris.Bar({
+	dashboardCharts.appInstallsFromAndroid = Morris.Donut({
+		element: 'app-installs-from-android',
+		resize: true,
+		data: [
+			{ label: "Facebook", value: 17 },
+			{ label: "Emails", value: 40 },
+			{ label: "Annonymous", value: 30 }
+		],
+		barColors: chartColors,
+		hideHover: 'auto'
+	});
+
+	dashboardCharts.appInstallsFromWin = Morris.Donut({
+		element: 'app-installs-from-windows',
+		resize: true,
+		data: [
+			{ label: "Facebook", value: 75 },
+			{ label: "Emails", value: 15 },
+			{ label: "Annonymous", value: 35 }
+		],
+		barColors: chartColors,
+		hideHover: 'auto'
+	});
+
+/*	dashboardCharts.extInstallsBrowser = Morris.Bar({
 		element: 'ext-installs-from-browser',
 		resize: true,
 		data: [
@@ -399,6 +443,54 @@ function load_charts(){
 		barColors: chartColors,
 		xLabelxLabelMargin: 1,
 		xLabelAngle: 45,
+		hideHover: 'auto'
+	});*/
+
+	dashboardCharts.extInstallsBrowserChrome = Morris.Donut({
+		element: 'ext-installs-from-browser-chrome',
+		resize: true,
+		data: [
+			{ label: "Facebook", value: 45 },
+			{ label: "Emails", value: 25 },
+			{ label: "Annonymous", value: 40 }
+		],
+		barColors: chartColors,
+		hideHover: 'auto'
+	});
+
+	dashboardCharts.extInstallsBrowserSafari = Morris.Donut({
+		element: 'ext-installs-from-browser-safari',
+		resize: true,
+		data: [
+			{ label: "Facebook", value: 17 },
+			{ label: "Emails", value: 40 },
+			{ label: "Annonymous", value: 30 }
+		],
+		barColors: chartColors,
+		hideHover: 'auto'
+	});
+
+	dashboardCharts.extInstallsBrowserFirefox = Morris.Donut({
+		element: 'ext-installs-from-browser-firefox',
+		resize: true,
+		data: [
+			{ label: "Facebook", value: 75 },
+			{ label: "Emails", value: 15 },
+			{ label: "Annonymous", value: 35 }
+		],
+		barColors: chartColors,
+		hideHover: 'auto'
+	});
+
+	dashboardCharts.extInstallsBrowserIe = Morris.Donut({
+		element: 'ext-installs-from-browser-ie',
+		resize: true,
+		data: [
+			{ label: "Facebook", value: 50 },
+			{ label: "Emails", value: 35 },
+			{ label: "Annonymous", value: 25 }
+		],
+		barColors: chartColors,
 		hideHover: 'auto'
 	});
 
