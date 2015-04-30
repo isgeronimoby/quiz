@@ -381,6 +381,26 @@ jQuery(document).ready(function ($) {
 	});
 	
 
+	//Challenge friend handler
+	$('.challengeFriendButton').click(function (e) {
+		if ($(this).hasClass('muted')) {
+			$(this).attr('href', '');
+			return false;
+		}
+
+		if (window.navigator.userAgent) {
+			var ua = window.navigator.userAgent.toLowerCase();
+			if (ua.indexOf("iphone") > 0 || ua.indexOf("ipad") > 0) {
+				$(this).attr('href', 'sms:&body=' + $(this).data("sms-text"));
+			} else if (ua.indexOf("android") > 0) {
+				$(this).attr('href', 'sms:?body=' + $(this).data("sms-text"));
+			}
+		}
+
+		return true;
+	});
+
+
 	function facebookSDKShareDialog() {
 		FB.ui({
 			method: 'share',
@@ -598,7 +618,4 @@ jQuery(document).ready(function ($) {
 				break;
 		}
 	});
-
-DrawApp.showScoreFunction('connectFBBox');
-
 });
