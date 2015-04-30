@@ -591,5 +591,4 @@ jQuery(document).ready(function ($) {
 		}
 	});
 
-	DrawApp.showScoreFunction('connectFBBox');
 });
