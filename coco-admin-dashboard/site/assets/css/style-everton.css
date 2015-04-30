@@ -5797,7 +5797,7 @@ body.cru .navbar-default .navbar-nav > li > a {
 }
 .nav.navbar-nav.navbar-right.top-navbar {
   width: 230px;
-  margin-right: -45px;
+  margin-right: -30px;
 }
 /*.ui-sortable-placeholder {
   	margin-left: 0 !important;
@@ -5819,9 +5819,6 @@ body.cru .navbar-default .navbar-nav > li > a {
 }
 .morrisCharts h4 span {
   font-weight: bold;
-}
-.morrisCharts .col-xs-6 {
-  width: 20%;
 }
 .morrisCharts svg {
   max-height: 180px;
