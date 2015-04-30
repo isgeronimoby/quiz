@@ -32,7 +32,7 @@ jQuery(document).ready(function ($) {
 			maxHeight: 800,
 			fitToView: false,
 			width: '100%',
-			height: '100%',
+			height: 'auto',
 			autoSize: false,
 			closeClick: false,
 			openEffect: 'none',
@@ -590,4 +590,6 @@ jQuery(document).ready(function ($) {
 				break;
 		}
 	});
+
+	DrawApp.showScoreFunction('connectFBBox');
 });
