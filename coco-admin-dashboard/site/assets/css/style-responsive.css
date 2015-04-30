@@ -261,7 +261,10 @@
 	.hide-phone{
 		display: none !important;
 	}
-
+	.nav.navbar-nav.navbar-right.top-navbar {
+		width: auto;
+		margin-right: -15px;
+	}
 	
 }
 

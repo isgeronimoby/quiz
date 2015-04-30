@@ -83,6 +83,8 @@ $(document).ready(function(){
 
 	// initializing table with default data
 	var tableExportButtonsArray = !($.browser.mobile) ? ["copy", "csv", "xls", "pdf"] : [];
+	if ( $.browser.mobile && $(window).width() <= 1024 ) tableExportButtonsArray = [];
+
 	Financials.tableRows = $('#export-table-apps').DataTable({
 		dom: 'T<"clear">lfrtip',
 		tableTools: {
