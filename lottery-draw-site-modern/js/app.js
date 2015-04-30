@@ -139,11 +139,15 @@ jQuery(document).ready(function ($) {
 	var daysCircle;
 	var overallCircle;
 
-	$(window).resize(function () {
-		circlesSize();
+	var orient = window.orientation;
 
-		$('.article > .greyBoxMobile').parent().height($('.article >  .articleMobileImage > img').height());
-		$('.article > .greyBoxMobile').height($('.article >  .articleMobileImage > img').height());
+	$(window).resize(function () {
+		if ( currentPlatform == 'desktop' ) {
+			circlesSize();
+
+			$('.article > .greyBoxMobile').parent().height($('.article >  .articleMobileImage > img').height());
+			$('.article > .greyBoxMobile').height($('.article >  .articleMobileImage > img').height());
+		}
 	});
 
 	function circlesSize() {
@@ -155,6 +159,10 @@ jQuery(document).ready(function ($) {
 			maxWidth = maxWidth * 0.6;
 		} else {
 			maxWidth = maxWidth * 0.8;
+		}
+
+		if ( currentPlatform == 'mobile' ) {
+			maxWidth = 260;
 		}
 
 		$(daysCircleCanvas).attr('width', maxWidth);
@@ -590,5 +598,7 @@ jQuery(document).ready(function ($) {
 				break;
 		}
 	});
+
+DrawApp.showScoreFunction('connectFBBox');
 
 });
