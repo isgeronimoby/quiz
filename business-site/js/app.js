@@ -76,7 +76,7 @@ jQuery(document).ready(function($){
 
 		}
 	});
-
+	var allLinks;
 	function makemenu() {
 		$('.sideMenu ul').remove();
 		$('.sideMenu').append('<ul class="nav"></ul>');
@@ -86,7 +86,7 @@ jQuery(document).ready(function($){
 			$('.sliding-menu > nav > ul > li > a')[index].href = '#'+$(this).attr('id');
 		});
 
-		var allLinks = $('.sideLinks');
+		allLinks = $('.sideLinks');
 		var frameScroll = 1000;
 		var frameOffset = 0;
 		for(var i=0; i < allLinks.length; i++){
@@ -99,24 +99,24 @@ jQuery(document).ready(function($){
 		});
 		$('.bottom-arrow-separate').click(function(e){
 			e.preventDefault();
-			$($('.sideLinks')[1]).click();
+			$(allLinks[1]).click();
 		});
 
 	}
 
 	$(document).keydown(function(e){
 		var curMenu = $('.sideMenu a.active').parent().index();
-		if (curMenu == -1 || curMenu == undefined) $($('.sideLinks')[0]).click();
+		if (curMenu == -1 || curMenu == undefined) $(allLinks[0]).click();
 
 		if (e.keyCode == '38') {
 			// UP key
-			if (curMenu != 0) $($('.sideLinks')[curMenu - 1]).click();
+			if (curMenu != 0) $(allLinks[curMenu - 1]).click();
 			e.preventDefault();
 
 		}
 		else if (e.keyCode == '40') {
 			// DOWN key
-			if (curMenu != 6) $($('.sideLinks')[curMenu + 1]).click();
+			if (curMenu != allLinks.length - 1) $(allLinks[curMenu + 1]).click();
 			e.preventDefault();
 		}
 
