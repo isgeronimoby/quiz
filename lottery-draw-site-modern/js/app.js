@@ -390,15 +390,30 @@ jQuery(document).ready(function ($) {
 
 		if (window.navigator.userAgent) {
 			var ua = window.navigator.userAgent.toLowerCase();
+			var text = $(this).data("sms-text");
+
 			if (ua.indexOf("iphone") > 0 || ua.indexOf("ipad") > 0) {
-				$(this).attr('href', 'sms:&body=' + $(this).data("sms-text"));
+				var iosVer = iOSversion();
+				if (iosVer[0] > 7)
+					$(this).attr('href', 'sms:&body=' + encodeURIComponent(text));
+				else
+					$(this).attr('href', 'sms:;body=' + encodeURIComponent(text));
 			} else if (ua.indexOf("android") > 0) {
-				$(this).attr('href', 'sms:?body=' + $(this).data("sms-text"));
+				$(this).attr('href', 'sms:?body=' + encodeURIComponent(text));
 			}
 		}
 
 		return true;
 	});
+
+
+	function iOSversion() {
+		if (/iP(hone|od|ad|od touch)/.test(navigator.platform)) {
+			// supports iOS 2.0 and later: <http://bit.ly/TJjs1V>
+			var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+			return [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
+		}
+	}
 
 
 	function facebookSDKShareDialog() {
