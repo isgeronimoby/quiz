@@ -119,11 +119,13 @@ jQuery(document).ready(function ($) {
 
 	//Is element in visible area.
 	function isScrolledIntoView(elem) {
-		var docViewTop = $(window).scrollTop();
+/*		var docViewTop = $(window).scrollTop();
 		var docViewBottom = docViewTop + $(window).height();
 		var elemTop = $(elem).offset().top;
 		var elemBottom = elemTop + $(elem).height();
-		return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+		return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));*/
+
+		return ( $(window).scrollTop() + $(window).height() > $(elem).offset().top + $(elem).height() / 2 );
 	}
 
 	/************************ NEW PROGRESS CHARTS ***************************/
@@ -138,8 +140,6 @@ jQuery(document).ready(function ($) {
 
 	var daysCircle;
 	var overallCircle;
-
-	var orient = window.orientation;
 
 	$(window).resize(function () {
 		if ( currentPlatform == 'desktop' ) {
@@ -370,7 +370,7 @@ jQuery(document).ready(function ($) {
 			if (ua.indexOf("iphone") > 0 || ua.indexOf("ipad") > 0 || ua.indexOf("android") > 0) {
 				$.ajax({
 					type: "POST",
-					url: twitterRewardUrl,
+					url: twitterRewardUrl
 				}).always(function () {
 					window.top.location.href = $('.twitterShareButton').attr('href');
 				});
@@ -495,7 +495,8 @@ jQuery(document).ready(function ($) {
 					if (isScrolledIntoView($(this))) $(this).animate({ opacity: 1 }, 600);
 				});
 
-				if (isScrolledIntoView(prize)) prize.animate({ opacity: 1 }, 600);
+				if ( isScrolledIntoView(prize[1]) ) prize.animate({ opacity: 1 }, 600);
+
 			});
 		}, 2000);
 	}

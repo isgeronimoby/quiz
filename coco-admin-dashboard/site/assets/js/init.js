@@ -214,10 +214,11 @@ $(document).on("click", ".widget", function(){
 	});
 
 // HIDING FULLSCREEN BUTTON IF IT IS NOT AVAILABLE
-	if (screenfull.enabled) {
-		$('.icon-resize-full-2').parent().show();
-	} else $('.icon-resize-full-2').parent().hide();
-
+	if ( screenfull ) {
+		if (screenfull.enabled) {
+			$('.icon-resize-full-2').parent().show();
+		} else $('.icon-resize-full-2').parent().hide();
+	}
 
 	// on androids lower than 4.4 no popup on logout, just simple logout
 	var uag = window.navigator.userAgent.toLowerCase();
