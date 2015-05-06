@@ -19,6 +19,8 @@ jQuery(document).ready(function ($) {
 	DrawApp.unmuteOptionItem = unmuteOptionItem;
 	DrawApp.connectSuccess = connectSuccess;
 
+	$(window).scrollTop( 0 );
+
 	$(window).resize(function () {
 		init();
 	});
@@ -71,8 +73,14 @@ jQuery(document).ready(function ($) {
 	function init() {
 		$('.article > .greyBoxDesktop').height($('.article >  .articleImageDesktop').outerHeight());
 
-		$('.article > .greyBoxMobile').parent().height($('.article >  .articleMobileImage > img').height());
-		$('.article > .greyBoxMobile').height($('.article >  .articleMobileImage > img').height());
+		var mobileArticleImage = $('.article >  .articleMobileImage > img');
+		var mobileArticleImageDummy = new Image();
+		mobileArticleImageDummy.onload = function(){
+			$('.article > .greyBoxMobile').parent().height( mobileArticleImage.height() );
+			$('.article > .greyBoxMobile').height( mobileArticleImage.height() );
+		};
+		mobileArticleImageDummy.src = mobileArticleImage.attr('src');
+
 		if ($(window).width() > 900) {
 			$($('#connectFBBox .button')[1]).width($($('#connectFBBox .button')[0]).width() + 10);
 		} else {
@@ -119,12 +127,6 @@ jQuery(document).ready(function ($) {
 
 	//Is element in visible area.
 	function isScrolledIntoView(elem) {
-/*		var docViewTop = $(window).scrollTop();
-		var docViewBottom = docViewTop + $(window).height();
-		var elemTop = $(elem).offset().top;
-		var elemBottom = elemTop + $(elem).height();
-		return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));*/
-
 		return ( $(window).scrollTop() + $(window).height() > $(elem).offset().top + $(elem).height() / 2 );
 	}
 
@@ -504,6 +506,7 @@ jQuery(document).ready(function ($) {
 			setCurOption('connectDeviceBox');
 	}
 
+
 	//Animate earning options.
 	function animateEarningOptions() {
 		setTimeout(function () {
@@ -514,8 +517,7 @@ jQuery(document).ready(function ($) {
 				earningOptions.each(function (index) {
 					if (isScrolledIntoView($(this))) $(this).animate({ opacity: 1 }, 600);
 				});
-
-				if ( isScrolledIntoView(prize[1]) ) prize.animate({ opacity: 1 }, 600);
+				if ( isScrolledIntoView(prize[1]) )	prize.animate({ opacity: 1 }, 600);
 
 			});
 		}, 2000);
