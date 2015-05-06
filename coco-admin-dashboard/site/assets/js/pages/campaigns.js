@@ -356,6 +356,7 @@ $(document).ready(function(){
 		// do something
 	});
 
+	if ( currentPlatform == 'mobile' ) $('.amExportButton').hide();
 
 	$(window).resize(function(){
 		if ( window.outerHeight == screen.availHeight || window.outerWidth == screen.availWidth ) {
@@ -372,8 +373,4 @@ $(document).ready(function(){
 			Campaigns.reloadFunnels();
 		}
 	}, 1000);
-});
-
-AmCharts.ready(function() {
-
 });
