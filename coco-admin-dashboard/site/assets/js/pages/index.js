@@ -149,7 +149,26 @@ $(document).ready(function(){
 		mapFiltersNumber.removeClass('active');
 		$(this).parent().addClass('active');
 	});
-    
+
+
+	var overallButtons = $('#website-statistic').find('.btn-group button');
+	overallButtons.click(function(e){
+		switch ( $(this).attr('id') ) {
+			case 'overall-installs':
+				// your code for installs button
+				break;
+			case 'overall-sales':
+				// your code for sales button
+				break;
+			case 'overall-affrevs':
+				// your code for affrevs button
+				break;
+			case 'overall-activeusers':
+				// your code for active users button
+				break;
+		}
+	});
+
     //ReloadReports(moment().subtract('days', 29), moment());
 
 });

@@ -236,6 +236,12 @@ $(document).on("click", ".widget", function(){
 		$(this).parent().parent().parent().find('button').html( $(this).html() );
 	});
 
+	var overallButtons = $('.btn-group button');
+	overallButtons.click(function(e){
+		overallButtons.removeClass('active');
+		$(this).addClass('active');
+	});
+
 });
 
 var debounce = function(func, wait, immediate) {
