@@ -4387,7 +4387,13 @@ body .n-found .ie-true,
 	color: #FFFFFF;
 }
 
+.lotteryFootballBG.animated a {
+	margin: 60px 0;
+}
 
+.lotteryFootballBG.animated .step-three a {
+	margin: 30px 0;
+}
 
 .lotteryFootballBG .bottom-friends-holder {
 	background: #1c2028;
@@ -4418,6 +4424,42 @@ body .n-found .ie-true,
 	margin-bottom: 6px;
 }
 
+.lotteryFootballBG.animated .top-section {
+
+}
+.lotteryFootballBG.animated .top-section > *,
+.lotteryFootballBG.animated .bottom-section > * {
+	display: inline-block;
+	vertical-align: middle;
+}
+.lotteryFootballBG.animated .top-section h3,
+.lotteryFootballBG.animated .bottom-section p {
+	max-width: 400px;
+}
+
+.lotteryFootballBG.animated .top-section h3,
+.lotteryFootballBG.animated .top-section h3 span,
+.lotteryFootballBG.animated .bottom-section p,
+.lotteryFootballBG.animated .bottom-section p span {
+	text-align: left;
+}
+
+
+.lotteryFootballBG.animated .top-section img {
+	max-width: 150px;
+	height: auto;
+	border: 4px solid #ffffff;
+	box-sizing: border-box;
+	border-radius: 10px;
+	margin-right: 15px;
+}
+
+.lotteryFootballBG.animated .bottom-section img {
+	max-width: 260px;
+	height: auto;
+	margin-right: 15px;
+}
+
 .lotteryFootballBG .bottom-friends-holder .friends-left-part {
 	width: 50%;
 	float: left;
@@ -4435,14 +4477,14 @@ body .n-found .ie-true,
 	height: 100%;
 }
 
-.lotteryFootballBG.animated > .first-slide-holder > .step-two > p {
+.lotteryFootballBG.animated > .first-slide-holder > .step-two > div > p {
 	opacity: 0;
 	transition: opacity 0.7s ease-in-out;
 	-webkit-transition: opacity 0.7s ease-in-out;
 	-moz-transition: opacity 0.7s ease-in-out;
 	-ms-transition: opacity 0.7s ease-in-out;
 }
-.lotteryFootballBG.animated > .first-slide-holder > .step-two > p.animated {
+.lotteryFootballBG.animated > .first-slide-holder > .step-two > div > p.animated {
 	opacity: 1;
 }
 
@@ -4502,14 +4544,14 @@ body .n-found .ie-true,
 	opacity: 1;
 }
 
-.lotteryFootballBG.animated .first-slide-holder > .step-two > div > img {
+.lotteryFootballBG.animated .first-slide-holder > .step-two img {
 	opacity: 0;
 	transition: opacity 0.7s ease-in-out;
 	-webkit-transition: opacity 0.7s ease-in-out;
 	-moz-transition: opacity 0.7s ease-in-out;
 	-ms-transition: opacity 0.7s ease-in-out;
 }
-.lotteryFootballBG.animated .first-slide-holder > .step-two > div > img.animated {
+.lotteryFootballBG.animated .first-slide-holder > .step-two img.animated {
 	opacity: 1;
 }
 
@@ -4528,7 +4570,7 @@ body .n-found .ie-true,
 }
 
 .lotteryFootballBG .back-overlay.animated {
-	background: rgba(0,0,0,0.6);
+	background: rgba(0,0,0,0.4);
 }
 
 .lotteryFootballBG.animated .first-slide-holder > .step-three {
@@ -4592,6 +4634,15 @@ body .n-found .ie-true,
 	border-bottom-color: #012a85;
 }
 
+@media all and (max-height: 810px) {
+	.lotteryFootballBG.animated {
+		height: auto !important;
+	}
+	.scroll-down-holder {
+		display: none;
+	}
+}
+
 @media all and (max-width: 1000px) {
 	.lotteryFootballBG .bottom-friends-holder .friends-left-part,
 	.lotteryFootballBG .bottom-friends-holder .friends-right-part {
@@ -4617,11 +4668,46 @@ body .n-found .ie-true,
 	.lotteryFootballBG.animated h3,
 	.lotteryFootballBG.animated h3 span {
 		line-height: 24px;
-		font-size: 22px;
-		padding: 0 5px;
+		font-size: 20px;
+		/*padding: 0 5px;*/
 	}
 	.lotteryFootballBG.animated .scroll-down-holder {
 		display: none;
+	}
+	.lotteryFootballBG.animated .top-section {
+		margin-bottom: -20px;
+		margin-top: -15px;
+	}
+	.lotteryFootballBG.animated .top-section h3 {
+		max-width: 170px;
+	}
+	.lotteryFootballBG.animated .bottom-section p {
+		max-width: 150px;
+		font-size: 16px;
+	}
+	.lotteryFootballBG.animated .top-section img {
+		max-width: 100px;
+	}
+	.lotteryFootballBG.animated .bottom-section img {
+		max-width: 130px;
+		margin-right: 5px;
+	}
+	.lotteryFootballBG.animated .first-slide-holder > .step-three p {
+		margin-top: 15px;
+		margin-bottom: -15px;
+	}
+	.lotteryFootballBG.animated .first-slide-holder > .step-three {
+		padding-top: 0;
+	}
+	.lotteryFootballBG.animated a {
+		margin: 15px 0;
+	}
+	.lotteryFootballBG.animated .first-slide-holder > .step-three h4 {
+		margin-top: -20px;
+	}
+	.lotteryFootballBG.animated .top-section {
+		margin-bottom: -10px;
+		margin-top: -15px;
 	}
 }
 

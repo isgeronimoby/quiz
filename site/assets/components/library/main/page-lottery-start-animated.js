@@ -7,11 +7,11 @@ jQuery(document).ready(function($){
 		progressBarSecondStep = startPageSlide.find('.progress-bar-triple span:nth-of-type(2)'),
 		progressBarThirdStep = startPageSlide.find('.progress-bar-triple span:nth-of-type(3)'),
 		startSlideOverlay = startPageSlide.find('.back-overlay'),
-		startSlideHeading = startPageSlide.find('.step-two h3'),
+		startSlideHeading = startPageSlide.find('.step-two h3').add('.step-two > div > .prize-image'),
 		startSlidePar = startPageSlide.find('.first-slide-holder > .step-two > p'),
 		startSlideBtn = startPageSlide.find('.first-slide-holder > .step-two > a'),
 		startSlideCongrats = $('.fadeTextHolder > p'),
-		startSlideImage = startPageSlide.find('.first-slide-holder > .step-two > div > img'),
+		startSlideImage = startPageSlide.find('.first-slide-holder > .step-two > .bottom-section > div > img').add('.first-slide-holder > .step-two > div > p'),
 		scrollDownChevron = startPageSlide.find('.scroll-down-holder span');
 
 

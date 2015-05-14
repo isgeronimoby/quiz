@@ -50,9 +50,25 @@
 		html.no-touch .service-message {
 			display: none;
 		}
+		.small-logo, .big-logo {
+			display: inline-block;
+		}
+		.big-logo {
+			margin-left: 5px;
+		}
+		.navbar .button-holder.wrap > a {
+			display: none !important;
+		}
 		@media (max-width: 990px){
 			html.no-touch body #content {
 				padding-top: 0 !important;
+			}
+			.toolbar .company-logo a img {
+				height: auto;
+				max-height: 100%;
+			}
+			.big-logo {
+				width: 70px;
 			}
 		}
 	</style>
@@ -115,8 +131,8 @@
 	<div class="button-holder not-logged wrap">
 		<div class="company-logo">
 			<a href="#">
-				<img src="../../assets/images/front/everton/company-logo1.png" class="big-logo" alt="logo"/>
 				<img src="../../assets/images/front/everton/small-logo.png" class="small-logo" alt="logo"/>
+				<img src="../../assets/images/front/everton/company-logo1.png" class="big-logo" alt="logo"/>
 			</a>
 			<span></span>
 		</div>
@@ -200,25 +216,33 @@
 		</div>
 
 		<div class="step-two">
-			<h3><span class="goldText">Win:</span> a signed t-shirt and watch a training session at Finch Farm</h3>
+			<div class="top-section">
+				<img src="https://metrouk2.files.wordpress.com/2014/11/lego-1.jpg" class="prize-image">
+				<h3><span class="goldText">Win:</span> a lego stripper and watch her dancing at the pole</h3>
+			</div>
 
 			<a class="not-ie" href="#">Add to claim 5 first tickets</a>
 			<a class="ie-true" href="#">Try to enter the draw</a>
 
-			<p class="show-desktop">Add the free Everton Rewards browser extension and<br/>
-				sign up it's that simple!</p>
-			<p class="show-mobile">Add the free Everton Rewards browser App and sign up it's that simple!</p>
 
-			<div class="show-desktop">
-				<img src="../../assets/images/front/everton/macbook_logo.png" alt="Application"/>
-			</div>
-			<div class="show-mobile">
-				<img src="../../assets/images/front/everton/iphone_circle_zoom.png" alt="Application"/>
+			<div class="bottom-section">
+				<div class="show-desktop">
+					<img src="../../assets/images/front/everton/macbook_logo.png" alt="Application"/>
+				</div>
+				<div class="show-mobile">
+					<img src="../../assets/images/front/everton/iphone_circle_zoom.png" alt="Application"/>
+				</div>
+				<p class="show-desktop">Add the free Everton Rewards browser extension and<br/>
+					sign up it's that simple!</p>
+				<p class="show-mobile">Add the free Everton Rewards browser App and sign up it's that simple!</p>
 			</div>
 		</div>
 
 		<div class="step-three">
-			<h3>Sign up to complete your<br/>entry into the draw</h3>
+			<div class="top-section">
+				<img src="https://metrouk2.files.wordpress.com/2014/11/lego-1.jpg" class="prize-image">
+				<h3>Sign up to complete your entry into the draw</h3>
+			</div>
 
 			<a class="buttonBlue" href="#">Sign up with Facebook</a>
 			<h4>We'll never post anything without your permission</h4>
