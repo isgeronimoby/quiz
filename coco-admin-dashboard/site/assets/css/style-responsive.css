@@ -197,6 +197,20 @@
 	
 	.la-pricing-table .la-col-4{width: 50%;}
 	.user-profile-sidebar{text-align: center;}
+	.morrisCharts svg {
+		max-height: 170px;
+	}
+	.widget-content{
+		max-height: initial;
+		padding: 0 0 20px;
+	}
+	.widget-content.widget-square {
+		height: auto;
+	}
+	.btn-group .btn {
+		font-size: 12px;
+		padding: 6px 3px;
+	}
 }
 
 @media (max-width: 480px){

@@ -49,42 +49,46 @@ $(document).ready(function(){
 	);
 
 	// SORTABLE ELEMENTS -> UNCOMMENT AJAX TO SEND POSITIONS
-	$( "#sortableArea" ).sortable({
-		handle: ".widget-header",
-		cancel: ".modal-widget",
-		opacity: 0.5,
-		revert: 300,
-		dropOnEmpty: false,
-		tolerance: "pointer",
-		forcePlaceholderSize: true,
-		helper: 'clone',
-		receive: function(event, ui) {$("body").trigger("resize")},
-		update: function (event, ui) {
-			if (this === ui.item.parent()[0]) {
-				var data = $(this).sortable('toArray');
+	if ( currentPlatform == 'desktop' ) {
+		$("#sortableArea").sortable({
+			handle: ".widget-header",
+			cancel: ".modal-widget",
+			opacity: 0.5,
+			revert: 300,
+			dropOnEmpty: false,
+			tolerance: "pointer",
+			forcePlaceholderSize: true,
+			helper: 'clone',
+			receive: function (event, ui) {
+				$("body").trigger("resize")
+			},
+			update: function (event, ui) {
+				if (this === ui.item.parent()[0]) {
+					var data = $(this).sortable('toArray');
 
-				var layout = "";
+					var layout = "";
 
-				var widgets = $("#sortableArea>div.col-lg-4");
+					var widgets = $("#sortableArea>div.col-lg-4");
 
-				$.each(widgets, function (index, value) {
-					layout += $(value).attr("id") + ";";
-				});
+					$.each(widgets, function (index, value) {
+						layout += $(value).attr("id") + ";";
+					});
 
-				//$.ajax({
-				//	type: "POST",
-				//	url: updateLayoutUrl,
-				//	data: { layout: layout },
-				//	dataType: "json",
-				//	success: function (response) {
-				//	},
-				//	error: function (error) {
-				//		console.log(error);
-				//	}
-				//});
+					//$.ajax({
+					//	type: "POST",
+					//	url: updateLayoutUrl,
+					//	data: { layout: layout },
+					//	dataType: "json",
+					//	success: function (response) {
+					//	},
+					//	error: function (error) {
+					//		console.log(error);
+					//	}
+					//});
+				}
 			}
-		}
-	});
+		});
+	}
 
   load_charts();
 
@@ -181,7 +185,7 @@ function reload_charts(){
 
 	dashboardCharts.appInstallsFromIos.draw();
 	dashboardCharts.appInstallsFromAndroid.draw();
-	dashboardCharts.appInstallsFromWin.draw();
+//	dashboardCharts.appInstallsFromWin.draw();
 	dashboardCharts.extInstallsBrowserChrome.draw();
 	dashboardCharts.extInstallsBrowserFirefox.draw();
 	dashboardCharts.extInstallsBrowserSafari.draw();
@@ -435,7 +439,7 @@ function load_charts(){
 		hideHover: 'auto'
 	});
 
-	dashboardCharts.appInstallsFromWin = Morris.Donut({
+/*	dashboardCharts.appInstallsFromWin = Morris.Donut({
 		element: 'app-installs-from-windows',
 		resize: true,
 		data: [
@@ -445,7 +449,7 @@ function load_charts(){
 		],
 		barColors: chartColors,
 		hideHover: 'auto'
-	});
+	});*/
 
 /*	dashboardCharts.extInstallsBrowser = Morris.Bar({
 		element: 'ext-installs-from-browser',
