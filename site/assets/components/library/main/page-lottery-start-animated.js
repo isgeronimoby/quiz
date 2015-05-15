@@ -16,7 +16,7 @@ jQuery(document).ready(function($){
 
 
 	// CHECK THE SCREEN HEIGHT TO PROPERLY POSITION FADING TEXT
-	if ( startPageSlide.height() > $(window).height() ) startSlideCongrats.parent().css('top', '20%');
+	if ( startPageSlide.height() > $(window).height() || currentPlatform == 'mobile' ) startSlideCongrats.parent().css('top', '200px');
 
 	// REBUILDING FIRST SCREEN TO FIT THE SCREEN
 	function rebuildSlideSize() {
