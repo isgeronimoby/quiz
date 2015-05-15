@@ -30,6 +30,24 @@ jQuery(document).ready(function($){
 		$('html,body').animate({ scrollTop: startPageSlide.height() + 40 }, 'slow');
 	});
 
+	function showStep( step ){
+		if ( step == 2 ) {
+			progressBar.removeClass('full');
+			progressBarSecondStep.removeClass('full');
+			progressBarThirdStep.removeClass('full');
+
+			progressBar.addClass('half');
+			setTimeout(function () {
+				progressBarSecondStep.addClass('full');
+			}, 1000);
+		} else if ( step == 3 ) {
+			progressBarSecondStep.addClass('full');
+			progressBar.addClass('full');
+			setTimeout(function(){
+				progressBarThirdStep.addClass('full');
+			}, 1000);
+		}
+	}
 
 	// LAUNCHING FADING TEXT
 	function showCongratsText(){
@@ -44,37 +62,29 @@ jQuery(document).ready(function($){
 	}
 
 	// SHOWING SECOND STEP
-	function launchSecondStep() {
+	function launchSecondStep( step ) {
 		setTimeout(function () {
-			showCongratsText();
+			secondSlide.show();
+			startSlideOverlay.addClass('animated');
+			showStep( step );
 			setTimeout(function () {
-				startSlideOverlay.addClass('animated');
-				progressBar.addClass('half');
-				setTimeout(function(){
-					progressBarSecondStep.addClass('full');
-				}, 1000);
+				startSlideHeading.addClass('animated');
 				setTimeout(function () {
-					startSlideHeading.addClass('animated');
+					startSlidePar.addClass('animated');
+					startSlideImage.addClass('animated');
 					setTimeout(function () {
-						startSlidePar.addClass('animated');
-						startSlideImage.addClass('animated');
-						setTimeout(function () {
-							startSlideBtn.addClass('animated');
-						}, 1000);
-					}, 700);
-				}, 800);
-			}, 2000);
+						startSlideBtn.addClass('animated');
+					}, 1000);
+				}, 700);
+			}, 800);
 		}, 300);
 	}
 
 	// SHOWING THIRD STEP
-	function launchThirdStep(){
+	function launchThirdStep( step ){
 		setTimeout(function(){
-			progressBar.addClass('full');
-			secondSlide.css('opacity', 0); // temporary
+			showStep( step );
 			setTimeout(function(){
-				progressBarThirdStep.addClass('full');
-				secondSlide.hide();
 				thirdSlide.fadeIn(1200);
 			}, 1100);
 		}, 300);
@@ -86,13 +96,37 @@ jQuery(document).ready(function($){
 	});
 
 
+	function showSlide( slide, step, congrats ){
+		secondSlide.hide();
+		thirdSlide.hide();
+		if ( slide == 'install' ){
+			if ( congrats ) {
+				showCongratsText();
+				setTimeout(function(){
+					launchSecondStep( step );
+				}, 2000);
+			} else {
+				launchSecondStep( step );
+			}
+		} else {
+			if ( congrats ) {
+				showCongratsText();
+				setTimeout(function(){
+					launchThirdStep( step );
+				}, 2000);
+			} else {
+				launchThirdStep( step );
+			}
+		}
+	}
+
 	// TEMPORARY TIMEOUTS TO SEE TRANSITION IN ACTION
 	// REMOVE ON PRODUCTION
 	setTimeout(function(){
-		launchSecondStep();
+		showSlide( 'install', 2, true );
 	}, 1000);
 	setTimeout(function(){
-		launchThirdStep();
+		showSlide( 'signup', 3, false );
 	}, 10000);
 	// END OF TEMP
 
