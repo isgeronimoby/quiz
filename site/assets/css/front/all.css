@@ -4605,6 +4605,11 @@ body .n-found .ie-true,
 	display: none;
 }
 
+.dummy-container {
+	width: 100%;
+	opacity: 0;
+}
+
 .fadeTextHolder {
 	position: absolute;
 	top: 50%;
@@ -4713,7 +4718,7 @@ body .n-found .ie-true,
 		padding-top: 0;
 	}
 	.lotteryFootballBG.animated a {
-		margin: 15px 0;
+		margin: 15px;
 	}
 	.lotteryFootballBG.animated .first-slide-holder > .step-three h4 {
 		margin-top: -20px;
@@ -5548,9 +5553,9 @@ body .n-found .ie-true,
 		font-size: 24px;
 	}
 	.lotteryFootballBG a {
-		font-size: 20px;
+		font-size: 18px;
 		line-height: 32px;
-		padding: 10px 30px;
+		padding: 10px 20px;
 	}
 	.lotteryFootballBG p {
 		font-size: 20px;

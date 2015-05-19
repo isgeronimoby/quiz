@@ -6,6 +6,7 @@ jQuery(document).ready(function($){
 		progressBar = startPageSlide.find('.progress-bar-triple .progress-fill'),
 		progressBarSecondStep = startPageSlide.find('.progress-bar-triple span:nth-of-type(2)'),
 		progressBarThirdStep = startPageSlide.find('.progress-bar-triple span:nth-of-type(3)'),
+		dummyBlock = startPageSlide.find('.dummy-container'),
 		startSlideOverlay = startPageSlide.find('.back-overlay'),
 		startSlideHeading = startPageSlide.find('.step-two h3').add('.step-two > div > .prize-image'),
 		startSlidePar = startPageSlide.find('.first-slide-holder > .step-two > p'),
@@ -20,6 +21,7 @@ jQuery(document).ready(function($){
 
 	// REBUILDING FIRST SCREEN TO FIT THE SCREEN
 	function rebuildSlideSize() {
+		dummyBlock.height( secondSlide.height() );
 		if ( $(window).width() > 1000 )
 			startPageSlide.height( $(window).height() - $('.navbar.toolbar').height() - 40 );
 		else startPageSlide.height('auto');
@@ -64,6 +66,7 @@ jQuery(document).ready(function($){
 	// SHOWING SECOND STEP
 	function launchSecondStep( step ) {
 		setTimeout(function () {
+			dummyBlock.hide();
 			secondSlide.show();
 			startSlideOverlay.addClass('animated');
 			showStep( step );
@@ -85,6 +88,7 @@ jQuery(document).ready(function($){
 		setTimeout(function(){
 			showStep( step );
 			setTimeout(function(){
+				dummyBlock.hide();
 				thirdSlide.fadeIn(1200);
 			}, 1100);
 		}, 300);
@@ -120,15 +124,15 @@ jQuery(document).ready(function($){
 		}
 	}
 
-	// TEMPORARY TIMEOUTS TO SEE TRANSITION IN ACTION
-	// REMOVE ON PRODUCTION
 	setTimeout(function(){
-		showSlide( 'install', 2, true );
+		if ( window.location.href.substring( window.location.href.lastIndexOf('&installed') + 11 ) == 1 ) {
+			//extension is installed
+			startSlideCongrats.html('Congratulations!');
+			showSlide( 'signup', 3, true );
+		} else {
+			showSlide( 'install', 2, true );
+		}
 	}, 1000);
-	setTimeout(function(){
-		showSlide( 'signup', 3, false );
-	}, 10000);
-	// END OF TEMP
 
 	$(window).resize(function(){
 		rebuildSlideSize();
