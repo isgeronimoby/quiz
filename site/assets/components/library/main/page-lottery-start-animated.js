@@ -94,12 +94,6 @@ jQuery(document).ready(function($){
 		}, 300);
 	}
 
-	// TRIGGERING OPENING REGISTRATION FORM
-	$('a.fancybox').click(function(){
-		$('.fake-btn').trigger('click');
-	});
-
-
 	function showSlide( slide, step, congrats ){
 		secondSlide.hide();
 		thirdSlide.hide();
