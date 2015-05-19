@@ -1,6 +1,6 @@
 var showExtensionPopupFunc;
 $(function(){
-	if (!window.mobilecheck()) {
+	if ( currentPlatform == 'desktop' ) {
 		var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 		// Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
 		var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
@@ -40,7 +40,7 @@ $(function(){
 });
 /*********** END OF NOTIFICATIONS ***********/
 $(document).ready(function(){
-	if (!window.mobilecheck()) {
+	if ( currentPlatform == 'desktop' ) {
 		$('section').hide();
 		$('.loading-holder').show();
 	}
