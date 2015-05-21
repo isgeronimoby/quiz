@@ -50,6 +50,37 @@ button {
 /*Reset styles END*/
 /*============================================================================*/
 
+/*============================================================================*/
+/*================================ FONTS =====================================*/
+/*============================================================================*/
+
+@font-face {
+	font-family: 'helvetica-custom';
+	src: url('../../fonts/helvetica-neue-light.eot'); /* IE9 Compat Modes */
+	src: url('../../fonts/helvetica-neue-light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	url('../../fonts/helvetica-neue-light.woff') format('woff'), /* Modern Browsers */
+	url('../../fonts/helvetica-neue-light.ttf')  format('truetype'), /* Safari, Android, iOS */
+	url('../../fonts/helvetica-neue-light.svg#helvetica') format('svg'); /* Legacy iOS */
+	font-weight: 200;
+}
+@font-face {
+	font-family: 'helvetica-custom';
+	src: url('../../fonts/helvetica-neue-regular.eot'); /* IE9 Compat Modes */
+	src: url('../../fonts/helvetica-neue-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+	url('../../fonts/helvetica-neue-regular.woff') format('woff'), /* Modern Browsers */
+	url('../../fonts/helvetica-neue-regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+	url('../../fonts/helvetica-neue-regular.svg#helvetica') format('svg'); /* Legacy iOS */
+	font-weight: 400;
+}
+
+/*============================================================================*/
+/*============================== FONTS END ===================================*/
+/*============================================================================*/
+
+
+
+
+
 html {
 	height: 100%;
 }
@@ -131,7 +162,7 @@ html.no-touch .service-message {
 body {
 	margin: 0;
 	color: #333;
-	font: 12px/15px 'Open Sans', Arial, Helvetica, sans-serif;
+	font: 12px/15px 'helvetica-custom', Arial, Helvetica, sans-serif;
 	background: #fff;
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: none;
@@ -1193,7 +1224,7 @@ body .modal-fancy .widget .widget-body {
     color: #4f4f4f;
     font-size: 17px;
     line-height: 18px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'helvetica-custom', sans-serif;
     font-weight: bold;
     margin-bottom: 10px;
 }
@@ -4384,8 +4415,12 @@ body .n-found .ie-true,
 	margin-bottom: 6px;
 }
 
-.lotteryFootballBG.animated .top-section {
+.lotteryFootballBG.animated .step-two .top-section {
 
+}
+.lotteryFootballBG.animated .step-two .bottom-section {
+	margin-right: -30px;
+	margin-top: 10px;
 }
 .lotteryFootballBG.animated .top-section > *,
 .lotteryFootballBG.animated .bottom-section > * {
@@ -4394,7 +4429,7 @@ body .n-found .ie-true,
 }
 .lotteryFootballBG.animated .top-section h3,
 .lotteryFootballBG.animated .bottom-section p {
-	max-width: 400px;
+	max-width: 350px;
 }
 
 .lotteryFootballBG.animated .top-section h3,
@@ -4417,7 +4452,8 @@ body .n-found .ie-true,
 .lotteryFootballBG.animated .bottom-section img {
 	max-width: 260px;
 	height: auto;
-	margin-right: 15px;
+	margin-left: -90px;
+	margin-top: -20px;
 }
 
 .lotteryFootballBG.animated .bottom-friends-holder .friends-left-part {
@@ -4610,17 +4646,17 @@ body .n-found .ie-true,
 }
 
 @media all and (max-width: 1000px) {
-	.lotteryFootballBG .bottom-friends-holder .friends-left-part,
-	.lotteryFootballBG .bottom-friends-holder .friends-right-part {
+	.lotteryFootballBG.animated .bottom-friends-holder .friends-left-part,
+	.lotteryFootballBG.animated .bottom-friends-holder .friends-right-part {
 		width: 100%;
 		float: none;
 		margin-bottom: 30px;
 	}
-	.lotteryFootballBG .bottom-friends-holder {
+	.lotteryFootballBG.animated .bottom-friends-holder {
 		position: static;
 		text-align: center;
 	}
-	.lotteryFootballBG .first-slide-holder {
+	.lotteryFootballBG.animated .first-slide-holder {
 		padding-bottom: 0;
 	}
 	.lotteryFootballBG.animated {
@@ -4655,7 +4691,7 @@ body .n-found .ie-true,
 		max-width: 100px;
 	}
 	.lotteryFootballBG.animated .bottom-section img {
-		max-width: 130px;
+		max-width: 110px;
 		margin-right: 5px;
 	}
 	.lotteryFootballBG.animated .first-slide-holder > .step-three p {
@@ -4674,6 +4710,14 @@ body .n-found .ie-true,
 	.lotteryFootballBG.animated .top-section {
 		margin-bottom: -10px;
 		margin-top: -15px;
+	}
+	.lotteryFootballBG.animated .step-two .bottom-section {
+		margin-right: 0;
+		margin-top: 10px;
+	}
+	.lotteryFootballBG.animated .bottom-section img {
+		margin-left: 10px;
+		margin-top: 0;
 	}
 }
 
@@ -4949,7 +4993,7 @@ body .n-found .ie-true,
 		margin-bottom: 0;
 		padding-bottom: 0;
 		border-bottom: none;
-		font-family: 'Roboto', sans-serif;
+		font-family: 'helvetica-custom', sans-serif;
 		font-size: 19px;
 		line-height: 25px;
 		color: #4f4f4f;
@@ -4961,7 +5005,7 @@ body .n-found .ie-true,
 		display: block;
 		overflow: hidden;
 		margin: 5px 0 0 0;
-		font-family: 'Roboto', sans-serif;
+		font-family: 'helvetica-custom', sans-serif;
 		font-weight: bold;
 		font-size: 14px;
 		line-height: 18px;
@@ -5102,7 +5146,7 @@ body .n-found .ie-true,
 		height: 40px;
 		line-height: 40px;
 		text-align: center;
-		font-family: 'Roboto', sans-serif;
+		font-family: 'helvetica-custom', sans-serif;
 		font-size: 13px;
 		font-weight: bold;
 		color: white;
@@ -5131,7 +5175,7 @@ body .n-found .ie-true,
 		height: 40px;
 		line-height: 40px;
 		text-align: center;
-		font-family: 'Roboto', sans-serif;
+		font-family: 'helvetica-custom', sans-serif;
 		border: solid 1px #BBBBBB;
 		color: #e5412d;
 		background-color: #F4F4F4;
@@ -5234,7 +5278,7 @@ body .n-found .ie-true,
 		height: 40px;
 		line-height: 40px;
 		text-align: center;
-		font-family: 'Roboto', sans-serif;
+		font-family: 'helvetica-custom', sans-serif;
 		border: solid 1px #BBBBBB;
 		background-color: #F4F4F4;
 		font-weight: normal;

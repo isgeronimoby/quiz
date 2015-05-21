@@ -15,6 +15,10 @@ jQuery(document).ready(function($){
 		startSlideImage = startPageSlide.find('.first-slide-holder > .step-two > .bottom-section > div > img').add('.first-slide-holder > .step-two > div > p'),
 		scrollDownChevron = startPageSlide.find('.scroll-down-holder span');
 
+	if ( navigator.userAgent.substr(navigator.userAgent.indexOf('MSIE') + 5, 3) <= 9 ) {
+		var ie9 = true;
+	}
+
 
 	// CHECK THE SCREEN HEIGHT TO PROPERLY POSITION FADING TEXT
 	if ( startPageSlide.height() > $(window).height() || currentPlatform == 'mobile' ) startSlideCongrats.parent().css('top', '200px');
@@ -118,15 +122,32 @@ jQuery(document).ready(function($){
 		}
 	}
 
-	setTimeout(function(){
+	// if IE 9 or lower detected no animation, just content
+	if ( !ie9 ) {
+		setTimeout(function(){
+			// greater than IE 9 or not IE
+			if ( window.location.href.substring( window.location.href.lastIndexOf('&installed') + 11 ) == 1 ) {
+				//extension is installed
+				startSlideCongrats.html('Congratulations!');
+				showSlide( 'signup', 3, true );
+			} else {
+				showSlide( 'install', 2, true );
+			}
+		}, 1000);
+	} else {
+		//IE 9 or lower
 		if ( window.location.href.substring( window.location.href.lastIndexOf('&installed') + 11 ) == 1 ) {
 			//extension is installed
-			startSlideCongrats.html('Congratulations!');
-			showSlide( 'signup', 3, true );
+			showStep( 3 );
+			dummyBlock.hide();
+			secondSlide.hide();
+			thirdSlide.show();
 		} else {
-			showSlide( 'install', 2, true );
+			showStep( 2 );
+			dummyBlock.hide();
+			secondSlide.show();
 		}
-	}, 1000);
+	}
 
 	$(window).resize(function(){
 		rebuildSlideSize();

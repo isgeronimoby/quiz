@@ -51,14 +51,14 @@
 		html.no-touch .service-message {
 			display: none;
 		}
-		.small-logo, .big-logo {
-			display: inline-block;
-		}
 		.big-logo {
 			margin-left: 5px;
 		}
 		.small-logo {
-			float: left;
+			display: none !important;
+		}
+		.big-logo {
+			display: inline-block !important;
 		}
 		.navbar .button-holder.wrap > a {
 			display: none !important;
@@ -92,6 +92,20 @@
 			}
 		}
 	</style>
+	<!--[if lte IE 9 ]>
+	<style>
+		.fadeTextHolder {
+			display: none;
+		}
+		.lotteryFootballBG.animated .first-slide-holder > .step-two img,
+		.lotteryFootballBG.animated > a,
+		.lotteryFootballBG.animated > .first-slide-holder > .step-two > a,
+		.lotteryFootballBG.animated > .first-slide-holder > .step-two > div > p,
+		.lotteryFootballBG.animated .step-two h3 {
+			opacity: 1;
+		}
+	</style>
+	<![endif]-->
 
 
 
@@ -151,8 +165,8 @@
 	<div class="button-holder not-logged wrap">
 		<div class="company-logo">
 			<a href="#">
-				<img src="../../assets/images/front/everton/small-logo.png" class="small-logo" alt="logo"/>
 				<img src="../../assets/images/front/everton/company-logo1.png" class="big-logo" alt="logo"/>
+				<img src="../../assets/images/front/everton/small-logo.png" class="small-logo" alt="logo"/>
 			</a>
 			<span></span>
 		</div>
@@ -246,15 +260,15 @@
 
 
 			<div class="bottom-section">
+				<p class="show-desktop">Add the free Everton Rewards browser extension and<br/>
+					sign up it's that simple!</p>
+				<p class="show-mobile">Add the free Everton Rewards browser App and sign up it's that simple!</p>
 				<div class="show-desktop">
 					<img src="../../assets/images/front/everton/macbook_logo.png" alt="Application"/>
 				</div>
 				<div class="show-mobile">
 					<img src="../../assets/images/front/everton/iphone_circle_zoom.png" alt="Application"/>
 				</div>
-				<p class="show-desktop">Add the free Everton Rewards browser extension and<br/>
-					sign up it's that simple!</p>
-				<p class="show-mobile">Add the free Everton Rewards browser App and sign up it's that simple!</p>
 			</div>
 		</div>
 
