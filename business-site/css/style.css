@@ -575,12 +575,16 @@ img {
 }
 
 @media all and (max-width: 830px) {
-	.head-partners {
-		display: none;
-	}
 	.text-plus-logo {
 		margin-top: 80px;
 		margin-left: 0;
+	}
+}
+
+
+@media all and (max-width: 950px) {
+	.head-partners {
+		display: none;
 	}
 }
 

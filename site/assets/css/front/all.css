@@ -162,7 +162,7 @@ html.no-touch .service-message {
 body {
 	margin: 0;
 	color: #333;
-	font: 12px/15px 'helvetica-custom', Arial, Helvetica, sans-serif;
+	font: 12px/15px 'Roboto', Arial, Helvetica, sans-serif;
 	background: #fff;
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: none;
@@ -233,6 +233,13 @@ ul, ol, li, h1, h2, h3, h4, h5, h6 {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	font-family: 'helvetica-custom', sans-serif;
+	font-weight: 200;
+}
+
+p, a {
+	font-family: 'Roboto', sans-serif;
+	font-weight: normal;
 }
 
 .toolbar:after,
@@ -334,7 +341,6 @@ ul, ol, li, h1, h2, h3, h4, h5, h6 {
 	background: #f9c50f;
 	float: left;
 	padding: 0 29px 0 27px;
-	font-family: Arial;
 	margin: 0 7px 0 0;
 	line-height: 40px;
 	height: 40px;
@@ -380,7 +386,6 @@ ul, ol, li, h1, h2, h3, h4, h5, h6 {
 }
 
 .container-fluid ul li a h3, .container-fluid ul li a h3 {
-	font-family: Arial;
 	color: #fff;
 }
 
@@ -1886,7 +1891,6 @@ body .modal-fancy .gg.alt:hover {
 	color: #4f4f4f;
 	font-size: 38px;
 	line-height: 38px;
-	font-family: Arial;
 	margin-bottom: 18px;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #efefef;
@@ -2014,7 +2018,8 @@ body .modal-fancy .gg.alt:hover {
 .search-result-count .sum {
 	display: block;
 	margin-bottom: 18px;
-	font-weight: bold;
+	font-weight: 200;
+	font-family: 'helvetica-custom', sans-serif;
 	padding-top: 28px;
 	line-height: 28px;
 	font-size: 35px;
@@ -2225,7 +2230,6 @@ body .modal-fancy .gg.alt:hover {
 	font-size: 18px;
 	line-height: 18px;
 	margin-bottom: 9px;
-	font-weight: bold;
 	color: #4f4f4f;
 }
 
@@ -2716,9 +2720,10 @@ body .modal-fancy .gg.alt:hover {
 .profile-statistic .sum {
 	display: block;
 	padding: 0 0 0 20px;
-	font-size: 40px;
+	font-size: 50px;
 	line-height: 56px;
-	font-weight: bold;
+	font-family: 'helvetica-custom', sans-serif;
+	font-weight: 200;
 	color: white;
 }
 
@@ -4993,7 +4998,6 @@ body .n-found .ie-true,
 		margin-bottom: 0;
 		padding-bottom: 0;
 		border-bottom: none;
-		font-family: 'helvetica-custom', sans-serif;
 		font-size: 19px;
 		line-height: 25px;
 		color: #4f4f4f;
@@ -5005,7 +5009,6 @@ body .n-found .ie-true,
 		display: block;
 		overflow: hidden;
 		margin: 5px 0 0 0;
-		font-family: 'helvetica-custom', sans-serif;
 		font-weight: bold;
 		font-size: 14px;
 		line-height: 18px;
@@ -5146,7 +5149,6 @@ body .n-found .ie-true,
 		height: 40px;
 		line-height: 40px;
 		text-align: center;
-		font-family: 'helvetica-custom', sans-serif;
 		font-size: 13px;
 		font-weight: bold;
 		color: white;
@@ -5175,7 +5177,6 @@ body .n-found .ie-true,
 		height: 40px;
 		line-height: 40px;
 		text-align: center;
-		font-family: 'helvetica-custom', sans-serif;
 		border: solid 1px #BBBBBB;
 		color: #e5412d;
 		background-color: #F4F4F4;
@@ -5278,7 +5279,6 @@ body .n-found .ie-true,
 		height: 40px;
 		line-height: 40px;
 		text-align: center;
-		font-family: 'helvetica-custom', sans-serif;
 		border: solid 1px #BBBBBB;
 		background-color: #F4F4F4;
 		font-weight: normal;

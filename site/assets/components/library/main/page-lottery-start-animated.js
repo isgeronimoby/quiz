@@ -36,6 +36,8 @@ jQuery(document).ready(function($){
 		$('html,body').animate({ scrollTop: startPageSlide.height() + 40 }, 'slow');
 	});
 
+	if ( currentPlatform == 'mobile' ) startSlideBtn.html('Install the App');
+
 	function showStep( step ){
 		if ( step == 2 ) {
 			progressBar.removeClass('full');
