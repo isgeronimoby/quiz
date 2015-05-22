@@ -26,11 +26,17 @@ $(document).ready(function () {
 				servMmes.css('top', height);
 			})
 		}
-		cookiesConfirm();
+
+		if ($('.cookies-block').length) {
+			cookiesConfirm();
+		}
+		
 
 		$(window).resize(
-			function(){
-				cookiesConfirm();
+			function () {
+				if ($('.cookies-block').length) {
+					cookiesConfirm();
+				}
 			}
 		)
 	}
