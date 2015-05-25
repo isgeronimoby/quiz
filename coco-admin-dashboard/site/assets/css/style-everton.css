@@ -5854,6 +5854,44 @@ body.cru .navbar-default .navbar-nav > li > a {
 .dropdown {
   margin-bottom: 15px;
 }
+.mobile-data-list {
+  margin: 20px 0;
+  padding: 0 15px;
+}
+.mobile-data-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.morrisChartsLight .mobile-data-list ul li {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+.mobile-data-list ul li {
+  font-size: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+.morrisChartsLight .mobile-data-list ul li h5 {
+  color: #333;
+}
+.mobile-data-list ul li h5 {
+  font-size: 16px;
+  line-height: 24px;
+}
+.mobile-data-list ul li span {
+  float: left;
+}
+.mobile-data-list ul li span.data {
+  float: right;
+  font-weight: 700;
+}
+.mobile-data-list ul li:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
 @media all and (max-width: 600px) {
   .pull-left.dropdown,
   .pull-left.dropdown button,

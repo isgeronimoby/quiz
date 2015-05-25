@@ -367,6 +367,13 @@ $(document).ready(function(){
 		Campaigns.reloadFunnels();
 	});
 
+	// TODO: adapt this function to the campaign page
+	Campaigns.fillMobileVersion = function( chart, data ){
+		chart.el.parent().find('.mobile-data-list .data.facebook').html( data.FacebookRegistrations + '%' );
+		chart.el.parent().find('.mobile-data-list .data.emails').html( data.EmailRegistrations + '%' );
+		chart.el.parent().find('.mobile-data-list .data.anonymous').html( data.AnonymusRegistrations + '%' );
+	};
+
 	// hack to force funnels reloading if small-screen detected
 	setTimeout(function(){
 		if ( $('body').hasClass('smallscreen') ) {

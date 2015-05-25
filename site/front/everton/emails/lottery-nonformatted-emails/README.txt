@@ -6,5 +6,5 @@ That way - "http://football.cool-link.com/emailImages/" to "../../../assets/imag
 
 Then can use them as local emails.
 
-
 This tool for sending emails - http://ctrlq.org/html-mail/
+

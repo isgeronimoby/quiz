@@ -350,7 +350,11 @@ function setPercentageDynamics(prevNumber, currentNumber, text, span) {
 	span.show();
 }
 
-
+dashboardCharts.fillMobileVersion = function( chart, data ){
+	chart.el.parent().find('.mobile-data-list .data.facebook').html( data.FacebookRegistrations + '%' );
+	chart.el.parent().find('.mobile-data-list .data.emails').html( data.EmailRegistrations + '%' );
+	chart.el.parent().find('.mobile-data-list .data.anonymous').html( data.AnonymusRegistrations + '%' );
+};
 
 
 dashboardCharts.overallLineChartData = [
