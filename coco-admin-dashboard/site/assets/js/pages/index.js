@@ -351,11 +351,24 @@ function setPercentageDynamics(prevNumber, currentNumber, text, span) {
 }
 
 dashboardCharts.fillMobileVersion = function( chart, data ){
-	chart.el.parent().find('.mobile-data-list .data.facebook').html( data.FacebookRegistrations + '%' );
-	chart.el.parent().find('.mobile-data-list .data.emails').html( data.EmailRegistrations + '%' );
-	chart.el.parent().find('.mobile-data-list .data.anonymous').html( data.AnonymusRegistrations + '%' );
+	var blockFill;
+	if ( data ) {
+		blockFill =
+			'<ul>' +
+			'<li><h5><span>Facebook:</span> <span class="data facebook">' + data.FacebookRegistrations + '%</span></h5></li>' +
+			'<li><h5><span>Email:</span> <span class="data emails">' + data.EmailRegistrations + '%</span></h5></li>' +
+			'<li><h5><span>Anonymous:</span> <span class="data anonymous">' + data.AnonymusRegistrations + '%</span></h5></li>' +
+			'</ul>';
+	} else {
+		blockFill =
+			'<ul>' +
+			'<li><h5><span>Facebook:</span> <span class="data facebook">' + chart.data[0].value + '%</span></h5></li>' +
+			'<li><h5><span>Email:</span> <span class="data emails">' + chart.data[1].value + '%</span></h5></li>' +
+			'<li><h5><span>Anonymous:</span> <span class="data anonymous">' + chart.data[2].value + '%</span></h5></li>' +
+			'</ul>';
+	}
+	chart.el.parent().find('.mobile-data-list').html( blockFill );
 };
-
 
 dashboardCharts.overallLineChartData = [
 	{
