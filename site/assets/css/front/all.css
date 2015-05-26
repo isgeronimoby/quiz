@@ -4460,6 +4460,10 @@ body .n-found .ie-true,
 	margin-left: -90px;
 	margin-top: -20px;
 }
+.lotteryFootballBG.animated .bottom-section .show-mobile img {
+	max-width: 190px;
+	margin-left: 10px;
+}
 
 .lotteryFootballBG.animated .bottom-friends-holder .friends-left-part {
 	width: 50%;
@@ -4650,9 +4654,8 @@ body .n-found .ie-true,
 	}
 }
 
-@media all and (min-width:800px) and (max-width: 1024px) {
+@media all and (max-width: 1024px) {
 	.lotteryFootballBG.animated .bottom-section p {
-		padding-right: 100px;
 		font-size: 20px;
 	}
 }
@@ -4702,7 +4705,7 @@ body .n-found .ie-true,
 	.lotteryFootballBG.animated .top-section img {
 		max-width: 100px;
 	}
-	.lotteryFootballBG.animated .bottom-section img {
+	.lotteryFootballBG.animated .bottom-section .show-mobile img {
 		max-width: 110px;
 		margin-right: 5px;
 	}
@@ -4728,7 +4731,7 @@ body .n-found .ie-true,
 		margin-top: 10px;
 	}
 	.lotteryFootballBG.animated .bottom-section img {
-		margin-left: 10px;
+		margin-left: -30px;
 		margin-top: 0;
 	}
 }
