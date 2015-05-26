@@ -4650,7 +4650,7 @@ body .n-found .ie-true,
 	}
 }
 
-@media all and (max-width: 1024px) {
+@media all and (min-width:800px) and (max-width: 1024px) {
 	.lotteryFootballBG.animated .bottom-section p {
 		padding-right: 100px;
 		font-size: 20px;
