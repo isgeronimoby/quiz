@@ -36,7 +36,7 @@ jQuery(document).ready(function($){
 		$('html,body').animate({ scrollTop: startPageSlide.height() + 40 }, 'slow');
 	});
 
-	if ( currentPlatform == 'mobile' ) startSlideBtn.html('Install the App');
+	if (currentPlatform == 'mobile') startSlideBtn.html('Install Everton Browser');
 
 	function showStep( step ){
 		if ( step == 2 ) {
