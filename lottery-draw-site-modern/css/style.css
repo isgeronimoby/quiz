@@ -1115,6 +1115,7 @@ button.close {
 .enter-details-block {
 	margin-bottom: 40px;
 }
+
 /****************************/
 
 
@@ -1190,6 +1191,20 @@ button.close {
 		position: relative;
 		top: -500px;
 		-webkit-transform: translate3d(0, 500px, 0);
+	}
+	#enterDraw .showMobile.fullwidth > a{
+		height: 65px;
+		padding: 0;
+		line-height: 60px;
+		font-size: 16px;
+		font-weight: 200;
+	}
+}
+
+@media all and (max-height:485px){
+	#enterDraw.sectionLayout > img {
+		width: auto;
+		max-height: 120px;
 	}
 }
 
