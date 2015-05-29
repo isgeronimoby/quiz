@@ -93,6 +93,7 @@ jQuery(document).ready(function($){
 	function launchThirdStep( step ){
 		setTimeout(function(){
 			showStep( step );
+			startSlideOverlay.addClass('animated');
 			setTimeout(function(){
 				dummyBlock.hide();
 				thirdSlide.fadeIn(1200);
