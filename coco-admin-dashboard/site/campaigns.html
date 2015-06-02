@@ -173,10 +173,10 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<div id="reportrange" class="pull-right report-heading">
+<!--		<div id="reportrange" class="pull-right report-heading">
 			<i class="fa fa-calendar fa-lg hidden-xs"></i>
 			<span>Choose date range for your reports</span> <b class="caret"></b>
-		</div>
+		</div>-->
 
 		<div class="pull-left dropdown">
 			<button class="btn btn-default dropdown-toggle dropdown-generic" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
@@ -194,7 +194,36 @@
 
 
 	<div class="row">
-		<div class="col-lg-12">
+
+		<div class="col-lg-6">
+			<div class="widget widget-line-statistic">
+				<div class="widget-header transparent">
+					<h2><i class="icon-chart-line"></i> <strong>Overall</strong> Statistics</h2>
+
+					<div class="additional-btn">
+						<a href="#" class="widget-toggle"><i class="icon-down-open-2"></i></a>
+					</div>
+
+				</div>
+				<div class="widget-content">
+					<div id="website-statistic" class="statistic-chart">
+						<div class="row stacked">
+							<div class="col-sm-12">
+								<div class="btn-group" role="group" aria-label="switcher">
+									<button id="overall-installs" type="button" class="btn btn-default active">Installs</button>
+									<button id="overall-sales" type="button" class="btn btn-default">Sales</button>
+									<button id="overall-affrevs" type="button" class="btn btn-default">Aff Rev</button>
+									<button id="overall-activeusers" type="button" class="btn btn-default">Active Users</button>
+								</div>
+								<div id="amchart-line-graphic" class="morris-chart"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-lg-6">
 			<div class="widget widget-line-statistic">
 				<div class="widget-header transparent">
 					<h2><i class="icon-chart-line"></i> <strong>All</strong> Traffic Sources</h2>
@@ -208,8 +237,8 @@
 					<div class="statistic-chart">
 						<div class="row stacked morrisChartsLight">
 							<div class="col-sm-12">
-								<div id="amchart-funnel-traffic" class="morris-chart hidden-xs"></div>
-								<div class="visible-xs mobile-data-list"></div>
+								<div id="amchart-funnel-traffic" class="morris-chart hide-bars-mobile"></div>
+								<div class="show-bars-mobile mobile-data-list"></div>
 							</div>
 						</div>
 					</div>
@@ -219,7 +248,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-lg-4">
+		<div class="col-lg-6">
 			<div class="widget widget-line-statistic">
 				<div class="widget-header transparent">
 					<h2><i class="icon-chart-line"></i> <strong>Facebook</strong> Traffic</h2>
@@ -233,8 +262,8 @@
 					<div class="statistic-chart">
 						<div class="row stacked morrisChartsLight">
 							<div class="col-sm-12">
-								<div id="amchart-funnel-facebook" class="morris-chart hidden-xs"></div>
-								<div class="visible-xs mobile-data-list"></div>
+								<div id="amchart-funnel-facebook" class="morris-chart hide-bars-mobile"></div>
+								<div class="show-bars-mobile mobile-data-list"></div>
 							</div>
 						</div>
 					</div>
@@ -242,7 +271,7 @@
 			</div>
 		</div>
 
-		<div class="col-lg-4">
+		<div class="col-lg-6">
 			<div class="widget widget-line-statistic">
 				<div class="widget-header transparent">
 					<h2><i class="icon-chart-line"></i> <strong>Adwords</strong> Traffic</h2>
@@ -256,8 +285,8 @@
 					<div class="statistic-chart">
 						<div class="row stacked morrisChartsLight">
 							<div class="col-sm-12">
-								<div id="amchart-funnel-adwords" class="morris-chart hidden-xs"></div>
-								<div class="visible-xs mobile-data-list"></div>
+								<div id="amchart-funnel-adwords" class="morris-chart hide-bars-mobile"></div>
+								<div class="show-bars-mobile mobile-data-list"></div>
 							</div>
 						</div>
 					</div>
@@ -265,7 +294,7 @@
 			</div>
 		</div>
 
-		<div class="col-lg-4">
+		<div class="col-lg-6">
 			<div class="widget widget-line-statistic">
 				<div class="widget-header transparent">
 					<h2><i class="icon-chart-line"></i> <strong>Bing</strong> Traffic</h2>
@@ -279,8 +308,8 @@
 					<div class="statistic-chart">
 						<div class="row stacked morrisChartsLight">
 							<div class="col-sm-12">
-								<div id="amchart-funnel-bing" class="morris-chart hidden-xs"></div>
-								<div class="visible-xs mobile-data-list"></div>
+								<div id="amchart-funnel-bing" class="morris-chart hide-bars-mobile"></div>
+								<div class="show-bars-mobile mobile-data-list"></div>
 							</div>
 						</div>
 					</div>

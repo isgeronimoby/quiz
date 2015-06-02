@@ -334,7 +334,6 @@ dashboardCharts.addDataToMap = function (locData){
 		var marker = new google.maps.Marker({
 			position: position,
 			map: dashboardCharts.maplace,
-			icon: 'assets/img/map-marker-blue-dark.png',
 			animation: google.maps.Animation.DROP,
 			title: String(locData[i].number)
 		});

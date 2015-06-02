@@ -9,7 +9,22 @@
 }
 
 /* Mobile and Tablets */
-
+@media (max-width: 1024px) {
+	.hide-bars-mobile {
+		display: none;
+	}
+	.show-bars-mobile {
+		display: block;
+	}
+}
+@media (min-width: 1025px) {
+	.hide-bars-mobile {
+		display: block;
+	}
+	.show-bars-mobile {
+		display: none;
+	}
+}
 /*Small desktop or tablet*/
 @media (min-width: 768px) and (max-width: 991px) {
 	body{overflow-x: hidden;}

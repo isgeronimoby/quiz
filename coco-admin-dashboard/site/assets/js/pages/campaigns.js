@@ -25,7 +25,43 @@ $(document).ready(function(){
 //			ReloadReports(start, end);
 		}
 	);
-
+	Campaigns.overallLineChartData = [
+		{
+			"date": "2014-01-28",
+			"ios": 8,
+			"android": 5
+		},
+		{
+			"date": "2014-01-29",
+			"ios": 6,
+			"android": 7
+		},
+		{
+			"date": "2014-01-30",
+			"ios": 2,
+			"android": 3
+		},
+		{
+			"date": "2014-02-01",
+			"ios": 1,
+			"android": 3
+		},
+		{
+			"date": "2014-02-02",
+			"ios": 2,
+			"android": 1
+		},
+		{
+			"date": "2014-02-03",
+			"ios": 3,
+			"android": 2
+		},
+		{
+			"date": "2014-02-04",
+			"ios": 6,
+			"android": 8
+		}
+	];
 	Campaigns.funnelAllTrafficSource = [
 		{
 			"title": "Website visits",
@@ -63,7 +99,7 @@ $(document).ready(function(){
 			"pathToImages": "http://cdn.amcharts.com/lib/3/images/",
 			"angle": 35,
 			"balloonText": "[[title]]:<b>[[value]]</b>",
-			"baseWidth": "60%",
+			"baseWidth": "80%",
 			"depth3D": 150,
 			"labelPosition": "right",
 			"neckHeight": "0%",
@@ -126,12 +162,12 @@ $(document).ready(function(){
 			"pathToImages": "http://cdn.amcharts.com/lib/3/images/",
 			"angle": 35,
 			"balloonText": "[[title]]:<b>[[value]]</b>",
-			"baseWidth": "100%",
+			"baseWidth": "80%",
 			"depth3D": 150,
 			"labelPosition": "right",
 			"neckHeight": "0%",
 			"neckWidth": "0%",
-			"labelsEnabled": false,
+			"labelsEnabled": true,
 			"startX": 400,
 			"startY": 100,
 			"valueRepresents": "area",
@@ -140,7 +176,7 @@ $(document).ready(function(){
 			"labelTickAlpha": 0.25,
 			"marginBottom": 40,
 			"marginLeft": 40,
-			"marginRight": 40,
+			"marginRight": 200,
 			"marginTop": 40,
 			"outlineAlpha": 0.16,
 			"outlineThickness": 2,
@@ -175,12 +211,12 @@ $(document).ready(function(){
 			"pathToImages": "http://cdn.amcharts.com/lib/3/images/",
 			"angle": 35,
 			"balloonText": "[[title]]:<b>[[value]]</b>",
-			"baseWidth": "100%",
+			"baseWidth": "80%",
 			"depth3D": 150,
 			"labelPosition": "right",
 			"neckHeight": "0%",
 			"neckWidth": "0%",
-			"labelsEnabled": false,
+			"labelsEnabled": true,
 			"startX": 400,
 			"startY": 100,
 			"valueRepresents": "area",
@@ -189,7 +225,7 @@ $(document).ready(function(){
 			"labelTickAlpha": 0.25,
 			"marginBottom": 40,
 			"marginLeft": 40,
-			"marginRight": 40,
+			"marginRight": 200,
 			"marginTop": 40,
 			"outlineAlpha": 0.16,
 			"outlineThickness": 2,
@@ -224,12 +260,12 @@ $(document).ready(function(){
 			"pathToImages": "http://cdn.amcharts.com/lib/3/images/",
 			"angle": 35,
 			"balloonText": "[[title]]:<b>[[value]]</b>",
-			"baseWidth": "100%",
+			"baseWidth": "80%",
 			"depth3D": 150,
 			"labelPosition": "right",
 			"neckHeight": "0%",
 			"neckWidth": "0%",
-			"labelsEnabled": false,
+			"labelsEnabled": true,
 			"startX": 400,
 			"startY": 100,
 			"valueRepresents": "area",
@@ -238,7 +274,7 @@ $(document).ready(function(){
 			"labelTickAlpha": 0.25,
 			"marginBottom": 40,
 			"marginLeft": 40,
-			"marginRight": 40,
+			"marginRight": 200,
 			"marginTop": 40,
 			"outlineAlpha": 0.16,
 			"outlineThickness": 2,
@@ -268,6 +304,79 @@ $(document).ready(function(){
 	);
 
 	Campaigns.amchartFunnelAllTraffic.dataProvider = Campaigns.funnelAllTrafficSource;
+
+	Campaigns.overallLineChart = AmCharts.makeChart("amchart-line-graphic",
+		{
+			"type": "serial",
+			"pathToImages": "http://cdn.amcharts.com/lib/3/images/",
+			"categoryField": "date",
+			"columnWidth": 1,
+			"dataDateFormat": "YYYY-MM-DD",
+			"mouseWheelScrollEnabled": false,
+			"startDuration": 0.7,
+			"startEffect": "easeOutSine",
+			"theme": "light",
+			"autoresize": true,
+			"autoMargins": false,
+			"autoMarginOffset": 50,
+			"marginLeft": 60,
+			"categoryAxis": {
+				"minPeriod": "DD",
+				"parseDates": true
+			},
+			"chartCursor": {
+				"categoryBalloonDateFormat": "MMM YYYY",
+				"fullWidth": true,
+				"valueLineAlpha": 0,
+				"valueLineBalloonEnabled": true,
+				"color": "#ffffff",
+				"cursorAlpha": 0.3,
+				"cursorColor": "#00369c"
+			},
+			"chartScrollbar": {
+				"backgroundAlpha": 0.6,
+				"backgroundColor": "#00369c",
+				"color": "#ffffff",
+				"gridAlpha": 0.7,
+				"gridCount": 4
+			},
+			"trendLines": [],
+			"graphs": [
+				{
+					"balloonText": "[[value]] - IOS installs",
+					"bullet": "round",
+					"lineColor": "#008000",
+					"balloonColor": "#008000",
+					"id": "ios-graph",
+					"title": "IOS",
+					"valueField": "ios"
+				},
+				{
+					"balloonText": "[[value]] - Android installs",
+					"bullet": "square",
+					"id": "android-graph",
+					"title": "Android",
+					"valueField": "android"
+				}
+			],
+			"guides": [],
+			"valueAxes": [
+				{
+					"id": "installs-axis",
+					"title": "Installs"
+				}
+			],
+			"allLabels": [],
+			"balloon": {},
+			"legend": {
+				"useGraphSettings": true,
+				"showEntries": true,
+				"valueText": " " // issue FAN-1029, use empty String if problem is still there, but it mostly not the chart problem
+			},
+			"titles": [],
+			"dataProvider": Campaigns.overallLineChartData
+		}
+	);
 
 // example of the JSON
 	Campaigns.tableJSON = [
@@ -343,11 +452,13 @@ $(document).ready(function(){
 		Campaigns.amchartFunnelFacebook.validateData();
 		Campaigns.amchartFunnelAdwords.validateData();
 		Campaigns.amchartFunnelBing.validateData();
+		Campaigns.overallLineChart.validateData();
 
 		Campaigns.amchartFunnelAllTraffic.validateNow();
 		Campaigns.amchartFunnelFacebook.validateNow();
 		Campaigns.amchartFunnelAdwords.validateNow();
 		Campaigns.amchartFunnelBing.validateNow();
+		Campaigns.overallLineChart.validateNow();
 	};
 
 	// Select campaign list
