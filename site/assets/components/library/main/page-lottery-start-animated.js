@@ -19,14 +19,10 @@ jQuery(document).ready(function($){
 		var ie9 = true;
 	}
 
-
-	// CHECK THE SCREEN HEIGHT TO PROPERLY POSITION FADING TEXT
-	if ( startPageSlide.height() > $(window).height() || currentPlatform == 'mobile' ) startSlideCongrats.parent().css('top', '200px');
-
 	// REBUILDING FIRST SCREEN TO FIT THE SCREEN
 	function rebuildSlideSize() {
 		dummyBlock.height( secondSlide.height() );
-		if ( $(window).width() > 1000 )
+		if ( window.innerWidth > 1080 )
 			startPageSlide.height( $(window).height() - $('.navbar.toolbar').height() - 40 );
 		else startPageSlide.height('auto');
 	}

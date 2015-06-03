@@ -4411,13 +4411,23 @@ body .n-found .ie-true,
 }
 .lotteryFootballBG .bottom-friends-holder h6{
 	color: #cccccc;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .lotteryFootballBG .bottom-friends-holder ul > li {
 	display: inline-block;
 	vertical-align: middle;
 	margin-right: 10px;
 	text-align: center;
+	margin-bottom: 15px;
+	max-width: 100px;
 }
+
+.lotteryFootballBG .bottom-friends-holder ul > li:nth-of-type(n + 11) {
+	display: none;
+}
+
 .lotteryFootballBG .bottom-friends-holder ul > li img {
 	max-width: 50px;
 	border-radius: 50%;
@@ -4471,8 +4481,9 @@ body .n-found .ie-true,
 }
 
 .lotteryFootballBG.animated .bottom-friends-holder .friends-left-part {
-	width: 50%;
-	float: left;
+	width: 100%;
+	float: none;
+	text-align: center;
 }
 
 .lotteryFootballBG.animated .bottom-friends-holder .friends-right-part {
@@ -4513,6 +4524,7 @@ body .n-found .ie-true,
 	position: absolute;
 	bottom: 130px;
 	left: 50%;
+	z-index: 20;
 	transform: translateX(-50%);
 	-webkit-transform: translateX(-50%);
 	-moz-transform: translateX(-50%);
@@ -4665,16 +4677,16 @@ body .n-found .ie-true,
 	}
 }
 
-@media all and (max-width: 1000px) {
+@media all and (max-width: 1080px) {
 	.lotteryFootballBG.animated .bottom-friends-holder .friends-left-part,
 	.lotteryFootballBG.animated .bottom-friends-holder .friends-right-part {
 		width: 100%;
 		float: none;
-		margin-bottom: 30px;
 	}
 	.lotteryFootballBG.animated .bottom-friends-holder {
 		position: static;
 		text-align: center;
+		margin-top: 20px;
 	}
 	.lotteryFootballBG.animated .first-slide-holder {
 		padding-bottom: 0;
@@ -4721,9 +4733,6 @@ body .n-found .ie-true,
 	.lotteryFootballBG.animated .first-slide-holder > .step-three {
 		padding-top: 0;
 	}
-	.lotteryFootballBG.animated a {
-		margin: 15px;
-	}
 	.lotteryFootballBG.animated .first-slide-holder > .step-three h4 {
 		margin-top: -20px;
 	}
@@ -4738,6 +4747,9 @@ body .n-found .ie-true,
 	.lotteryFootballBG.animated .bottom-section img {
 		margin-left: -30px;
 		margin-top: 0;
+	}
+	.fadeTextHolder {
+		top: 200px;
 	}
 }
 
@@ -5571,6 +5583,9 @@ body .n-found .ie-true,
 		max-width: 220px;
 		margin: 15px 0;
 	}
+	.lotteryFootballBG.animated a {
+		margin: 15px;
+	}
 }
 
 @media all and (max-width: 580px) {
@@ -5744,7 +5759,17 @@ body .n-found .ie-true,
 		font-size: 16px;
 	}
 
-
+	.lotteryFootballBG .bottom-friends-holder ul > li {
+		margin-right: 0;
+		margin-bottom: 0;
+		max-width: 72px;
+	}
+	.lotteryFootballBG .bottom-friends-holder ul > li img {
+		max-width: 60%;
+	}
+	.lotteryFootballBG .bottom-friends-holder h6 {
+		font-size: 10px;
+	}
 }
 
 @media all and (max-width: 460px) {
