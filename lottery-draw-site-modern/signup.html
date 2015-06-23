@@ -52,10 +52,33 @@
 		<div class="clearfix"></div>
 	</div>
 
-	<section id="dashboard" class="sectionLayout">
+	<section id="dashboard" class="sectionLayout signupPage">
+
+		<div class="mobileSignupLayout">
+
+			<h3 class="condensedFont">Meet the team, get signed T-shirts and watch a training session</h3>
+
+			<img class="img-responsive" src="./images/everton-training.png" />
+
+			<a href="#" class="button buttonBlue buttonDefault"><span><span>Enter with Facebook</span></span></a>
+			<a href="#signUpWithEmailPopup" class="button buttonDefault buttonStroke fancybox"><span><span>sign up with email</span></span></a>
+			<a href="#alreadyMemberPopup" class="simpleLink fancybox">Already a member?</a>
+
+			<div class="greyBox">
+				<h3 class="no-transform">We’re giving away the chance to meet the team at Finch Farm. All you have to do to enter the draw is download the Everton Browser and sign up.</h3>
+				<p>&nbsp;</p>
+				<h3 class="no-transform"><strong>The Prize</strong>:</h3>
+				<ul>
+					<li><h3 class="no-transform">Access for two people to visit Finch Farm and watch a first-team training session.</h3></li>
+					<li><h3 class="no-transform">Lunch provided at the Finch Farm canteen with an Everton ambassador.</h3></li>
+					<li><h3 class="no-transform">The opportunity to meet some of the first-team squad.</h3></li>
+					<li><h3 class="no-transform">A signed Everton shirt!</h3></li>
+				</ul>
+			</div>
+		</div>
+
 		<div class="circularChartsGroup">
 			<h1>Your progress</h1>
-			<!--<p class="color-aqua subtopic">Each action - another entry into the draw</p>-->
 			<div class="canvasHolder">
 				<canvas id="overallCircleProgress" width="500" height="500"></canvas>
 				<canvas id="daysCircleProgress" width="500" height="500"></canvas>
@@ -108,7 +131,7 @@
 		<div class="optionsGroup">
 			<div class="greyBox curOptionBox" id="connectFBBox">
 				<h3><span class="color-aqua">Earn 5 more tickets</span> by connecting to facebook</h3>
-				<div class="tickets showMobileBlock"><span>+5</span><br/>tickets</div><a href="#" class="button buttonBlue buttonDefault"><span><span>Connect with Facebook</span></span></a>
+				<div class="tickets showMobileBlock"><span>+5</span><br/>tickets</div><a href="#" class="button buttonBlue buttonDefault"><span><span>Enter with Facebook</span></span></a>
 				<div class="showMobileBlock"><a href="#alreadyMemberPopup" class="simpleLink fancybox">Already a member?</a></div>
 				<div class="showDesktopBlock">
 					<p>we'll never post anything without your permission</p>
@@ -116,47 +139,6 @@
 					<a href="#alreadyMemberPopup" class="simpleLink fancybox">Already a member?</a>
 				</div>
 			</div>
-
-			<div class="greyBox curOptionBox" id="shareFacebookBox">
-				<h3><span class="color-aqua">Earn 5 more tickets</span> by sharing on facebook</h3>
-				<div class="tickets"><span>+5</span><br/>tickets</div><a href="#" class="button buttonBlue buttonDefault"><span><span>Share on facebook</span></span></a>
-			</div>
-
-			<div class="greyBox curOptionBox" id="shareTwitterBox">
-				<h3><span class="color-aqua">Earn 5 more tickets</span> by sharing on twitter</h3>
-				<div class="tickets"><span>+5</span><br/>tickets</div><a href="#" class="button buttonLightBlue buttonDefault"><span><span>Share on twitter</span></span></a>
-			</div>
-
-			<div class="greyBox curOptionBox" id="connectDeviceBox">
-				<h3><span class="color-aqua">Earn 5 more tickets</span> connecting another device</h3>
-				<div class="tickets"><span>+5</span><br/>tickets</div><a href="#connectDevice" class="button buttonYellow buttonDefault fancybox"><span><span>Connect device</span></span></a>
-			</div>
-
-			<div class="greyBox curOptionBox" id="openBrowserBox">
-				<h3 class="marginBottom"><span class="color-aqua">Earn 5 more tickets</span> by opening your browser 4 days in a row</h3>
-				<div class="tickets"><span>+5</span><br/>tickets</div> <h3 class="insteadButtonText">Set Everton Browser as your default browser</h3>
-			</div>
-
-			<div class="earningOptions">
-				<ul>
-					<li id="signUpWithEmailItem" class="showMobileBlock"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#signUpWithEmailPopup" class="button buttonDefault buttonStroke fancybox"><span><span>Sign up with email</span></span></a></li>
-					<li id="shareFacebookItem"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#" class="button buttonDefault buttonBlue"><span><span>Share on facebook</span></span></a></li>
-					<li id="shareTwitterItem"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#" class="button buttonDefault buttonLightBlue"><span><span>Share on twitter</span></span></a></li>
-					<li id="connectDeviceItem"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#connectDevice" class="button buttonDefault buttonYellow fancybox"><span><span><span class="showDesktop">Get the Everton Browser on your phone</span><span class="showMobile">Add Everton on PC</span></span></span></a></li>
-					<li id="exampleMutedItem"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#" class="button buttonDefault buttonLightBlue"><span><span>Share on facebook again in 4 days</span></span></a></li>
-					<!--<li class="optionDisabled"><div class="listArrow"></div><div class="tickets"><span>5</span><br/>earned</div><div class="button buttonDefault buttonDisabled"><span><span>Disabled Button</span></span></div></li>-->
-				</ul>
-			</div>
-
-			<article class="article showMobileBlock">
-				<div class="articleImage articleMobileImage">
-					<img class="img-responsive" src="./images/everton-training.png" />
-				</div>
-				<div class="greyBox greyBoxMobile">
-					<a href="#" class="thinLink allCenterHolder"><h3 class="allCenterElement color-aqua"><b>find out about the prize</b></h3></a>
-				</div>
-				<div class="clearfix"></div>
-			</article>
 		</div>
 		<div class="clearfix"></div>
 	</section>
@@ -168,75 +150,6 @@
 
 
 <!-- POPUPS -->
-
-<div class="everton-amazing-popups">
-	<div id="connectDevice" class="everton-popup-container">
-		<div class="everton-popup">
-			<div class="everton-popup-header">
-				<a href="#" class="everton-popup-close">&times;</a>
-				<div class="everton-popup-clearfix"></div>
-				<h4></h4>
-			</div>
-			<!-- Box -->
-			<div class="everton-popup-body popupInner">
-				<h2></h2>
-				<!-- Alert -->
-				<div class="alert alert-danger">
-					<button data-dismiss="alert" class="close" type="button">&times;</button>
-					<strong>Warning!</strong>
-					<div data-valmsg-summary="true" class="validation-summary-errors">
-						<ul><li>Email is required.</li>
-							<li>Some other error.</li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="alert alert-success">
-					<button data-dismiss="alert" class="close" type="button">×</button><strong>Success!</strong>
-					<div data-valmsg-summary="true" class="validation-summary-errors">
-						<ul>
-							<li>Link was successfully sent to you email.</li>
-						</ul>
-					</div>
-				</div>
-				<!-- // Alert END -->
-				<!-- Form -->
-				<div class="showMobile">
-					<img src="./images/macbook_logo.png">
-				</div>
-				<div class="showDesktop">
-					<img src="./images/iphone_circle_zoom.png">
-				</div>
-				<div class="text-holder">
-					<h2 class="popup-heading showMobile">Email yourself a link to install the browser extension on your pc</h2>
-					<h2 class="popup-heading showDesktop">Email yourself a link to install the Everton browser app on your phone</h2>
-				</div>
-				<div class="showDesktop">
-					<span class="connectSuccessMessage">SUCCESS!<br/>PLEASE CHECK YOUR EMAIL TO INSTALL THE EVERTON BROWSER APP ON YOUR PHONE</span>
-				</div>
-				<div class="showMobile">
-					<span class="connectSuccessMessage">SUCCESS!<br/>PLEASE CHECK YOUR EMAIL TO INSTALL THE EVERTON BROWSER EXTENSION ON YOUR PC</span>
-				</div>
-				<form method="post" class="popupForm login-form" id="connectDeviceForm" action="index.html?lang=en">
-					<div class="form-group email-group">
-						<label for="email" class="strong">Enter your email</label>
-						<input type="text" id="connect-email" name="connect-email"
-							   class="input-block-level form-control" placeholder="john@example.com" autofocus/>
-					</div>
-					<button type="submit" class="button buttonDefault buttonYellow"><i></i>
-						<span class="align-wrapp">
-							<span>
-								<span class="showMobile">Get Everton PC extension</span>
-								<span class="showDesktop">Get the Everton Browser app on your phone</span>
-							</span>
-						</span></button>
-				</form>
-				<!-- // Form END -->
-			</div>
-			<!-- // Box END -->
-		</div>
-	</div>
-</div>
 
 <div class="everton-amazing-popups">
 	<div id="signUpWithEmailPopup" class="everton-popup-container">
@@ -339,61 +252,6 @@
 	</div>
 </div>
 
-<div class="everton-amazing-popups">
-	<div id="challengeafriend" class="everton-popup-container">
-		<div class="everton-popup">
-			<div class="everton-popup-header">
-				<a href="#" class="everton-popup-close">&times;</a>
-				<div class="everton-popup-clearfix"></div>
-				<h4></h4>
-			</div>
-			<!-- Box -->
-			<div class="everton-popup-body popupInner">
-				<h2></h2>
-				<!-- Alert -->
-				<div class="alert alert-danger">
-					<button data-dismiss="alert" class="close" type="button">&times;</button>
-					<strong>Warning!</strong>
-					<div data-valmsg-summary="true" class="validation-summary-errors">
-						<ul><li>Email is required.</li>
-							<li>Some other error.</li>
-						</ul>
-					</div>
-				</div>
-
-				<!-- // Alert END -->
-				<!-- Form -->
-				<div class="showMobile">
-					<img src="./images/iphone-challenge.png">
-				</div>
-				<div class="showDesktop">
-					<img src="./images/iphone-challenge.png">
-				</div>
-				<div class="text-holder">
-					<h2 class="popup-heading">CHALLENGE FRIENDS TO ANSWER EVERTON QUESTIONS</h2>
-				</div>
-				<div class="">
-					<span class="connectSuccessMessage">SUCCESS!<br/>YOU’LL GET 5 TICKETS FOR EACH FRIEND THAT ANSWERS CORRECTLY AND SIGNS UP</span>
-				</div>
-				<form method="post" class="popupForm login-form" id="challengeafriendForm" action="index.html?lang=en">
-					<div class="form-group email-group">
-						<label for="email" class="strong">Enter your friends email addresses, seperate addresses with a comma</label>
-						<input type="text" id="challenge-email" name="challenge-email"
-							   class="input-block-level form-control" placeholder="john@example.com, john@example.com" autofocus/>
-					</div>
-					<button type="submit" class="button buttonDefault buttonYellow"><i></i>
-						<span class="align-wrapp">
-							<span>
-								<span class="">Send Email</span>
-							</span>
-						</span></button>
-				</form>
-				<!-- // Form END -->
-			</div>
-			<!-- // Box END -->
-		</div>
-	</div>
-</div>
 
 <div class="push"></div>
 </div>

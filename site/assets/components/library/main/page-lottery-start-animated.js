@@ -8,7 +8,7 @@ jQuery(document).ready(function($){
 		progressBarThirdStep = startPageSlide.find('.progress-bar-triple span:nth-of-type(3)'),
 		dummyBlock = startPageSlide.find('.dummy-container'),
 		startSlideOverlay = startPageSlide.find('.back-overlay'),
-		startSlideHeading = startPageSlide.find('.step-two h3').add('.step-two > div > .prize-image'),
+		startSlideHeading = startPageSlide.find('.step-two h3').add('.step-two > div .prize-image, .step-two .prize-image-holder'),
 		startSlidePar = startPageSlide.find('.first-slide-holder > .step-two > p'),
 		startSlideBtn = startPageSlide.find('.first-slide-holder > .step-two > a'),
 		startSlideCongrats = $('.fadeTextHolder > p'),

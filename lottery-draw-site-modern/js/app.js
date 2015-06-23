@@ -8,7 +8,8 @@ var DrawApp = {
 	nextFacebookShareDate: null,
 	nextTwitterShareDate: null,
 	scoreText: "SCORE",
-	connectFBBox: false
+	connectFBBox: false,
+	actionsList: []
 };
 
 jQuery(document).ready(function ($) {
@@ -18,6 +19,7 @@ jQuery(document).ready(function ($) {
 	DrawApp.muteOptionItem = muteOptionItem;
 	DrawApp.unmuteOptionItem = unmuteOptionItem;
 	DrawApp.connectSuccess = connectSuccess;
+	DrawApp.restoreActionsList = refreshActionsList;
 
 	$(window).scrollTop( 0 );
 
@@ -319,7 +321,7 @@ jQuery(document).ready(function ($) {
 	var fbShareDialogOpened = false;
 	//Facebook share handler
 	$('.facebookShareButton').click(function (e) {
-		if ($(this).hasClass('muted'))
+		if ($(this).parent().hasClass('muted'))
 			return false;
 
 		if (window.navigator.userAgent) {
@@ -362,7 +364,7 @@ jQuery(document).ready(function ($) {
 
 	//Twitter share handler
 	$('.twitterShareButton').click(function (e) {
-		if ($(this).hasClass('muted')) {
+		if ($(this).parent().hasClass('muted')) {
 			$(this).attr('href', '');
 			return false;
 		}
@@ -385,7 +387,7 @@ jQuery(document).ready(function ($) {
 
 	//Challenge friend handler
 	$('.challengeFriendButton').click(function (e) {
-		if ($(this).hasClass('muted')) {
+		if ($(this).parent().hasClass('muted')) {
 			$(this).attr('href', '');
 			return false;
 		}
@@ -524,18 +526,21 @@ jQuery(document).ready(function ($) {
 
 	//Animate earning options.
 	function animateEarningOptions() {
-		setTimeout(function () {
-			$(window).scroll(function () {
-				var earningOptions = $('.earningOptions li');
-				var prize = $('.article');
+		var optionsList = $('.earningOptions');
+		var listVisibility = false;
 
-				earningOptions.each(function (index) {
-					if (isScrolledIntoView($(this))) $(this).animate({ opacity: 1 }, 600);
-				});
-				if ( isScrolledIntoView(prize[1]) )	prize.animate({ opacity: 1 }, 600);
-
-			});
-		}, 2000);
+		$(window).scroll(function () {
+			if ($(window).scrollTop() >= optionsList.offset().top / 2 - 70) {
+				if ( listVisibility == false ) {
+					optionsList.find('li').add('.article').each(function (ind, el) {
+						setTimeout( function () {
+							$(el).addClass('revealListItem');
+						}, 400 * ind );
+					});
+					listVisibility = true;
+				}
+			}
+		});
 	}
 
 	//Show current selected option.
@@ -552,18 +557,75 @@ jQuery(document).ready(function ($) {
 
 	//Mute option item.
 	function muteOptionItem(item) {
+		var list = $('.earningOptions ul li'),
+			listPar = list.parent();
+
 		item = $('#' + item);
-		item.find('.tickets').addClass('muted');
-		item.find('.button').addClass('muted').click(function (e) {
-			e.preventDefault();
+		item.addClass('muted').css('position','relative');
+
+		var animDuration = 800;
+
+		item.animate({
+			opacity: 0,
+			top: listPar.height() + listPar.offset().top - item.offset().top
+		}, animDuration, function(){
+			$(this).css({
+				position: 'static',
+				top: 'auto'
+			});
 		});
+
+		list.sort(function(a, b){
+			var reg = /\bmuted\b/g;
+			var va = reg.test(a.className) ? 1 : 0,
+				vb = reg.test(b.className) ? 1 : 0;
+			return va - vb;
+		});
+
+		setTimeout(function(){
+			listPar.append(list);
+			list.find('.muted').click(function(e){
+				e.preventDefault();
+			});
+			item.animate({
+				opacity: 1
+			}, 300);
+
+			rewriteDrawActions();
+
+		}, animDuration - 200);
+
+
 	}
 
 	//Unmute option item.
 	function unmuteOptionItem(item) {
 		item = $('#' + item);
-		item.find('.tickets').removeClass('muted');
-		item.find('.button').removeClass('muted').unbind('click').click();
+		var listPar = item.parent();
+		item.removeClass('muted').css('position','relative');;
+
+		var animDuration = 500;
+
+		item.animate({
+			opacity: 0,
+			top: listPar.offset().top - item.offset().top
+		}, animDuration, function(){
+			$(this).css({
+				position: 'static',
+				top: 'auto'
+			});
+		});
+
+		setTimeout(function(){
+			listPar.prepend(item);
+			item.animate({
+				opacity: 1
+			}, 300);
+
+			rewriteDrawActions();
+
+		}, animDuration - 200);
+
 	}
 
 	function connectSuccess(popupID) {
@@ -636,4 +698,31 @@ jQuery(document).ready(function ($) {
 				break;
 		}
 	});
+
+	function rewriteDrawActions() {
+		DrawApp.actionsList = [];
+		$('.earningOptions ul li').each(function (ind, el) {
+			DrawApp.actionsList.push( $(el).attr('id') );
+		});
+	}
+
+
+	var defaultList = ["signUpWithEmailItem", "shareFacebookItem", "shareTwitterItem", "connectDeviceItem", "exampleMutedItem"];
+
+	function refreshActionsList( listArray ) {
+		if ( listArray && listArray.length > 0 ) {
+			var newList = [];
+			var actionsListHolder = $('.earningOptions ul');
+			listArray.forEach(function (el) {
+				actionsListHolder.find('li').each(function (ind, elem) {
+					if ($(elem).attr('id') == el) newList.push(elem);
+				});
+			});
+			actionsListHolder.find('li').remove();
+			actionsListHolder.append(newList);
+		}
+	}
+
+	rewriteDrawActions();
+
 });

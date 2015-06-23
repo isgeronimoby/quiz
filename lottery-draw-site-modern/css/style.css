@@ -102,7 +102,7 @@ img {
     display: inline-block;
     vertical-align: middle;
     border: 0 none;
-	
+
     max-width: 100%;
 }
 .img-responsive, .article > .articleImage img.img-responsive {
@@ -172,9 +172,19 @@ img {
 .marginBottom {
     margin-bottom: 20px;
 }
-.muted {
+.muted .tickets,
+.muted a {
     opacity: 0.4;
     cursor: default;
+	pointer-events: none;
+}
+.earningOptions ul li.revealListItem,
+.article.revealListItem{
+	opacity: 1;
+	transition: opacity .7s ease;
+	-webkit-transition: opacity .7s ease;
+	-moz-transition: opacity .7s ease;
+	-ms-transition: opacity .7s ease;
 }
 .historyBack {
 	width: 50px;
@@ -395,11 +405,17 @@ img {
     margin-top: 0;
     text-align: center;
 }
-.earningOptions ul li .button > span, .greyBox .button > span, .everton-popup-body .button > span, .enter-details-block .button > span {
+.earningOptions ul li .button > span, .greyBox .button > span,
+.everton-popup-body .button > span, .enter-details-block .button > span,
+.sectionLayout.signupPage .mobileSignupLayout .button > span {
 	display: inline-block;
 	height: 100%;
 }
-.earningOptions ul li .button > span > span, .greyBox .button > span > span, .everton-popup-body .button > span > span, .enter-details-block .button > span > span {
+.earningOptions ul li .button > span > span,
+.greyBox .button > span > span,
+.everton-popup-body .button > span > span,
+.enter-details-block .button > span > span,
+.sectionLayout.signupPage .mobileSignupLayout .button > span > span{
 	display: table-cell;
 	vertical-align: middle;
 	height: 53px;
@@ -1116,6 +1132,31 @@ button.close {
 	margin-bottom: 40px;
 }
 
+/*********** Sign Up Page ***/
+.sectionLayout.signupPage {
+
+}
+.sectionLayout.signupPage #connectFBBox {
+	display: block !important;
+}
+.sectionLayout.signupPage > .circularChartsGroup > *{
+
+}
+.sectionLayout.signupPage > .mobileSignupLayout {
+	display: none;
+}
+.sectionLayout.signupPage > .mobileSignupLayout > h3 {
+	margin: 10px 0;
+}
+.sectionLayout.signupPage > .mobileSignupLayout .greyBox {
+	text-align: left;
+}
+.sectionLayout.signupPage > .mobileSignupLayout .greyBox ul {
+	padding-left: 20px;
+}
+.sectionLayout.signupPage > .mobileSignupLayout .greyBox ul li {
+	margin: 10px 0;
+}
 /****************************/
 
 
@@ -1163,6 +1204,13 @@ button.close {
 		-ms-transform: translate(0,0);
 		-o-transform: translate(0,0);
 		margin: 80px 0;
+	}
+	.sectionLayout.signupPage > .circularChartsGroup > *,
+	.sectionLayout.signupPage > .optionsGroup {
+		display: none;
+	}
+	.sectionLayout.signupPage > .mobileSignupLayout {
+		display: block;
 	}
 }
 @media all and (min-width:430px) and (max-width:585px) {
