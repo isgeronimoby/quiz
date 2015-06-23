@@ -701,13 +701,20 @@ jQuery(document).ready(function ($) {
 
 	function rewriteDrawActions() {
 		DrawApp.actionsList = [];
-		$('.earningOptions ul li').each(function (ind, el) {
+		var list = $('.earningOptions ul li');
+		list.each(function (ind, el) {
 			DrawApp.actionsList.push( $(el).attr('id') );
 		});
+
+		list.sort(function(a, b){
+			var reg = /\bmuted\b/g;
+			var va = reg.test(a.className) ? 1 : 0,
+				vb = reg.test(b.className) ? 1 : 0;
+			return va - vb;
+		});
+
+		list.parent().append(list);
 	}
-
-
-	var defaultList = ["signUpWithEmailItem", "shareFacebookItem", "shareTwitterItem", "connectDeviceItem", "exampleMutedItem"];
 
 	function refreshActionsList( listArray ) {
 		if ( listArray && listArray.length > 0 ) {
