@@ -580,14 +580,16 @@ body.noiframe .modal {
 		var neededDivs = [];
 
 		array.forEach(function(el){
-			if ( +(window.getComputedStyle(el, null)['z-index']) > 999999999 ) {
+			if ( +(window.getComputedStyle(el, null)['z-index']) > 999999 ) {
 				neededDivs.push(el);
 			}
 		});
-		neededDivs.forEach(function(el){
-			el.style.cssText = 'z-index: 999999 !important;'
-		});
-		lrPopup.style.cssText = 'z-index: 999999999 !important;'
+		if ( neededDivs.length > 1 ) {
+			neededDivs.forEach(function (el) {
+				el.style.cssText = 'z-index: 999999 !important;'
+			});
+			lrPopup.style.cssText = 'z-index: 999999999 !important;'
+		}
 	}
 
 	changingInnerZindexes();
