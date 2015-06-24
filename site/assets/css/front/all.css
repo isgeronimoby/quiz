@@ -5607,11 +5607,14 @@ body .n-found .ie-true,
 	.lotteryFootballBG h3 span.goldText {
 		font-size: 24px;
 	}
-	.lotteryFootballBG a {
+	.lotteryFootballBG a,
+	.lotteryFootballBG a:focus,
+	.lotteryFootballBG a:active {
 		font-size: 18px;
 		line-height: 32px;
 		padding: 10px 20px;
 	}
+
 	.lotteryFootballBG p {
 		font-size: 20px;
 	}

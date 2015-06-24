@@ -237,4 +237,10 @@
 	if ($(window).width() <= 768)
 		$('.container-fluid').addClass('menu-hidden');
 
+
+
 })(jQuery, window);
+
+jQuery(window).ready(function(){
+	if ( FastClick ) FastClick.attach(document.body);
+});
