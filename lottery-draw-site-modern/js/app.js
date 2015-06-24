@@ -385,8 +385,8 @@ jQuery(document).ready(function ($) {
 	});
 	
 
-	//Challenge friend handler
-	$('.challengeFriendButton').click(function (e) {
+	//Invite friend handler
+	$('.inviteFriendButton').click(function (e) {
 		if ($(this).parent().hasClass('muted')) {
 			$(this).attr('href', '');
 			return false;
@@ -406,6 +406,14 @@ jQuery(document).ready(function ($) {
 				$(this).attr('href', 'sms:?body=' + encodeURIComponent(text));
 			}
 		}
+
+		$.ajax({
+			type: "POST",
+			url: campaignTrackUrl,
+			data: { TypeId: 10 }
+		}).done(function (content) {
+
+		});
 
 		return true;
 	});
