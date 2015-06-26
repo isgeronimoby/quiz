@@ -4621,6 +4621,7 @@ body .n-found .ie-true,
 	background: rgba(0,0,0,0);
 	position: relative;
 	opacity: 0;
+	margin: 15px 0;
 }
 .lotteryFootballBG.animated .prize-image-holder.animated {
 	opacity: 1;
@@ -4639,6 +4640,9 @@ body .n-found .ie-true,
 	background: url("../../images/front/everton/everton_logo_square.png") no-repeat;
 	background-size: cover;
 	content: "";
+}
+.lotteryFootballBG .prize-image-holder img {
+	margin: 0;
 }
 .dummy-container {
 	width: 100%;
@@ -4690,9 +4694,24 @@ body .n-found .ie-true,
 	from {opacity: 0;}
 	to {opacity: 1;}
 }
+@-webkit-keyframes step-opacity {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+@-moz-keyframes step-opacity {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+@-ms-keyframes step-opacity {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
 .lotteryFootballBG.animated.single .step-three {
 	display: block !important;
 	animation: step-opacity 5s linear 0s 1;
+	-webkit-animation: step-opacity 5s linear 0s 1;
+	-moz-animation: step-opacity 5s linear 0s 1;
+	-ms-animation: step-opacity 5s linear 0s 1;
 }
 .lotteryFootballBG.animated.single .step-three * {
 
