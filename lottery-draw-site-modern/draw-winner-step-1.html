@@ -41,7 +41,7 @@
 
 			<a href="#"><article class="article showDesktopBlock">
 				<div class="articleImage articleImageDesktop">
-					<img src="./images/everton-training.png" />
+					<img class="prize-image-inside" src="./images/everton-training.png" />
 				</div>
 				<div class="greyBox greyBoxDesktop">
 					<h3 class="color-aqua"><b>the prize</b></h3>
@@ -52,63 +52,65 @@
 			<div class="clearfix"></div>
 		</div>
 
-		<section class="sectionLayout">
-			<div class="marginTopText">
-				<h3 class="condensedFont">Congratulations < name ><br/>You've won the < opportunity to meet the team and get signed t-shirts at Finch Farm ></h3>
-			</div>
-
-			<img class="noVAlign" src="./images/everton-training.png" alt="" />
-			<div class="winnerHolderEmbedded">
-				<img src="http://lorempixel.com/200/200/cats/" />
-			</div>
-
-			<div class="marginTopText">
-				<h3 class="condensedFont">Please enter your address so we can send you more details on the prize</h3>
-			</div>
-
-			<div class="enter-details-block">
-				<a href="#" id="show-details-btn" class="button buttonDefault buttonYellow"><span><span>Enter details</span></span></a>
-			</div>
-
-			<div class="details-form-block">
-				<!-- Alert -->
-				<div class="alert alert-danger">
-					<button data-dismiss="alert" class="close" type="button">&times;</button>
-					<strong>Warning!</strong>
-					<div data-valmsg-summary="true" class="validation-summary-errors">
-						<ul><li>Email is required.</li>
-							<li>Some other error.</li>
-						</ul>
-					</div>
+		<section class="sectionLayout sectionWinnerSteps">
+			<div class="winner-steps-left-side">
+				<div class="marginTopText">
+					<h3 class="condensedFont">Congratulations < name ><br/>You've won the < opportunity to meet the team and get signed t-shirts at Finch Farm ></h3>
 				</div>
-				<!-- // Alert END -->
-				<!-- Form -->
-				<form method="post" class="details-form" id="provideDetailsForm" action="index.html?lang=en">
-					<div class="form-group">
-						<label form="address1" class="strong">Your address line 1*</label>
-						<input type="text" class="input-block-level form-control" id="address1"
-							   name="address1" placeholder="House or building name"/>
-					</div>
-					<div class="form-group">
-						<label form="address2" class="strong">Your address line 2</label>
-						<input type="text" class="input-block-level form-control" id="address2"
-							   name="address2" placeholder="Road or street name"/>
-					</div>
-					<div class="form-group">
-						<label form="county" class="strong">County</label>
-						<input type="text" class="input-block-level form-control" id="county"
-							   name="county" placeholder="Merseyside"/>
-					</div>
-					<div class="form-group">
-						<label form="postcode" class="strong">Postcode</label>
-						<input type="text" class="input-block-level form-control" id="postcode"
-							   name="postcode" placeholder="Postcode"/>
-					</div>
+				<img class="noVAlign" src="./images/everton-training.png" alt="" />
+				<div class="winnerHolderEmbedded">
+					<img src="http://lorempixel.com/200/200/cats/" />
+				</div>
 
-					<button type="submit" class="button buttonDefault buttonYellow"><i></i>
-						<span class="align-wrapp"><span>CONFIRM</span></span></button>
-				</form>
-				<!-- // Form END -->
+				<div class="marginTopText">
+					<h3 class="condensedFont">Please enter your address so we can send you more details on the prize</h3>
+				</div>
+
+			</div>
+			<div class="winner-steps-right-side">
+				<div class="enter-details-block">
+					<a href="#" id="show-details-btn" class="button buttonDefault buttonYellow"><span><span>Enter details</span></span></a>
+				</div>
+				<div class="details-form-block">
+					<!-- Alert -->
+					<div class="alert alert-danger">
+						<button data-dismiss="alert" class="close" type="button">&times;</button>
+						<strong>Warning!</strong>
+						<div data-valmsg-summary="true" class="validation-summary-errors">
+							<ul><li>Email is required.</li>
+								<li>Some other error.</li>
+							</ul>
+						</div>
+					</div>
+					<!-- // Alert END -->
+					<!-- Form -->
+					<form method="post" class="details-form" id="provideDetailsForm" action="index.html?lang=en">
+						<div class="form-group">
+							<label form="address1" class="strong">Your address line 1*</label>
+							<input type="text" class="input-block-level form-control" id="address1"
+								   name="address1" placeholder="House or building name"/>
+						</div>
+						<div class="form-group">
+							<label form="address2" class="strong">Your address line 2</label>
+							<input type="text" class="input-block-level form-control" id="address2"
+								   name="address2" placeholder="Road or street name"/>
+						</div>
+						<div class="form-group">
+							<label form="county" class="strong">County</label>
+							<input type="text" class="input-block-level form-control" id="county"
+								   name="county" placeholder="Merseyside"/>
+						</div>
+						<div class="form-group">
+							<label form="postcode" class="strong">Postcode</label>
+							<input type="text" class="input-block-level form-control" id="postcode"
+								   name="postcode" placeholder="Postcode"/>
+						</div>
+
+						<button type="submit" class="button buttonDefault buttonYellow"><i></i>
+							<span class="align-wrapp"><span>CONFIRM</span></span></button>
+					</form>
+					<!-- // Form END -->
+				</div>
 			</div>
 		</section>
 	</div>

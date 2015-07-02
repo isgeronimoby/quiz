@@ -152,6 +152,103 @@
 		-ms-transform: translate(-50%,-50%);
 		-o-transform: translate(-50%,-50%);
 	}
+	.sectionLayout > .prize-image-inside {
+		max-width: 35%;
+		float: left;
+		border: 4px solid whitesmoke;
+		margin: 40px 34px;
+		box-sizing: border-box;
+	}
+	.sectionLayout > .greyBox {
+		position: relative;
+		z-index: -1;
+		padding-left: 42%;
+		min-height: 290px;
+		text-align: left;
+	}
+	.sectionLayout > .greyBox:after {
+		position: absolute;
+		right: 10px;
+		bottom: 10px;
+		content: "";
+		width: 50px;
+		height: 50px;
+		background: url('../images/everton_logo.png') no-repeat;
+		background-size: cover;
+	}
+	.sectionDrawFinished > .winnerHolder {
+		max-width: 15%;
+		float: left;
+		border: 6px solid whitesmoke;
+		margin: 40px 70px;
+		box-sizing: border-box;
+	}
+	.sectionDrawFinished > .greyBox {
+		padding: 20px;
+		text-align: left;
+		min-height: 140px;
+		padding-top: 60px;
+	}
+	.sectionDrawFinished > .marginTopText {
+		float: none;
+		clear: both;
+	}
+	.sectionDrawFinished > .prize-image-inside,
+	.sectionEnter > .prize-image-inside,
+	.sectionEnterExisting > .prize-image-inside {
+		max-width: 60%;
+		float: none;
+		border: 4px solid whitesmoke;
+		margin: 20px 0;
+		box-sizing: border-box;
+	}
+	.sectionDrawFinished .button {
+		max-width: 60%;
+	}
+	.sectionWinnerSteps .winner-steps-left-side {
+		width: 39%;
+		float: left;
+		padding-right: 10px;
+	}
+	.sectionWinnerSteps .winner-steps-left-side > img {
+		margin-top: 20px;
+		box-sizing: border-box;
+		border: 4px solid #364158;
+	}
+	.sectionWinnerSteps .winner-steps-right-side {
+		width: 59%;
+		float: right;
+		padding-left: 10px;
+	}
+	.sectionWinnerSteps .winner-steps-right-side #show-details-btn {
+		margin-top: 100px;
+	}
+	.sectionWinnerSteps .winner-steps-right-side > img {
+		box-sizing: border-box;
+		border: 4px solid #364158;
+	}
+	.sectionEnter .greyBox {
+		padding: 20px;
+		min-height: initial;
+		z-index: 1;
+	}
+	.sectionEnter .greyBox:after {
+		display: none;
+	}
+	.sectionEnter .greyBox #aboutContainer {
+		max-width: none;
+		margin-left: 0;
+	}
+	.sectionEnterExisting .greyBox {
+		padding-left: 380px;
+		min-height: 230px;
+	}
+	.sectionEnterExisting .imageHolder {
+		float: left;
+		position: relative;
+		z-index: 2;
+		margin-left: 20px;
+	}
 }
 
 @media all and (min-width: 1025px) {

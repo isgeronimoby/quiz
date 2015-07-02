@@ -9,6 +9,5 @@ $(function(){
 			$('#aboutContainer').html(currentText);
 			textState = 0;
 		}
-		$(this).css('bottom', '15px');
 	});
 });

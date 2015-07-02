@@ -208,8 +208,9 @@ img {
 	background-size: 50%;
 	background-position: center;
 	position: absolute;
-	bottom: 12px;
-	right: 30px;
+	bottom: 0;
+	right: 5px;
+	z-index: 100;
 }
 .fullwidth {
 	width: 100%;
@@ -269,9 +270,7 @@ img {
 #aboutContainer {
 	position: relative;
 	display: inline-block;
-	max-width: 230px;
 	text-align: left;
-	margin-left: -50px;
 }
 .greyBox {
     margin: 10px 0;
@@ -1223,6 +1222,7 @@ button.close {
     .earningOptions ul li .button {
         width: 75%;
     }
+
 }
 @media all and (max-width:500px) {
     .earningOptions ul li .button, .greyBox .button, .earningOptions ul li .buttonDisabled,
@@ -1247,13 +1247,14 @@ button.close {
 		font-size: 16px;
 		font-weight: 200;
 	}
+	.sectionLayout .prize-image-inside {
+		width: auto;
+		max-height: 150px;
+	}
 }
 
 @media all and (max-height:485px){
-	#enterDraw.sectionLayout > img {
-		width: auto;
-		max-height: 120px;
-	}
+
 }
 
 .overthrow-enabled .overthrow {

@@ -87,11 +87,11 @@
 				appDetectionAndroid();
 			} else {
 				// neither ios nor android, but mobile
-				window.location.href = Redirects.other;
+				window.top.location.href = Redirects.other;
 			}
 		} else {
 			// DESKTOP
-			window.location.href = Redirects.other;
+			window.top.location.href = Redirects.other;
 
 			// DESKTOP OS and Browser
 			var desktopBrowser = null;
