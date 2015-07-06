@@ -200,11 +200,6 @@ $(document).on("click", ".widget", function(){
 //SELECT
 	$('.selectpicker').selectpicker();
 
-
-//FILE INPUT
-	$('input[type=file]').bootstrapFileInput();
-
-
 // SIDE-BAR menu on minimized interface
 	$('#sidebar-menu ul > li').on('click', function () {
 		$(this).toggleClass('mouseHover');
