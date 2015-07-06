@@ -1,4 +1,7 @@
-$(function(){
+$(window).ready(function(){
+
+	console.log('I\'m in!');
+
 
     var ul = $('#upload ul');
 

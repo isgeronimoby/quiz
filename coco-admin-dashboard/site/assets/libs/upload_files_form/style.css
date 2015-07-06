@@ -16,16 +16,9 @@ html.no-touch.sticky-top:not(.animations-gpu).front #content {
     padding:30px;
     border-radius:3px;
 
+	margin: 40px auto 100px;
 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	-webkit-transform: translate(-50%, -50%);
-	-moz-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
 }
 
 #drop{
@@ -65,7 +58,8 @@ html.no-touch.sticky-top:not(.animations-gpu).front #content {
 
 #upload ul{
     list-style:none;
-    margin:0 -30px;
+	margin: 0 -30px;
+	padding: 0;
     border-top:1px solid #2b2e31;
     border-bottom:1px solid #3d4043;
 }
@@ -90,7 +84,7 @@ html.no-touch.sticky-top:not(.animations-gpu).front #content {
 }
 
 #upload ul li p{
-    max-width: 250px;
+    max-width: 300px;
     overflow: hidden;
     white-space: nowrap;
     color: #EEE;
