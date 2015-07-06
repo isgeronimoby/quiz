@@ -81,7 +81,7 @@ $(document).ready(function () {
 	});
 
 	//	sign up show form slideDown
-	$('.fake-btn').on('click', function(e) {
+	/*$('.fake-btn').on('click', function(e) {
 		$(this).css('display', 'none');
 		$('.fancybox-wrap').addClass('custom-transition');
 		$('.switch-wrapp').slideDown(300);
@@ -89,9 +89,20 @@ $(document).ready(function () {
 		setTimeout(function() {
 			$.fancybox.update();
 		},400);
-	});
+	});*/
 
 	$(".fancybox").fancybox({
+		afterShow: function(){
+			$('.fake-btn').on('click', function(e) {
+				$(this).css('display', 'none');
+				$('.fancybox-wrap').addClass('custom-transition');
+				$('.switch-wrapp').slideDown(300);
+
+				setTimeout(function() {
+					$.fancybox.update();
+				},400);
+			});
+		},
 		afterClose : function(){
 			$('.fancybox-wrap').removeClass('custom-transition');
 			$('.fake-btn').css('display', 'block');

@@ -258,7 +258,6 @@ function initCarousel() {
 
             //TODO: check window size for ex.: "this.maxOffset = this.maskSize - this.sumSize + window.innerWidth - 250"
             this.maxOffset = this.maskSize - this.sumSize ;
-            console.log(this.maxOffset);
 
             // vertical gallery with single size step custom behavior
             if(this.options.vertical && this.options.maskAutoSize) {
