@@ -22,7 +22,7 @@
 		var Redirects = {
 			iosDeeplink: 'evertonrewardstest://draw',
 			iosAppstore: 'https://www.apple.com/',
-			androidDeeplink: 'intent://draw#Intent;scheme=everton;package=com.sportreward.everton.test;end',
+			androidDeeplink: 'intent://draw#Intent;scheme=evertonrewards;package=com.sportreward.everton;end',
 			androidAppstore: 'https://store.google.com/',
 			other: 'https://www.yahoo.com/'
 		};
@@ -57,7 +57,7 @@
 
 		// Magic on android devices
 		function appDetectionAndroid() {
-
+		/*
 			// Android chrome browser
 			if (navigator.userAgent.match(/Chrome/)) {
 				window.location.assign(Redirects.androidAppstore);
@@ -75,6 +75,31 @@
 				iframe.setAttribute('src', Redirects.iosDeeplink);
 				document.body.appendChild(iframe);
 			}
+		*/
+
+			var timeout;
+			function preventPopup() {
+				clearTimeout(timeout);
+				timeout = null;
+				window.removeEventListener('pagehide', preventPopup);
+			}
+
+			function openApp() {
+				var tempLink = document.createElement('A');
+				tempLink.innerHTML = 'link';
+				tempLink.href = Redirects.androidDeeplink;
+				tempLink.style.display = 'none';
+				document.body.appendChild( tempLink );
+
+				timeout = setTimeout(function() {
+					document.location = Redirects.androidAppstore;
+				}, timeoutValue);
+
+				tempLink.click();
+
+				window.addEventListener('pagehide', preventPopup);
+			}
+			openApp();
 		}
 
 		// DETECTIONS:
@@ -93,6 +118,7 @@
 			// DESKTOP
 			window.top.location.href = Redirects.other;
 
+		/*
 			// DESKTOP OS and Browser
 			var desktopBrowser = null;
 			var desktopOS = !(navigator.platform.toUpperCase().indexOf('MAC')>=0) ? 'win' : 'mac';
@@ -116,6 +142,8 @@
 				default:
 					desktopBrowser = null;
 			}
+		*/
+
 		}
 	})();
 </script>
