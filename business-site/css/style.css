@@ -75,7 +75,11 @@ img {
 }
 .head-partners > img {
 	max-width: 100px;
-	margin-left: 10px;
+	margin-left: 15px;
+}
+
+.head-partners > .small-logo {
+	max-width: 60px;
 }
 
 .full-page:nth-child(even) {
@@ -95,7 +99,7 @@ img {
     /*width: 100%;*/
     max-width: 1100px;
     text-align: left;
-    padding-top: 20px;
+    padding-top: 30px;
     padding-bottom: 20px;
     margin-left: 20px;
     float: left;
@@ -818,6 +822,7 @@ img {
     .logo-wrapper {
         float: left;
         width: auto;
+		padding-top: 20px;
     }
     .sliding-menu nav {
         display: block;
