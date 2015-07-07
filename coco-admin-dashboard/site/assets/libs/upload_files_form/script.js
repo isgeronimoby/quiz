@@ -1,8 +1,5 @@
 $(window).ready(function(){
 
-	console.log('I\'m in!');
-
-
     var ul = $('#upload ul');
 
     $('#drop a').click(function(){
@@ -22,11 +19,10 @@ $(window).ready(function(){
         add: function (e, data) {
 
             var tpl = $('<li class="working"><input type="text" value="0" data-width="48" data-height="48"'+
-                ' data-fgColor="#0788a5" data-readOnly="1" data-bgColor="#3e4043" /><p></p><span></span></li>');
+                ' data-fgColor="#0788a5" data-readOnly="1" data-bgColor="#3e4043" /><p></p></li>');
 
             // Append the file name and file size
-            tpl.find('p').text(data.files[0].name)
-                         .append('<i>' + formatFileSize(data.files[0].size) + '</i>');
+            tpl.find('p').text(data.files[0].name).append('<i>' + formatFileSize(data.files[0].size) + '</i>');
 
             // Add the HTML to the UL element
             data.context = tpl.appendTo(ul);
@@ -47,8 +43,15 @@ $(window).ready(function(){
 
             });
 
-            // Automatically upload the file once it is added to the queue
-            var jqXHR = data.submit();
+        	// Automatically upload the file once it is added to the queue
+            var jqXHR = data.submit().success(function (result, textStatus, jqXHR) {
+            	if (result.status == 'error') {
+
+            		data.context.addClass('error');
+            	}
+
+            	tpl.append("<span></span>");
+            });
         },
 
         progress: function(e, data){
