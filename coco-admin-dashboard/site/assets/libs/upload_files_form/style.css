@@ -116,7 +116,8 @@ html.no-touch.sticky-top:not(.animations-gpu).front #content {
     cursor:pointer;
 }
 
-#upload ul li.working span{
+#upload ul li.working span,
+#upload ul li.error span {
     height: 16px;
     background-position: 0 -12px;
 }
