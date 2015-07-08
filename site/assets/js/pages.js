@@ -45,7 +45,7 @@ $(document).ready(function () {
 
 	$('.custom-popover').popover({
 		trigger: 'hover'
-	})
+	});
 
 //    profile hover menu
 
@@ -81,7 +81,7 @@ $(document).ready(function () {
 	});
 
 	//	sign up show form slideDown
-	/*$('.fake-btn').on('click', function(e) {
+	$('.fake-btn').on('click', function(e) {
 		$(this).css('display', 'none');
 		$('.fancybox-wrap').addClass('custom-transition');
 		$('.switch-wrapp').slideDown(300);
@@ -89,7 +89,7 @@ $(document).ready(function () {
 		setTimeout(function() {
 			$.fancybox.update();
 		},400);
-	});*/
+	});
 
 	$(".fancybox").fancybox({
 		afterShow: function(){

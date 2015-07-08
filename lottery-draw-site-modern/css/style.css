@@ -259,7 +259,7 @@ img {
     margin-top: 15px;
     padding: 0 8px;
 }
-.sectionLayout > img{
+.sectionLayout > .prize-image-holder > img{
     width: 100%;
     height: auto;
     margin-top: 10px;
@@ -1247,8 +1247,9 @@ button.close {
 		font-size: 16px;
 		font-weight: 200;
 	}
-	.sectionLayout .prize-image-inside {
+	.sectionLayout .prize-image-holder {
 		width: auto;
+		overflow: hidden;
 		max-height: 150px;
 	}
 }
