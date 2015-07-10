@@ -248,7 +248,7 @@ img {
 
 }
 .noVAlign {
-	vertical-align: initial;
+	vertical-align: top;
 }
 .imageHolder img{
 	display: inline-block;
@@ -262,7 +262,6 @@ img {
 .sectionLayout > .prize-image-holder > img{
     width: 100%;
     height: auto;
-    margin-top: 10px;
 }
 .relative {
 	position: relative;
@@ -1156,6 +1155,42 @@ button.close {
 .sectionLayout.signupPage > .mobileSignupLayout .greyBox ul li {
 	margin: 10px 0;
 }
+
+.recent-winners {
+	border-top: 1px solid #777;
+	border-bottom: 1px solid #777;
+	margin: 20px 0;
+	padding: 15px 0 0;
+}
+
+.recent-winners ul {
+	padding: 5px 0;
+	width: 100%;
+	text-align: center;
+}
+.recent-winners ul li {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+	max-width: 100px;
+	margin: 5px 10px;
+}
+.recent-winners ul li:nth-of-type(n + 11) {
+	display: none;
+}
+.recent-winners ul li img {
+	max-width: 60px;
+	border-radius: 50%;
+	display: inline-block;
+	margin-bottom: 6px;
+}
+.recent-winners ul li h6 {
+	color: #cccccc;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 10px;
+}
 /****************************/
 
 
@@ -1252,6 +1287,18 @@ button.close {
 		overflow: hidden;
 		max-height: 150px;
 	}
+
+	.recent-winners ul li {
+		max-width: 35%;
+		margin: 10px 12px;
+	}
+	.recent-winners ul li:nth-of-type(n + 7) {
+		display: none;
+	}
+	.recent-winners ul li img {
+		max-width: 85%;
+	}
+
 }
 
 @media all and (max-height:485px){
