@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<title>Everton Draw</title>
 
 	<script type="text/javascript">
@@ -76,7 +77,7 @@
 				document.body.appendChild(iframe);
 			}
 		*/
-
+			/*
 			var timeout;
 			function preventPopup() {
 				clearTimeout(timeout);
@@ -100,6 +101,7 @@
 				window.addEventListener('pagehide', preventPopup);
 			}
 			openApp();
+			*/
 		}
 
 		// DETECTIONS:
@@ -109,7 +111,8 @@
 			if (md.os() === 'iOS') {
 				appDetectionIos();
 			} else if (md.os() === 'AndroidOS') {
-				appDetectionAndroid();
+				//appDetectionAndroid();
+				window.top.location.href = Redirects.other;
 			} else {
 				// neither ios nor android, but mobile
 				window.top.location.href = Redirects.other;
