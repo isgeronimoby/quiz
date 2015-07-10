@@ -543,7 +543,7 @@ jQuery(document).ready(function ($) {
 					optionsList.find('li').add('.article').each(function (ind, el) {
 						setTimeout( function () {
 							$(el).addClass('revealListItem');
-						}, 400 * ind );
+						}, 250 * ind );
 					});
 					listVisibility = true;
 				}
