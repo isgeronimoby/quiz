@@ -5,6 +5,10 @@ html.no-touch.sticky-top:not(.animations-gpu).front #content {
 	position: static;
 }
 
+.upload_page {
+	/*text-align: center;*/
+}
+
 #upload{
     background-color:#373a3d;
 
@@ -16,7 +20,7 @@ html.no-touch.sticky-top:not(.animations-gpu).front #content {
     padding:30px;
     border-radius:3px;
 
-	margin: 40px auto 100px;
+	margin: 40px 0 100px 0;
 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
@@ -124,4 +128,31 @@ html.no-touch.sticky-top:not(.animations-gpu).front #content {
 
 #upload ul li.error p{
     color:red;
+}
+
+.not-supported {
+	display: none;
+	margin: 40px 0;
+	padding: 20px 0 0;
+	border-top: 1px solid #bbb;
+	color: rgb(0, 54, 156);
+}
+
+
+@media all and (max-width: 420px) {
+	#upload {
+		width: auto;
+		padding: 20px;
+		overflow: hidden;
+	}
+	#drop {
+		padding: 20px 5px;
+	}
+	#upload ul {
+		margin: 0;
+	}
+	#upload ul li {
+		padding: 15px 5px;
+		margin-left: -35px;
+	}
 }

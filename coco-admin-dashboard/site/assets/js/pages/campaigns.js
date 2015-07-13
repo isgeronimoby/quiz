@@ -53,7 +53,7 @@ $(document).ready(function(){
 		},
 		{
 			"title": "Purchased more",
-			"value": 18
+			"value": 1
 		}
 	];
 
