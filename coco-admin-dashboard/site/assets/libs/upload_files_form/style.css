@@ -5,10 +5,6 @@ html.no-touch.sticky-top:not(.animations-gpu).front #content {
 	position: static;
 }
 
-.upload_page {
-	/*text-align: center;*/
-}
-
 #upload{
     background-color:#373a3d;
 
