@@ -8,14 +8,7 @@ $(document).ready(function(){
 			format: 'DD-MM-YYYY',
 			minDate: '01/01/2012',
 			maxDate: '12/31/2018',
-			ranges: {
-				'Today': [moment(), moment()],
-				'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
-				'Last 7 Days': [moment().subtract('days', 6), moment()],
-				'Last 30 Days': [moment().subtract('days', 29), moment()],
-				'This Month': [moment().startOf('month'), moment().endOf('month')],
-				'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
-			},
+			ranges: {},
 			startDate: moment().subtract('days', 29),
 			endDate: moment()
 		},

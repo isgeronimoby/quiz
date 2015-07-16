@@ -5910,8 +5910,14 @@ body.cru .navbar-default .navbar-nav > li > a {
 @media all and (max-width: 600px) {
   .pull-left.dropdown,
   .pull-left.dropdown button,
-  .pull-left.dropdown ul {
+  .pull-left.dropdown ul,
+  .pull-right.dropdown.right-margin,
+  .pull-right.dropdown.right-margin button,
+  .pull-right.dropdown.right-margin ul {
     width: 100%;
+  }
+  .pull-right.dropdown.right-margin {
+    margin-right: 0;
   }
   .report-heading {
     width: 100%;
@@ -5949,4 +5955,7 @@ body.cru .navbar-default .navbar-nav > li > a {
 }
 .dropdown .dropdown-menu li b {
   text-transform: uppercase;
+}
+.dropdown.right-margin {
+  margin-right: 10px;
 }
