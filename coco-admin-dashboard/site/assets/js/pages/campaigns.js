@@ -19,6 +19,206 @@ $(document).ready(function(){
 		}
 	);
 
+
+	/* ********************************* */
+
+
+	function getRandVal(){
+		return Math.round(Math.random() * 5000 );
+	}
+	Campaigns.fakeData = [
+		{ name: 'Website Visits', chrome: getRandVal(), firefox: getRandVal(), safari: getRandVal(), ie: getRandVal(), ios: getRandVal(), android: getRandVal(), total: 3250 },
+		{ name: 'Click Install Buttons', chrome: getRandVal(), firefox: getRandVal(), safari: getRandVal(), ie: getRandVal(), ios: getRandVal(), android: getRandVal(), total: 3100 },
+		{ name: 'Install Application', chrome: getRandVal(), firefox: getRandVal(), safari: getRandVal(), ie: getRandVal(), ios: getRandVal(), android: getRandVal(), total: 2820 },
+		{ name: 'Create Account', chrome: getRandVal(), firefox: getRandVal(), safari: getRandVal(), ie: getRandVal(), ios: getRandVal(), android: getRandVal(), total: 3560 },
+		{ name: 'Enter the draw', chrome: getRandVal(), firefox: getRandVal(), safari: getRandVal(), ie: getRandVal(), ios: getRandVal(), android: getRandVal(), total: 2800 },
+		{ name: 'Send Browser Ext. Link', chrome: getRandVal(), firefox: getRandVal(), safari: getRandVal(), ie: getRandVal(), ios: getRandVal(), android: getRandVal(), total: 2430 },
+		{ name: 'Send Mobile App Link', chrome: getRandVal(), firefox: getRandVal(), safari: getRandVal(), ie: getRandVal(), ios: getRandVal(), android: getRandVal(), total: 2300 },
+		{ name: 'Reward For Facebook Share', chrome: getRandVal(), firefox: getRandVal(), safari: getRandVal(), ie: getRandVal(), ios: getRandVal(), android: getRandVal(), total: 2100 },
+		{ name: 'Reward for Twitter Share', chrome: getRandVal(), firefox: getRandVal(), safari: getRandVal(), ie: getRandVal(), ios: getRandVal(), android: getRandVal(), total: 2050 },
+		{ name: 'Click Invite Friend Button', chrome: getRandVal(), firefox: getRandVal(), safari: getRandVal(), ie: getRandVal(), ios: getRandVal(), android: getRandVal(), total: 1800  },
+		{ name: 'Invitation Sent (Desktop)', chrome: getRandVal(), firefox: getRandVal(), safari: getRandVal(), ie: getRandVal(), ios: getRandVal(), android: getRandVal(), total: 1670 }
+	];
+	Campaigns.fullTooltips = [];
+
+	Campaigns.barsTooltipsFill = function (data) {
+		Campaigns.fullTooltips = [];
+		data.forEach(function (elem) {
+			var str = "";
+			for (var a in elem) {
+				if (a == 'name') {
+					str += ('<span class="graph-heading">' + elem[a] + '</span><br/>');
+					continue;
+				} else if (a == 'total') {
+					str += ('<span class="graph-total">Total: ' + elem[a] + '</span><br/>');
+					continue;
+				}
+				str += ('<span data-browser="' + a.toLowerCase() + '">' + a + ': ' + '<b>' + elem[a] + '</b></span><br/>');
+			}
+			Campaigns.fullTooltips.push(str);
+		});
+	};
+	Campaigns.barsTooltipsFill(Campaigns.fakeData);
+
+	Campaigns.barChart = AmCharts.makeChart("amchart-bar-fake",
+		{
+			"type": "serial",
+			"categoryField": "name",
+			"angle": 15,
+			"depth3D": 5,
+			"columnWidth": 0.8,
+			"columnSpacing": 0,
+			"startDuration": 0,
+			"theme": "light",
+			"fontSize": 10,
+			"categoryAxis": {
+				"gridPosition": "start",
+				"labelRotation": 30
+			},
+			"trendLines": [],
+			"graphs": [
+				{
+					"fillAlphas": 1,
+					"id": "AmGraph-1",
+					"title": "Chrome",
+					"type": "column",
+					"valueField": "chrome",
+					"markerType": "circle",
+					"balloonFunction": function(gdi, amc){
+						for(var i = 0; i < Campaigns.fullTooltips.length; i++) {
+							if ( Campaigns.fullTooltips[i].indexOf(gdi.category) != -1 ){
+								var curTooltip = Campaigns.fullTooltips[i];
+								var regexp = new RegExp('<span data-browser="' + gdi.graph.valueField + '"', 'g');
+								var newTooltip = curTooltip.replace(regexp,
+									'<span style="text-shadow: 0 0 10px rgba(255,255,255,0.5);color:' + gdi.graph.bulletColorR + '; data-browser="' + gdi.graph.valueField + '"' );
+								return newTooltip;
+							}
+						}
+					}
+				},
+				{
+					"fillAlphas": 1,
+					"id": "AmGraph-2",
+					"title": "Firefox",
+					"type": "column",
+					"valueField": "firefox",
+					"markerType": "circle",
+					"balloonFunction": function(gdi, amc){
+						for(var i = 0; i < Campaigns.fullTooltips.length; i++) {
+							if ( Campaigns.fullTooltips[i].indexOf(gdi.category) != -1 ){
+								var curTooltip = Campaigns.fullTooltips[i];
+								var regexp = new RegExp('<span data-browser="' + gdi.graph.valueField + '"', 'g');
+								var newTooltip = curTooltip.replace(regexp,
+									'<span style="text-shadow: 0 0 10px rgba(255,255,255,0.5);color:' + gdi.graph.bulletColorR + '; data-browser="' + gdi.graph.valueField + '"' );
+								return newTooltip;
+							}
+						}
+					}
+				},
+				{
+					"fillAlphas": 1,
+					"id": "AmGraph-3",
+					"title": "Safari",
+					"type": "column",
+					"valueField": "safari",
+					"markerType": "circle",
+					"balloonFunction": function(gdi, amc){
+						for(var i = 0; i < Campaigns.fullTooltips.length; i++) {
+							if ( Campaigns.fullTooltips[i].indexOf(gdi.category) != -1 ){
+								var curTooltip = Campaigns.fullTooltips[i];
+								var regexp = new RegExp('<span data-browser="' + gdi.graph.valueField + '"', 'g');
+								var newTooltip = curTooltip.replace(regexp,
+									'<span style="text-shadow: 0 0 10px rgba(255,255,255,0.5);color:' + gdi.graph.bulletColorR + '; data-browser="' + gdi.graph.valueField + '"' );
+								return newTooltip;
+							}
+						}
+					}
+				},
+				{
+					"fillAlphas": 1,
+					"id": "AmGraph-4",
+					"title": "IE",
+					"type": "column",
+					"valueField": "ie",
+					"markerType": "circle",
+					"balloonFunction": function(gdi, amc){
+						for(var i = 0; i < Campaigns.fullTooltips.length; i++) {
+							if ( Campaigns.fullTooltips[i].indexOf(gdi.category) != -1 ){
+								var curTooltip = Campaigns.fullTooltips[i];
+								var regexp = new RegExp('<span data-browser="' + gdi.graph.valueField + '"', 'g');
+								var newTooltip = curTooltip.replace(regexp,
+									'<span style="text-shadow: 0 0 10px rgba(255,255,255,0.5);color:' + gdi.graph.bulletColorR + '; data-browser="' + gdi.graph.valueField + '"' );
+								return newTooltip;
+							}
+						}
+					}
+				},
+				{
+					"fillAlphas": 1,
+					"id": "AmGraph-5",
+					"title": "iOS",
+					"type": "column",
+					"valueField": "ios",
+					"markerType": "circle",
+					"balloonFunction": function(gdi, amc){
+						for(var i = 0; i < Campaigns.fullTooltips.length; i++) {
+							if ( Campaigns.fullTooltips[i].indexOf(gdi.category) != -1 ){
+								var curTooltip = Campaigns.fullTooltips[i];
+								var regexp = new RegExp('<span data-browser="' + gdi.graph.valueField + '"', 'g');
+								var newTooltip = curTooltip.replace(regexp,
+									'<span style="text-shadow: 0 0 10px rgba(255,255,255,0.5);color:' + gdi.graph.bulletColorR + '; data-browser="' + gdi.graph.valueField + '"' );
+								return newTooltip;
+							}
+						}
+					}
+				},
+				{
+					"fillAlphas": 1,
+					"id": "AmGraph-6",
+					"title": "Android",
+					"type": "column",
+					"valueField": "android",
+					"markerType": "circle",
+					"balloonFunction": function(gdi, amc){
+						for(var i = 0; i < Campaigns.fullTooltips.length; i++) {
+							if ( Campaigns.fullTooltips[i].indexOf(gdi.category) != -1 ){
+								var curTooltip = Campaigns.fullTooltips[i];
+								var regexp = new RegExp('<span data-browser="' + gdi.graph.valueField + '"', 'g');
+								var newTooltip = curTooltip.replace(regexp,
+									'<span style="text-shadow: 0 0 10px rgba(255,255,255,0.5);color:' + gdi.graph.bulletColorR + '; data-browser="' + gdi.graph.valueField + '"' );
+								return newTooltip;
+							}
+						}
+					}
+				}
+			],
+			"guides": [],
+			"valueAxes": [],
+			"allLabels": [],
+			"balloon": {
+				"borderColor": "#FD0000",
+				"borderThickness": 6,
+				"color": "#FFFFFF",
+				"cornerRadius": 20,
+				"fillAlpha": 0.8,
+				"fillColor": "#235B8C",
+				"fontSize": 12,
+				"horizontalPadding": 20,
+				"shadowAlpha": 0,
+				"showBullet": true,
+				"verticalPadding": 12
+			},
+			"legend": {
+				"useGraphSettings": false
+			},
+			"titles": [],
+			"dataProvider": Campaigns.fakeData
+		}
+	);
+
+	/* ********************************* */
+
+
 	Campaigns.funnelAllTrafficSource = [
 		{
 			"title": "Website visits",
@@ -333,7 +533,7 @@ $(document).ready(function(){
 			Campaigns.tableRows.rows.add( data ).draw();
 		}
 	};
-
+	var ifEnlarged = false;
 	Campaigns.reloadFunnels = function(){
 		Campaigns.amchartFunnelAllTraffic.validateData();
 		Campaigns.amchartFunnelFacebook.validateData();
@@ -344,6 +544,10 @@ $(document).ready(function(){
 		Campaigns.amchartFunnelFacebook.validateNow();
 		Campaigns.amchartFunnelAdwords.validateNow();
 		Campaigns.amchartFunnelBing.validateNow();
+
+		//temp
+		Campaigns.barChart.validateData();
+		Campaigns.barChart.validateNow();
 	};
 
 	// Select campaign list

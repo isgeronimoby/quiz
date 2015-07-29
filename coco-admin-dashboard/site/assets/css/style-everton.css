@@ -5858,6 +5858,17 @@ body.cru .navbar-default .navbar-nav > li > a {
 .morris-chart {
   min-height: 370px;
 }
+.widget-funnel-main .statistic-chart .funnel-webvisits {
+  color: #FFFFFF;
+}
+.statistic-chart .funnel-webvisits {
+  position: absolute;
+  top: 0;
+  left: 40px;
+}
+.statistic-chart .funnel-webvisits .value {
+  font-weight: bold;
+}
 .amcharts-main-div a[title="JavaScript charts"] {
   display: none !important;
 }
@@ -5958,4 +5969,12 @@ body.cru .navbar-default .navbar-nav > li > a {
 }
 .dropdown.right-margin {
   margin-right: 10px;
+}
+.amcharts-balloon-div .graph-heading {
+  text-decoration: underline;
+}
+.amcharts-balloon-div .graph-total {
+  margin-top: 4px;
+  font-weight: bold;
+  line-height: 26px;
 }
