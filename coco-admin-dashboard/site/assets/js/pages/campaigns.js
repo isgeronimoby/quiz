@@ -533,7 +533,7 @@ $(document).ready(function(){
 			Campaigns.tableRows.rows.add( data ).draw();
 		}
 	};
-	var ifEnlarged = false;
+
 	Campaigns.reloadFunnels = function(){
 		Campaigns.amchartFunnelAllTraffic.validateData();
 		Campaigns.amchartFunnelFacebook.validateData();
@@ -545,7 +545,6 @@ $(document).ready(function(){
 		Campaigns.amchartFunnelAdwords.validateNow();
 		Campaigns.amchartFunnelBing.validateNow();
 
-		//temp
 		Campaigns.barChart.validateData();
 		Campaigns.barChart.validateNow();
 	};
