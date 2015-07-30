@@ -53,7 +53,7 @@ $(document).ready(function(){
 					str += ('<span class="graph-total">Total: ' + elem[a] + '</span><br/>');
 					continue;
 				}
-				str += ('<span data-browser="' + a.toLowerCase() + '">' + a + ': ' + '<b>' + elem[a] + '</b></span><br/>');
+				str += ('<span data-browser="' + a.toLowerCase() + '">' + a + ': ' + '<b>' + elem[a] + ' (' + Math.round( elem[a] / elem['total'] * 100 ) + '%)' + '</b></span><br/>');
 			}
 			Campaigns.fullTooltips.push(str);
 		});
