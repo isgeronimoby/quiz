@@ -26,9 +26,10 @@
 	}
 	.statistic-chart .funnel-webvisits .value {
 		font-weight: 700;
+		float: right;
 	}
 	.statistic-chart .funnel-webvisits .name {
-		float: right;
+
 	}
 }
 @media (min-width: 1025px) {
