@@ -20,9 +20,12 @@
 		position: static;
 		margin: 20px 0 -15px;
 		padding: 0 15px;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+		border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 		font-size: 16px;
 		font-weight: 300;
+	}
+	.widget-funnel-main .funnel-webvisits {
+		border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 	}
 	.statistic-chart .funnel-webvisits .value {
 		font-weight: 700;
@@ -30,6 +33,10 @@
 	}
 	.statistic-chart .funnel-webvisits .name {
 
+	}
+	.widget-content{
+		max-height: initial;
+		padding: 0 0 20px;
 	}
 }
 @media (min-width: 1025px) {

@@ -41,20 +41,25 @@ $(document).ready(function(){
 	];
 	Campaigns.fullTooltips = [];
 
+	Campaigns.fillMobileVersionBars = function( chart ){
+		$(chart.div).parent().find('.mobile-data-list').addClass('row');
+		Campaigns.fullTooltips.forEach(function(str){
+			$(chart.div).parent().find('.mobile-data-list').append('<div class="col-xs-12 col-sm-4">' + str + '</div>');
+		});
+	};
+
 	Campaigns.barsTooltipsFill = function (data) {
 		Campaigns.fullTooltips = [];
 		data.forEach(function (elem) {
 			var str = "";
+			str += ('<span class="graph-heading">' + elem['name'] + '</span><br/>');
 			for (var a in elem) {
-				if (a == 'name') {
-					str += ('<span class="graph-heading">' + elem[a] + '</span><br/>');
-					continue;
-				} else if (a == 'total') {
-					str += ('<span class="graph-total">Total: ' + elem[a] + '</span><br/>');
+				if (a == 'name' || a == 'total') {
 					continue;
 				}
 				str += ('<span data-browser="' + a.toLowerCase() + '">' + a + ': ' + '<b>' + elem[a] + ' (' + Math.round( elem[a] / elem['total'] * 100 ) + '%)' + '</b></span><br/>');
 			}
+			str += ('<span class="graph-total">Total: ' + elem['total'] + '</span>');
 			Campaigns.fullTooltips.push(str);
 		});
 	};
@@ -215,6 +220,8 @@ $(document).ready(function(){
 			"dataProvider": Campaigns.fakeData
 		}
 	);
+
+
 
 	/* ********************************* */
 
@@ -566,6 +573,8 @@ $(document).ready(function(){
 		Campaigns.reloadFunnels();
 	});
 
+
+
 	Campaigns.fillMobileVersion = function( chart ){
 		var blockFill = '<ul>';
 		chart.chartData.forEach(function(el){
@@ -580,5 +589,9 @@ $(document).ready(function(){
 		if ( $('body').hasClass('smallscreen') ) {
 			Campaigns.reloadFunnels();
 		}
+
+		// TEMP - add it in the date reload
+		Campaigns.fillMobileVersionBars(Campaigns.barChart);
+
 	}, 1000);
 });
