@@ -16,6 +16,20 @@
 	.show-bars-mobile {
 		display: block;
 	}
+	.statistic-chart .funnel-webvisits {
+		position: static;
+		margin: 20px 0 -15px;
+		padding: 0 15px;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+		font-size: 16px;
+		font-weight: 300;
+	}
+	.statistic-chart .funnel-webvisits .value {
+		font-weight: 700;
+	}
+	.statistic-chart .funnel-webvisits .name {
+		float: right;
+	}
 }
 @media (min-width: 1025px) {
 	.hide-bars-mobile {
