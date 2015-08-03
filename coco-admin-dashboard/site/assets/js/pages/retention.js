@@ -46,4 +46,19 @@ $(document).ready(function () {
         }
     });
 
+    //Disabling/enabling app changing
+    var appsDropdown = $('.appchoser > button');
+    var userAppsToggle = $('#user-group label');
+    userAppsToggle.click(function(e){
+        if ($(this).find('input').val() != 'apps') {
+            appsDropdown.addClass('disabled');
+        } else {
+            appsDropdown.removeClass('disabled');
+        }
+    });
+
+    userAppsToggle.each(function(ind, el){
+       if ( $(el).val() != 'apps' ) appsDropdown.addClass('disabled');
+    });
+
 });
