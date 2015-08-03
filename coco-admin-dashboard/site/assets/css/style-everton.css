@@ -5987,3 +5987,22 @@ body.cru .navbar-default .navbar-nav > li > a {
 .show-bars-mobile .col-sm-4 span b {
   float: right;
 }
+.widget-cohort-chart .widget-content {
+  max-height: initial;
+}
+.widget-cohort-chart .widget-content .cornelius-container {
+  padding: 10px 40px;
+}
+.widget-cohort-chart .widget-content .cornelius-container .cornelius-table {
+  width: 100%;
+  border-radius: 0;
+  box-shadow: none;
+  border: 1px solid #ddd;
+}
+.widget-cohort-chart .widget-content .cornelius-container .cornelius-table .cornelius-medium-high,
+.widget-cohort-chart .widget-content .cornelius-container .cornelius-table .cornelius-high,
+.widget-cohort-chart .widget-content .cornelius-container .cornelius-table .cornelius-hot,
+.widget-cohort-chart .widget-content .cornelius-container .cornelius-table .cornelius-extra-hot {
+  text-shadow: none;
+  -webkit-text-shadow: none;
+}
