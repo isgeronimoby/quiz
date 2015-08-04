@@ -170,29 +170,19 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<div id="reportrange" class="pull-right report-heading">
-			<i class="fa fa-calendar fa-lg hidden-xs"></i>
-			<span>Choose date range</span> <b class="caret"></b>
+		<div id="reportrange" class="pull-right report-heading retention">
+			<input type="week" value="2015-W15"/>
+			<input type="month" value="2015-03"/>
 		</div>
 
-<!--		<div class="btn-toolbar pull-left">
-			<div class="btn-group" role="group">
-				<button type="button" class="btn btn-default active">Left</button>
-				<button type="button" class="btn btn-default">Middle</button>
-			</div>
-			<div class="btn-group" role="group">
-				<button type="button" class="btn btn-default">Left</button>
-				<button type="button" class="btn btn-default">Middle</button>
-			</div>
-		</div>-->
 
 		<div class="btn-toolbar pull-left">
 			<div id="interval-group" class="btn-group" data-toggle="buttons">
-				<label class="btn btn-default active">
-					<input type="radio" name="mode" value="m"> Monthly
-				</label>
 				<label class="btn btn-default">
 					<input type="radio" name="mode" value="w"> Weekly
+				</label>
+				<label class="btn btn-default active">
+					<input type="radio" name="mode" value="m"> Monthly
 				</label>
 			</div>
 
