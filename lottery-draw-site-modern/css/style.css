@@ -241,7 +241,7 @@ img {
 	text-align: center;
 }
 .footer, .push {
-	height: 40px;
+	height: auto;
 }
 
 .sectionLayout {
@@ -1128,6 +1128,14 @@ button.close {
 
 .enter-details-block {
 	margin-bottom: 40px;
+}
+
+#installAppBox .marginBottom {
+    margin-bottom: 0;
+}
+#installAppBox .img-responsive {
+    max-width: 60%;
+    margin: 10px 0 25px;
 }
 
 /*********** Sign Up Page ***/

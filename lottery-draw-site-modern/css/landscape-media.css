@@ -121,7 +121,9 @@
 	.simpleLink, .simpleLink:active, .simpleLink:focus {
 		padding: 0;
 	}
-
+	.footer, .push {
+		height: 40px;
+	}
     .footer {
 		padding: 0 20px;
     }

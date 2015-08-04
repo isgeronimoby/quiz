@@ -36,6 +36,20 @@ jQuery(document).ready(function($){
 
 	function showStep( step ){
 		if ( step == 2 ) {
+			/*progressBar.removeClass('full');
+			progressBarSecondStep.removeClass('full');
+			progressBarThirdStep.removeClass('full');
+
+			progressBar.addClass('half');
+			setTimeout(function () {
+				progressBarSecondStep.addClass('full');
+			}, 1000);*/
+		} else if ( step == 3 ) {
+			/*progressBarSecondStep.addClass('full');
+			progressBar.addClass('full');
+			setTimeout(function(){
+				progressBarThirdStep.addClass('full');
+			}, 1000);*/
 			progressBar.removeClass('full');
 			progressBarSecondStep.removeClass('full');
 			progressBarThirdStep.removeClass('full');
@@ -43,12 +57,6 @@ jQuery(document).ready(function($){
 			progressBar.addClass('half');
 			setTimeout(function () {
 				progressBarSecondStep.addClass('full');
-			}, 1000);
-		} else if ( step == 3 ) {
-			progressBarSecondStep.addClass('full');
-			progressBar.addClass('full');
-			setTimeout(function(){
-				progressBarThirdStep.addClass('full');
 			}, 1000);
 		}
 	}

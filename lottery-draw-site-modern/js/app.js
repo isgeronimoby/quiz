@@ -641,11 +641,13 @@ jQuery(document).ready(function ($) {
 		var successText = successPlace.find('.connectSuccessMessage');
 		successPlace.find('.everton-popup-body img').hide();
 		successPlace.find('.text-holder').hide();
+		successPlace.find('form').hide();
 		successText.addClass('connectSuccessMessageAnimated');
 		setTimeout(function () {
 			successText.addClass('connectSuccessMessageAnimationFinished').removeClass('connectSuccessMessageAnimated');
 			successPlace.find('.everton-popup-body img').show();
 			successPlace.find('.text-holder').show();
+			successPlace.find('form').show();
 			successText.removeClass('connectSuccessMessageAnimationFinished');
 
 			$.fancybox.close();
@@ -680,12 +682,14 @@ jQuery(document).ready(function ($) {
 		};
 		img.src = src;
 	}
-
-	$('.portraitHolder img').load(function () {
-		setTimeout(function () {
-			renderAvatar($('.portraitHolder img'));
-		}, 300);
+	$($('canvas')[0]).load(function(){
+		$('.portraitHolder img').load(function () {
+			setTimeout(function () {
+				renderAvatar($('.portraitHolder img'));
+			}, 300);
+		});
 	});
+
 
 	$(document).ajaxError(function (event, jqXHR, settings, exception) {
 		if (jqXHR.readyState != 4)

@@ -4796,7 +4796,7 @@ body .n-found .ie-true,
 		margin-top: -15px;
 	}
 	.lotteryFootballBG.animated .step-two .bottom-section {
-		margin-right: 0;
+		/* margin-right: 0; */
 		margin-top: 10px;
 	}
 	.lotteryFootballBG.animated .bottom-section img {
@@ -5624,7 +5624,7 @@ body .n-found .ie-true,
 	}
 	.lotteryFootballBG h3,
 	.lotteryFootballBG h3 span.goldText {
-		font-size: 24px;
+		font-size: 20px;
 	}
 	.lotteryFootballBG a,
 	.lotteryFootballBG a:focus,
@@ -5642,8 +5642,9 @@ body .n-found .ie-true,
 		margin: 15px 0;
 	}
 	.lotteryFootballBG.animated a {
-		margin: 15px;
+		margin: 30px 15px;
 	}
+
 }
 
 @media all and (max-width: 580px) {
