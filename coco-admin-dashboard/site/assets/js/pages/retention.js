@@ -8,6 +8,7 @@ $(document).ready(function () {
     var appsDropdown = $('.appchoser > button');
     var userAppsToggle = $('#user-group label');
     var datesToggle = $('#interval-group label');
+    var reLaunchCohortBtn = $('.btn-update');
     var dateFrom;
 
 
@@ -73,6 +74,10 @@ $(document).ready(function () {
         console.log(dateFrom);
     });
 
+    //click on update button
+    reLaunchCohortBtn.click(function(e){
+
+    });
 
     //showing picker on start
     datesToggle.each(function(ind, el){

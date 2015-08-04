@@ -170,10 +170,7 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<div id="reportrange" class="pull-right report-heading retention">
-			<input type="week" value="2015-W15"/>
-			<input type="month" value="2015-03"/>
-		</div>
+
 
 
 		<div class="btn-toolbar pull-left">
@@ -186,6 +183,11 @@
 				</label>
 			</div>
 
+			<div id="reportrange" class="btn-group report-heading retention">
+				<input type="week" value="2015-W15"/>
+				<input type="month" value="2015-03"/>
+			</div>
+
 			<div id="user-group" class="btn-group" data-toggle="buttons">
 				<label class="btn btn-default active">
 					<input type="radio" name="mode" value="users"> Users
@@ -195,7 +197,7 @@
 				</label>
 			</div>
 
-			<div class="pull-left dropdown appchoser">
+			<div class="btn-group dropdown appchoser">
 				<button class="btn btn-default dropdown-toggle dropdown-generic" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
 					Select Application (All)
 				</button>
@@ -205,6 +207,10 @@
 					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Firefox</a></li>
 					<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Safari</a></li>
 				</ul>
+			</div>
+
+			<div class="btn-group">
+				<button class="btn btn-update">Update Data</button>
 			</div>
 
 		</div>
