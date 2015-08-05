@@ -248,6 +248,54 @@
 		font-size: 12px;
 		padding: 6px 3px;
 	}
+
+	.btn-toolbar .btn.btn-cohort,
+	.btn-toolbar .btn.btn-update,
+	.btn-toolbar .btn.btn-default {
+		font-size: 12px;
+		padding: 0 10px;
+		margin-bottom: 5px;
+	}
+
+	.btn-toolbar div#reportrange.report-heading {
+		background-color: transparent;
+	}
+	.btn-toolbar {
+		float: none !important;
+		margin-bottom: 10px;
+	}
+	.btn-toolbar .btn-group {
+		display: block;
+		float: none;
+		position: relative;
+	}
+	.btn-toolbar #reportrange.report-heading input {
+		width: 47%;
+		margin-bottom: 5px;
+	}
+	.btn-toolbar .btn.btn-update {
+		width: 100%;
+	}
+	.btn-toolbar .btn.btn-default {
+		width: 47%;
+		height: 40px;
+		line-height: 40px;
+		padding-right: 20px;
+	}
+
+	.btn-toolbar .btn.btn-cohort {
+		width: 25%;
+		margin-right: 5px;
+	}
+	.btn-toolbar #interval-group {
+		z-index: 10;
+	}
+	.btn-toolbar .dropdown-menu {
+		top: 42px;
+		width: 100%;
+		text-align: right;
+		border-radius: 4px;
+	}
 }
 
 @media (max-width: 480px){

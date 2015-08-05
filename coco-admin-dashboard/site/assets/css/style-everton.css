@@ -6032,3 +6032,49 @@ body.cru .navbar-default .navbar-nav > li > a {
 #reportrange.retention input[type="week"] {
   display: none;
 }
+.file-uploader-widget {
+  padding: 0 40px 30px;
+}
+.btn-toolbar .btn-cohort {
+  background-color: #ffffff;
+  border: 0;
+  color: #000000;
+  padding: 0 10px;
+  border-radius: 2px;
+  height: 40px;
+  line-height: 40px;
+}
+.btn-toolbar .btn:active,
+.btn-toolbar .btn.active {
+  box-shadow: none;
+}
+.btn-toolbar .btn-cohort:hover {
+  background-color: #eeeeee;
+}
+.btn-toolbar .btn-cohort.active {
+  background-color: #ddd;
+  box-shadow: inset 4px 4px 6px rgba(0, 0, 0, 0.2);
+}
+.btn-toolbar .btn-update,
+.btn-toolbar .btn-update.active {
+  background-color: #68c39f;
+  border: 0;
+  color: #ffffff;
+  padding: 0 10px;
+  border-radius: 2px;
+  height: 40px;
+  line-height: 40px;
+}
+.btn-toolbar #reportrange.report-heading {
+  padding: 0;
+  margin-bottom: 0;
+}
+.btn-toolbar #reportrange.report-heading input {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+}
+.btn-toolbar .btn-update:hover {
+  background-color: #4B8A71;
+  color: #ffffff;
+}
