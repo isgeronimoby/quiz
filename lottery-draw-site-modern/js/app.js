@@ -166,7 +166,7 @@ jQuery(document).ready(function ($) {
 		}
 
 		if ( currentPlatform == 'mobile' ) {
-			maxWidth = 260;
+			maxWidth = 210;
 		}
 
 		$(daysCircleCanvas).attr('width', maxWidth);

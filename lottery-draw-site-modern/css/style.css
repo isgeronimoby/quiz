@@ -134,7 +134,7 @@ img {
 	min-height: initial;
 	height: auto !important;
 	height: 100%;
-	margin: 0 auto -40px;
+	margin: 0 auto;
     text-align: center;
 }
 .showDesktopBlock {
@@ -312,7 +312,7 @@ img {
 }
 .article > div{
     width: 50%;
-    height: 100%;
+    height: auto;
     margin: 0;
     vertical-align: middle;
     display: inline-block;
@@ -520,9 +520,9 @@ img {
 	font-size: 1.5em;
 }
 .everton-popup-container .everton-popup .everton-popup-body h2.popup-heading{
-	font-size: 24px;
-	line-height: 30px;
-	margin: 22px 0;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 22px 0 0;
 }
 .everton-popup-container .everton-popup .everton-popup-body .formError{
     color: red;
@@ -738,9 +738,9 @@ button.close {
 .connectSuccessMessage {
 	display: none;
 	font-weight: 900;
-	line-height: 30px;
+	line-height: 22px;
 	margin-bottom: 30px;
-	font-size: 26px;
+	font-size: 18px;
 	opacity: 1;
 }
 .connectSuccessMessageAnimated {
@@ -803,18 +803,24 @@ button.close {
 }
 
 .buttonLarge {
-    border-bottom: 10px solid;
+    border-bottom: 6px solid;
     font-size: 20px;
     font-weight: 600;
     padding: 20px;
 }
 .buttonDefault {
     border-style: hidden;
-    border-bottom: 5px solid;
+    border-bottom: 4px solid;
+    box-shadow: 0 3px 4px -2px rgba(0,0,0,0.7);
     font-size: 18px;
     font-weight: 100;
     padding: 0 15px;
     height: 55px;
+    transition: all 0.2s ease-in;
+}
+
+.buttonDefault:hover {
+    box-shadow: none;
 }
 
 .buttonBlue,
@@ -1357,6 +1363,11 @@ canvas {
     height: 100%;
     vertical-align: middle;
 }
+
+.infoBlock p {
+    font-size: 12px;
+}
+
 .infoHolder {
     display: inline-block;
     vertical-align: middle;
