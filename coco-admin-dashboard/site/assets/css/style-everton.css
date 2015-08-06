@@ -5918,6 +5918,9 @@ body.cru .navbar-default .navbar-nav > li > a {
   clear: both;
   height: 0;
 }
+.ui-widget-header .ui-icon {
+  background-image: url('../../assets/libs/jqueryui/ui-lightness/images/ui-icons_222222_256x240.png');
+}
 @media all and (max-width: 600px) {
   .pull-left.dropdown,
   .pull-left.dropdown button,
@@ -6006,40 +6009,41 @@ body.cru .navbar-default .navbar-nav > li > a {
   text-shadow: none;
   -webkit-text-shadow: none;
 }
-#reportrange.retention input::-webkit-calendar-picker-indicator {
+/*#reportrange.retention input::-webkit-calendar-picker-indicator{
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
-#reportrange.retention input::-moz-calendar-picker-indicator {
+#reportrange.retention input::-moz-calendar-picker-indicator{
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
-#reportrange.retention input::-ms-calendar-picker-indicator {
+#reportrange.retention input::-ms-calendar-picker-indicator{
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
-#reportrange.retention input::-o-calendar-picker-indicator {
+#reportrange.retention input::-o-calendar-picker-indicator{
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
-#reportrange.retention input[type="month"] {
-  display: none;
-  -webkit-appearance: none;
+
+#reportrange.retention input[type="month"]{
+	display: none;
+  -webkit-appearance:none;
 }
-#reportrange.retention input[type="week"] {
-  display: none;
-  -webkit-appearance: none;
+#reportrange.retention input[type="week"]{
+	display: none;
+  -webkit-appearance:none;
 }
-#reportrange.retention input::-webkit-inner-spin-button {
-  display: none;
+#reportrange.retention input::-webkit-inner-spin-button{
+  	display: none;
 }
 #reportrange.retention input::-webkit-clear-button {
-  display: none;
-}
+  	display: none;
+}*/
 .file-uploader-widget {
   padding: 0 40px 30px;
 }

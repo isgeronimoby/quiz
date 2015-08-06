@@ -2,15 +2,24 @@ var Churn = {};
 
 $(document).ready(function () {
 
-    var datePicker = $('#reportrange');
-    var weekPicker = datePicker.find('[type="week"]');
-    var monthPicker = datePicker.find('[type="month"]');
     var appsDropdown = $('.appchoser > button');
     var userAppsToggle = $('#user-group label');
     var datesToggle = $('#interval-group label');
     var reLaunchCohortBtn = $('.btn-update');
-    var dateFrom;
+    var dateFrom, weekNumber, weekMonth;
 
+    $('.datepicker').datepicker({
+        calendarWeeks: true
+    }).on('changeDate', function(e){
+        if (weekMonth == 'w') {
+            weekNumber = $('td.day.active').parent().find('.cw').html();
+            dateFrom = moment(e.date.getFullYear() + '-W' + weekNumber)._d;
+        } else {
+            dateFrom = e.date.getFullYear() + '/' + e.date.getMonth();
+
+            // e.date - full date
+        }
+    });
 
     function getRandVal() {
         return Math.round(Math.random() * 1000);
@@ -53,11 +62,9 @@ $(document).ready(function () {
     //And showing appropriate picker
     datesToggle.click(function(){
         if ($(this).find('input').val() == 'w') {
-            weekPicker.show();
-            monthPicker.hide();
+            weekMonth = 'w';
         } else {
-            weekPicker.hide();
-            monthPicker.show();
+            weekMonth = 'm';
         }
     });
 
@@ -67,12 +74,6 @@ $(document).ready(function () {
         // do something
     });
 
-    //picking starting date from picker
-    //and converting it
-    weekPicker.add(monthPicker).on('change', function(){
-        dateFrom = moment($(this).val()).toString();
-        console.log(dateFrom);
-    });
 
     //click on update button
     reLaunchCohortBtn.click(function(e){
@@ -82,13 +83,14 @@ $(document).ready(function () {
     //showing picker on start
     datesToggle.each(function(ind, el){
         if ($(el).find('input').val() == 'w' && $(el).hasClass('active')) {
-            weekPicker.show();
+            weekMonth = 'w';
         } else if ( $(el).find('input').val() == 'm' && $(el).hasClass('active') ) {
-            monthPicker.show();
+            weekMonth = 'm';
         }
     });
     //checking for app needs on start
     userAppsToggle.each(function(ind, el){
         if ( $(el).val() != 'apps' ) appsDropdown.addClass('disabled');
     });
+
 });
