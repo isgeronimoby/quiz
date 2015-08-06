@@ -10,7 +10,8 @@ $(document).ready(function () {
 
     $('.datepicker').datepicker({
         calendarWeeks: true,
-        format: 'dd/mm/yyyy'
+        format: 'yyyy-mm-dd',
+        weekStart: 1
     }).on('changeDate', function(e){
         if (weekMonth == 'w') {
             weekNumber = $('td.day.active').parent().find('.cw').html();

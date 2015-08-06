@@ -6077,14 +6077,16 @@ body.cru .navbar-default .navbar-nav > li > a {
   height: 40px;
   line-height: 40px;
 }
-.btn-toolbar #reportrange.report-heading {
+.btn-toolbar .report-heading {
   padding: 0;
   margin-bottom: 0;
 }
-.btn-toolbar #reportrange.report-heading input {
+.btn-toolbar .report-heading input {
   height: 40px;
   line-height: 40px;
   padding: 0 10px;
+  border-radius: 2px;
+  border: 1px solid #cccccc;
 }
 .btn-toolbar .btn-update:hover {
   background-color: #4B8A71;
