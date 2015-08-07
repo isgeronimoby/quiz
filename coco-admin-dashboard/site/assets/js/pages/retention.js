@@ -106,7 +106,7 @@ $(document).ready(function () {
     allDataCells.on('mouseover', function(e){
         var shift = +$(corTable.find('tr th:nth-child(' + ($(this).index() + 1) + ')')['selector']).html();
         var currentRowLabel = $(this).parent().find('.cornelius-label').html();
-        var currentRowNumber = $(this).parent().index() - 1;
+        var currentRowNumber = $(this).parent().index() - 2;
         var shiftedRowLabel = $(allRows.toArray()[shift + currentRowNumber]).find('.cornelius-label').html();
         var currentPercent = e.currentTarget.innerHTML + '%';
         var tooltip = currentPercent + ' of ' + currentRowLabel + ' registered users last visited in ' + shiftedRowLabel;
