@@ -2,24 +2,26 @@ var Churn = {};
 
 $(document).ready(function () {
 
+    var datepicker = $('.datepicker');
+    var corTable = $('.cornelius-table');
     var appsDropdown = $('.appchoser > button');
     var userAppsToggle = $('#user-group label');
     var datesToggle = $('#interval-group label');
     var reLaunchCohortBtn = $('.btn-update');
-    var dateFrom, weekNumber, weekMonth;
+    var dateFrom, weekNumber, weekMonth, allRows;
+    var allDataCells;
 
-    $('.datepicker').datepicker({
+    datepicker.datepicker({
         calendarWeeks: true,
         format: 'yyyy-mm-dd',
         weekStart: 1
     }).on('changeDate', function(e){
+        fullDate = e.date;
         if (weekMonth == 'w') {
             weekNumber = $('td.day.active').parent().find('.cw').html();
             dateFrom = moment(e.date.getFullYear() + '-W' + weekNumber)._d;
         } else {
             dateFrom = e.date.getFullYear() + '/' + e.date.getMonth();
-
-            // e.date - full date
         }
     });
 
@@ -49,6 +51,8 @@ $(document).ready(function () {
             weekOf: 'Week of'
         }
     });
+    allRows = $(corTable.find('tr td')['selector']).parent();
+    allDataCells = $('.cornelius-percentage');
 
     //Clicking on user/app switch
     //Disabling/enabling app changing
@@ -93,6 +97,21 @@ $(document).ready(function () {
     //checking for app needs on start
     userAppsToggle.each(function(ind, el){
         if ( $(el).val() != 'apps' ) appsDropdown.addClass('disabled');
+    });
+
+    allDataCells.each(function(ind, elem){
+        $(elem).attr('data-toggle', 'tooltip');
+    });
+
+    allDataCells.on('mouseover', function(e){
+        var shift = +$(corTable.find('tr th:nth-child(' + ($(this).index() + 1) + ')')['selector']).html();
+        var currentRowLabel = $(this).parent().find('.cornelius-label').html();
+        var currentRowNumber = $(this).parent().index() - 1;
+        var shiftedRowLabel = $(allRows.toArray()[shift + currentRowNumber]).find('.cornelius-label').html();
+        var currentPercent = e.currentTarget.innerHTML + '%';
+        var tooltip = currentPercent + ' of ' + currentRowLabel + ' registered users last visited in ' + shiftedRowLabel;
+
+        $(this).attr('title', tooltip);
     });
 
 });
