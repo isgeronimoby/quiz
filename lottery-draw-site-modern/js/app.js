@@ -407,13 +407,14 @@ jQuery(document).ready(function ($) {
 			}
 		}
 
+		var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+
 		$.ajax({
 			type: "POST",
 			url: campaignTrackUrl,
-			data: { TypeId: 10 }
-		}).done(function (content) {
-
-		});
+			data: { TypeId: 10 },
+			async: !isSafari
+		}).done(function (content) { });
 
 		return true;
 	});
