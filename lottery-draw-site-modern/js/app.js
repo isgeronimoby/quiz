@@ -133,7 +133,7 @@ jQuery(document).ready(function ($) {
 	}
 
 	/************************ NEW PROGRESS CHARTS ***************************/
-	var userImageHidden = false;
+	var userImageHidden = true;
 	var daysCircleCanvas = document.getElementById('daysCircleProgress');
 	var overallCircleCanvas = document.getElementById('overallCircleProgress');
 
@@ -169,9 +169,9 @@ jQuery(document).ready(function ($) {
 			maxWidth = 210;
 		}
 
-		if (userImageHidden == false) {
+		if (userImageHidden == true) {
 			$('.portraitHolder img').show();
-			userImageHidden = true;
+			userImageHidden = false;
 		}
 
 		$(daysCircleCanvas).attr('width', maxWidth);
