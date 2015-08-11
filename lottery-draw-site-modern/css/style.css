@@ -1011,6 +1011,8 @@ button.close {
 	max-height: 80px;
 }
 .circularChartsGroup .circularPortrait .portraitHolder img{
+    display: none;
+
 	border-radius: 50%;
 	max-width: 80px;
 	max-height: 80px;

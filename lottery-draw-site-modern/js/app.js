@@ -133,7 +133,7 @@ jQuery(document).ready(function ($) {
 	}
 
 	/************************ NEW PROGRESS CHARTS ***************************/
-
+	var userImageHidden = false;
 	var daysCircleCanvas = document.getElementById('daysCircleProgress');
 	var overallCircleCanvas = document.getElementById('overallCircleProgress');
 
@@ -167,6 +167,11 @@ jQuery(document).ready(function ($) {
 
 		if ( currentPlatform == 'mobile' ) {
 			maxWidth = 210;
+		}
+
+		if (userImageHidden == false) {
+			$('.portraitHolder img').show();
+			userImageHidden = true;
 		}
 
 		$(daysCircleCanvas).attr('width', maxWidth);
@@ -653,42 +658,6 @@ jQuery(document).ready(function ($) {
 			$.fancybox.close();
 		}, 4000);
 	}
-
-	// GENERATING CIRCULAR CANVAS FROM IMAGE FOR AVATAR
-	function renderAvatar(src) {
-		var size = document.querySelector('.portraitHolder img').naturalWidth;
-		src = src.attr('src');
-		var c = document.getElementsByClassName("portraitHolder")[0];
-		$(c).find('img').hide();
-		$(c).append('<canvas id="portraitCanvas">');
-		c = document.getElementById('portraitCanvas');
-		c.width = size + 5;
-		c.height = size + 5;
-		var ctx = c.getContext("2d");
-		var img = document.createElement('IMG');
-		img.onload = function () {
-			var pattern = ctx.createPattern(img, 'no-repeat');
-
-			ctx.beginPath();
-			ctx.arc(size / 2 + 2,
-					size / 2 + 2,
-					size / 2,
-				0, 2 * Math.PI);
-			ctx.lineWidth = 8;
-			ctx.strokeStyle = '#364158';
-			ctx.stroke();
-			ctx.fillStyle = pattern;
-			ctx.fill();
-		};
-		img.src = src;
-	}
-	$($('canvas')[0]).load(function(){
-		$('.portraitHolder img').load(function () {
-			setTimeout(function () {
-				renderAvatar($('.portraitHolder img'));
-			}, 300);
-		});
-	});
 
 
 	$(document).ajaxError(function (event, jqXHR, settings, exception) {
