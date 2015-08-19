@@ -7,7 +7,7 @@
     <style>
 
         body {
-            overflow: hidden;
+
         }
 
         .everton-shopping-label-trigger > .everton-shopping-label * {
@@ -45,6 +45,9 @@
         }
 
         /* Add "noiframe" class to the body when popup is ON */
+        body.noiframe {
+            overflow: hidden;
+        }
         body.noiframe iframe,
         body.noiframe .modal,
         body.noiframe embed,
@@ -292,8 +295,10 @@
                     that.labelBody.className += ' everton-shopping-label-start-sliding';
                     setTimeout(function(){
                         that.runTimer( 10 );
+                        that.changeZIndexes();
                     }, 500)
                 }, 0);
+                document.body.className += ' noiframe';
                 EvertonLabel.btnYes.addEventListener('click', function(){
                     EvertonLabel.showYesScreen();
                 });
@@ -310,6 +315,7 @@
                 that.labelBody.className = that.labelBody.className.replace(/\beverton-shopping-label-start-sliding\b/, '');
                 setTimeout(function(){
                     that.labelBody.style.display = 'none';
+                    document.body.className = document.body.className.replace(/\bnoiframe\b/, '');
                 }, 500);
             },
             'hideMainScreen': function(){
@@ -363,6 +369,23 @@
             'stopTimer': function(){
                 if (this.interval != '')
                     clearInterval(this.interval);
+            },
+            'changeZIndexes': function(){
+                var lrPopup = document.querySelector('.everton-shopping-label-trigger');
+                var array = Array.prototype.slice.call(document.querySelectorAll('div'));
+                var neededDivs = [];
+
+                array.forEach(function(el){
+                    if ( +(window.getComputedStyle(el, null)['z-index']) > 999999 ) {
+                        neededDivs.push(el);
+                    }
+                });
+                if ( neededDivs.length > 1 ) {
+                    neededDivs.forEach(function (el) {
+                        el.style.cssText += ';z-index: 999999 !important;'
+                    });
+                    lrPopup.style.cssText += ';z-index: 999999999 !important;'
+                }
             }
         };
 
