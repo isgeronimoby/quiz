@@ -351,7 +351,7 @@
                 var that = this;
                 var wasInteraction = false;
                 that.interval = setInterval(function(){
-                    EvertonLabel.counter.innerHTML = Math.round(seconds * 100) / 100;
+                    EvertonLabel.counter.innerHTML = (Math.round(seconds * 100) / 100).toFixed(1);
                     seconds -= 0.1;
                     if ( seconds <= 0 ) {
                         that.stopTimer();
