@@ -5,14 +5,9 @@
     <title></title>
 
     <style>
-
-        body {
-
-        }
-
         .everton-shopping-label-trigger > .everton-shopping-label * {
             font-family: Arial, sans-serif;
-            text-transform: uppercase;
+            text-transform: none;
             color: #333333;
             font-weight: 200;
             font-size: 16px;
@@ -29,10 +24,10 @@
             position: static;
             border-collapse: collapse;
             box-sizing: border-box;
-            transform: translate3d(0,0,0);
-            -webkit-transform: translate3d(0,0,0);
-            -moz-transform: translate3d(0,0,0);
-            -ms-transform: translate3d(0,0,0);
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+            -moz-transform: translate3d(0, 0, 0);
+            -ms-transform: translate3d(0, 0, 0);
             background: none;
             width: auto;
             height: auto;
@@ -48,6 +43,7 @@
         body.noiframe {
             overflow: hidden;
         }
+
         body.noiframe iframe,
         body.noiframe .modal,
         body.noiframe embed,
@@ -55,21 +51,36 @@
             display: none !important;
         }
 
+        .everton-shopping-label-clearfix:before,
+        .everton-shopping-label-clearfix:after {
+            content: " "; /* 1 */
+            display: table; /* 2 */
+        }
+
+        .everton-shopping-label-clearfix:after {
+            clear: both;
+        }
+
         .everton-shopping-label-trigger {
             position: absolute;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            right: 0;
+            width: 1px;
+            height: 1px;
             z-index: 999999999999;
+
+            display: none;
         }
 
         .everton-shopping-label-trigger > .everton-shopping-label {
             position: absolute;
             right: 0;
-            margin: 5px;
-            height: 175px;
-            width: 480px;
+            margin: 10px;
+            height: 105px;
+            width: 390px;
+
+            background: #ffffff;
+            box-shadow: 1px 1px 6px rgba(0,0,0,0.5);
 
             display: none;
 
@@ -84,124 +95,194 @@
             -moz-transition: all 0.5s ease-out;
             -ms-transition: all 0.5s ease-out;
         }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-logo {
+            background-image: url('./images/everton_logo_white.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 70px;
+            background-color: #00369c;
+            width: 105px;
+            height: 100%;
+            float: left;
+        }
 
         .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content {
-            background: #ffffff;
-            border: 2px solid #00369c;
-            padding: 20px;
-            height: 100%;
-            width: 100%;
+            position: relative;
+            z-index: 100;
+            float: right;
+            width: 285px;
         }
+
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-close {
+            position: absolute;
+            top: 12px;
+            right: 10px;
+            color: #999999;
+            line-height: 1px;
+            cursor: pointer;
+            transform: rotate(0deg);
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+
+            transition: all 0.25s ease-out;
+            -webkit-transition: all 0.25s ease-out;
+            -moz-transition: all 0.25s ease-out;
+            -ms-transition: all 0.25s ease-out;
+        }
+
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-close:hover {
+            transform: rotate(180deg);
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            color: #333333;
+        }
+
+        /* CONTENT styles here */
+
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask {
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask .everton-shopping-label-heading {
+            font-size: 12px;
+            font-weight: 700;
+            height: 17px;
+            overflow: hidden;
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask .everton-shopping-label-answer-btn {
+            border-radius: 2px;
+            color: #ffffff;
+            height: 44px;
+            line-height: 44px;
+            font-size: 14px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            margin: 5px 0;
+            cursor: pointer;
+
+
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4ac14e+0,38ae3b+100 */
+            background: #4ac14e; /* Old browsers */
+            background: -moz-linear-gradient(top,  #4ac14e 0%, #38ae3b 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4ac14e), color-stop(100%,#38ae3b)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  #4ac14e 0%,#38ae3b 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  #4ac14e 0%,#38ae3b 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  #4ac14e 0%,#38ae3b 100%); /* IE10+ */
+            background: linear-gradient(to bottom,  #4ac14e 0%,#38ae3b 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4ac14e', endColorstr='#38ae3b',GradientType=0 ); /* IE6-9 */
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask .everton-shopping-label-answer-btn:hover {
+            text-shadow: none;
+            background: #349037;
+        }
+
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-p {
+            font-size: 13px;
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask .everton-shopping-label-no-btn {
+            cursor: pointer;
+            display: inline-block;
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask .everton-shopping-label-no-btn:hover {
+            color: #00369c;
+            text-decoration: underline;
+        }
+
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-answer,
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-answer .everton-shopping-label-message {
+            display: none;
+        }
+
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table,
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table tbody{
+            display: table;
+            width: 100%;
+            height: 100%;
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table tr{
+            display: table-row;
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table td{
+            display: table-cell;
+            text-align: center;
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-message{
+            height: 35px;
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-message td {
+            font-size: 14px;
+            padding: 0 10px;
+            text-align: left;
+            border-bottom: 1px solid #cccccc;
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-message td a {
+            display: inline;
+            font-size: 14px;
+            text-decoration: underline;
+            color: #666666;
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-message td a:hover {
+            color: #00369c;
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-answer table .everton-shopping-label-message-yes td:before {
+            content: "\2713";
+            color: #349037;
+            font-size: 16px;
+            margin-right: 4px;
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats {
+            height: 70px;
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats td {
+            cursor: pointer;
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats td a {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            padding-top: 14px;
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats td:hover {
+            background: #f3f3f3;
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats .everton-shopping-label-pounds {
+            font-size: 15px;
+            line-height: 16px;
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats .everton-shopping-label-pounds:before {
+            content: '\00a3';
+        }
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats .everton-shopping-label-stat-name {
+            font-size: 13px;
+            color: #777777;
+        }
+
+        /* END of CONTENT styles */
         .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text {
             text-align: right;
-            padding-right: 20px;
-            margin-top: 5px;
-            text-decoration: none;
+            margin-top: 6px;
         }
-        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content > .everton-shopping-label-ask span,
-        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text span {
-            display: inline;
-        }
-
-        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-h3 {
-            font-size: 18px;
-            text-align: center;
-            line-height: 22px;
-        }
-
-        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content > .everton-shopping-label-ask > .everton-shopping-label-yes-btn {
-            font-size: 16px;
-            background: #00369c;
-            text-align: center;
-            color: #ffffff;
-            line-height: 66px;
-            height: 66px;
-            border-bottom: 4px solid #002874;
-            cursor: pointer;
-            transition: all 0.2s;
-            -webkit-transition: all 0.2s;
-            -moz-transition: all 0.2s;
-            -ms-transition: all 0.2s;
-
-            margin: 14px 0;
-        }
-
-        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content > .everton-shopping-label-ask > .everton-shopping-label-yes-btn:hover {
-            background: #002874;
-            color: #9ecedd;
-            border-bottom: 66px solid #002874;
-        }
-
-        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content > .everton-shopping-label-ask > .everton-shopping-label-no-btn {
-            text-transform: none;
-            text-decoration: underline;
-            font-size: 14px;
-            cursor: pointer;
-            display: inline-block;
-        }
-
-        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content > .everton-shopping-label-ask > .everton-shopping-label-no-btn:hover,
-        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content > .everton-shopping-label-ask > .everton-shopping-label-no-btn:hover span{
-            color: #9ecedd;
-        }
-
-        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content > .everton-shopping-label-ask > .everton-shopping-label-info-btn {
-            text-transform: none;
-            font-size: 14px;
-            cursor: pointer;
-            color: #00369c;
-            border: 1px solid #00369c;
-            border-radius: 50%;
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            text-align: center;
-            font-family: monospace;
-            float: right;
-            margin-top: -2px;
-        }
-
         .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-countdown,
-        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-close {
-            text-transform: none;
-            font-size: 14px;
-            font-weight: 100;
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-countdown span,
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-info {
+            display: inline-block;
+            font-size: 13px;
         }
-        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-close {
-            cursor: pointer;
-
-            display: none;
-        }
-        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content > .everton-shopping-label-yes-screen,
-        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content > .everton-shopping-label-no-screen {
-            position: relative;
-            width: 100%;
-            height: 100%;
-
-            display: none;
-            opacity: 0;
-
-            transition: all 0.5s ease-out;
-            -webkit-transition: all 0.5s ease-out;
-            -moz-transition: all 0.5s ease-out;
-            -ms-transition: all 0.5s ease-out;
-        }
-
-        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content > .everton-shopping-label-yes-screen .everton-shopping-label-h2,
-        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content > .everton-shopping-label-no-screen .everton-shopping-label-h2 {
-            font-size: 24px;
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-info {
+            color: #ffffff;
+            background: #999999;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-family: Georgia, Times, "Times New Roman", serif;
             text-align: center;
-            line-height: 30px;
-            position: absolute;
-            top: 50%;
-            left: 0;
-            transform: translate(0, -50%);
-            -webkit-transform: translate(0, -50%);
-            -moz-transform: translate(0, -50%);
-            -ms-transform: translate(0, -50%);
+            margin-left: 5px;
+            cursor: pointer;
         }
-
-
+        .everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-info:hover {
+            background: #00369c;
+        }
 
         /* TRANSITIONS */
         .everton-shopping-label-start-sliding {
@@ -212,10 +293,6 @@
             -ms-transform: translate(0) !important;
         }
 
-        .everton-shopping-label-fade-in {
-            opacity: 1 !important;
-        }
-
     </style>
 
 </head>
@@ -223,175 +300,213 @@
 
 <div class="everton-shopping-label-trigger">
     <div class="everton-shopping-label">
+        <div class="everton-shopping-label-logo"></div>
         <div class="everton-shopping-label-content">
             <div class="everton-shopping-label-ask">
-                <div class="everton-shopping-label-h3">
-                    Earn free Everton credit when shopping
+                <div class="everton-shopping-label-heading">
+                    Earn everton credits on Argos?
                 </div>
-                <div class="everton-shopping-label-yes-btn">
-                    Yes, I want to earn credits
-                </div>
-                <div class="everton-shopping-label-no-btn">
-                    Not now, maybe later (appears again in <span>5</span> days)
-                </div>
-                <div class="everton-shopping-label-info-btn">i</div>
+                <div class="everton-shopping-label-answer-btn">Great, let me ean credits</div>
+                <div class="everton-shopping-label-p everton-shopping-label-no-btn">No, thanks</div>
             </div>
-            <div class="everton-shopping-label-yes-screen">
-                <div class="everton-shopping-label-h2">
-                    Congratulations!<br>
-                    Now you earn Everton credits.
-                </div>
+            <div class="everton-shopping-label-answer">
+                <table>
+                    <tr class="everton-shopping-label-message everton-shopping-label-message-yes">
+                        <td colspan="3">You will be earning credits now</td>
+                    </tr>
+                    <tr class="everton-shopping-label-message everton-shopping-label-message-not">
+                        <td colspan="3">You are not on one of our <a href="#partners">partner site</a></td>
+                    </tr>
+                    <tr class="everton-shopping-label-stats">
+                        <td class="everton-shopping-stats-confirmed">
+                            <a href="#confirmed">
+                                <div class="everton-shopping-label-pounds">1000.00</div>
+                                <div class="everton-shopping-label-stat-name">Confirmed</div>
+                            </a>
+                        </td>
+                        <td class="everton-shopping-stats-pending">
+                            <a href="#pending">
+                                <div class="everton-shopping-label-pounds">1000.00</div>
+                                <div class="everton-shopping-label-stat-name">Pending</div>
+                            </a>
+                        </td>
+                        <td class="everton-shopping-stats-donated">
+                            <a href="#donated">
+                                <div class="everton-shopping-label-pounds">1000.00</div>
+                                <div class="everton-shopping-label-stat-name">Donated</div>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
             </div>
-            <div class="everton-shopping-label-no-screen">
-                <div class="everton-shopping-label-h2">
-                    It's very sad :(<br>
-                    But you don't earn any credits.
-                </div>
-            </div>
+            <div class="everton-shopping-label-close">&#215;</div>
         </div>
+        <div class="everton-shopping-label-clearfix"></div>
         <div class="everton-shopping-label-bottom-text">
-            <div class="everton-shopping-label-countdown">will disappear in <span>0</span></div>
-            <div class="everton-shopping-label-close">Close</div>
+            <div class="everton-shopping-label-countdown">Closes in <span>10</span> secs</div>
+            <a href="#faq" class="everton-shopping-label-info">i</a>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-        "use strict";
 
-        var EvertonLabel = {
-            'labelBody': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label'),
+    "use strict";
 
-            //Buttons vars
-            'btnYes': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label > ' +
-                '.everton-shopping-label-content > .everton-shopping-label-ask > .everton-shopping-label-yes-btn'),
-            'btnNo': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label > ' +
-                '.everton-shopping-label-content > .everton-shopping-label-ask > .everton-shopping-label-no-btn'),
-            'btnInfo': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label > ' +
-                '.everton-shopping-label-content > .everton-shopping-label-ask > .everton-shopping-label-info-btn'),
+    var EvertonLabel = {
+        'labelBody': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label'),
 
-            //Screens vars
-            'screenMain': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label > ' +
-                '.everton-shopping-label-content > .everton-shopping-label-ask'),
-            'screenYes': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label > ' +
-                '.everton-shopping-label-content > .everton-shopping-label-yes-screen'),
-            'screenNo': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label > ' +
-                '.everton-shopping-label-content > .everton-shopping-label-no-screen'),
+        // BUTTONS
+        'btnYes': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
+        '.everton-shopping-label-ask .everton-shopping-label-answer-btn'),
+        'btnNo': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
+        '.everton-shopping-label-ask .everton-shopping-label-no-btn'),
+        'btnClose': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
+        '.everton-shopping-label-close'),
+        'btnInfo': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
+        '.everton-shopping-label-info'),
 
-            //Other
-            'counterHolder': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label > ' +
-                '.everton-shopping-label-bottom-text > .everton-shopping-label-countdown'),
-            'counter': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label > ' +
-                '.everton-shopping-label-bottom-text > .everton-shopping-label-countdown > span'),
-            'close': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label > ' +
-                '.everton-shopping-label-bottom-text > .everton-shopping-label-close'),
-            'interval': '',
+        //SCREENS
+        'screenAsk': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
+        '.everton-shopping-label-ask'),
+        'screenAnswer': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
+        '.everton-shopping-label-answer'),
+        'screenActive': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
+        '.everton-shopping-label-answer .everton-shopping-label-message-yes'),
+        'screenNot': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
+        '.everton-shopping-label-answer .everton-shopping-label-message-not'),
 
-            //Methods
-            'showLabel': function(){
-                var that = this;
-                that.labelBody.style.display = 'block';
+        //OTHER
+        'counterHolder': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
+        '.everton-shopping-label-countdown'),
+        'counter': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
+        '.everton-shopping-label-countdown span'),
+        'interval': '',
+        'timeLeft': 10,
+
+        //METHODS
+        'showLabel': function(screen){
+            var that = this;
+            switch (screen){
+                case 'yes':
+                    that.screenAsk.style.display = 'none';
+                    that.screenAnswer.style.display = 'block';
+                    that.screenActive.style.display = 'table-row';
+                    that.counterHolder.style.display = 'none';
+                    break;
+                case 'not':
+                    that.screenAsk.style.display = 'none';
+                    that.screenAnswer.style.display = 'block';
+                    that.screenNot.style.display = 'table-row';
+                    that.counterHolder.style.display = 'none';
+                    break;
+                default:
+                /* Do nothing */
+            }
+            var wasInteraction = false;
+            that.labelBody.style.display = 'block';
+            that.labelBody.parentNode.style.display = 'block';
+            setTimeout(function(){
+                that.labelBody.className += ' everton-shopping-label-start-sliding';
                 setTimeout(function(){
-                    that.labelBody.className += ' everton-shopping-label-start-sliding';
-                    setTimeout(function(){
-                        that.runTimer( 10 );
-                        that.changeZIndexes();
-                    }, 500)
-                }, 0);
-                document.body.className += ' noiframe';
-                EvertonLabel.btnYes.addEventListener('click', function(){
-                    EvertonLabel.showYesScreen();
-                });
-                EvertonLabel.btnNo.addEventListener('click', function(){
-                    EvertonLabel.showNoScreen();
-                });
-                EvertonLabel.btnInfo.addEventListener('click', function(){
-//                window.location = 'faq page';
-                    alert('faq');
-                });
-            },
-            'hideLabel': function(){
-                var that = this;
-                that.labelBody.className = that.labelBody.className.replace(/\beverton-shopping-label-start-sliding\b/, '');
-                setTimeout(function(){
-                    that.labelBody.style.display = 'none';
-                    document.body.className = document.body.className.replace(/\bnoiframe\b/, '');
-                }, 500);
-            },
-            'hideMainScreen': function(){
-                this.screenMain.style.display = 'none';
-                this.closeInit();
-            },
-            'showYesScreen': function(){
-                var that = this;
-                that.hideMainScreen();
-                that.screenYes.style.display = 'block';
-                setTimeout(function(){
-                    that.screenYes.className += ' everton-shopping-label-fade-in';
-                }, 0);
-            },
-            'showNoScreen': function(){
-                var that = this;
-                that.hideMainScreen();
-                that.screenNo.style.display = 'block';
-                setTimeout(function(){
-                    that.screenNo.className += ' everton-shopping-label-fade-in';
-                }, 0);
-            },
-            'closeInit': function(){
-                var that = this;
-                that.counterHolder.style.display = 'none';
-                that.stopTimer();
-                that.close.style.display = 'inline-block';
-                that.close.addEventListener('click', function(){
-                    that.hideLabel();
-                });
-            },
-            'runTimer': function(seconds){
-                var that = this;
-                var wasInteraction = false;
-                that.interval = setInterval(function(){
-                    EvertonLabel.counter.innerHTML = (Math.round(seconds * 100) / 100).toFixed(1);
-                    seconds -= 0.1;
-                    if ( seconds <= 0 ) {
-                        that.stopTimer();
-                        that.hideLabel();
+                    if ( screen != 'yes' && screen != 'not' ) {
+                        that.runTimer();
                     }
-                }, 100);
-                that.screenMain.addEventListener('mouseover', function(e){
-                    e.preventDefault();
-                    if( !wasInteraction ) {
-                        that.closeInit();
+                    that.changeZIndexes();
+                }, 500)
+            }, 30);
+            document.body.className += ' noiframe';
+
+            that.btnClose.addEventListener('click', function(){
+                that.closeInit();
+                that.hideLabel();
+            });
+
+            that.btnYes.addEventListener('click', function(){
+                that.hideLabel();
+                setTimeout(function(){
+                    // wait for the end of animation
+                    // then reload the page to enable tracking
+                }, 500);
+            });
+
+            that.btnNo.addEventListener('click', function(){
+                that.hideLabel();
+            });
+
+            that.btnInfo.addEventListener('click', function(){
+                that.closeInit();
+            });
+
+            if ( screen != 'yes' && screen != 'not' ) {
+                that.labelBody.addEventListener('mouseenter', function () {
+                    if (!wasInteraction) {
+                        that.stopTimer();
                         wasInteraction = true;
                     }
                 });
-            },
-            'stopTimer': function(){
-                if (this.interval != '')
-                    clearInterval(this.interval);
-            },
-            'changeZIndexes': function(){
-                var lrPopup = document.querySelector('.everton-shopping-label-trigger');
-                var array = Array.prototype.slice.call(document.querySelectorAll('div'));
-                var neededDivs = [];
 
-                array.forEach(function(el){
-                    if ( +(window.getComputedStyle(el, null)['z-index']) > 999999 ) {
-                        neededDivs.push(el);
+                that.labelBody.addEventListener('mouseleave', function () {
+                    if (wasInteraction) {
+                        that.runTimer();
+                        wasInteraction = false;
                     }
                 });
-                if ( neededDivs.length > 1 ) {
-                    neededDivs.forEach(function (el) {
-                        el.style.cssText += ';z-index: 999999 !important;'
-                    });
-                    lrPopup.style.cssText += ';z-index: 999999999 !important;'
-                }
             }
-        };
+        },
+        'hideLabel': function(){
+            var that = this;
+            that.labelBody.className = that.labelBody.className.replace(/\beverton-shopping-label-start-sliding\b/, '');
+            that.stopTimer();
+            setTimeout(function(){
+                that.labelBody.style.display = 'none';
+                that.labelBody.parentNode.style.display = 'none';
+                document.body.className = document.body.className.replace(/\bnoiframe\b/, '');
+            }, 500);
+        },
 
-        window.onload = function(){
-            EvertonLabel.showLabel();
+        'closeInit': function(){
+            var that = this;
+            that.counterHolder.style.display = 'none';
+            that.labelBody.addEventListener('mouseleave', function(){
+                that.stopTimer();
+            });
+            that.stopTimer();
+        },
+        'runTimer': function(){
+            var that = this;
+            that.interval = setInterval(function(){
+                that.counter.innerHTML = Math.round(that.timeLeft);
+                that.timeLeft -= 0.1;
+                if ( that.timeLeft <= 0 ) {
+                    that.stopTimer();
+                    that.hideLabel();
+                }
+            }, 100);
+        },
+        'stopTimer': function(){
+            if (this.interval != '')
+                clearInterval(this.interval);
+        },
+        'changeZIndexes': function(){
+            var lrPopup = document.querySelector('.everton-shopping-label-trigger');
+            var array = Array.prototype.slice.call(document.querySelectorAll('div'));
+            var neededDivs = [];
+
+            array.forEach(function(el){
+                if ( +(window.getComputedStyle(el, null)['z-index']) > 999999 ) {
+                    neededDivs.push(el);
+                }
+            });
+            if ( neededDivs.length > 1 ) {
+                neededDivs.forEach(function (el) {
+                    el.style.cssText += ';z-index: 999999 !important;'
+                });
+                lrPopup.style.cssText += ';z-index: 999999999 !important;'
+            }
         }
+    };
+
 </script>
 
 </body>
