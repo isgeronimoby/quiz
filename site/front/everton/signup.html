@@ -56,9 +56,10 @@
 		document.documentElement.className += ' ie ie10';
 	}</script>
 	<script src="../../assets/components/library/main/jquery.carousel.js"></script>
-	<script src="../../assets/components/library/main/jquery.fancybox.js"></script>
+	<!--<script src="../../assets/components/library/main/jquery.fancybox.js"></script>-->
 	<script src="../../assets/components/library/main/jquery.fancybox.pack.js"></script>
 	<script src="../../assets/components/library/main/jquery.main.js"></script>
+	<script type="text/javascript" src="../../assets/components/library/featherlight/featherlight.min.js"></script>
 	<script src="../../assets/components/library/main/jquery.mousewheel-3.0.6.pack.js"></script>
 
 	<script src="../../assets/js/lib/jquery.autocomplete.js"></script>
@@ -143,6 +144,104 @@
 </div>
 <div class="main-holder wrap clearfix">
 </div>
+
+
+
+
+	<a href="#" data-featherlight="#doubleSignUp">Open double sign-up popup</a>
+	<a href="#" data-featherlight="#emailSignUp">Open email sign-up popup</a>
+
+	<div class="featherlight-popup modal-fancy featherlight-popup-inner" id="doubleSignUp">
+		<div class="featherlight-heading">
+			<h2>Sign up to track your rewards</h2>
+		</div>
+		<div class="featherlight-body">
+			<h4 class="hidden-xs">Sign up to get notifications about your earnings and to link multiple devices</h4>
+			<!-- Alert -->
+			<div class="alert alert-danger">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<strong>Warning!</strong> Best check yo self, you're not looking
+				too good.
+			</div>
+			<!-- // Alert END -->
+			<div class="signup-buttons">
+				<a href="" class="facebook-connect social-login fb glyphicons parents"><i></i><span
+						class="align-wrapp"><span>Connect with Facebook</span></span></a>
+				<p class="small-note">we'll never post anything without your permission.</p>
+				<p>or</p>
+
+				<a href="" class="email-connect social-login fb glyphicons parents"><i></i><span
+						class="align-wrapp"><span>Sign Up with Email</span></span></a>
+
+				<form class="featherlight-signup-form triggered-form hidden-element" id="form-email">
+					<h5 class="text-right">Sign Up with Email</h5>
+					<div class="form-group">
+						<label class="strong">Your username:</label>
+						<input type="text" class="form-control" name="username" placeholder="Your username, please"/>
+					</div>
+					<div class="form-group">
+						<label class="strong">Your email:</label>
+						<input type="email" class="form-control" name="email" placeholder="Put your mail here, please"/>
+					</div>
+					<div class="form-group password-holder">
+						<label class="strong">Password:</label>
+						<input type="password" class="form-control" name="password" placeholder=""/>
+						<span class="eye"></span>
+					</div>
+					<button type="submit" class="social-login gg glyphicons user_add"><i></i><span
+							class="align-wrapp"><span>Create Account</span></span></button>
+
+					<p class="small-note">By signing up, you agree with <a href="#">Terms & Conditions</a>
+						and <a href="#">Privacy Policy</a></p>
+				</form>
+
+				<p class="small-note"><a href="#">Already a member?</a></p>
+			</div>
+		</div>
+	</div>
+
+	<div class="featherlight-popup modal-fancy featherlight-popup-inner" id="emailSignUp">
+		<div class="featherlight-heading">
+			<h2>Sign up to track your rewards</h2>
+		</div>
+		<div class="featherlight-body">
+			<h4 class="hidden-xs">Sign up to get notifications about your earnings and to link multiple devices</h4>
+			<!-- Alert -->
+			<div class="alert alert-danger">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<strong>Warning!</strong> Best check yo self, you're not looking
+				too good.
+			</div>
+			<!-- // Alert END -->
+			<div class="signup-buttons">
+				<form class="featherlight-signup-form">
+					<div class="form-group">
+						<label class="strong">Your username:</label>
+						<input type="text" class="form-control" name="username" placeholder="Your name, please"/>
+					</div>
+					<div class="form-group">
+						<label class="strong">Your email:</label>
+						<input type="email" class="form-control" name="email" placeholder="Put your mail here, please"/>
+					</div>
+					<div class="form-group password-holder">
+						<label class="strong">Password:</label>
+						<input type="password" class="form-control" name="password" placeholder=""/>
+						<span class="eye"></span>
+					</div>
+					<button type="submit" class="social-login gg glyphicons user_add"><i></i><span
+							class="align-wrapp"><span>Create Account</span></span></button>
+
+					<p class="small-note">By signing up, you agree with <a href="#">Terms & Conditions</a>
+						and <a href="#">Privacy Policy</a></p>
+				</form>
+
+				<p class="small-note"><a href="#">Already a member?</a></p>
+			</div>
+		</div>
+	</div>
+
+
+
 
 <div class="popup-holder">
 	<div id="signupPopup" class="sign-up modal-fancy modal-fancy">

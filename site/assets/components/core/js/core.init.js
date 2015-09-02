@@ -238,6 +238,96 @@
 		$('.container-fluid').addClass('menu-hidden');
 
 
+	// Featherlight POPUPS for signing up only, at least for now
+	// All changes after it was loaded
+
+	var featherlightFormsValidationRules = {
+		rules: {
+			username: {
+				required: true,
+				minlength: 2
+			},
+			email: {
+				required: true,
+				email: true
+			},
+			password: {
+				required: true,
+				minlength: 5
+			}
+		},
+		messages: {
+			username: {
+				required: "Please enter a username",
+				minlength: "Your username must consist of at least 2 characters"
+			},
+			password: {
+				required: "Please provide a password",
+				minlength: "Your password must be at least 5 characters long"
+			},
+			email: "Please enter a valid email address"
+		}
+	};
+
+	if ( $.featherlight ) {
+		$.featherlight.defaults.afterOpen = function (event) {
+			'use strict';
+			var emailBtn = $('.featherlight-body .email-connect');
+
+			var fForm = $('.featherlight .featherlight-signup-form'),
+				email = fForm.find('input[type=email]'),
+				name = fForm.find('input[type=name]'),
+				pass = fForm.find('input[name=password]'),
+				showPass = fForm.find('.eye');
+
+			// Trigger to show the form with email signup
+			emailBtn.on('click', function (e) {
+				e.preventDefault();
+				$(this).hide();
+				fForm.fadeIn(300);
+			});
+
+			// SUBMITTING THE FORM
+			fForm.find('button').on('click', function (e) {
+				e.preventDefault();
+			});
+
+			// EYE icon to show or hide the password
+			showPass.on('click', function () {
+				if ($(this).hasClass('active')) {
+					pass.attr('type', 'password');
+					$(this).removeClass('active');
+				} else {
+					$(this).addClass('active');
+					pass.attr('type', 'text');
+				}
+			});
+
+			// Form validation (here to be triggered every time the popup is shown)
+			fForm.validate(featherlightFormsValidationRules);
+		};
+
+		// Change back states of some elements on closing the popup
+		$.featherlight.defaults.afterClose = function (event) {
+			var emailBtn = $('.featherlight .featherlight-body .email-connect');
+			var fForm = $('.featherlight .featherlight-signup-form.triggered-form'),
+				pass = fForm.find('input[name=password]'),
+				showPass = fForm.find('.eye');
+
+			pass.attr('type', 'password');
+			showPass.removeClass('active');
+			fForm.hide();
+			emailBtn.show();
+		};
+	}
+	// If not in a popup
+	if ( $('.featherlight-popup').length == 0 ) {
+		$('.featherlight-body .email-connect').on('click', function (e) {
+			e.preventDefault();
+			$(this).hide();
+			$('.featherlight-signup-form').fadeIn(400).validate(featherlightFormsValidationRules);
+		});
+	}
 
 })(jQuery, window);
 

@@ -45,6 +45,9 @@ html.front.top-full .navbar.main {
 /******************************/
 /******** SIGN UP PAGE ********/
 /******************************/
+.featherlight .featherlight-heading {
+  background-color: #00369c;
+}
 .fancybox-close {
   background: url(../../images/front/everton/btn-close.png) no-repeat;
 }
@@ -55,10 +58,10 @@ html.front.top-full .navbar.main {
   color: #00369c;
 }
 body .modal-fancy .gg {
-  background-color: #00369c;
+  background-color: #6B6B6B;
 }
 body .modal-fancy .gg:hover {
-  background-color: #0b318c;
+  background-color: #4C4C4C;
 }
 .install-wrap a {
   background-color: #00369c;
