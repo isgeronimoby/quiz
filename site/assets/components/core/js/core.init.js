@@ -287,11 +287,6 @@
 				fForm.fadeIn(300);
 			});
 
-			// SUBMITTING THE FORM
-			fForm.find('button').on('click', function (e) {
-				e.preventDefault();
-			});
-
 			// EYE icon to show or hide the password
 			showPass.on('click', function () {
 				if ($(this).hasClass('active')) {
