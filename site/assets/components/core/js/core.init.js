@@ -277,7 +277,7 @@
 			var fForm = $('.featherlight .featherlight-signup-form'),
 				email = fForm.find('input[type=email]'),
 				name = fForm.find('input[type=name]'),
-				pass = fForm.find('input[name=password]'),
+				pass = fForm.find('input[name=Password]'),
 				showPass = fForm.find('.eye');
 
 			// Trigger to show the form with email signup
