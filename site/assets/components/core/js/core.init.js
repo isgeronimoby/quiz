@@ -277,7 +277,7 @@
 			var fForm = $('.featherlight .featherlight-signup-form');
 			var email = fForm.find('input[type=email]'),
 				name = fForm.find('input[type=name]'),
-				pass = fForm.find('input[name=password]'),
+				pass = fForm.find('input[name=Password]'),
 				showPass = fForm.find('.eye');
 
 			// Trigger to show the form with email signup
@@ -306,7 +306,7 @@
 		$.featherlight.defaults.afterClose = function (event) {
 			var emailBtn = $('.featherlight .featherlight-body .email-connect');
 			var fForm = $('.featherlight .featherlight-signup-form.triggered-form'),
-				pass = fForm.find('input[name=password]'),
+				pass = fForm.find('input[name=Password]'),
 				showPass = fForm.find('.eye');
 
 			pass.attr('type', 'password');
@@ -321,7 +321,7 @@
 			e.preventDefault();
 			$(this).hide();
 			var fForm = $('.featherlight-signup-form'),
-				pass = fForm.find('input[name=password]'),
+				pass = fForm.find('input[name=Password]'),
 				showPass = fForm.find('.eye');
 			fForm.fadeIn(400).validate(featherlightFormsValidationRules);
 			showPass.on('click', function () {
