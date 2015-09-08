@@ -274,8 +274,8 @@
 			'use strict';
 			var emailBtn = $('.featherlight-body .email-connect');
 
-			var fForm = $('.featherlight .featherlight-signup-form'),
-				email = fForm.find('input[type=email]'),
+			var fForm = $('.featherlight .featherlight-signup-form');
+			var email = fForm.find('input[type=email]'),
 				name = fForm.find('input[type=name]'),
 				pass = fForm.find('input[name=password]'),
 				showPass = fForm.find('.eye');
@@ -285,11 +285,6 @@
 				e.preventDefault();
 				$(this).hide();
 				fForm.fadeIn(300);
-			});
-
-			// SUBMITTING THE FORM
-			fForm.find('button').on('click', function (e) {
-				e.preventDefault();
 			});
 
 			// EYE icon to show or hide the password
@@ -325,7 +320,19 @@
 		$('.featherlight-body .email-connect').on('click', function (e) {
 			e.preventDefault();
 			$(this).hide();
-			$('.featherlight-signup-form').fadeIn(400).validate(featherlightFormsValidationRules);
+			var fForm = $('.featherlight-signup-form'),
+				pass = fForm.find('input[name=password]'),
+				showPass = fForm.find('.eye');
+			fForm.fadeIn(400).validate(featherlightFormsValidationRules);
+			showPass.on('click', function () {
+				if ($(this).hasClass('active')) {
+					pass.attr('type', 'password');
+					$(this).removeClass('active');
+				} else {
+					$(this).addClass('active');
+					pass.attr('type', 'text');
+				}
+			});
 		});
 	}
 

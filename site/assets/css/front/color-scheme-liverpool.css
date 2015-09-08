@@ -189,6 +189,9 @@ body .modal-fancy .gg:hover {
 .profile-content .send-settings:hover {
   background-color: #dd301b;
 }
+.profile-statistic li {
+  background-color: #e5412d;
+}
 .datepicker .datepicker-days thead tr .dow,
 .datepicker .datepicker-days tbody tr .day.active,
 .datepicker-months table tr td span.active,
@@ -264,6 +267,18 @@ body .modal-fancy .gg:hover {
 .dashboard-content .resent-act-dif-color:hover {
   color: #dd301b;
 }
+.user-description .joined span {
+  color: #e5412d;
+}
+.progress-item.available {
+  background: #e5412d;
+}
+.progress-item.donated .count {
+  color: #dd301b;
+}
+.profile-content .widget-tabs .widget-head .active a i {
+  color: #e5412d;
+}
 /******************************/
 /***** SEARCH RESULT PAGE *****/
 /******************************/
@@ -286,6 +301,31 @@ body .modal-fancy .gg:hover {
 .landing-page h2 i:before,
 .landing-page h3 i:before {
   color: #e5412d;
+}
+.lotteryFootballBG .progress-bar-triple .progress-fill {
+  background: #e5412d;
+}
+.lotteryFootballBG .progress-bar-triple span {
+  color: #e5412d;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(2).full {
+  background: #e5412d;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(3) {
+  color: #e5412d;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(3).full {
+  background: #e5412d;
+}
+.lotteryFootballBG.animated .buttonBlue,
+.lotteryFootballBG.animated .buttonBlue:active,
+.lotteryFootballBG.animated .buttonBlue:focus {
+  background-color: #e5412d;
+  border-bottom-color: #992213;
+}
+.lotteryFootballBG.animated .buttonBlue:hover {
+  background-color: #992213;
+  border-bottom-color: #992213;
 }
 /******************************/
 /******* LANDING PAGE *******/
@@ -316,6 +356,18 @@ html.front #footer ul .active a {
 }
 .glyphicons.primary i:before,
 .glyphicons-social.primary i:before {
+  color: #e5412d;
+}
+/******************************/
+/**********  MISC  ************/
+/******************************/
+a.ctm_btn {
+  text-shadow: #dd301b 1px 1px 1px;
+}
+.gallery-holder .pagination a {
+  color: #e5412d;
+}
+.amazon-redirect .product-item .text-area h4 {
   color: #e5412d;
 }
 @media all and (max-width: 990px) {

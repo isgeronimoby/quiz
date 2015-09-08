@@ -14,19 +14,10 @@
 
 @header-open-slide-bttn-hover: #a2090f;
 
-//   Test colors
+@grey-light-btns: #6b6b6b;
 
-//@team-color: #29ae0e;
-//
-//@team-color-hover: #2a8a1b;
-//
-//@custom-bttn-color: #f9ae5f;
-//
-//@custom-bttn-color-hover: #b08e45;
-//
-//@custom-bttn-color-border: #e4981f;
-//
-//@header-open-slide-bttn-hover: #170c96;
+@grey-dark-btns: #4c4c4c;
+
 
 /* Header */
 html.front.top-full .navbar.main {
@@ -282,6 +273,10 @@ body .modal-fancy .gg:hover {
 	background-color: @team-color-hover;
 }
 
+.profile-statistic li {
+  background-color: @team-color;
+}
+
 .datepicker .datepicker-days thead tr .dow,
 .datepicker .datepicker-days tbody tr .day.active,
 .datepicker-months table tr td span.active,
@@ -380,6 +375,21 @@ body .modal-fancy .gg:hover {
   color: @team-color-hover;
 }
 
+.user-description .joined span {
+	color: @team-color;
+}
+
+.progress-item.available {
+ 	background: @team-color;
+}
+
+.progress-item.donated .count {
+  	color: @team-color-hover;
+}
+
+.profile-content .widget-tabs .widget-head .active a i {
+ 	color: @team-color;
+}
 /******************************/
 /***** SEARCH RESULT PAGE *****/
 /******************************/
@@ -406,8 +416,33 @@ body .modal-fancy .gg:hover {
 /******************************/
 
 .landing-page h2 i:before, .landing-page h3 i:before {
-	color: @team-color;
+  color: @team-color;
 
+}
+.lotteryFootballBG .progress-bar-triple .progress-fill {
+  background: @team-color;
+}
+.lotteryFootballBG .progress-bar-triple span {
+  color: @team-color;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(2).full {
+  background: @team-color;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(3) {
+  color: @team-color;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(3).full {
+  background: @team-color;
+}
+.lotteryFootballBG.animated .buttonBlue,
+.lotteryFootballBG.animated .buttonBlue:active,
+.lotteryFootballBG.animated .buttonBlue:focus {
+  background-color: @team-color;
+  border-bottom-color: darken(@team-color, 20%);
+}
+.lotteryFootballBG.animated .buttonBlue:hover {
+  background-color: darken(@team-color, 20%);
+  border-bottom-color: darken(@team-color, 20%);
 }
 
 /******************************/
@@ -448,6 +483,22 @@ html.front #footer ul .active a {
 .glyphicons.primary i:before, .glyphicons-social.primary i:before {
 	color: @team-color;
 }
+
+
+/******************************/
+/**********  MISC  ************/
+/******************************/
+a.ctm_btn {
+  text-shadow: @team-color-hover 1px 1px 1px;
+}
+.gallery-holder .pagination a {
+  color: @team-color;
+}
+.amazon-redirect .product-item .text-area h4 {
+  color: @team-color;
+}
+
+
 
 @media all and (max-width: 990px) {
 	.drop-down-menu {

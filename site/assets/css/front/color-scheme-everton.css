@@ -58,10 +58,10 @@ html.front.top-full .navbar.main {
   color: #00369c;
 }
 body .modal-fancy .gg {
-  background-color: #6B6B6B;
+  background-color: #6b6b6b;
 }
 body .modal-fancy .gg:hover {
-  background-color: #4C4C4C;
+  background-color: #4c4c4c;
 }
 .install-wrap a {
   background-color: #00369c;
@@ -193,6 +193,9 @@ body .modal-fancy .gg:hover {
 .profile-content .send-settings:hover {
   background-color: #0b318c;
 }
+.profile-statistic li {
+  background-color: #00369c;
+}
 .datepicker .datepicker-days thead tr .dow,
 .datepicker .datepicker-days tbody tr .day.active,
 .datepicker-months table tr td span.active,
@@ -268,6 +271,18 @@ body .modal-fancy .gg:hover {
 .dashboard-content .resent-act-dif-color:hover {
   color: #0b318c;
 }
+.user-description .joined span {
+  color: #00369c;
+}
+.progress-item.available {
+  background: #00369c;
+}
+.progress-item.donated .count {
+  color: #0b318c;
+}
+.profile-content .widget-tabs .widget-head .active a i {
+  color: #00369c;
+}
 /******************************/
 /***** SEARCH RESULT PAGE *****/
 /******************************/
@@ -290,6 +305,31 @@ body .modal-fancy .gg:hover {
 .landing-page h2 i:before,
 .landing-page h3 i:before {
   color: #00369c;
+}
+.lotteryFootballBG .progress-bar-triple .progress-fill {
+  background: #00369c;
+}
+.lotteryFootballBG .progress-bar-triple span {
+  color: #00369c;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(2).full {
+  background: #00369c;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(3) {
+  color: #00369c;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(3).full {
+  background: #00369c;
+}
+.lotteryFootballBG.animated .buttonBlue,
+.lotteryFootballBG.animated .buttonBlue:active,
+.lotteryFootballBG.animated .buttonBlue:focus {
+  background-color: #00369c;
+  border-bottom-color: #001336;
+}
+.lotteryFootballBG.animated .buttonBlue:hover {
+  background-color: #001336;
+  border-bottom-color: #001336;
 }
 /******************************/
 /******* LANDING PAGE *******/
@@ -320,6 +360,18 @@ html.front #footer ul .active a {
 }
 .glyphicons.primary i:before,
 .glyphicons-social.primary i:before {
+  color: #00369c;
+}
+/******************************/
+/**********  MISC  ************/
+/******************************/
+a.ctm_btn {
+  text-shadow: #0b318c 1px 1px 1px;
+}
+.gallery-holder .pagination a {
+  color: #00369c;
+}
+.amazon-redirect .product-item .text-area h4 {
   color: #00369c;
 }
 @media all and (max-width: 990px) {

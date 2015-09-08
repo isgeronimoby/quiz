@@ -2,20 +2,6 @@
 
 //   Actual colors
 
-//@team-color: #e5412d;
-//
-//@team-color-hover: #DD301B;
-//
-//@custom-bttn-color: #f9c50f;
-//
-//@custom-bttn-color-hover: #ffd739;
-//
-//@custom-bttn-color-border: #e4981f;
-//
-//@header-open-slide-bttn-hover: #a2090f;
-
-//   Test colors
-
 @team-color: #00369c;
 
 @team-color-hover: #0b318c;
@@ -27,6 +13,10 @@
 @custom-bttn-color-border: #e4981f;
 
 @header-open-slide-bttn-hover: #00295c;
+
+@grey-light-btns: #6b6b6b;
+
+@grey-dark-btns: #4c4c4c;
 
 /* Header */
 html.front.top-full .navbar.main {
@@ -87,6 +77,10 @@ html.front.top-full .navbar.main {
 /******** SIGN UP PAGE ********/
 /******************************/
 
+.featherlight .featherlight-heading {
+  	background-color: @team-color;
+}
+
 .fancybox-close {
   background: url(../../images/front/everton/btn-close.png) no-repeat;
 }
@@ -100,11 +94,11 @@ html.front.top-full .navbar.main {
 }
 
 body .modal-fancy .gg {
-	background-color: @team-color;
+	background-color: @grey-light-btns;
 }
 
 body .modal-fancy .gg:hover {
-	background-color: @team-color-hover;
+	background-color: @grey-dark-btns;
 }
 
 .install-wrap a {
@@ -284,6 +278,10 @@ body .modal-fancy .gg:hover {
 	background-color: @team-color-hover;
 }
 
+.profile-statistic li {
+  	background-color: @team-color;
+}
+
 .datepicker .datepicker-days thead tr .dow,
 .datepicker .datepicker-days tbody tr .day.active,
 .datepicker-months table tr td span.active,
@@ -379,9 +377,24 @@ body .modal-fancy .gg:hover {
 }
 
 .dashboard-content .resent-act-dif-color:hover {
-  color: @team-color-hover;
+  	color: @team-color-hover;
 }
 
+.user-description .joined span {
+  	color: @team-color;
+}
+
+.progress-item.available {
+  	background: @team-color;
+}
+
+.progress-item.donated .count {
+  	color: @team-color-hover;
+}
+
+.profile-content .widget-tabs .widget-head .active a i {
+  	color: @team-color;
+}
 /******************************/
 /***** SEARCH RESULT PAGE *****/
 /******************************/
@@ -411,7 +424,31 @@ body .modal-fancy .gg:hover {
 	color: @team-color;
 
 }
-
+.lotteryFootballBG .progress-bar-triple .progress-fill {
+  	background: @team-color;
+}
+.lotteryFootballBG .progress-bar-triple span {
+  	color: @team-color;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(2).full {
+	background: @team-color;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(3) {
+  	color: @team-color;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(3).full {
+  	background: @team-color;
+}
+.lotteryFootballBG.animated .buttonBlue,
+.lotteryFootballBG.animated .buttonBlue:active,
+.lotteryFootballBG.animated .buttonBlue:focus {
+  	background-color: @team-color;
+  	border-bottom-color: darken(@team-color, 20%);
+}
+.lotteryFootballBG.animated .buttonBlue:hover {
+  	background-color: darken(@team-color, 20%);
+  	border-bottom-color: darken(@team-color, 20%);
+}
 /******************************/
 /******* LANDING PAGE *******/
 /******************************/
@@ -450,6 +487,21 @@ html.front #footer ul .active a {
 .glyphicons.primary i:before, .glyphicons-social.primary i:before {
 	color: @team-color;
 }
+
+/******************************/
+/**********  MISC  ************/
+/******************************/
+a.ctm_btn {
+  	text-shadow: @team-color-hover 1px 1px 1px;
+}
+.gallery-holder .pagination a {
+  	color: @team-color;
+}
+.amazon-redirect .product-item .text-area h4 {
+  	color: @team-color;
+}
+
+
 
 @media all and (max-width: 990px) {
 	.drop-down-menu {

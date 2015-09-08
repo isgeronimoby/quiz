@@ -7,11 +7,11 @@ html.front.top-full .navbar.main {
   color: #00369c;
 }
 .toolbar .button {
-  color: #00369c;
-  background-color: #ffd739;
+  color: #ffffff;
+  background-color: #00369c;
 }
 .toolbar .button:hover {
-  background-color: #eec738;
+  background-color: #00295c;
 }
 .number {
   background-color: #ffd739;
@@ -32,20 +32,36 @@ html.front.top-full .navbar.main {
 .service-message a:hover {
   background-color: #0b318c;
 }
+/******** Cookies ********/
+.cookies-block p {
+  color: #00369c;
+}
+.cookies-block a {
+  background-color: #00369c;
+}
+.cookies-block a:hover {
+  background-color: #0b318c;
+}
 /******************************/
 /******** SIGN UP PAGE ********/
 /******************************/
+.featherlight .featherlight-heading {
+  background-color: #00369c;
+}
+.fancybox-close {
+  background: url(../../images/front/everton/btn-close.png) no-repeat;
+}
 .wrapper-title {
   background-color: #00369c;
 }
 .form-title span {
   color: #00369c;
 }
-body #login .gg {
-  background-color: #00369c;
+body .modal-fancy .gg {
+  background-color: #6b6b6b;
 }
-body #login .gg:hover {
-  background-color: #0b318c;
+body .modal-fancy .gg:hover {
+  background-color: #4c4c4c;
 }
 .install-wrap a {
   background-color: #00369c;
@@ -56,19 +72,19 @@ body #login .gg:hover {
 /******************************/
 /********* LOGIN PAGE *********/
 /******************************/
-#login .sign-in.alt {
+.modal-fancy .sign-in.alt {
   background-color: #00369c;
 }
-#login .sign-in.alt:hover {
+.modal-fancy .sign-in.alt:hover {
   background-color: #0b318c;
 }
 /******************************/
 /**** FORGOT PASSWORD PAGE ****/
 /******************************/
-#login.forgot-password .sign-in.alt {
+.modal-fancy.forgot-password .sign-in.alt {
   background-color: #00369c;
 }
-#login.forgot-password .sign-in.alt:hover {
+.modal-fancy.forgot-password .sign-in.alt:hover {
   background-color: #0b318c;
 }
 /******************************/
@@ -95,17 +111,14 @@ body #login .gg:hover {
 .member-info .date {
   color: #00369c;
 }
-.member-info .edit-settings {
-  background-color: #00369c;
-}
-.member-info .edit-settings:hover {
-  background-color: #0b318c;
-}
 .member-info .save-img {
   background-color: #00369c;
 }
 .member-info .save-img:hover {
   background-color: #0b318c;
+}
+.profile-statistic .popover-title {
+  color: #00369c;
 }
 .profile-statistic .donations .sum {
   color: #00369c;
@@ -166,16 +179,22 @@ body #login .gg:hover {
 .profile-content .store-btn {
   background-color: #00369c;
 }
+.profile-content .store-btn:hover {
+  background-color: #0b318c;
+}
 /* Profile page tab redeem on load */
-.profile-content #tab5-1 .total {
+.profile-content .total {
   color: #00369c;
 }
 /* Profile page tab settings */
-.profile-content #tab6-1 .send-settings {
+.profile-content .send-settings {
   background-color: #00369c;
 }
-.profile-content #tab6-1 .send-settings:hover {
+.profile-content .send-settings:hover {
   background-color: #0b318c;
+}
+.profile-statistic li {
+  background-color: #00369c;
 }
 .datepicker .datepicker-days thead tr .dow,
 .datepicker .datepicker-days tbody tr .day.active,
@@ -185,6 +204,10 @@ body #login .gg:hover {
 }
 .profile-content .checkbox-custom i.checked {
   color: #00369c;
+}
+.send-sum .jq-selectbox__select-text,
+.profile-content .send-sum .jq-selectbox__dropdown li {
+  color: #00369c !important;
 }
 /******************************/
 /******** CREDITS PAGE ********/
@@ -230,6 +253,9 @@ body #login .gg:hover {
 /******************************/
 /******* DASHBOARD PAGE *******/
 /******************************/
+.separator-sign-in {
+  background-color: #00369c;
+}
 .dashboard-content .profile-statistic .purchases .sum {
   color: #00369c;
 }
@@ -240,6 +266,21 @@ body #login .gg:hover {
   background-color: #0b318c;
 }
 .dashboard-content .top-rewards h3 i:before {
+  color: #00369c;
+}
+.dashboard-content .resent-act-dif-color:hover {
+  color: #0b318c;
+}
+.user-description .joined span {
+  color: #00369c;
+}
+.progress-item.available {
+  background: #00369c;
+}
+.progress-item.donated .count {
+  color: #0b318c;
+}
+.profile-content .widget-tabs .widget-head .active a i {
   color: #00369c;
 }
 /******************************/
@@ -264,6 +305,31 @@ body #login .gg:hover {
 .landing-page h2 i:before,
 .landing-page h3 i:before {
   color: #00369c;
+}
+.lotteryFootballBG .progress-bar-triple .progress-fill {
+  background: #00369c;
+}
+.lotteryFootballBG .progress-bar-triple span {
+  color: #00369c;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(2).full {
+  background: #00369c;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(3) {
+  color: #00369c;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(3).full {
+  background: #00369c;
+}
+.lotteryFootballBG.animated .buttonBlue,
+.lotteryFootballBG.animated .buttonBlue:active,
+.lotteryFootballBG.animated .buttonBlue:focus {
+  background-color: #00369c;
+  border-bottom-color: #001336;
+}
+.lotteryFootballBG.animated .buttonBlue:hover {
+  background-color: #001336;
+  border-bottom-color: #001336;
 }
 /******************************/
 /******* LANDING PAGE *******/
@@ -294,6 +360,18 @@ html.front #footer ul .active a {
 }
 .glyphicons.primary i:before,
 .glyphicons-social.primary i:before {
+  color: #00369c;
+}
+/******************************/
+/**********  MISC  ************/
+/******************************/
+a.ctm_btn {
+  text-shadow: #0b318c 1px 1px 1px;
+}
+.gallery-holder .pagination a {
+  color: #00369c;
+}
+.amazon-redirect .product-item .text-area h4 {
   color: #00369c;
 }
 @media all and (max-width: 990px) {

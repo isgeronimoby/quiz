@@ -95,7 +95,7 @@ html {
 }
 
 html.front.top-full .navbar.main {
-	background: #e5412d;
+	background: #777777;
 }
 
 html .service-message {
@@ -335,7 +335,7 @@ p, a {
 }
 
 .toolbar .button {
-	color: #d3171e;
+	color: #777777;
 	font-size: 14px;
 	line-height: 20px;
 	font-weight: bold;
@@ -518,7 +518,7 @@ html.no-touch body #content {
 
 .autocomplete-suggestions strong {
 	font-weight: normal;
-	color: #e5412d;
+	color: #777777;
 }
 
 .profile-hover {
@@ -555,7 +555,7 @@ html.no-touch body #content {
 
 .profile-hover .statistics .earned *,
 .profile-hover .statistics .donated * {
-	color: #e5412d;
+	color: #777777;
 }
 
 .profile-hover .statistics .sum {
@@ -636,7 +636,7 @@ html.no-touch body #content {
 
 .additional-navigation li a.activatedItem,
 .additional-navigation li a:hover {
-	background: #a2090f;
+	background: #777777;
 }
 
 .additional-navigation li a.profile.logged-in:hover {
@@ -763,9 +763,9 @@ html.no-touch body #content {
 	height: 17px;
 	right: -9px;
 	top: -7px;
-	color: #df5508;
-	background: #ffd200;
-	border: 1px solid #df5508;
+	color: #ffffff;
+	background: #777777;
+	border: 1px solid #777777;
 	padding: 0 5px;
 	z-index: 200;
 	border-radius: 50%;
@@ -834,7 +834,7 @@ html.no-touch body #content {
 
 .service-message a {
 	display: inline-block;
-	background: #e5412d;
+	background: #777777;
 	height: 30px;
 	color: #fff;
 	line-height: 30px;
@@ -847,7 +847,7 @@ html.no-touch body #content {
 }
 
 .service-message a:hover {
-	background: #DD301B;
+	background: #999999;
 	text-decoration: none;
 }
 
@@ -907,7 +907,6 @@ a.ctm_btn {
 	padding: 0 8px 0 29px;
 	position: relative;
 	text-decoration: none;
-	text-shadow: #33508c 1px 1px 1px;
 	text-transform: lowercase;
 }
 
@@ -1136,7 +1135,6 @@ carousel1
 
 .gallery-holder .pagination a {
 	text-decoration: none;
-	color: #00f;
 }
 
 .gallery-holder .pagination .active a {
@@ -1170,7 +1168,7 @@ end carousel1
 .wrapper-title {
 	overflow: hidden;
 	padding: 14px 18px 14px 30px;
-	background: #e5412d;
+	background: #777777;
 }
 
 body .modal-fancy {
@@ -1347,16 +1345,19 @@ body .modal-fancy .widget .widget-body {
 		margin: 30px 0;
 	}
 
-	.featherlight-popup-inner .featherlight-body .signup-buttons .facebook-connect {
+	.featherlight-popup-inner .featherlight-body .signup-buttons .facebook-connect,
+	body .modal-fancy .social-login.fb {
 		box-shadow: 0 5px 8px -2px rgba(0,0,0,0.5);
 		background: #3b5998;
 		height: 50px;
 
 	}
-	.featherlight-popup-inner .featherlight-body .signup-buttons .facebook-connect span {
+	.featherlight-popup-inner .featherlight-body .signup-buttons .facebook-connect span,
+	body .modal-fancy .social-login.fb span {
 		line-height: 50px;
 	}
-	.featherlight-popup-inner .featherlight-body .signup-buttons .facebook-connect:hover {
+	.featherlight-popup-inner .featherlight-body .signup-buttons .facebook-connect:hover,
+	body .modal-fancy .social-login.fb:hover {
 		background-color: #294071;
 		box-shadow: inset 4px 3px 10px 0 rgba(0,0,0,0.5);
 	}
@@ -1560,7 +1561,7 @@ a.read-more:visited {
 }
 
 .form-title span {
-	color: #e5412d;
+	color: #777777;
 }
 
 .action-block {
@@ -1612,11 +1613,11 @@ body .modal-fancy p a {
 }
 
 .modal-fancy .sign-in.alt {
-	background: #e5412d;
+	background: #777777;
 }
 
 .modal-fancy .sign-in.alt:hover {
-	background: #b53222;
+	background: #999999;
 }
 
 .modal-fancy .action-block .sign-in:hover {
@@ -1673,7 +1674,6 @@ body .modal-fancy .social-login {
 
 body .modal-fancy .social-login.fb {
 	padding: 0 7px 0 45px;
-	background-color: #A7A7A7;
 }
 
 body .modal-fancy .social-login i:before {
@@ -1686,7 +1686,7 @@ body .modal-fancy .gg {
 	width: 100%;
 	border: none;
 	outline: none;
-	background-color: #e5412d;
+	background-color: #777777;
 }
 
 body .modal-fancy a.fb:hover {
@@ -1694,7 +1694,7 @@ body .modal-fancy a.fb:hover {
 }
 
 body .modal-fancy .gg:hover {
-	background-color: #c63a28;
+	background-color: #999999;
 }
 
 body .modal-fancy div.row .col-md-6 .get-help:hover {
@@ -1817,7 +1817,7 @@ html.front #footer ul li a {
 }
 
 html.front #footer ul .active a {
-	color: #e5412d;
+	color: #777777;
 }
 
 html.front #footer ul li a:hover {
@@ -1864,21 +1864,21 @@ html.no-touch .wrap.cookies-true {
 	height: 40px;
 	text-align: center;
 	padding: 6px;
-	background: #ffd739;
+	background: #efefef;
 	font-size: 14px;
 	font-weight: bold;
 	width: 100%;
 }
 
 .cookies-block p {
-	color: #e5412d;
+	color: #777777;
 	line-height: 30px;
 	margin: 0;
 }
 
 .cookies-block a {
 	display: inline-block;
-	background: #e5412d;
+	background: #777777;
 	height: 30px;
 	color: #fff;
 	line-height: 30px;
@@ -1891,7 +1891,7 @@ html.no-touch .wrap.cookies-true {
 }
 
 .cookies-block a:hover {
-	background: #DD301B;
+	background: #999999;
 	text-decoration: none;
 }
 
@@ -2042,7 +2042,7 @@ body .modal-fancy p {
 	line-height: 45px;
 	padding: 0 56px 0 0;
 	font-size: 13px;
-	background-color: #e5412d;
+	background-color: #777777;
 	background-size: 20px;
 	background-position: 28px 17px;
 }
@@ -2076,7 +2076,7 @@ body .modal-fancy p {
 }
 
 .modal-fancy.forgot-password .sign-in.alt:hover {
-	background-color: #c63a28;
+	background-color: #999999;
 }
 
 .forgot-password .row {
@@ -2128,13 +2128,13 @@ body .modal-fancy .gg.alt:hover {
 	vertical-align: middle;
 	padding-left: 45px;
 	padding-right: 45px;
-	background-color: #e5412d;
+	background-color: #777777;
 	color: white;
 }
 
 .install-wrap a:hover {
 	text-decoration: none;
-	background-color: #dd301b;
+	background-color: #999999;
 }
 
 
@@ -2147,7 +2147,7 @@ body .modal-fancy .gg.alt:hover {
 /*CREDITS PAGE*/
 /*============================================================================*/
 .advertisement {
-	background: #e5412d;
+	background: #777777;
 	padding: 23px 200px 17px 20px;
 	position: relative;
 }
@@ -2238,7 +2238,7 @@ body .modal-fancy .gg.alt:hover {
 
 .aside-list a {
 	display: block;
-	color: #e5412d;
+	color: #777777;
 	padding: 0 17px;
 	height: 39px;
 	line-height: 39px;
@@ -2254,7 +2254,7 @@ body .modal-fancy .gg.alt:hover {
 .aside-list .active a,
 .aside-list a:hover {
 	text-decoration: none;
-	background: #e5412d;
+	background: #777777;
 	color: #fff;
 }
 
@@ -2276,7 +2276,7 @@ body .modal-fancy .gg.alt:hover {
 }
 
 .search-result-count {
-	background-color: #e5412d;
+	background-color: #777777;
 	height: 110px;
 }
 
@@ -2376,7 +2376,7 @@ body .modal-fancy .gg.alt:hover {
 .filters-block h3 i:before {
 	line-height: 22px;
 	font-size: 18px;
-	color: #e5412d;
+	color: #777777;
 }
 
 .jq-selectbox__select-text {
@@ -2387,7 +2387,7 @@ body .modal-fancy .gg.alt:hover {
 	cursor: pointer;
 	font-size: 14px;
 	color: #fff;
-	background: #e5412d url(../../images/front/bg-select.png) no-repeat 100px 9px;
+	background: #777777 url(../../images/front/bg-select.png) no-repeat 100px 9px;
 }
 
 .jq-selectbox__dropdown {
@@ -2513,7 +2513,7 @@ body .modal-fancy .gg.alt:hover {
 	display: inline-block;
 	line-height: 29px;
 	color: #fff;
-	background: #e5412d;
+	background: #777777;
 	padding: 0 11px;
 	font-weight: bold;
 	font-size: 13px;
@@ -2529,7 +2529,7 @@ body .modal-fancy .gg.alt:hover {
 }
 
 .product-item .text-area a:hover {
-	background: #be3221;
+	background: #999999;
 	text-decoration: none;
 }
 
@@ -2562,7 +2562,7 @@ body .modal-fancy .gg.alt:hover {
 }
 
 .user-description .joined span {
-	color: #e83f23;
+	color: #777777;
 	margin-left: 4px;
 }
 
@@ -2626,7 +2626,7 @@ body .modal-fancy .gg.alt:hover {
 }
 
 .progress-item.available {
-	background: #e5412d;
+	background: #777777;
 	color: #fff;
 }
 
@@ -2636,7 +2636,7 @@ body .modal-fancy .gg.alt:hover {
 }
 
 .progress-item.donated .count {
-	color: #e34335;
+	color: #999999;
 }
 
 /*============================================================================*/
@@ -2731,11 +2731,11 @@ body .modal-fancy .gg.alt:hover {
 }
 
 .profile-content .widget-tabs .widget-head .active a i {
-	color: #e34335;
+	color: #777777;
 }
 
 .profile-content .widget.widget-tabs > .widget-head ul li.active a i:before {
-	color: #e5412d;
+	color: #777777;
 }
 
 .profile-content .widget-tabs .widget-head a {
@@ -2792,7 +2792,7 @@ body .modal-fancy .gg.alt:hover {
 	font-weight: bold;
 	font-size: 16px;
 	line-height: 16px;
-	color: #e5412d;
+	color: #777777;
 }
 
 .separator-sign-in {
@@ -2843,7 +2843,7 @@ body .modal-fancy .gg.alt:hover {
 	font-weight: bold;
 	font-size: 14px;
 	line-height: 20px;
-	color: #e5412d;
+	color: #777777;
 }
 
 .member-info .edit-settings {
@@ -2869,7 +2869,7 @@ body .modal-fancy .gg.alt:hover {
 	overflow: visible;
 	display: inline-block;
 	height: 110px;
-	background-color: #e5412d;
+	background-color: #777777;
 }
 
 .profile-statistic a {
@@ -2934,7 +2934,7 @@ body .modal-fancy .gg.alt:hover {
 	border: none;
 	font-size: 13px;
 	font-weight: bold;
-	color: #e5412d;
+	color: #777777;
 	background-color: white;
 }
 .profile-statistic .popover-content {
@@ -2953,7 +2953,7 @@ body .modal-fancy .gg.alt:hover {
 }
 
 .profile-statistic .available {
-	background-color: #e5412d;
+	background-color: #777777;
 	color: white;
 }
 
@@ -2975,7 +2975,7 @@ body .modal-fancy .gg.alt:hover {
 }
 
 .profile-statistic .donations .sum {
-	color: #e5412d;
+	color: #777777;
 }
 
 .profile-statistic .title {
@@ -3040,7 +3040,7 @@ body .modal-fancy .gg.alt:hover {
 	display: block;
 	width: 110px;
 	height: 33px;
-	background-color: #e5412d;
+	background-color: #777777;
 	text-align: center;
 	font-size: 13px;
 	line-height: 33px;
@@ -3049,7 +3049,7 @@ body .modal-fancy .gg.alt:hover {
 }
 
 .save-img:hover {
-	background-color: #dd301b;
+	background-color: #999999;
 	color: white;
 	text-decoration: none;
 }
@@ -3132,7 +3132,7 @@ body .modal-fancy .gg.alt:hover {
 .profile-content .resent-activity h2 i:before {
 	line-height: 21px;
 	font-size: 21px;
-	color: #e5412d;
+	color: #777777;
 }
 
 .resent-activity .date {
@@ -3159,7 +3159,7 @@ body .modal-fancy .gg.alt:hover {
 }
 
 .resent-act-dif-color {
-	color: #e5412d;
+	color: #777777;
 }
 
 /************Redeem Credits tab********************/
@@ -3205,7 +3205,7 @@ body .modal-fancy .gg.alt:hover {
 	font-size: 26px;
 	line-height: 59px;
 	font-weight: bold;
-	color: #e5412d;
+	color: #777777;
 	text-align: center;
 	text-indent: 0;
 }
@@ -3216,7 +3216,7 @@ body .modal-fancy .gg.alt:hover {
 	margin: 0 auto 22px;
 	width: 334px;
 	height: 70px;
-	background-color: #e5412d;
+	background-color: #777777;
 	font-size: 22px;
 	line-height: 70px;
 	font-weight: bold;
@@ -3260,7 +3260,7 @@ body .modal-fancy .gg.alt:hover {
 }
 
 .profile-content .total {
-	color: #e5412d;
+	color: #777777;
 }
 
 /************Edit Settings tab********************/
@@ -3291,8 +3291,8 @@ body .modal-fancy .gg.alt:hover {
 	font-weight: bold;
 	font-size: 14px;
 	line-height: 14px;
-	color: #f5f5f5;;
-	background-color: #e5412d;;
+	color: #f5f5f5;
+	background-color: #777777;
 }
 
 .profile-content .personal-settings {
@@ -3358,7 +3358,7 @@ body .modal-fancy .gg.alt:hover {
 
 .datepicker .datepicker-days thead tr .dow,
 .datepicker .datepicker-days tbody tr .day.active {
-	background-color: #e5412d !important;
+	background-color: #777777 !important;
 	color: white;
 }
 
@@ -3431,7 +3431,7 @@ body .datepicker .datepicker-days .table-condensed {
 
 .datepicker-months table tr td span.active,
 .datepicker-years tr td .year.active {
-	background-color: #e5412d !important;
+	background-color: #777777 !important;
 	color: white;
 }
 
@@ -3516,7 +3516,7 @@ body .datepicker .datepicker-days .table-condensed {
 	font-weight: bold;
 	font-size: 35px;
 	line-height: 56px;
-	color: #e5412d;
+	color: #777777;
 }
 
 .profile-content .send-sum .jq-selectbox__dropdown li {
@@ -3567,7 +3567,7 @@ body .datepicker .datepicker-days .table-condensed {
 	font-weight: bold;
 	font-size: 35px;
 	line-height: 56px;
-	color: #e5412d;
+	color: #777777;
 }
 
 .profile-content .filter-area {
@@ -3615,7 +3615,7 @@ body .datepicker .datepicker-days .table-condensed {
 	text-align: center;
 	font-size: 13px;
 	line-height: 22px;
-	background-color: #e5412d;
+	background-color: #777777;
 	color: white;
 }
 
@@ -3649,7 +3649,7 @@ body .datepicker .datepicker-days .table-condensed {
 }
 
 .profile-content .search-block .email a {
-	background-color: #e5412d;
+	background-color: #777777;
 }
 
 .profile-content .search-block .twitter a {
@@ -3742,7 +3742,7 @@ body .datepicker .datepicker-days .table-condensed {
 .profile-content .send-to {
 	position: relative;
 	display: block;
-	background-color: #e5412d;
+	background-color: #777777;
 	font-size: 24px;
 	line-height: normal;
 	font-weight: bold;
@@ -3825,7 +3825,7 @@ body .datepicker .datepicker-days .table-condensed {
 }
 
 .profile-statistic .available:hover {
-	background-color: #DD301B;
+	background-color: #999999;
 	cursor: pointer;
 }
 
@@ -3834,7 +3834,7 @@ body .datepicker .datepicker-days .table-condensed {
 }
 
 .search-block .email a:hover {
-	background-color: #DD301B;
+	background-color: #999999;
 }
 
 .search-block .twitter a:hover {
@@ -3842,19 +3842,19 @@ body .datepicker .datepicker-days .table-condensed {
 }
 
 .profile-content .store-btn:hover {
-	background-color: #DD301B;
+	background-color: #999999;
 }
 
 .profile-content .send-settings:hover {
-	background-color: #DD301B;
+	background-color: #999999;
 }
 
 .profile-content .send-to:hover {
-	background-color: #DD301B;
+	background-color: #999999;
 }
 
 .drop-down-menu:hover {
-	background-color: #DD301B;
+	background-color: #999999;
 }
 
 .drop-down-menu a {
@@ -3871,7 +3871,7 @@ body .datepicker .datepicker-days .table-condensed {
 
 .dashboard-content .profile-statistic .purchases .sum {
 	padding-top: 14px;
-	color: #e5412d;
+	color: #777777;
 	padding: 15px 0 0 0;
 }
 
@@ -3909,7 +3909,7 @@ body .datepicker .datepicker-days .table-condensed {
 .dashboard-content .top-rewards h3 i:before {
 	line-height: 24px;
 	font-size: 18px;
-	color: #e5412d;
+	color: #777777;
 }
 
 .dashboard-content .live-rewards h3 {
@@ -3932,12 +3932,12 @@ body .datepicker .datepicker-days .table-condensed {
 	text-align: center;
 	text-decoration: none;
 	font-size: 14px;
-	background-color: #e5412d;
+	background-color: #777777;
 	color: #ffffff;
 }
 
 .dashboard-content .top-rewards > a:hover {
-	background-color: #DD301B;
+	background-color: #999999;
 }
 
 .dashboard-content .live-rewards li {
@@ -3967,7 +3967,7 @@ body .datepicker .datepicker-days .table-condensed {
 }
 
 .dashboard-content .resent-act-dif-color:hover {
-	color: #DD301B;
+	color: #999999;
 }
 
 .dashboard-content .live-rewards li img {
@@ -4049,7 +4049,7 @@ body .datepicker .datepicker-days .table-condensed {
 	display: inline-block;
 	padding: 20px 15px;
 	margin-bottom: 40px;
-	background-color: #f9c50f;
+	background-color: #777777;
 	font-weight: bold;
 	font-size: 28px;
 	line-height: 32px;
@@ -4057,11 +4057,11 @@ body .datepicker .datepicker-days .table-condensed {
 	color: #000000;
 	text-transform: lowercase;
 	text-align: center;
-	border-bottom: solid 4px #e4981f;
+	border-bottom: solid 4px #999999;
 }
 
 .main-holder .n-found a:hover {
-	background-color: #ffd739;
+	background-color: #999999;
 }
 
 body .n-found .ie-true,
@@ -4108,7 +4108,7 @@ body .n-found .ie-true,
 .landing-page h3 i:before {
 	font-size: 18px;
 	line-height: 22px;
-	color: #e5412d;
+	color: #777777;
 }
 
 .main-holder .landing-page a {
@@ -4214,14 +4214,14 @@ body .n-found .ie-true,
 }
 
 .contact-area .send-contacts {
-	background-color: #e5412d;
+	background-color: #777777;
 	color: white;
 	height: 46px;
 	line-height: 46px ;
 }
 
 .contact-area .send-contacts:hover {
-	background-color: #DD301B;
+	background-color: #999999;
 }
 
 /*============================================================================*/
@@ -4265,7 +4265,7 @@ body .n-found .ie-true,
 	font-size: 46px;
 	line-height: 46px;
 	font-weight: bold;
-	color: #e5412d;
+	color: #777777;
 }
 
 .conversions .title {
@@ -4286,11 +4286,11 @@ body .n-found .ie-true,
 .conversions .redeem {
 	font-size: 13px;
 	line-height: 13px;
-	color: #e5412d;
+	color: #777777;
 }
 
 .conversions .redeem:hover {
-	color: #DD301B;
+	color: #999999;
 }
 
 /*============================================================================*/
@@ -4336,7 +4336,7 @@ body .n-found .ie-true,
 }
 
 .amazon-redirect .product-item .text-area h4 {
-	color: #e5412d;;
+	color: #777777;
 	font-size: 16px;
 }
 
@@ -4434,7 +4434,7 @@ body .n-found .ie-true,
     width: 650px;
     padding-top: 10px;
 }
-.cancer-research-landing > div:last-child .container p{
+.cancer-research-landing > div:last-child .container p {
     color: #0d355b;
     font-size: 15px;
     padding: 4px 18px;
@@ -4469,12 +4469,15 @@ body .n-found .ie-true,
 	background-size: cover;
 	background-position: center center;
 }
+
 .lotteryFootballBG h3 {
 	color: #FFFFFF;
 }
-.lotteryFootballBG h3 span.goldText{
+
+.lotteryFootballBG h3 span.goldText {
 	color: #ffd739;
 }
+
 .lotteryFootballBG h3,
 .lotteryFootballBG h3 span.goldText {
 	font-size: 32px;
@@ -4577,7 +4580,7 @@ body .n-found .ie-true,
 	width: 0;
 	height: 100%;
 	left: 0;
-	background: #00369c;
+	background: #777777;
 	transition: width 1s ease-in-out;
 	-webkit-transition: width 1s ease-out;
 	-moz-transition: width 1s ease-out;
@@ -4632,7 +4635,7 @@ body .n-found .ie-true,
 .lotteryFootballBG .progress-bar-triple span:nth-of-type(2) {
 	left: 49%;
 	background: #FFFFFF;
-	color: #00369c;
+	color: #777777;
 
 	transition: all 0.5s ease-out;
 	-webkit-transition: all 0.5s ease-out;
@@ -4640,13 +4643,13 @@ body .n-found .ie-true,
 	-ms-transition: all 0.5s ease-out;
 }
 .lotteryFootballBG .progress-bar-triple span:nth-of-type(2).full {
-	background: #00369c;
+	background: #777777;
 	color: #FFFFFF;
 }
 .lotteryFootballBG .progress-bar-triple span:nth-of-type(3) {
 	left: 98%;
 	background: #FFFFFF;
-	color: #00369c;
+	color: #777777;
 
 	transition: all 0.5s ease-out;
 	-webkit-transition: all 0.5s ease-out;
@@ -4654,7 +4657,7 @@ body .n-found .ie-true,
 	-ms-transition: all 0.5s ease-out;
 }
 .lotteryFootballBG .progress-bar-triple span:nth-of-type(3).full {
-	background: #00369c;
+	background: #777777;
 	color: #FFFFFF;
 }
 
@@ -4952,13 +4955,13 @@ body .n-found .ie-true,
 .lotteryFootballBG.animated .buttonBlue,
 .lotteryFootballBG.animated .buttonBlue:active,
 .lotteryFootballBG.animated .buttonBlue:focus {
-	background-color: #00369c;
-	border-bottom-color: #012a85;
+	background-color: #777777;
+	border-bottom-color: #999999;
 	color: #FFFFFF;
 }
 .lotteryFootballBG.animated .buttonBlue:hover {
-	background-color: #012a85;
-	border-bottom-color: #012a85;
+	background-color: #999999;
+	border-bottom-color: #999999;
 }
 @keyframes step-opacity {
 	from {opacity: 0;}
@@ -5364,7 +5367,6 @@ body .n-found .ie-true,
 		font-weight: bold;
 		font-size: 14px;
 		line-height: 18px;
-		color: #e5412d;
 	}
 
 	.member-info .profile-summary.guest-user {
@@ -5490,7 +5492,7 @@ body .n-found .ie-true,
 	}
 
 	.drop-down-menu {
-		background-color: #e5412d;
+		background-color: #777777;
 	}
 
 	.drop-down-menu a {
@@ -5530,7 +5532,7 @@ body .n-found .ie-true,
 		line-height: 40px;
 		text-align: center;
 		border: solid 1px #BBBBBB;
-		color: #e5412d;
+		color: #777777;
 		background-color: #F4F4F4;
 		font-weight: normal;
 		border-top: none;
@@ -5622,7 +5624,6 @@ body .n-found .ie-true,
 		background-color: #F4F4F4 !important;
 		border: 1px solid #BBBBBB !important;
 		border-top: none !important;
-		color: #e5412d;
 	}
 
 	.credits-content .aside-list a {
@@ -5646,7 +5647,6 @@ body .n-found .ie-true,
 
 	.credits-content .aside-list .active a {
 		font-weight: bold;
-		color: #e5412d;
 		border-color: #BBBBBB;
 	}
 
