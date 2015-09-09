@@ -251,6 +251,7 @@
 			var fForm = $.featherlight.current().$content.find('form');
 			var email = fForm.find('input[type=email]'),
 				name = fForm.find('input[type=name]');
+			var msg = $(event.currentTarget).attr("data-msg");
 			lastFeatherlight = $('.featherlight');
 
 			// Trigger to show the form with email signup
@@ -262,6 +263,14 @@
 
 			// EYE icon to show or hide the password
 			$.fn.passwordEye(fForm);
+
+
+
+			if (!msg || 0 === msg.length) {
+				msg = "";
+			}
+
+			$('div.featherlight-body > h4').text( msg );
 
 		};
 
