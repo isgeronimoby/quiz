@@ -298,6 +298,14 @@
 				}
 			});
 
+			var msg = $(event.currentTarget).attr("data-msg");
+
+			if (!msg || 0 === msg.length) {
+				msg = "";
+			}
+
+			$("div.featherlight-body>h4").text(msg);
+
 			// Form validation (here to be triggered every time the popup is shown)
 			fForm.validate(featherlightFormsValidationRules);
 		};
