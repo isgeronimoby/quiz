@@ -261,11 +261,6 @@
 				fForm.fadeIn(300);
 			});
 
-			// EYE icon to show or hide the password
-			$.fn.passwordEye(fForm);
-
-
-
 			if (!msg || 0 === msg.length) {
 				msg = "";
 			}
@@ -286,20 +281,18 @@
 	}
 
 	// If not in a popup
-	if ( $('.featherlight-popup').length == 0 ) {
+	if ($('.featherlight-popup').length == 0) {
 		$('.featherlight-body .email-connect').on('click', function (e) {
 			e.preventDefault();
 			$(this).hide();
 			var fForm = $('.featherlight-signup-form');
 			fForm.fadeIn(400);
-			$.fn.passwordEye(fForm);
 		});
 	}
 
 	function passwordEyeDefault (form) {
 		if ( !form ) form = $('.login-form');
-		var pass = form.find('input[name=Password]'),
-			showPass = form.find('.eye');
+		var pass = form.find('input[name=Password]'), showPass = form.find('.eye');
 		pass.attr('type', 'password');
 		showPass.removeClass('active');
 		showPass.off('click');
@@ -312,8 +305,7 @@
 			else
 				form = $('.login-form');
 		}
-		var pass = form.find('input[name=Password]'),
-			showPass = form.find('.eye');
+		var pass = form.find('input[name=Password]'), showPass = form.find('.eye');
 
 		showPass.on('click', function () {
 			if ($(this).hasClass('active')) {
@@ -329,5 +321,5 @@
 })(jQuery, window);
 
 jQuery(window).ready(function(){
-	if ( FastClick ) FastClick.attach(document.body);
+	if (FastClick) FastClick.attach(document.body);
 });
