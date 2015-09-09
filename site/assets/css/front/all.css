@@ -1346,7 +1346,7 @@ body .modal-fancy .widget .widget-body {
 	}
 
 	.featherlight-popup-inner .featherlight-body .signup-buttons .facebook-connect,
-	body .modal-fancy .social-login.fb {
+	body .modal-fancy .social-login.fb:not(.email-connect) {
 		box-shadow: 0 5px 8px -2px rgba(0,0,0,0.5);
 		background: #3b5998;
 		height: 50px;
@@ -1357,7 +1357,7 @@ body .modal-fancy .widget .widget-body {
 		line-height: 50px;
 	}
 	.featherlight-popup-inner .featherlight-body .signup-buttons .facebook-connect:hover,
-	body .modal-fancy .social-login.fb:hover {
+	body .modal-fancy .social-login.fb:not(.email-connect):hover {
 		background-color: #294071;
 		box-shadow: inset 4px 3px 10px 0 rgba(0,0,0,0.5);
 	}
@@ -1674,6 +1674,7 @@ body .modal-fancy .social-login {
 
 body .modal-fancy .social-login.fb {
 	padding: 0 7px 0 45px;
+	background: #a7a7a7;
 }
 
 body .modal-fancy .social-login i:before {
