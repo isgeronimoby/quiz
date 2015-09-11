@@ -267,6 +267,7 @@
 
 			$('div.featherlight-body > h4').text( msg );
 
+			$.fn.passwordEye();
 		};
 
 		// Change back states of some elements on closing the popup
@@ -277,6 +278,8 @@
 			passwordEyeDefault($.featherlight.current().$content.find('form'));
 			fForm.hide();
 			emailBtn.show();
+
+			$("div.alert-danger").remove();
 		};
 	}
 
@@ -305,9 +308,10 @@
 			else
 				form = $('.login-form');
 		}
+
 		var pass = form.find('input[name=Password]'), showPass = form.find('.eye');
 
-		showPass.on('click', function () {
+		showPass.off('click').on('click', function () {
 			if ($(this).hasClass('active')) {
 				pass.attr('type', 'password');
 				$(this).removeClass('active');
