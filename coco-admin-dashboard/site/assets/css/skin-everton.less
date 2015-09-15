@@ -1,0 +1,209 @@
+/* CLUB COLORS */
+@color-club-brand: #00369c;
+@color-club-gold: #D0A638;
+@color-club-gold-dark: #93721D;
+@color-club-grey-dark: #364158;
+
+
+/* COMMON COLORS */
+@transparent: rgba(0,0,0,0);
+@white-1: #ffffff;
+@grey-1: #4C5264;
+@grey-light: #dddddd;
+@red-1: #EB5051;
+@blue-1: #3C989E;
+@blue-2: #3498DB;
+@blue-3: #2980B9;
+@darkblue-1: #252932;
+@darkblue-2: #4A525F;
+@darkblue-3: #38464A;
+@lightblue-1: #AFB3BF;
+@lightblue-2: #3F618E;
+@lightblue-3: #4D5D91;
+@orange-1: #E84C3D;
+@orange-2: #DE745E;
+@orange-3: #E27A3F;
+@orange-4: #edce8c;
+@green-1: #68C39F;
+@green-2: #9EC789;
+@green-3: #209C83;
+@pink-1: #F57A82;
+@pink-2: #F56F6C;
+@yellow-1: #F4CDA5;
+@yellow-2: #EAE696;
+
+/* SYSTEM COLORS */
+@maincolor: #f5f5ff;
+@hovercolor: #68C39F;
+@topbar_color: @color-club-brand;
+@topbar_left_color: @color-club-brand;
+@brand_color: #343838;
+@contentbg: #E4E6F0;
+@first_level_hover: lighten(@color-club-brand, 20%);
+@second_level: @lightblue-3;
+
+@color-font-dark: #222222;
+@left-sidebar-font-color: @color-font-dark;
+@right-sidebar-font-color: @color-font-dark;
+/* COLORS END */
+
+
+
+body {
+  background: @contentbg;
+}
+
+.nav.navbar-nav.top-navbar .dropdown-menu > li > a {
+  color: @grey-1;
+}
+
+.dropdown-menu.dropdown-message li i.msg-time{
+  color: @lightblue-2;
+}
+
+.dropdown-menu.dropdown-message li p i {
+  color: @lightblue-2;
+}
+
+.topbar {
+  background:@topbar_color;
+}
+
+.topbar .topbar-left{
+  background: @topbar_left_color;
+}
+
+.navbar-nav > li.topbar-profile > .dropdown-menu:before {
+  border-bottom-color: @lightblue-2;
+}
+
+.navbar-form .search-button:hover{
+  color: @color-club-grey-dark !important;
+}
+
+i.online{
+  color:#00AC65;
+}
+
+.the-timeline ul li .the-date{
+  background: @red-1;
+}
+
+.logo a{
+  background: url('../img/logo-everton.png') no-repeat;
+}
+
+.navbar-right .iconify > a:hover > i {
+  color:@lightblue-1;
+}
+
+.side-menu.left {
+  background: @maincolor;
+}
+.side-menu.right {
+  background: @maincolor;
+}
+.body.content.rows {
+  background: @contentbg;
+}
+
+.button-menu-mobile:hover, body.cru .button-menu-mobile:hover {
+  color:@lightblue-1;
+}
+
+.breadcrumb li a{
+  color:darken(@lightblue-1, 5%);
+}
+
+.breadcrumb li.active{
+  color:@lightblue-2;
+}
+
+.breadcrumb > li + li:before{
+  color:darken(@lightblue-1,5%);
+}
+
+#sidebar-menu > ul > li{
+  background:@maincolor;
+}
+
+#sidebar-menu > ul > li > a:hover {
+  background: @first_level_hover;
+}
+
+#sidebar-menu > ul > li > a.subdrop {
+  background: @first_level_hover;
+}
+
+#sidebar-menu > ul > li > a.active,#sidebar-menu > ul > li > a.active.subdrop {
+  background: @hovercolor !important;
+}
+
+#sidebar-menu ul ul {
+  background: @second_level;
+}
+
+#sidebar-menu ul ul a:hover {
+  background: darken(@second_level,5%);
+}
+
+#sidebar-menu ul ul li a.active {
+  background: darken(@second_level,10%);
+}
+
+#wrapper.enlarged .left.side-menu #sidebar-menu ul > li.mouseHover > a{
+  background: @first_level_hover;
+}
+
+#wrapper.enlarged #sidebar-menu ul ul li a.active {
+  background: darken(@second_level,5%) !important;
+}
+
+.side-menu.right .nav-tabs{
+  background: @maincolor;
+}
+
+.side-menu.right .nav-tabs > li.active > a,.side-menu.right .nav-tabs > li.active > a:hover,.side-menu.right .nav-tabs > li.active > a:focus{
+  background: lighten(@lightblue-1, 20%);
+  border-color: lighten(@lightblue-1, 20%);
+}
+
+.widget .nav-tabs > li.active > a,.widget .nav-tabs > li.active > a:hover,.widget .nav-tabs > li.active > a:focus {
+  background-color: @lightblue-2;
+}
+
+.menu-message .list-group-item.active .badge{
+  background: @lightblue-2;
+}
+
+.login-page{
+  background: @lightblue-2;
+}
+
+.signup-page{
+  background: @lightblue-2;
+}
+
+.lock-page{
+  background:@darkblue-1;
+}
+
+.lock-page .container{
+  background: @lightblue-2;
+}
+
+.invoice .widget-content.padding{
+  color:@lightblue-2;
+}
+
+.company-column address{
+  color:@lightblue-2;
+}
+
+.report-heading span.endDate{
+  color: @color-club-brand;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus, body.cru .navbar-default .navbar-nav > li > a:hover {
+  color: @lightblue-1;
+}

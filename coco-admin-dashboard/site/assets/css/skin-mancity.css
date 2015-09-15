@@ -1,0 +1,137 @@
+/* CLUB COLORS */
+/* COMMON COLORS */
+/* SYSTEM COLORS */
+/* COLORS END */
+body {
+  background: #e4e6f0;
+}
+.nav.navbar-nav.top-navbar .dropdown-menu > li > a {
+  color: #4c5264;
+}
+.dropdown-menu.dropdown-message li i.msg-time {
+  color: #3f618e;
+}
+.dropdown-menu.dropdown-message li p i {
+  color: #3f618e;
+}
+.topbar {
+  background: #62ade9;
+}
+.topbar .topbar-left {
+  background: #62ade9;
+}
+.navbar-nav > li.topbar-profile > .dropdown-menu:before {
+  border-bottom-color: #3f618e;
+}
+.navbar-form .search-button:hover {
+  color: #364158 !important;
+}
+i.online {
+  color: #00AC65;
+}
+.the-timeline ul li .the-date {
+  background: #eb5051;
+}
+.logo a {
+  background: url('../img/logo-manchester-city.png') no-repeat;
+  background-size: cover;
+  height: 34px;
+  width: 182px;
+  margin-left: -40px;
+}
+.navbar-right .iconify > a:hover > i {
+  color: #afb3bf;
+}
+.side-menu.left {
+  background: #f5f5ff;
+}
+.side-menu.right {
+  background: #f5f5ff;
+}
+.body.content.rows {
+  background: #e4e6f0;
+}
+.button-menu-mobile:hover,
+body.cru .button-menu-mobile:hover {
+  color: #afb3bf;
+}
+.breadcrumb li a {
+  color: #a1a6b4;
+}
+.breadcrumb li.active {
+  color: #3f618e;
+}
+.breadcrumb > li + li:before {
+  color: #a1a6b4;
+}
+#sidebar-menu > ul > li {
+  background: #f5f5ff;
+}
+#sidebar-menu > ul > li > a:hover {
+  background: #bbdcf6;
+}
+#sidebar-menu > ul > li > a.subdrop {
+  background: #bbdcf6;
+}
+#sidebar-menu > ul > li > a.active,
+#sidebar-menu > ul > li > a.active.subdrop {
+  background: #68c39f !important;
+}
+#sidebar-menu ul ul {
+  background: #3596e3;
+}
+#sidebar-menu ul ul a:hover {
+  background: #1f8adf;
+}
+#sidebar-menu ul ul li a.active {
+  background: #1c7cc9;
+}
+#wrapper.enlarged .left.side-menu #sidebar-menu ul > li.mouseHover > a {
+  background: #bbdcf6;
+}
+#wrapper.enlarged #sidebar-menu ul ul li a.active {
+  background: #1f8adf !important;
+}
+.side-menu.right .nav-tabs {
+  background: #f5f5ff;
+}
+.side-menu.right .nav-tabs > li.active > a,
+.side-menu.right .nav-tabs > li.active > a:hover,
+.side-menu.right .nav-tabs > li.active > a:focus {
+  background: #e8e9ec;
+  border-color: #e8e9ec;
+}
+.widget .nav-tabs > li.active > a,
+.widget .nav-tabs > li.active > a:hover,
+.widget .nav-tabs > li.active > a:focus {
+  background-color: #3f618e;
+}
+.menu-message .list-group-item.active .badge {
+  background: #3f618e;
+}
+.login-page {
+  background: #3f618e;
+}
+.signup-page {
+  background: #3f618e;
+}
+.lock-page {
+  background: #252932;
+}
+.lock-page .container {
+  background: #3f618e;
+}
+.invoice .widget-content.padding {
+  color: #3f618e;
+}
+.company-column address {
+  color: #3f618e;
+}
+.report-heading span.endDate {
+  color: #62ade9;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus,
+body.cru .navbar-default .navbar-nav > li > a:hover {
+  color: #afb3bf;
+}

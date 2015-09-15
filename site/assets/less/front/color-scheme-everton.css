@@ -310,7 +310,7 @@ body .modal-fancy .gg:hover {
   background: #00369c;
 }
 .lotteryFootballBG .progress-bar-triple span {
-  color: #00369c;
+  background: #00369c;
 }
 .lotteryFootballBG .progress-bar-triple span:nth-of-type(2).full {
   background: #00369c;
@@ -330,6 +330,16 @@ body .modal-fancy .gg:hover {
 .lotteryFootballBG.animated .buttonBlue:hover {
   background-color: #001336;
   border-bottom-color: #001336;
+}
+.lotteryFootballBG {
+  background: url('../../../assets/images/front/everton/bg-team-training.png') no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.lotteryFootballBG.animated {
+  background: url('../../../assets/images/front/everton/bg-team-training-saturated.png') no-repeat;
+  background-size: cover;
+  background-position: center center;
 }
 /******************************/
 /******* LANDING PAGE *******/

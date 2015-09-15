@@ -48,9 +48,7 @@
 @topbar_left_color: @color-club-brand;
 @brand_color: #343838;
 @contentbg: #E4E6F0;
-@first_level_hover: @color-club-brand;
-//@first_level_hover: darken(@maincolor,50%);
-//@second_level: darken(@maincolor,5%);
+@first_level_hover: lighten(@color-club-brand, 20%);
 @second_level: @lightblue-3;
 
 @color-font-dark: #222222;
@@ -204,7 +202,6 @@
 /* MAIN CSS CONTENT */
 
 body {
-	background: @contentbg;
 	margin: 0;
 	-webkit-font-smoothing: antialiased;
 	text-rendering:optimizelegibility;
@@ -295,7 +292,6 @@ a:hover,a:active,a:focus {
 
 .nav.navbar-nav.top-navbar .dropdown-menu > li > a {
 	cursor: pointer;
-	color: @grey-1;
 }
 
 .nav.navbar-nav.top-navbar > li span.absolute {
@@ -502,13 +498,11 @@ textarea:focus, select:focus, input[type="text"]:focus, input[type="password"]:f
 }
 
 .dropdown-menu.dropdown-message li i.msg-time{
-	color: @lightblue-2;
 	font-size: 11px;
 	font-style:normal;
 }
 
 .dropdown-menu.dropdown-message li p i {
-	color: @lightblue-2;
 	font-size: 11px;
 	font-style:normal;
 }
@@ -720,7 +714,7 @@ i.i-xs {
 }
 
 .navbar-nav > li.topbar-profile > .dropdown-menu:before {
-	border-bottom: 6px solid @lightblue-2;
+	border-bottom: 6px solid;
 }
 
 /* SIDEBAR FORM */
@@ -757,7 +751,6 @@ i.i-xs {
 }
 
 .navbar-form .search-button:hover{
-	color: @color-club-grey-dark !important;
 	-webkit-transition: all 300ms ease-in;
 	-moz-transition: all 300ms ease-in;
 	-ms-transition: all 300ms ease-in;
@@ -909,10 +902,6 @@ i.i-xs {
 	margin-top:-14px;
 }
 
-i.online{
-	color:#00AC65;
-}
-
 hr.divider{
 	border-color:rgba(255,255,255,0.1);
 	width:90%;
@@ -1012,7 +1001,6 @@ hr.divider{
 	top:0;
 	width: 50px;
 	height: 50px;
-	background: @red-1;
 	border-radius: 50%;
 	text-align: center;
 	line-height: 130%;
@@ -1268,15 +1256,15 @@ iframe {
 	top:0px;
 	height:50px;
 	z-index:11;
-	background:@topbar_color;
+	background:@grey-light;
 	position: fixed;
 	-webkit-box-shadow: 1px 0 3px 0 rgba(0,0,0,0.2);
 	box-shadow: 1px 0 3px 0 rgba(0,0,0,0.2);
 }
 
-body.cru .topbar {
+/*body.cru .topbar {
   background:@topbar_color_cru;
-}
+}*/
 
 .topbar .topbar-left{
 	float:left;
@@ -1284,21 +1272,20 @@ body.cru .topbar {
 	position:relative;
 	z-index: 1;
 	width:@left_sidebar_width;
-	background: @topbar_left_color;
+	background: @grey-light;
 }
-body.cru .topbar .topbar-left{
+/*body.cru .topbar .topbar-left{
   background: @topbar_color_cru;
-}
+}*/
 
 .logo a{
 	display: inline-block;
 	height: 30px;
 	width: 104px;
-	background: url('../img/logo-everton.png') no-repeat;
 	vertical-align: middle;
 }
 
-body.cru .logo a{
+/*body.cru .logo a{
   display: inline-block;
   height: 37px;
   width: 240px;
@@ -1306,7 +1293,7 @@ body.cru .logo a{
   vertical-align: middle;
   background-size: cover;
   margin-left: -40px;
-}
+}*/
 
 .logo h1{
 	margin:0px auto;
@@ -1327,18 +1314,15 @@ body.cru .logo a{
 }
 
 .topbar-profile > a{
-	font-family: "Open Sans";
+	font-family: "Open Sans", serif;
 }
 
 .navbar-right .iconify > a > i{
 	font-size:18px;
-//	color:@white-1;
 	line-height:17px;
 }
 
-.navbar-right .iconify > a:hover > i {
-  color:@lightblue-1;
-}
+
 
 .right-opener{
 	//background:#f5f5f5;
@@ -1353,21 +1337,12 @@ body.cru .logo a{
 	display: none;
 }
 
-.open-right-sidebar .right-opener{
-
-}
-
 .open-right-sidebar .right-opener .fa-angle-double-right{
 	display: inline-block;
-
 }
 
 .open-right-sidebar .right-opener .fa-angle-double-left{
 	display: none;
-}
-
-.logo h1 img{
-
 }
 
 .col {
@@ -1407,7 +1382,6 @@ body.cru .logo a{
 }
 
 .side-menu.left {
-	background: @maincolor;
 	position: absolute;
 	top:50px;
 }
@@ -1451,7 +1425,6 @@ body.mobile .slimscrollleft,body.mobile .slimscroller{
 	right:-@right_sidebar_width;
 	position: fixed;
 	z-index:15;
-	background: @maincolor;
 }
 
 .side-menu.right .tab-inner{
@@ -1559,13 +1532,11 @@ body.fixed-left .left-footer {
 	border: none;
 }
 
-body.cru .button-menu-mobile {
+/*body.cru .button-menu-mobile {
   color: #000000;
-}
+}*/
 
-.button-menu-mobile:hover, body.cru .button-menu-mobile:hover {
-	color:@lightblue-1;
-}
+
 
 button.navbar-toggle {
 	padding: 5px 20px;
@@ -1585,15 +1556,11 @@ button.navbar-toggle {
 
 .breadcrumb li a{
 	font-family: "Open Sans";
-	color:darken(@lightblue-1,5%);
 }
 
-.breadcrumb li.active{
-	color:@lightblue-2;
-}
+
 
 .breadcrumb > li + li:before{
-	color:darken(@lightblue-1,5%);
 	padding:0px 10px;
 	content: "";
 	font-family: FontAwesome;
@@ -1624,7 +1591,6 @@ button.navbar-toggle {
 	font-family:"Open Sans";
 }
 #sidebar-menu > ul > li{
-	background:@maincolor;
 	display: block;
 }
 #sidebar-menu > ul > li > a {
@@ -1642,7 +1608,6 @@ button.navbar-toggle {
 
 #sidebar-menu > ul > li > a:hover {
 	color: @white-1;
-	background: @first_level_hover;
 	padding-left: 10px;
 }
 
@@ -1671,7 +1636,6 @@ button.navbar-toggle {
 }
 
 #sidebar-menu > ul > li > a.subdrop {
-	background: @first_level_hover;
 	color: @white-1;
 }
 #sidebar-menu > ul > li > a.subdrop i,
@@ -1681,18 +1645,6 @@ button.navbar-toggle {
 
 #sidebar-menu > ul > li > a.active,#sidebar-menu > ul > li > a.active.subdrop {
 	color: @white-1;
-	background: @hovercolor !important;
-	/* Enable this if you like gradients
-	background: -moz-linear-gradient(top, @hovercolor 0%, darken(@hovercolor,9%) 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@hovercolor), color-stop(100%,darken(@hovercolor,15%)));
-	background: -webkit-linear-gradient(top,  @hovercolor 0%,darken(@hovercolor,15%) 100%);
-	background: -o-linear-gradient(top,  @hovercolor 0%,darken(@hovercolor,15%) 100%);
-	background: -ms-linear-gradient(top,  @hovercolor 0%,darken(@hovercolor,15%) 100%);
-	background: linear-gradient(to bottom,  @hovercolor 0%, darken(@hovercolor,15%) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#88bfe8', endColorstr='#70b0e0',GradientType=0 );
-	-webkit-box-shadow: -1px 1px 0px 0 rgba(0,0,0,0.5);
-	box-shadow: -1px 1px 0px 0 rgba(0,0,0,0.5);
-	*/
 	border-left:5px solid rgba(0,0,0,0.3);
 	padding-left: 5px;
 }
@@ -1731,7 +1683,6 @@ button.navbar-toggle {
 /* SIDEBAR SUBMENU */
 #sidebar-menu ul ul {
 	display: none;
-	background: @second_level;
 	border-top:1px solid rgba(0,0,0,0.1);
 	border-bottom: 2px solid rgba(0,0,0,0.1);
 }
@@ -1759,16 +1710,6 @@ button.navbar-toggle {
 
 #sidebar-menu ul ul ul ul a {
 	padding-left: 45px;
-}
-
-#sidebar-menu ul ul a:hover {
-	color: @white-1;
-	background: darken(@second_level,5%);
-}
-
-#sidebar-menu ul ul li a.active {
-	color: @white-1;
-	background: darken(@second_level,10%);
 }
 
 #sidebar-menu ul ul a i {
@@ -1838,14 +1779,6 @@ button.navbar-toggle {
 
 #wrapper.enlarged .left.side-menu #sidebar-menu ul > li > ul{
   display:none;
-}
-
-#wrapper.enlarged .left.side-menu #sidebar-menu ul > li.mouseHover > a{
-	background: @first_level_hover;
-}
-
-#wrapper.enlarged #sidebar-menu ul ul li a.active {
-	background: darken(@second_level,5%) !important;
 }
 
 #wrapper.enlarged #sidebar-menu > ul > li:hover > a.open:after, #wrapper.enlarged #sidebar-menu > ul > li.mouseHover > a.active:after{
@@ -1931,7 +1864,6 @@ button.navbar-toggle {
 
 /* RIGHT SIDEBAR MENU */
 .side-menu.right .nav-tabs{
-	background: @maincolor;
 	border:none;
 }
 
@@ -1960,9 +1892,7 @@ button.navbar-toggle {
 }
 
 .side-menu.right .nav-tabs > li.active > a,.side-menu.right .nav-tabs > li.active > a:hover,.side-menu.right .nav-tabs > li.active > a:focus{
-	background: lighten(@lightblue-1, 20%);
-	border-color: lighten(@lightblue-1, 20%);
-	border-radius: 0px;
+	border-radius: 0;
 }
 
 .side-menu.right .right-toolbar{
@@ -1984,7 +1914,6 @@ button.navbar-toggle {
 .side-menu.right .panel-default > .panel-heading{
 	background:transparent;
 	border:none;
-	//margin:0px 15px;
 	border-radius: 0px;
 }
 
@@ -2536,7 +2465,6 @@ button.navbar-toggle {
 	border-right: none;
 	border-left: none;
 	border-bottom: none;
-	background-color: @lightblue-2;
 	color: @white-1;
 }
 
@@ -3259,7 +3187,6 @@ form.input-chat {
 
 .menu-message .list-group-item.active .badge{
 	color:@white-1;
-	background: @lightblue-2;
 }
 
 
@@ -4240,21 +4167,7 @@ a:focus .icon-vimeo {
 }
 
 /* ANOTHER CONTENT CONFIGURATION */
-.login-page{
-	background: @lightblue-2;
-}
 
-.signup-page{
-	background: @lightblue-2;
-}
-
-.lock-page{
-	background:@darkblue-1;
-}
-
-.lock-page .container{
-	background: @lightblue-2;
-}
 
 .rotate(@deg: 90) {
 	/* Safari */
@@ -4645,7 +4558,7 @@ table.pricing-table-style-1 thead tr th.th-success {
 
 /* INVOICE */
 .invoice .widget-content.padding{
-	padding: 70px 30px;color:@lightblue-2;
+	padding: 70px 30px;
 }
 .payment-methods{
 	font-size:30px;
@@ -4655,9 +4568,7 @@ table.pricing-table-style-1 thead tr th.th-success {
 	margin-bottom: 20px;
 }
 
-.company-column address{
-	color:@lightblue-2;
-}
+
 
 .bill-to {
 	padding: 15px;
@@ -5736,20 +5647,17 @@ footer .footer-links a:last-child{
 .report-heading span.endDate{
 	font-weight: bold;
 	padding: 0 6px;
-	color: @color-club-brand;
 }
 
 /* BOOTSTRAP OVERRIDES */
 .navbar-default .navbar-nav > li > a {
 	color: @white-1;
 }
-.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus, body.cru .navbar-default .navbar-nav > li > a:hover {
-	color: @lightblue-1;
-}
 
-body.cru .navbar-default .navbar-nav > li > a {
+
+/*body.cru .navbar-default .navbar-nav > li > a {
   color: #000000;
-}
+}*/
 
 .nav.navbar-nav.navbar-right.top-navbar {
 	margin-right: -15px;
@@ -5759,15 +5667,6 @@ body.cru .navbar-default .navbar-nav > li > a {
     display: inline-block;
     vertical-align: middle;
 }
-/*.ui-sortable-placeholder {
-  	margin-left: 0 !important;
-	padding: 0 !important;
-}
-
-.container-fluid {
-  padding-right: 0;
-  padding-left: 0;
-}*/
 
 /* CUSTOM CHARTS */
 .morris-hover {
@@ -5986,43 +5885,6 @@ body.cru .navbar-default .navbar-nav > li > a {
   text-shadow: none;
   -webkit-text-shadow: none;
 }
-
-/*#reportrange.retention input::-webkit-calendar-picker-indicator{
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-#reportrange.retention input::-moz-calendar-picker-indicator{
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-#reportrange.retention input::-ms-calendar-picker-indicator{
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-#reportrange.retention input::-o-calendar-picker-indicator{
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-
-#reportrange.retention input[type="month"]{
-	display: none;
-  -webkit-appearance:none;
-}
-#reportrange.retention input[type="week"]{
-	display: none;
-  -webkit-appearance:none;
-}
-#reportrange.retention input::-webkit-inner-spin-button{
-  	display: none;
-}
-#reportrange.retention input::-webkit-clear-button {
-  	display: none;
-}*/
-
 
 .file-uploader-widget {
   	padding: 0 40px 30px;

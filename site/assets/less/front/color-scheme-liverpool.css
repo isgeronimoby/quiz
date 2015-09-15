@@ -306,7 +306,7 @@ body .modal-fancy .gg:hover {
   background: #e5412d;
 }
 .lotteryFootballBG .progress-bar-triple span {
-  color: #e5412d;
+  background: #e5412d;
 }
 .lotteryFootballBG .progress-bar-triple span:nth-of-type(2).full {
   background: #e5412d;
@@ -326,6 +326,17 @@ body .modal-fancy .gg:hover {
 .lotteryFootballBG.animated .buttonBlue:hover {
   background-color: #992213;
   border-bottom-color: #992213;
+}
+/* TODO: put right images */
+.lotteryFootballBG {
+  background: url('../../../assets/images/front/liverpool/bg-team-training.png') no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.lotteryFootballBG.animated {
+  background: url('../../../assets/images/front/liverpool/bg-team-training-saturated.png') no-repeat;
+  background-size: cover;
+  background-position: center center;
 }
 /******************************/
 /******* LANDING PAGE *******/
