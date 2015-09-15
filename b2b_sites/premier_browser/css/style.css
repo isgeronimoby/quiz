@@ -216,6 +216,8 @@ html.mm-opened .top-header .mobile-menu {
     box-sizing: border-box;
 }
 .logo-wrapper * {
+    color: #333333;
+    text-decoration: none;
     width: auto;
     max-width: 100%;
     display: inline-block;
@@ -602,6 +604,7 @@ html.mm-opened .top-header .mobile-menu {
     width: 520px;
     height: 520px;
     margin: 60px auto 0;
+    background: #ffffff;
 }
 
 .second-slide .circle {

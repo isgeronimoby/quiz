@@ -4,6 +4,8 @@
         var menuBtn = document.getElementById('menu');
         var menu = menuBtn.parentNode.querySelector('.menu-inner');
         var trigger = 0;
+        var btnDisabled = Array.prototype.slice.call(document.querySelectorAll('.btn.cs'));
+
 
         menuBtn.addEventListener('click', function(e){
             e.preventDefault();
@@ -22,6 +24,12 @@
                     menu.style.display = 'none';
                 }, 320);
             }
+        });
+
+        btnDisabled.forEach(function(elem){
+           elem.addEventListener('click', function(e){
+               e.preventDefault();
+           });
         });
     });
 })();

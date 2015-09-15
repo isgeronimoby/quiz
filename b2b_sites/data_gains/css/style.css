@@ -1,3 +1,23 @@
+/* Fonts */
+@font-face {
+    font-family: 'ev-helvetica';
+    src: url('../fonts/helvetica-neue-light.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/helvetica-neue-light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/helvetica-neue-light.woff') format('woff'), /* Modern Browsers */
+    url('../fonts/helvetica-neue-light.ttf')  format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/helvetica-neue-light.svg#helvetica') format('svg'); /* Legacy iOS */
+    font-weight: 200;
+}
+@font-face {
+    font-family: 'ev-helvetica';
+    src: url('../fonts/helvetica-neue-regular.eot'); /* IE9 Compat Modes */
+    src: url('../fonts/helvetica-neue-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/helvetica-neue-regular.woff') format('woff'), /* Modern Browsers */
+    url('../fonts/helvetica-neue-regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/helvetica-neue-regular.svg#helvetica') format('svg'); /* Legacy iOS */
+    font-weight: 400;
+}
+
 html, body {
     width: 100%;
     height: 100%;
@@ -31,6 +51,7 @@ h1 {
     line-height: 60px;
     margin-bottom: 40px;
     text-shadow: 2px 1px 2px rgba(0,0,0,0.4);
+    font-family: "Helvetica Neue", 'ev-helvetica', Calibri, Arial, sans-serif;
 }
 
 .background-video {
@@ -82,17 +103,19 @@ h1 {
     padding-top: 13px;
 }
 
-.top-bar .logo-wrapper > * {
+.top-bar .logo-wrapper a > * {
     display: inline-block;
     vertical-align: middle;
+    text-decoration: none;
 }
 
-.top-bar .logo-wrapper > p {
+.top-bar .logo-wrapper a > p {
     font-size: 22px;
     font-weight: 500;
+    color: #333333;
 }
 
-.top-bar .logo-wrapper > img {
+.top-bar .logo-wrapper a > img {
     max-width: 100px;
 }
 
@@ -353,6 +376,10 @@ h1 {
     /*top: 100%;*/
 }
 
+.btn.cs {
+    cursor: default;
+}
+
 .btn.cs:after {
     content: 'coming soon...';
     position: absolute;
@@ -445,6 +472,10 @@ h1 {
     line-height: 34px;
     font-weight: 100;
     color: #8d959b;
+}
+
+p b {
+    font-weight: bold;
 }
 
 .simple-content {

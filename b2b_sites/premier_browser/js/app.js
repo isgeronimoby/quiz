@@ -89,6 +89,11 @@ $(document).ready(function() {
         });
     }
 
+    $('.to-top').on('click', function(e){
+        e.preventDefault();
+
+        navigation.find('li a')[0].click();
+    });
 
 
     // Contacts trigger
