@@ -1,0 +1,321 @@
+﻿.everton-shopping-label-trigger > .everton-shopping-label * {
+    font-family: Arial, sans-serif;
+    text-transform: none;
+    color: #333333;
+    font-weight: 200;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 16px;
+    letter-spacing: 0;
+    text-indent: 0;
+    text-shadow: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    text-decoration: none;
+    position: static;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    background: none;
+    width: auto;
+    height: auto;
+    float: none;
+    min-width: initial;
+    min-height: initial;
+    clear: none;
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Add "noiframe" class to the body when popup is ON */
+body.noiframe {
+    overflow: auto;
+}
+
+body.noiframe iframe,
+body.noiframe .modal,
+body.noiframe embed,
+body.noiframe object {
+    display: none !important;
+}
+
+.everton-shopping-label-clearfix:before,
+.everton-shopping-label-clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.everton-shopping-label-clearfix:after {
+    clear: both;
+}
+
+.everton-shopping-label-trigger {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 1px;
+    z-index: 999999999999;
+
+    display: none;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label {
+    position: absolute;
+    right: 0;
+    margin: 10px;
+    height: 105px;
+    width: 390px;
+
+    background: #ffffff;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+
+    display: none;
+
+    transform: translate(100%);
+    -webkit-transform: translate(100%);
+    -moz-transform: translate(100%);
+    -ms-transform: translate(100%);
+    opacity: 0;
+
+    transition: all 0.5s ease-out;
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -ms-transition: all 0.5s ease-out;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-logo {
+    background-image: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70px;
+    background-color: #777777;
+    width: 105px;
+    height: 100%;
+    float: left;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content {
+    position: relative;
+    z-index: 100;
+    float: right;
+    width: 285px;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-close {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    color: #999999;
+    line-height: 1px;
+    cursor: pointer;
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+
+    transition: all 0.25s ease-out;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    -ms-transition: all 0.25s ease-out;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-close:hover {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    color: #333333;
+}
+
+/* CONTENT styles here */
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask {
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask .everton-shopping-label-heading {
+    font-size: 12px;
+    font-weight: 700;
+    height: 17px;
+    overflow: hidden;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask .everton-shopping-label-answer-btn {
+    border-radius: 2px;
+    color: #ffffff;
+    height: 44px;
+    line-height: 44px;
+    font-size: 14px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    margin: 5px 0;
+    cursor: pointer;
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4ac14e+0,38ae3b+100 */
+    background: #4ac14e; /* Old browsers */
+    background: -moz-linear-gradient(top, #4ac14e 0%, #38ae3b 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4ac14e), color-stop(100%, #38ae3b)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #4ac14e 0%, #38ae3b 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #4ac14e 0%, #38ae3b 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #4ac14e 0%, #38ae3b 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #4ac14e 0%, #38ae3b 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4ac14e', endColorstr='#38ae3b', GradientType=0); /* IE6-9 */
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask .everton-shopping-label-answer-btn:hover {
+    text-shadow: none;
+    background: #349037;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-p {
+    font-size: 13px;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask .everton-shopping-label-no-btn {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask .everton-shopping-label-no-btn:hover {
+    color: #777777;
+    text-decoration: underline;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-answer,
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-answer .everton-shopping-label-message {
+    display: none;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table,
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table tbody {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table tr {
+    display: table-row;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table td {
+    display: table-cell;
+    text-align: center;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-message {
+    height: 35px;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-message td {
+    font-size: 14px;
+    padding: 9px 10px;
+    text-align: left;
+    border-bottom: 1px solid #cccccc;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-message td a {
+    display: inline;
+    font-size: 14px;
+    text-decoration: underline;
+    color: #666666;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-message td a:hover {
+    color: #777777;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-answer table .everton-shopping-label-message-yes td:before {
+    content: "\2713";
+    color: #349037;
+    font-size: 16px;
+    margin-right: 4px;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats {
+    height: 70px;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats td {
+    cursor: pointer;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats td a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding-top: 14px;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats td:hover {
+    background: #f3f3f3;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats .everton-shopping-label-pounds {
+    font-size: 15px;
+    line-height: 16px;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats .everton-shopping-label-pounds:before {
+    content: '\00a3';
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats .everton-shopping-label-stat-name {
+    font-size: 13px;
+    color: #777777;
+}
+
+/* END of CONTENT styles */
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text {
+    text-align: right;
+    margin-top: 6px;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-countdown,
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-countdown span,
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-info {
+    display: inline-block;
+    font-size: 13px;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-info {
+    color: #ffffff;
+    background: #999999;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-family: Georgia, Times, "Times New Roman", serif;
+    text-align: center;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-info:hover {
+    background: #777777;
+}
+
+/* TRANSITIONS */
+.everton-shopping-label-start-sliding {
+    opacity: 1 !important;
+    transform: translate(0) !important;
+    -webkit-transform: translate(0) !important;
+    -moz-transform: translate(0) !important;
+    -ms-transform: translate(0) !important;
+}
+
+
+/* Google Injections */
+
+.-sp0rt-reward-google-donate,
+.-sp0rt-reward-google-donate b {
+    font-size: 15px;
+    margin: 2px 0 10px;
+    display: block;
+    color: #555555;
+    font-weight: 100;
+}
