@@ -776,7 +776,7 @@ html.mm-opened .top-header .mobile-menu {
     margin-right: -100px;
 }
 .image-with-text.angular .bottom {
-    margin-left: -100px;
+    margin-left: -70px;
     margin-bottom: 35px;
 }
 
@@ -1030,9 +1030,374 @@ html.mm-opened .top-header .mobile-menu {
 }
 
 
+
+.mobile {
+
+}
+
+.mobile .middle-block {
+    padding: 10px;
+}
+
+.mobile .first-slide {
+    height: 600px;
+}
+
+.mobile .fourth-slide, .mobile .fifth-slide, .mobile .sixth-slide {
+    display: block;
+}
+.mobile .text-right, .mobile .text-left {
+    text-align: center;
+    margin: 12px 0;
+}
+.mobile .top-header .mobile-menu {
+    display: inline-block;
+}
+.mobile h2 {
+    font-size: 30px;
+    line-height: 32px;
+    margin: 50px 0 20px;
+}
+
+.mobile h4 {
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0;
+}
+
+.mobile .bg-connectivity {
+    background-image: none;
+}
+
+.mobile #navigation, .mobile .head-partners {
+    display: none;
+}
+.mobile .top-header {
+    height: 44px;
+    background-color: rgba(255,255,255,0.85);
+    box-shadow: 1px 2px 6px rgba(0,0,0,0.4);
+}
+.mobile .logo-wrapper {
+    display: block;
+    float: none;
+    width: 100%;
+    padding: 0;
+    text-align: left;
+}
+.mobile .logo-wrapper p {
+    margin-top: 8px;
+}
+.mobile .logo-wrapper img {
+    max-width: 70px;
+    margin-top: 8px;
+    margin-left: 10px;
+}
+.mobile .middle-block {
+    box-sizing: border-box;
+}
+.mobile .middle-block > div {
+    position: relative;
+}
+.mobile .section .animate-1, .mobile .section .animate-2, .mobile .section .animate-3,
+.mobile .section .animate-4, .mobile .section .animate-5 {
+    opacity: 1;
+}
+.mobile .section .second-slide {
+    transform: rotate(360deg) scale(1);
+    -webkit-transform: rotate(360deg) scale(1);
+    -moz-transform: rotate(360deg) scale(1);
+    -ms-transform: rotate(360deg) scale(1);
+    -o-transform: rotate(360deg) scale(1);
+    opacity: 1;
+}
+.mobile .second-slide .circle p {
+    text-align: center;
+}
+.mobile #fullpage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.mobile .middle-phone-holder {
+    display: none !important;
+}
+.mobile .section {
+    text-align: center;
+    box-sizing: border-box;
+}
+.mobile .image-with-text p, .mobile .image-with-text img, .mobile .image-with-text .img-wide {
+    display: block;
+    text-align: center;
+    margin: 10px auto;
+}
+.mobile p {
+    padding: 0 !important;
+}
+.mobile .text-bottom {
+    font-weight: 700;
+    position: static;
+    padding: 0 20px !important;
+    transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    min-width: 100%;
+    box-sizing: border-box;
+}
+.mobile .image-with-text.v-centered .content-images p, .mobile .cross-platform .text-right, .mobile .cross-platform .text-left,
+.mobile .image-with-text.v-centered .content-images p.text-left, .mobile .image-with-text.v-centered .content-images p.text-right,
+.mobile .image-with-text.v-centered .content-images .show-mobile, .mobile .cross-platform .content-images .show-mobile {
+    position: relative;
+    z-index: 150;
+    padding: 6px 15px !important;
+    transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+    margin: 20px auto;
+    text-align: center;
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    left: 0;
+    max-width: 80%;
+}
+.mobile .image-with-text.angular .top {
+    margin-right: 0;
+}
+.mobile .image-with-text.angular .bottom {
+    margin-left: 0;
+    margin-bottom: 20px;
+}
+.mobile .image-with-text p {
+    max-width: initial;
+}
+.mobile .img-wide {
+    max-width: 80%;
+}
+.mobile .img-high {
+    max-width: 30%;
+}
+
+.mobile .first-slide img:nth-child(1) {
+    max-width: 40%;
+}
+.mobile .first-slide .img-high, .mobile .first-slide img:nth-child(3) {
+    max-width: 20%;
+}
+.mobile .first-slide img:nth-child(4) {
+    top: 70%;
+    max-width: 20%;
+}
+.mobile .middle-block > h2 {
+    margin-bottom: 20px;
+    font-size: 40px;
+    line-height: 46px;
+}
+
+.mobile .image-with-text.angular .img-wide {
+    max-width: 45%;
+}
+.mobile .contacts-holder {
+    margin-top: 100px;
+    position: initial !important;
+    transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    padding-bottom: 60px;
+}
+.mobile h2 {
+    font-size: 26px;
+    line-height: 24px;
+    margin: 30px 0 20px;
+}
+.mobile .contacts-holder .btn-find-more {
+    font-size: 24px;
+    padding: 0 50px;
+    line-height: 60px;
+    height: 60px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+.mobile .contacts-holder p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.mobile .contacts-holder h3 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+.mobile .contacts-holder h2 {
+    margin-bottom: 30px;
+}
+.mobile .image-with-text.v-centered .content-images img:nth-of-type(4),
+.mobile .image-with-text.v-centered .content-images img:nth-of-type(3){
+    display: none;
+}
+.mobile .image-with-text.v-centered .content-images img:nth-of-type(2) {
+    max-width: 40%;
+}
+.mobile .image-with-text.v-centered .content-images img:nth-of-type(1) {
+    max-width: 90%;
+}
+.mobile .cross-platform .content-images img:nth-of-type(3) {
+    max-width: 25%;
+}
+.mobile .cross-platform .content-images img:nth-of-type(2) {
+    max-width: 50%;
+}
+.mobile .cross-platform .content-images img:nth-of-type(1),
+.mobile .img-wide-alone {
+    max-width: 80%;
+}
+.mobile .quotes-container {
+    max-width: 100%;
+    margin: 20px auto 0;
+}
+.mobile .quotes-container > .quote p {
+    font-size: 14px;
+}
+.mobile .content-images img:not(.show-mobile) {
+    display: none;
+}
+.mobile .content-images .show-mobile {
+    max-width: 100%;
+}
+.mobile .show-mobile {
+    display: inline-block !important;
+}
+
+
+
+/* OFFCANVAS */
+
+.uk-offcanvas {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+.uk-offcanvas .uk-offcanvas-bar {
+    background: #efefef;
+    border-right: 1px solid #cccccc;
+    box-shadow: 5px 0 20px rgba(0,0,0,0.2);
+}
+.uk-offcanvas .uk-offcanvas-bar ul {
+    padding: 0;
+}
+.uk-offcanvas .uk-offcanvas-bar ul li {
+    border-bottom: 1px solid #dddddd;
+}
+.uk-offcanvas .uk-offcanvas-bar ul li:first-of-type {
+    border-top: 1px solid #dddddd;
+}
+.uk-offcanvas .uk-offcanvas-bar ul li a {
+    text-decoration: none;
+    display: block;
+    padding-left: 25px;
+    line-height: 32px;
+    color: #777777;
+}
+.uk-offcanvas .uk-offcanvas-bar ul li a:hover {
+    background: #dddddd;
+}
+.uk-nav-offcanvas > li > a {
+    color: #cccccc;
+    padding: 10px 15px;
+}
+.uk-nav-offcanvas > .uk-open > a,
+html:not(.uk-touch) .uk-nav-offcanvas > li > a:hover,
+html:not(.uk-touch) .uk-nav-offcanvas > li > a:focus {
+    background: #404040;
+    color: #ffffff;
+    outline: none;
+}
+html .uk-nav.uk-nav-offcanvas > li.uk-active > a {
+    background: #1a1a1a;
+    color: #ffffff;
+}
+.uk-nav-offcanvas .uk-nav-header {
+    color: #777777;
+}
+.uk-nav-offcanvas .uk-nav-divider {
+    border-top: 1px solid #1a1a1a;
+}
+.uk-nav-offcanvas ul a {
+    color: #cccccc;
+}
+html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
+    color: #ffffff;
+}
+.uk-offcanvas {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    touch-action: none;
+    background: rgba(0, 0, 0, 0.1);
+}
+.uk-offcanvas.uk-active {
+    display: block;
+}
+.uk-offcanvas-page {
+    position: absolute;
+    -webkit-transition: margin-left 0.3s ease-in-out;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.mobile.uk-offcanvas-page {
+    position: fixed;
+}
+
+.uk-offcanvas-bar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    z-index: 1001;
+    width: 270px;
+    max-width: 100%;
+    background: #333333;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transition: -webkit-transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+    -ms-scroll-chaining: none;
+}
+.uk-offcanvas.uk-active .uk-offcanvas-bar.uk-offcanvas-bar-show {
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
+}
+.uk-offcanvas-bar-flip {
+    left: auto;
+    right: 0;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+.uk-offcanvas .uk-panel {
+    margin: 20px 15px;
+    color: #777777;
+}
+.uk-offcanvas .uk-panel-title {
+    color: #cccccc;
+}
+.uk-offcanvas .uk-panel a:not([class]) {
+    color: #cccccc;
+}
+.uk-offcanvas .uk-panel a:not([class]):hover {
+    color: #ffffff;
+}
+
+
+
 /* MOBILE LAYOUT */
 
-@media all and (min-width: 1025px) and (min-height: 700px) and (max-height: 800px) {
+@media all and (min-height: 700px) and (max-height: 800px) {
     .second-slide {
         width: 450px;
         height: 450px;
@@ -1075,7 +1440,7 @@ html.mm-opened .top-header .mobile-menu {
         max-width: 600px;
     }
 }
-@media all and (min-width: 1025px) and (max-height: 700px) {
+@media all  and (max-height: 700px) {
     .second-slide {
         width: 380px;
         height: 380px;
@@ -1122,7 +1487,8 @@ html.mm-opened .top-header .mobile-menu {
     }
 }
 
-@media all and (min-width: 800px) and (max-width: 1024px) {
+@media all and (min-width: 800px) and (max-width: 1024px){
+
     .logo-wrapper {
         padding-left: 10px;
     }
@@ -1248,6 +1614,19 @@ html.mm-opened .top-header .mobile-menu {
 }
 
 @media screen and (max-width: 800px) {
+    .mobile .first-slide {
+        height: 400px;
+    }
+    .mobile .first-slide img:nth-child(1) {
+        max-width: 60%;
+    }
+    .mobile .first-slide .img-high, .mobile .first-slide img:nth-child(3) {
+        max-width: 40%;
+    }
+    .mobile .first-slide img:nth-child(4) {
+        top: 70%;
+        max-width: 40%;
+    }
     .fourth-slide, .fifth-slide, .sixth-slide {
         display: block;
     }
@@ -1298,7 +1677,7 @@ html.mm-opened .top-header .mobile-menu {
         margin-left: 10px;
     }
     .middle-block {
-        padding: 0 80px;
+        padding: 20px;
         box-sizing: border-box;
     }
     .middle-block > div {
@@ -1325,6 +1704,9 @@ html.mm-opened .top-header .mobile-menu {
         height: 100%;
         top: 0;
         left: 0;
+    }
+    .middle-phone-holder {
+        display: none !important;
     }
     .section {
         text-align: center;
@@ -1395,8 +1777,8 @@ html.mm-opened .top-header .mobile-menu {
     }
     .middle-block > h2 {
         margin-bottom: 20px;
-        font-size: 40px;
-        line-height: 46px;
+        font-size: 32px;
+        line-height: 34px;
     }
     .second-slide {
         width: 400px;
@@ -1484,7 +1866,7 @@ html.mm-opened .top-header .mobile-menu {
 
 @media all and (max-width: 550px) {
     .middle-block {
-        padding: 0 10px;
+        padding: 80px 10px;
     }
 }
 
@@ -1516,215 +1898,41 @@ html.mm-opened .top-header .mobile-menu {
     /* 1280x608 */
 }
 
-@media all and (max-width: 400px) {
-    .first-slide {
+@media screen and (max-width: 400px) {
+    .first-slide, .mobile .first-slide {
         height: 240px;
         margin-top: 80px;
     }
-    .second-slide {
+    .second-slide, .mobile .second-slide {
         width: 280px;
         height: 280px;
         margin: 0 auto;
     }
-    .second-slide .circle p {
+
+    .second-slide .circle p, .mobile .second-slide .circle p {
         font-size: 11px;
     }
-    .middle-block > h2 {
+    .middle-block > h2, .mobile .middle-block > h2 {
         margin-bottom: 20px;
         font-size: 34px;
         line-height: 34px;
         margin-top: 40px;
     }
-    .seventh-slide, .tenth-slide {
+    .seventh-slide, .mobile .tenth-slide,
+    .seventh-slide, .mobile .tenth-slide {
         margin-top: 50px;
     }
 }
 
-
-/* OFFCANVAS */
-
-.uk-offcanvas {
-    background: rgba(0, 0, 0, 0.2) !important;
-}
-.uk-offcanvas .uk-offcanvas-bar {
-    background: #efefef;
-    border-right: 1px solid #cccccc;
-    box-shadow: 5px 0 20px rgba(0,0,0,0.2);
-}
-
-.uk-offcanvas .uk-offcanvas-bar ul {
-    padding: 0;
-}
-
-.uk-offcanvas .uk-offcanvas-bar ul li {
-    border-bottom: 1px solid #dddddd;
-}
-.uk-offcanvas .uk-offcanvas-bar ul li:first-of-type {
-    border-top: 1px solid #dddddd;
-}
-
-.uk-offcanvas .uk-offcanvas-bar ul li a {
-    text-decoration: none;
-    display: block;
-    padding-left: 25px;
-    line-height: 32px;
-    color: #777777;
-}
-.uk-offcanvas .uk-offcanvas-bar ul li a:hover {
-    background: #dddddd;
-}
-
-/* Modifier `uk-nav-offcanvas`
- ========================================================================== */
-/*
- * Items
- */
-.uk-nav-offcanvas > li > a {
-    color: #cccccc;
-    padding: 10px 15px;
-}
-/*
- * Hover
- * No hover on touch devices because it behaves buggy in fixed offcanvas
- * 1. Apply hover style also to focus state
- * 2. Remove default focus style
- */
-.uk-nav-offcanvas > .uk-open > a,
-html:not(.uk-touch) .uk-nav-offcanvas > li > a:hover,
-html:not(.uk-touch) .uk-nav-offcanvas > li > a:focus {
-    background: #404040;
-    color: #ffffff;
-    /* 2 */
-    outline: none;
-}
-/*
- * Active
- * `html .uk-nav` needed for higher specificity to override hover
- */
-html .uk-nav.uk-nav-offcanvas > li.uk-active > a {
-    background: #1a1a1a;
-    color: #ffffff;
-}
-/*
- * Sub-object: `uk-nav-header`
- */
-.uk-nav-offcanvas .uk-nav-header {
-    color: #777777;
-}
-/*
- * Sub-object: `uk-nav-divider`
- */
-.uk-nav-offcanvas .uk-nav-divider {
-    border-top: 1px solid #1a1a1a;
-}
-/*
- * Nested items
- * No hover on touch devices because it behaves buggy in fixed offcanvas
- */
-.uk-nav-offcanvas ul a {
-    color: #cccccc;
-}
-html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
-    color: #ffffff;
-}
-/* ========================================================================
-   Component: Off-canvas
- ========================================================================== */
-/*
- * This is the offcanvas overlay and bar container
- * 1. Hide by default
- * 2. Set fixed position
- * 3. Deactivate browser touch actions in IE11
- * 4. Mask the background page
- */
-.uk-offcanvas {
-    /* 1 */
-    display: none;
-    /* 2 */
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-    /* 3 */
-    touch-action: none;
-    /* 4 */
-    background: rgba(0, 0, 0, 0.1);
-}
-.uk-offcanvas.uk-active {
-    display: block;
-}
-/* Sub-object `uk-offcanvas-page`
- ========================================================================== */
-/*
- * Prepares the whole HTML page to slide-out
- * 1. Fix the main page and disallow scrolling
- * 2. Side-out transition
- */
-.uk-offcanvas-page {
-    /* 1 */
-    position: fixed;
-    /* 2 */
-    -webkit-transition: margin-left 0.3s ease-in-out;
-    transition: margin-left 0.3s ease-in-out;
-}
-/* Sub-object `uk-offcanvas-bar`
- ========================================================================== */
-/*
- * This is the offcanvas bar
- * 1. Set fixed position
- * 2. Size and style
- * 3. Allow scrolling
- * 4. Side-out transition
- * 5. Deactivate scroll chaining in IE11
- */
-.uk-offcanvas-bar {
-    /* 1 */
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%);
-    z-index: 1001;
-    /* 2 */
-    width: 270px;
-    max-width: 100%;
-    background: #333333;
-    /* 3 */
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    /* 4 */
-    -webkit-transition: -webkit-transform 0.3s ease-in-out;
-    transition: transform 0.3s ease-in-out;
-    /* 5 */
-    -ms-scroll-chaining: none;
-}
-.uk-offcanvas.uk-active .uk-offcanvas-bar.uk-offcanvas-bar-show {
-    -webkit-transform: translateX(0%);
-    transform: translateX(0%);
-}
-/* Modifier `uk-offcanvas-bar-flip`
- ========================================================================== */
-.uk-offcanvas-bar-flip {
-    left: auto;
-    right: 0;
-    -webkit-transform: translateX(100%);
-    transform: translateX(100%);
-}
-/* Panel in offcanvas
- ========================================================================== */
-.uk-offcanvas .uk-panel {
-    margin: 20px 15px;
-    color: #777777;
-}
-.uk-offcanvas .uk-panel-title {
-    color: #cccccc;
-}
-.uk-offcanvas .uk-panel a:not([class]) {
-    color: #cccccc;
-}
-.uk-offcanvas .uk-panel a:not([class]):hover {
-    color: #ffffff;
+@media screen and (max-height: 700px) and (max-width: 800px) {
+    .image-with-text.angular .img-wide {
+        max-width: 40%;
+    }
+    .img-high {
+        max-width: 20%;
+    }
+    .cross-platform .content-images .show-mobile,
+    .image-with-text.v-centered .content-images .show-mobile {
+        max-width: 60%;
+    }
 }
