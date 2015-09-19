@@ -241,8 +241,7 @@
 	// Featherlight POPUPS for signing up only, at least for now
 	// All changes after it was loaded
 	var lastFeatherlight;
-	if ( $.featherlight ) {
-
+	if ($.featherlight) {
 		$.featherlight.defaults.afterContent = function (event) {
 
 			'use strict';
@@ -253,6 +252,10 @@
 				name = fForm.find('input[type=name]');
 			var msg = $(event.currentTarget).attr("data-msg");
 			lastFeatherlight = $('.featherlight');
+
+			passwordEyeDefault($.featherlight.current().$content.find('form'));
+			fForm.hide();
+			emailBtn.show();
 
 			// Trigger to show the form with email signup
 			emailBtn.on('click', function (e) {
@@ -268,16 +271,6 @@
 			$('div.featherlight-body > h4').text( msg );
 
 			$.fn.passwordEye();
-		};
-
-		// Change back states of some elements on closing the popup
-		$.featherlight.defaults.beforeClose = function () {
-			var emailBtn = lastFeatherlight.find('.featherlight-body .email-connect');
-			var fForm = lastFeatherlight.find('.featherlight-signup-form.triggered-form');
-
-			passwordEyeDefault($.featherlight.current().$content.find('form'));
-			fForm.hide();
-			emailBtn.show();
 
 			$("div.alert-danger").remove();
 		};
