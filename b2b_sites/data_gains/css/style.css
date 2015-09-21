@@ -23,16 +23,11 @@ html, body {
     height: 100%;
     padding: 0;
     margin: 0;
-    overflow: hidden;
     font-family: "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
     font-weight: 200;
     color: #ffffff;
     text-align: center;
 }
-
-/*html.white, html.white body {
-    overflow: auto;
-}*/
 
 body * {
     padding: 0;
