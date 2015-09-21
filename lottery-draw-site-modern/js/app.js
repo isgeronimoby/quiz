@@ -543,18 +543,27 @@ jQuery(document).ready(function ($) {
 		var optionsList = $('.earningOptions');
 		var listVisibility = false;
 
-		$(window).scroll(function () {
-			if ($(window).scrollTop() >= optionsList.offset().top / 2 - 70) {
-				if ( listVisibility == false ) {
-					optionsList.find('li').add('.article').each(function (ind, el) {
-						setTimeout( function () {
-							$(el).addClass('revealListItem');
-						}, 250 * ind );
-					});
-					listVisibility = true;
+		if ( optionsList.height() / 2.2 + optionsList.offset().top > $(window).height() ) {
+			$(window).scroll(function () {
+				if (( optionsList.offset().top + 120 - $(window).scrollTop() ) < $(window).height()) {
+					if (listVisibility == false) {
+						optionsList.find('li').add('.article').each(function (ind, el) {
+							setTimeout(function () {
+								$(el).addClass('revealListItem');
+							}, 250 * ind);
+						});
+						listVisibility = true;
+					}
 				}
-			}
-		});
+			});
+		} else {
+			optionsList.find('li').add('.article').each(function (ind, el) {
+				setTimeout(function () {
+					$(el).addClass('revealListItem');
+				}, 250 * ind);
+			});
+			listVisibility = true;
+		}
 	}
 
 	//Show current selected option.
