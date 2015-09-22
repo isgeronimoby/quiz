@@ -404,14 +404,14 @@ img {
     text-align: center;
 }
 .earningOptions ul li .button > span, .greyBox .button > span,
-.everton-popup-body .button > span, .enter-details-block .button > span,
+.club-popup-body .button > span, .enter-details-block .button > span,
 .sectionLayout.signupPage .mobileSignupLayout .button > span {
 	display: inline-block;
 	height: 100%;
 }
 .earningOptions ul li .button > span > span,
 .greyBox .button > span > span,
-.everton-popup-body .button > span > span,
+.club-popup-body .button > span > span,
 .enter-details-block .button > span > span,
 .sectionLayout.signupPage .mobileSignupLayout .button > span > span{
 	display: table-cell;
@@ -449,23 +449,23 @@ img {
     display: none;
 }
 /*****   POPUP STYLES   *****/
-.everton-amazing-popups .everton-popup-clearfix:before,
-.everton-amazing-popups .everton-popup-clearfix:after {
+.club-amazing-popups .club-popup-clearfix:before,
+.club-amazing-popups .club-popup-clearfix:after {
     content:"";
     display:table;
 }
-.everton-amazing-popups .everton-popup-clearfix:after {
+.club-amazing-popups .club-popup-clearfix:after {
     clear:both;
 }
-.everton-amazing-popups .everton-popup-clearfix {
+.club-amazing-popups .club-popup-clearfix {
     zoom:1; /* For IE 6/7 (trigger hasLayout) */
 }
 /* END OF RESET */
-.everton-amazing-popups, .popup-holder {
+.club-amazing-popups, .popup-holder {
 	display: none;
 
 }
-.everton-popup-container .everton-popup .everton-popup-header {
+.club-popup-container .club-popup .club-popup-header {
 	width: 100%;
 	height: 0;
 	background: transparent;
@@ -475,7 +475,7 @@ img {
 }
 
 
-.everton-popup-container .everton-popup .everton-popup-header .everton-popup-close {
+.club-popup-container .club-popup .club-popup-header .club-popup-close {
 	float: right;
 	display: block;
 	text-decoration: none;
@@ -490,41 +490,41 @@ img {
 	margin-right: 10px;
 	margin-top: 7px;
 }
-.everton-popup-container .everton-popup .everton-popup-body {
+.club-popup-container .club-popup .club-popup-body {
 	padding: 28px 24px 34px 30px;
     text-align: center;
 	background: #364158;
 }
-.everton-popup-container .everton-popup .everton-popup-body .form-group .simpleLink{
+.club-popup-container .club-popup .club-popup-body .form-group .simpleLink{
 	text-align: left;
 	margin: 20px 0 6px;
 	text-transform: none;
 }
 
 
-.everton-popup-container .everton-popup .everton-popup-body .terms,
-.everton-popup-container .everton-popup .everton-popup-body .terms a{
+.club-popup-container .club-popup .club-popup-body .terms,
+.club-popup-container .club-popup .club-popup-body .terms a{
 	text-decoration: none;
 	color: #bbb;
 	font-weight: 400;
 	margin: 15px 0 0;
 	font-size: 13px;
 }
-.everton-popup-container .everton-popup .everton-popup-body .terms a:hover {
+.club-popup-container .club-popup .club-popup-body .terms a:hover {
 	text-decoration: underline;
 	color: #eeeeee;
 }
-.everton-popup-container .everton-popup .everton-popup-body h2{
+.club-popup-container .club-popup .club-popup-body h2{
     font-weight: 800;
     color: #fff;
 	font-size: 1.5em;
 }
-.everton-popup-container .everton-popup .everton-popup-body h2.popup-heading{
+.club-popup-container .club-popup .club-popup-body h2.popup-heading{
     font-size: 16px;
     line-height: 20px;
     margin: 22px 0 0;
 }
-.everton-popup-container .everton-popup .everton-popup-body .formError{
+.club-popup-container .club-popup .club-popup-body .formError{
     color: red;
     display: block;
     text-align: left;
@@ -656,7 +656,7 @@ button.close {
 	border: 0;
 }
 
-.everton-popup-container .everton-popup .everton-popup-body .popupForm label, .details-form label{
+.club-popup-container .club-popup .club-popup-body .popupForm label, .details-form label{
     display: block;
     color: #6EAFFA;;
     text-align: left;
@@ -665,7 +665,7 @@ button.close {
     margin-top: 25px;
     margin-bottom: 2px;
 }
-.everton-popup-container .everton-popup .everton-popup-body .popupForm input:not([type="submit"]), .details-form input:not([type="submit"]){
+.club-popup-container .club-popup .club-popup-body .popupForm input:not([type="submit"]), .details-form input:not([type="submit"]){
     display: block;
     color: #222222;
     min-height: 46px;
@@ -682,7 +682,7 @@ button.close {
 	border-radius: 0;
 }
 
-.everton-popup-container .everton-popup .everton-popup-body .popupForm input[type=submit], .details-form input[type=submit]{
+.club-popup-container .club-popup .club-popup-body .popupForm input[type=submit], .details-form input[type=submit]{
     color: #ffffff;
     margin-top: 25px;
     cursor: pointer;
@@ -821,37 +821,6 @@ button.close {
 
 .buttonDefault:hover {
     box-shadow: none;
-}
-
-.buttonBlue,
-.buttonBlue:active,
-.buttonBlue:focus {
-    background-color: #00369c;
-    border-bottom-color: #012a85;
-}
-.buttonBlue:hover {
-    background-color: #012a85;
-    border-bottom-color: #012a85;
-}
-.buttonLightBlue,
-.buttonLightBlue:active,
-.buttonLightBlue:focus {
-    background-color: #3782d7;
-    border-bottom-color: #1c68bd;
-}
-.buttonLightBlue:hover {
-    background-color: #1c68bd;
-    border-bottom-color: #1c68bd;
-}
-.buttonYellow,
-.buttonYellow:active,
-.buttonYellow:focus {
-    background-color: #bda234;
-    border-bottom-color: #7a640c;
-}
-.buttonYellow:hover {
-    background-color: #7a640c;
-    border-bottom-color: #7a640c;
 }
 
 .buttonStroke,

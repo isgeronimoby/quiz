@@ -66,7 +66,7 @@ jQuery(document).ready(function ($) {
 
 
 	// End of fancybox default values
-	$('.everton-popup-close').click(function (e) {
+	$('.club-popup-close').click(function (e) {
 		e.preventDefault();
 		$.fancybox.close();
 	});
@@ -654,13 +654,13 @@ jQuery(document).ready(function ($) {
 	function connectSuccess(popupID) {
 		var successPlace = $('#' + popupID);
 		var successText = successPlace.find('.connectSuccessMessage');
-		successPlace.find('.everton-popup-body img').hide();
+		successPlace.find('.club-popup-body img').hide();
 		successPlace.find('.text-holder').hide();
 		successPlace.find('form').hide();
 		successText.addClass('connectSuccessMessageAnimated');
 		setTimeout(function () {
 			successText.addClass('connectSuccessMessageAnimationFinished').removeClass('connectSuccessMessageAnimated');
-			successPlace.find('.everton-popup-body img').show();
+			successPlace.find('.club-popup-body img').show();
 			successPlace.find('.text-holder').show();
 			successPlace.find('form').show();
 			successText.removeClass('connectSuccessMessageAnimationFinished');

@@ -1,0 +1,30 @@
+.buttonBlue,
+.buttonBlue:active,
+.buttonBlue:focus {
+    background-color: #62ade9;
+    border-bottom-color: #357fe9;
+}
+.buttonBlue:hover {
+    background-color: #357fe9;
+    border-bottom-color: #357fe9;
+}
+.buttonLightBlue,
+.buttonLightBlue:active,
+.buttonLightBlue:focus {
+    background-color: #226596;
+    border-bottom-color: #104267;
+}
+.buttonLightBlue:hover {
+    background-color: #104267;
+    border-bottom-color: #104267;
+}
+.buttonYellow,
+.buttonYellow:active,
+.buttonYellow:focus {
+    background-color: #bda234;
+    border-bottom-color: #7a640c;
+}
+.buttonYellow:hover {
+    background-color: #7a640c;
+    border-bottom-color: #7a640c;
+}
