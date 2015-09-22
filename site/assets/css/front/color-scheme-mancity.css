@@ -332,14 +332,17 @@ body .modal-fancy .gg:hover {
   border-bottom-color: #1c7cc9;
 }
 .lotteryFootballBG {
-  background: url('../../../assets/images/front/mancity/bg-team-training.png') no-repeat;
+  background: url('../../images/front/mancity/bg-team-training.png') no-repeat;
   background-size: cover;
   background-position: center center;
 }
 .lotteryFootballBG.animated {
-  background: url('../../../assets/images/front/mancity/bg-team-training-saturated.png') no-repeat;
+  background: url('../../images/front/mancity/bg-team-training-saturated.png') no-repeat;
   background-size: cover;
   background-position: center center;
+}
+.lotteryFootballBG.animated .prize-image-holder:after {
+  background: url("../../images/front/mancity/logo_square.png") no-repeat;
 }
 /******************************/
 /******* LANDING PAGE *******/

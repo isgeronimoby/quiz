@@ -2804,7 +2804,7 @@ body .modal-fancy .gg.alt:hover {
     z-index: 500;
 	margin: 0 4px 0 7px;
 	/*background-color: #e5412d;*/
-    background: url('../../images/front/everton/separator-image.png');
+    background: url('../../images/front/separator-image.png');
 }
 
 .profile-name .dashboard-sign-in {
@@ -4158,6 +4158,86 @@ body .n-found .ie-true,
 	margin: 0;
 }
 
+.landing-page .service-message a {
+	background-color: #f9c50f;
+	color: #000000;
+}
+
+.landing-page .service-message a:hover {
+	background-color: #ffd739;
+}
+
+
+.landing-page h2,
+.landing-page h3 {
+	clear: both;
+	overflow: hidden;
+	padding-left: 37px;
+	/*text-indent: 37px;*/
+	text-align: left;
+}
+
+.landing-page h2 {
+	margin-bottom: 40px;
+}
+.landing-page h3 {
+	margin-bottom: 26px;
+}
+
+
+.landing-page h2 i:before,
+.landing-page h3 i:before {
+	font-size: 18px;
+	line-height: 22px;
+	color: #e5412d;
+}
+
+.main-holder .landing-page a {
+	text-transform: inherit;
+	padding-left: 43px;
+	padding-right: 43px;
+}
+
+.landing-page .instructions li p {
+	font-size: 18px;
+	line-height: 23px;
+}
+
+.landing-page .thumbnail {
+	padding: 0;
+	border: none;
+}
+
+.landing-page .shop p {
+	font-size: 18px;
+	line-height: 23px;
+	text-align: left;
+}
+
+.landing-page .retailers {
+	clear: both;
+	margin-bottom: 78px;
+}
+
+.landing-page .retailers li {
+	margin-bottom: 15px;
+}
+
+.landing-page .retailers li span {
+	display: block;
+	height: 88px;
+	line-height: 88px;
+	border: solid 1px #d9d9d9;
+
+}
+
+.landing-page .retailers img {
+	display: inline;
+	vertical-align: middle;
+	padding: 0;
+	margin: 0;
+}
+
 /*============================================================================*/
 /*CONTACT PAGE*/
 /*============================================================================*/
@@ -4800,7 +4880,7 @@ body .n-found .ie-true,
 	display: inline-block;
 	width: 70px;
 	height: 70px;
-	background: url('../../images/front/everton/circle-arrow-down.svg') no-repeat;
+	background: url('../../images/front/circle-arrow-down.svg') no-repeat;
 	background-size: cover;
 	cursor: pointer;
 	opacity: 0.6;
@@ -4903,7 +4983,6 @@ body .n-found .ie-true,
 	right: 20px;
 	width: 44px;
 	height: 44px;
-	background: url("../../images/front/everton/everton_logo_square.png") no-repeat;
 	background-size: cover;
 	content: "";
 }
@@ -5643,6 +5722,25 @@ body .n-found .ie-true,
 		border-color: #BBBBBB;
 	}
 
+	.wrapper-search {
+		margin: 5px 0px 0 6px;
+	}
+
+	.navbar.active .wrapper-search {
+		display: block;
+		padding-right: 25px;
+		background: #fff;
+	}
+
+	.autocomplete-suggestions {
+		width: 210px !important;
+		margin-left: -25px;
+	}
+
+	.toolbar .company-logo {
+		margin-right: 6px;
+	}
+
 }
 
 @media all and (max-width: 1090px) and (min-width: 991px) {
@@ -5871,6 +5969,13 @@ body .n-found .ie-true,
 	}
 }
 
+@media all and (max-width: 630px) {
+	.toolbar .button {
+		padding: 0 12px;
+	}
+
+}
+
 @media all and (max-width: 620px) {
 
 	.profile-statistic li {
@@ -5941,6 +6046,13 @@ body .n-found .ie-true,
     .popup-article .send-settings {
         width: 100% !important;
     }
+}
+
+@media all and (max-width: 550px) {
+	.toolbar .button {
+		padding: 0 4px;
+	}
+
 }
 
 @media all and (max-width: 490px) {
@@ -6191,6 +6303,20 @@ body .n-found .ie-true,
         width: 95px;
         height: auto;
     }
+
+	.wrapper-search {
+		margin: 5px 0px 0 6px;
+	}
+
+	.wrapper-search .open-search {
+		margin: 3px 16px 0 0;
+	}
+
+	.toolbar .button {
+		margin: 0 5px 0 0;
+		padding: 0 3px;
+	}
+
 }
 
 @media all and (max-width: 380px) {
