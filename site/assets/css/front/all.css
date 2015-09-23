@@ -1368,6 +1368,7 @@ body .modal-fancy .widget .widget-body {
 
 	.featherlight-popup-inner .featherlight-body .signup-buttons > .social-login {
 		margin: 15px 30px;
+		cursor: pointer;
 	}
 
 	.featherlight-popup-inner .featherlight-body .signup-buttons .small-note {
