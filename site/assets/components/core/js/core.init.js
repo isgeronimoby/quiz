@@ -254,7 +254,9 @@
 			lastFeatherlight = $('.featherlight');
 
 			passwordEyeDefault($.featherlight.current().$content.find('form'));
-			fForm.hide();
+			if ( fForm.hasClass('hidden-element') ) {
+				fForm.hide();
+			}
 			emailBtn.show();
 
 			// Trigger to show the form with email signup
