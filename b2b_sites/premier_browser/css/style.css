@@ -1397,6 +1397,19 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 
 /* MOBILE LAYOUT */
 
+@media screen and (max-width: 1025px) {
+    .mobile .first-slide .img-high, .mobile .first-slide img:nth-child(3) {
+        max-width: 15%;
+    }
+    .mobile .first-slide img:nth-child(4) {
+        top: 50%;
+        max-width: 15%;
+    }
+    .first-slide img:nth-child(3) {
+        left: 63%;
+    }
+}
+
 @media all and (min-height: 700px) and (max-height: 800px) {
     .second-slide {
         width: 450px;
@@ -1621,11 +1634,14 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
         max-width: 60%;
     }
     .mobile .first-slide .img-high, .mobile .first-slide img:nth-child(3) {
-        max-width: 40%;
+        max-width: 30%;
+    }
+    .mobile .first-slide img:nth-child(3) {
+        left: 68%;
     }
     .mobile .first-slide img:nth-child(4) {
         top: 70%;
-        max-width: 40%;
+        max-width: 30%;
     }
     .fourth-slide, .fifth-slide, .sixth-slide {
         display: block;

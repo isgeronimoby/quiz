@@ -49,6 +49,11 @@ h1 {
     font-family: "Helvetica Neue", 'ev-helvetica', Calibri, Arial, sans-serif;
 }
 
+.wrapper {
+    height: 100%;
+    width: 100%;
+}
+
 .mobile-bg {
     display: none;
 
@@ -62,21 +67,11 @@ h1 {
     overflow: hidden;
     margin-bottom: -5px;
     text-align: center;
-}
-.mobile-bg > img {
-    display: inline-block;
-    position: absolute;
-    height: 100%;
-    width: auto;
-    top: 50%;
-    left: 50%;
 
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
+    background: url('../imgs/bg_dark.jpg') no-repeat center;
+    background-size: cover;
 }
+
 
 .background-video {
     position: fixed;
@@ -306,11 +301,11 @@ h1 {
     left: 50%;
     width: 100%;
     text-align: center;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    -moz-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
 }
 
 .bottom-content .left-part > p,
@@ -607,6 +602,12 @@ p b {
     }
 }
 
+@media screen and (max-width: 1025px) {
+    .top-bar {
+        padding: 0 15px;
+    }
+}
+
 @media screen and (max-height: 650px) {
     html, body {
         width: 100%;
@@ -646,7 +647,7 @@ p b {
         text-align: center;
     }
     .bottom-content {
-        bottom: -20px;
+        /*bottom: -20px;*/
     }
     .bottom-content p, .bottom-content .logos.ribbons p {
         font-size: 14px;
