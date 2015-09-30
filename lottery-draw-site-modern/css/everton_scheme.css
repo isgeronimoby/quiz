@@ -28,3 +28,8 @@
     background-color: #7a640c;
     border-bottom-color: #7a640c;
 }
+
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body {
+    background: #23279c;
+    border-bottom: 12px solid #012a85;
+}

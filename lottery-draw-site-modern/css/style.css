@@ -1396,9 +1396,7 @@ canvas {
 .extension-notification .extension-overlay .extension-notification-holder .extension-notification-body {
 	position: relative;
 	text-align: center;
-	background: #23279c;
 	display: inline-block;
-	border-bottom: 12px solid #1b217d;
 	padding: 22px 50px;
 	margin-top: 65px;
 }
