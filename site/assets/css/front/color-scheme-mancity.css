@@ -343,6 +343,15 @@ body .modal-fancy .gg:hover {
 }
 .lotteryFootballBG.animated .prize-image-holder:after {
   background: url("../../images/front/mancity/logo_square.png") no-repeat;
+  background-size: cover;
+}
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow {
+  background: url('../../images/front/mancity/arrow_top.png') no-repeat;
+  background-size: cover;
+}
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body {
+  background-color: #62ade9;
+  border-bottom: 8px solid #1c7cc9;
 }
 /******************************/
 /******* LANDING PAGE *******/
