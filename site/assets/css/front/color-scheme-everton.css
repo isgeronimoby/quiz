@@ -343,6 +343,15 @@ body .modal-fancy .gg:hover {
 }
 .lotteryFootballBG.animated .prize-image-holder:after {
   background: url("../../images/front/everton/everton_logo_square.png") no-repeat;
+  background-size: cover;
+}
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow {
+  background: url('../../images/front/everton/arrow_top.png') no-repeat;
+  background-size: cover;
+}
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body {
+  background-color: #00369c;
+  border-bottom: 8px solid #001336;
 }
 /******************************/
 /******* LANDING PAGE *******/

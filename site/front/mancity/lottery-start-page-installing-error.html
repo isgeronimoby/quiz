@@ -258,54 +258,19 @@
 
 <div class="lotteryFootballBG animated text-center n-found">
 
-	<div class="fadeTextHolder">
-		<p>Welcome to the Everton Draw!</p>
-	</div>
-
 	<div class="first-slide-holder">
 
-		<div class="progress-bar-triple">
-			<div class="progress-fill"></div>
-			<span>1</span>
-			<span>2</span>
-			<span>3</span>
-			<div class="clearfix"></div>
+		<!-- LOADING CIRCLE -->
+		<div class="loading-holder error">
+			<h1>How embarassing, it seems there was a problem whilst installing, please, try again</h1>
+
+			<a class="not-ie" href="#">Try again</a>
+
+			<p>Please, <a class="plain" href="">click here</a> to add it again</p>
 		</div>
-		<div class="dummy-container"></div>
-		<div class="step-two">
-			<div class="top-section">
-				<h3>Everytime you shop you’ll earn free
-					Everton credit to spend at Everton Direct!</h3>
-			</div>
-
-			<a class="not-ie" href="#">Install Everton Extension</a>
-			<a class="ie-true" href="#">Try to enter the draw</a>
+		<!-- LOADING CIRCLE END -->
 
 
-			<div class="bottom-section">
-				<p>and get the chance to win
-					a tattoo</p>
-			</div>
-			<div class="top-section">
-				<div class="prize-image-holder">
-					<img src="https://metrouk2.files.wordpress.com/2014/11/lego-1.jpg" class="prize-image">
-				</div>
-			</div>
-		</div>
-
-		<div class="step-three">
-			<div class="top-section">
-				<h3>Almost there!<br/>
-					Sign up to start <span class="goldText">earning</span> and <span class="goldText">winning</span></h3>
-			</div>
-
-			<a class="buttonBlue facebook" href="#">Sign up with Facebook</a>
-			<h4>We'll never post anything without your permission</h4>
-			<p>or</p>
-			<a class="fancybox email-button" href="#signupPopup">Sign up with Email</a>
-			<br/><a href="#" class="plain link-on-dark">Already a member?</a>
-
-		</div>
 
 		<div class="scroll-down-holder">
 			<span></span>
@@ -334,8 +299,22 @@
 	</div>
 
 
-	<div class="back-overlay"></div>
+	<div class="back-overlay animated"></div>
 </div>
+
+	<!-- NOTIFICATIONS FOR EXTENSIONS -->
+	<div class="extension-notification">
+		<div class="extension-overlay">
+			<div class="extension-notification-holder">
+				<div class="extension-notification-body">
+					<div class="extension-notification-arrow"></div>
+					<h2>Almost there, click 'ADD'<br/>to complete</h2>
+					<img src="../../assets/images/front/everton/macbook_logo.png" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- NOTIFICATIONS FOR EXTENSIONS ENDS -->
 
 <div class="main-top wrap"></div>
 
@@ -437,9 +416,6 @@
 			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-17.jpg" width="81" height="27" alt=""/></span></li>
 			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../../assets/images/front/retailers/retailer-18.jpg" width="119" height="68" alt=""/></span></li>
 		</ul>
-
-		<a class="not-ie" href="#">Install to enter the draw</a>
-		<a class="ie-true" href="#">Try to enter the draw</a>
 
 	</div>
 </div>
@@ -783,6 +759,7 @@
 <script src="../../assets/components/core/js/core.init.js?v=v2.3.0"></script>
 <script src="../../assets/components/library/main/detectMobileShowElements.js"></script>
 <script src="../../assets/components/library/main/page-lottery-start-animated.js"></script>
+<script src="../../assets/components/library/main/browserExtensionNotification.js"></script>
 
 
 </body>

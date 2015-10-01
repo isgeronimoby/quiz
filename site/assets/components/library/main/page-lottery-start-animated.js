@@ -13,7 +13,9 @@ jQuery(document).ready(function($){
 		startSlideBtn = startPageSlide.find('.first-slide-holder > .step-two > a'),
 		startSlideCongrats = $('.fadeTextHolder > p'),
 		startSlideImage = startPageSlide.find('.first-slide-holder > .step-two > .bottom-section > div > img').add('.first-slide-holder > .step-two > div > p'),
-		scrollDownChevron = startPageSlide.find('.scroll-down-holder span');
+		scrollDownChevron = startPageSlide.find('.scroll-down-holder span'),
+		winnersSection = startPageSlide.find('.bottom-friends-holder'),
+		bottomInstallBtn = $('.main-holder .row a');
 
 	if ( navigator.userAgent.substr(navigator.userAgent.indexOf('MSIE') + 5, 3) <= 9 ) {
 		var ie9 = true;
@@ -23,33 +25,21 @@ jQuery(document).ready(function($){
 	function rebuildSlideSize() {
 		dummyBlock.height( secondSlide.height() );
 		if ( window.innerWidth > 1080 )
-			startPageSlide.height( $(window).height() - $('.navbar.toolbar').height() - 40 );
+			startPageSlide.height( $(window).height() - $('.navbar.toolbar').height() - 110 );
 		else startPageSlide.height('auto');
 	}
 
 	//HANDLING CHEVRON CLICK TO SCROLL DOWN THE PAGE
 	scrollDownChevron.click(function(){
-		$('html,body').animate({ scrollTop: startPageSlide.height() + 40 }, 'slow');
+		tellMoreBtn.click();
 	});
 
 	if (currentPlatform == 'mobile') startSlideBtn.html('Install Everton Browser');
 
 	function showStep( step ){
 		if ( step == 2 ) {
-			/*progressBar.removeClass('full');
-			progressBarSecondStep.removeClass('full');
-			progressBarThirdStep.removeClass('full');
 
-			progressBar.addClass('half');
-			setTimeout(function () {
-				progressBarSecondStep.addClass('full');
-			}, 1000);*/
 		} else if ( step == 3 ) {
-			/*progressBarSecondStep.addClass('full');
-			progressBar.addClass('full');
-			setTimeout(function(){
-				progressBarThirdStep.addClass('full');
-			}, 1000);*/
 			progressBar.removeClass('full');
 			progressBarSecondStep.removeClass('full');
 			progressBarThirdStep.removeClass('full');
@@ -136,6 +126,7 @@ jQuery(document).ready(function($){
 			if ( window.location.href.substring( window.location.href.lastIndexOf('&installed') + 11 ) == 1 ) {
 				//extension is installed
 				startSlideCongrats.html('Congratulations!');
+				bottomInstallBtn.hide();
 				showSlide( 'signup', 3, true );
 			} else {
 				showSlide( 'install', 2, true );
@@ -149,6 +140,7 @@ jQuery(document).ready(function($){
 			dummyBlock.hide();
 			secondSlide.hide();
 			thirdSlide.show();
+			bottomInstallBtn.hide();
 		} else {
 			showStep( 2 );
 			dummyBlock.hide();
@@ -156,9 +148,40 @@ jQuery(document).ready(function($){
 		}
 	}
 
+	var tellMoreBtn = $('<div class="landing-tell-more">Tell me more</div>');
+	var tellMoreBtnState = 0;
+	$('.navbar.toolbar > .button-holder').append(tellMoreBtn);
+
+	tellMoreBtn.on('click', function(){
+		if ( tellMoreBtnState === 0 ) {
+			$('html,body').animate({ scrollTop: startPageSlide.height() + 110 }, 'slow');
+		} else {
+			$('html,body').animate({ scrollTop: 0 }, 'slow');
+		}
+	});
+
+	$(window).scroll(function(){
+		tellMoreFunc();
+	});
+
+	function tellMoreFunc() {
+		if ( $(window).scrollTop() > startPageSlide.height() ) {
+			tellMoreBtnState = 1;
+			tellMoreBtn.html('I\'ve got it');
+		} else {
+			tellMoreBtnState = 0;
+			tellMoreBtn.html('Tell me more');
+		}
+	}
+
 	$(window).resize(function(){
 		rebuildSlideSize();
 	});
+
+	if ( winnersSection.find('ul li').length > 0 ) {
+		winnersSection.show('fast');
+		scrollDownChevron.parent().css('bottom', '130px');
+	}
 
 	// REBUILDING FIRST SCREEN TO FIT THE SCREEN
 	rebuildSlideSize();
