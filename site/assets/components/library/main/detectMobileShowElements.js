@@ -1,6 +1,7 @@
 /************ CHECKING FOR MOBILE DEVICES AND BROWSERS ************/
 
 var currentPlatform = "";
+var md;
 
 (function(){
 	/*! mobile-detect - v1.2.1 - 2015-07-19
@@ -9,7 +10,7 @@ var currentPlatform = "";
 
 
 	// Browser detection if no mobile detected -->
-	var md = new MobileDetect(window.navigator.userAgent);
+	md = new MobileDetect(window.navigator.userAgent);
 
 	if ( md.mobile() ) currentPlatform = "mobile";
 	else currentPlatform = "desktop";
