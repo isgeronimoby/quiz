@@ -5086,6 +5086,28 @@ body .n-found .ie-true,
 	opacity: 0;
 	margin: 15px 0;
 }
+
+.lotteryFootballBG.animated .prize-image-holder.prize-image-placeholder {
+	width: 150px;
+	height: 150px;
+	border: 4px solid #ffffff;
+	box-sizing: border-box;
+	border-radius: 10px;
+}
+.lotteryFootballBG.animated .prize-image-holder.prize-image-placeholder:after {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	width: 80px;
+	height: 80px;
+	background-size: cover;
+	content: "";
+}
+
 .lotteryFootballBG.animated .prize-image-holder.animated {
 	opacity: 1;
 

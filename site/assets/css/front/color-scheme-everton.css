@@ -353,6 +353,9 @@ body .modal-fancy .gg:hover {
   background-color: #00369c;
   border-bottom: 8px solid #001336;
 }
+.lotteryFootballBG.animated .prize-image-holder.prize-image-placeholder {
+  background-color: #00369c;
+}
 /******************************/
 /******* LANDING PAGE *******/
 /******************************/
