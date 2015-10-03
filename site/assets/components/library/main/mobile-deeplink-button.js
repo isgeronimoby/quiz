@@ -69,7 +69,7 @@ $(document).ready(function(){
                 iframe.onload = function () {
                     window.location = Redirects.androidAppstore;
                 };
-                iframe.setAttribute('src', Redirects.iosDeeplink);
+                iframe.setAttribute('src', Redirects.androidDeeplink);
                 document.body.appendChild(iframe);
             }
         }
