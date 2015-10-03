@@ -126,7 +126,7 @@ jQuery(document).ready(function($){
 	if ( !ie9 ) {
 		setTimeout(function(){
 			// greater than IE 9 or not IE
-			if ( window.location.href.substring( window.location.href.lastIndexOf('&installed') + 11 ) == 1 ) {
+			if ( window.location.href.substring( window.location.href.lastIndexOf('installed') + 10 ) == 1 ) {
 				//extension is installed
 				startSlideCongrats.html('Congratulations!');
 				bottomInstallBtn.hide();
@@ -137,7 +137,7 @@ jQuery(document).ready(function($){
 		}, 1000);
 	} else {
 		//IE 9 or lower
-		if ( window.location.href.substring( window.location.href.lastIndexOf('&installed') + 11 ) == 1 ) {
+		if ( window.location.href.substring( window.location.href.lastIndexOf('installed') + 10 ) == 1 ) {
 			//extension is installed
 			showStep( 3 );
 			dummyBlock.hide();
