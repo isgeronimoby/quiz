@@ -204,7 +204,7 @@ img {
 	cursor: pointer;
 	width: 40px;
 	height: 40px;
-	background: url('../images/read-more.png') no-repeat;
+	background: url('../images/everton/read-more.png') no-repeat;
 	background-size: 50%;
 	background-position: center;
 	position: absolute;
@@ -363,7 +363,7 @@ img {
     display: inline-block;
     vertical-align: middle;
     width: 18px;
-    background: url('../images/linked-list-style.png') no-repeat;
+    background: url('../images/everton/linked-list-style.png') no-repeat;
     background-position: left center;
     background-size: cover;
     height: 65px;
@@ -1411,7 +1411,7 @@ canvas {
 }
 
 .extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow {
-	background: url('../images/arrow_top.png') no-repeat;
+	background: url('../images/everton/arrow_top.png') no-repeat;
 	width: 53px;
 	height: 70px;
 	background-size: cover;
