@@ -1,5 +1,5 @@
-'use strict';
 (function($){
+    'use strict';
     $.fn.NotificationPopup = {
         notifHolder: $('.notification-holder'),
         prizeImageBtn: $('.notification-holder .action-holder'),
