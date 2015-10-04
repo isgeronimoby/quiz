@@ -15,11 +15,12 @@ $(function(){
 	/*********** SHOW NOTIFICATIONS FOR EXTENSIONS ***********/
 	function showExtensionPopup() {
 		var notificationFFText = 'Almost there, click \'ALLOW\'<br/> and \'INSTALL\' to complete';
+		var notificationSafariText = 'Almost there, now open <br/>the extension file to complete';
 		var notificationPopup = $('.extension-notification .extension-overlay .extension-notification-holder');
 		var notifPopupArrow = notificationPopup.find('.extension-notification-arrow');
 		var notificationText = notificationPopup.find('.extension-notification-body > h2');
 
-		if ( isChrome || isFirefox ) {
+		if ( isChrome || isFirefox || isSafari ) {
 			if ( isChrome ) {
 				notificationPopup.removeClass('winFF').addClass('winChrome');
 				if (!isMac) {
@@ -27,6 +28,10 @@ $(function(){
 				} else { // Chrome on Mac
 					notifPopupArrow.removeClass('winFF').removeClass('winChrome').addClass('macChrome');
 				}
+			} else if ( isSafari ) {
+				notificationPopup.addClass('safari');
+				notifPopupArrow.hide();
+				notificationText.html(notificationSafariText);
 			} else { // is Firefox
 				notificationPopup.removeClass('winChrome').addClass('winFF');
 				notifPopupArrow.removeClass('winChrome').addClass('winFF');

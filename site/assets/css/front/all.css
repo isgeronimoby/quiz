@@ -6989,7 +6989,7 @@ body .n-found .ie-true,
 
 .extension-notification .extension-overlay .extension-notification-holder {
 	display: inline-block;
-	position: absolute;
+	position: fixed;
 	min-width: 300px;
 }
 .extension-notification .extension-overlay .extension-notification-holder.winChrome {
@@ -7002,6 +7002,13 @@ body .n-found .ie-true,
 .extension-notification .extension-overlay .extension-notification-holder.winFF {
 	left: 0;
 	top: 110px;
+}
+
+.extension-notification .extension-overlay .extension-notification-holder.safari {
+	top: 50%;
+	right: 0;
+	transform: translate(0, -50%);
+	-webkit-transform: translate(0, -50%);
 }
 
 .extension-notification .extension-overlay .extension-notification-holder .extension-notification-body {
