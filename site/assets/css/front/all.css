@@ -5339,6 +5339,335 @@ body .n-found .ie-true,
 /*End of lottery first page*/
 /*============================================================================*/
 
+
+/*============================================================================*/
+/* Draw notification popup */
+/*============================================================================*/
+
+.notification-holder {
+	position: fixed;
+	z-index: 10000;
+	left: 0;
+	bottom: 30px;
+	display: none;
+	-webkit-transition: -webkit-transform 0.3s ease;
+	transition: transform 0.3s ease;
+	-webkit-transform: translate3d(-100%, 0, 0);
+	transform: translate3d(-100%, 0, 0);
+}
+.notification-holder.show-draw-popup {
+	display: block;
+}
+.notification-holder.shown {
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+.notification-holder > .notification-body {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	background-color: #FFFFFF;
+	font-family: Arial, sans-serif;
+	font-weight: 100;
+	overflow: hidden;
+	border: 1px solid #d5d5d5;
+	box-shadow: 0 0 6px rgba(0,0,0,0.3);
+}
+.notification-holder > .notification-body > .action-holder {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100px;
+	height: 100px;
+	z-index: 10;
+	cursor: pointer;
+	display: none;
+}
+.notification-holder > .notification-body > .notification-draw-holder {
+	width: 100px;
+	height: 130px;
+	background-color: #ffffff;
+	float: left;
+	position: relative;
+	z-index: 5;
+}
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-image {
+	width: 100%;
+	height: 100px;
+	overflow: hidden;
+}
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-image img {
+	max-width: 100%;
+	height: auto;
+	display: inline-block;
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	-webkit-transition: opacity 0.25s ease 0.1s;
+	transition: opacity 0.25s ease 0.1s;
+}
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-bottom > .tickets {
+	position: absolute;
+	top: 89%;
+	left: 20px;
+	-webkit-transform: translate3d(-50%, -50%, 0) scale(1);
+	transform: translate3d(-50%, -50%, 0) scale(1);
+	color: #555555;
+	font-size: 22px;
+	-webkit-transition: all 0.3s ease 0.05s;
+	transition: all 0.3s ease 0.05s;
+}
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-bottom > .tickets-word {
+	position: absolute;
+	top: 89%;
+	left: 64px;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	color: #555555;
+	font-size: 12px;
+	text-transform: uppercase;
+	-webkit-transition: all 0.25s ease;
+	transition: all 0.25s ease;
+}
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-bottom > .collapsed-cta {
+	font-size: 14px;
+	text-align: center;
+	display: none;
+	text-decoration: none;
+	text-transform: uppercase;
+	line-height: 26px;
+	color: #ffffff;
+	box-sizing: border-box;
+	border-bottom: 3px solid;
+	border-top: 1px solid #ffffff;
+	-webkit-transition: background 0.2s ease, color 0.15s ease 0.1s;
+	transition: background 0.2s ease, color 0.15s ease 0.1s;
+}
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-bottom > .collapsed-cta:hover {
+	color: #ddd;
+}
+.notification-holder > .notification-body > .notification-content {
+	box-sizing: border-box;
+	float: right;
+	width: 280px;
+	height: 130px;
+	border-left: 1px solid #d5d5d5;
+	padding: 7px 10px;
+	text-align: center;
+	position: relative;
+	left: 0;
+	z-index: 3;
+	-webkit-transition: margin 0.3s ease 0.3s;
+	transition: margin 0.3s ease 0.3s;
+}
+.notification-holder > .notification-body > .notification-content > .notification-close {
+	font-size: 18px;
+	text-decoration: none;
+	color: #666666;
+	cursor: pointer;
+	z-index: 10;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 24px;
+	height: 24px;
+	display: inline-block;
+	line-height: 24px;
+	-webkit-transform: translate3d(0, 0, 0) rotate(0deg);
+	transform: translate3d(0, 0, 0) rotate(0deg);
+	-webkit-transform-origin: 50% 48%;
+	-ms-transform-origin: 50% 48%;
+	transform-origin: 50% 48%;
+	-moz-transform-origin: 49% 51%;
+	-webkit-transition: -webkit-transform 0.25s ease, color 0.2s ease;
+	transition: transform 0.25s ease, color 0.2s ease;
+}
+.notification-holder > .notification-body > .notification-content > .notification-close:hover {
+	-webkit-transform: translate3d(0, 0, 0) rotate(180deg);
+	transform: translate3d(0, 0, 0) rotate(180deg);
+	color: #333333;
+}
+.notification-holder > .notification-body > .notification-content > h3 {
+	font-size: 16px;
+	margin: 0 0 4px;
+}
+.notification-holder > .notification-body > .notification-content > p {
+	font-size: 14px;
+	margin: 4px 0 10px;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	color: #ffffff;
+	display: inline-block;
+	line-height: 38px;
+	box-sizing: border-box;
+	border-bottom: 3px solid;
+	box-shadow: 0 5px 2px -3px rgba(0, 0, 0, 0.6);
+	height: 38px;
+	padding: 0 40px;
+	margin: 2px 0;
+	text-transform: uppercase;
+	text-decoration: none;
+	-webkit-transition: background 0.2s ease, color 0.1s linear 0.1s;
+	transition: background 0.2s ease, color 0.1s linear 0.1s;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action:hover {
+	color: #dddddd;
+	box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.9);
+}
+.notification-holder > .notification-body.collapsed > .action-holder {
+	display: block;
+}
+.notification-holder > .notification-body.collapsed .notification-content {
+	margin-left: -380px;
+}
+.notification-holder > .notification-body.collapsed .notification-draw-bottom > .tickets {
+	top: 40px;
+	left: 50%;
+	font-family: 'helvetica-custom', sans-serif;
+	color: #ffffff;
+	font-size: 60px;
+	line-height: 1;
+}
+.notification-holder > .notification-body.collapsed .notification-draw-bottom > .tickets.increasing {
+	-webkit-transform: translate3d(-50%, -50%, 0) scale(1.3);
+	transform: translate3d(-50%, -50%, 0) scale(1.3);
+	color: rgba(255, 255, 255, 0.75);
+}
+.notification-holder > .notification-body.collapsed .notification-draw-bottom > .tickets-word {
+	top: 62%;
+	left: 50%;
+	color: #ffffff;
+	font-size: 12px;
+	text-transform: uppercase;
+}
+.notification-holder > .notification-body.collapsed .notification-draw-bottom > .collapsed-cta {
+	display: block;
+}
+.notification-holder > .notification-body.collapsed img {
+	opacity: 0.3;
+}
+.notification-holder > .notification-body.collapsed:hover img {
+	opacity: 0.6;
+}
+.notification-holder > .tickets-animation {
+	position: absolute;
+	left: 50px;
+	top: 0;
+	-webkit-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	transform: translateX(-50%);
+	z-index: 10;
+	display: none;
+}
+.notification-holder > .tickets-animation .ticket-image {
+	position: absolute;
+	left: -12px;
+	top: 0;
+	width: 31px;
+	height: 50px;
+	background: url('../../../assets/images/front/everton/tickets_image.png') no-repeat;
+	background-size: cover;
+	box-sizing: border-box;
+	opacity: 0;
+	-webkit-transition: left 0.7s ease, -webkit-transform 1.2s ease;
+	transition: left 0.7s ease, transform 1.2s ease;
+}
+.notification-holder > .tickets-animation .ticket-image:nth-child(1) {
+	left: -7px;
+	-webkit-transform: translate3d(0, -220px, 0) rotate(-20deg) scale(1.2);
+	transform: translate3d(0, -220px, 0) rotate(-20deg) scale(1.2);
+	-webkit-transition-delay: 0.05s;
+	transition-delay: 0.05s;
+	-webkit-animation-delay: 0;
+	animation-delay: 0;
+}
+.notification-holder > .tickets-animation .ticket-image:nth-child(2) {
+	-webkit-transform: translate3d(0, -230px, 0) rotate(-120deg) scale(1.2);
+	transform: translate3d(0, -230px, 0) rotate(-120deg) scale(1.2);
+	-webkit-transition-delay: 0.15s;
+	transition-delay: 0.15s;
+	-webkit-animation-delay: 0.13s;
+	animation-delay: 0.13s;
+}
+.notification-holder > .tickets-animation .ticket-image:nth-child(3) {
+	left: -17px;
+	-webkit-transform: translate3d(0, -210px, 0) rotate(90deg) scale(1.2);
+	transform: translate3d(0, -210px, 0) rotate(90deg) scale(1.2);
+	-webkit-transition-delay: 0.3s;
+	transition-delay: 0.3s;
+	-webkit-animation-delay: 0.27s;
+	animation-delay: 0.27s;
+}
+.notification-holder.adding-tickets > .notification-body.collapsed .notification-draw-bottom > .tickets {
+	-webkit-transform: translate3d(-50%, -50%, 0) scale(1.3);
+	transform: translate3d(-50%, -50%, 0) scale(1.3);
+	color: rgba(255, 255, 255, 0.75);
+}
+.notification-holder.adding-tickets > .tickets-animation .ticket-image {
+	left: -12px;
+	-webkit-transform: translate3d(0, 30px, 0) rotate(480deg) scale(0.7);
+	transform: translate3d(0, 30px, 0) rotate(480deg) scale(0.7);
+	-webkit-animation-name: tickets-opacity;
+	animation-name: tickets-opacity;
+	-webkit-animation-duration: 1.4s;
+	animation-duration: 1.4s;
+	-webkit-animation-timing-function: ease;
+	animation-timing-function: ease;
+	-webkit-animation-direction: forwards;
+	animation-direction: forwards;
+}
+@-webkit-keyframes tickets-opacity {
+	0% {
+		opacity: 0;
+	}
+	5% {
+		opacity: 0;
+	}
+	25% {
+		opacity: 1;
+	}
+	45% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+@keyframes tickets-opacity {
+	0% {
+		opacity: 0;
+	}
+	5% {
+		opacity: 0;
+	}
+	25% {
+		opacity: 1;
+	}
+	45% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+@media screen and (max-width: 540px) {
+	.notification-holder.show-draw-popup {
+		display: none;
+	}
+}
+
+/*============================================================================*/
+/* End of draw notification popup */
+/*============================================================================*/
+
+
+
 /*============================================================================*/
 /*LOADERS*/
 /*============================================================================*/

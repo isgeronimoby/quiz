@@ -30,7 +30,7 @@ html.front.top-full .navbar.main {
   background-color: #62ade9;
 }
 .service-message a:hover {
-  background-color: #1c7cc9;
+  background-color: #3596e3;
 }
 /******** Cookies ********/
 .cookies-block p {
@@ -40,7 +40,7 @@ html.front.top-full .navbar.main {
   background-color: #62ade9;
 }
 .cookies-block a:hover {
-  background-color: #1c7cc9;
+  background-color: #3596e3;
 }
 /******************************/
 /******** SIGN UP PAGE ********/
@@ -67,7 +67,7 @@ body .modal-fancy .gg:hover {
   background-color: #62ade9;
 }
 .install-wrap a:hover {
-  background-color: #1c7cc9;
+  background-color: #3596e3;
 }
 /******************************/
 /********* LOGIN PAGE *********/
@@ -76,7 +76,7 @@ body .modal-fancy .gg:hover {
   background-color: #62ade9;
 }
 .modal-fancy .sign-in.alt:hover {
-  background-color: #1c7cc9;
+  background-color: #3596e3;
 }
 /******************************/
 /**** FORGOT PASSWORD PAGE ****/
@@ -85,7 +85,7 @@ body .modal-fancy .gg:hover {
   background-color: #62ade9;
 }
 .modal-fancy.forgot-password .sign-in.alt:hover {
-  background-color: #1c7cc9;
+  background-color: #3596e3;
 }
 /******************************/
 /******** PROFILE PAGE ********/
@@ -94,19 +94,19 @@ body .modal-fancy .gg:hover {
   background-color: #62ade9;
 }
 .save-img:hover {
-  background-color: #1c7cc9;
+  background-color: #3596e3;
 }
 .profile-name a {
   color: #62ade9;
 }
 .profile-name a:hover {
-  color: #1c7cc9;
+  color: #3596e3;
 }
 .profile-name-adaptive a {
   color: #62ade9;
 }
 .profile-name-adaptive a:hover {
-  color: #1c7cc9;
+  color: #3596e3;
 }
 .member-info .date {
   color: #62ade9;
@@ -115,7 +115,7 @@ body .modal-fancy .gg:hover {
   background-color: #62ade9;
 }
 .member-info .save-img:hover {
-  background-color: #1c7cc9;
+  background-color: #3596e3;
 }
 .profile-statistic .popover-title {
   color: #62ade9;
@@ -127,13 +127,13 @@ body .modal-fancy .gg:hover {
   background-color: #62ade9;
 }
 .profile-statistic .available:hover {
-  background-color: #1c7cc9;
+  background-color: #3596e3;
 }
 .profile-content .widget.widget-tabs .drop-down-menu {
   background-color: #62ade9;
 }
 .profile-content .widget.widget-tabs .drop-down-menu:hover {
-  background-color: #1c7cc9;
+  background-color: #3596e3;
 }
 /* Profile page tab profile */
 .main-holder .profile-content .big-btn div a,
@@ -142,7 +142,7 @@ body .modal-fancy .gg:hover {
 }
 .main-holder .profile-content .big-btn div a:hover,
 .main-holder .profile-content .big-btn div button:hover {
-  background-color: #1c7cc9;
+  background-color: #3596e3;
 }
 .profile-content .resent-activity h2 i::before {
   color: #62ade9;
@@ -161,7 +161,7 @@ body .modal-fancy .gg:hover {
   background-color: #62ade9;
 }
 .profile-content .search-block .email a:hover {
-  background-color: #1c7cc9;
+  background-color: #3596e3;
 }
 .profile-content .result-count {
   background-color: #62ade9;
@@ -170,7 +170,7 @@ body .modal-fancy .gg:hover {
   background-color: #62ade9;
 }
 .profile-content .send-to:hover {
-  background-color: #1c7cc9;
+  background-color: #3596e3;
 }
 /* Profile page tab redeem credits */
 .profile-content .redemption-code .code {
@@ -180,7 +180,7 @@ body .modal-fancy .gg:hover {
   background-color: #62ade9;
 }
 .profile-content .store-btn:hover {
-  background-color: #1c7cc9;
+  background-color: #3596e3;
 }
 /* Profile page tab redeem on load */
 .profile-content .total {
@@ -191,7 +191,7 @@ body .modal-fancy .gg:hover {
   background-color: #62ade9;
 }
 .profile-content .send-settings:hover {
-  background-color: #1c7cc9;
+  background-color: #3596e3;
 }
 .profile-statistic li {
   background-color: #62ade9;
@@ -248,7 +248,7 @@ body .modal-fancy .gg:hover {
   background-color: #62ade9;
 }
 .product-item .text-area a:hover {
-  background-color: #1c7cc9;
+  background-color: #3596e3;
 }
 /******************************/
 /******* DASHBOARD PAGE *******/
@@ -263,13 +263,13 @@ body .modal-fancy .gg:hover {
   background-color: #62ade9;
 }
 .dashboard-content .top-rewards > a:hover {
-  background-color: #1c7cc9;
+  background-color: #3596e3;
 }
 .dashboard-content .top-rewards h3 i:before {
   color: #62ade9;
 }
 .dashboard-content .resent-act-dif-color:hover {
-  color: #1c7cc9;
+  color: #3596e3;
 }
 .user-description .joined span {
   color: #62ade9;
@@ -278,7 +278,7 @@ body .modal-fancy .gg:hover {
   background: #62ade9;
 }
 .progress-item.donated .count {
-  color: #1c7cc9;
+  color: #3596e3;
 }
 .profile-content .widget-tabs .widget-head .active a i {
   color: #62ade9;
@@ -356,6 +356,30 @@ body .modal-fancy .gg:hover {
   background-color: #62ade9;
   border-bottom: 8px solid #1c7cc9;
 }
+/**********************************/
+/******* Notification popup *******/
+/**********************************/
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-image {
+  background: #62ade9;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action {
+  background: #62ade9;
+  border-bottom-color: #3596e3;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action:hover {
+  background: #3596e3;
+}
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-bottom > .collapsed-cta {
+  background: #62ade9;
+  border-bottom-color: #3596e3;
+}
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-bottom > .collapsed-cta:hover {
+  background: #3596e3;
+}
+.notification-holder > .tickets-animation .ticket-image {
+  background: url('../../images/front/mancity/tickets_image.png') no-repeat;
+  background-size: cover;
+}
 /******************************/
 /******* LANDING PAGE *******/
 /******************************/
@@ -363,7 +387,7 @@ body .modal-fancy .gg:hover {
   background-color: #62ade9;
 }
 .contact-area .send-contacts:hover {
-  background-color: #1c7cc9;
+  background-color: #3596e3;
 }
 /******************************/
 /**** Conversions pop-up  *****/
@@ -375,7 +399,7 @@ body .modal-fancy .gg:hover {
   color: #62ade9;
 }
 .conversions .redeem:hover {
-  color: #1c7cc9;
+  color: #3596e3;
 }
 /******************************/
 /********** FOOTER ************/
@@ -391,7 +415,7 @@ html.front #footer ul .active a {
 /**********  MISC  ************/
 /******************************/
 a.ctm_btn {
-  text-shadow: #1c7cc9 1px 1px 1px;
+  text-shadow: #3596e3 1px 1px 1px;
 }
 .gallery-holder .pagination a {
   color: #62ade9;
@@ -404,16 +428,16 @@ a.ctm_btn {
     background-color: #62ade9;
   }
   .drop-down-menu:hover {
-    background-color: #1c7cc9;
+    background-color: #3596e3;
   }
   .profile-content .widget.widget-tabs .drop-down-menu-content li a {
     color: #62ade9 !important;
   }
   .profile-content .widget.widget-tabs .drop-down-menu-content li a:hover {
-    color: #1c7cc9;
+    color: #3596e3;
   }
   .credits-content .aside-list a:hover {
-    color: #1c7cc9;
+    color: #3596e3;
   }
   .credits-content .aside-list .active a {
     color: #62ade9;

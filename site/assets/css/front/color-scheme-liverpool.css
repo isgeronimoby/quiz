@@ -345,6 +345,26 @@ body .modal-fancy .gg:hover {
 .lotteryFootballBG.animated .prize-image-holder.prize-image-placeholder {
   background-color: #e5412d;
 }
+/**********************************/
+/******* Notification popup *******/
+/**********************************/
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-image {
+  background: #e5412d;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action {
+  background: #e5412d;
+  border-bottom-color: #dd301b;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action:hover {
+  background: #dd301b;
+}
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-bottom > .collapsed-cta {
+  background: #e5412d;
+  border-bottom-color: #dd301b;
+}
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-bottom > .collapsed-cta:hover {
+  background: #dd301b;
+}
 /******************************/
 /******* LANDING PAGE *******/
 /******************************/

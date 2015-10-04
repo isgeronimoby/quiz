@@ -356,6 +356,30 @@ body .modal-fancy .gg:hover {
 .lotteryFootballBG.animated .prize-image-holder.prize-image-placeholder {
   background-color: #00369c;
 }
+/**********************************/
+/******* Notification popup *******/
+/**********************************/
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-image {
+  background: #00369c;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action {
+  background: #00369c;
+  border-bottom-color: #0b318c;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action:hover {
+  background: #0b318c;
+}
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-bottom > .collapsed-cta {
+  background: #00369c;
+  border-bottom-color: #0b318c;
+}
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-bottom > .collapsed-cta:hover {
+  background: #0b318c;
+}
+.notification-holder > .tickets-animation .ticket-image {
+  background: url('../../images/front/everton/tickets_image.png') no-repeat;
+  background-size: cover;
+}
 /******************************/
 /******* LANDING PAGE *******/
 /******************************/
