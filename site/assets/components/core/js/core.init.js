@@ -317,11 +317,6 @@
 		});
 	};
 
-	// Temporary IE solution: hiding black toolbar from the header to prevent clicking INSTALL
-	if ( (false || !!document.documentMode) == true || /Edge\/\d+/.test(window.navigator.userAgent) ) { //IE
-		$('.service-message').hide();
-	}
-
 })(jQuery, window);
 
 jQuery(window).ready(function(){
