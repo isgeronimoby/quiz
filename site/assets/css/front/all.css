@@ -5346,7 +5346,7 @@ body .n-found .ie-true,
 
 .notification-holder {
 	position: fixed;
-	z-index: 10000;
+	z-index: 50000;
 	left: 0;
 	bottom: 30px;
 	display: none;
