@@ -129,6 +129,42 @@ img {
 .clearfix {
     zoom:1; /* For IE 6/7 (trigger hasLayout) */
 }
+
+.dashboard-header {
+    height: 40px;
+    width: 100%;
+    background-color: #5a5a5a;
+}
+.dashboard-header > .header-container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.dashboard-header > .header-container > * {
+    display: inline-block;
+    line-height: 40px;
+    height: 40px;
+}
+.dashboard-header > .header-container > .logo-holder img{
+    margin-top: -4px;
+}
+.dashboard-header > .header-container > a{
+    text-decoration: none;
+    background-color: rgba(0,0,0,0.4);
+    padding: 0 30px;
+    opacity: 0.8;
+    transition: background 0.2s ease, opacity 0.2s ease, border 0.2s ease;
+    -webkit-transition: background 0.2s ease, opacity 0.2s ease, border 0.2s ease;
+    -moz-transition: background 0.2s ease, opacity 0.2s ease, border 0.2s ease;
+    -ms-transition: background 0.2s ease, opacity 0.2s ease, border 0.2s ease;
+}
+
+.dashboard-header > .header-container > a:hover {
+    background-color: rgba(0,0,0,0.6);
+    opacity: 1;
+    border-bottom: 2px solid #FFFFFF;
+}
+
 .draw-wrapper {
     width: 100%;
 	min-height: initial;
@@ -1245,6 +1281,9 @@ button.close {
 
 }
 @media all and (max-width:500px) {
+    .dashboard-header .header-container > a {
+        display: none;
+    }
     .earningOptions ul li .button, .greyBox .button, .earningOptions ul li .buttonDisabled,
     .earningOptions ul li .buttonStroke {
         width: 55%;
