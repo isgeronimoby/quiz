@@ -363,11 +363,32 @@ body .modal-fancy .gg:hover {
   background: #62ade9;
 }
 .notification-holder > .notification-body > .notification-content > .draw-action {
+  background: #196eb2;
+  border-bottom-color: #135386;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action:hover {
+  background: #135386;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action.action-tw {
   background: #62ade9;
   border-bottom-color: #3596e3;
 }
-.notification-holder > .notification-body > .notification-content > .draw-action:hover {
+.notification-holder > .notification-body > .notification-content > .draw-action.action-tw:hover {
   background: #3596e3;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action.action-fr {
+  background-color: #e4981f;
+  border-color: #ba7b16;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action.action-fr:hover {
+  background-color: #ba7b16;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action.action-dv {
+  background-color: #ffd739;
+  border-color: #e4981f;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action.action-dv:hover {
+  background-color: #e4981f;
 }
 .notification-holder > .notification-body > .notification-draw-holder > .notification-draw-bottom > .collapsed-cta {
   background: #62ade9;

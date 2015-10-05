@@ -3,19 +3,15 @@
 //   Actual colors
 
 @team-color: #62ade9;
-
 @team-color-hover: darken(@team-color, 10%);
+@team-color-light: darken(@team-color, 25%);
+@team-color-light-hover: darken(@team-color-light, 10%);
 
 @custom-bttn-color: #ffd739;
-
 @custom-bttn-color-hover: #eec738;
-
 @custom-bttn-color-border: #e4981f;
-
 @header-open-slide-bttn-hover: darken(@team-color, 30%);
-
 @grey-light-btns: #6b6b6b;
-
 @grey-dark-btns: #4c4c4c;
 
 /* Header */
@@ -483,11 +479,32 @@ body .modal-fancy .gg:hover {
   background: @team-color;
 }
 .notification-holder > .notification-body > .notification-content > .draw-action {
+  background: @team-color-light;
+  border-bottom-color: @team-color-light-hover;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action:hover {
+  background: @team-color-light-hover;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action.action-tw {
   background: @team-color;
   border-bottom-color: @team-color-hover;
 }
-.notification-holder > .notification-body > .notification-content > .draw-action:hover {
+.notification-holder > .notification-body > .notification-content > .draw-action.action-tw:hover {
   background: @team-color-hover;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action.action-fr {
+  background-color: @custom-bttn-color-border;
+  border-color: darken(@custom-bttn-color-border, 10%);
+}
+.notification-holder > .notification-body > .notification-content > .draw-action.action-fr:hover {
+  background-color: darken(@custom-bttn-color-border, 10%);
+}
+.notification-holder > .notification-body > .notification-content > .draw-action.action-dv {
+  background-color: @custom-bttn-color;
+  border-color: @custom-bttn-color-border;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action.action-dv:hover {
+  background-color: @custom-bttn-color-border;
 }
 
 .notification-holder > .notification-body > .notification-draw-holder > .notification-draw-bottom > .collapsed-cta {
