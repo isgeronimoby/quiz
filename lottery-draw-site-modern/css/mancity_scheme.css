@@ -1,12 +1,12 @@
 .buttonBlue,
 .buttonBlue:active,
 .buttonBlue:focus {
-    background-color: #3b5998;
-    border-bottom-color: #2f3f98;
+    background-color: #2B4B90;
+    border-bottom-color: #2B3884;
 }
 .buttonBlue:hover {
-    background-color: #2f3f98;
-    border-bottom-color: #2f3f98;
+    background-color: #2B3884;
+    border-bottom-color: #2B3884;
 }
 .buttonLightBlue,
 .buttonLightBlue:active,
