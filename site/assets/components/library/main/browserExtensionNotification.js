@@ -29,9 +29,14 @@ $(function(){
 					notifPopupArrow.removeClass('winFF').removeClass('winChrome').addClass('macChrome');
 				}
 			} else if ( isSafari ) {
-				notificationPopup.addClass('safari');
+				if ( !isMac ) {
+					notificationPopup.addClass('winSafari');
+					notificationText.html(notificationSafariText);
+				} else { // Safari on Mac
+					notificationPopup.addClass('macSafari');
+				}
 				notifPopupArrow.hide();
-				notificationText.html(notificationSafariText);
+
 			} else { // is Firefox
 				notificationPopup.removeClass('winChrome').addClass('winFF');
 				notifPopupArrow.removeClass('winChrome').addClass('winFF');

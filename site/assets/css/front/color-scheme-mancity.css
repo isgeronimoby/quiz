@@ -352,7 +352,8 @@ body .modal-fancy .gg:hover {
   background: url('../../images/front/mancity/arrow_top.png') no-repeat;
   background-size: cover;
 }
-.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body {
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body,
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body-macsafari {
   background-color: #62ade9;
   border-bottom: 8px solid #1c7cc9;
 }

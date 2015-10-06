@@ -7000,6 +7000,9 @@ body .n-found .ie-true,
 	position: fixed;
 	min-width: 300px;
 }
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body-macsafari {
+	display: none;
+}
 .extension-notification .extension-overlay .extension-notification-holder.winChrome {
 	top: 285px;
 	left: 50%;
@@ -7012,11 +7015,53 @@ body .n-found .ie-true,
 	top: 110px;
 }
 
-.extension-notification .extension-overlay .extension-notification-holder.safari {
+.extension-notification .extension-overlay .extension-notification-holder.winSafari {
 	top: 50%;
 	right: 0;
 	transform: translate(0, -50%);
 	-webkit-transform: translate(0, -50%);
+}
+
+.extension-notification .extension-overlay .extension-notification-holder.macSafari {
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	transform: translate(0, 0);
+	-webkit-transform: translate(0, 0);
+}
+
+.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body {
+	display: none;
+}
+
+.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari {
+	display: block;
+	padding: 20px 0;
+}
+.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari h2{
+	font-size: 20px;
+	color: #FFFFFF;
+	padding: 10px 10px;
+	text-decoration: underline;
+}
+
+.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari > div {
+	display: inline-block;
+	vertical-align: top;
+	width: 34%;
+	padding: 5px 4px;
+}
+.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari > div:nth-of-type(1) {
+	width: 30%;
+}
+
+.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari > div h3 {
+	color: #FFFFFF;
+	font-size: 18px;
+}
+.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari > div img {
+	max-width: 100%;
+	display: inline-block;
 }
 
 .extension-notification .extension-overlay .extension-notification-holder .extension-notification-body {
