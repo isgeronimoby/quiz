@@ -1,6 +1,7 @@
-$(document).ready(function () {
+$('document').ready(function(){
 
 	(function ($) {
+
 		'use strict';
 		$.fn.NotificationPopup = {
 			notifHolder: $('.notification-holder'),
@@ -8,6 +9,7 @@ $(document).ready(function () {
 			closeBtn: $('.notification-holder .notification-close'),
 			notificationBody: $('.notification-holder .notification-body'),
 			ticketsAnimation: $('.notification-holder .tickets-animation'),
+			prizeImg: $('.notification-holder .notification-draw-image img'),
 
 			showFull: function () {
 				this.notificationBody.removeClass('collapsed');
@@ -46,6 +48,11 @@ $(document).ready(function () {
 					}, timeBasic * 5); // Duration of flying tickets animation visibility
 				}, 10);
 			},
+			prizeImgFit: function() {
+                if ( this.prizeImg[0].naturalHeight > this.prizeImg[0].naturalWidth ) {
+                    this.prizeImg.removeClass('wide').addClass('high');
+                }
+			},
 			init: function () {
 				var that = this;
 				that.prizeImageBtn.on('click', function () {
@@ -54,13 +61,16 @@ $(document).ready(function () {
 				that.closeBtn.on('click', function () {
 					that.close();
 				});
+				that.prizeImgFit();
 				that.notifHolder.addClass('show-draw-popup');
 				setTimeout(function () {
 					that.notifHolder.addClass('shown');
 				}, 1000); // delay before showing the popup
 			}
 		};
+
 	})(jQuery);
+
 });
 
 // 1. Initializing popup

@@ -5397,16 +5397,23 @@ body .n-found .ie-true,
 	overflow: hidden;
 }
 .notification-holder > .notification-body > .notification-draw-holder > .notification-draw-image img {
-	max-width: 100%;
-	height: auto;
 	display: inline-block;
 	position: relative;
 	top: 50%;
-	-webkit-transform: translateY(-50%);
-	-ms-transform: translateY(-50%);
-	transform: translateY(-50%);
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
 	-webkit-transition: opacity 0.25s ease 0.1s;
 	transition: opacity 0.25s ease 0.1s;
+}
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-image img.wide {
+	height: 100%;
+	width: auto;
+}
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-image img.high {
+	max-width: 100%;
+	height: auto;
 }
 .notification-holder > .notification-body > .notification-draw-holder > .notification-draw-bottom > .tickets {
 	position: absolute;
