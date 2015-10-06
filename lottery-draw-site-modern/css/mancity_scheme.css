@@ -1,22 +1,22 @@
 .buttonBlue,
 .buttonBlue:active,
 .buttonBlue:focus {
-    background-color: #62ade9;
-    border-bottom-color: #357fe9;
+    background-color: #3b5998;
+    border-bottom-color: #2f3f98;
 }
 .buttonBlue:hover {
-    background-color: #357fe9;
-    border-bottom-color: #357fe9;
+    background-color: #2f3f98;
+    border-bottom-color: #2f3f98;
 }
 .buttonLightBlue,
 .buttonLightBlue:active,
 .buttonLightBlue:focus {
-    background-color: #226596;
-    border-bottom-color: #104267;
+    background-color: #62ade9;
+    border-bottom-color: #357fe9;
 }
 .buttonLightBlue:hover {
-    background-color: #104267;
-    border-bottom-color: #104267;
+    background-color: #357fe9;
+    border-bottom-color: #357fe9;
 }
 .buttonYellow,
 .buttonYellow:active,
