@@ -37,3 +37,20 @@
 .dashboard-header {
     background-color: #62ade9;
 }
+
+.dashboard-header > .header-container > .logo-holder img {
+    display: inline-block;
+    height: 100%;
+    width: auto;
+}
+
+.footer img {
+    max-width: 70%;
+    height: auto;
+}
+
+@media screen and (max-width: 900px) {
+    .dashboard-header > .header-container {
+        padding: 0 4px;
+    }
+}

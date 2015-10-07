@@ -13,6 +13,11 @@ html.front.top-full .navbar.main {
 .toolbar .button:hover {
   background-color: #16609c;
 }
+.toolbar .company-logo {
+  height: 36px;
+  margin-right: 6px;
+  margin-top: 2px;
+}
 .number {
   background-color: #ffd739;
   color: #62ade9;
@@ -444,6 +449,11 @@ a.ctm_btn {
 }
 .amazon-redirect .product-item .text-area h4 {
   color: #62ade9;
+}
+@media all and (max-width: 1025px) {
+  .additional-navigation .info-amount {
+    display: none;
+  }
 }
 @media all and (max-width: 990px) {
   .drop-down-menu {
