@@ -1,4 +1,4 @@
-var showExtensionPopupFunc;
+var showExtensionPopupFunc, hideExtensionPopupFunc;
 $(function(){
 	if ( currentPlatform == 'desktop' ) {
 		var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
@@ -42,10 +42,13 @@ $(function(){
 				notifPopupArrow.removeClass('winChrome').addClass('winFF');
 				notificationText.html(notificationFFText);
 			}
-			$('.extension-notification').show();
+			$('.extension-notification').fadeIn(300);
 		}
 	}
 
+	hideExtensionPopupFunc = function(){
+		$('.extension-notification').hide();
+	};
 	showExtensionPopupFunc = showExtensionPopup;
 });
 /*********** END OF NOTIFICATIONS ***********/

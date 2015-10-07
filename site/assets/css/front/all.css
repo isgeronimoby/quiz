@@ -5077,9 +5077,20 @@ body .n-found .ie-true,
 	font-size: 14px;
 }
 
-.lotteryFootballBG.animated .step-three {
+.lotteryFootballBG.animated .step-three,
+.lotteryFootballBG.animated .step-installing,
+.lotteryFootballBG.animated .step-error {
 	display: none;
 }
+.lotteryFootballBG.animated .step-installing,
+.lotteryFootballBG.animated .step-error {
+	height: 100%;
+}
+
+.lotteryFootballBG.animated .step-installing .loading-holder {
+	top: 30%;
+}
+
 .lotteryFootballBG.animated.single .prize-image-holder {
 	opacity: 1;
 }
@@ -5134,6 +5145,14 @@ body .n-found .ie-true,
 .dummy-container {
 	width: 100%;
 	opacity: 0;
+}
+
+.lotteryFootballBG.animated.misc-states {
+
+}
+
+.lotteryFootballBG.animated.misc-states .bottom-friends-holder {
+	position: absolute;
 }
 
 .lotteryFootballBG .info-section h1{
@@ -5338,6 +5357,11 @@ body .n-found .ie-true,
 	}
 }
 
+@media all and (max-width: 600px) {
+	.lotteryFootballBG.animated .step-installing .loading-holder {
+		top: 10%;
+	}
+}
 /*============================================================================*/
 /*End of lottery first page*/
 /*============================================================================*/

@@ -3,6 +3,8 @@ jQuery(document).ready(function($){
 	var startPageSlide = $('.lotteryFootballBG.animated'),
 		secondSlide = startPageSlide.find('.step-two'),
 		thirdSlide = startPageSlide.find('.step-three'),
+		stepInstall = startPageSlide.find('.step-installing'),
+		stepError = startPageSlide.find('.step-error'),
 		progressBar = startPageSlide.find('.progress-bar-triple .progress-fill'),
 		progressBarSecondStep = startPageSlide.find('.progress-bar-triple span:nth-of-type(2)'),
 		progressBarThirdStep = startPageSlide.find('.progress-bar-triple span:nth-of-type(3)'),
@@ -17,6 +19,8 @@ jQuery(document).ready(function($){
 		winnersSection = startPageSlide.find('.bottom-friends-holder'),
 		bottomInstallBtn = $('.main-holder .row a');
 
+	var dontChangeSlide = false;
+
 	if ( navigator.userAgent.substr(navigator.userAgent.indexOf('MSIE') + 5, 3) <= 9 ) {
 		var ie9 = true;
 	}
@@ -26,7 +30,11 @@ jQuery(document).ready(function($){
 		dummyBlock.height( secondSlide.height() );
 		if ( window.innerWidth > 1080 )
 			startPageSlide.height( $(window).height() - $('.navbar.toolbar').height() - 110 );
-		else startPageSlide.height('auto');
+		else {
+			if ( dontChangeSlide != true ) {
+				startPageSlide.height('auto');
+			}
+		}
 	}
 
 	//HANDLING CHEVRON CLICK TO SCROLL DOWN THE PAGE
@@ -185,6 +193,32 @@ jQuery(document).ready(function($){
 		winnersSection.show('fast');
 		scrollDownChevron.parent().css('bottom', '130px');
 	}
+
+	$.fn.showMiddleState = function(step){
+		// 1. step - 'install'
+		// 2. step - 'error'
+		var elsToHide = secondSlide.add(thirdSlide).add(progressBar.parent()).add(stepInstall).add(stepError);
+
+		if ( window.innerWidth < 1080 ) {
+			startPageSlide.height(startPageSlide.height());
+			startPageSlide.addClass('misc-states');
+			dontChangeSlide = true;
+		}
+		elsToHide.hide();
+		if ( step == 'install' ) {
+			setTimeout(function(){
+				showExtensionPopupFunc();
+			}, 600);
+			stepInstall.fadeIn(400);
+		} else if ( step == 'error' ) {
+			hideExtensionPopupFunc();
+			stepError.fadeIn(400);
+		}
+	};
+
+	bottomInstallBtn.on('click', function(){
+		tellMoreBtn.click();
+	});
 
 	// REBUILDING FIRST SCREEN TO FIT THE SCREEN
 	rebuildSlideSize();

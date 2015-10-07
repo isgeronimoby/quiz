@@ -86,10 +86,6 @@
 				height: auto;
 				max-height: 100%;
 			}
-			.big-logo {
-				width: 70px;
-				margin-bottom: -13px;
-			}
 		}
 	</style>
 	<!--[if lte IE 9 ]>
@@ -259,7 +255,7 @@
 <div class="lotteryFootballBG animated text-center n-found">
 
 	<div class="fadeTextHolder">
-		<p>Welcome to the Everton Draw!</p>
+		<p>Welcome to the MCFC Rewards!</p>
 	</div>
 
 	<div class="first-slide-holder">
@@ -307,6 +303,29 @@
 
 		</div>
 
+		<div class="step-installing">
+			<!-- LOADING CIRCLE -->
+			<div class="loading-holder show-desktop">
+				<h1 class="show-desktop">Installing the official MCFC<br/>browser extension</h1>
+				<div>
+					<img src="../../assets/images/front/loading_white.png" />
+				</div>
+			</div>
+			<!-- LOADING CIRCLE END -->
+			<div class="show-mobile info-section">
+				<h1>Why not using Everton browser and earn credits?</h1>
+
+				<a class="plain deeplink-btn" href="#"><img src="../../assets/images/front/mancity/iphone_circle_zoom.png" /></a>
+			</div>
+		</div>
+
+		<div class="step-error">
+			<div class="loading-holder error">
+				<h1>How embarassing, it seems there was a problem installing, please, try again</h1>
+				<a class="not-ie" href="#">Try again</a>
+			</div>
+		</div>
+
 		<div class="scroll-down-holder">
 			<span></span>
 		</div>
@@ -336,6 +355,36 @@
 
 	<div class="back-overlay"></div>
 </div>
+
+
+	<!-- NOTIFICATIONS FOR EXTENSIONS -->
+	<div class="extension-notification">
+		<div class="extension-overlay">
+			<div class="extension-notification-holder">
+				<div class="extension-notification-body">
+					<div class="extension-notification-arrow"></div>
+					<h2>Almost there, click 'ADD'<br/>to complete</h2>
+					<img src="../../assets/images/front/mancity/macbook_logo.png" />
+				</div>
+				<div class="extension-notification-body-macsafari">
+					<div class="first-screenshot">
+						<h3><b>1</b>. Please, click "<b>Downloads</b>" button</h3>
+						<img src="../../assets/images/front/mancity/install_extension_first_step.jpg" />
+					</div>
+					<div class="second-screenshot">
+						<h3><b>2</b>. Then double click on the <b>mcfc.safariextz</b></h3>
+						<img src="../../assets/images/front/mancity/install_extension_second_step.jpg" />
+					</div>
+					<div class="third-screenshot">
+						<h3><b>3</b>. Click "<b>Trust</b>" to complete installation</h3>
+						<img src="../../assets/images/front/mancity/install_extension_third_step.jpg" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- NOTIFICATIONS FOR EXTENSIONS ENDS -->
+
 
 <div class="main-top wrap"></div>
 
@@ -783,6 +832,7 @@
 <script src="../../assets/components/plugins/fastclick/fastclick.js"></script>
 <script src="../../assets/components/core/js/core.init.js?v=v2.3.0"></script>
 <script src="../../assets/components/library/main/detectMobileShowElements.js"></script>
+<script src="../../assets/components/library/main/browserExtensionNotification.js"></script>
 <script src="../../assets/components/library/main/page-lottery-start-animated.js"></script>
 
 
