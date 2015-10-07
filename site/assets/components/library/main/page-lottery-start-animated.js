@@ -34,10 +34,10 @@ jQuery(document).ready(function($){
 		tellMoreBtn.click();
 	});
 
-	if (currentPlatform == 'mobile') {
-		startSlideBtn.html('Install Everton Browser');
-		bottomInstallBtn.html('Install Everton Browser');
-	}
+	//if (currentPlatform == 'mobile') {
+	//	startSlideBtn.html('Install Browser');
+	//	bottomInstallBtn.html('Install Browser');
+	//}
 
 	function showStep( step ){
 		if ( step == 2 ) {
