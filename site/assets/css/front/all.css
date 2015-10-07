@@ -4807,8 +4807,11 @@ body .n-found .ie-true,
 	-webkit-transition: all 300ms ease;
 	-moz-transition: all 300ms ease;
 	-ms-transition: all 300ms ease;
+	background-color: #3b5998;
+	border-bottom-color: #273D6D;
 }
 .lotteryFootballBG.animated .step-three a.facebook:hover {
+	background-color: #273D6D;
 	border-bottom-color: #FFFFFF;
 }
 
