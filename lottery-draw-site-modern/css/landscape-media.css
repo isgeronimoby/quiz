@@ -85,6 +85,9 @@
         float: left;
         width: 42%;
     }
+	.signup-layout .circularChartsGroup {
+		height: 418px;
+	}
     .circularChartsGroup h1{
         margin-top: 40px;
     }

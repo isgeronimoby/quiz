@@ -999,6 +999,7 @@ button.close {
 .circularChartsGroup .prize-image-signup {
 	display: none;
 }
+
 .signup-layout .circularChartsGroup .prize-image-signup {
 	display: block;
 }
@@ -1055,9 +1056,10 @@ button.close {
 	background: #364158;
 	text-align: left;
 }
-.signup-layout .article.showDesktopBlock > .overall-text h4 {
-	padding: 20px;
-	text-transform: none;
+.signup-layout .article.showDesktopBlock > .overall-text h1 {
+	padding: 0;
+    text-align: center;
+    line-height: 92px;
 }
 
 .circularChartsGroup .circularPortrait{

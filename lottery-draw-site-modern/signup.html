@@ -22,153 +22,158 @@
 	</div>
 </div>
 
-<div class="draw-container text-center signup-layout">
-	<div class="staticTop">
-		<div class="countdown">
-			<div>
+<div class="draw-container text-center">
+
+	<div class="signup-layout">
+
+		<div class="staticTop">
+			<div class="countdown">
 				<div>
-					<span class="numbers">0</span>
-					<span>days</span>
+					<div>
+						<span class="numbers">0</span>
+						<span>days</span>
+					</div>
+				</div>
+				<div>
+					<div>
+						<span class="numbers">00</span>
+						<span>hrs</span>
+					</div>
+				</div>
+				<div>
+					<div>
+						<span class="numbers">00</span>
+						<span>mins</span>
+					</div>
+				</div>
+				<div>
+					<div>
+						<span class="numbers">00</span>
+						<span>secs</span>
+					</div>
 				</div>
 			</div>
-			<div>
-				<div>
-					<span class="numbers">00</span>
-					<span>hrs</span>
+			<article class="article showDesktopBlock ">
+				<div class="articleImage articleImageDesktop">
+					<img src="images/everton/prize_image.png" />
 				</div>
-			</div>
-			<div>
-				<div>
-					<span class="numbers">00</span>
-					<span>mins</span>
+				<div class="greyBox greyBoxDesktop">
+					<h3 class="color-aqua"><b>the prize</b></h3>
+					<h3 class="condensedFont">Meet the team, get signed T-shirts and watch a training session</h3>
 				</div>
-			</div>
-			<div>
-				<div>
-					<span class="numbers">00</span>
-					<span>secs</span>
+				<div class="clearfix"></div>
+				<div class="overall-text">
+					<h1>Win exclusive Everton prizes</h1>
 				</div>
-			</div>
+			</article>
+			<div class="clearfix"></div>
 		</div>
-		<article class="article showDesktopBlock ">
-			<div class="articleImage articleImageDesktop">
-				<img src="images/everton/prize_image.png" />
-			</div>
-			<div class="greyBox greyBoxDesktop">
-				<h3 class="color-aqua"><b>the prize</b></h3>
+
+		<section id="dashboard" class="sectionLayout signupPage">
+
+			<div class="mobileSignupLayout">
+
 				<h3 class="condensedFont">Meet the team, get signed T-shirts and watch a training session</h3>
+
+				<div class="prize-image-holder">
+					<img class="img-responsive prize-image-inside" src="images/everton/prize_image.png" />
+				</div>
+
+				<a href="#" class="button buttonBlue buttonDefault"><span><span>Enter with Facebook</span></span></a>
+				<a href="#signUpWithEmailPopup" class="button buttonDefault buttonStroke fancybox"><span><span>sign up with email</span></span></a>
+				<a href="#alreadyMemberPopup" class="simpleLink fancybox">Already a member?</a>
+
+				<div class="greyBox">
+					<h3 class="no-transform">We’re giving away the chance to meet the team at Finch Farm. All you have to do to enter the draw is download the Everton Browser and sign up.</h3>
+					<p>&nbsp;</p>
+					<h3 class="no-transform"><strong>The Prize</strong>:</h3>
+					<ul>
+						<li><h3 class="no-transform">Access for two people to visit Finch Farm and watch a first-team training session.</h3></li>
+						<li><h3 class="no-transform">Lunch provided at the Finch Farm canteen with an Everton ambassador.</h3></li>
+						<li><h3 class="no-transform">The opportunity to meet some of the first-team squad.</h3></li>
+						<li><h3 class="no-transform">A signed Everton shirt!</h3></li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="circularChartsGroup">
+				<h1>Your progress</h1>
+				<div class="canvasHolder">
+					<canvas id="overallCircleProgress" width="500" height="500"></canvas>
+					<canvas id="daysCircleProgress" width="500" height="500"></canvas>
+
+					<div class=infoBlock>
+						<div class="infoHolder">
+							<div class="circleSection" id="infoOverall">
+								<div class="circleTicketsSection">
+									<p class="circlePercentage color-aqua"></p>
+									<p class="color-aqua">tickets</p>
+								</div>
+								<div class="circleDaysSection">
+									<p class="daysPercentage">1/4</p>
+									<p>tickets</p>
+								</div>
+							</div>
+							<div class="circleSection" id="infoTickets">
+								<div class="circleTicketsSection">
+									<p class="circlePercentage color-aqua"></p>
+									<p class="color-aqua">tickets</p>
+								</div>
+								<div>
+									<p class="color-aqua">Each ticket gets you an extra entry into the draw</p>
+								</div>
+							</div>
+							<div class="circleSection" id="infoDays">
+								<div>
+									<p class="color-gold">Open the app 4 days <br>in a row<br>get extra ticket</p>
+								</div>
+								<div class="circleDaysSection">
+									<p class="daysPercentage">1/4</p>
+									<p>tickets</p>
+								</div>
+							</div>
+							<ul class="circleToggles">
+								<li class="active"></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</div>
+					</div>
+					<div class="circularPortrait">
+						<div class="portraitHolder">
+							<img src="./images/everton/profile-image.png"/>
+						</div>
+					</div>
+				</div>
+				<div class="prize-image-signup">
+					<div class="prize"></div>
+					<div class="description">
+						<h3><span>PRIZE:</span> Meet the team, get signed T-shirts and watch a training session</h3>
+					</div>
+				</div>
+			</div>
+
+			<div class="optionsGroup">
+				<div class="greyBox curOptionBox" id="connectFBBox">
+					<h3>Sign up using <span class="color-aqua">Facebook</span> to earn 10 bonus tickets</h3>
+					<div class="tickets showMobileBlock"><span>+5</span><br/>tickets</div><a href="#" class="button buttonBlue buttonDefault"><span><span>Enter with Facebook</span></span></a>
+					<div class="showMobileBlock"><a href="#alreadyMemberPopup" class="simpleLink fancybox">Already a member?</a></div>
+					<div class="showDesktopBlock">
+						<p>we'll never post anything without your permission</p>
+						<a href="#signUpWithEmailPopup" class="button buttonDefault buttonStroke fancybox"><span><span>or sign up with email</span></span></a>
+						<a href="#alreadyMemberPopup" class="simpleLink fancybox">Already a member?</a>
+					</div>
+				</div>
 			</div>
 			<div class="clearfix"></div>
-			<div class="overall-text">
-				<h4>Join our community to get a chance to win exclusive branded prizes,
-					<br/>earn free credits just simply shopping and spending them in the club shop</h4>
-			</div>
-		</article>
-		<div class="clearfix"></div>
+		</section>
+
+		<div class="scoreHolder">
+			<p class="score">SCORE</p>
+		</div>
+
 	</div>
 
-	<section id="dashboard" class="sectionLayout signupPage">
-
-		<div class="mobileSignupLayout">
-
-			<h3 class="condensedFont">Meet the team, get signed T-shirts and watch a training session</h3>
-
-			<div class="prize-image-holder">
-				<img class="img-responsive prize-image-inside" src="images/everton/prize_image.png" />
-			</div>
-
-			<a href="#" class="button buttonBlue buttonDefault"><span><span>Enter with Facebook</span></span></a>
-			<a href="#signUpWithEmailPopup" class="button buttonDefault buttonStroke fancybox"><span><span>sign up with email</span></span></a>
-			<a href="#alreadyMemberPopup" class="simpleLink fancybox">Already a member?</a>
-
-			<div class="greyBox">
-				<h3 class="no-transform">We’re giving away the chance to meet the team at Finch Farm. All you have to do to enter the draw is download the Everton Browser and sign up.</h3>
-				<p>&nbsp;</p>
-				<h3 class="no-transform"><strong>The Prize</strong>:</h3>
-				<ul>
-					<li><h3 class="no-transform">Access for two people to visit Finch Farm and watch a first-team training session.</h3></li>
-					<li><h3 class="no-transform">Lunch provided at the Finch Farm canteen with an Everton ambassador.</h3></li>
-					<li><h3 class="no-transform">The opportunity to meet some of the first-team squad.</h3></li>
-					<li><h3 class="no-transform">A signed Everton shirt!</h3></li>
-				</ul>
-			</div>
-		</div>
-
-		<div class="circularChartsGroup">
-			<h1>Your progress</h1>
-			<div class="canvasHolder">
-				<canvas id="overallCircleProgress" width="500" height="500"></canvas>
-				<canvas id="daysCircleProgress" width="500" height="500"></canvas>
-
-				<div class=infoBlock>
-					<div class="infoHolder">
-						<div class="circleSection" id="infoOverall">
-							<div class="circleTicketsSection">
-								<p class="circlePercentage color-aqua"></p>
-								<p class="color-aqua">tickets</p>
-							</div>
-							<div class="circleDaysSection">
-								<p class="daysPercentage">1/4</p>
-								<p>tickets</p>
-							</div>
-						</div>
-						<div class="circleSection" id="infoTickets">
-							<div class="circleTicketsSection">
-								<p class="circlePercentage color-aqua"></p>
-								<p class="color-aqua">tickets</p>
-							</div>
-							<div>
-								<p class="color-aqua">Each ticket gets you an extra entry into the draw</p>
-							</div>
-						</div>
-						<div class="circleSection" id="infoDays">
-							<div>
-								<p class="color-gold">Open the app 4 days <br>in a row<br>get extra ticket</p>
-							</div>
-							<div class="circleDaysSection">
-								<p class="daysPercentage">1/4</p>
-								<p>tickets</p>
-							</div>
-						</div>
-						<ul class="circleToggles">
-							<li class="active"></li>
-							<li></li>
-							<li></li>
-						</ul>
-					</div>
-				</div>
-				<div class="circularPortrait">
-					<div class="portraitHolder">
-						<img src="./images/everton/profile-image.png"/>
-					</div>
-				</div>
-			</div>
-			<div class="prize-image-signup">
-				<div class="prize"></div>
-				<div class="description">
-					<h3><span>PRIZE:</span> Meet the team, get signed T-shirts and watch a training session</h3>
-				</div>
-			</div>
-		</div>
-
-		<div class="optionsGroup">
-			<div class="greyBox curOptionBox" id="connectFBBox">
-				<h3>Sign up using <span class="color-aqua">Facebook</span> to earn 10 bonus tickets</h3>
-				<div class="tickets showMobileBlock"><span>+5</span><br/>tickets</div><a href="#" class="button buttonBlue buttonDefault"><span><span>Enter with Facebook</span></span></a>
-				<div class="showMobileBlock"><a href="#alreadyMemberPopup" class="simpleLink fancybox">Already a member?</a></div>
-				<div class="showDesktopBlock">
-					<p>we'll never post anything without your permission</p>
-					<a href="#signUpWithEmailPopup" class="button buttonDefault buttonStroke fancybox"><span><span>or sign up with email</span></span></a>
-					<a href="#alreadyMemberPopup" class="simpleLink fancybox">Already a member?</a>
-				</div>
-			</div>
-		</div>
-		<div class="clearfix"></div>
-	</section>
-
-	<div class="scoreHolder">
-		<p class="score">SCORE</p>
-	</div>
 </div>
 
 
@@ -303,7 +308,7 @@
 <script type="text/javascript" src="./js/overthrow.min.js"></script>
 <!--<script type="text/javascript" src="./js/form-validator.init.js"></script>-->
 <script type="text/javascript" src="./js/detectMobileShowElements.js"></script>
-<script type="text/javascript" src="./js/app.js"></script>
+<!--<script type="text/javascript" src="./js/app.js"></script>-->
 <script type="text/javascript" src="./js/fastclick.js"></script>
 <script>
 window.fbAsyncInit = function () {
@@ -328,15 +333,15 @@ window.fbAsyncInit = function () {
 		window.twttr = (function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], t = window.twttr || {}; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); t._e = []; t.ready = function (f) { t._e.push(f); }; return t; }(document, "script", "twitter-wjs"));
 	}
 </script>
-<script>
-	DrawApp.ticketsCurrent = 20;
-	DrawApp.ticketsMax = 35;
+<!--<script>-->
+	<!--DrawApp.ticketsCurrent = 20;-->
+	<!--DrawApp.ticketsMax = 35;-->
 
-	DrawApp.daysInRow = 2;
-	DrawApp.daysInRowMax = 4;
-	DrawApp.facebookSharePauseDays = 4;
-	DrawApp.twitterSharePauseDays = 4;
-</script>
+	<!--DrawApp.daysInRow = 2;-->
+	<!--DrawApp.daysInRowMax = 4;-->
+	<!--DrawApp.facebookSharePauseDays = 4;-->
+	<!--DrawApp.twitterSharePauseDays = 4;-->
+<!--</script>-->
 
 </body>
 </html>
