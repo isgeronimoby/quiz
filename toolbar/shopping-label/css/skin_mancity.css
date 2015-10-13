@@ -1,0 +1,16 @@
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-logo {
+    background-image: url('{STORAGE_URL}content/everton/everton_logo_white.png');
+    background-color: #62ade9;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask .everton-shopping-label-no-btn:hover {
+    color: #62ade9;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-message td a:hover {
+    color: #62ade9;
+}
+
+.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-info:hover {
+    background: #62ade9;
+}
