@@ -781,3 +781,15 @@ p b {
 @media screen and (max-height: 730px) {
 
 }
+
+@media screen and (max-width: 500px) {
+    .top-bar .logo-wrapper a > p {
+        font-size: 16px;
+    }
+    .top-bar .logo-wrapper a > img {
+        max-width: 70px;
+    }
+    .top-bar .logo-wrapper {
+        padding-top: 18px;
+    }
+}
