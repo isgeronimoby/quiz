@@ -276,6 +276,9 @@
 	.article > div{
 		height: 100%;
 	}
+	.signupPage .signup-layout {
+		display: block;
+	}
 }
 
 @media all and (min-width: 1025px) {

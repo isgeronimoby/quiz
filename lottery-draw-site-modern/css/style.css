@@ -1000,6 +1000,10 @@ button.close {
 	display: none;
 }
 
+.signupPage .signup-layout {
+    display: none;
+}
+
 .signup-layout .circularChartsGroup .prize-image-signup {
 	display: block;
 }

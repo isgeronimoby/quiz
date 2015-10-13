@@ -25,7 +25,6 @@
 <div class="draw-container text-center">
 
 	<div class="signup-layout">
-
 		<div class="staticTop">
 			<div class="countdown">
 				<div>
@@ -68,6 +67,9 @@
 			</article>
 			<div class="clearfix"></div>
 		</div>
+	</div>
+
+
 
 		<section id="dashboard" class="sectionLayout signupPage">
 
@@ -96,59 +98,62 @@
 				</div>
 			</div>
 
-			<div class="circularChartsGroup">
-				<h1>Your progress</h1>
-				<div class="canvasHolder">
-					<canvas id="overallCircleProgress" width="500" height="500"></canvas>
-					<canvas id="daysCircleProgress" width="500" height="500"></canvas>
 
-					<div class=infoBlock>
-						<div class="infoHolder">
-							<div class="circleSection" id="infoOverall">
-								<div class="circleTicketsSection">
-									<p class="circlePercentage color-aqua"></p>
-									<p class="color-aqua">tickets</p>
+			<div class="signup-layout">
+				<div class="circularChartsGroup">
+					<h1>Your progress</h1>
+					<div class="canvasHolder">
+						<canvas id="overallCircleProgress" width="500" height="500"></canvas>
+						<canvas id="daysCircleProgress" width="500" height="500"></canvas>
+
+						<div class=infoBlock>
+							<div class="infoHolder">
+								<div class="circleSection" id="infoOverall">
+									<div class="circleTicketsSection">
+										<p class="circlePercentage color-aqua"></p>
+										<p class="color-aqua">tickets</p>
+									</div>
+									<div class="circleDaysSection">
+										<p class="daysPercentage">1/4</p>
+										<p>tickets</p>
+									</div>
 								</div>
-								<div class="circleDaysSection">
-									<p class="daysPercentage">1/4</p>
-									<p>tickets</p>
+								<div class="circleSection" id="infoTickets">
+									<div class="circleTicketsSection">
+										<p class="circlePercentage color-aqua"></p>
+										<p class="color-aqua">tickets</p>
+									</div>
+									<div>
+										<p class="color-aqua">Each ticket gets you an extra entry into the draw</p>
+									</div>
 								</div>
+								<div class="circleSection" id="infoDays">
+									<div>
+										<p class="color-gold">Open the app 4 days <br>in a row<br>get extra ticket</p>
+									</div>
+									<div class="circleDaysSection">
+										<p class="daysPercentage">1/4</p>
+										<p>tickets</p>
+									</div>
+								</div>
+								<ul class="circleToggles">
+									<li class="active"></li>
+									<li></li>
+									<li></li>
+								</ul>
 							</div>
-							<div class="circleSection" id="infoTickets">
-								<div class="circleTicketsSection">
-									<p class="circlePercentage color-aqua"></p>
-									<p class="color-aqua">tickets</p>
-								</div>
-								<div>
-									<p class="color-aqua">Each ticket gets you an extra entry into the draw</p>
-								</div>
+						</div>
+						<div class="circularPortrait">
+							<div class="portraitHolder">
+								<img src="./images/everton/profile-image.png"/>
 							</div>
-							<div class="circleSection" id="infoDays">
-								<div>
-									<p class="color-gold">Open the app 4 days <br>in a row<br>get extra ticket</p>
-								</div>
-								<div class="circleDaysSection">
-									<p class="daysPercentage">1/4</p>
-									<p>tickets</p>
-								</div>
-							</div>
-							<ul class="circleToggles">
-								<li class="active"></li>
-								<li></li>
-								<li></li>
-							</ul>
 						</div>
 					</div>
-					<div class="circularPortrait">
-						<div class="portraitHolder">
-							<img src="./images/everton/profile-image.png"/>
+					<div class="prize-image-signup">
+						<div class="prize"></div>
+						<div class="description">
+							<h3><span>PRIZE:</span> Meet the team, get signed T-shirts and watch a training session</h3>
 						</div>
-					</div>
-				</div>
-				<div class="prize-image-signup">
-					<div class="prize"></div>
-					<div class="description">
-						<h3><span>PRIZE:</span> Meet the team, get signed T-shirts and watch a training session</h3>
 					</div>
 				</div>
 			</div>
@@ -168,11 +173,11 @@
 			<div class="clearfix"></div>
 		</section>
 
-		<div class="scoreHolder">
-			<p class="score">SCORE</p>
-		</div>
-
+	<div class="scoreHolder">
+		<p class="score">SCORE</p>
 	</div>
+
+
 
 </div>
 
