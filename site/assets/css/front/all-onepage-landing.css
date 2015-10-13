@@ -71,9 +71,9 @@ html .service-message {
 	display: none;
 }
 
-html.no-touch .service-message {
+/*html.no-touch .service-message {
 	display: block;
-}
+}*/
 
 .container-fluid {
 	min-height: 100%;

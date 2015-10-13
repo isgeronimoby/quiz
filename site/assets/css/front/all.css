@@ -1221,6 +1221,10 @@ body .modal-fancy .widget .widget-body {
 	background: url(../../images/front/liverpool/btn-close.png) no-repeat;
 }
 
+.show-desktop, .show-mobile {
+	display: none;
+}
+
 /* Featherlight popup */
 /**
  * Featherlight – ultra slim jQuery lightbox
