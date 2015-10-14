@@ -145,8 +145,8 @@
 		function hideInstallbar() {
 			$("meta[property='sr:tracking_id']").change(function () {
 				var trackingId = $(this).attr("content");
-				if (!trackingId)
-					$('.service-message').show();
+				if (trackingId)
+					$('.service-message').hide();
 			});
 		}
 		/*This area from declaration plugins*/
