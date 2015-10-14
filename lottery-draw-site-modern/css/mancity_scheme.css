@@ -38,10 +38,6 @@
     background-color: #62ade9;
 }
 
-.circularChartsGroup .prize-image-signup > .prize {
-	background-image: url('../images/mancity/prize_image.png');
-}
-
 .dashboard-header > .header-container > .logo-holder img {
     display: inline-block;
     height: 100%;
