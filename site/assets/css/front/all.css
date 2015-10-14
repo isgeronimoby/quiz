@@ -4897,7 +4897,7 @@ body .n-found .ie-true,
 
 
 .lotteryFootballBG.animated .top-section img {
-	max-width: 150px;
+	max-width: 100%;
 	height: auto;
 	border: 4px solid #ffffff;
 	box-sizing: border-box;
@@ -5015,10 +5015,7 @@ body .n-found .ie-true,
 	opacity: 1;
 }
 .lotteryFootballBG.animated .first-slide-holder.prize-section .prize-image-holder.prize-image-placeholder {
-	width: 240px;
-	height: 240px;
-	display: block;
-	margin: 20px auto -40px;
+
 }
 
 .lotteryFootballBG.animated .scroll-down-holder {
@@ -5137,12 +5134,15 @@ body .n-found .ie-true,
 	background: rgba(0,0,0,0);
 	position: relative;
 	opacity: 0;
-	margin: 15px 0;
+	/*margin: 15px 0;*/
+	width: 240px;
+	display: block;
+	margin: 20px auto -40px;
 }
 
 .lotteryFootballBG.animated .prize-image-holder.prize-image-placeholder {
-	width: 150px;
-	height: 150px;
+	width: 240px;
+	height: 240px;
 	border: 4px solid #ffffff;
 	box-sizing: border-box;
 	border-radius: 10px;
@@ -5171,10 +5171,10 @@ body .n-found .ie-true,
 }
 .lotteryFootballBG.animated .prize-image-holder:after {
 	position: absolute;
-	bottom: 4px;
-	right: 20px;
-	width: 44px;
-	height: 44px;
+	bottom: 12px;
+	right: 10px;
+	width: 50px;
+	height: 50px;
 	background-size: cover;
 	content: "";
 }
@@ -5342,7 +5342,7 @@ body .n-found .ie-true,
 		font-size: 20px;
 	}
 	.lotteryFootballBG.animated .top-section img {
-		max-width: 150px;
+		max-width: 100%;
 	}
 	.lotteryFootballBG.animated .bottom-section .show-mobile img {
 		max-width: 110px;
@@ -6591,7 +6591,7 @@ body .n-found .ie-true,
 	.lotteryFootballBG.animated .step-three a.facebook:after {
 		display: none;
 	}
-
+	.lotteryFootballBG.animated .first-slide-holder.prize-section .prize-image-holder,
 	.lotteryFootballBG.animated .first-slide-holder.prize-section .prize-image-holder.prize-image-placeholder {
 		width: 150px;
 		height: 150px;
