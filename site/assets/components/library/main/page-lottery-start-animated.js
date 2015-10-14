@@ -134,19 +134,22 @@ jQuery(document).ready(function($){
 	if ( !ie9 ) {
 		setTimeout(function(){
 			// greater than IE 9 or not IE
-			if (window.location.href.substring(window.location.href.lastIndexOf('installed') + 10, window.location.href.lastIndexOf('installed') + 11) == 1) {
-				//extension is installed
+			if (window.location.href.lastIndexOf('installed=') > -1) {
+
+			var installed = (window.location.href.lastIndexOf('installed=1') > -1);
+			if (installed)
 				startSlideCongrats.html('Congratulations!');
-				bottomInstallBtn.hide();
-				showSlide( 'signup', 3, true );
+
+			bottomInstallBtn.hide();
+			showSlide('signup', 3, installed);
 			} else {
 				showSlide( 'install', 2, true );
 			}
 		}, 1000);
 	} else {
 		//IE 9 or lower
-		if (window.location.href.substring(window.location.href.lastIndexOf('installed') + 10, window.location.href.lastIndexOf('installed') + 11) == 1) {
-			//extension is installed
+		if (window.location.href.lastIndexOf('installed=') > -1) {
+			//show sign up
 			showStep( 3 );
 			dummyBlock.hide();
 			secondSlide.hide();
