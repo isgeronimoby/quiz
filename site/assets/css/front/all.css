@@ -4971,6 +4971,10 @@ body .n-found .ie-true,
 	font-size: 30px;
 	color: #FFFFFF;
 }
+.lotteryFootballBG.animated > .first-slide-holder .step-error .loading-holder h1,
+.lotteryFootballBG.animated > .first-slide-holder .step-installing .loading-holder h1 {
+	opacity: 1;
+}
 .lotteryFootballBG.animated > .first-slide-holder .loading-holder > div {
 	margin: 30px 0;
 }
@@ -5298,6 +5302,12 @@ body .n-found .ie-true,
 	.lotteryFootballBG.animated {
 		height: auto !important;
 	}
+	.lotteryFootballBG.animated .step-two .bottom-section {
+		margin-bottom: 30px;
+	}
+}
+
+@media all and (max-height: 850px) {
 	.scroll-down-holder {
 		display: none;
 	}
