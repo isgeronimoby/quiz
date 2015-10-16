@@ -445,6 +445,57 @@ a.ctm_btn {
 .amazon-redirect .product-item .text-area h4 {
   color: #00369c;
 }
+/* ************************************* */
+/* CHRISTMAS PAGES STYLES                */
+/* ************************************* */
+.christmas-page .video-section .right-side .bottom-text {
+  color: #00369c;
+}
+.christmas-page .explanation-section .explanation-row .explanation-card {
+  color: #00369c;
+}
+.christmas-page .explanation-section .explanation-row .btn-christmas.btn-brand {
+  background-color: #00369c;
+}
+.christmas-holding-page .header-section {
+  /* GRADIENT */
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4674bf+0,002053+100 */
+  background: #4674bf;
+  /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, #4674bf 0%, #002053 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #4674bf), color-stop(100%, #002053));
+  /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover, #4674bf 0%, #002053 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, #4674bf 0%, #002053 100%);
+  /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, #4674bf 0%, #002053 100%);
+  /* IE10+ */
+  background: radial-gradient(ellipse at center, #4674bf 0%, #002053 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4674bf', endColorstr='#002053', GradientType=1);
+  /* IE6-9 fallback on horizontal gradient */
+  text-align: right;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+.christmas-holding-page .holding-middle-section h3,
+.christmas-holding-page .holding-middle-section h4 {
+  color: #00369c;
+}
+.christmas-holding-page .holding-footer {
+  background-color: #00369c;
+}
+.christmas-holding-page .header-section h1:after {
+  background-image: url('../../images/front/everton/crimbo/christmas_hat.png');
+}
+.christmas-holding-page .header-section .wrap:after {
+  background-image: url('../../images/front/everton/crimbo/stars-right.png');
+}
+.christmas-holding-page .header-section .wrap:before {
+  background-image: url('../../images/front/everton/crimbo/stars-left.png');
+}
 @media all and (max-width: 990px) {
   .drop-down-menu {
     background-color: #00369c;

@@ -450,6 +450,18 @@ a.ctm_btn {
 .amazon-redirect .product-item .text-area h4 {
   color: #62ade9;
 }
+/* ************************************* */
+/* CHRISTMAS PAGES STYLES                */
+/* ************************************* */
+.christmas-page .video-section .right-side .bottom-text {
+  color: #62ade9;
+}
+.christmas-page .explanation-section .explanation-row .explanation-card {
+  color: #62ade9;
+}
+.christmas-page .explanation-section .explanation-row .btn-christmas.btn-brand {
+  background-color: #62ade9;
+}
 @media all and (max-width: 1025px) {
   .additional-navigation .info-amount {
     display: none;

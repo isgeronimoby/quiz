@@ -7203,3 +7203,438 @@ body .n-found .ie-true,
 		display: none;
 	}
 }
+
+/* ************************************* */
+/* CHRISTMAS PAGES STYLES                */
+/* ************************************* */
+
+@font-face {
+	font-family: 'bebas';
+	src: url('../../fonts/bebasneue-webfont.eot');
+	src: url('../../fonts/bebasneue-webfont.eot?#iefix') format('embedded-opentype'),
+	url('../../fonts/bebasneue-webfont.woff2') format('woff2'),
+	url('../../fonts/bebasneue-webfont.woff') format('woff'),
+	url('../../fonts/bebasneue-webfont.ttf') format('truetype'),
+	url('../../fonts/bebasneue-webfont.svg#bebas_neueregular') format('svg');
+	font-weight: 400;
+	font-style: normal;
+}
+
+
+.christmas-holder {
+
+}
+html.front.top-full .christmas-holder .navbar.main {
+	overflow: visible;
+}
+.christmas-holder .company-logo {
+	float: none;
+	position: absolute;
+	right: 0;
+	top: 10px;
+	height: 80px;
+	margin: 0;
+}
+
+html body .christmas-holder #content{
+	padding-top: 40px !important;
+	margin-bottom: 0 !important;
+	padding-bottom: 0 !important;
+}
+
+@media screen and (max-width: 990px) {
+	html body .christmas-holder #content{
+		padding-top: 0 !important;
+	}
+}
+
+.christmas-page {
+	min-height: 600px;
+}
+
+.christmas-page .video-section {
+	background: url('../../images/front/snow_pic_2.jpg');
+
+}
+
+.christmas-page .video-section .left-side {
+	width: 60%;
+	float: left;
+	margin-bottom: -4px;
+}
+.christmas-page .video-section .left-side iframe {
+	width: 100%;
+	height: 350px;
+	position: relative;
+	z-index: 0;
+}
+.christmas-page .video-section .right-side {
+	width: 40%;
+	float: right;
+	padding-top: 30px;
+}
+.christmas-page .video-section .right-side .header {
+	background-color: rgba(0,0,0,0.5);
+	padding: 6px 12px;
+	color: #FFFFFF;
+	text-transform: uppercase;
+	position: relative;
+	z-index: 10;
+	margin-left: -90px;
+}
+.christmas-page .video-section .right-side .header h1 {
+	font-family: 'bebas', Helvetica, Arial, sans serif;
+	font-weight: 900;
+	letter-spacing: -2px;
+	font-size: 52px;
+	line-height: 46px;
+	margin-bottom: 6px;
+	color: inherit;
+}
+.christmas-page .video-section .right-side .header h3 {
+	font-weight: 200;
+	font-size: 17px;
+	line-height: 20px;
+	color: inherit;
+}
+
+.christmas-page .video-section .right-side .bottom-text {
+	padding: 30px 40px 0;
+	text-align: center;
+}
+.christmas-page .video-section .right-side .bottom-text h4 {
+	font-size: 17px;
+	color: inherit;
+}
+.christmas-page .video-section .right-side .bottom-text .small-text {
+	font-size: 13px;
+	color: inherit;
+	margin-top: 10px;
+}
+
+.christmas-page .explanation-section {
+	width: 800px;
+	background: url('../../images/front/christmas_lines.svg') no-repeat;
+	background-size: 100% 100%;
+	margin: 0 auto;
+}
+.christmas-page .explanation-section .explanation-row {
+	text-align: center;
+}
+.christmas-page .explanation-section .explanation-row .explanation-card {
+	display: inline-block;
+	width: 200px;
+	vertical-align: top;
+	margin: 30px 30px;
+}
+.christmas-page .explanation-section .explanation-row .explanation-card img {
+	max-width: 100%;
+	height: auto;
+	box-shadow: 0 14px 6px -10px rgba(0,0,0,0.5);
+}
+.christmas-page .explanation-section .explanation-row .explanation-card p {
+	max-width: 80%;
+	margin: 20px auto 0;
+}
+.christmas-page .explanation-section .explanation-row .explanation-card p span {
+	color: #000000;
+	font-weight: 400;
+}
+.christmas-page .explanation-section .explanation-row .btn-christmas {
+	display: inline-block;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #333333;
+	font-size: 22px;
+	height: 50px;
+	line-height: 50px;
+	padding: 0 30px;
+	margin: 30px 0;
+	border: 1px solid #333333;
+	background-color: #FFFFFF;
+	box-shadow: 0 16px 7px -12px rgba(0,0,0,0.5);
+	transition: box-shadow 0.12s linear, transform 0.12s ease;
+	-webkit-transition: box-shadow 0.12s linear, -webkit-transform 0.12s ease;
+	-moz-transition: box-shadow 0.12s linear, -moz-transform 0.12s ease;
+	-ms-transition: box-shadow 0.12s linear, -ms-transform 0.12s ease;
+}
+.christmas-page .explanation-section .explanation-row .btn-christmas:hover {
+	box-shadow: 0 4px 3px -3px rgba(0,0,0,0.75);
+	transform: translateY(2px);
+	-webkit-transform: translateY(2px);
+	-moz-transform: translateY(2px);
+	-ms-transform: translateY(2px);
+}
+
+.christmas-page .explanation-section .explanation-row .btn-christmas.btn-brand {
+	color: #FFFFFF;
+	border: none;
+}
+
+.christmas-holding-page .header-section {
+	/* GRADIENT */
+
+	text-align: right;
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+.christmas-holding-page .header-section .wrap {
+	position: relative;
+}
+.christmas-holding-page .header-section .wrap:after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	right: -60px;
+	width: 180px;
+	height: 180px;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.christmas-holding-page .header-section .wrap:before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	left: -60px;
+	width: 180px;
+	height: 180px;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.christmas-holding-page .header-section h1 {
+	font-family: 'bebas', Helvetica, Arial, sans serif;
+	color: #FFFFFF;
+	font-size: 130px;
+	line-height: 120px;
+	text-transform: uppercase;
+	position: relative;
+}
+.christmas-holding-page .header-section h1:after {
+	content: '';
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	right: -11px;
+	top: -60px;
+	transform: rotate(12deg);
+}
+.christmas-holding-page .header-section h3 {
+	color: #eaeaea;
+	font-size: 20px;
+	text-transform: uppercase;
+	line-height: 20px;
+}
+
+
+
+
+.christmas-holding-page .header-section .wrap > .crimbo-holder {
+	margin-top: -10px;
+	float: left;
+}
+.christmas-holding-page .header-section .wrap > .text-coming {
+	margin-top: 64px;
+	float: right;
+	padding-right: 80px;
+	position: relative;
+	z-index: 5;
+}
+
+.christmas-holding-page .header-section .wrap > .crimbo-holder img {
+	max-width: 280px;
+	margin: 10px 0 -10px;
+}
+.christmas-holding-page .header-section .wrap > .crimbo-holder h3 {
+	padding-left: 10px;
+}
+
+.christmas-holding-page .holding-middle-section {
+	padding: 40px 0;
+	text-align: center;
+}
+
+.christmas-holding-page .holding-middle-section h3,
+.christmas-holding-page .holding-middle-section h4 {
+
+}
+.christmas-holding-page .holding-middle-section h3 {
+	font-size: 19px;
+	line-height: 25px;
+}
+
+.christmas-holding-page .holding-middle-section h4 {
+	margin-top: 20px;
+	font-size: 16px;
+}
+
+.christmas-holding-page .holding-footer {
+	padding: 40px 0;
+}
+.christmas-holding-page .holding-footer #mc_embed_signup {
+	background: transparent;
+}
+
+.christmas-holding-page .holding-footer #mc_embed_signup input:not([type=submit]) {
+	background: rgba(255,255,255,0.15);
+	border: 1px solid rgba(255,255,255,0.5);
+	border-radius: 10px;
+	height: 50px;
+	line-height: 50px;
+	padding: 0 15px;
+	color: #e5e5e5;
+	font-size: 18px;
+}
+.christmas-holding-page .holding-footer #mc_embed_signup input:not([type=submit]):active,
+.christmas-holding-page .holding-footer #mc_embed_signup input:not([type=submit]):focus {
+	background: rgba(255,255,255,0.25);
+	border: 1px solid rgba(255,255,255,1);
+	color: #ffffff;
+}
+
+.christmas-holding-page .holding-footer #mc_embed_signup input[type=submit] {
+	font-family: 'bebas', Helvetica, Arial, sans serif;
+	font-size: 34px;
+	letter-spacing: 1px;
+
+	clear: both;
+	background-color: transparent;
+	border: 1px solid #e5e5e5;
+	border-radius: 4px;
+	color: #e5e5e5;
+	cursor: pointer;
+	display: inline-block;
+	font-weight: bold;
+	height: 50px;
+	line-height: 50px;
+	margin: 0 5px 10px 0;
+	padding: 0 30px;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: top;
+	white-space: nowrap;
+	width: auto;
+}
+.christmas-holding-page .holding-footer #mc_embed_signup input[type=submit]:hover {
+	border: 1px solid #FFFFFF;
+	color: #FFFFFF;
+	background: rgba(255,255,255,0.2);
+}
+
+.christmas-holding-page .holding-footer #mc_embed_signup #mc_embed_signup_scroll {
+	text-align: center;
+}
+.christmas-holding-page .holding-footer #mc_embed_signup .mc-field-group {
+	display: inline-block;
+	max-width: 300px;
+	margin: 0 15px;
+}
+.christmas-holding-page .holding-footer #mc_embed_signup div.response {
+	float: none;
+	width: 100%;
+	text-transform: uppercase;
+	color: #2ED22E;
+}
+
+@media screen and (max-width: 1050px) {
+	.christmas-holding-page .header-section .wrap {
+		text-align: center;
+	}
+	.christmas-holding-page .header-section .wrap > .crimbo-holder {
+		float: none;
+		display: inline-block;
+	}
+	.christmas-holding-page .header-section .wrap > .text-coming {
+		float: none;
+		padding-right: 0;
+		z-index: 5;
+		display: inline-block;
+		margin: 20px 10px 0;
+	}
+	.christmas-holding-page .header-section .wrap:after {
+		right: 0;
+		top: 20%;
+	}
+	.christmas-holding-page .header-section .wrap:before {
+		left: 0;
+	}
+}
+
+
+@media screen and (max-width: 810px) {
+	.christmas-page .explanation-section {
+		width: 100%;
+		background: none;
+	}
+	.christmas-page .explanation-section .explanation-row .explanation-card {
+		display: block;
+		margin: 30px auto;
+	}
+	.christmas-page .video-section .left-side {
+		width: 100%;
+		float: none;
+	}
+	.christmas-page .video-section .right-side {
+		width: 100%;
+		float: none;
+	}
+	.christmas-page .video-section .right-side .header {
+		margin-left: 0;
+		text-align: center;
+	}
+	.christmas-page .video-section .right-side .header h1 {
+		font-size: 44px;
+		line-height: 40px;
+	}
+	.christmas-page .video-section .right-side .bottom-text {
+		margin-bottom: 20px;
+	}
+	.christmas-holding-page .holding-middle-section {
+		padding: 20px;
+	}
+}
+@media screen and (max-width: 650px) {
+	.christmas-holding-page .header-section h1 {
+		font-size: 90px;
+		line-height: 100px;
+		display: inline-block;
+	}
+	.christmas-holding-page .header-section .wrap > .crimbo-holder img {
+		max-width: 210px;
+	}
+}
+@media screen and (max-width: 500px) {
+	.christmas-page .video-section .left-side iframe {
+		height: 280px;
+	}
+	.christmas-holding-page .header-section h1 {
+		font-size: 60px;
+		line-height: 70px;
+	}
+	.christmas-holding-page .header-section .wrap:before,
+	.christmas-holding-page .header-section .wrap:after {
+		display: none;
+	}
+	.christmas-holding-page .header-section h1:after {
+		width: 50px;
+		height: 50px;
+		top: -22px;
+	}
+	.christmas-holding-page .holding-footer #mc_embed_signup .mc-field-group {
+		max-width: none;
+		margin: 0 auto;
+	}
+}
+/* ************************************* */
+/* CHRISTMAS PAGES STYLES END            */
+/* ************************************* */
