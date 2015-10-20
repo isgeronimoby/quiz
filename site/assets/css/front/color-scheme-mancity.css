@@ -10,6 +10,9 @@ html.front.top-full .navbar.main {
   color: #ffffff;
   background-color: #62ade9;
 }
+.text-brand {
+  color: #62ade9;
+}
 .toolbar .button:hover {
   background-color: #16609c;
 }

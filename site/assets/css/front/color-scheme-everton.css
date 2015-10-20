@@ -6,6 +6,9 @@ html.front.top-full .navbar.main {
 .autocomplete-suggestions strong {
   color: #00369c;
 }
+.text-brand {
+  color: #00369c;
+}
 .toolbar .button {
   color: #ffffff;
   background-color: #00369c;
@@ -487,7 +490,8 @@ a.ctm_btn {
 .christmas-holding-page .holding-footer {
   background-color: #00369c;
 }
-.christmas-holding-page .header-section h1:after {
+.christmas-holding-page .header-section h1:after,
+.christmas-page .video-section .right-side .header h1:nth-child(2):after {
   background-image: url('../../images/front/everton/crimbo/christmas_hat.png');
 }
 .christmas-holding-page .header-section .wrap:after {
@@ -495,6 +499,9 @@ a.ctm_btn {
 }
 .christmas-holding-page .header-section .wrap:before {
   background-image: url('../../images/front/everton/crimbo/stars-left.png');
+}
+.christmas-page .explanation-section {
+  background-image: url('../../images/front/everton/crimbo/christmas_lines.svg');
 }
 @media all and (max-width: 990px) {
   .drop-down-menu {
