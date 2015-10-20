@@ -121,16 +121,19 @@
 		<section class="christmas-stats">
 			<h2>My stats</h2>
 			<div class="row">
-				<div class="col-sm-12">
+				<div class="col-sm-12 col-xs-20">
 					<div class="christmas-profile">
-						<img class="profile-image" src="../../assets/images/avatar-74x74.jpg" />
-						<h4 class="name">Josh</h4>
+						<a href="#">
+							<img class="profile-image" src="../../assets/images/avatar-74x74.jpg" />
+							<h4 class="name">Josh</h4>
+						</a>
 					</div>
 				</div>
-				<div class="col-sm-14 side-separators">
+				<div class="col-sm-14 col-xs-28 side-separators">
 					<div class="christmas-stats-block">
 						<p>Invites sent: <span class="stat">11</span></p>
-						<p>Friends signed up: <span class="stat singed-up">10</span></p>
+						<p>Friends signed up: <span class="stat">15</span></p>
+						<p>Friends made purchases: <span class="stat made-purchases">7</span></p>
 						<p>Prizes unlocked: <span class="stat">2</span></p>
 					</div>
 				</div>
@@ -205,7 +208,7 @@
 				<form action="">
 					<input type="text" placeholder="Friend's name?"/>
 					<input type="email" placeholder="Friend's email?"/>
-					<button type="submit">Send invite</button>
+					<button type="submit" class="shaky-cta">Send invite</button>
 				</form>
 			</div>
 		</section>
@@ -224,14 +227,14 @@
 					<div class="col-sm-24 right-block">
 						<h3>Your form guide</h3>
 						<div class="row">
-							<div class="col-sm-17">
+							<div class="col-sm-17 col-xs-16">
 								<img src="http://lorempixel.com/200/120/cats/6" alt=""/>
 								<p>You are entered into the draw to win a signed home shirt!</p>
 							</div>
-							<div class="col-sm-8">
+							<div class="col-sm-8 col-xs-8">
 								<div class="small-separator"></div>
 							</div>
-							<div class="col-sm-22">
+							<div class="col-sm-22 col-xs-24">
 								<img src="http://lorempixel.com/200/120/cats/5" alt=""/>
 								<p>You have qualified to receive a Guaranteed exclusive Goodison Road shirt!</p>
 							</div>
@@ -243,12 +246,13 @@
 				<div class="col-sm-24 left-block">
 					<h3>Your trophy cabinet</h3>
 					<div class="trophies-list">
-						<span class="trophy active"></span>
+						<span class="trophy"></span>
 						<span class="trophy"></span>
 						<span class="trophy"></span>
 						<span class="trophy"></span>
 						<span class="trophy"></span>
 					</div>
+					<div class="clearfix"></div>
 				</div>
 				<div class="col-sm-24 right-block">
 					<h3>Sign up more friends and qualify for greater prizes!</h3>
@@ -348,7 +352,7 @@
 <script src="../../assets/components/core/js/core.init.js?v=v2.3.0"></script>
 <script src="../../assets/components/library/main/detectMobileShowElements.js"></script>
 <!--<script src="../../assets/components/library/snowstorm/snowstorm-min.js"></script>-->
-<script src="../../assets/components/library/pages/christmas_campaign.js"></script>
+<script src="../../assets/components/core/js/pages/christmas_campaign.js"></script>
 
 
 </body>

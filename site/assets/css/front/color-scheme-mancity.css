@@ -465,6 +465,72 @@ a.ctm_btn {
 .christmas-page .explanation-section .explanation-row .btn-christmas.btn-brand {
   background-color: #62ade9;
 }
+.christmas-holding-page .header-section {
+  /* GRADIENT */
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4674bf+0,002053+100 */
+  background: #4674bf;
+  /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, #4674bf 0%, #002053 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #4674bf), color-stop(100%, #002053));
+  /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover, #4674bf 0%, #002053 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, #4674bf 0%, #002053 100%);
+  /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, #4674bf 0%, #002053 100%);
+  /* IE10+ */
+  background: radial-gradient(ellipse at center, #4674bf 0%, #002053 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4674bf', endColorstr='#002053', GradientType=1);
+  /* IE6-9 fallback on horizontal gradient */
+  text-align: right;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+.christmas-holding-page .holding-middle-section h3,
+.christmas-holding-page .holding-middle-section h4 {
+  color: #62ade9;
+}
+.christmas-holding-page .holding-footer {
+  background-color: #62ade9;
+}
+/* ****************************************************************** */
+/* Christmas Dashboard styles                                         */
+/* ****************************************************************** */
+.christmas-dashboard section h2,
+.christmas-dashboard section .christmas-stats-block .stat,
+.christmas-dashboard section .invite-options .fa:hover,
+.christmas-dashboard section .invite-options .fa.active,
+.christmas-dashboard section .invitation-form form button:hover,
+.christmas-dashboard section.trophies .top-part .right-block,
+.christmas-dashboard section.trophies .top-part .right-block h3 {
+  color: #62ade9;
+}
+.christmas-dashboard section.christmas-stats .christmas-cta:hover,
+.christmas-dashboard section.invites table tbody td button:hover {
+  background-color: #62ade9;
+  color: #62ade9;
+}
+.christmas-dashboard section .invitation-form form input:not([type=submit]):focus {
+  border-bottom-color: #62ade9;
+}
+.christmas-dashboard section .invitation-form form button {
+  background-color: #62ade9;
+  color: #FFFFFF;
+}
+.christmas-dashboard section.trophies > div:nth-child(1):after {
+  background-image: url('../../images/front/everton/crimbo/gaffer.png');
+}
+.christmas-dashboard section.trophies .bottom-part .left-block {
+  background-color: #62ade9;
+}
+.christmas-dashboard section.invites table tbody td .tick div {
+  border-color: #62ade9;
+}
+.christmas-dashboard .christmas-notification {
+  background: #62ade9;
+}
 @media all and (max-width: 1025px) {
   .additional-navigation .info-amount {
     display: none;

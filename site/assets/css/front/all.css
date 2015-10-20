@@ -7582,7 +7582,6 @@ html body .christmas-holder #content{
 }
 .christmas-dashboard section h2 {
 	margin: 30px 0;
-	color: #00369c;
 }
 
 .christmas-dashboard .christmas-separator {
@@ -7599,8 +7598,16 @@ html body .christmas-holder #content{
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aaaaaa', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
+.christmas-dashboard .shaky-cta {
+	animation: shaky-cta 10s ease 9s forwards infinite;
+	-webkit-animation: shaky-cta 10s ease 9s forwards infinite;
+}
+
 .christmas-dashboard section .christmas-profile {
 
+}
+.christmas-dashboard section .christmas-profile a {
+	text-decoration: none;
 }
 .christmas-dashboard section .christmas-profile img {
 	display: inline-block;
@@ -7608,6 +7615,14 @@ html body .christmas-holder #content{
 	max-width: 70px;
 	border-radius: 50%;
 	margin-right: 10px;
+	text-decoration: none;
+	transition: border-radius 0.3s ease;
+	-webkit-transition: border-radius 0.3s ease;
+	-moz-transition: border-radius 0.3s ease;
+	-ms-transition: border-radius 0.3s ease;
+}
+.christmas-dashboard section .christmas-profile a:hover img {
+	border-radius: 15%;
 }
 .christmas-dashboard section .christmas-profile .name {
 	display: inline-block;
@@ -7618,7 +7633,6 @@ html body .christmas-holder #content{
 }
 .christmas-dashboard section .christmas-stats-block .stat {
 	float: right;
-	color: #00369c;
 }
 
 .christmas-dashboard section.christmas-stats .christmas-cta {
@@ -7660,16 +7674,12 @@ html body .christmas-holder #content{
 }
 
 .christmas-dashboard section.christmas-stats .christmas-cta:hover {
-	background-color: #00369c;
-	color: #00369c;
+
 }
 .christmas-dashboard section.christmas-stats .christmas-cta:hover:after {
 	color: #FFFFFF;
 	right: 50%;
 }
-
-
-
 
 
 .christmas-dashboard section .row > div:nth-child(1) {
@@ -7741,6 +7751,7 @@ html body .christmas-holder #content{
 }
 
 .christmas-dashboard section.squad .football {
+	display: none;
 	width: 40px;
 	height: 40px;
 	position: absolute;
@@ -7755,20 +7766,9 @@ html body .christmas-holder #content{
 	transition: left 0.4s ease;
 }
 
-/*TODO: Refactor this to have it done through JS and animations in the end of the file */
 .christmas-dashboard section.squad .football.pass {
 	animation: football-pass 0.4s ease alternate;
-}
-@keyframes football-pass {
-	0% {
-		bottom: 30px;
-	}
-	50% {
-		bottom: 70%;
-	}
-	100% {
-		bottom: 30px;
-	}
+	-webkit-animation: football-pass 0.4s ease alternate;
 }
 
 .christmas-dashboard section .invite-options {
@@ -7785,10 +7785,7 @@ html body .christmas-holder #content{
 	-moz-transition: color 0.2s ease;
 	-ms-transition: color 0.2s ease;
 }
-.christmas-dashboard section .invite-options .fa:hover,
-.christmas-dashboard section .invite-options .fa.active {
-	color: #00369c;
-}
+
 .christmas-dashboard section .invite-options .fa-mobile-phone {
 	font-size: 34px;
 }
@@ -7821,7 +7818,6 @@ html body .christmas-holder #content{
 }
 .christmas-dashboard section .invitation-form form input:not([type=submit]):focus {
 	border-bottom-width: 2px;
-	border-bottom-color: #00369c;
 }
 
 .christmas-dashboard section .invitation-form form button {
@@ -7834,8 +7830,6 @@ html body .christmas-holder #content{
 	padding: 0 44px 0 20px;
 	overflow: hidden;
 	border: 0;
-	color: #FFFFFF;
-	background-color: #00369c;
 	position: relative;
 	display: inline-block;
 	vertical-align: middle;
@@ -7857,9 +7851,6 @@ html body .christmas-holder #content{
 	-ms-transition: right 0.2s ease;
 }
 
-.christmas-dashboard section .invitation-form form button:hover {
-	color: #00369c;
-}
 .christmas-dashboard section .invitation-form form button:hover:after {
 	color: #FFFFFF;
 	right: 50%;
@@ -7876,7 +7867,6 @@ html body .christmas-holder #content{
 	width: 110px;
 	height: 220px;
 	background-repeat: no-repeat;
-	background-image: url('../../images/front/everton/crimbo/gaffer.png');
 	background-size: cover;
 	z-index: 5;
 }
@@ -7894,9 +7884,6 @@ html body .christmas-holder #content{
 .christmas-dashboard section.trophies .top-part .right-block {
 	background-color: #FFFFFF;
 }
-.christmas-dashboard section.trophies .bottom-part .left-block {
-	background-color: #00369c;
-}
 .christmas-dashboard section.trophies .bottom-part .right-block {
 	background-color: #cfcfcf;
 }
@@ -7907,11 +7894,9 @@ html body .christmas-holder #content{
 }
 .christmas-dashboard section.trophies .top-part .right-block {
 	padding: 10px 10px 0 20px;
-	color: #00369c;
 }
 .christmas-dashboard section.trophies .top-part .right-block h3 {
 	margin-bottom: 10px;
-	color: #00369c;
 }
 
 .christmas-dashboard section.trophies .top-part .left-block h1 {
@@ -8030,7 +8015,6 @@ html body .christmas-holder #content{
 	height: 10px;
 	border-bottom: 1px solid;
 	border-left: 1px solid;
-	border-color: #00369c;
 	transform: rotate(-45deg);
 }
 
@@ -8071,25 +8055,18 @@ html body .christmas-holder #content{
 	-ms-transition: right 0.2s ease;
 }
 
-.christmas-dashboard section.invites table tbody td button:hover {
-	background-color: #00369c;
-	color: #00369c;
-}
 .christmas-dashboard section.invites table tbody td button:hover:after {
 	color: #FFFFFF;
 	right: 50%;
 }
 
 
-
-
-
 .christmas-dashboard .christmas-notification {
 	position: fixed;
-	background: #00369c;
 	bottom: 30px;
 	left: 0;
 	z-index: 999999999;
+	border-bottom-right-radius: 40px;
 	box-shadow: 1px 1px 5px rgba(0,0,0,0.75);
 	transform: translateX(-100%);
 	-webkit-transform: translateX(-105%);
@@ -8178,6 +8155,75 @@ html body .christmas-holder #content{
 .christmas-dashboard .christmas-notification.goal .christmas-notification-body .goal {
 	display: block;
 }
+
+
+/* ------------------------------------------------------------------ */
+/* Animations                                                         */
+/* ------------------------------------------------------------------ */
+
+@keyframes football-pass {
+	0% {
+		bottom: 30px;
+		transform: translateX(-130%) rotate(0deg);
+		-moz-transform: translateX(-130%) rotate(0deg);
+		-ms-transform: translateX(-130%) rotate(0deg);
+	}
+	50% {
+		bottom: 70%;
+		transform: translateX(-130%) rotate(400deg);
+		-moz-transform: translateX(-130%) rotate(400deg);
+		-ms-transform: translateX(-130%) rotate(400deg);
+	}
+	100% {
+		bottom: 30px;
+		transform: translateX(-130%) rotate(720deg);
+		-moz-transform: translateX(-130%) rotate(720deg);
+		-ms-transform: translateX(-130%) rotate(720deg);
+	}
+}
+@-webkit-keyframes football-pass {
+	0% {
+		bottom: 30px;
+		-webkit-transform: translateX(-130%) rotate(0deg);
+	}
+	50% {
+		bottom: 70%;
+		-webkit-transform: translateX(-130%) rotate(400deg);
+	}
+	100% {
+		bottom: 30px;
+		-webkit-transform: translateX(-130%) rotate(720deg);
+	}
+}
+
+@keyframes shaky-cta {
+	0% {
+		transform: rotate(0deg);
+	}
+	1%{
+		transform: rotate(-9deg);
+	}
+	3%{
+		transform: rotate(9deg);
+	}
+	4%{
+		transform: rotate(0deg);
+	}
+}
+@-webkit-keyframes shaky-cta {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+	1%{
+		-webkit-transform: rotate(-9deg);
+	}
+	3%{
+		-webkit-transform: rotate(9deg);
+	}
+	4%{
+		-webkit-transform: rotate(0deg);
+	}
+}
 /* ****************************************************************** */
 /* End of Christmas Dashboard styles                                  */
 /* ****************************************************************** */
@@ -8208,6 +8254,28 @@ html body .christmas-holder #content{
 	}
 }
 
+@media screen and (max-width: 990px) {
+	.christmas-dashboard {
+		padding: 0 20px;
+	}
+}
+@media screen and (max-width: 910px) {
+	.christmas-dashboard section.trophies .top-part .left-block h1 {
+		font-size: 50px;
+	}
+	.christmas-dashboard section.squad .football {
+		width: 34px;
+		height: 34px;
+	}
+	.christmas-dashboard section.trophies .bottom-part h3 {
+		font-size: 20px;
+	}
+	.christmas-dashboard section.trophies .trophies-list .trophy {
+		height: 30px;
+		width: 30px;
+		margin: 5px 0;
+	}
+}
 
 @media screen and (max-width: 810px) {
 	.christmas-page .explanation-section {
@@ -8247,6 +8315,76 @@ html body .christmas-holder #content{
 		top: -27px;
 	}
 }
+
+@media screen and (max-width: 768px) {
+	.christmas-dashboard section .side-separators {
+		border-right: 0;
+	}
+	.christmas-dashboard .christmas-stats .row > div:not(:last-child) {
+		margin-bottom: 30px;
+	}
+	.christmas-dashboard .christmas-stats .row > div:last-child {
+		text-align: center;
+	}
+	.christmas-dashboard .christmas-separator {
+		margin: 20px 0;
+	}
+	.christmas-dashboard section {
+		margin-bottom: 20px;
+	}
+	.christmas-dashboard section .invitation-form form input:not([type=submit]) {
+		width: 48%;
+	}
+	.christmas-dashboard section .invitation-form form button {
+		display: block;
+		margin: 20px auto;
+	}
+	.christmas-dashboard section.trophies > div:nth-child(1):after {
+		bottom: 0;
+		top: 60px;
+		width: 90px;
+		height: 180px;
+	}
+	.christmas-dashboard section.invites table {
+		width: 100%;
+	}
+	.christmas-dashboard section.invites table tbody td {
+		font-size: 14px;
+		height: 30px;
+	}
+	.christmas-dashboard section.invites table tbody td .multiply {
+		padding-top: 10px;
+		width: 20px;
+		height: 20px;
+	}
+	.christmas-dashboard section.invites table tbody td .tick {
+		padding-top: 2px;
+		width: 19px;
+		height: 18px;
+	}
+	.christmas-dashboard section.invites table tbody td button {
+		height: 32px;
+		line-height: 33px;
+		font-size: 20px;
+	}
+	.christmas-dashboard section.invites table tbody td button:after {
+		line-height: 33px;
+	}
+	.christmas-dashboard section.squad .squad-el.squad-flag:after {
+		width: 26px;
+		height: 26px;
+		font-size: 16px;
+		line-height: 26px;
+	}
+	.christmas-dashboard section.squad .squad-el.squad-flag.squad-trophey:after {
+		font-size: 20px;
+	}
+	.christmas-dashboard section.squad .football {
+		width: 24px;
+		height: 24px;
+	}
+}
+
 @media screen and (max-width: 650px) {
 	.christmas-holding-page .header-section h1 {
 		font-size: 90px;

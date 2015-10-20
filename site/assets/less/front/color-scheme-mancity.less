@@ -14,6 +14,9 @@
 @grey-light-btns: #6b6b6b;
 @grey-dark-btns: #4c4c4c;
 
+// TODO: change to corresponded club colors
+@team-gradient-light: #4674bf;
+@team-gradient-dark: #002053;
 /* Header */
 html.front.top-full .navbar.main {
 	background-color: @team-color;
@@ -594,6 +597,80 @@ a.ctm_btn {
 }
 .christmas-page .explanation-section .explanation-row .btn-christmas.btn-brand {
   background-color: @team-color;
+}
+
+.christmas-holding-page .header-section {
+  /* GRADIENT */
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4674bf+0,002053+100 */
+  background: @team-gradient-light; /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover,  @team-gradient-light 0%, @team-gradient-dark 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,@team-gradient-light), color-stop(100%,#002053)); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover,  @team-gradient-light 0%,@team-gradient-dark 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover,  @team-gradient-light 0%,@team-gradient-dark 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover,  @team-gradient-light 0%,@team-gradient-dark 100%); /* IE10+ */
+  background: radial-gradient(ellipse at center,  @team-gradient-light 0%,@team-gradient-dark 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@{team-gradient-light}', endColorstr='@{team-gradient-dark}' ,GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+  text-align: right;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+.christmas-holding-page .holding-middle-section h3,
+.christmas-holding-page .holding-middle-section h4 {
+  color: @team-color;
+}
+.christmas-holding-page .holding-footer {
+  background-color: @team-color;
+}
+.christmas-holding-page .header-section h1:after,
+.christmas-page .video-section .right-side .header h1:nth-child(2):after {
+  //background-image: url('../../images/front/everton/crimbo/christmas_hat.png');
+}
+.christmas-holding-page .header-section .wrap:after {
+  //background-image: url('../../images/front/everton/crimbo/stars-right.png');
+}
+.christmas-holding-page .header-section .wrap:before {
+  //background-image: url('../../images/front/everton/crimbo/stars-left.png');
+}
+.christmas-page .explanation-section {
+  //background-image: url('../../images/front/everton/crimbo/christmas_lines.svg');
+}
+
+/* ****************************************************************** */
+/* Christmas Dashboard styles                                         */
+/* ****************************************************************** */
+.christmas-dashboard section h2,
+.christmas-dashboard section .christmas-stats-block .stat,
+.christmas-dashboard section .invite-options .fa:hover,
+.christmas-dashboard section .invite-options .fa.active,
+.christmas-dashboard section .invitation-form form button:hover,
+.christmas-dashboard section.trophies .top-part .right-block,
+.christmas-dashboard section.trophies .top-part .right-block h3 {
+  color: @team-color;
+}
+.christmas-dashboard section.christmas-stats .christmas-cta:hover,
+.christmas-dashboard section.invites table tbody td button:hover {
+  background-color: @team-color;
+  color: @team-color;
+}
+.christmas-dashboard section .invitation-form form input:not([type=submit]):focus {
+  border-bottom-color: @team-color;
+}
+.christmas-dashboard section .invitation-form form button {
+  background-color: @team-color;
+  color: #FFFFFF;
+}
+.christmas-dashboard section.trophies > div:nth-child(1):after {
+  background-image: url('../../images/front/everton/crimbo/gaffer.png');
+}
+.christmas-dashboard section.trophies .bottom-part .left-block {
+  background-color: @team-color;
+}
+.christmas-dashboard section.invites table tbody td .tick div {
+  border-color: @team-color;
+}
+.christmas-dashboard .christmas-notification {
+  background: @team-color;
 }
 
 

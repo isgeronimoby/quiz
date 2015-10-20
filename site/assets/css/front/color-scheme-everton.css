@@ -503,6 +503,42 @@ a.ctm_btn {
 .christmas-page .explanation-section {
   background-image: url('../../images/front/everton/crimbo/christmas_lines.svg');
 }
+/* ****************************************************************** */
+/* Christmas Dashboard styles                                         */
+/* ****************************************************************** */
+.christmas-dashboard section h2,
+.christmas-dashboard section .christmas-stats-block .stat,
+.christmas-dashboard section .invite-options .fa:hover,
+.christmas-dashboard section .invite-options .fa.active,
+.christmas-dashboard section .invitation-form form button:hover,
+.christmas-dashboard section.trophies .top-part .right-block,
+.christmas-dashboard section.trophies .top-part .right-block h3 {
+  color: #00369c;
+}
+.christmas-dashboard section.christmas-stats .christmas-cta:hover,
+.christmas-dashboard section.invites table tbody td button:hover {
+  background-color: #00369c;
+  color: #00369c;
+}
+.christmas-dashboard section .invitation-form form input:not([type=submit]):focus {
+  border-bottom-color: #00369c;
+}
+.christmas-dashboard section .invitation-form form button {
+  background-color: #00369c;
+  color: #FFFFFF;
+}
+.christmas-dashboard section.trophies > div:nth-child(1):after {
+  background-image: url('../../images/front/everton/crimbo/gaffer.png');
+}
+.christmas-dashboard section.trophies .bottom-part .left-block {
+  background-color: #00369c;
+}
+.christmas-dashboard section.invites table tbody td .tick div {
+  border-color: #00369c;
+}
+.christmas-dashboard .christmas-notification {
+  background: #00369c;
+}
 @media all and (max-width: 990px) {
   .drop-down-menu {
     background-color: #00369c;
