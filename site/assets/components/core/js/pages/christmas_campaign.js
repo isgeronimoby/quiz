@@ -58,6 +58,7 @@ $(document).ready(function(){
     var FootballAnimation = {
         squadEls: christmasDashboard.find('.squad .squad-row .squad-el'),
         football: christmasDashboard.find('.squad .squad-row .football'),
+        squadCount: christmasDashboard.find('.squad .squad-class'),
         timeBasic: 400,
         animateBall: function(player){
             this.football.removeClass('pass');
@@ -70,6 +71,7 @@ $(document).ready(function(){
             var counter = 0;
             //that.squadEls.css('max-width', 100 / squadNumber + '%');
             // uncomment if squad number is differ from 10
+            that.squadCount.html(Math.floor(startingSignedUps / squadNumber) + 1);
             if ( startingSignedUps === 0 ) {
                 that.football.fadeIn(300);
                 var firstPos = this.football.css('left');

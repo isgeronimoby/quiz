@@ -7695,6 +7695,22 @@ html body .christmas-holder #content{
 	border-left: 1px solid #cccccc;
 	border-right: 1px solid #cccccc;
 }
+.christmas-dashboard section.squad h2 {
+	display: inline-block;
+}
+.christmas-dashboard section.squad .squad-class {
+	display: inline-block;
+	background-image: url('../../images/front/everton/crimbo/flag.svg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 33px;
+	line-height: 70px;
+	height: 56px;
+	text-align: center;
+	font-size: 20px;
+	color: #ffffff;
+	margin-left: 12px;
+}
 
 .christmas-dashboard section.squad .squad-row {
 	position: relative;
@@ -8395,6 +8411,12 @@ html body .christmas-holder #content{
 		max-width: 210px;
 	}
 }
+@media screen and (max-width: 610px) {
+	.christmas-dashboard section .invitation-form form input:not([type=submit]) {
+		width: 100%;
+		margin-bottom: 5px;
+	}
+}
 @media screen and (max-width: 500px) {
 	.christmas-page .video-section .left-side iframe {
 		height: 280px;
@@ -8415,6 +8437,65 @@ html body .christmas-holder #content{
 	.christmas-holding-page .holding-footer #mc_embed_signup .mc-field-group {
 		max-width: none;
 		margin: 0 auto;
+	}
+	.christmas-dashboard section.trophies .top-part .left-block h1 {
+		font-size: 30px;
+	}
+	.christmas-dashboard section .row > div:nth-child(3) {
+		padding-left: 7px;
+	}
+	.christmas-dashboard section .row > div:nth-child(1) {
+		padding-right: 7px;
+		text-align: center;
+	}
+	.christmas-dashboard section .christmas-profile img {
+		margin: 0 0 5px;
+	}
+	.christmas-dashboard section .christmas-profile .name {
+		display: block;
+		text-align: center;
+	}
+	.christmas-dashboard section .row > div:nth-child(2) {
+		padding: 0;
+		border: 0;
+	}
+	.christmas-dashboard section.trophies .top-part .right-block .row div .small-separator {
+		display: none;
+	}
+	.christmas-dashboard section.trophies .bottom-part, .christmas-dashboard section.trophies .bottom-part h3,
+	.christmas-dashboard section.trophies .bottom-part .left-block h3 {
+		text-align: center;
+		float: none;
+		height: auto;
+		line-height: 24px;
+	}
+	.christmas-dashboard section.trophies .trophies-list {
+		float: none;
+	}
+	.christmas-dashboard section.invites table tbody td button {
+		max-width: 40px;
+		padding: 0;
+		color: #555555;
+	}
+	.christmas-dashboard section.invites table tbody td button:after {
+		color: #FFFFFF;
+	}
+	.christmas-dashboard section.invites table tbody td:nth-child(1) {
+		display: none;
+	}
+	.christmas-dashboard section.squad .squad-el {
+		max-width: 20%;
+		margin-bottom: 20px;
+		padding: 0;
+	}
+	.christmas-dashboard section.squad .football {
+		display: none !important;
+	}
+	.christmas-dashboard section.squad .squad-el.active .name {
+		display: block;
+		margin: 0 auto;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 }
 /* ************************************* */
