@@ -8093,6 +8093,11 @@ html body .christmas-holder #content{
 	-moz-transition: transform 0.3s ease;
 	-ms-transition: transform 0.3s ease;
 }
+.christmas-dashboard .christmas-notification.error {
+	border-bottom-right-radius: 0;
+	background: #790000;
+}
+
 .christmas-dashboard .christmas-notification.shown {
 	transform: translateX(0);
 	-webkit-transform: translateX(0);
@@ -8158,17 +8163,27 @@ html body .christmas-holder #content{
 	font-size: 76px;
 	line-height: 86px;
 }
+.christmas-dashboard .christmas-notification.error .christmas-notification-body h1 {
+	font-size: 60px;
+	line-height: 70px;
+}
 .christmas-dashboard .christmas-notification .christmas-notification-body h5 {
 	line-height: 18px;
 }
-.christmas-dashboard .christmas-notification .christmas-notification-body .shoot,
-.christmas-dashboard .christmas-notification .christmas-notification-body .goal {
+.christmas-dashboard .christmas-notification.error .christmas-notification-body ul {
+	text-align: left;
+	display: inline-block;
+}
+.christmas-dashboard .christmas-notification.error .christmas-notification-body ul li {
+	list-style: disc;
+}
+.christmas-dashboard .christmas-notification .christmas-notification-body > div {
 	display: none;
 }
-.christmas-dashboard .christmas-notification.shoot .christmas-notification-body .shoot {
-	display: block;
-}
-.christmas-dashboard .christmas-notification.goal .christmas-notification-body .goal {
+.christmas-dashboard .christmas-notification.shoot .christmas-notification-body .shoot,
+.christmas-dashboard .christmas-notification.goal .christmas-notification-body .goal,
+.christmas-dashboard .christmas-notification.again .christmas-notification-body .again,
+.christmas-dashboard .christmas-notification.error .christmas-notification-body .error {
 	display: block;
 }
 

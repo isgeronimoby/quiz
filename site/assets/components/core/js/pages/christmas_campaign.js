@@ -34,10 +34,15 @@ $(document).ready(function(){
         closeBtn: christmasDashboard.find('.christmas-notification > .christmas-notification-close'),
         body: christmasDashboard.find('.christmas-notification > .christmas-notification-body'),
         show: function(state){
+            this.holder.attr('class', 'christmas-notification');
             if ( state === 'goal' ) {
-                this.holder.removeClass('shoot').addClass('goal');
+                this.holder.addClass('goal');
+            } else if ( state === 'again' ) {
+                this.holder.addClass('again');
+            } else if ( state === 'error' ) {
+                this.holder.addClass('error');
             } else {
-                this.holder.removeClass('goal').addClass('shoot');
+                this.holder.addClass('shoot');
             }
             this.holder.addClass('shown');
         },
