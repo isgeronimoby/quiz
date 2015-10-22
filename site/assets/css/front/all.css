@@ -7330,9 +7330,28 @@ html body .christmas-holder #content{
 
 .christmas-page .explanation-section {
 	width: 800px;
-	background-repeat:  no-repeat;
-	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-size: 85% 85%;
 	margin: 0 auto;
+	background-position: center bottom 60px;
+}
+.christmas-page .explanation-section .explanation-row:nth-child(1) {
+	position: relative;
+	margin-bottom: 130px;
+}
+.christmas-page .explanation-section .explanation-row:nth-child(1):after {
+	content: '';
+	position: absolute;
+	top: 100px;
+	left: 50%;
+	transform: translate(-50%,0);
+	-webkit-transform: translate(-50%,0);
+	-moz-transform: translate(-50%,0);
+	-ms-transform: translate(-50%,0);
+	width: 140px;
+	height: 140px;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 .christmas-page .explanation-section .explanation-row {
 	text-align: center;
@@ -7347,6 +7366,7 @@ html body .christmas-holder #content{
 	max-width: 100%;
 	height: auto;
 	box-shadow: 0 14px 6px -10px rgba(0,0,0,0.5);
+	border-radius: 50%;
 }
 .christmas-page .explanation-section .explanation-row .explanation-card p {
 	max-width: 80%;
@@ -8344,6 +8364,12 @@ html body .christmas-holder #content{
 		height: 40px;
 		right: -5px;
 		top: -27px;
+	}
+	.christmas-page .explanation-section .explanation-row:nth-child(1) {
+		margin-bottom: 0;
+	}
+	.christmas-page .explanation-section .explanation-row:nth-child(1):after {
+		display: none;
 	}
 }
 
