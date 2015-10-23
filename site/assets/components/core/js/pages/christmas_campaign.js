@@ -127,7 +127,7 @@ $(document).ready(function(){
 
     // On invited friends landing page, changing states for installation process
     // 'install' or 'error' or empty to hide everything
-    $.fn.installationStates = function(state) {
+    $.fn.showMiddleState = function(state) {
         var overlay = $('.christmas-page .service-states');
         switch (state) {
             case 'install':
@@ -145,7 +145,7 @@ $(document).ready(function(){
                 overlay.removeClass('install error');
         }
         overlay.find('.overflow-close').on('click', function(){
-            $.fn.installationStates();
+            $.fn.showMiddleState();
         });
     };
 });
