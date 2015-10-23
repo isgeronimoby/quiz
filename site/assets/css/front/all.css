@@ -7924,6 +7924,7 @@ html body .christmas-holder #content{
 	display: inline-block;
 	vertical-align: middle;
 	cursor: pointer;
+	text-decoration: none;
 	transition: color 0.2s ease;
 	-webkit-transition: color 0.2s ease;
 	-moz-transition: color 0.2s ease;
