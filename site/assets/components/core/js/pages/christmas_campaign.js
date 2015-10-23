@@ -124,4 +124,28 @@ $(document).ready(function(){
     };
     Trophies.init();
 
+
+    // On invited friends landing page, changing states for installation process
+    // 'install' or 'error' or empty to hide everything
+    $.fn.installationStates = function(state) {
+        var overlay = $('.christmas-page .service-states');
+        switch (state) {
+            case 'install':
+                showExtensionPopupFunc();
+                overlay.removeClass('install error');
+                overlay.addClass('install');
+                break;
+            case 'error':
+                hideExtensionPopupFunc();
+                overlay.removeClass('install error');
+                overlay.addClass('error');
+                break;
+            default:
+                hideExtensionPopupFunc();
+                overlay.removeClass('install error');
+        }
+        overlay.find('.overflow-close').on('click', function(){
+            $.fn.installationStates();
+        });
+    };
 });
