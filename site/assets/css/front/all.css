@@ -7513,6 +7513,21 @@ html body .christmas-holder #content{
 	z-index: 50000;
 }
 /* end of installation process styles for invited friends landing page */
+.christmas-page .faq {
+	padding: 30px 0 0;
+}
+.christmas-page .faq dl {
+	padding: 30px 0 0;
+}
+.christmas-page .faq dl dt {
+	font-size: 20px;
+}
+
+.christmas-page .faq dl dd {
+	font-size: 14px;
+	font-weight: 100;
+	margin-bottom: 20px;
+}
 
 
 .christmas-holding-page .header-section {
@@ -8482,6 +8497,9 @@ html body .christmas-holder #content{
 	}
 	.christmas-page .explanation-section .explanation-row:nth-child(1):after {
 		display: none;
+	}
+	.christmas-page .faq {
+		padding: 30px 20px;
 	}
 }
 
