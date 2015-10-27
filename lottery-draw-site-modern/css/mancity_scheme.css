@@ -49,6 +49,10 @@
     height: auto;
 }
 
+.sectionLayout > .greyBox:after {
+    background-image: url('../images/mancity/logo_crest.png');
+}
+
 @media screen and (max-width: 900px) {
     .dashboard-header > .header-container {
         padding: 0 4px;

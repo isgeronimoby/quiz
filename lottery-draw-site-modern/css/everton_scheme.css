@@ -37,3 +37,6 @@
 .dashboard-header {
     background-color: #23279c;
 }
+.sectionLayout > .greyBox:after {
+    background-image: url('../images/everton/logo_crest.png');
+}

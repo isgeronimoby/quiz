@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="front ie lt-ie9 lt-ie8 lt-ie7 fluid top-full menuh-top"> <![endif]-->
+<!--[if IE 7]>
+<html class="front ie lt-ie9 lt-ie8 fluid top-full menuh-top sticky-top"> <![endif]-->
+<!--[if IE 8]>
+<html class="front ie lt-ie9 fluid top-full menuh-top sticky-top"> <![endif]-->
+<!--[if gt IE 8]>
+<html class="animations front ie gt-ie8 fluid top-full menuh-top sticky-top"> <![endif]-->
+<!--[if !IE]><!-->
+<html class="animations front fluid top-full menuh-top sticky-top"><!-- <![endif]-->
+<head>
+	<title>FLAT KIT Template (v2.3.0)</title>
+	<link rel="icon" type="image/x-icon" href="../../assets/images/front/qpr/favicon.ico" />
+
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+
+	<!-- 
+	**********************************************************
+	In development, use the LESS files and the less.js compiler
+	instead of the minified CSS loaded by default.
+	**********************************************************
+	<link rel="stylesheet/less" href="../../assets/less/front/module.front.page.profile.less" />
+	-->
+
+	<!--[if lt IE 9]>
+	<link rel="stylesheet" href="../../assets/components/library/bootstrap-custom/css/bootstrap.min.css"/><![endif]-->
+	<link href='https://fonts.googleapis.com/css?family=Questrial' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700,600' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="../../assets/css/front/module.front.page.all-pages.css"/>
+	<link rel="stylesheet" href="../../assets/css/front/fancybox-styles.css"/>
+	<link rel="stylesheet" href="../../assets/css/front/all.css"/>
+
+
+	<!--Color Scheme original file .less with color variables situate in "../../assets/less/front/color-scheme-everton.less" -->
+	<link rel="stylesheet" href="../../assets/css/front/color-scheme-qpr.css"/>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+
+	<script src="../../assets/components/library/jquery/jquery.min.js?v=v2.3.0"></script>
+	<script src="../../assets/components/library/jquery/jquery-migrate.min.js?v=v2.3.0"></script>
+	<script src="../../assets/components/library/modernizr/modernizr.js?v=v2.3.0"></script>
+	<!--<script src="../../assets/components/plugins/less-js/less.min.js?v=v2.3.0"></script>-->
+	<script src="../../assets/components/modules/admin/charts/flot/assets/lib/excanvas.js?v=v2.3.0"></script>
+	<script src="../../assets/components/plugins/browser/ie/ie.prototype.polyfill.js?v=v2.3.0"></script>
+	<script>if (/*@cc_on!@*/false && document.documentMode === 10) {
+		document.documentElement.className += ' ie ie10';
+	}</script>
+	<script src="../../assets/components/library/main/jquery.carousel.js"></script>
+	<script src="../../assets/components/library/main/jquery.fancybox.js"></script>
+	<script src="../../assets/components/library/main/jquery.fancybox.pack.js"></script>
+	<script src="../../assets/components/library/main/jquery.main.js"></script>
+	<script src="../../assets/components/library/main/jquery.mousewheel-3.0.6.pack.js"></script>
+	<script src="../../assets/components/library/main/jquery.formstyler.js"></script>
+	<!-- <script src="../../assets/components/library/main/jquery.formstyler.min.js"></script> -->
+
+	<script src="../../assets/js/lib/jquery.autocomplete.js"></script>
+	<script src="../../assets/js/pages.js"></script>
+
+</head>
+<body>
+
+<!-- Main Container Fluid -->
+<div class="container-fluid menu-hidden">
+<!-- Content -->
+<div id="content">
+<!-- Top navbar (note: add class "navbar-hidden" to close the navbar by default) -->
+<div class="navbar toolbar main hidden-print">
+	<div class="button-holder wrap">
+		<div class="company-logo">
+			<a href="#">
+				<img src="../../assets/images/front/qpr/256.png" class="big-logo" alt="logo"/>
+				<img src="../../assets/images/front/qpr/small-logo.png" class="small-logo" alt="logo"/>
+			</a>
+			<span></span>
+		</div>
+		<div class="wrapper-search">
+			<form action="#" class="search">
+				<fieldset>
+					<input type="submit" class="go-search" value=""/>
+
+					<div class="wrapper-input"><input type="text" id="header-search" placeholder="Search"/></div>
+				</fieldset>
+			</form>
+			<a href="#" class="open-search col-md-3 glyphicons search"><i></i></a>
+			<a href="#" class="close-search"></a>
+		</div>
+		<a href="#" class="button btn-shop clicker">Shop</a>
+		<a href="#" class="button clicker offers-btn">Offers</a>
+
+		<div class="panel">
+			<ul class="additional-navigation">
+				<li><a class="news-bar-tab open-news" href="#"><em class="bg"><span class="number">3</span></em></a>
+				</li>
+				<li><a class="offers-bar-tab open-offers" href="#"><em class="bg"><span class="number">5</span></em></a>
+				</li>
+				<li><a class="info-amount" href="#">256.10</a></li>
+				<li><a class="profile logged-in" href="#"><img src="../../assets/images/front/ico-profile.jpg"
+															 alt="#"/></a></li>
+			</ul>
+		</div>
+		<div class="profile-hover">
+			<ul class="statistics">
+				<li class="pending">
+					<span class="sum">43.55</span>
+					<span class="stat-title">Pending</span>
+				</li>
+				<li class="earned">
+					<span class="sum">43.55</span>
+					<span class="stat-title">Earned</span>
+				</li>
+				<li class="donated">
+					<span class="sum">43.55</span>
+					<span class="stat-title">Donated</span>
+				</li>
+			</ul>
+			<ul class="profile-nav">
+				<li><a href="#">Profile</a></li>
+				<li><a href="#">Gift to friends</a></li>
+				<li><a href="#">Redeem</a></li>
+				<li><a href="#">Payments History</a></li>
+				<li><a href="#">Edit Settings</a></li>
+				<li><a href="#">Default charity</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- Top navbar END --><!-- Wrapper -->
+<div class="service-message">
+	<p>Install the Everton app on your browser so you never miss a chance to earn Everton rewards again. <a href="#">Install</a>
+	</p>
+</div>
+<div class="main-top wrap clear-side-padding">
+	<div class="row profile-content">
+		<div class="profile-name col-xs-48 col-sm-48 col-md-48 col-lg-48 hidden-xs hidden-sm clear-side-padding">
+			<h1>Guest</h1>
+			<a href="#">Register Now</a>
+		</div>
+		<div class="member-info col-xs-48 col-sm-48 col-md-12 col-lg-12 clear-side-padding">
+
+			<form action="#" class="set-avatar" id="set-avatar" autocomplete="off" method="get">
+				<label for="profile-avatar"></label>
+				<input id="profile-avatar" name="profile-avatar" type="file"/>
+			</form>
+
+			<img class="profile-avatar" src="../../assets/images/front/profile-no-img.png"
+				 alt="Avatar"/>
+
+			<div class="profile-summary col-xs-34 col-sm-26 col-md-24 col-lg-24 clear-side-indent">
+				<div class="profile-name-adaptive hidden-md hidden-lg">
+					<h1>Guest</h1>
+					<a href="#">Register Now</a>
+				</div>
+				<div class="member-joined">
+					<span class="title hidden-xs hidden-sm">Member since:</span>
+					<span class="title-adaptive hidden-md hidden-lg">Joined:</span>
+					<span class="date">12th January 2014</span>
+				</div>
+				<a class="edit-settings" href="#">Edit Settings</a>
+			</div>
+		</div>
+		<div class="profile-statistic col-xs-48 col-sm-48 col-md-36 col-lg-36 clear-side-padding">
+			<ul>
+				<li class="pending col-xs-15 col-xs-offset-1 col-sm-15 col-sm-offset-1 col-md-15 col-md-offset-1 col-lg-15 col-lg-offset-1">
+					<a href="#" class="statistic-link-wrap">
+						<span tabindex="0" class="btn btn-lg btn-danger custom-popover triangle-btn hidden-xs" data-toggle="hover" data-trigger="hover" title="Pending Everton Credit" data-content="Credits will be pending until the returns
+							period of the product you purchased
+							expires. This credit may only be spent in
+							Everton FC store."></span>
+						<span class="title hidden-xs hidden-sm">Pending</span>
+						<span class="title hidden-md hidden-lg">Pending</span>
+						<span class="sum">43.55</span>
+					</a>
+				</li>
+				<li class="available col-xs-15 col-xs-offset-1 col-sm-15 col-sm-offset-1 col-md-15 col-md-offset-1 col-lg-15 col-lg-offset-1">
+					<a href="#" class="statistic-link-wrap">
+						<span tabindex="0" class="btn btn-lg btn-danger custom-popover triangle-btn hidden-xs" data-toggle="hover" data-trigger="hover" title="Earned Everton Credit" data-content="You may now redeem and spend this
+							Everton credit in the Everton FC store."></span>
+						<span class="title hidden-xs hidden-sm">Available</span>
+						<span class="title title-adaptive hidden-md hidden-lg">Available</span>
+						<span class="sum">58.40</span>
+						<span class="redeem-these hidden-xs hidden-sm">Redeem these</span>
+					</a>
+				</li>
+				<li class="donations col-xs-15 col-xs-offset-1 col-sm-15 col-sm-offset-1 col-md-15 col-md-offset-1 col-lg-15 col-lg-offset-1">
+					<a href="#" class="statistic-link-wrap">
+						<span class="triangle-btn hidden-xs"></span>
+						<span class="title hidden-xs hidden-sm">Foundation donations</span>
+						<span class="title title-adaptive hidden-md hidden-lg">Donated</span>
+						<span class="sum">&pound;3</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="main-holder wrap clearfix">
+<div class="row profile-content clear-side-indent">
+
+<!-- Tabs -->
+<div class="relativeWrap">
+<div class="widget widget-tabs widget-tabs-double widget-tabs-vertical row">
+<!-- Tabs Heading -->
+<div class="drop-down-menu hidden-md hidden-lg">
+	<a href="#">Profile</a><i class="fa fa-caret-down"></i>
+</div>
+<div class="widget-head col-md-12 col-lg-12">
+	<ul class="drop-down-menu-content">
+		<li><a href="profile.html" class=""><i class="fa fa-user"></i>Profile</a></li>
+		<li><a href="profile-gift.html" class=""><i class="fa fa-send"></i>Gift to a Friend</a></li>
+		<li><a href="profile-redeem.html" class=""><i class="fa fa-database"></i>Redeem</a></li>
+		<li><a href="profile-redeem-load.html" class=""><i class="fa fa-database"></i>Redeem on Load</a></li>
+		<li><a href="profile-history.html" class=""><i class="fa fa-bank"></i>Payment History</a></li>
+		<li class="active"><a href="profile-settings.html" class=""><i class="fa fa-cog"></i>Edit Settings</a></li>
+	</ul>
+</div>
+<!-- // Tabs Heading END -->
+
+<div class="widget-body col-xs-48 col-sm-48 col-md-36 col-lg-36">
+<div class="tab-content clear-side-padding col-xs-48 col-sm-48 col-md-47 col-md-offset-1 col-lg-47 col-lg-offset-1">
+
+<!-- Tab Settings -->
+<div class="tab-pane clear-side-indent active" id="tab6-1">
+	<h2>Edit your personal settings</h2>
+	<!-- Form -->
+	<form class="form-horizontal personal-settings margin-none" id="personal-settings" method="get" autocomplete="off">
+
+		<!-- Alert -->
+		<div class="alert alert-danger">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>Warning!</strong> Best check yo self, you're not looking
+			too good.
+		</div>
+		<!-- // Alert END -->
+
+		<!-- Alert -->
+		<div class="alert alert-success">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>Warning!</strong> Everything ok
+		</div>
+		<!-- // Alert END -->
+
+		<!-- Widget -->
+		<div class="widget">
+
+			<div class="widget-body">
+
+				<!-- Row -->
+				<div class="row innerLR">
+
+					<!-- Column -->
+					<div class="col-md-48 clear-side-padding">
+
+						<!-- Group -->
+						<div class="form-group">
+							<label class="col-xs-48 col-sm-16 col-md-16 col-lg-16 control-label" for="firstname">First
+								name</label>
+
+							<div class="col-xs-48 col-sm-32 col-md-32 col-lg-32 clear-side-indent"><input
+									class="form-control" id="firstname" name="firstname" type="text"/></div>
+						</div>
+						<!-- // Group END -->
+
+						<!-- Group -->
+						<div class="form-group">
+							<label class="col-xs-48 col-sm-16 col-md-16 col-lg-16 control-label" for="lastname">Last
+								name</label>
+
+							<div class="col-xs-48 col-sm-32 col-md-32 col-lg-32 clear-side-indent"><input
+									class="form-control" id="lastname" name="lastname" type="text"/></div>
+						</div>
+						<!-- // Group END -->
+
+						<!-- Group -->
+						<div class="form-group">
+							<label class="col-xs-48 col-sm-16 col-md-16 col-lg-16 control-label" for="pickdate">Date of
+								birth</label>
+
+							<div class="input-group date col-xs-48 col-sm-32 col-md-32 col-lg-32 col-lg-32 clear-side-indent"
+								 id="datepicker2">
+								<input class="form-control" id="pickdate" type="text" value="13 February 1980"/>
+								<span class="input-group-addon"><i class="fa fa-th"></i></span>
+							</div>
+						</div>
+						<!-- // Group END -->
+
+						<!-- Group -->
+						<div class="form-group gender-group">
+							<label class="col-xs-48 col-sm-16 col-md-16 col-lg-16 control-label"
+								 for="gender">Gender</label>
+							<select class="select col-xs-48 col-sm-32 col-md-32 col-lg-32 clear-side-indent" id="gender"
+									name="gender">
+								<option value="">Male</option>
+								<option value="">Female</option>
+							</select>
+						</div>
+						<!-- // Group END -->
+
+						<!-- Group -->
+						<div class="form-group">
+							<label class="col-xs-48 col-sm-16 col-md-16 col-lg-16 control-label" for="old_password">Old
+								password</label>
+
+							<div class="col-xs-48 col-sm-32 col-md-32 col-lg-32 clear-side-indent"><input
+									class="form-control" id="old_password" name="old_password" type="password"
+									placeholder="Leave empty for no change"/></div>
+						</div>
+						<!-- // Group END -->
+
+						<!-- Group -->
+						<div class="form-group">
+							<label class="col-xs-48 col-sm-16 col-md-16 col-lg-16 control-label"
+								 for="password">Password</label>
+
+							<div class="col-xs-48 col-sm-32 col-md-32 col-lg-32 clear-side-indent"><input
+									class="form-control" id="password" name="password" type="password"
+									placeholder="Leave empty for no change"/></div>
+						</div>
+						<!-- // Group END -->
+
+						<!-- Group -->
+						<div class="form-group">
+							<label class="col-xs-48 col-sm-16 col-md-16 col-lg-16 control-label" for="confirm_password">Confirm
+								password</label>
+
+							<div class="col-xs-48 col-sm-32 col-md-32 col-lg-32 clear-side-indent"><input
+									class="form-control" id="confirm_password" name="confirm_password" type="password"
+									placeholder="Leave empty for no change"/></div>
+						</div>
+						<!-- // Group END -->
+
+					</div>
+
+					<button class="send-settings" type="submit">Update</button>
+
+					<!-- // Column END -->
+				</div>
+				<!-- // Row END -->
+			</div>
+		</div>
+		<!-- // Widget END -->
+
+	</form>
+	<!-- // Form END -->
+
+	<!-- Form -->
+	<form class="form-horizontal margin-none" id="notifications-settings" method="get" autocomplete="off">
+
+		<!-- Widget -->
+		<div class="widget">
+
+			<div class="widget-body">
+
+				<!-- Row -->
+				<div class="settings-notification">
+					<div class="row">
+
+						<!-- Column -->
+						<div class="notificatio-checkbox-block col-xs-48 col-sm-48 col-md-48 col-lg-48 clear-side-padding">
+							<h2>Notification settings</h2>
+
+							<div class="checkbox select-all">
+								<label class="checkbox-custom" for="notify-all">
+									<i class="fa fa-fw fa-square-o"></i><input type="checkbox" class="checkbox" id="notify-all" name="notify-all"/>Notify me of
+								</label>
+							</div>
+							<div class="checkbox">
+								<label class="checkbox-custom" for="newsletter1">
+									<i class="fa fa-fw fa-square-o"></i><input type="checkbox" class="checkbox" id="newsletter1" name="newsletter1"/>Trident
+								</label>
+							</div>
+							<div class="checkbox">
+								<label class="checkbox-custom" for="newsletter2">
+									<i class="fa fa-fw fa-square-o"></i><input type="checkbox" class="checkbox" id="newsletter2" name="newsletter2"/>Trident
+								</label>
+							</div>
+							<div class="checkbox">
+								<label class="checkbox-custom" for="newsletter3">
+									<i class="fa fa-fw fa-square-o"></i><input type="checkbox" class="checkbox" id="newsletter3" name="newsletter3"/>Trident
+								</label>
+							</div>
+							<div class="checkbox">
+								<label class="checkbox-custom" for="newsletter4">
+									<i class="fa fa-fw fa-square-o"></i><input type="checkbox" class="checkbox" id="newsletter4" name="newsletter4"/>Trident
+								</label>
+							</div>
+							<div class="checkbox">
+								<label class="checkbox-custom" for="agree5">
+									<i class="fa fa-fw fa-square-o"></i><input type="checkbox" class="checkbox" id="agree5" name="agree5"/>Gecko
+								</label>
+							</div>
+							<div class="checkbox">
+								<label class="checkbox-custom" for="agree6">
+									<i class="fa fa-fw fa-square-o"></i><input type="checkbox" class="checkbox" id="agree6" name="agree6"/>Gecko
+								</label>
+							</div>
+							<div class="checkbox">
+								<label class="checkbox-custom" for="agree7">
+									<i class="fa fa-fw fa-square-o"></i><input type="checkbox" class="checkbox" id="agree7" name="agree7"/>Gecko
+								</label>
+							</div>
+							<div class="checkbox">
+								<label class="checkbox-custom" for="agree8">
+									<i class="fa fa-fw fa-square-o"></i><input type="checkbox" class="checkbox" id="agree8" name="agree8"/>Gecko
+								</label>
+							</div>
+						</div>
+						<!-- // Column END -->
+						<button class="send-settings" type="submit">Update</button>
+					</div>
+					<!-- // Row END -->
+				</div>
+			</div>
+		</div>
+		<!-- // Widget END -->
+
+	</form>
+	<!-- // Form END -->
+
+</div>
+<!-- // Tab Settings END -->
+
+</div>
+</div>
+</div>
+</div>
+<!-- // Tabs END -->
+
+</div>
+</div>
+<div class="offers">
+	<div class="gallery-holder carouse48">
+		<div class="gallery">
+			<div class="gholder">
+				<a class="btn-prev" href="#"></a>
+				<a class="btn-next" href="#"></a>
+
+				<div class="gmask-center">
+					<div class="gmask">
+						<ul class="group">
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img4.png" alt="#"/>
+
+								<h3>U21s v United:
+									Ticket details</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img5.png" alt="#"/>
+
+								<h3>Norwich v Everton:
+									Sold out</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img6.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img4.png" alt="#"/>
+
+								<h3>U21s v United:
+									Ticket details</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img5.png" alt="#"/>
+
+								<h3>Norwich v Everton:
+									Sold out</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img6.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img4.png" alt="#"/>
+
+								<h3>U21s v United:
+									Ticket details</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img5.png" alt="#"/>
+
+								<h3>Norwich v Everton:
+									Sold out</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img6.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img4.png" alt="#"/>
+
+								<h3>U21s v United:
+									Ticket details</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img5.png" alt="#"/>
+
+								<h3>Norwich v Everton:
+									Sold out</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img6.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="newsbar">
+	<div class="gallery-holder carousel1">
+		<div class="gallery">
+			<div class="gholder">
+				<a class="btn-prev" href="#"></a>
+				<a class="btn-next" href="#"></a>
+
+				<div class="gmask-center">
+					<div class="gmask">
+						<ul class="group">
+							<li class="active"><a href="#"><img src="../../assets/images/front/qpr/temp/img1.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img2.png" alt="#"/>
+
+								<h3>Column: It was a joy
+									to report at Anfield</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img3.png" alt="#"/>
+
+								<h3>Break? I'm ready to
+									start the season now'</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img1.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img2.png" alt="#"/>
+
+								<h3>Column: It was a joy
+									to report at Anfield</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img3.png" alt="#"/>
+
+								<h3>Break? I'm ready to
+									start the season now'</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img1.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img2.png" alt="#"/>
+
+								<h3>Column: It was a joy
+									to report at Anfield</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img3.png" alt="#"/>
+
+								<h3>Break? I'm ready to
+									start the season now'</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../../assets/images/front/qpr/temp/img1.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- // Wrapper END -->
+<!-- // Content END -->
+
+<!-- // Footer END -->
+</div>
+</div>
+<div id="footer" class="hidden-print">
+	<div class="container clear-side-padding innerTB">
+		<div class="row">
+			<div class="col-xs-48 col-sm-48 col-md-48 col-lg-48 clear-side-padding">
+				<ul>
+					<li><a href="#">Contact</a></li>
+					<li><a href="#">Terms</a></li>
+					<li><a href="#">Privacy</a></li>
+					<li class="active"><a href="#">Cookies</a></li>
+					<li><a href="#">FAQ</a></li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- // Main Container Fluid END -->
+
+<div class="popup-holder">
+	<div id="login" class="save-img-pop-up modal-fancy">
+		<div class="wrapper">
+			<div class="wrapper-title">
+				<h1 class="glyphicons user_add">Upload new image </h1>
+			</div>
+			<!-- Box -->
+			<div class="widget widget-heading-simple">
+				<div class="widget-body">
+					<div class="form-title">
+						<p>Upload new image bla bla bla</p>
+					</div>
+					<div class="pancontainer" data-orient="center" data-canzoom="yes" data-candrag="yes" data-left="0" data-top="0">
+						<img  class="" src="../../assets/images/front/profile-no-img.png"
+							  alt="Avatar" />
+
+					</div>
+
+					<a hreflang="#" id="saveImage" class="save-img"  href="#">Save image</a>
+
+					<!-- Alert -->
+					<div class="alert alert-danger">
+						<!--<button type="button" class="close" data-dismiss="alert">&times;</button>-->
+						<strong>Error message:</strong> the wrong file format, only png, jpg, bmp are supported
+					</div>
+					<!-- // Alert END -->
+
+				</div>
+				<!-- // Box END -->
+			</div>
+		</div>
+
+	</div>
+</div>
+<a href="#login" class="fancybox"></a>
+
+
+<!-- Global -->
+<script>
+	var basePath = '',
+			commonPath = '../../assets/',
+			rootPath = '../',
+			DEV = false,
+			componentsPath = '../../assets/components/';
+
+	var primaryColor = '#e5412d',
+			dangerColor = '#b55151',
+			infoColor = '#5cc7dd',
+			successColor = '#609450',
+			warningColor = '#ab7a4b',
+			inverseColor = '#45484d';
+
+	var themerPrimaryColor = primaryColor;
+</script>
+
+<script>
+	(function ($) {
+		$(function () {
+			$('.select').styler();
+		})
+	})(jQuery)
+</script>
+
+<script src="../../assets/components/library/bootstrap-custom/js/bootstrap.min.js?v=v2.3.0"></script>
+<script src="../../assets/components/plugins/breakpoints/breakpoints.js?v=v2.3.0"></script>
+<script src="../../assets/components/core/js/core.init.js?v=v2.3.0"></script>
+
+
+<script src="../../assets/components/modules/admin/forms/elements/bootstrap-datepicker/assets/lib/js/bootstrap-datepicker.js?v=v2.3.0"></script>
+<script src="../../assets/components/modules/admin/forms/elements/bootstrap-datepicker/assets/custom/js/bootstrap-datepicker.init.js?v=v2.3.0"></script>
+
+<script src="../../assets/components/modules/admin/forms/validator/assets/lib/jquery-validation/dist/jquery.validate.min.js?v=v2.3.0"></script>
+<script src="../../assets/js/form-validator.init.js?v=v2.3.0"></script>
+<script src="../../assets/components/modules/admin/forms/elements/fuelux-checkbox/fuelux-checkbox.js?v=v2.3.0"></script>
+
+</body>
+</html>

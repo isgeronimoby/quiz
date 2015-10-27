@@ -1,0 +1,60 @@
+.buttonBlue,
+.buttonBlue:active,
+.buttonBlue:focus {
+    background-color: #2B4B90;
+    border-bottom-color: #2B3884;
+}
+.buttonBlue:hover {
+    background-color: #2B3884;
+    border-bottom-color: #2B3884;
+}
+.buttonLightBlue,
+.buttonLightBlue:active,
+.buttonLightBlue:focus {
+    background-color: #4e7dab;
+    border-bottom-color: #3563ab;
+}
+.buttonLightBlue:hover {
+    background-color: #3563ab;
+    border-bottom-color: #3563ab;
+}
+.buttonYellow,
+.buttonYellow:active,
+.buttonYellow:focus {
+    background-color: #bda234;
+    border-bottom-color: #7a640c;
+}
+.buttonYellow:hover {
+    background-color: #7a640c;
+    border-bottom-color: #7a640c;
+}
+
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body {
+    background: #005cab;
+    border-bottom: 12px solid #1544ab;
+}
+
+.dashboard-header {
+    background-color: #005cab;
+}
+
+.dashboard-header > .header-container > .logo-holder img {
+    display: inline-block;
+    height: 100%;
+    width: auto;
+}
+
+.footer img {
+    max-width: 70%;
+    height: auto;
+}
+
+.sectionLayout > .greyBox:after {
+    background-image: url('../images/qpr/logo_crest.png');
+}
+
+@media screen and (max-width: 900px) {
+    .dashboard-header > .header-container {
+        padding: 0 4px;
+    }
+}
