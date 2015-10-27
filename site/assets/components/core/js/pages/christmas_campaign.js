@@ -76,7 +76,7 @@ $(document).ready(function(){
             var counter = 0;
             //that.squadEls.css('max-width', 100 / squadNumber + '%');
             // uncomment if squad number is differ from 10
-            that.squadCount.html(Math.floor(startingSignedUps / squadNumber) + 1);
+            that.squadCount.html((startingSignedUps === 0) ? 1 : Math.ceil(startingSignedUps / squadNumber));
             if ( startingSignedUps === 0 ) {
                 that.football.fadeIn(300);
                 var firstPos = this.football.css('left');
