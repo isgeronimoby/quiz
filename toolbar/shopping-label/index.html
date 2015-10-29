@@ -4,59 +4,59 @@
     <meta charset="UTF-8">
     <title></title>
 
-    <link href="./css/main.css" type="text/css"/>
-    <link href="./css/skin.css" type="text/css"/>
+    <link href="./css/main.css" type="text/css" rel="stylesheet"/>
+    <link href="./css/skin_qpr.css" type="text/css" rel="stylesheet"/>
 
 </head>
 <body>
 
-<div class="everton-shopping-label-trigger">
-    <div class="everton-shopping-label">
-        <div class="everton-shopping-label-logo"></div>
-        <div class="everton-shopping-label-content">
-            <div class="everton-shopping-label-ask">
-                <div class="everton-shopping-label-heading">
+<div class="fcclub-shopping-label-trigger">
+    <div class="fcclub-shopping-label">
+        <div class="fcclub-shopping-label-logo"></div>
+        <div class="fcclub-shopping-label-content">
+            <div class="fcclub-shopping-label-ask">
+                <div class="fcclub-shopping-label-heading">
                     Earn QPR credits on Argos?
                 </div>
-                <div class="everton-shopping-label-answer-btn">Great, let me ean credits</div>
-                <div class="everton-shopping-label-p everton-shopping-label-no-btn">No, thanks</div>
+                <div class="fcclub-shopping-label-answer-btn">Great, let me ean credits</div>
+                <div class="fcclub-shopping-label-p fcclub-shopping-label-no-btn">No, thanks</div>
             </div>
-            <div class="everton-shopping-label-answer">
+            <div class="fcclub-shopping-label-answer">
                 <table>
-                    <tr class="everton-shopping-label-message everton-shopping-label-message-yes">
+                    <tr class="fcclub-shopping-label-message fcclub-shopping-label-message-yes">
                         <td colspan="3">You will be earning credits now</td>
                     </tr>
-                    <tr class="everton-shopping-label-message everton-shopping-label-message-not">
+                    <tr class="fcclub-shopping-label-message fcclub-shopping-label-message-not">
                         <td colspan="3">You are not on one of our <a href="#partners">partner site</a></td>
                     </tr>
-                    <tr class="everton-shopping-label-stats">
-                        <td class="everton-shopping-stats-confirmed">
+                    <tr class="fcclub-shopping-label-stats">
+                        <td class="fcclub-shopping-stats-confirmed">
                             <a href="#confirmed">
-                                <div class="everton-shopping-label-pounds">1000.00</div>
-                                <div class="everton-shopping-label-stat-name">Confirmed</div>
+                                <div class="fcclub-shopping-label-pounds">1000.00</div>
+                                <div class="fcclub-shopping-label-stat-name">Confirmed</div>
                             </a>
                         </td>
-                        <td class="everton-shopping-stats-pending">
+                        <td class="fcclub-shopping-stats-pending">
                             <a href="#pending">
-                                <div class="everton-shopping-label-pounds">1000.00</div>
-                                <div class="everton-shopping-label-stat-name">Pending</div>
+                                <div class="fcclub-shopping-label-pounds">1000.00</div>
+                                <div class="fcclub-shopping-label-stat-name">Pending</div>
                             </a>
                         </td>
-                        <td class="everton-shopping-stats-donated">
+                        <td class="fcclub-shopping-stats-donated">
                             <a href="#donated">
-                                <div class="everton-shopping-label-pounds">1000.00</div>
-                                <div class="everton-shopping-label-stat-name">Donated</div>
+                                <div class="fcclub-shopping-label-pounds">1000.00</div>
+                                <div class="fcclub-shopping-label-stat-name">Donated</div>
                             </a>
                         </td>
                     </tr>
                 </table>
             </div>
-            <div class="everton-shopping-label-close">&#215;</div>
+            <div class="fcclub-shopping-label-close">&#215;</div>
         </div>
-        <div class="everton-shopping-label-clearfix"></div>
-        <div class="everton-shopping-label-bottom-text">
-            <div class="everton-shopping-label-countdown">Closes in <span>10</span> secs</div>
-            <a href="#faq" class="everton-shopping-label-info">i</a>
+        <div class="fcclub-shopping-label-clearfix"></div>
+        <div class="fcclub-shopping-label-bottom-text">
+            <div class="fcclub-shopping-label-countdown">Closes in <span>10</span> secs</div>
+            <a href="#faq" class="fcclub-shopping-label-info">i</a>
         </div>
     </div>
 </div>
@@ -65,34 +65,34 @@
 
     "use strict";
 
-    var EvertonLabel = {
-        'labelBody': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label'),
+    var FcClubLabel = {
+        'labelBody': document.querySelector('.fcclub-shopping-label-trigger > .fcclub-shopping-label'),
 
         // BUTTONS
-        'btnYes': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
-        '.everton-shopping-label-ask .everton-shopping-label-answer-btn'),
-        'btnNo': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
-        '.everton-shopping-label-ask .everton-shopping-label-no-btn'),
-        'btnClose': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
-        '.everton-shopping-label-close'),
-        'btnInfo': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
-        '.everton-shopping-label-info'),
+        'btnYes': document.querySelector('.fcclub-shopping-label-trigger > .fcclub-shopping-label ' +
+        '.fcclub-shopping-label-ask .fcclub-shopping-label-answer-btn'),
+        'btnNo': document.querySelector('.fcclub-shopping-label-trigger > .fcclub-shopping-label ' +
+        '.fcclub-shopping-label-ask .fcclub-shopping-label-no-btn'),
+        'btnClose': document.querySelector('.fcclub-shopping-label-trigger > .fcclub-shopping-label ' +
+        '.fcclub-shopping-label-close'),
+        'btnInfo': document.querySelector('.fcclub-shopping-label-trigger > .fcclub-shopping-label ' +
+        '.fcclub-shopping-label-info'),
 
         //SCREENS
-        'screenAsk': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
-        '.everton-shopping-label-ask'),
-        'screenAnswer': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
-        '.everton-shopping-label-answer'),
-        'screenActive': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
-        '.everton-shopping-label-answer .everton-shopping-label-message-yes'),
-        'screenNot': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
-        '.everton-shopping-label-answer .everton-shopping-label-message-not'),
+        'screenAsk': document.querySelector('.fcclub-shopping-label-trigger > .fcclub-shopping-label ' +
+        '.fcclub-shopping-label-ask'),
+        'screenAnswer': document.querySelector('.fcclub-shopping-label-trigger > .fcclub-shopping-label ' +
+        '.fcclub-shopping-label-answer'),
+        'screenActive': document.querySelector('.fcclub-shopping-label-trigger > .fcclub-shopping-label ' +
+        '.fcclub-shopping-label-answer .fcclub-shopping-label-message-yes'),
+        'screenNot': document.querySelector('.fcclub-shopping-label-trigger > .fcclub-shopping-label ' +
+        '.fcclub-shopping-label-answer .fcclub-shopping-label-message-not'),
 
         //OTHER
-        'counterHolder': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
-        '.everton-shopping-label-countdown'),
-        'counter': document.querySelector('.everton-shopping-label-trigger > .everton-shopping-label ' +
-        '.everton-shopping-label-countdown span'),
+        'counterHolder': document.querySelector('.fcclub-shopping-label-trigger > .fcclub-shopping-label ' +
+        '.fcclub-shopping-label-countdown'),
+        'counter': document.querySelector('.fcclub-shopping-label-trigger > .fcclub-shopping-label ' +
+        '.fcclub-shopping-label-countdown span'),
         'interval': '',
         'timeLeft': 10,
 
@@ -119,7 +119,7 @@
             that.labelBody.style.display = 'block';
             that.labelBody.parentNode.style.display = 'block';
             setTimeout(function(){
-                that.labelBody.className += ' everton-shopping-label-start-sliding';
+                that.labelBody.className += ' fcclub-shopping-label-start-sliding';
                 setTimeout(function(){
                     if ( screen != 'yes' && screen != 'not' ) {
                         that.runTimer();
@@ -168,7 +168,7 @@
         },
         'hideLabel': function(){
             var that = this;
-            that.labelBody.className = that.labelBody.className.replace(/\beverton-shopping-label-start-sliding\b/, '');
+            that.labelBody.className = that.labelBody.className.replace(/\bfcclub-shopping-label-start-sliding\b/, '');
             that.stopTimer();
             setTimeout(function(){
                 that.labelBody.style.display = 'none';
@@ -201,7 +201,7 @@
                 clearInterval(this.interval);
         },
         'changeZIndexes': function(){
-            var lrPopup = document.querySelector('.everton-shopping-label-trigger');
+            var lrPopup = document.querySelector('.fcclub-shopping-label-trigger');
             var array = Array.prototype.slice.call(document.querySelectorAll('div'));
             var neededDivs = [];
 

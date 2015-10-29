@@ -1,4 +1,4 @@
-﻿.everton-shopping-label-trigger > .everton-shopping-label * {
+﻿.fcclub-shopping-label-trigger > .fcclub-shopping-label * {
     font-family: Arial, sans-serif;
     text-transform: none;
     color: #333333;
@@ -44,17 +44,17 @@ body.noiframe object {
     display: none !important;
 }
 
-.everton-shopping-label-clearfix:before,
-.everton-shopping-label-clearfix:after {
+.fcclub-shopping-label-clearfix:before,
+.fcclub-shopping-label-clearfix:after {
     content: " "; /* 1 */
     display: table; /* 2 */
 }
 
-.everton-shopping-label-clearfix:after {
+.fcclub-shopping-label-clearfix:after {
     clear: both;
 }
 
-.everton-shopping-label-trigger {
+.fcclub-shopping-label-trigger {
     position: fixed;
     top: 0;
     right: 0;
@@ -65,7 +65,7 @@ body.noiframe object {
     display: none;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label {
     position: absolute;
     right: 0;
     margin: 10px;
@@ -89,7 +89,7 @@ body.noiframe object {
     -ms-transition: all 0.5s ease-out;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-logo {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-logo {
     background-image: none;
     background-repeat: no-repeat;
     background-position: center;
@@ -100,14 +100,14 @@ body.noiframe object {
     float: left;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content {
     position: relative;
     z-index: 100;
     float: right;
     width: 285px;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-close {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content .fcclub-shopping-label-close {
     position: absolute;
     top: 12px;
     right: 10px;
@@ -125,7 +125,7 @@ body.noiframe object {
     -ms-transition: all 0.25s ease-out;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-close:hover {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content .fcclub-shopping-label-close:hover {
     transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
@@ -135,19 +135,19 @@ body.noiframe object {
 
 /* CONTENT styles here */
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content .fcclub-shopping-label-ask {
     padding: 10px 20px;
     text-align: center;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask .everton-shopping-label-heading {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content .fcclub-shopping-label-ask .fcclub-shopping-label-heading {
     font-size: 12px;
     font-weight: 700;
     height: 17px;
     overflow: hidden;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask .everton-shopping-label-answer-btn {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content .fcclub-shopping-label-ask .fcclub-shopping-label-answer-btn {
     border-radius: 2px;
     color: #ffffff;
     height: 44px;
@@ -168,122 +168,122 @@ body.noiframe object {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4ac14e', endColorstr='#38ae3b', GradientType=0); /* IE6-9 */
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask .everton-shopping-label-answer-btn:hover {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content .fcclub-shopping-label-ask .fcclub-shopping-label-answer-btn:hover {
     text-shadow: none;
     background: #349037;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-p {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content .fcclub-shopping-label-p {
     font-size: 13px;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask .everton-shopping-label-no-btn {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content .fcclub-shopping-label-ask .fcclub-shopping-label-no-btn {
     cursor: pointer;
     display: inline-block;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-ask .everton-shopping-label-no-btn:hover {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content .fcclub-shopping-label-ask .fcclub-shopping-label-no-btn:hover {
     color: #777777;
     text-decoration: underline;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-answer,
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-answer .everton-shopping-label-message {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content .fcclub-shopping-label-answer,
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content .fcclub-shopping-label-answer .fcclub-shopping-label-message {
     display: none;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table,
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table tbody {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content table,
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content table tbody {
     display: table;
     width: 100%;
     height: 100%;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table tr {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content table tr {
     display: table-row;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table td {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content table td {
     display: table-cell;
     text-align: center;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-message {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content table .fcclub-shopping-label-message {
     height: 35px;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-message td {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content table .fcclub-shopping-label-message td {
     font-size: 14px;
     padding: 9px 10px;
     text-align: left;
     border-bottom: 1px solid #cccccc;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-message td a {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content table .fcclub-shopping-label-message td a {
     display: inline;
     font-size: 14px;
     text-decoration: underline;
     color: #666666;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-message td a:hover {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content table .fcclub-shopping-label-message td a:hover {
     color: #777777;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content .everton-shopping-label-answer table .everton-shopping-label-message-yes td:before {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content .fcclub-shopping-label-answer table .fcclub-shopping-label-message-yes td:before {
     content: "\2713";
     color: #349037;
     font-size: 16px;
     margin-right: 4px;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content table .fcclub-shopping-label-stats {
     height: 70px;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats td {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content table .fcclub-shopping-label-stats td {
     cursor: pointer;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats td a {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content table .fcclub-shopping-label-stats td a {
     display: inline-block;
     width: 100%;
     height: 100%;
     padding-top: 14px;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats td:hover {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content table .fcclub-shopping-label-stats td:hover {
     background: #f3f3f3;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats .everton-shopping-label-pounds {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content table .fcclub-shopping-label-stats .fcclub-shopping-label-pounds {
     font-size: 15px;
     line-height: 16px;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats .everton-shopping-label-pounds:before {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content table .fcclub-shopping-label-stats .fcclub-shopping-label-pounds:before {
     content: '\00a3';
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-content table .everton-shopping-label-stats .everton-shopping-label-stat-name {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-content table .fcclub-shopping-label-stats .fcclub-shopping-label-stat-name {
     font-size: 13px;
     color: #777777;
 }
 
 /* END of CONTENT styles */
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-bottom-text {
     text-align: right;
     margin-top: 6px;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-countdown,
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-countdown span,
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-info {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-bottom-text .fcclub-shopping-label-countdown,
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-bottom-text .fcclub-shopping-label-countdown span,
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-bottom-text .fcclub-shopping-label-info {
     display: inline-block;
     font-size: 13px;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-info {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-bottom-text .fcclub-shopping-label-info {
     color: #ffffff;
     background: #999999;
     border-radius: 50%;
@@ -295,12 +295,12 @@ body.noiframe object {
     cursor: pointer;
 }
 
-.everton-shopping-label-trigger > .everton-shopping-label > .everton-shopping-label-bottom-text .everton-shopping-label-info:hover {
+.fcclub-shopping-label-trigger > .fcclub-shopping-label > .fcclub-shopping-label-bottom-text .fcclub-shopping-label-info:hover {
     background: #777777;
 }
 
 /* TRANSITIONS */
-.everton-shopping-label-start-sliding {
+.fcclub-shopping-label-start-sliding {
     opacity: 1 !important;
     transform: translate(0) !important;
     -webkit-transform: translate(0) !important;
