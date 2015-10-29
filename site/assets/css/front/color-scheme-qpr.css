@@ -340,24 +340,24 @@ body .modal-fancy .gg:hover {
   border-bottom-color: #002545;
 }
 .lotteryFootballBG {
-  background: url('../../images/front/mancity/bg-team-training.png') no-repeat;
+  background: url('../../images/front/qpr/bg-team-training.png') no-repeat;
   background-size: cover;
   background-position: center center;
 }
 .lotteryFootballBG.animated {
-  background: url('../../images/front/mancity/bg-team-training-saturated.png') no-repeat;
+  background: url('../../images/front/qpr/bg-team-training-saturated.png') no-repeat;
   background-size: cover;
   background-position: center center;
 }
 .lotteryFootballBG.animated .prize-image-holder:after {
-  background: url("../../images/front/mancity/logo_square.png") no-repeat;
+  background: url("../../images/front/qpr/logo_square.png") no-repeat;
   background-size: cover;
 }
 .lotteryFootballBG.animated .prize-image-holder.prize-image-placeholder {
   background-color: #005cab;
 }
 .extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow {
-  background: url('../../images/front/mancity/arrow_top.png') no-repeat;
+  background: url('../../../assets/images/front/qpr/arrow_top.png') no-repeat;
   background-size: cover;
 }
 .extension-notification .extension-overlay .extension-notification-holder .extension-notification-body,
@@ -407,7 +407,7 @@ body .modal-fancy .gg:hover {
   background: #004178;
 }
 .notification-holder > .tickets-animation .ticket-image {
-  background: url('../../images/front/mancity/tickets_image.png') no-repeat;
+  background: url('../../../assets/images/front/qpr/tickets_image.png') no-repeat;
   background-size: cover;
 }
 /******************************/
