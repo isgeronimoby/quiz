@@ -337,11 +337,10 @@ p, a {
 .toolbar .button {
 	color: #777777;
 	font-size: 14px;
-	line-height: 20px;
 	font-weight: bold;
 	background: #f9c50f;
 	float: left;
-	padding: 0 29px 0 27px;
+	padding: 0 15px;
 	margin: 0 7px 0 0;
 	line-height: 40px;
 	height: 40px;
@@ -5824,6 +5823,1805 @@ body .n-found .ie-true,
 	display: none;
 }
 
+
+/****************************************************************/
+/* Custom visibility */
+/****************************************************************/
+.shown {
+	display: inherit;
+}
+
+/******** STYLES FOR EXTENSIONS NOTIFICATIONS *********/
+@keyframes loading-rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(359deg);
+	}
+}
+@-webkit-keyframes loading-rotation {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(359deg);
+	}
+}
+@-moz-keyframes loading-rotation {
+	0% {
+		-moz-transform: rotate(0deg);
+	}
+	100% {
+		-moz-transform: rotate(359deg);
+	}
+}
+@-ms-keyframes loading-rotation {
+	0% {
+		-ms-transform: rotate(0deg);
+	}
+	100% {
+		-ms-transform: rotate(359deg);
+	}
+}
+
+.extension-notification {
+	display: none;
+}
+
+.extension-notification .extension-overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.5);
+	z-index: 100000;
+}
+
+.extension-notification .extension-overlay .extension-notification-holder {
+	display: inline-block;
+	position: fixed;
+	min-width: 300px;
+}
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body-macsafari {
+	display: none;
+}
+.extension-notification .extension-overlay .extension-notification-holder.winChrome {
+	top: 285px;
+	left: 50%;
+	transform: translate(-50%);
+	-webkit-transform: translate(-50%);
+}
+
+.extension-notification .extension-overlay .extension-notification-holder.winFF {
+	left: 0;
+	top: 110px;
+}
+
+.extension-notification .extension-overlay .extension-notification-holder.winSafari {
+	top: 50%;
+	right: 0;
+	transform: translate(0, -50%);
+	-webkit-transform: translate(0, -50%);
+}
+
+.extension-notification .extension-overlay .extension-notification-holder.macSafari {
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	transform: translate(0, 0);
+	-webkit-transform: translate(0, 0);
+}
+
+.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body {
+	display: none;
+}
+
+.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari {
+	display: block;
+	padding: 20px 0;
+}
+.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari h2{
+	font-size: 20px;
+	color: #FFFFFF;
+	padding: 10px 10px;
+	text-decoration: underline;
+}
+
+.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari > div {
+	display: inline-block;
+	vertical-align: top;
+	width: 34%;
+	padding: 5px 4px;
+}
+.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari > div:nth-of-type(1) {
+	width: 30%;
+}
+
+.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari > div h3 {
+	color: #FFFFFF;
+	font-size: 18px;
+}
+.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari > div img {
+	max-width: 100%;
+	display: inline-block;
+}
+
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body {
+	position: relative;
+	text-align: center;
+	display: inline-block;
+	padding: 22px 50px 40px;
+	margin-top: 65px;
+}
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body h2{
+	color: #ffffff;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-bottom: 30px;
+}
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body img{
+	display: inline-block;
+	max-width: 70%;
+}
+
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow {
+	width: 53px;
+	height: 70px;
+	position: absolute;
+	top: -70px;
+}
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow.winChrome {
+	right: 145px;
+}
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow.macChrome {
+	right: 50px;
+}
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow.winFF {
+	right: 135px;
+}
+@media all and (max-width:460px) {
+	.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow {
+		display: none;
+	}
+}
+
+/* ************************************* */
+/* CHRISTMAS PAGES STYLES                */
+/* ************************************* */
+
+@font-face {
+	font-family: 'bebas';
+	src: url('../../fonts/bebasneue-webfont.eot');
+	src: url('../../fonts/bebasneue-webfont.eot?#iefix') format('embedded-opentype'),
+	url('../../fonts/bebasneue-webfont.woff2') format('woff2'),
+	url('../../fonts/bebasneue-webfont.woff') format('woff'),
+	url('../../fonts/bebasneue-webfont.ttf') format('truetype'),
+	url('../../fonts/bebasneue-webfont.svg#bebas_neueregular') format('svg');
+	font-weight: 400;
+	font-style: normal;
+}
+
+
+.christmas-holder {
+
+}
+#footer.christmas-footer {
+	margin-top: 0;
+}
+html.front.top-full .christmas-holder .navbar.main {
+	overflow: visible;
+}
+.christmas-holder .company-logo {
+	float: none;
+	position: absolute;
+	right: 0;
+	top: 10px;
+	height: 80px;
+	margin: 0;
+}
+
+.christmas-holder .btn-header-back,
+.christmas-holder .menu-link {
+	display: inline-block;
+	line-height: 40px;
+	color: #dddddd;
+	font-size: 16px;
+	background-color: rgba(0,0,0,0.3);
+	padding: 0 40px 0 36px;
+	text-decoration: none;
+}
+.christmas-holder .btn-header-back span {
+	display: inline-block;
+	vertical-align: middle;
+}
+.christmas-holder .btn-header-back span.arrow {
+	font-size: 22px;
+}
+.christmas-holder .btn-header-back:hover,
+.christmas-holder .menu-link:hover {
+	background-color: rgba(0,0,0,0.5);
+	color: #ffffff;
+}
+
+html body .christmas-holder #content{
+	padding-top: 40px !important;
+	margin-bottom: 0 !important;
+	padding-bottom: 0 !important;
+}
+
+@media screen and (max-width: 990px) {
+	html body .christmas-holder #content{
+		padding-top: 0 !important;
+	}
+}
+
+.christmas-page {
+	min-height: 600px;
+}
+
+.christmas-page .video-section {
+	background: url('../../images/front/snow_pic_2.jpg');
+
+}
+
+.christmas-page .video-section .left-side {
+	width: 60%;
+	float: left;
+	margin-bottom: -4px;
+}
+.christmas-page .video-section .left-side iframe {
+	width: 100%;
+	height: 350px;
+	position: relative;
+	z-index: 0;
+}
+.christmas-page .video-section .right-side {
+	width: 40%;
+	float: right;
+	padding-top: 30px;
+}
+.christmas-page .video-section .right-side .header {
+	background-color: rgba(0,0,0,0.5);
+	padding: 6px 12px;
+	color: #FFFFFF;
+	text-transform: uppercase;
+	position: relative;
+	z-index: 10;
+	margin-left: -90px;
+}
+.christmas-page .video-section .right-side .header h1 {
+	font-family: 'bebas', Helvetica, Arial, sans serif;
+	font-weight: 900;
+	letter-spacing: 2px;
+	font-size: 75px;
+	line-height: 62px;
+	margin-bottom: 6px;
+	color: inherit;
+	position: relative;
+	display: inline-block;
+}
+.christmas-page .video-section .right-side .header h1:nth-child(2):after {
+	content: '';
+	position: absolute;
+	width: 80px;
+	height: 80px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	right: -15px;
+	top: -60px;
+	transform: rotate(15deg);
+}
+.christmas-page .video-section .right-side .header h3 {
+	font-weight: 200;
+	font-size: 17px;
+	line-height: 20px;
+	color: inherit;
+}
+
+.christmas-page .video-section .right-side .bottom-text {
+	padding: 30px 40px 0;
+	text-align: center;
+}
+.christmas-page .video-section .right-side .bottom-text h4 {
+	font-size: 17px;
+	color: inherit;
+}
+.christmas-page .video-section .right-side .bottom-text .small-text {
+	font-size: 13px;
+	color: inherit;
+	margin-top: 10px;
+}
+
+.christmas-page .explanation-section {
+	width: 800px;
+	background-repeat: no-repeat;
+	background-size: 85% 85%;
+	margin: 0 auto;
+	background-position: center bottom 60px;
+}
+.christmas-page .explanation-section .explanation-row:nth-child(1) {
+	position: relative;
+	margin-bottom: 130px;
+}
+.christmas-page .explanation-section .explanation-row:nth-child(1):after {
+	content: '';
+	position: absolute;
+	top: 100px;
+	left: 50%;
+	transform: translate(-50%,0);
+	-webkit-transform: translate(-50%,0);
+	-moz-transform: translate(-50%,0);
+	-ms-transform: translate(-50%,0);
+	width: 140px;
+	height: 140px;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.christmas-page .explanation-section .explanation-row {
+	text-align: center;
+}
+.christmas-page .explanation-section .explanation-row .explanation-card {
+	display: inline-block;
+	width: 200px;
+	vertical-align: top;
+	margin: 30px 30px;
+}
+.christmas-page .explanation-section .explanation-row .explanation-card img {
+	max-width: 100%;
+	height: auto;
+	box-shadow: 0 14px 6px -10px rgba(0,0,0,0.5);
+	border-radius: 50%;
+}
+.christmas-page .explanation-section .explanation-row .explanation-card p {
+	max-width: 80%;
+	margin: 20px auto 0;
+}
+.christmas-page .explanation-section .explanation-row .explanation-card p span {
+	color: #000000;
+	font-weight: 400;
+}
+.christmas-page .btn-christmas {
+	display: inline-block;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #333333;
+	font-size: 22px;
+	height: 50px;
+	line-height: 50px;
+	padding: 0 30px;
+	margin: 30px 0;
+	border: 1px solid #333333;
+	background-color: #FFFFFF;
+	box-shadow: 0 16px 7px -12px rgba(0,0,0,0.5);
+	transition: box-shadow 0.12s linear, transform 0.12s ease;
+	-webkit-transition: box-shadow 0.12s linear, -webkit-transform 0.12s ease;
+	-moz-transition: box-shadow 0.12s linear, -moz-transform 0.12s ease;
+	-ms-transition: box-shadow 0.12s linear, -ms-transform 0.12s ease;
+}
+.christmas-page .btn-christmas:hover {
+	box-shadow: 0 4px 3px -3px rgba(0,0,0,0.75);
+	transform: translateY(2px);
+	-webkit-transform: translateY(2px);
+	-moz-transform: translateY(2px);
+	-ms-transform: translateY(2px);
+}
+
+.christmas-page .btn-christmas.btn-brand {
+	color: #FFFFFF;
+	border: none;
+}
+
+.christmas-page .panel-text {
+	background-color: rgba(0,0,0,0.3);
+	border: 1px solid #ffffff;
+	padding: 15px;
+	color: #ffffff;
+	font-size: 17px;
+	margin-bottom: 10px;
+}
+.christmas-page .panel-text p {
+	margin-bottom: 15px;
+}
+.christmas-page .panel-text a {
+	margin: 0;
+}
+
+/* installation process styles for invited friends landing page */
+.christmas-page .service-states {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(255,255,255,0.85);
+	z-index: 100000;
+	text-align: center;
+}
+.christmas-page .overflow-close {
+	position: absolute;
+	right: 5px;
+	top: 10px;
+	font-size: 50px;
+	font-family: "Helvetica Neue", 'ev-helvetica', Calibri, Arial, sans-serif;
+	font-weight: 100;
+	color: #333333;
+	display: inline-block;
+	cursor: pointer;
+}
+.christmas-page .service-states,
+.christmas-page .service-states .step-installing,
+.christmas-page .service-states .step-error {
+	display: none;
+}
+.christmas-page .service-states.install,
+.christmas-page .service-states.install .step-installing,
+.christmas-page .service-states.error,
+.christmas-page .service-states.error .step-error {
+	display: block;
+}
+.christmas-page .service-states .step-installing {
+	position: fixed;
+	bottom: 30px;
+	left: 50%;
+	min-width: 500px;
+	transform: translate(-50%, 0);
+	-webkit-transform: translate(-50%, 0);
+	-moz-transform: translate(-50%, 0);
+	-ms-transform: translate(-50%, 0);
+}
+.christmas-page .service-states .step-error {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	min-width: 500px;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+}
+.christmas-page .service-states h1,
+.christmas-page .service-states .loading-holder > div {
+	margin-bottom: 20px;
+}
+.christmas-page .service-states .step-installing .loading-holder img {
+	display: inline-block;
+	animation: loading-rotation 2s linear infinite;
+	-webkit-animation: loading-rotation 2s linear infinite;
+	-moz-animation: loading-rotation 2s linear infinite;
+	-ms-animation: loading-rotation 2s linear infinite;
+}
+
+
+.christmas-page .extension-notification .extension-overlay {
+	position: static;
+	width: 0;
+	height: 0;
+	top: 0;
+	left: 0;
+	background: transparent;
+	z-index: 50000;
+}
+/* end of installation process styles for invited friends landing page */
+.christmas-page .faq, .christmas-page .terms {
+	padding: 30px 0 0;
+}
+.christmas-page .faq dl {
+	padding: 30px 0 0;
+}
+.christmas-page .faq dl dt {
+	font-size: 20px;
+}
+
+.christmas-page .faq dl dd {
+	font-size: 14px;
+	font-weight: 100;
+	margin-bottom: 20px;
+}
+
+.christmas-page .terms h1 {
+	margin-bottom: 30px;
+}
+.christmas-page .terms h3 {
+	margin-bottom: 10px;
+	margin-top: 50px;
+	font-weight: 400;
+}
+
+.christmas-page .terms ul {
+	padding-left: 20px;
+}
+.christmas-page .terms ul li {
+	list-style: disc outside;
+}
+
+.christmas-page .signup .explanation-section {
+	background: none;
+	margin-top: 60px;
+}
+.christmas-page .signup .explanation-section .explanation-row:nth-child(1):after {
+	display: none;
+}
+.christmas-page .signup .explanation-section .explanation-card img {
+	border-radius: 0;
+	border: 1px solid #aaaaaa;
+}
+.christmas-page .signup .explanation-section .explanation-card {
+	width: 14%;
+	margin: 5px;
+}
+
+.christmas-page .signup .explanation-section {
+	width: 100%;
+}
+
+.navbar.toolbar .button-holder .button-crimbo {
+	position: relative;
+	border-bottom: 2px solid #FFFFFF;
+}
+
+.navbar.toolbar .button-holder .button-crimbo:after {
+	content: '';
+	position: absolute;
+	top: -2px;
+	right: 10px;
+	width: 20px;
+	height: 20px;
+	background: url('../../images/front/everton/crimbo/christmas_hat.png') no-repeat;
+	background-size: cover;
+	transform: rotate(13deg);
+	-webkit-transform: rotate(13deg);
+	-moz-transform: rotate(13deg);
+	transition: top 0.2s ease, transform 0.2s ease;
+	-webkit-transition: top 0.2s ease, -webkit-transform 0.2s ease;
+	-moz-transition: top 0.2s ease, -moz-transform 0.2s ease;
+}
+.navbar.toolbar .button-holder .button-crimbo:hover:after {
+	top: -7px;
+	transform: rotate(5deg);
+	-webkit-transform: rotate(5deg);
+	-moz-transform: rotate(5deg);
+}
+
+.christmas-holding-page .header-section {
+	/* GRADIENT */
+
+	text-align: right;
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+.christmas-holding-page .header-section .wrap {
+	position: relative;
+}
+.christmas-holding-page .header-section .wrap:after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	right: -60px;
+	width: 180px;
+	height: 180px;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.christmas-holding-page .header-section .wrap:before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	left: -60px;
+	width: 180px;
+	height: 180px;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.christmas-holding-page .header-section h1 {
+	font-family: 'bebas', Helvetica, Arial, sans serif;
+	color: #FFFFFF;
+	font-size: 130px;
+	line-height: 120px;
+	text-transform: uppercase;
+	position: relative;
+}
+.christmas-holding-page .header-section h1:after {
+	content: '';
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	right: -11px;
+	top: -60px;
+	transform: rotate(12deg);
+}
+.christmas-holding-page .header-section h3 {
+	color: #eaeaea;
+	font-size: 20px;
+	text-transform: uppercase;
+	line-height: 20px;
+}
+
+
+
+
+.christmas-holding-page .header-section .wrap > .crimbo-holder {
+	margin-top: -10px;
+	float: left;
+}
+.christmas-holding-page .header-section .wrap > .text-coming {
+	margin-top: 64px;
+	float: right;
+	padding-right: 80px;
+	position: relative;
+	z-index: 5;
+}
+
+.christmas-holding-page .header-section .wrap > .crimbo-holder img {
+	max-width: 320px;
+	margin: -15px 0 5px;
+}
+.christmas-holding-page .header-section .wrap > .crimbo-holder h3 {
+	padding-left: 10px;
+}
+
+.christmas-holding-page .holding-middle-section {
+	padding: 40px 0;
+	text-align: center;
+}
+
+.christmas-holding-page .holding-middle-section h3,
+.christmas-holding-page .holding-middle-section h4 {
+
+}
+.christmas-holding-page .holding-middle-section h3 {
+	font-size: 19px;
+	line-height: 25px;
+}
+
+.christmas-holding-page .holding-middle-section h4 {
+	margin-top: 20px;
+	font-size: 16px;
+}
+
+.christmas-holding-page .holding-footer {
+	padding: 40px 0;
+}
+.christmas-holding-page .holding-footer #mc_embed_signup {
+	background: transparent;
+}
+
+.christmas-holding-page .holding-footer #mc_embed_signup input:not([type=submit]) {
+	background: rgba(255,255,255,0.15);
+	border: 1px solid rgba(255,255,255,0.5);
+	border-radius: 10px;
+	height: 50px;
+	line-height: 50px;
+	padding: 0 15px;
+	color: #e5e5e5;
+	font-size: 18px;
+}
+.christmas-holding-page .holding-footer #mc_embed_signup input:not([type=submit]):active,
+.christmas-holding-page .holding-footer #mc_embed_signup input:not([type=submit]):focus {
+	background: rgba(255,255,255,0.25);
+	border: 1px solid rgba(255,255,255,1);
+	color: #ffffff;
+}
+
+.christmas-holding-page .holding-footer #mc_embed_signup input[type=submit] {
+	font-family: 'bebas', Helvetica, Arial, sans serif;
+	font-size: 34px;
+	letter-spacing: 1px;
+
+	clear: both;
+	background-color: transparent;
+	border: 1px solid #e5e5e5;
+	border-radius: 4px;
+	color: #e5e5e5;
+	cursor: pointer;
+	display: inline-block;
+	font-weight: bold;
+	height: 50px;
+	line-height: 50px;
+	margin: 0 5px 10px 0;
+	padding: 0 30px;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: top;
+	white-space: nowrap;
+	width: auto;
+}
+.christmas-holding-page .holding-footer #mc_embed_signup input[type=submit]:hover {
+	border: 1px solid #FFFFFF;
+	color: #FFFFFF;
+	background: rgba(255,255,255,0.2);
+}
+
+.christmas-holding-page .holding-footer #mc_embed_signup #mc_embed_signup_scroll {
+	text-align: center;
+}
+.christmas-holding-page .holding-footer #mc_embed_signup .mc-field-group {
+	display: inline-block;
+	max-width: 300px;
+	margin: 0 15px;
+}
+.christmas-holding-page .holding-footer #mc_embed_signup div.response {
+	float: none;
+	width: 100%;
+	text-transform: uppercase;
+	color: #2ED22E;
+}
+
+/* ****************************************************************** */
+/* Christmas Dashboard styles                                         */
+/* ****************************************************************** */
+.christmas-dashboard {
+/*	background-image: url('../../images/front/everton/crimbo/blue-crimbo-logo-new.png');
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	background-size: 20%;*/
+}
+.christmas-dashboard h1, .christmas-dashboard h2,
+.christmas-dashboard h3, .christmas-dashboard h4,
+.christmas-dashboard .heading {
+	font-family: 'bebas', Helvetica, Arial, sans serif;
+}
+
+.christmas-dashboard section {
+	margin-bottom: 50px;
+}
+.christmas-dashboard section h2 {
+	margin: 30px 0;
+}
+
+.christmas-dashboard .christmas-separator {
+	margin: 50px 0;
+	height: 5px;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#aaaaaa+0,ffffff+70 */
+	background: rgb(170,170,170); /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(200,200,200,1) 0%, rgba(255,255,255,0) 50%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(200,200,170,0)), color-stop(50%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(200,200,200,1) 0%,rgba(255,255,255,0) 50%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  rgba(200,200,200,1) 0%,rgba(255,255,255,0) 50%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(200,200,200,1) 0%,rgba(255,255,255,0) 50%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  rgba(200,200,200,1) 0%,rgba(255,255,255,0) 50%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aaaaaa', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.christmas-dashboard .shaky-cta {
+	animation: shaky-cta 10s ease 9s forwards infinite;
+	-webkit-animation: shaky-cta 10s ease 9s forwards infinite;
+}
+
+.christmas-dashboard section .christmas-profile {
+
+}
+.christmas-dashboard section .christmas-profile a {
+	text-decoration: none;
+}
+.christmas-dashboard section .christmas-profile img {
+	display: inline-block;
+	vertical-align: middle;
+	max-width: 70px;
+	border-radius: 50%;
+	margin-right: 10px;
+	text-decoration: none;
+	transition: border-radius 0.3s ease;
+	-webkit-transition: border-radius 0.3s ease;
+	-moz-transition: border-radius 0.3s ease;
+	-ms-transition: border-radius 0.3s ease;
+}
+.christmas-dashboard section .christmas-profile a:hover img {
+	border-radius: 15%;
+}
+.christmas-dashboard section .christmas-profile .name {
+	display: inline-block;
+	vertical-align: middle;
+}
+.christmas-dashboard section .christmas-stats-block {
+
+}
+.christmas-dashboard section .christmas-stats-block .stat {
+	float: right;
+}
+
+.christmas-dashboard section.christmas-stats .christmas-cta {
+	font-family: 'bebas', Helvetica, Arial, sans serif;
+	font-size: 21px;
+	letter-spacing: 1px;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 2px;
+	padding: 0 44px 0 20px;
+	margin-top: 10px;
+	border: 0;
+	color: #FFFFFF;
+	background-color: #555555;
+	overflow: hidden;
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	transition: background 0.2s ease;
+	-webkit-transition: background 0.2s ease;
+	-moz-transition: background 0.2s ease;
+	-ms-transition: background 0.2s ease;
+}
+.christmas-dashboard section.christmas-stats .christmas-cta:after {
+	font-family: FontAwesome;
+	content: "\f0c0";
+	position: absolute;
+	top: 0;
+	right: 20px;
+	line-height: 42px;
+	transform: translateX(50%);
+	-webkit-transform: translateX(50%);
+	-moz-transform: translateX(50%);
+	-ms-transform: translateX(50%);
+	transition: right 0.2s ease;
+	-webkit-transition: right 0.2s ease;
+	-moz-transition: right 0.2s ease;
+	-ms-transition: right 0.2s ease;
+}
+
+.christmas-dashboard section.christmas-stats .christmas-cta:hover {
+
+}
+.christmas-dashboard section.christmas-stats .christmas-cta:hover:after {
+	color: #FFFFFF;
+	right: 50%;
+}
+
+
+.christmas-dashboard section .row > div:nth-child(1) {
+	padding-right: 30px;
+}
+.christmas-dashboard section .row > div:nth-child(2) {
+	padding: 0 30px;
+}
+.christmas-dashboard section .row > div:nth-child(3) {
+	padding-left: 30px;
+}
+.christmas-dashboard section .side-separators {
+	border-left: 1px solid #cccccc;
+	border-right: 1px solid #cccccc;
+}
+.christmas-dashboard section.squad h2 {
+	display: inline-block;
+}
+.christmas-dashboard section.squad .squad-class {
+	display: inline-block;
+	background-image: url('../../images/front/everton/crimbo/flag.svg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 33px;
+	line-height: 70px;
+	height: 56px;
+	text-align: center;
+	font-size: 20px;
+	color: #ffffff;
+	margin-left: 12px;
+}
+
+.christmas-dashboard section.squad .squad-row {
+	position: relative;
+	text-align: center;
+}
+
+.christmas-dashboard section.squad .squad-el {
+	max-width: 10%;
+	display: inline-block;
+	vertical-align: top;
+	padding: 0 5px;
+	box-sizing: border-box;
+	text-align: center;
+	position: relative;
+	margin-left: -5px;
+}
+.christmas-dashboard section.squad .squad-el .squad-person {
+	max-width: 50%;
+	opacity: 0.5;
+	display: inline-block;
+	margin-bottom: 5px;
+}
+.christmas-dashboard section.squad .squad-el .name {
+	display: none;
+}
+.christmas-dashboard section.squad .squad-el.active .squad-person {
+	opacity: 1;
+}
+.christmas-dashboard section.squad .squad-el.active .name {
+	display: block;
+}
+.christmas-dashboard section.squad .squad-el.squad-flag:after {
+	font-family: FontAwesome;
+	opacity: 0.5;
+	content: '\f024';
+	display: block;
+	position: absolute;
+	top: -15px;
+	right: 15px;
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	background-color: #7a7a7a;
+	color: #ffffff;
+	font-size: 20px;
+	line-height: 34px;
+}
+.christmas-dashboard section.squad .squad-el.active.squad-flag:after {
+	opacity: 1;
+}
+.christmas-dashboard section.squad .squad-el.squad-flag.squad-trophey:after {
+	content: '\f091';
+	font-size: 24px;
+}
+
+.christmas-dashboard section.squad .football {
+	display: none;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	bottom: 30px;
+	left: 0;
+	background: url("../../images/front/everton/crimbo/football.png") no-repeat;
+	background-size: cover;
+	transform: translateX(-130%);
+	-webkit-transform: translateX(-130%);
+	-moz-transform: translateX(-130%);
+	-ms-transform: translateX(-130%);
+	transition: left 0.4s ease;
+}
+
+.christmas-dashboard section.squad .football.pass {
+	animation: football-pass 0.4s ease alternate;
+	-webkit-animation: football-pass 0.4s ease alternate;
+}
+
+.christmas-dashboard section.squad > p {
+	margin-top: 20px;
+	color: #666666;
+	text-align: right;
+}
+.christmas-dashboard section.squad > p a {
+	color: #666666;
+}
+
+.christmas-dashboard section .invite-options {
+
+}
+.christmas-dashboard section .invite-options .fa {
+	font-size: 30px;
+	color: #aaaaab;
+	display: inline-block;
+	vertical-align: middle;
+	cursor: pointer;
+	text-decoration: none;
+	transition: color 0.2s ease;
+	-webkit-transition: color 0.2s ease;
+	-moz-transition: color 0.2s ease;
+	-ms-transition: color 0.2s ease;
+}
+
+.christmas-dashboard section .invite-options .fa-mobile-phone {
+	font-size: 34px;
+}
+.christmas-dashboard section .invite-options .small-separator {
+	height: 20px;
+	width: 1px;
+	background-color: #aaaaab;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 20px;
+}
+
+.christmas-dashboard section .invitation-form {
+	margin: 20px 0;
+}
+
+.christmas-dashboard section .invitation-form form input {
+	height: 40px;
+	line-height: 40px;
+	padding: 0 10px;
+	margin-right: 5px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.christmas-dashboard section .invitation-form form input:not([type=submit]) {
+	outline: none;
+	border: 1px solid #dedede;
+	border-radius: 2px;
+	min-width: 270px;
+}
+.christmas-dashboard section .invitation-form form input:not([type=submit]):focus {
+	border-bottom-width: 2px;
+}
+
+.christmas-dashboard section .invitation-form form button {
+	font-family: 'bebas', Helvetica, Arial, sans serif;
+	font-size: 21px;
+	letter-spacing: 1px;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 2px;
+	padding: 0 44px 0 20px;
+	overflow: hidden;
+	border: 0;
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+}
+.christmas-dashboard section .invitation-form form button:after {
+	font-family: FontAwesome;
+	content: "\f1d8";
+	position: absolute;
+	top: 0;
+	right: 20px;
+	line-height: 42px;
+	transform: translateX(50%);
+	-webkit-transform: translateX(50%);
+	-moz-transform: translateX(50%);
+	-ms-transform: translateX(50%);
+	transition: right 0.2s ease;
+	-webkit-transition: right 0.2s ease;
+	-moz-transition: right 0.2s ease;
+	-ms-transition: right 0.2s ease;
+}
+
+.christmas-dashboard section .invitation-form form button:hover:after {
+	color: #FFFFFF;
+	right: 50%;
+}
+
+.christmas-dashboard section.trophies > div:nth-child(1) {
+	position: relative;
+}
+.christmas-dashboard section.trophies > div:nth-child(1):after {
+	content: '';
+	position: absolute;
+	left: 10px;
+	bottom: -3px;
+	width: 110px;
+	height: 220px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	z-index: 5;
+}
+.christmas-dashboard section.trophies .bottom-part,
+.christmas-dashboard section.trophies .bottom-part h3{
+	height: 40px;
+	line-height: 40px;
+}
+.christmas-dashboard section.trophies .top-part {
+	position: relative;
+}
+.christmas-dashboard section.trophies .top-part .left-block {
+	background-color: #cfcfcf;
+}
+.christmas-dashboard section.trophies .top-part .right-block {
+	background-color: #FFFFFF;
+}
+.christmas-dashboard section.trophies .bottom-part .right-block {
+	background-color: #cfcfcf;
+}
+
+.christmas-dashboard section.trophies .top-part .left-block,
+.christmas-dashboard section.trophies .top-part .right-block {
+	padding: 20px;
+}
+.christmas-dashboard section.trophies .top-part .right-block {
+	padding: 10px 10px 0 20px;
+}
+.christmas-dashboard section.trophies .top-part .right-block h3 {
+	margin-bottom: 10px;
+}
+
+.christmas-dashboard section.trophies .top-part .left-block h1 {
+	color: #FFFFFF;
+	font-size: 70px;
+	margin-bottom: 50px;
+}
+.christmas-dashboard section.trophies .top-part .left-block .quotes {
+	max-width: 50%;
+	margin: 70px auto 40px;
+	padding-left: 100px;
+	box-sizing: content-box;
+	position: relative;
+}
+.christmas-dashboard section.trophies .top-part .left-block .quotes:before,
+.christmas-dashboard section.trophies .top-part .left-block .quotes:after {
+	font-family: FontAwesome;
+	position: absolute;
+	font-size: 26px;
+	color: #FFFFFF;
+}
+.christmas-dashboard section.trophies .top-part .left-block .quotes:before {
+	content: "\f10d";
+	top: -15px;
+	left: 60px;
+}
+.christmas-dashboard section.trophies .top-part .left-block .quotes:after {
+	content: "\f10e";
+	bottom: -20px;
+	right: -35px;
+}
+.christmas-dashboard section.trophies .top-part .right-block .row div {
+	text-align: center;
+	padding: 0;
+}
+.christmas-dashboard section.trophies .top-part .right-block .row div img {
+	max-width: none;
+	width: 100%;
+	margin-bottom: 10px;
+	box-shadow: 0 12px 5px -9px rgba(0,0,0,0.5);
+}
+.christmas-dashboard section.trophies .top-part .right-block .row div .small-separator {
+	width: 60%;
+	height: 1px;
+	background: #cccccc;
+	margin: 50px auto 0;
+}
+
+.christmas-dashboard section.trophies .bottom-part .left-block,
+.christmas-dashboard section.trophies .bottom-part .right-block {
+	padding: 0 20px;
+}
+.christmas-dashboard section.trophies .bottom-part h3 {
+	color: #FFFFFF;
+}
+
+.christmas-dashboard section.trophies .bottom-part .left-block h3 {
+	display: inline-block;
+	vertical-align: middle;
+	float: left;
+}
+.christmas-dashboard section.trophies .trophies-list {
+	height: 40px;
+	display: inline-block;
+	vertical-align: middle;
+	float: right;
+}
+.christmas-dashboard section.trophies .trophies-list .trophy {
+	opacity: 0.6;
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background-image: url('../../images/front/everton/crimbo/trophy.svg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.christmas-dashboard section.trophies .trophies-list .trophy.active {
+	opacity: 1;
+}
+
+.christmas-dashboard section.invites table {
+	width: 70%;
+}
+.christmas-dashboard section.invites table tbody td {
+	font-size: 16px;
+	height: 60px;
+	min-width: 20px;
+}
+.christmas-dashboard section.invites table tbody td.no-invites {
+	color: #888888;
+	text-align: left;
+}
+.christmas-dashboard section.invites table tbody td:nth-child(1) {
+	text-align: center;
+}
+.christmas-dashboard section.invites table tbody td .multiply {
+	padding-top: 15px;
+	width: 28px;
+	height: 28px;
+	display: inline-block;
+}
+.christmas-dashboard section.invites table tbody td .multiply > div{
+	height: 1px;
+	background: black;
+}
+.christmas-dashboard section.invites table tbody td .multiply > div:nth-child(1){
+	transform: rotate(45deg);
+}
+.christmas-dashboard section.invites table tbody td .multiply > div:nth-child(2){
+	transform: rotate(-45deg);
+}
+.christmas-dashboard section.invites table tbody td .tick {
+	padding-top: 5px;
+	padding-left: 2px;
+	width: 26px;
+	height: 25px;
+	display: inline-block;
+}
+.christmas-dashboard section.invites table tbody td .tick div {
+	height: 10px;
+	border-bottom: 1px solid;
+	border-left: 1px solid;
+	transform: rotate(-45deg);
+}
+
+.christmas-dashboard section.invites table tbody td button {
+	font-family: 'bebas', Helvetica, Arial, sans serif;
+	font-size: 21px;
+	letter-spacing: 1px;
+	height: 40px;
+	line-height: 40px;
+	border-radius: 2px;
+	padding: 0 44px 0 20px;
+	border: 0;
+	color: #FFFFFF;
+	background-color: #555555;
+	overflow: hidden;
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	transition: background 0.2s ease;
+	-webkit-transition: background 0.2s ease;
+	-moz-transition: background 0.2s ease;
+	-ms-transition: background 0.2s ease;
+}
+.christmas-dashboard section.invites table tbody td button:after {
+	font-family: FontAwesome;
+	content: "\f1d8";
+	position: absolute;
+	top: 0;
+	right: 20px;
+	line-height: 42px;
+	transform: translateX(50%);
+	-webkit-transform: translateX(50%);
+	-moz-transform: translateX(50%);
+	-ms-transform: translateX(50%);
+	transition: right 0.2s ease;
+	-webkit-transition: right 0.2s ease;
+	-moz-transition: right 0.2s ease;
+	-ms-transition: right 0.2s ease;
+}
+
+.christmas-dashboard section.invites table tbody td button:hover:after {
+	color: #FFFFFF;
+	right: 50%;
+}
+
+
+.christmas-dashboard .christmas-notification {
+	position: fixed;
+	bottom: 30px;
+	left: 0;
+	z-index: 999999999;
+	border-bottom-right-radius: 40px;
+	box-shadow: 1px 1px 5px rgba(0,0,0,0.75);
+	transform: translateX(-100%);
+	-webkit-transform: translateX(-105%);
+	-moz-transform: translateX(-105%);
+	-ms-transform: translateX(-105%);
+	transition: transform 0.3s ease;
+	-webkit-transition: transform 0.3s ease;
+	-moz-transition: transform 0.3s ease;
+	-ms-transition: transform 0.3s ease;
+}
+.christmas-dashboard .christmas-notification.error {
+	border-bottom-right-radius: 0;
+	background: #790000;
+}
+
+.christmas-dashboard .christmas-notification.shown {
+	transform: translateX(0);
+	-webkit-transform: translateX(0);
+	-moz-transform: translateX(0);
+	-ms-transform: translateX(0);
+}
+
+.christmas-dashboard .christmas-notification .christmas-notification-close {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+}
+.christmas-dashboard .christmas-notification .christmas-notification-close .multiply {
+	padding-top: 6px;
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%) rotate(0deg);
+	-webkit-transform: translate(-50%, -50%) rotate(0deg);
+	-moz-transform: translate(-50%, -50%) rotate(0deg);
+	-ms-transform: translate(-50%, -50%) rotate(0deg);
+	transform-origin: 50% 65%;
+	transition: transform 0.3s ease;
+	-webkit-transition: transform 0.3s ease;
+	-moz-transition: transform 0.3s ease;
+	-ms-transition: transform 0.3s ease;
+}
+.christmas-dashboard .christmas-notification .christmas-notification-close:hover .multiply {
+	transform: translate(-50%, -50%) rotate(180deg);
+	-webkit-transform: translate(-50%, -50%) rotate(180deg);
+	-moz-transform: translate(-50%, -50%) rotate(180deg);
+	-ms-transform: translate(-50%, -50%) rotate(180deg);
+}
+.christmas-dashboard .christmas-notification .multiply > div{
+	height: 1px;
+	background: #FFFFFF;
+}
+.christmas-dashboard .christmas-notification .multiply > div:nth-child(1){
+	transform: rotate(45deg);
+}
+.christmas-dashboard .christmas-notification .multiply > div:nth-child(2){
+	transform: rotate(-45deg);
+	margin-top: -1px;
+}
+
+.christmas-dashboard .christmas-notification .christmas-notification-body {
+	width: 340px;
+	height: 140px;
+	padding: 0 20px;
+	text-align: center;
+}
+
+.christmas-dashboard .christmas-notification .christmas-notification-body * {
+	color: #FFFFFF;
+}
+.christmas-dashboard .christmas-notification .christmas-notification-body h1 {
+	font-size: 76px;
+	line-height: 86px;
+}
+.christmas-dashboard .christmas-notification.error .christmas-notification-body h1 {
+	font-size: 60px;
+	line-height: 70px;
+}
+.christmas-dashboard .christmas-notification .christmas-notification-body h5 {
+	line-height: 18px;
+}
+.christmas-dashboard .christmas-notification.error .christmas-notification-body ul {
+	text-align: left;
+	display: inline-block;
+}
+.christmas-dashboard .christmas-notification.error .christmas-notification-body ul li {
+	list-style: disc;
+}
+.christmas-dashboard .christmas-notification .christmas-notification-body > div {
+	display: none;
+}
+.christmas-dashboard .christmas-notification.shoot .christmas-notification-body .shoot,
+.christmas-dashboard .christmas-notification.goal .christmas-notification-body .goal,
+.christmas-dashboard .christmas-notification.again .christmas-notification-body .again,
+.christmas-dashboard .christmas-notification.error .christmas-notification-body .error {
+	display: block;
+}
+
+/* ------------------------------------------------------------------ */
+/* Animations                                                         */
+/* ------------------------------------------------------------------ */
+
+@keyframes football-pass {
+	0% {
+		bottom: 30px;
+		transform: translateX(-130%) rotate(0deg);
+		-moz-transform: translateX(-130%) rotate(0deg);
+		-ms-transform: translateX(-130%) rotate(0deg);
+	}
+	50% {
+		bottom: 70%;
+		transform: translateX(-130%) rotate(400deg);
+		-moz-transform: translateX(-130%) rotate(400deg);
+		-ms-transform: translateX(-130%) rotate(400deg);
+	}
+	100% {
+		bottom: 30px;
+		transform: translateX(-130%) rotate(720deg);
+		-moz-transform: translateX(-130%) rotate(720deg);
+		-ms-transform: translateX(-130%) rotate(720deg);
+	}
+}
+@-webkit-keyframes football-pass {
+	0% {
+		bottom: 30px;
+		-webkit-transform: translateX(-130%) rotate(0deg);
+	}
+	50% {
+		bottom: 70%;
+		-webkit-transform: translateX(-130%) rotate(400deg);
+	}
+	100% {
+		bottom: 30px;
+		-webkit-transform: translateX(-130%) rotate(720deg);
+	}
+}
+
+@keyframes shaky-cta {
+	0% {
+		transform: rotate(0deg);
+	}
+	1%{
+		transform: rotate(-9deg);
+	}
+	3%{
+		transform: rotate(9deg);
+	}
+	4%{
+		transform: rotate(0deg);
+	}
+}
+@-webkit-keyframes shaky-cta {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+	1%{
+		-webkit-transform: rotate(-9deg);
+	}
+	3%{
+		-webkit-transform: rotate(9deg);
+	}
+	4%{
+		-webkit-transform: rotate(0deg);
+	}
+}
+/* ****************************************************************** */
+/* End of Christmas Dashboard styles                                  */
+/* ****************************************************************** */
+
+
+
+@media screen and (max-width: 1050px) {
+	.christmas-holding-page .header-section .wrap {
+		text-align: center;
+	}
+	.christmas-holding-page .header-section .wrap > .crimbo-holder {
+		float: none;
+		display: inline-block;
+	}
+	.christmas-holding-page .header-section .wrap > .text-coming {
+		float: none;
+		padding-right: 0;
+		z-index: 5;
+		display: inline-block;
+		margin: 20px 10px 0;
+	}
+	.christmas-holding-page .header-section .wrap:after {
+		right: 0;
+		top: 20%;
+	}
+	.christmas-holding-page .header-section .wrap:before {
+		left: 0;
+	}
+}
+
+@media screen and (max-width: 990px) {
+	.christmas-dashboard {
+		padding: 0 20px;
+	}
+}
+@media screen and (max-width: 910px) {
+	.christmas-dashboard section.trophies .top-part .left-block h1 {
+		font-size: 50px;
+	}
+	.christmas-dashboard section.squad .football {
+		width: 34px;
+		height: 34px;
+	}
+	.christmas-dashboard section.trophies .bottom-part h3 {
+		font-size: 20px;
+	}
+	.christmas-dashboard section.trophies .trophies-list .trophy {
+		height: 30px;
+		width: 30px;
+		margin: 5px 0;
+	}
+}
+
+@media screen and (max-width: 810px) {
+	.christmas-page .explanation-section {
+		width: 100%;
+		background-image: none !important;
+	}
+	.christmas-page .explanation-section .explanation-row .explanation-card {
+		display: block;
+		margin: 30px auto;
+		width: 100%;
+		padding: 0 20px;
+	}
+	.christmas-page .explanation-section .explanation-row .explanation-card img {
+		border-radius: 0;
+		border: 1px solid #ccc;
+		box-shadow: none;
+		float: left;
+		max-width: 40%;
+	}
+	.christmas-page .explanation-section .explanation-row .explanation-card p {
+		float: left;
+		max-width: 50%;
+		text-align: left;
+		margin: 5px 10px;
+	}
+	.christmas-page .explanation-section .explanation-row .explanation-card:before,
+	.christmas-page .explanation-section .explanation-row .explanation-card:after {
+		content: " ";
+		display: table;
+	}
+	.christmas-page .explanation-section .explanation-row .explanation-card:after {
+		clear: both;
+	}
+	.christmas-page .video-section .left-side {
+		width: 100%;
+		float: none;
+	}
+	.christmas-page .video-section .right-side {
+		width: 100%;
+		float: none;
+	}
+	.christmas-page .video-section .right-side .header {
+		margin-left: 0;
+		text-align: center;
+	}
+	.christmas-page .video-section .right-side .header h1 {
+		font-size: 44px;
+		line-height: 40px;
+	}
+	.christmas-page .video-section .right-side .bottom-text {
+		margin-bottom: 20px;
+	}
+	.christmas-holding-page .holding-middle-section {
+		padding: 20px;
+	}
+	.christmas-page .video-section .right-side .header h1:nth-child(2):after {
+		width: 40px;
+		height: 40px;
+		right: -5px;
+		top: -27px;
+	}
+	.christmas-page .explanation-section .explanation-row:nth-child(1) {
+		margin-bottom: 0;
+	}
+	.christmas-page .explanation-section .explanation-row:nth-child(1):after {
+		display: none;
+	}
+	.christmas-page .video-section .right-side .bottom-text {
+		padding: 10px 10px 0;
+	}
+	.christmas-page .video-section .right-side .header h3 {
+		font-size: 14px;
+		line-height: 16px;
+	}
+	.christmas-page .faq, .christmas-page .terms {
+		padding: 30px 20px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.christmas-dashboard section .side-separators {
+		border-right: 0;
+	}
+	.christmas-dashboard .christmas-stats .row > div:not(:last-child) {
+		margin-bottom: 30px;
+	}
+	.christmas-dashboard .christmas-stats .row > div:last-child {
+		text-align: center;
+	}
+	.christmas-dashboard .christmas-separator {
+		margin: 20px 0;
+	}
+	.christmas-dashboard section {
+		margin-bottom: 20px;
+	}
+	.christmas-dashboard section .invitation-form form input:not([type=submit]) {
+		width: 48%;
+	}
+	.christmas-dashboard section .invitation-form form button {
+		display: block;
+		margin: 20px auto;
+	}
+	.christmas-dashboard section.trophies > div:nth-child(1):after {
+		bottom: 0;
+		top: 60px;
+		width: 90px;
+		height: 180px;
+	}
+	.christmas-dashboard section.invites table {
+		width: 100%;
+	}
+	.christmas-dashboard section.invites table tbody td {
+		font-size: 14px;
+		height: 30px;
+	}
+	.christmas-dashboard section.invites table tbody td .multiply {
+		padding-top: 10px;
+		width: 20px;
+		height: 20px;
+	}
+	.christmas-dashboard section.invites table tbody td .tick {
+		padding-top: 2px;
+		width: 19px;
+		height: 18px;
+	}
+	.christmas-dashboard section.invites table tbody td button {
+		height: 32px;
+		line-height: 33px;
+		font-size: 20px;
+	}
+	.christmas-dashboard section.invites table tbody td button:after {
+		line-height: 33px;
+	}
+	.christmas-dashboard section.squad .squad-el.squad-flag:after {
+		width: 26px;
+		height: 26px;
+		font-size: 16px;
+		line-height: 26px;
+	}
+	.christmas-dashboard section.squad .squad-el.squad-flag.squad-trophey:after {
+		font-size: 20px;
+	}
+	.christmas-dashboard section.squad .football {
+		width: 24px;
+		height: 24px;
+	}
+	.christmas-dashboard section.squad > p {
+		margin-top: 10px;
+		text-align: center;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.christmas-holding-page .header-section h1 {
+		font-size: 90px;
+		line-height: 100px;
+		display: inline-block;
+	}
+	.christmas-holding-page .header-section .wrap > .crimbo-holder img {
+		max-width: 210px;
+	}
+}
+@media screen and (max-width: 610px) {
+	.christmas-dashboard section .invitation-form form input:not([type=submit]) {
+		width: 100%;
+		margin-bottom: 5px;
+	}
+}
+@media screen and (max-width: 500px) {
+	.christmas-page .video-section .left-side iframe {
+		height: 200px;
+	}
+	.christmas-holding-page .header-section h1 {
+		font-size: 60px;
+		line-height: 70px;
+	}
+	.christmas-holding-page .header-section .wrap:before,
+	.christmas-holding-page .header-section .wrap:after {
+		display: none;
+	}
+	.christmas-holding-page .header-section h1:after {
+		width: 50px;
+		height: 50px;
+		top: -22px;
+	}
+	.christmas-holding-page .holding-footer #mc_embed_signup .mc-field-group {
+		max-width: none;
+		margin: 0 auto;
+	}
+	.christmas-dashboard section.trophies .top-part .left-block h1 {
+		font-size: 30px;
+	}
+	.christmas-dashboard section .row > div:nth-child(3) {
+		padding-left: 7px;
+	}
+	.christmas-dashboard section .row > div:nth-child(1) {
+		padding-right: 7px;
+		text-align: center;
+	}
+	.christmas-dashboard section .christmas-profile img {
+		margin: 0 0 5px;
+	}
+	.christmas-dashboard section .christmas-profile .name {
+		display: block;
+		text-align: center;
+	}
+	.christmas-dashboard section .row > div:nth-child(2) {
+		padding: 0;
+		border: 0;
+	}
+	.christmas-dashboard section.trophies .top-part .right-block .row div .small-separator {
+		display: none;
+	}
+	.christmas-dashboard section.trophies .bottom-part, .christmas-dashboard section.trophies .bottom-part h3,
+	.christmas-dashboard section.trophies .bottom-part .left-block h3 {
+		text-align: center;
+		float: none;
+		height: auto;
+		line-height: 24px;
+	}
+	.christmas-dashboard section.trophies .trophies-list {
+		float: none;
+	}
+	.christmas-dashboard section.invites table tbody td button {
+		max-width: 40px;
+		padding: 0;
+		color: #555555;
+	}
+	.christmas-dashboard section.invites table tbody td button:after {
+		color: #FFFFFF;
+	}
+	.christmas-dashboard section.invites table tbody td:nth-child(1) {
+		display: none;
+	}
+	.christmas-dashboard section.squad .squad-el {
+		max-width: 20%;
+		margin-bottom: 20px;
+		padding: 0;
+	}
+	.christmas-dashboard section.squad .football {
+		display: none !important;
+	}
+	.christmas-dashboard section.squad .squad-el.active .name {
+		display: block;
+		margin: 0 auto;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.christmas-page .service-states .step-installing,
+	.christmas-page .service-states .step-error {
+		min-width: 100%;
+	}
+	.christmas-page .btn-christmas {
+		font-size: 16px;
+		padding: 0;
+		width: 96%;
+		margin: 20px 0;
+	}
+	.christmas-page .explanation-section .explanation-row .explanation-card p {
+		max-width: 50%;
+		margin: 0 5px;
+	}
+	.christmas-dashboard .christmas-notification {
+		border-radius: 0;
+		bottom: 0;
+		width: 100%;
+		transform: translate(0, 100%);
+		-webkit-transform: translate(0, 100%);
+		-moz-transform: translate(0, 100%);
+		-ms-transform: translate(0, 100%);
+	}
+	.christmas-dashboard .christmas-notification.shown {
+		transform: translate(0, 0);
+		-webkit-transform: translate(0, 0);
+		-moz-transform: translate(0, 0);
+		-ms-transform: translate(0, 0);
+	}
+	.christmas-dashboard .christmas-notification .christmas-notification-body {
+		width: 100%;
+		height: auto;
+		padding: 10px 20px;
+	}
+	.christmas-dashboard .christmas-notification .christmas-notification-body h1,
+	.christmas-dashboard .christmas-notification.error .christmas-notification-body h1 {
+		font-size: 50px;
+		line-height: 45px;
+		margin-bottom: 6px;
+	}
+}
+
+@media (min-width: 768px) {
+	html.front.top-full .christmas-holder .navbar.main {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 10000;
+	}
+}
+/* ************************************* */
+/* CHRISTMAS PAGES STYLES END            */
+/* ************************************* */
+
+
+
 /*============================================================================*/
 /*MEDIA STYLES*/
 /*============================================================================*/
@@ -6564,12 +8362,25 @@ body .n-found .ie-true,
 		line-height: 28px;
 	}
 }
-
+@media all and (max-width: 670px) {
+	.toolbar .button {
+		padding: 0 4px;
+		font-size: 12px;
+	}
+	.navbar.toolbar .button-holder .button-crimbo:after {
+		top: 0px;
+		right: -1px;
+		width: 18px;
+		height: 18px;
+	}
+}
 @media all and (max-width: 630px) {
 	.toolbar .button {
-		padding: 0 12px;
+		/*padding: 0 12px;*/
 	}
-
+	.additional-navigation .offers-bar-tab, .additional-navigation .news-bar-tab {
+		padding: 13px 7px 12px 7px;
+	}
 }
 
 @media all and (max-width: 620px) {
@@ -6657,9 +8468,9 @@ body .n-found .ie-true,
 		padding: 15px 0 0 7% !important;
 	}
 
-    .popup-article .send-settings {
-        width: 100% !important;
-    }
+	.popup-article .send-settings {
+		width: 100% !important;
+	}
 }
 
 @media all and (max-width: 550px) {
@@ -6913,10 +8724,10 @@ body .n-found .ie-true,
 		line-height: 21px;
 		padding: 13px 15px;
 	}
-    .popup-article-image {
-        width: 95px;
-        height: auto;
-    }
+	.popup-article-image {
+		width: 95px;
+		height: auto;
+	}
 
 	.wrapper-search {
 		margin: 5px 0px 0 6px;
@@ -7040,1690 +8851,3 @@ body .n-found .ie-true,
 		padding: 12px 0 0 37px !important;
 	}
 }
-
-/****************************************************************/
-/* Custom visibility */
-/****************************************************************/
-.shown {
-	display: inherit;
-}
-
-/******** STYLES FOR EXTENSIONS NOTIFICATIONS *********/
-@keyframes loading-rotation {
-	0% {
-		transform: rotate(0deg);
-	}
-	100% {
-		transform: rotate(359deg);
-	}
-}
-@-webkit-keyframes loading-rotation {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-	100% {
-		-webkit-transform: rotate(359deg);
-	}
-}
-@-moz-keyframes loading-rotation {
-	0% {
-		-moz-transform: rotate(0deg);
-	}
-	100% {
-		-moz-transform: rotate(359deg);
-	}
-}
-@-ms-keyframes loading-rotation {
-	0% {
-		-ms-transform: rotate(0deg);
-	}
-	100% {
-		-ms-transform: rotate(359deg);
-	}
-}
-
-.extension-notification {
-	display: none;
-}
-
-.extension-notification .extension-overlay {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	background: rgba(0,0,0,0.5);
-	z-index: 100000;
-}
-
-.extension-notification .extension-overlay .extension-notification-holder {
-	display: inline-block;
-	position: fixed;
-	min-width: 300px;
-}
-.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body-macsafari {
-	display: none;
-}
-.extension-notification .extension-overlay .extension-notification-holder.winChrome {
-	top: 285px;
-	left: 50%;
-	transform: translate(-50%);
-	-webkit-transform: translate(-50%);
-}
-
-.extension-notification .extension-overlay .extension-notification-holder.winFF {
-	left: 0;
-	top: 110px;
-}
-
-.extension-notification .extension-overlay .extension-notification-holder.winSafari {
-	top: 50%;
-	right: 0;
-	transform: translate(0, -50%);
-	-webkit-transform: translate(0, -50%);
-}
-
-.extension-notification .extension-overlay .extension-notification-holder.macSafari {
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	transform: translate(0, 0);
-	-webkit-transform: translate(0, 0);
-}
-
-.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body {
-	display: none;
-}
-
-.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari {
-	display: block;
-	padding: 20px 0;
-}
-.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari h2{
-	font-size: 20px;
-	color: #FFFFFF;
-	padding: 10px 10px;
-	text-decoration: underline;
-}
-
-.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari > div {
-	display: inline-block;
-	vertical-align: top;
-	width: 34%;
-	padding: 5px 4px;
-}
-.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari > div:nth-of-type(1) {
-	width: 30%;
-}
-
-.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari > div h3 {
-	color: #FFFFFF;
-	font-size: 18px;
-}
-.extension-notification .extension-overlay .extension-notification-holder.macSafari .extension-notification-body-macsafari > div img {
-	max-width: 100%;
-	display: inline-block;
-}
-
-.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body {
-	position: relative;
-	text-align: center;
-	display: inline-block;
-	padding: 22px 50px 40px;
-	margin-top: 65px;
-}
-.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body h2{
-	color: #ffffff;
-	font-weight: bold;
-	text-transform: uppercase;
-	margin-bottom: 30px;
-}
-.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body img{
-	display: inline-block;
-	max-width: 70%;
-}
-
-.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow {
-	width: 53px;
-	height: 70px;
-	position: absolute;
-	top: -70px;
-}
-.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow.winChrome {
-	right: 145px;
-}
-.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow.macChrome {
-	right: 50px;
-}
-.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow.winFF {
-	right: 135px;
-}
-@media all and (max-width:460px) {
-	.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow {
-		display: none;
-	}
-}
-
-/* ************************************* */
-/* CHRISTMAS PAGES STYLES                */
-/* ************************************* */
-
-@font-face {
-	font-family: 'bebas';
-	src: url('../../fonts/bebasneue-webfont.eot');
-	src: url('../../fonts/bebasneue-webfont.eot?#iefix') format('embedded-opentype'),
-	url('../../fonts/bebasneue-webfont.woff2') format('woff2'),
-	url('../../fonts/bebasneue-webfont.woff') format('woff'),
-	url('../../fonts/bebasneue-webfont.ttf') format('truetype'),
-	url('../../fonts/bebasneue-webfont.svg#bebas_neueregular') format('svg');
-	font-weight: 400;
-	font-style: normal;
-}
-
-
-.christmas-holder {
-
-}
-#footer.christmas-footer {
-	margin-top: 0;
-}
-html.front.top-full .christmas-holder .navbar.main {
-	overflow: visible;
-}
-.christmas-holder .company-logo {
-	float: none;
-	position: absolute;
-	right: 0;
-	top: 10px;
-	height: 80px;
-	margin: 0;
-}
-
-html body .christmas-holder #content{
-	padding-top: 40px !important;
-	margin-bottom: 0 !important;
-	padding-bottom: 0 !important;
-}
-
-@media screen and (max-width: 990px) {
-	html body .christmas-holder #content{
-		padding-top: 0 !important;
-	}
-}
-
-.christmas-page {
-	min-height: 600px;
-}
-
-.christmas-page .video-section {
-	background: url('../../images/front/snow_pic_2.jpg');
-
-}
-
-.christmas-page .video-section .left-side {
-	width: 60%;
-	float: left;
-	margin-bottom: -4px;
-}
-.christmas-page .video-section .left-side iframe {
-	width: 100%;
-	height: 350px;
-	position: relative;
-	z-index: 0;
-}
-.christmas-page .video-section .right-side {
-	width: 40%;
-	float: right;
-	padding-top: 30px;
-}
-.christmas-page .video-section .right-side .header {
-	background-color: rgba(0,0,0,0.5);
-	padding: 6px 12px;
-	color: #FFFFFF;
-	text-transform: uppercase;
-	position: relative;
-	z-index: 10;
-	margin-left: -90px;
-}
-.christmas-page .video-section .right-side .header h1 {
-	font-family: 'bebas', Helvetica, Arial, sans serif;
-	font-weight: 900;
-	letter-spacing: 2px;
-	font-size: 75px;
-	line-height: 62px;
-	margin-bottom: 6px;
-	color: inherit;
-	position: relative;
-	display: inline-block;
-}
-.christmas-page .video-section .right-side .header h1:nth-child(2):after {
-	content: '';
-	position: absolute;
-	width: 80px;
-	height: 80px;
-	background-repeat: no-repeat;
-	background-size: cover;
-	right: -15px;
-	top: -60px;
-	transform: rotate(15deg);
-}
-.christmas-page .video-section .right-side .header h3 {
-	font-weight: 200;
-	font-size: 17px;
-	line-height: 20px;
-	color: inherit;
-}
-
-.christmas-page .video-section .right-side .bottom-text {
-	padding: 30px 40px 0;
-	text-align: center;
-}
-.christmas-page .video-section .right-side .bottom-text h4 {
-	font-size: 17px;
-	color: inherit;
-}
-.christmas-page .video-section .right-side .bottom-text .small-text {
-	font-size: 13px;
-	color: inherit;
-	margin-top: 10px;
-}
-
-.christmas-page .explanation-section {
-	width: 800px;
-	background-repeat: no-repeat;
-	background-size: 85% 85%;
-	margin: 0 auto;
-	background-position: center bottom 60px;
-}
-.christmas-page .explanation-section .explanation-row:nth-child(1) {
-	position: relative;
-	margin-bottom: 130px;
-}
-.christmas-page .explanation-section .explanation-row:nth-child(1):after {
-	content: '';
-	position: absolute;
-	top: 100px;
-	left: 50%;
-	transform: translate(-50%,0);
-	-webkit-transform: translate(-50%,0);
-	-moz-transform: translate(-50%,0);
-	-ms-transform: translate(-50%,0);
-	width: 140px;
-	height: 140px;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-.christmas-page .explanation-section .explanation-row {
-	text-align: center;
-}
-.christmas-page .explanation-section .explanation-row .explanation-card {
-	display: inline-block;
-	width: 200px;
-	vertical-align: top;
-	margin: 30px 30px;
-}
-.christmas-page .explanation-section .explanation-row .explanation-card img {
-	max-width: 100%;
-	height: auto;
-	box-shadow: 0 14px 6px -10px rgba(0,0,0,0.5);
-	border-radius: 50%;
-}
-.christmas-page .explanation-section .explanation-row .explanation-card p {
-	max-width: 80%;
-	margin: 20px auto 0;
-}
-.christmas-page .explanation-section .explanation-row .explanation-card p span {
-	color: #000000;
-	font-weight: 400;
-}
-.christmas-page .btn-christmas {
-	display: inline-block;
-	text-transform: uppercase;
-	text-decoration: none;
-	color: #333333;
-	font-size: 22px;
-	height: 50px;
-	line-height: 50px;
-	padding: 0 30px;
-	margin: 30px 0;
-	border: 1px solid #333333;
-	background-color: #FFFFFF;
-	box-shadow: 0 16px 7px -12px rgba(0,0,0,0.5);
-	transition: box-shadow 0.12s linear, transform 0.12s ease;
-	-webkit-transition: box-shadow 0.12s linear, -webkit-transform 0.12s ease;
-	-moz-transition: box-shadow 0.12s linear, -moz-transform 0.12s ease;
-	-ms-transition: box-shadow 0.12s linear, -ms-transform 0.12s ease;
-}
-.christmas-page .btn-christmas:hover {
-	box-shadow: 0 4px 3px -3px rgba(0,0,0,0.75);
-	transform: translateY(2px);
-	-webkit-transform: translateY(2px);
-	-moz-transform: translateY(2px);
-	-ms-transform: translateY(2px);
-}
-
-.christmas-page .btn-christmas.btn-brand {
-	color: #FFFFFF;
-	border: none;
-}
-
-.christmas-page .panel-text {
-	background-color: rgba(0,0,0,0.3);
-	border: 1px solid #ffffff;
-	padding: 15px;
-	color: #ffffff;
-	font-size: 17px;
-	margin-bottom: 10px;
-}
-.christmas-page .panel-text p {
-	margin-bottom: 5px;
-}
-.christmas-page .panel-text a {
-	margin: 0;
-}
-
-/* installation process styles for invited friends landing page */
-.christmas-page .service-states {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(255,255,255,0.85);
-	z-index: 100000;
-	text-align: center;
-}
-.christmas-page .overflow-close {
-	position: absolute;
-	right: 5px;
-	top: 10px;
-	font-size: 50px;
-	font-family: "Helvetica Neue", 'ev-helvetica', Calibri, Arial, sans-serif;
-	font-weight: 100;
-	color: #333333;
-	display: inline-block;
-	cursor: pointer;
-}
-.christmas-page .service-states,
-.christmas-page .service-states .step-installing,
-.christmas-page .service-states .step-error {
-	display: none;
-}
-.christmas-page .service-states.install,
-.christmas-page .service-states.install .step-installing,
-.christmas-page .service-states.error,
-.christmas-page .service-states.error .step-error {
-	display: block;
-}
-.christmas-page .service-states .step-installing {
-	position: fixed;
-	bottom: 30px;
-	left: 50%;
-	min-width: 500px;
-	transform: translate(-50%, 0);
-	-webkit-transform: translate(-50%, 0);
-	-moz-transform: translate(-50%, 0);
-	-ms-transform: translate(-50%, 0);
-}
-.christmas-page .service-states .step-error {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	min-width: 500px;
-	transform: translate(-50%, -50%);
-	-webkit-transform: translate(-50%, -50%);
-	-moz-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-}
-.christmas-page .service-states h1,
-.christmas-page .service-states .loading-holder > div {
-	margin-bottom: 20px;
-}
-.christmas-page .service-states .step-installing .loading-holder img {
-	display: inline-block;
-	animation: loading-rotation 2s linear infinite;
-	-webkit-animation: loading-rotation 2s linear infinite;
-	-moz-animation: loading-rotation 2s linear infinite;
-	-ms-animation: loading-rotation 2s linear infinite;
-}
-
-
-.christmas-page .extension-notification .extension-overlay {
-	position: static;
-	width: 0;
-	height: 0;
-	top: 0;
-	left: 0;
-	background: transparent;
-	z-index: 50000;
-}
-/* end of installation process styles for invited friends landing page */
-.christmas-page .faq, .christmas-page .terms {
-	padding: 30px 0 0;
-}
-.christmas-page .faq dl {
-	padding: 30px 0 0;
-}
-.christmas-page .faq dl dt {
-	font-size: 20px;
-}
-
-.christmas-page .faq dl dd {
-	font-size: 14px;
-	font-weight: 100;
-	margin-bottom: 20px;
-}
-
-.christmas-page .terms h1 {
-	margin-bottom: 30px;
-}
-.christmas-page .terms h3 {
-	margin-bottom: 10px;
-	margin-top: 50px;
-	font-weight: 400;
-}
-
-.christmas-page .terms ul {
-	padding-left: 20px;
-}
-.christmas-page .terms ul li {
-	list-style: disc outside;
-}
-
-
-.christmas-holding-page .header-section {
-	/* GRADIENT */
-
-	text-align: right;
-	padding-top: 60px;
-	padding-bottom: 40px;
-}
-.christmas-holding-page .header-section .wrap {
-	position: relative;
-}
-.christmas-holding-page .header-section .wrap:after {
-	content: '';
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	-webkit-transform: translateY(-50%);
-	-moz-transform: translateY(-50%);
-	-ms-transform: translateY(-50%);
-	right: -60px;
-	width: 180px;
-	height: 180px;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-.christmas-holding-page .header-section .wrap:before {
-	content: '';
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	-webkit-transform: translateY(-50%);
-	-moz-transform: translateY(-50%);
-	-ms-transform: translateY(-50%);
-	left: -60px;
-	width: 180px;
-	height: 180px;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-
-.christmas-holding-page .header-section h1 {
-	font-family: 'bebas', Helvetica, Arial, sans serif;
-	color: #FFFFFF;
-	font-size: 130px;
-	line-height: 120px;
-	text-transform: uppercase;
-	position: relative;
-}
-.christmas-holding-page .header-section h1:after {
-	content: '';
-	position: absolute;
-	width: 100px;
-	height: 100px;
-	background-repeat: no-repeat;
-	background-size: cover;
-	right: -11px;
-	top: -60px;
-	transform: rotate(12deg);
-}
-.christmas-holding-page .header-section h3 {
-	color: #eaeaea;
-	font-size: 20px;
-	text-transform: uppercase;
-	line-height: 20px;
-}
-
-
-
-
-.christmas-holding-page .header-section .wrap > .crimbo-holder {
-	margin-top: -10px;
-	float: left;
-}
-.christmas-holding-page .header-section .wrap > .text-coming {
-	margin-top: 64px;
-	float: right;
-	padding-right: 80px;
-	position: relative;
-	z-index: 5;
-}
-
-.christmas-holding-page .header-section .wrap > .crimbo-holder img {
-	max-width: 320px;
-	margin: -15px 0 5px;
-}
-.christmas-holding-page .header-section .wrap > .crimbo-holder h3 {
-	padding-left: 10px;
-}
-
-.christmas-holding-page .holding-middle-section {
-	padding: 40px 0;
-	text-align: center;
-}
-
-.christmas-holding-page .holding-middle-section h3,
-.christmas-holding-page .holding-middle-section h4 {
-
-}
-.christmas-holding-page .holding-middle-section h3 {
-	font-size: 19px;
-	line-height: 25px;
-}
-
-.christmas-holding-page .holding-middle-section h4 {
-	margin-top: 20px;
-	font-size: 16px;
-}
-
-.christmas-holding-page .holding-footer {
-	padding: 40px 0;
-}
-.christmas-holding-page .holding-footer #mc_embed_signup {
-	background: transparent;
-}
-
-.christmas-holding-page .holding-footer #mc_embed_signup input:not([type=submit]) {
-	background: rgba(255,255,255,0.15);
-	border: 1px solid rgba(255,255,255,0.5);
-	border-radius: 10px;
-	height: 50px;
-	line-height: 50px;
-	padding: 0 15px;
-	color: #e5e5e5;
-	font-size: 18px;
-}
-.christmas-holding-page .holding-footer #mc_embed_signup input:not([type=submit]):active,
-.christmas-holding-page .holding-footer #mc_embed_signup input:not([type=submit]):focus {
-	background: rgba(255,255,255,0.25);
-	border: 1px solid rgba(255,255,255,1);
-	color: #ffffff;
-}
-
-.christmas-holding-page .holding-footer #mc_embed_signup input[type=submit] {
-	font-family: 'bebas', Helvetica, Arial, sans serif;
-	font-size: 34px;
-	letter-spacing: 1px;
-
-	clear: both;
-	background-color: transparent;
-	border: 1px solid #e5e5e5;
-	border-radius: 4px;
-	color: #e5e5e5;
-	cursor: pointer;
-	display: inline-block;
-	font-weight: bold;
-	height: 50px;
-	line-height: 50px;
-	margin: 0 5px 10px 0;
-	padding: 0 30px;
-	text-align: center;
-	text-decoration: none;
-	vertical-align: top;
-	white-space: nowrap;
-	width: auto;
-}
-.christmas-holding-page .holding-footer #mc_embed_signup input[type=submit]:hover {
-	border: 1px solid #FFFFFF;
-	color: #FFFFFF;
-	background: rgba(255,255,255,0.2);
-}
-
-.christmas-holding-page .holding-footer #mc_embed_signup #mc_embed_signup_scroll {
-	text-align: center;
-}
-.christmas-holding-page .holding-footer #mc_embed_signup .mc-field-group {
-	display: inline-block;
-	max-width: 300px;
-	margin: 0 15px;
-}
-.christmas-holding-page .holding-footer #mc_embed_signup div.response {
-	float: none;
-	width: 100%;
-	text-transform: uppercase;
-	color: #2ED22E;
-}
-
-/* ****************************************************************** */
-/* Christmas Dashboard styles                                         */
-/* ****************************************************************** */
-.christmas-dashboard {
-/*	background-image: url('../../images/front/everton/crimbo/blue-crimbo-logo-new.png');
-	background-repeat: no-repeat;
-	background-position: right bottom;
-	background-size: 20%;*/
-}
-.christmas-dashboard h1, .christmas-dashboard h2,
-.christmas-dashboard h3, .christmas-dashboard h4,
-.christmas-dashboard .heading {
-	font-family: 'bebas', Helvetica, Arial, sans serif;
-}
-
-.christmas-dashboard section {
-	margin-bottom: 50px;
-}
-.christmas-dashboard section h2 {
-	margin: 30px 0;
-}
-
-.christmas-dashboard .christmas-separator {
-	margin: 50px 0;
-	height: 5px;
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#aaaaaa+0,ffffff+70 */
-	background: rgb(170,170,170); /* Old browsers */
-	background: -moz-radial-gradient(center, ellipse cover,  rgba(200,200,200,1) 0%, rgba(255,255,255,0) 50%); /* FF3.6+ */
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(200,200,170,0)), color-stop(50%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
-	background: -webkit-radial-gradient(center, ellipse cover,  rgba(200,200,200,1) 0%,rgba(255,255,255,0) 50%); /* Chrome10+,Safari5.1+ */
-	background: -o-radial-gradient(center, ellipse cover,  rgba(200,200,200,1) 0%,rgba(255,255,255,0) 50%); /* Opera 12+ */
-	background: -ms-radial-gradient(center, ellipse cover,  rgba(200,200,200,1) 0%,rgba(255,255,255,0) 50%); /* IE10+ */
-	background: radial-gradient(ellipse at center,  rgba(200,200,200,1) 0%,rgba(255,255,255,0) 50%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aaaaaa', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-}
-
-.christmas-dashboard .shaky-cta {
-	animation: shaky-cta 10s ease 9s forwards infinite;
-	-webkit-animation: shaky-cta 10s ease 9s forwards infinite;
-}
-
-.christmas-dashboard section .christmas-profile {
-
-}
-.christmas-dashboard section .christmas-profile a {
-	text-decoration: none;
-}
-.christmas-dashboard section .christmas-profile img {
-	display: inline-block;
-	vertical-align: middle;
-	max-width: 70px;
-	border-radius: 50%;
-	margin-right: 10px;
-	text-decoration: none;
-	transition: border-radius 0.3s ease;
-	-webkit-transition: border-radius 0.3s ease;
-	-moz-transition: border-radius 0.3s ease;
-	-ms-transition: border-radius 0.3s ease;
-}
-.christmas-dashboard section .christmas-profile a:hover img {
-	border-radius: 15%;
-}
-.christmas-dashboard section .christmas-profile .name {
-	display: inline-block;
-	vertical-align: middle;
-}
-.christmas-dashboard section .christmas-stats-block {
-
-}
-.christmas-dashboard section .christmas-stats-block .stat {
-	float: right;
-}
-
-.christmas-dashboard section.christmas-stats .christmas-cta {
-	font-family: 'bebas', Helvetica, Arial, sans serif;
-	font-size: 21px;
-	letter-spacing: 1px;
-	height: 40px;
-	line-height: 40px;
-	border-radius: 2px;
-	padding: 0 44px 0 20px;
-	margin-top: 10px;
-	border: 0;
-	color: #FFFFFF;
-	background-color: #555555;
-	overflow: hidden;
-	position: relative;
-	display: inline-block;
-	vertical-align: middle;
-	transition: background 0.2s ease;
-	-webkit-transition: background 0.2s ease;
-	-moz-transition: background 0.2s ease;
-	-ms-transition: background 0.2s ease;
-}
-.christmas-dashboard section.christmas-stats .christmas-cta:after {
-	font-family: FontAwesome;
-	content: "\f0c0";
-	position: absolute;
-	top: 0;
-	right: 20px;
-	line-height: 42px;
-	transform: translateX(50%);
-	-webkit-transform: translateX(50%);
-	-moz-transform: translateX(50%);
-	-ms-transform: translateX(50%);
-	transition: right 0.2s ease;
-	-webkit-transition: right 0.2s ease;
-	-moz-transition: right 0.2s ease;
-	-ms-transition: right 0.2s ease;
-}
-
-.christmas-dashboard section.christmas-stats .christmas-cta:hover {
-
-}
-.christmas-dashboard section.christmas-stats .christmas-cta:hover:after {
-	color: #FFFFFF;
-	right: 50%;
-}
-
-
-.christmas-dashboard section .row > div:nth-child(1) {
-	padding-right: 30px;
-}
-.christmas-dashboard section .row > div:nth-child(2) {
-	padding: 0 30px;
-}
-.christmas-dashboard section .row > div:nth-child(3) {
-	padding-left: 30px;
-}
-.christmas-dashboard section .side-separators {
-	border-left: 1px solid #cccccc;
-	border-right: 1px solid #cccccc;
-}
-.christmas-dashboard section.squad h2 {
-	display: inline-block;
-}
-.christmas-dashboard section.squad .squad-class {
-	display: inline-block;
-	background-image: url('../../images/front/everton/crimbo/flag.svg');
-	background-repeat: no-repeat;
-	background-size: cover;
-	width: 33px;
-	line-height: 70px;
-	height: 56px;
-	text-align: center;
-	font-size: 20px;
-	color: #ffffff;
-	margin-left: 12px;
-}
-
-.christmas-dashboard section.squad .squad-row {
-	position: relative;
-	text-align: center;
-}
-
-.christmas-dashboard section.squad .squad-el {
-	max-width: 10%;
-	display: inline-block;
-	vertical-align: top;
-	padding: 0 5px;
-	box-sizing: border-box;
-	text-align: center;
-	position: relative;
-	margin-left: -5px;
-}
-.christmas-dashboard section.squad .squad-el .squad-person {
-	max-width: 50%;
-	opacity: 0.5;
-	display: inline-block;
-	margin-bottom: 5px;
-}
-.christmas-dashboard section.squad .squad-el .name {
-	display: none;
-}
-.christmas-dashboard section.squad .squad-el.active .squad-person {
-	opacity: 1;
-}
-.christmas-dashboard section.squad .squad-el.active .name {
-	display: block;
-}
-.christmas-dashboard section.squad .squad-el.squad-flag:after {
-	font-family: FontAwesome;
-	opacity: 0.5;
-	content: '\f024';
-	display: block;
-	position: absolute;
-	top: -15px;
-	right: 15px;
-	width: 34px;
-	height: 34px;
-	border-radius: 50%;
-	background-color: #7a7a7a;
-	color: #ffffff;
-	font-size: 20px;
-	line-height: 34px;
-}
-.christmas-dashboard section.squad .squad-el.active.squad-flag:after {
-	opacity: 1;
-}
-.christmas-dashboard section.squad .squad-el.squad-flag.squad-trophey:after {
-	content: '\f091';
-	font-size: 24px;
-}
-
-.christmas-dashboard section.squad .football {
-	display: none;
-	width: 40px;
-	height: 40px;
-	position: absolute;
-	bottom: 30px;
-	left: 0;
-	background: url("../../images/front/everton/crimbo/football.png") no-repeat;
-	background-size: cover;
-	transform: translateX(-130%);
-	-webkit-transform: translateX(-130%);
-	-moz-transform: translateX(-130%);
-	-ms-transform: translateX(-130%);
-	transition: left 0.4s ease;
-}
-
-.christmas-dashboard section.squad .football.pass {
-	animation: football-pass 0.4s ease alternate;
-	-webkit-animation: football-pass 0.4s ease alternate;
-}
-
-.christmas-dashboard section .invite-options {
-
-}
-.christmas-dashboard section .invite-options .fa {
-	font-size: 30px;
-	color: #aaaaab;
-	display: inline-block;
-	vertical-align: middle;
-	cursor: pointer;
-	text-decoration: none;
-	transition: color 0.2s ease;
-	-webkit-transition: color 0.2s ease;
-	-moz-transition: color 0.2s ease;
-	-ms-transition: color 0.2s ease;
-}
-
-.christmas-dashboard section .invite-options .fa-mobile-phone {
-	font-size: 34px;
-}
-.christmas-dashboard section .invite-options .small-separator {
-	height: 20px;
-	width: 1px;
-	background-color: #aaaaab;
-	display: inline-block;
-	vertical-align: middle;
-	margin: 0 20px;
-}
-
-.christmas-dashboard section .invitation-form {
-	margin: 20px 0;
-}
-
-.christmas-dashboard section .invitation-form form input {
-	height: 40px;
-	line-height: 40px;
-	padding: 0 10px;
-	margin-right: 5px;
-	display: inline-block;
-	vertical-align: middle;
-}
-.christmas-dashboard section .invitation-form form input:not([type=submit]) {
-	outline: none;
-	border: 1px solid #dedede;
-	border-radius: 2px;
-	min-width: 270px;
-}
-.christmas-dashboard section .invitation-form form input:not([type=submit]):focus {
-	border-bottom-width: 2px;
-}
-
-.christmas-dashboard section .invitation-form form button {
-	font-family: 'bebas', Helvetica, Arial, sans serif;
-	font-size: 21px;
-	letter-spacing: 1px;
-	height: 40px;
-	line-height: 40px;
-	border-radius: 2px;
-	padding: 0 44px 0 20px;
-	overflow: hidden;
-	border: 0;
-	position: relative;
-	display: inline-block;
-	vertical-align: middle;
-}
-.christmas-dashboard section .invitation-form form button:after {
-	font-family: FontAwesome;
-	content: "\f1d8";
-	position: absolute;
-	top: 0;
-	right: 20px;
-	line-height: 42px;
-	transform: translateX(50%);
-	-webkit-transform: translateX(50%);
-	-moz-transform: translateX(50%);
-	-ms-transform: translateX(50%);
-	transition: right 0.2s ease;
-	-webkit-transition: right 0.2s ease;
-	-moz-transition: right 0.2s ease;
-	-ms-transition: right 0.2s ease;
-}
-
-.christmas-dashboard section .invitation-form form button:hover:after {
-	color: #FFFFFF;
-	right: 50%;
-}
-
-.christmas-dashboard section.trophies > div:nth-child(1) {
-	position: relative;
-}
-.christmas-dashboard section.trophies > div:nth-child(1):after {
-	content: '';
-	position: absolute;
-	left: 10px;
-	bottom: -3px;
-	width: 110px;
-	height: 220px;
-	background-repeat: no-repeat;
-	background-size: cover;
-	z-index: 5;
-}
-.christmas-dashboard section.trophies .bottom-part,
-.christmas-dashboard section.trophies .bottom-part h3{
-	height: 40px;
-	line-height: 40px;
-}
-.christmas-dashboard section.trophies .top-part {
-	position: relative;
-}
-.christmas-dashboard section.trophies .top-part .left-block {
-	background-color: #cfcfcf;
-}
-.christmas-dashboard section.trophies .top-part .right-block {
-	background-color: #FFFFFF;
-}
-.christmas-dashboard section.trophies .bottom-part .right-block {
-	background-color: #cfcfcf;
-}
-
-.christmas-dashboard section.trophies .top-part .left-block,
-.christmas-dashboard section.trophies .top-part .right-block {
-	padding: 20px;
-}
-.christmas-dashboard section.trophies .top-part .right-block {
-	padding: 10px 10px 0 20px;
-}
-.christmas-dashboard section.trophies .top-part .right-block h3 {
-	margin-bottom: 10px;
-}
-
-.christmas-dashboard section.trophies .top-part .left-block h1 {
-	color: #FFFFFF;
-	font-size: 70px;
-	margin-bottom: 50px;
-}
-.christmas-dashboard section.trophies .top-part .left-block .quotes {
-	max-width: 50%;
-	margin: 70px auto 40px;
-	padding-left: 100px;
-	box-sizing: content-box;
-	position: relative;
-}
-.christmas-dashboard section.trophies .top-part .left-block .quotes:before,
-.christmas-dashboard section.trophies .top-part .left-block .quotes:after {
-	font-family: FontAwesome;
-	position: absolute;
-	font-size: 26px;
-	color: #FFFFFF;
-}
-.christmas-dashboard section.trophies .top-part .left-block .quotes:before {
-	content: "\f10d";
-	top: -15px;
-	left: 60px;
-}
-.christmas-dashboard section.trophies .top-part .left-block .quotes:after {
-	content: "\f10e";
-	bottom: -20px;
-	right: -35px;
-}
-.christmas-dashboard section.trophies .top-part .right-block .row div {
-	text-align: center;
-	padding: 0;
-}
-.christmas-dashboard section.trophies .top-part .right-block .row div img {
-	max-width: none;
-	width: 100%;
-	margin-bottom: 10px;
-	box-shadow: 0 12px 5px -9px rgba(0,0,0,0.5);
-}
-.christmas-dashboard section.trophies .top-part .right-block .row div .small-separator {
-	width: 60%;
-	height: 1px;
-	background: #cccccc;
-	margin: 50px auto 0;
-}
-
-.christmas-dashboard section.trophies .bottom-part .left-block,
-.christmas-dashboard section.trophies .bottom-part .right-block {
-	padding: 0 20px;
-}
-.christmas-dashboard section.trophies .bottom-part h3 {
-	color: #FFFFFF;
-}
-
-.christmas-dashboard section.trophies .bottom-part .left-block h3 {
-	display: inline-block;
-	vertical-align: middle;
-	float: left;
-}
-.christmas-dashboard section.trophies .trophies-list {
-	height: 40px;
-	display: inline-block;
-	vertical-align: middle;
-	float: right;
-}
-.christmas-dashboard section.trophies .trophies-list .trophy {
-	opacity: 0.6;
-	display: inline-block;
-	height: 40px;
-	width: 40px;
-	background-image: url('../../images/front/everton/crimbo/trophy.svg');
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-.christmas-dashboard section.trophies .trophies-list .trophy.active {
-	opacity: 1;
-}
-
-.christmas-dashboard section.invites table {
-	width: 70%;
-}
-.christmas-dashboard section.invites table tbody td {
-	font-size: 16px;
-	height: 60px;
-	min-width: 20px;
-}
-.christmas-dashboard section.invites table tbody td.no-invites {
-	color: #888888;
-	text-align: left;
-}
-.christmas-dashboard section.invites table tbody td:nth-child(1) {
-	text-align: center;
-}
-.christmas-dashboard section.invites table tbody td .multiply {
-	padding-top: 15px;
-	width: 28px;
-	height: 28px;
-	display: inline-block;
-}
-.christmas-dashboard section.invites table tbody td .multiply > div{
-	height: 1px;
-	background: black;
-}
-.christmas-dashboard section.invites table tbody td .multiply > div:nth-child(1){
-	transform: rotate(45deg);
-}
-.christmas-dashboard section.invites table tbody td .multiply > div:nth-child(2){
-	transform: rotate(-45deg);
-}
-.christmas-dashboard section.invites table tbody td .tick {
-	padding-top: 5px;
-	padding-left: 2px;
-	width: 26px;
-	height: 25px;
-	display: inline-block;
-}
-.christmas-dashboard section.invites table tbody td .tick div {
-	height: 10px;
-	border-bottom: 1px solid;
-	border-left: 1px solid;
-	transform: rotate(-45deg);
-}
-
-.christmas-dashboard section.invites table tbody td button {
-	font-family: 'bebas', Helvetica, Arial, sans serif;
-	font-size: 21px;
-	letter-spacing: 1px;
-	height: 40px;
-	line-height: 40px;
-	border-radius: 2px;
-	padding: 0 44px 0 20px;
-	border: 0;
-	color: #FFFFFF;
-	background-color: #555555;
-	overflow: hidden;
-	position: relative;
-	display: inline-block;
-	vertical-align: middle;
-	transition: background 0.2s ease;
-	-webkit-transition: background 0.2s ease;
-	-moz-transition: background 0.2s ease;
-	-ms-transition: background 0.2s ease;
-}
-.christmas-dashboard section.invites table tbody td button:after {
-	font-family: FontAwesome;
-	content: "\f1d8";
-	position: absolute;
-	top: 0;
-	right: 20px;
-	line-height: 42px;
-	transform: translateX(50%);
-	-webkit-transform: translateX(50%);
-	-moz-transform: translateX(50%);
-	-ms-transform: translateX(50%);
-	transition: right 0.2s ease;
-	-webkit-transition: right 0.2s ease;
-	-moz-transition: right 0.2s ease;
-	-ms-transition: right 0.2s ease;
-}
-
-.christmas-dashboard section.invites table tbody td button:hover:after {
-	color: #FFFFFF;
-	right: 50%;
-}
-
-
-.christmas-dashboard .christmas-notification {
-	position: fixed;
-	bottom: 30px;
-	left: 0;
-	z-index: 999999999;
-	border-bottom-right-radius: 40px;
-	box-shadow: 1px 1px 5px rgba(0,0,0,0.75);
-	transform: translateX(-100%);
-	-webkit-transform: translateX(-105%);
-	-moz-transform: translateX(-105%);
-	-ms-transform: translateX(-105%);
-	transition: transform 0.3s ease;
-	-webkit-transition: transform 0.3s ease;
-	-moz-transition: transform 0.3s ease;
-	-ms-transition: transform 0.3s ease;
-}
-.christmas-dashboard .christmas-notification.error {
-	border-bottom-right-radius: 0;
-	background: #790000;
-}
-
-.christmas-dashboard .christmas-notification.shown {
-	transform: translateX(0);
-	-webkit-transform: translateX(0);
-	-moz-transform: translateX(0);
-	-ms-transform: translateX(0);
-}
-
-.christmas-dashboard .christmas-notification .christmas-notification-close {
-	position: absolute;
-	width: 20px;
-	height: 20px;
-	top: 0;
-	right: 0;
-	cursor: pointer;
-}
-.christmas-dashboard .christmas-notification .christmas-notification-close .multiply {
-	padding-top: 6px;
-	width: 10px;
-	height: 10px;
-	display: inline-block;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%) rotate(0deg);
-	-webkit-transform: translate(-50%, -50%) rotate(0deg);
-	-moz-transform: translate(-50%, -50%) rotate(0deg);
-	-ms-transform: translate(-50%, -50%) rotate(0deg);
-	transform-origin: 50% 65%;
-	transition: transform 0.3s ease;
-	-webkit-transition: transform 0.3s ease;
-	-moz-transition: transform 0.3s ease;
-	-ms-transition: transform 0.3s ease;
-}
-.christmas-dashboard .christmas-notification .christmas-notification-close:hover .multiply {
-	transform: translate(-50%, -50%) rotate(180deg);
-	-webkit-transform: translate(-50%, -50%) rotate(180deg);
-	-moz-transform: translate(-50%, -50%) rotate(180deg);
-	-ms-transform: translate(-50%, -50%) rotate(180deg);
-}
-.christmas-dashboard .christmas-notification .multiply > div{
-	height: 1px;
-	background: #FFFFFF;
-}
-.christmas-dashboard .christmas-notification .multiply > div:nth-child(1){
-	transform: rotate(45deg);
-}
-.christmas-dashboard .christmas-notification .multiply > div:nth-child(2){
-	transform: rotate(-45deg);
-	margin-top: -1px;
-}
-
-.christmas-dashboard .christmas-notification .christmas-notification-body {
-	width: 340px;
-	height: 140px;
-	padding: 0 20px;
-	text-align: center;
-}
-
-.christmas-dashboard .christmas-notification .christmas-notification-body * {
-	color: #FFFFFF;
-}
-.christmas-dashboard .christmas-notification .christmas-notification-body h1 {
-	font-size: 76px;
-	line-height: 86px;
-}
-.christmas-dashboard .christmas-notification.error .christmas-notification-body h1 {
-	font-size: 60px;
-	line-height: 70px;
-}
-.christmas-dashboard .christmas-notification .christmas-notification-body h5 {
-	line-height: 18px;
-}
-.christmas-dashboard .christmas-notification.error .christmas-notification-body ul {
-	text-align: left;
-	display: inline-block;
-}
-.christmas-dashboard .christmas-notification.error .christmas-notification-body ul li {
-	list-style: disc;
-}
-.christmas-dashboard .christmas-notification .christmas-notification-body > div {
-	display: none;
-}
-.christmas-dashboard .christmas-notification.shoot .christmas-notification-body .shoot,
-.christmas-dashboard .christmas-notification.goal .christmas-notification-body .goal,
-.christmas-dashboard .christmas-notification.again .christmas-notification-body .again,
-.christmas-dashboard .christmas-notification.error .christmas-notification-body .error {
-	display: block;
-}
-
-/* ------------------------------------------------------------------ */
-/* Animations                                                         */
-/* ------------------------------------------------------------------ */
-
-@keyframes football-pass {
-	0% {
-		bottom: 30px;
-		transform: translateX(-130%) rotate(0deg);
-		-moz-transform: translateX(-130%) rotate(0deg);
-		-ms-transform: translateX(-130%) rotate(0deg);
-	}
-	50% {
-		bottom: 70%;
-		transform: translateX(-130%) rotate(400deg);
-		-moz-transform: translateX(-130%) rotate(400deg);
-		-ms-transform: translateX(-130%) rotate(400deg);
-	}
-	100% {
-		bottom: 30px;
-		transform: translateX(-130%) rotate(720deg);
-		-moz-transform: translateX(-130%) rotate(720deg);
-		-ms-transform: translateX(-130%) rotate(720deg);
-	}
-}
-@-webkit-keyframes football-pass {
-	0% {
-		bottom: 30px;
-		-webkit-transform: translateX(-130%) rotate(0deg);
-	}
-	50% {
-		bottom: 70%;
-		-webkit-transform: translateX(-130%) rotate(400deg);
-	}
-	100% {
-		bottom: 30px;
-		-webkit-transform: translateX(-130%) rotate(720deg);
-	}
-}
-
-@keyframes shaky-cta {
-	0% {
-		transform: rotate(0deg);
-	}
-	1%{
-		transform: rotate(-9deg);
-	}
-	3%{
-		transform: rotate(9deg);
-	}
-	4%{
-		transform: rotate(0deg);
-	}
-}
-@-webkit-keyframes shaky-cta {
-	0% {
-		-webkit-transform: rotate(0deg);
-	}
-	1%{
-		-webkit-transform: rotate(-9deg);
-	}
-	3%{
-		-webkit-transform: rotate(9deg);
-	}
-	4%{
-		-webkit-transform: rotate(0deg);
-	}
-}
-/* ****************************************************************** */
-/* End of Christmas Dashboard styles                                  */
-/* ****************************************************************** */
-
-
-
-@media screen and (max-width: 1050px) {
-	.christmas-holding-page .header-section .wrap {
-		text-align: center;
-	}
-	.christmas-holding-page .header-section .wrap > .crimbo-holder {
-		float: none;
-		display: inline-block;
-	}
-	.christmas-holding-page .header-section .wrap > .text-coming {
-		float: none;
-		padding-right: 0;
-		z-index: 5;
-		display: inline-block;
-		margin: 20px 10px 0;
-	}
-	.christmas-holding-page .header-section .wrap:after {
-		right: 0;
-		top: 20%;
-	}
-	.christmas-holding-page .header-section .wrap:before {
-		left: 0;
-	}
-}
-
-@media screen and (max-width: 990px) {
-	.christmas-dashboard {
-		padding: 0 20px;
-	}
-}
-@media screen and (max-width: 910px) {
-	.christmas-dashboard section.trophies .top-part .left-block h1 {
-		font-size: 50px;
-	}
-	.christmas-dashboard section.squad .football {
-		width: 34px;
-		height: 34px;
-	}
-	.christmas-dashboard section.trophies .bottom-part h3 {
-		font-size: 20px;
-	}
-	.christmas-dashboard section.trophies .trophies-list .trophy {
-		height: 30px;
-		width: 30px;
-		margin: 5px 0;
-	}
-}
-
-@media screen and (max-width: 810px) {
-	.christmas-page .explanation-section {
-		width: 100%;
-		background-image: none !important;
-	}
-	.christmas-page .explanation-section .explanation-row .explanation-card {
-		display: block;
-		margin: 30px auto;
-		width: 100%;
-		padding: 0 20px;
-	}
-	.christmas-page .explanation-section .explanation-row .explanation-card img {
-		border-radius: 0;
-		border: 1px solid #ccc;
-		box-shadow: none;
-		float: left;
-		max-width: 40%;
-	}
-	.christmas-page .explanation-section .explanation-row .explanation-card p {
-		float: left;
-		max-width: 50%;
-		text-align: left;
-		margin: 5px 10px;
-	}
-	.christmas-page .explanation-section .explanation-row .explanation-card:before,
-	.christmas-page .explanation-section .explanation-row .explanation-card:after {
-		content: " ";
-		display: table;
-	}
-	.christmas-page .explanation-section .explanation-row .explanation-card:after {
-		clear: both;
-	}
-	.christmas-page .video-section .left-side {
-		width: 100%;
-		float: none;
-	}
-	.christmas-page .video-section .right-side {
-		width: 100%;
-		float: none;
-	}
-	.christmas-page .video-section .right-side .header {
-		margin-left: 0;
-		text-align: center;
-	}
-	.christmas-page .video-section .right-side .header h1 {
-		font-size: 44px;
-		line-height: 40px;
-	}
-	.christmas-page .video-section .right-side .bottom-text {
-		margin-bottom: 20px;
-	}
-	.christmas-holding-page .holding-middle-section {
-		padding: 20px;
-	}
-	.christmas-page .video-section .right-side .header h1:nth-child(2):after {
-		width: 40px;
-		height: 40px;
-		right: -5px;
-		top: -27px;
-	}
-	.christmas-page .explanation-section .explanation-row:nth-child(1) {
-		margin-bottom: 0;
-	}
-	.christmas-page .explanation-section .explanation-row:nth-child(1):after {
-		display: none;
-	}
-	.christmas-page .video-section .right-side .bottom-text {
-		padding: 10px 10px 0;
-	}
-	.christmas-page .video-section .right-side .header h3 {
-		font-size: 14px;
-		line-height: 16px;
-	}
-	.christmas-page .faq, .christmas-page .terms {
-		padding: 30px 20px;
-	}
-}
-
-@media screen and (max-width: 768px) {
-	.christmas-dashboard section .side-separators {
-		border-right: 0;
-	}
-	.christmas-dashboard .christmas-stats .row > div:not(:last-child) {
-		margin-bottom: 30px;
-	}
-	.christmas-dashboard .christmas-stats .row > div:last-child {
-		text-align: center;
-	}
-	.christmas-dashboard .christmas-separator {
-		margin: 20px 0;
-	}
-	.christmas-dashboard section {
-		margin-bottom: 20px;
-	}
-	.christmas-dashboard section .invitation-form form input:not([type=submit]) {
-		width: 48%;
-	}
-	.christmas-dashboard section .invitation-form form button {
-		display: block;
-		margin: 20px auto;
-	}
-	.christmas-dashboard section.trophies > div:nth-child(1):after {
-		bottom: 0;
-		top: 60px;
-		width: 90px;
-		height: 180px;
-	}
-	.christmas-dashboard section.invites table {
-		width: 100%;
-	}
-	.christmas-dashboard section.invites table tbody td {
-		font-size: 14px;
-		height: 30px;
-	}
-	.christmas-dashboard section.invites table tbody td .multiply {
-		padding-top: 10px;
-		width: 20px;
-		height: 20px;
-	}
-	.christmas-dashboard section.invites table tbody td .tick {
-		padding-top: 2px;
-		width: 19px;
-		height: 18px;
-	}
-	.christmas-dashboard section.invites table tbody td button {
-		height: 32px;
-		line-height: 33px;
-		font-size: 20px;
-	}
-	.christmas-dashboard section.invites table tbody td button:after {
-		line-height: 33px;
-	}
-	.christmas-dashboard section.squad .squad-el.squad-flag:after {
-		width: 26px;
-		height: 26px;
-		font-size: 16px;
-		line-height: 26px;
-	}
-	.christmas-dashboard section.squad .squad-el.squad-flag.squad-trophey:after {
-		font-size: 20px;
-	}
-	.christmas-dashboard section.squad .football {
-		width: 24px;
-		height: 24px;
-	}
-}
-
-@media screen and (max-width: 650px) {
-	.christmas-holding-page .header-section h1 {
-		font-size: 90px;
-		line-height: 100px;
-		display: inline-block;
-	}
-	.christmas-holding-page .header-section .wrap > .crimbo-holder img {
-		max-width: 210px;
-	}
-}
-@media screen and (max-width: 610px) {
-	.christmas-dashboard section .invitation-form form input:not([type=submit]) {
-		width: 100%;
-		margin-bottom: 5px;
-	}
-}
-@media screen and (max-width: 500px) {
-	.christmas-page .video-section .left-side iframe {
-		height: 200px;
-	}
-	.christmas-holding-page .header-section h1 {
-		font-size: 60px;
-		line-height: 70px;
-	}
-	.christmas-holding-page .header-section .wrap:before,
-	.christmas-holding-page .header-section .wrap:after {
-		display: none;
-	}
-	.christmas-holding-page .header-section h1:after {
-		width: 50px;
-		height: 50px;
-		top: -22px;
-	}
-	.christmas-holding-page .holding-footer #mc_embed_signup .mc-field-group {
-		max-width: none;
-		margin: 0 auto;
-	}
-	.christmas-dashboard section.trophies .top-part .left-block h1 {
-		font-size: 30px;
-	}
-	.christmas-dashboard section .row > div:nth-child(3) {
-		padding-left: 7px;
-	}
-	.christmas-dashboard section .row > div:nth-child(1) {
-		padding-right: 7px;
-		text-align: center;
-	}
-	.christmas-dashboard section .christmas-profile img {
-		margin: 0 0 5px;
-	}
-	.christmas-dashboard section .christmas-profile .name {
-		display: block;
-		text-align: center;
-	}
-	.christmas-dashboard section .row > div:nth-child(2) {
-		padding: 0;
-		border: 0;
-	}
-	.christmas-dashboard section.trophies .top-part .right-block .row div .small-separator {
-		display: none;
-	}
-	.christmas-dashboard section.trophies .bottom-part, .christmas-dashboard section.trophies .bottom-part h3,
-	.christmas-dashboard section.trophies .bottom-part .left-block h3 {
-		text-align: center;
-		float: none;
-		height: auto;
-		line-height: 24px;
-	}
-	.christmas-dashboard section.trophies .trophies-list {
-		float: none;
-	}
-	.christmas-dashboard section.invites table tbody td button {
-		max-width: 40px;
-		padding: 0;
-		color: #555555;
-	}
-	.christmas-dashboard section.invites table tbody td button:after {
-		color: #FFFFFF;
-	}
-	.christmas-dashboard section.invites table tbody td:nth-child(1) {
-		display: none;
-	}
-	.christmas-dashboard section.squad .squad-el {
-		max-width: 20%;
-		margin-bottom: 20px;
-		padding: 0;
-	}
-	.christmas-dashboard section.squad .football {
-		display: none !important;
-	}
-	.christmas-dashboard section.squad .squad-el.active .name {
-		display: block;
-		margin: 0 auto;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-	.christmas-page .service-states .step-installing,
-	.christmas-page .service-states .step-error {
-		min-width: 100%;
-	}
-	.christmas-page .btn-christmas {
-		font-size: 16px;
-		padding: 0;
-		width: 96%;
-		margin: 20px 0;
-	}
-	.christmas-page .explanation-section .explanation-row .explanation-card p {
-		max-width: 50%;
-		margin: 0 5px;
-	}
-}
-
-@media (min-width: 768px) {
-	html.front.top-full .christmas-holder .navbar.main {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		z-index: 10000;
-	}
-}
-/* ************************************* */
-/* CHRISTMAS PAGES STYLES END            */
-/* ************************************* */
