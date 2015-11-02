@@ -325,5 +325,5 @@
 })(jQuery, window);
 
 jQuery(window).ready(function(){
-	if (FastClick) FastClick.attach(document.body);
+	if (this.FastClick) FastClick.attach(document.body);
 });
