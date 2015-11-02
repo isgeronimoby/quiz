@@ -7193,15 +7193,15 @@ html body .christmas-holder #content{
 .christmas-dashboard .christmas-notification.error .christmas-notification-body ul li {
 	list-style: disc;
 }
-.christmas-dashboard .christmas-notification .christmas-notification-body > div {
+/*.christmas-dashboard .christmas-notification .christmas-notification-body > div {
 	display: none;
 }
 .christmas-dashboard .christmas-notification.shoot .christmas-notification-body .shoot,
-.christmas-dashboard .christmas-notification.goal .christmas-notification-body .goal,
-.christmas-dashboard .christmas-notification.again .christmas-notification-body .again,
-.christmas-dashboard .christmas-notification.error .christmas-notification-body .error {
-	display: block;
-}
+ .christmas-dashboard .christmas-notification.goal .christmas-notification-body .goal,
+ .christmas-dashboard .christmas-notification.again .christmas-notification-body .again,
+ .christmas-dashboard .christmas-notification.error .christmas-notification-body .error {
+	 display: block;
+ }*/
 
 /* ------------------------------------------------------------------ */
 /* Animations                                                         */
