@@ -82,14 +82,14 @@ $(document).ready(function(){
             e.preventDefault();
 
             if (md.mobile()) {
-                if (md.os() === 'iOS') {
-                    appDetectionIos();
-                } else if (md.os() === 'AndroidOS') {
-                    appDetectionAndroid();
-                } else {
-                    // neither ios nor android, but mobile
-                    window.top.location.href = Redirects.other;
-                }
+            	if (md.os() === 'iOS' && Redirects.iosDeeplink != '') {
+            		appDetectionIos();
+            	} else if (md.os() === 'AndroidOS' && Redirects.androidDeeplink != '') {
+            		appDetectionAndroid();
+            	} else {
+            		// neither ios nor android, but mobile
+            		window.top.location.href = Redirects.other;
+            	}
             }
         });
 
