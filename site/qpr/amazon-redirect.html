@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="front ie lt-ie9 lt-ie8 lt-ie7 fluid top-full menuh-top"> <![endif]-->
+<!--[if IE 7]>
+<html class="front ie lt-ie9 lt-ie8 fluid top-full menuh-top sticky-top"> <![endif]-->
+<!--[if IE 8]>
+<html class="front ie lt-ie9 fluid top-full menuh-top sticky-top"> <![endif]-->
+<!--[if gt IE 8]>
+<html class="animations front ie gt-ie8 fluid top-full menuh-top sticky-top"> <![endif]-->
+<!--[if !IE]><!-->
+<html class="animations front fluid top-full menuh-top sticky-top"><!-- <![endif]-->
+<head>
+	<title>FLAT KIT Template (v2.3.0)</title>
+	<link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+
+	<!-- 
+	**********************************************************
+	In development, use the LESS files and the less.js compiler
+	instead of the minified CSS loaded by default.
+	**********************************************************
+	<link rel="stylesheet/less" href="../assets/less/front/module.front.page.signup.less" />
+	-->
+
+	<!--[if lt IE 9]>
+	<link rel="stylesheet" href="../assets/components/library/bootstrap/css/bootstrap.min.css"/><![endif]-->
+	<link href='https://fonts.googleapis.com/css?family=Questrial' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700,600' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="../assets/css/module.front.page.all-pages.css"/>
+	<link rel="stylesheet" href="../assets/css/fancybox-styles.css"/>
+	<link rel="stylesheet" href="../assets/css/all.css"/>
+
+
+	<!--Color Scheme original file .less with color variables situate in "../assets/less/front/color-scheme-everton.less" -->
+	<link rel="stylesheet" href="css/color-scheme-qpr.css"/>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+
+	<script src="../assets/components/library/jquery/jquery.min.js?v=v2.3.0"></script>
+	<script src="../assets/components/library/jquery/jquery-migrate.min.js?v=v2.3.0"></script>
+	<script src="../assets/components/library/modernizr/modernizr.js?v=v2.3.0"></script>
+	<script src="../assets/components/plugins/less-js/less.min.js?v=v2.3.0"></script>
+	<script src="../assets/components/modules/admin/charts/flot/assets/lib/excanvas.js?v=v2.3.0"></script>
+	<script src="../assets/components/plugins/browser/ie/ie.prototype.polyfill.js?v=v2.3.0"></script>
+	<script>if (/*@cc_on!@*/false && document.documentMode === 10) {
+		document.documentElement.className += ' ie ie10';
+	}</script>
+	<script src="../assets/components/library/main/jquery.carousel.js"></script>
+	<script src="../assets/components/library/main/jquery.fancybox.js"></script>
+	<script src="../assets/components/library/main/jquery.fancybox.pack.js"></script>
+	<script src="../assets/components/library/main/jquery.main.js"></script>
+	<script src="../assets/components/library/main/jquery.mousewheel-3.0.6.pack.js"></script>
+	<script src="../assets/components/library/main/jquery.formstyler.js"></script>
+	<!--<script src="../assets/components/library/main/jquery.formstyler.min.js"></script>-->
+
+	<script src="../assets/js/lib/jquery.autocomplete.js"></script>
+	<script src="../assets/js/pages.js"></script>
+
+</head>
+<body>
+
+<!-- Main Container Fluid -->
+<div class="container-fluid menu-hidden">
+<!-- Content -->
+<div id="content">
+<!-- Top navbar (note: add class "navbar-hidden" to close the navbar by default) -->
+<div class="navbar toolbar main hidden-print">
+	<div class="button-holder wrap">
+		<div class="company-logo">
+			<a href="#">
+				<img src="images/256.png" class="big-logo" alt="logo"/>
+				<img src="images/small-logo.png" class="small-logo" alt="logo"/>
+			</a>
+			<span></span>
+		</div>
+		<div class="wrapper-search">
+			<form action="#" class="search">
+				<fieldset>
+					<input type="submit" class="go-search" value=""/>
+
+					<div class="wrapper-input"><input type="text" id="header-search" placeholder="Search"/></div>
+				</fieldset>
+			</form>
+			<a href="#" class="open-search col-md-3 glyphicons search"><i></i></a>
+			<a href="#" class="close-search"></a>
+		</div>
+		<a href="#" class="button btn-shop clicker">Shop</a>
+		<a href="#" class="button clicker offers-btn">Offers</a>
+
+		<div class="panel">
+			<ul class="additional-navigation">
+				<li><a class="news-bar-tab open-news" href="#"><em class="bg"><span class="number">3</span></em></a>
+				</li>
+				<li><a class="offers-bar-tab open-offers" href="#"><em class="bg"><span class="number">5</span></em></a>
+				</li>
+				<li><a class="info-amount" href="#">256.10</a></li>
+				<li><a class="profile logged-in" href="#"><img src="../assets/images/ico-profile.jpg"
+															 alt="#"/></a></li>
+			</ul>
+		</div>
+		<div class="profile-hover">
+			<ul class="statistics">
+				<li class="pending">
+					<span class="sum">43.55</span>
+					<span class="stat-title">Pending</span>
+				</li>
+				<li class="earned">
+					<span class="sum">43.55</span>
+					<span class="stat-title">Earned</span>
+				</li>
+				<li class="donated">
+					<span class="sum">43.55</span>
+					<span class="stat-title">Donated</span>
+				</li>
+			</ul>
+			<ul class="profile-nav">
+				<li><a href="#">Profile</a></li>
+				<li><a href="#">Gift to friends</a></li>
+				<li><a href="#">Redeem</a></li>
+				<li><a href="#">Payments History</a></li>
+				<li><a href="#">Edit Settings</a></li>
+				<li><a href="#">Default charity</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- Top navbar END --><!-- Wrapper -->
+<div class="service-message">
+	<p>Install the Everton app on your browser so you never miss a chance to earn Everton rewards again. <a href="#">Install</a>
+	</p>
+</div>
+<div class="main-top wrap">
+	<div class="amazon-redirect">
+		<h1>Shop and earn Everton rewards</h1>
+	</div>
+</div>
+<div class="main-holder wrap clearfix">
+	<div class="row clear-side-padding amazon-redirect">
+		<div class="col-xs-48 col-sm-35 col-md-27 col-lg-27 clear-side-padding">
+			<div class="product-item redirect-block clearfix">
+				<div class="img-wrapper">
+					<div class="holder">
+
+					</div>
+				</div>
+				<div class="text-area">
+					<h4>www.amazon.co.uk</h4>
+
+					<p>Amazon will give you 1.5% back as Everton rewards on anything you
+						spend on Amazon.co.uk. It costs you nothing extra, the 1.5% is built into the
+						price of product already.</p>
+
+					<div class="wrapper-link clearfix">
+						<a href="#"><span class="align-wrapp">Continue shopping</span><span class="triangle-big-icon"></span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="offers">
+	<div class="gallery-holder carousel2">
+		<div class="gallery">
+			<div class="gholder">
+				<a class="btn-prev" href="#"></a>
+				<a class="btn-next" href="#"></a>
+
+				<div class="gmask-center">
+					<div class="gmask">
+						<ul class="group">
+							<li><a href="#"><img src="../assets/images/temp/img4.png" alt="#"/>
+
+								<h3>U21s v United:
+									Ticket details</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img5.png" alt="#"/>
+
+								<h3>Norwich v Everton:
+									Sold out</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img6.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img4.png" alt="#"/>
+
+								<h3>U21s v United:
+									Ticket details</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img5.png" alt="#"/>
+
+								<h3>Norwich v Everton:
+									Sold out</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img6.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img4.png" alt="#"/>
+
+								<h3>U21s v United:
+									Ticket details</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img5.png" alt="#"/>
+
+								<h3>Norwich v Everton:
+									Sold out</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img6.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img4.png" alt="#"/>
+
+								<h3>U21s v United:
+									Ticket details</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img5.png" alt="#"/>
+
+								<h3>Norwich v Everton:
+									Sold out</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img6.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="newsbar">
+	<div class="gallery-holder carousel1">
+		<div class="gallery">
+			<div class="gholder">
+				<a class="btn-prev" href="#"></a>
+				<a class="btn-next" href="#"></a>
+
+				<div class="gmask-center">
+					<div class="gmask">
+						<ul class="group">
+							<li class="active"><a href="#"><img src="../assets/images/temp/img1.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img2.png" alt="#"/>
+
+								<h3>Column: It was a joy
+									to report at Anfield</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img3.png" alt="#"/>
+
+								<h3>Break? I'm ready to
+									start the season now'</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img1.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img2.png" alt="#"/>
+
+								<h3>Column: It was a joy
+									to report at Anfield</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img3.png" alt="#"/>
+
+								<h3>Break? I'm ready to
+									start the season now'</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img1.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img2.png" alt="#"/>
+
+								<h3>Column: It was a joy
+									to report at Anfield</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img3.png" alt="#"/>
+
+								<h3>Break? I'm ready to
+									start the season now'</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img1.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- // Wrapper END -->
+<!-- // Content END -->
+
+<!-- // Footer END -->
+</div>
+</div>
+<div id="footer" class="hidden-print">
+	<div class="container clear-side-padding innerTB">
+		<div class="row">
+			<div class="col-xs-48 col-sm-48 col-md-48 col-lg-48 clear-side-padding">
+				<ul>
+					<li><a href="#">Contact</a></li>
+					<li><a href="#">Terms</a></li>
+					<li><a href="#">Privacy</a></li>
+					<li class="active"><a href="#">Cookies</a></li>
+					<li><a href="#">FAQ</a></li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- // Main Container Fluid END -->
+
+<!-- Global -->
+<script>
+	var basePath = '',
+			commonPath = '../assets/',
+			rootPath = '../',
+			DEV = false,
+			componentsPath = '../assets/components/';
+
+	var primaryColor = '#e5412d',
+			dangerColor = '#b55151',
+			infoColor = '#5cc7dd',
+			successColor = '#609450',
+			warningColor = '#ab7a4b',
+			inverseColor = '#45484d';
+
+	var themerPrimaryColor = primaryColor;
+</script>
+
+<script>
+	(function ($) {
+		$(function () {
+			$('.select').styler();
+		})
+	})(jQuery)
+</script>
+<script src="../assets/components/library/bootstrap-custom/js/bootstrap.min.js?v=v2.3.0"></script>
+<script src="../assets/components/plugins/breakpoints/breakpoints.js?v=v2.3.0"></script>
+<script src="../assets/components/core/js/core.init.js?v=v2.3.0"></script>
+
+</body>
+</html>

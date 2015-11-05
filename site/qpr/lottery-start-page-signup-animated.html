@@ -1,0 +1,745 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="front ie lt-ie9 lt-ie8 lt-ie7 fluid top-full menuh-top"> <![endif]-->
+<!--[if IE 7]>
+<html class="front ie lt-ie9 lt-ie8 fluid top-full menuh-top sticky-top"> <![endif]-->
+<!--[if IE 8]>
+<html class="front ie lt-ie9 fluid top-full menuh-top sticky-top"> <![endif]-->
+<!--[if gt IE 8]>
+<html class="animations front ie gt-ie8 fluid top-full menuh-top sticky-top"> <![endif]-->
+<!--[if !IE]><!-->
+<html class="animations front fluid top-full menuh-top sticky-top"><!-- <![endif]-->
+<head>
+	<title>FLAT KIT Template (v2.3.0)</title>
+	<link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+
+	<!-- 
+	**********************************************************
+	In development, use the LESS files and the less.js compiler
+	instead of the minified CSS loaded by default.
+	**********************************************************
+	<link rel="stylesheet/less" href="../assets/less/front/module.front.page.profile.less" />
+	-->
+
+	<!--[if lt IE 9]>
+	<link rel="stylesheet" href="../assets/components/library/bootstrap-custom/css/bootstrap.min.css"/><![endif]-->
+	<link href='https://fonts.googleapis.com/css?family=Questrial' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700,600' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="../assets/css/module.front.page.all-pages.css"/>
+	<link rel="stylesheet" href="../assets/css/fancybox-styles.css"/>
+	<link rel="stylesheet" href="../assets/css/all.css"/>
+
+
+	<!--Color Scheme original file .less with color variables situate in "../assets/less/front/color-scheme-everton.less" -->
+	<link rel="stylesheet" href="css/color-scheme-qpr.css"/>
+
+
+	<style>
+		#moreInfo {
+			display: none;
+		}
+		html.no-touch body #content {
+			padding-top: 40px !important;
+			margin-bottom: 0 !important;
+		}
+		html.no-touch .service-message {
+			display: none;
+		}
+		.big-logo {
+			margin-left: 5px;
+		}
+		.small-logo {
+			display: none !important;
+		}
+		.big-logo {
+			display: inline-block !important;
+		}
+		.navbar .button-holder.wrap > a {
+			display: none !important;
+		}
+		.navbar .wrapper-search {
+			display: none;
+		}
+		.navbar .panel {
+			display: none;
+		}
+		.navbar .authentication {
+			display: none;
+		}
+		.modal-fancy .switch-wrapp {
+			display: block !important;
+		}
+		body .modal-fancy.sign-up .social-login.gg.fake-btn {
+			display: none !important;
+		}
+		@media (max-width: 990px){
+			html.no-touch body #content {
+				padding-top: 0 !important;
+			}
+			.toolbar .company-logo a img {
+				height: auto;
+				max-height: 100%;
+			}
+			.big-logo {
+				width: 70px;
+				margin-bottom: -13px;
+			}
+		}
+	</style>
+	<!--[if lte IE 9 ]>
+	<style>
+		.fadeTextHolder {
+			display: none;
+		}
+		.lotteryFootballBG.animated .first-slide-holder > .step-two img,
+		.lotteryFootballBG.animated > a,
+		.lotteryFootballBG.animated > .first-slide-holder > .step-two > a,
+		.lotteryFootballBG.animated > .first-slide-holder > .step-two > div > p,
+		.lotteryFootballBG.animated .step-two h3 {
+			opacity: 1;
+		}
+	</style>
+	<![endif]-->
+
+
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+
+	<script src="../assets/components/library/jquery/jquery.min.js?v=v2.3.0"></script>
+	<script src="../assets/components/library/jquery/jquery-migrate.min.js?v=v2.3.0"></script>
+	<script src="../assets/components/library/modernizr/modernizr.js?v=v2.3.0"></script>
+	<!--<script src="../assets/components/plugins/less-js/less.min.js?v=v2.3.0"></script>-->
+	<script src="../assets/components/modules/admin/charts/flot/assets/lib/excanvas.js?v=v2.3.0"></script>
+	<script src="../assets/components/plugins/browser/ie/ie.prototype.polyfill.js?v=v2.3.0"></script>
+	<script>if (/*@cc_on!@*/false && document.documentMode === 10) {
+		document.documentElement.className += ' ie ie10';
+	}</script>
+	<script>
+		function GetIEVersion() {
+			var sAgent = window.navigator.userAgent;
+			var Idx = sAgent.indexOf("MSIE");
+
+			// If IE, return version number.
+			if (Idx > 0)
+				return parseInt(sAgent.substring(Idx+ 5, sAgent.indexOf(".", Idx)));
+
+			// If IE 11 then look for Updated user agent string.
+			else if (!!navigator.userAgent.match(/Trident\/7\./))
+				$('html').addClass('ie11');
+			else
+				return 0; //It is not IE
+		}
+
+		GetIEVersion();
+	</script>
+	<script src="../assets/components/library/main/jquery.carousel.js"></script>
+	<script src="../assets/components/library/main/jquery.fancybox.js"></script>
+	<script src="../assets/components/library/main/jquery.fancybox.pack.js"></script>
+	<script src="../assets/components/library/main/jquery.main.js"></script>
+	<script src="../assets/components/library/main/jquery.mousewheel-3.0.6.pack.js"></script>
+	<script src="../assets/components/library/main/jquery.formstyler.js"></script>
+	<!-- <script src="../assets/components/library/main/jquery.formstyler.min.js"></script> -->
+
+	<script src="../assets/js/lib/jquery.autocomplete.js"></script>
+	<script src="../assets/js/pages.js"></script>
+
+</head>
+<body>
+
+<!-- Main Container Fluid -->
+<div class="container-fluid menu-hidden">
+<!-- Content -->
+<div id="content">
+<!-- Top navbar (note: add class "navbar-hidden" to close the navbar by default) -->
+<div class="navbar toolbar main hidden-print">
+	<div class="button-holder not-logged wrap">
+		<div class="company-logo">
+			<a href="#">
+				<img src="images/256.png" class="big-logo" alt="logo"/>
+				<img src="images/small-logo.png" class="small-logo" alt="logo"/>
+			</a>
+			<span></span>
+		</div>
+		<div class="wrapper-search">
+			<form action="#" class="search">
+				<fieldset>
+					<input type="submit" class="go-search" value=""/>
+
+					<div class="wrapper-input"><input type="text" id="header-search" placeholder="Search"/></div>
+				</fieldset>
+			</form>
+			<a href="#" class="open-search col-md-3 glyphicons search"><i></i></a>
+			<a href="#" class="close-search"></a>
+		</div>
+		<a href="#" class="button btn-shop clicker">Shop</a>
+		<a href="#" class="button clicker offers-btn">Offers</a>
+
+		<div class="panel">
+			<ul class="additional-navigation">
+				<li><a class="news-bar-tab open-news" href="#"><em class="bg"><span class="number">3</span></em></a>
+				</li>
+				<li><a class="offers-bar-tab open-offers" href="#"><em class="bg"><span class="number">5</span></em></a>
+				</li>
+				<li><a class="info-amount" href="#">256.10</a></li>
+				<li><a class="profile logged-in" href="#"><img src="../assets/images/ico-profile.jpg"
+															   alt="#"/></a></li>
+			</ul>
+		</div>
+		<div class="profile-hover">
+			<ul class="statistics">
+				<li class="pending">
+					<span class="sum">43.55</span>
+					<span class="stat-title">Pending</span>
+				</li>
+				<li class="earned">
+					<span class="sum">43.55</span>
+					<span class="stat-title">Earned</span>
+				</li>
+				<li class="donated">
+					<span class="sum">43.55</span>
+					<span class="stat-title">Donated</span>
+				</li>
+			</ul>
+			<ul class="profile-nav">
+				<li><a href="#">Profile</a></li>
+				<li><a href="#">Gift to friends</a></li>
+				<li><a href="#">Redeem</a></li>
+				<li><a href="#">Payments History</a></li>
+				<li><a href="#">Edit Settings</a></li>
+				<li><a href="#">Default charity</a></li>
+			</ul>
+		</div>
+		<div class="authentication">
+			<a href="#">Sign In</a>
+			<span class="separator"></span>
+			<a href="#">Join</a>
+		</div>
+	</div>
+</div>
+<!-- Top navbar END --><!-- Wrapper -->
+<div class="clearfix"></div>
+<div class="service-message">
+	<p>Install the Everton app and get money off Everton merchandise for free. <a href="#">Install</a>
+	</p>
+</div>
+
+<div class="lotteryFootballBG animated single text-center n-found">
+
+	<div class="fadeTextHolder">
+		<p>Welcome to the Everton Draw!</p>
+	</div>
+
+	<div class="first-slide-holder">
+		<div class="dummy-container"></div>
+		<div class="step-three">
+			<div class="top-section">
+				<div class="prize-image-holder">
+					<img src="https://metrouk2.files.wordpress.com/2014/11/lego-1.jpg" class="prize-image">
+				</div>
+				<h3>Sign up to complete your entry into the draw <span class="goldText">and get your 10 tickets</span></h3>
+			</div>
+
+			<a class="buttonBlue" href="#">Sign up with Facebook</a>
+			<h4>We'll never post anything without your permission</h4>
+			<p>or</p>
+			<a class="fancybox email-button" href="#signupPopup">Sign up with Email</a>
+		</div>
+
+		<div class="scroll-down-holder">
+			<p>More information below</p>
+			<span></span>
+		</div>
+
+		<div class="bottom-friends-holder">
+			<div class="main-holder wrap">
+				<div class="friends-left-part">
+					<h4>Most Recent Winners</h4>
+					<ul>
+						<li><img src="../assets/images/avatars/p1.jpg"/><h6>John Jameson</h6></li>
+						<li><img src="../assets/images/avatars/p2.jpg"/><h6>Peter Parker</h6></li>
+						<li><img src="../assets/images/avatars/p3.jpg"/><h6>Phelicia Hardy</h6></li>
+						<li><img src="../assets/images/avatars/p4.jpg"/><h6>Mary Jane Wotson</h6></li>
+						<li><img src="../assets/images/avatars/p5.jpg"/><h6>Gary Osborn</h6></li>
+						<li><img src="../assets/images/avatars/p1.jpg"/><h6>John Jameson</h6></li>
+						<li><img src="../assets/images/avatars/p2.jpg"/><h6>Peter Parker</h6></li>
+						<li><img src="../assets/images/avatars/p3.jpg"/><h6>Phelicia Hardy</h6></li>
+						<li><img src="../assets/images/avatars/p4.jpg"/><h6>Mary Jane Wotson</h6></li>
+						<li><img src="../assets/images/avatars/p5.jpg"/><h6>Gary Osborn</h6></li>
+					</ul>
+				</div>
+				<div class="friends-right-part">
+
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="back-overlay"></div>
+</div>
+
+<div class="main-top wrap"></div>
+
+<div class="main-holder wrap clearfix lotteryStartPage">
+	<div class="row n-found landing-page clear-side-indent">
+
+		<h2 class="glyphicons charts"><i></i>What is Everton Rewards?</h2>
+
+		<div class="instructions col-lg-48 text-center">
+			<div class="col-lg-22 col-md-22 col-sm-22">
+				<div class="col-lg-48 text-center">
+					<h4>Everton Rewards</h4>
+				</div>
+				<div class="col-lg-24 col-md-24">
+					<img class="lotteryDescImage" src="images/land-tutorial-1.jpg" alt="Step 1"/>
+					<p>Earn Everton credit for<br/>
+					free when you shop at<br/>
+					1000's of stores</p>
+				</div>
+				<div class="col-lg-24 col-md-24">
+					<img class="lotteryDescImage" src="images/land-tutorial-2.jpg" alt="Step 2"/>
+					<p>Spend your Everton<br/>
+						credit at Everton<br/>
+						Direct</p>
+				</div>
+			</div>
+			<div class="col-lg-2 visible-lg">
+				<div class="greyDot"></div>
+				<div class="greyDot"></div>
+				<div class="greyDot"></div>
+				<div class="greyDot"></div>
+				<div class="greyDot"></div>
+				<div class="greyDot"></div>
+				<div class="greyDot"></div>
+				<div class="greyDot"></div>
+				<div class="greyDot"></div>
+				<div class="greyDot"></div>
+			</div>
+			<div class="col-lg-22 col-md-22 col-sm-22">
+				<div class="col-lg-48 text-center">
+					<h4>The draw</h4>
+				</div>
+				<div class="col-lg-24 col-md-24">
+					<img class="lotteryDescImage" src="images/earn-tickets.png" alt="Step 1"/>
+					<p>Earn tickets<br/>
+						for completing<br/>
+						specific tasks</p>
+				</div>
+				<div class="col-lg-24 col-md-24">
+					<img class="lotteryDescImage" src="images/signed-tshirts.png" alt="Step 2"/>
+					<p>Each draw ticket<br/>
+						gets you an extra entry<br/>
+						into the prize draw</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="text-center">
+		<h4 class="tellMore"><a href="#" onclick="toggleAboutStartPage(event);">Tell me more about Everton Rewards <img src="images/arrow-down.png"/></a></h4>
+	</div>
+</div>
+
+
+<div id="moreInfo" class="main-holder wrap clearfix">
+	<div class="row n-found landing-page clear-side-indent">
+
+		<h2 class="glyphicons charts"><i></i>Shop as normal and get amazing Everton products for free</h2>
+
+		<div class="shop">
+			<p class="col-xs-48 col-sm-23 col-md-23 col-lg-23 clear-side-padding">Simply install the Everton app and shop as normal at any retailer.
+				When you visit their site you will see the option to generate
+				Everton credit at the same time. Our clever system then tracks
+				your visit and once the retailer has confirmed a sale, we put
+				the credit in your account. Normally 5% of whatever you spend.
+				When you want to redeem it, just click through to the Everton
+				store via our link and complete your purchase using a code we
+				provide you.</p>
+			<div class="img-holder col-xs-28 col-xs-offset-10 col-sm-20 col-sm-offset-4 col-md-20 col-md-offset-4 col-lg-20 col-lg-offset-4 clear-side-padding">
+				<img src="images/club-items.jpg" width="190" height="224" alt="club items"/>
+			</div>
+		</div>
+
+		<h3 class="glyphicons charts"><i></i>The Everton reward app works with all your favourite retailers ...</h3>
+
+		<ul class="retailers row">
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-1.jpg" width="104" height="16" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-2.jpg" width="88" height="29" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-3.jpg" width="99" height="24" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-4.jpg" width="110" height="17" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-5.jpg" width="90" height="27" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-6.jpg" width="69"height="27" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-7.jpg" width="122" height="43" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-8.jpg" width="48" height="35" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-9.jpg" width="74" height="37" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-10.jpg" width="58" height="37" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-11.jpg" width="106" height="21" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-12.jpg" width="99" height="39" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-13.jpg" width="98" height="33" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-14.jpg" width="73" height="47" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-15.jpg" width="46" height="46" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-16.jpg" width="99" height="36" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-17.jpg" width="81" height="27" alt=""/></span></li>
+			<li class="col-xs-48 col-sm-16 col-md-8 col-lg-8"><span><img src="../assets/images/retailers/retailer-18.jpg" width="119" height="68" alt=""/></span></li>
+		</ul>
+
+		<a class="not-ie" href="#">Install to enter the draw</a>
+		<a class="ie-true" href="#">Try to enter the draw</a>
+
+	</div>
+</div>
+
+
+
+<div class="popup-holder">
+	<div id="signupPopup" class="sign-up modal-fancy modal-fancy">
+		<div class="wrapper">
+			<div class="wrapper-title">
+				<h1 class="glyphicons user_add">Sign up with Email</h1>
+			</div>
+			<!-- Box -->
+			<div class="widget widget-heading-simple">
+				<div class="widget-body">
+					<div class="form-title">
+						<p>Sign up to get notifications about your earnings and to link multiple devices</p>
+					</div>
+
+					<!-- Alert -->
+					<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Warning!</strong> Best check yo self, you're not looking
+						too good.
+					</div>
+					<!-- // Alert END -->
+					<!-- Form -->
+					<form method="post" class="login-form" id="sign-up" action="index.html?lang=en">
+						<!-- Row -->
+						<div class="row clear-side-padding">
+							<!-- Column -->
+							<div class="col-md-48">
+								<div class="innerL">
+									<div class="switch-wrapp">
+										<div class="form-group">
+											<label form="username" class="strong">Username</label>
+											<input type="text" class="input-block-level form-control" id="username"
+												   name="username" placeholder="Your Username"/>
+										</div>
+										<div class="form-group">
+											<label for="password" class="strong">Password</label>
+											<input type="password" id="password" name="password"
+												   class="input-block-level form-control" placeholder="Your Password"/>
+										</div>
+										<div class="form-group">
+											<label for="confirm_password" class="strong">Confirm Password</label>
+											<input type="password" id="confirm_password" name="confirm_password"
+												   class="input-block-level form-control" placeholder="Confirm Password"/>
+										</div>
+										<div class="form-group email-group">
+											<label for="email" class="strong">Email</label>
+											<input type="text" id="email" name="email"
+												   class="input-block-level form-control" placeholder="Your Email Address"/>
+										</div>
+										<div class="checkbox">
+											<label class="checkbox-custom" for="agree">
+												<i class="fa fa-fw fa-square-o"></i>
+												<input type="checkbox" class="checkbox" id="agree" name="agree"/>
+												I agree to <a href="#">Terms and Conditions</a>
+											</label>
+										</div>
+										<div class="checkbox app-permission">
+											<label class="checkbox-custom" for="data-permission">
+												<i class="fa fa-fw fa-square-o"></i>
+												<input type="checkbox" class="checkbox" id="data-permission" name="data-permission"/>
+												I give permission to pass my data to LFC
+											</label>
+										</div>
+										<button type="submit" class="social-login gg glyphicons user_add"><i></i><span
+												class="align-wrapp"><span>Create Account</span></span></button>
+										<p class="troubles-request">Having troubles? <a href="#" class="get-help">Get Help</a></p>
+									</div>
+									<a class="social-login gg glyphicons user_add fake-btn"><i></i><span
+											class="align-wrapp"><span>Create Account</span></span></a>
+								</div>
+							</div>
+							<!-- // Column END -->
+						</div>
+						<!-- // Row END -->
+					</form>
+					<!-- // Form END -->
+				</div>
+				<!-- // Box END -->
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+
+<div class="offers">
+	<div class="gallery-holder carouse48">
+		<div class="gallery">
+			<div class="gholder">
+				<a class="btn-prev" href="#"></a>
+				<a class="btn-next" href="#"></a>
+
+				<div class="gmask-center">
+					<div class="gmask">
+						<ul class="group">
+							<li><a href="#"><img src="../assets/images/temp/img4.png" alt="#"/>
+
+								<h3>U21s v United:
+									Ticket details</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img5.png" alt="#"/>
+
+								<h3>Norwich v Everton:
+									Sold out</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img6.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img4.png" alt="#"/>
+
+								<h3>U21s v United:
+									Ticket details</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img5.png" alt="#"/>
+
+								<h3>Norwich v Everton:
+									Sold out</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img6.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img4.png" alt="#"/>
+
+								<h3>U21s v United:
+									Ticket details</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img5.png" alt="#"/>
+
+								<h3>Norwich v Everton:
+									Sold out</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img6.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img4.png" alt="#"/>
+
+								<h3>U21s v United:
+									Ticket details</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img5.png" alt="#"/>
+
+								<h3>Norwich v Everton:
+									Sold out</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img6.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="newsbar">
+	<div class="gallery-holder carousel1">
+		<div class="gallery">
+			<div class="gholder">
+				<a class="btn-prev" href="#"></a>
+				<a class="btn-next" href="#"></a>
+
+				<div class="gmask-center">
+					<div class="gmask">
+						<ul class="group">
+							<li class="active"><a href="#"><img src="../assets/images/temp/img1.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img2.png" alt="#"/>
+
+								<h3>Column: It was a joy
+									to report at Anfield</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img3.png" alt="#"/>
+
+								<h3>Break? I'm ready to
+									start the season now'</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img1.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img2.png" alt="#"/>
+
+								<h3>Column: It was a joy
+									to report at Anfield</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img3.png" alt="#"/>
+
+								<h3>Break? I'm ready to
+									start the season now'</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img1.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img2.png" alt="#"/>
+
+								<h3>Column: It was a joy
+									to report at Anfield</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img3.png" alt="#"/>
+
+								<h3>Break? I'm ready to
+									start the season now'</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img1.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- // Wrapper END -->
+<!-- // Content END -->
+
+<!-- // Footer END -->
+</div>
+</div>
+<div id="footer" class="hidden-print">
+	<div class="container clear-side-padding innerTB">
+		<div class="row">
+			<div class="col-xs-48 col-sm-48 col-md-48 col-lg-48 clear-side-padding">
+				<ul>
+					<li><a href="#">Contact</a></li>
+					<li><a href="#">Terms</a></li>
+					<li><a href="#">Privacy</a></li>
+					<li class="active"><a href="#">Cookies</a></li>
+					<li><a href="#">FAQ</a></li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- // Main Container Fluid END -->
+
+<!-- Global -->
+<script>
+	var basePath = '',
+			commonPath = '../assets/',
+			rootPath = '../',
+			DEV = false,
+			componentsPath = '../assets/components/';
+
+	var primaryColor = '#e5412d',
+			dangerColor = '#b55151',
+			infoColor = '#5cc7dd',
+			successColor = '#609450',
+			warningColor = '#ab7a4b',
+			inverseColor = '#45484d';
+
+	var themerPrimaryColor = primaryColor;
+</script>
+
+<script>
+	(function ($) {
+		$(function () {
+			$('.select').styler();
+		});
+
+	})(jQuery);
+
+	function toggleAboutStartPage(e) {
+		e.preventDefault();
+		$('#moreInfo').toggle( 0, function(){
+			$('.lotteryStartPage .tellMore a img').toggleClass('opened');
+		});
+	}
+</script>
+
+<script src="../assets/components/library/bootstrap-custom/js/bootstrap.min.js?v=v2.3.0"></script>
+<script src="../assets/components/plugins/breakpoints/breakpoints.js?v=v2.3.0"></script>
+<script src="../assets/components/plugins/fastclick/fastclick.js"></script>
+<script src="../assets/components/core/js/core.init.js?v=v2.3.0"></script>
+<script src="../assets/components/library/main/detectMobileShowElements.js"></script>
+<script src="../assets/components/library/main/page-lottery-start-animated.js"></script>
+
+
+</body>
+</html>

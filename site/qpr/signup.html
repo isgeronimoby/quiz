@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="front ie lt-ie9 lt-ie8 lt-ie7 fluid top-full menuh-top"> <![endif]-->
+<!--[if IE 7]>
+<html class="front ie lt-ie9 lt-ie8 fluid top-full menuh-top sticky-top"> <![endif]-->
+<!--[if IE 8]>
+<html class="front ie lt-ie9 fluid top-full menuh-top sticky-top"> <![endif]-->
+<!--[if gt IE 8]>
+<html class="animations front ie gt-ie8 fluid top-full menuh-top sticky-top"> <![endif]-->
+<!--[if !IE]><!-->
+<html class="animations front fluid top-full menuh-top sticky-top"><!-- <![endif]-->
+<head>
+	<title>FLAT KIT Template (v2.3.0)</title>
+	<link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+
+
+	<!-- 
+	**********************************************************
+	In development, use the LESS files and the less.js compiler
+	instead of the minified CSS loaded by default.
+	**********************************************************
+	<link rel="stylesheet/less" href="../assets/less/front/module.front.page.signup.less" />
+	-->
+
+	<!--[if lt IE 9]>
+	<link rel="stylesheet" href="../assets/components/library/bootstrap-custom/css/bootstrap.min.css"/><![endif]-->
+	<link href='https://fonts.googleapis.com/css?family=Questrial' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700,600' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="../assets/css/module.front.page.all-pages.css"/>
+	<link rel="stylesheet" href="../assets/css/fancybox-styles.css"/>
+	<link rel="stylesheet" href="../assets/css/all.css"/>
+
+
+	<!--Color Scheme original file .less with color variables situate in "../assets/less/front/color-scheme-everton.less" -->
+	<link rel="stylesheet" href="css/color-scheme-qpr.css"/>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+
+	<script src="../assets/components/library/jquery/jquery.min.js?v=v2.3.0"></script>
+	<script src="../assets/components/library/jquery/jquery-migrate.min.js?v=v2.3.0"></script>
+	<script src="../assets/components/library/modernizr/modernizr.js?v=v2.3.0"></script>
+	<script src="../assets/components/plugins/less-js/less.min.js?v=v2.3.0"></script>
+	<script src="../assets/components/modules/admin/charts/flot/assets/lib/excanvas.js?v=v2.3.0"></script>
+	<script src="../assets/components/plugins/browser/ie/ie.prototype.polyfill.js?v=v2.3.0"></script>
+	<script>if (/*@cc_on!@*/false && document.documentMode === 10) {
+		document.documentElement.className += ' ie ie10';
+	}</script>
+	<script src="../assets/components/library/main/jquery.carousel.js"></script>
+	<!--<script src="../assets/components/library/main/jquery.fancybox.js"></script>-->
+	<script src="../assets/components/library/main/jquery.fancybox.pack.js"></script>
+	<script src="../assets/components/library/main/jquery.main.js"></script>
+	<script type="text/javascript" src="../assets/components/library/featherlight/featherlight.min.js"></script>
+	<script src="../assets/components/library/main/jquery.mousewheel-3.0.6.pack.js"></script>
+
+	<script src="../assets/js/lib/jquery.autocomplete.js"></script>
+	<script src="../assets/js/pages.js"></script>
+
+</head>
+<body>
+
+<!-- Main Container Fluid -->
+<div class="container-fluid menu-hidden">
+<!-- Content -->
+<div id="content">
+
+<!-- Top navbar (note: add class "navbar-hidden" to close the navbar by default) -->
+<div class="navbar toolbar main hidden-print">
+	<div class="button-holder wrap">
+		<div class="company-logo">
+			<a href="#">
+				<img src="images/256.png" class="big-logo" alt="logo"/>
+				<img src="images/small-logo.png" class="small-logo" alt="logo"/>
+			</a>
+			<span></span>
+		</div>
+		<div class="wrapper-search">
+			<form action="#" class="search">
+				<fieldset>
+					<input type="submit" class="go-search" value=""/>
+
+					<div class="wrapper-input"><input type="text" id="header-search" placeholder="Search"/></div>
+				</fieldset>
+			</form>
+			<a href="#" class="open-search col-md-3 glyphicons search"><i></i></a>
+			<a href="#" class="close-search"></a>
+		</div>
+		<a href="#" class="button btn-shop clicker">Shop</a>
+		<a href="#" class="button clicker offers-btn">Offers</a>
+
+		<div class="panel">
+			<ul class="additional-navigation">
+				<li><a class="news-bar-tab open-news" href="#"><em class="bg"><span class="number">3</span></em></a>
+				</li>
+				<li><a class="offers-bar-tab open-offers" href="#"><em class="bg"><span class="number">5</span></em></a>
+				</li>
+				<li><a class="info-amount" href="#">256.10</a></li>
+				<li><a class="profile logged-in" href="#"><img src="../assets/images/ico-profile.jpg"
+															 alt="#"/></a></li>
+			</ul>
+		</div>
+		<div class="profile-hover">
+			<ul class="statistics">
+				<li class="pending">
+					<span class="sum">43.55</span>
+					<span class="stat-title">Pending</span>
+				</li>
+				<li class="earned">
+					<span class="sum">43.55</span>
+					<span class="stat-title">Earned</span>
+				</li>
+				<li class="donated">
+					<span class="sum">43.55</span>
+					<span class="stat-title">Donated</span>
+				</li>
+			</ul>
+			<ul class="profile-nav">
+				<li><a href="#">Profile</a></li>
+				<li><a href="#">Gift to friends</a></li>
+				<li><a href="#">Redeem</a></li>
+				<li><a href="#">Payments History</a></li>
+				<li><a href="#">Edit Settings</a></li>
+				<li><a href="#">Default charity</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- Top navbar END --><!-- Wrapper -->
+<div class="service-message">
+	<p>Install the Everton app on your browser so you never miss a chance to earn Everton rewards again. <a href="#">Install</a>
+	</p>
+</div>
+<div class="main-top wrap">
+	<a href="#signupPopup" class="fancybox">Signup popup</a>
+</div>
+<div class="main-holder wrap clearfix">
+</div>
+
+
+
+
+	<a href="#" data-featherlight="#doubleSignUp" data-featherlight-persist="shared">Open double sign-up popup</a>
+	<a href="#" data-featherlight="#emailSignUp">Open email sign-up popup</a>
+
+	<div class="featherlight-popup modal-fancy featherlight-popup-inner" id="doubleSignUp">
+		<div class="featherlight-heading">
+			<h2>Sign up to track your rewards</h2>
+		</div>
+		<div class="featherlight-body">
+			<h4 class="hidden-xs">Sign up to get notifications about your earnings and to link multiple devices</h4>
+			<!-- Alert -->
+			<div class="alert alert-danger">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<strong>Warning!</strong> Best check yo self, you're not looking
+				too good.
+			</div>
+			<!-- // Alert END -->
+			<div class="signup-buttons">
+				<a href="" class="facebook-connect social-login fb glyphicons parents"><i></i><span
+						class="align-wrapp"><span>Connect with Facebook</span></span></a>
+				<p class="small-note">we'll never post anything without your permission.</p>
+				<p>or</p>
+
+				<a href="" class="email-connect social-login fb glyphicons parents"><i></i><span
+						class="align-wrapp"><span>Sign Up with Email</span></span></a>
+
+				<form class="featherlight-signup-form triggered-form hidden-element login-form" id="form-email">
+					<h5 class="text-right">Sign Up with Email</h5>
+					<div class="form-group">
+						<label class="strong">Your username:</label>
+						<input type="text" class="form-control" name="username" placeholder="Your username, please"/>
+					</div>
+					<div class="form-group">
+						<label class="strong">Your email:</label>
+						<input type="email" class="form-control" name="email" placeholder="Put your mail here, please"/>
+					</div>
+					<div class="form-group password-holder">
+						<label class="strong">Password:</label>
+						<input type="password" class="form-control" name="Password" placeholder=""/>
+						<span class="eye"></span>
+					</div>
+					<button type="submit" class="social-login gg glyphicons user_add"><i></i><span
+							class="align-wrapp"><span>Create Account</span></span></button>
+
+					<p class="small-note">By signing up, you agree with <a href="#">Terms & Conditions</a>
+						and <a href="#">Privacy Policy</a></p>
+				</form>
+
+				<p class="small-note"><a href="#">Already a member?</a></p>
+			</div>
+		</div>
+	</div>
+
+	<div class="featherlight-popup modal-fancy featherlight-popup-inner" id="emailSignUp">
+		<div class="featherlight-heading">
+			<h2>Sign up to track your rewards</h2>
+		</div>
+		<div class="featherlight-body">
+			<h4 class="hidden-xs">Sign up to get notifications about your earnings and to link multiple devices</h4>
+			<!-- Alert -->
+			<div class="alert alert-danger">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<strong>Warning!</strong> Best check yo self, you're not looking
+				too good.
+			</div>
+			<!-- // Alert END -->
+			<div class="signup-buttons">
+				<form class="featherlight-signup-form login-form">
+					<div class="form-group">
+						<label class="strong">Your username:</label>
+						<input type="text" class="form-control" name="username" placeholder="Your name, please"/>
+					</div>
+					<div class="form-group">
+						<label class="strong">Your email:</label>
+						<input type="email" class="form-control" name="email" placeholder="Put your mail here, please"/>
+					</div>
+					<div class="form-group password-holder">
+						<label class="strong">Password:</label>
+						<input type="password" class="form-control" name="Password" placeholder=""/>
+						<span class="eye"></span>
+					</div>
+					<button type="submit" class="social-login gg glyphicons user_add"><i></i><span
+							class="align-wrapp"><span>Create Account</span></span></button>
+
+					<p class="small-note">By signing up, you agree with <a href="#">Terms & Conditions</a>
+						and <a href="#">Privacy Policy</a></p>
+				</form>
+
+				<p class="small-note"><a href="#">Already a member?</a></p>
+			</div>
+		</div>
+	</div>
+
+
+
+
+<div class="popup-holder">
+	<div id="signupPopup" class="sign-up modal-fancy modal-fancy">
+		<div class="wrapper">
+			<div class="wrapper-title">
+				<h1 class="glyphicons user_add">Sign up </h1>
+			</div>
+			<!-- Box -->
+			<div class="widget widget-heading-simple">
+				<div class="widget-body">
+					<div class="form-title">
+						<p>Sign up to get notifications about your earnings and to link multiple devices</p>
+					</div>
+					<div class="action-block">
+						<span href="#" class="create hidden-xs hidden-sm">Create account</span>
+						<a href="#" class="sign-in">Sign in</a>
+						<span href="#" class="member">Already a member?</span>
+					</div>
+					<!-- Alert -->
+					<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Warning!</strong> Best check yo self, you're not looking
+						too good.
+					</div>
+					<!-- // Alert END -->
+					<!-- Form -->
+					<form method="post" class="login-form" id="sign-up" action="index.html?lang=en">
+						<!-- Row -->
+						<div class="row clear-side-padding">
+							<!-- Column -->
+							<div class="col-md-24 fb-sign-up">
+								<div class="innerR">
+									<a href="" class="social-login fb glyphicons parents"><i></i><span
+											class="align-wrapp"><span>Connect with Facebook</span></span></a>
+									<span class="title strong">We’ll never post anything without your permission.</span>
+								</div>
+							</div>
+							<!-- // Column END -->
+							<!-- Column -->
+							<div class="col-md-24">
+								<div class="innerL">
+									<div class="switch-wrapp">
+										<div class="form-group">
+											<label form="username" class="strong">Username</label>
+											<input type="text" class="input-block-level form-control" id="username"
+												   name="username" placeholder="Your Username"/>
+										</div>
+										<div class="form-group">
+											<label for="password" class="strong">Password</label>
+											<input type="password" id="password" name="password"
+												   class="input-block-level form-control" placeholder="Your Password"/>
+										</div>
+										<div class="form-group">
+											<label for="confirm_password" class="strong">Confirm Password</label>
+											<input type="password" id="confirm_password" name="confirm_password"
+												   class="input-block-level form-control" placeholder="Confirm Password"/>
+										</div>
+										<div class="form-group email-group">
+											<label for="email" class="strong">Email</label>
+											<input type="text" id="email" name="email"
+												   class="input-block-level form-control" placeholder="Your Email Address"/>
+										</div>
+										<div class="checkbox">
+											<label class="checkbox-custom" for="agree">
+												<i class="fa fa-fw fa-square-o"></i>
+												<input type="checkbox" class="checkbox" id="agree" name="agree"/>
+												I agree to <a href="#">Terms and Conditions</a>
+											</label>
+										</div>
+										<div class="checkbox app-permission">
+											<label class="checkbox-custom" for="data-permission">
+												<i class="fa fa-fw fa-square-o"></i>
+												<input type="checkbox" class="checkbox" id="data-permission" name="data-permission"/>
+												I give permission to pass my data to LFC
+											</label>
+										</div>
+										<button type="submit" class="social-login gg glyphicons user_add"><i></i><span
+												class="align-wrapp"><span>Create Account</span></span></button>
+										<p class="troubles-request">Having troubles? <a href="#" class="get-help">Get Help</a></p>
+									</div>
+									<a class="social-login gg glyphicons user_add fake-btn"><i></i><span
+											class="align-wrapp"><span>Create Account</span></span></a>
+								</div>
+							</div>
+							<!-- // Column END -->
+						</div>
+						<!-- // Row END -->
+					</form>
+					<!-- // Form END -->
+				</div>
+				<!-- // Box END -->
+			</div>
+		</div>
+
+	</div>
+</div>
+<div class="offers">
+	<div class="gallery-holder carousel2">
+		<div class="gallery">
+			<div class="gholder">
+				<a class="btn-prev" href="#"></a>
+				<a class="btn-next" href="#"></a>
+
+				<div class="gmask-center">
+					<div class="gmask">
+						<ul class="group">
+							<li><a href="#"><img src="../assets/images/temp/img4.png" alt="#"/>
+
+								<h3>U21s v United:
+									Ticket details</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img5.png" alt="#"/>
+
+								<h3>Norwich v Everton:
+									Sold out</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img6.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img4.png" alt="#"/>
+
+								<h3>U21s v United:
+									Ticket details</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img5.png" alt="#"/>
+
+								<h3>Norwich v Everton:
+									Sold out</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img6.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img4.png" alt="#"/>
+
+								<h3>U21s v United:
+									Ticket details</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img5.png" alt="#"/>
+
+								<h3>Norwich v Everton:
+									Sold out</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img6.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img4.png" alt="#"/>
+
+								<h3>U21s v United:
+									Ticket details</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img5.png" alt="#"/>
+
+								<h3>Norwich v Everton:
+									Sold out</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img6.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="newsbar">
+	<div class="gallery-holder carousel1">
+		<div class="gallery">
+			<div class="gholder">
+				<a class="btn-prev" href="#"></a>
+				<a class="btn-next" href="#"></a>
+
+				<div class="gmask-center">
+					<div class="gmask">
+						<ul class="group">
+							<li class="active"><a href="#"><img src="../assets/images/temp/img1.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img2.png" alt="#"/>
+
+								<h3>Column: It was a joy
+									to report at Anfield</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img3.png" alt="#"/>
+
+								<h3>Break? I'm ready to
+									start the season now'</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img1.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img2.png" alt="#"/>
+
+								<h3>Column: It was a joy
+									to report at Anfield</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img3.png" alt="#"/>
+
+								<h3>Break? I'm ready to
+									start the season now'</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img1.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img2.png" alt="#"/>
+
+								<h3>Column: It was a joy
+									to report at Anfield</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img3.png" alt="#"/>
+
+								<h3>Break? I'm ready to
+									start the season now'</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+							<li><a href="#"><img src="../assets/images/temp/img1.png" alt="#"/>
+
+								<h3>Stats: A 2013-14
+									season comparison</h3>
+
+								<p>22 May 2014 09:01</p>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- // Wrapper END -->
+<!-- // Content END -->
+
+<!-- // Footer END -->
+</div>
+</div>
+<div id="footer" class="hidden-print">
+	<div class="container clear-side-padding innerTB">
+		<div class="row">
+			<div class="col-xs-48 col-sm-48 col-md-48 col-lg-48 clear-side-padding">
+				<ul>
+					<li><a href="#">Contact</a></li>
+					<li><a href="#">Terms</a></li>
+					<li><a href="#">Privacy</a></li>
+					<li class="active"><a href="#">Cookies</a></li>
+					<li><a href="#">FAQ</a></li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- // Main Container Fluid END -->
+
+<!-- Global -->
+<script>
+	var basePath = '',
+			commonPath = '../assets/',
+			rootPath = '../',
+			DEV = false,
+			componentsPath = '../assets/components/';
+
+	var primaryColor = '#e5412d',
+			dangerColor = '#b55151',
+			infoColor = '#5cc7dd',
+			successColor = '#609450',
+			warningColor = '#ab7a4b',
+			inverseColor = '#45484d';
+
+	var themerPrimaryColor = primaryColor;
+</script>
+
+<script src="../assets/components/library/bootstrap-custom/js/bootstrap.min.js?v=v2.3.0"></script>
+<script src="../assets/components/plugins/breakpoints/breakpoints.js?v=v2.3.0"></script>
+<script src="../assets/components/core/js/core.init.js?v=v2.3.0"></script>
+
+<script src="../assets/components/modules/admin/forms/validator/assets/lib/jquery-validation/dist/jquery.validate.min.js?v=v2.3.0"></script>
+<script src="../assets/js/form-validator.init.js?v=v2.3.0"></script>
+<script src="../assets/components/modules/admin/forms/elements/fuelux-checkbox/fuelux-checkbox.js?v=v2.3.0"></script>
+
+
+</body>
+</html>

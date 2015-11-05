@@ -64,6 +64,8 @@ $(document).ready(function(){
         squadEls: christmasDashboard.find('.squad .squad-row .squad-el'),
         football: christmasDashboard.find('.squad .squad-row .football'),
         squadCount: christmasDashboard.find('.squad .squad-class'),
+        inviteTitle: christmasDashboard.find('.sign-up > h2'),
+        inviteArrow: christmasDashboard.find('.sign-up .invite-arrow'),
         timeBasic: 400,
         animateBall: function(player){
             this.football.removeClass('pass');
@@ -78,9 +80,10 @@ $(document).ready(function(){
             // uncomment if squad number is differ from 10
             that.squadCount.html((startingSignedUps === 0) ? 1 : Math.ceil(startingSignedUps / squadNumber));
             if ( startingSignedUps === 0 ) {
+                that.inviteTitle.html('Invite a friend to start your squad');
                 that.football.fadeIn(300);
                 var firstPos = this.football.css('left');
-                for (var i = 0; i < squadNumber+2; i++) {
+                for (var i = 0; i < squadNumber+5; i++) {
                     (function (i) {
                         setTimeout(function () {
                             that.animateBall(i + 1);
@@ -93,6 +96,7 @@ $(document).ready(function(){
                 that.football.fadeIn(300);
                 if ( startingSignedUps % squadNumber === 0 ) {
                     counter = squadNumber;
+                    that.inviteArrow.hide();
                 } else {
                     counter = startingSignedUps % squadNumber;
                 }
@@ -106,6 +110,7 @@ $(document).ready(function(){
                             // timeEnd = i * (that.timeBasic); // Storing as variable to know the full duration
                         })(i);
                     }
+                    that.inviteArrow.css('left', (counter + 1) * 10 - 6 + '%');
                 }
             }
         }
@@ -148,4 +153,35 @@ $(document).ready(function(){
             $.fn.showMiddleState();
         });
     };
+
+    //Changing fan's phrases
+    (function fanShouts(){
+        var fanObj = christmasDashboard.find('.sign-up > .fan-shouts');
+        setInterval(function(){
+            var num = Math.floor(Math.random() * 6) + 1;
+            fanObj.attr('class', 'fan-shouts');
+            switch (num) {
+                case 6:
+                    fanObj.addClass('six');
+                    break;
+                case 5:
+                    fanObj.addClass('five');
+                    break;
+                case 4:
+                    fanObj.addClass('four');
+                    break;
+                case 3:
+                    fanObj.addClass('three');
+                    break;
+                case 2:
+                    fanObj.addClass('two');
+                    break;
+                default:
+                    fanObj.addClass('one');
+            }
+        }, 7000);
+    })();
+
+    $('[data-toggle="tooltip"]').tooltip();
+
 });

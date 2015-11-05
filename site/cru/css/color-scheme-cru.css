@@ -1,0 +1,349 @@
+/* Colors for site settings */
+/* Header */
+html.front.top-full .navbar.main {
+  background-color: #cd0160;
+}
+.autocomplete-suggestions strong {
+  color: #cd0160;
+}
+.toolbar .button {
+  color: #cd0160;
+  background-color: #f9c50f;
+}
+.toolbar .button:hover {
+  background-color: #ffd739;
+}
+.number {
+  background-color: #f9c50f;
+  color: #cd0160;
+  border-color: #cd0160;
+}
+.additional-navigation li a.activatedItem,
+.additional-navigation li a:hover {
+  background-color: #a2090f;
+}
+.profile-hover .statistics .earned *,
+.profile-hover .statistics .donated * {
+  color: #cd0160;
+}
+.service-message a {
+  background-color: #cd0160;
+}
+.service-message a:hover {
+  background-color: #9b014e;
+}
+.cookies-block p {
+  color: #cd0160;
+}
+.cookies-block a {
+  background-color: #cd0160;
+}
+.cookies-block a:hover {
+  background-color: #9b014e;
+}
+/******************************/
+/******** SIGN UP PAGE ********/
+/******************************/
+.fancybox-close {
+  background: url(../../assets/images/btn-close.png) no-repeat;
+}
+.wrapper-title {
+  background-color: #cd0160;
+}
+.form-title span {
+  color: #cd0160;
+}
+body .modal-fancy .gg {
+  background-color: #cd0160;
+}
+body .modal-fancy .gg:hover {
+  background-color: #9b014e;
+}
+.install-wrap a {
+  background-color: #cd0160;
+}
+.install-wrap a:hover {
+  background-color: #9b014e;
+}
+/******************************/
+/********* LOGIN PAGE *********/
+/******************************/
+.modal-fancy .sign-in.alt {
+  background-color: #cd0160;
+}
+.modal-fancy .sign-in.alt:hover {
+  background-color: #9b014e;
+}
+/******************************/
+/**** FORGOT PASSWORD PAGE ****/
+/******************************/
+.modal-fancy.forgot-password .sign-in.alt {
+  background-color: #cd0160;
+}
+.modal-fancy.forgot-password .sign-in.alt:hover {
+  background-color: #9b014e;
+}
+/******************************/
+/******** PROFILE PAGE ********/
+/******************************/
+.save-img {
+  background-color: #cd0160;
+}
+.save-img:hover {
+  background-color: #9b014e;
+}
+.profile-name a {
+  color: #cd0160;
+}
+.profile-name a:hover {
+  color: #9b014e;
+}
+.profile-name-adaptive a {
+  color: #cd0160;
+}
+.profile-name-adaptive a:hover {
+  color: #9b014e;
+}
+.member-info .date {
+  color: #cd0160;
+}
+.member-info .save-img {
+  background-color: #cd0160;
+}
+.member-info .save-img:hover {
+  background-color: #9b014e;
+}
+.profile-statistic .popover-title {
+  color: #cd0160;
+}
+.profile-statistic .donations .sum {
+  color: #cd0160;
+}
+.profile-statistic .available {
+  background-color: #cd0160;
+}
+.profile-statistic .available:hover {
+  background-color: #9b014e;
+}
+.profile-content .widget.widget-tabs .drop-down-menu {
+  background-color: #cd0160;
+}
+.profile-content .widget.widget-tabs .drop-down-menu:hover {
+  background-color: #9b014e;
+}
+/* Profile page tab profile */
+.main-holder .profile-content .big-btn div a,
+.main-holder .profile-content .big-btn div button {
+  background-color: #cd0160;
+}
+.main-holder .profile-content .big-btn div a:hover,
+.main-holder .profile-content .big-btn div button:hover {
+  background-color: #9b014e;
+}
+.profile-content .resent-activity h2 i::before {
+  color: #cd0160;
+}
+.profile-content .widget.widget-tabs > .widget-head ul li.active a i:before {
+  color: #cd0160;
+}
+.resent-act-dif-color {
+  color: #cd0160;
+}
+/* Profile page tab gift to a friend */
+.profile-content .send-sum input {
+  color: #cd0160;
+}
+.profile-content .search-block .email a {
+  background-color: #cd0160;
+}
+.profile-content .search-block .email a:hover {
+  background-color: #9b014e;
+}
+.profile-content .result-count {
+  background-color: #cd0160;
+}
+.profile-content .send-to {
+  background-color: #cd0160;
+}
+.profile-content .send-to:hover {
+  background-color: #9b014e;
+}
+/* Profile page tab redeem credits */
+.profile-content .redemption-code .code {
+  color: #cd0160;
+}
+.profile-content .store-btn {
+  background-color: #cd0160;
+}
+.profile-content .store-btn:hover {
+  background-color: #9b014e;
+}
+/* Profile page tab redeem on load */
+.profile-content .total {
+  color: #cd0160;
+}
+/* Profile page tab settings */
+.profile-content .send-settings {
+  background-color: #cd0160;
+}
+.profile-content .send-settings:hover {
+  background-color: #9b014e;
+}
+.datepicker .datepicker-days thead tr .dow,
+.datepicker .datepicker-days tbody tr .day.active,
+.datepicker-months table tr td span.active,
+.datepicker-years tr td .year.active {
+  background-color: #cd0160 !important;
+}
+.profile-content .checkbox-custom i.checked {
+  color: #cd0160;
+}
+.send-sum .jq-selectbox__select-text,
+.profile-content .send-sum .jq-selectbox__dropdown li {
+  color: #cd0160 !important;
+}
+/******************************/
+/******** CREDITS PAGE ********/
+/******************************/
+.filters-block h3 i::before {
+  color: #cd0160;
+}
+.advertisement {
+  background-color: #cd0160;
+}
+.advertisement .invite {
+  background-color: #f9c50f;
+}
+.advertisement .invite:hover {
+  background-color: #ffd739;
+}
+.aside-list a {
+  color: #cd0160;
+}
+.aside-list .active a,
+.aside-list a:hover {
+  background-color: #cd0160;
+  border: 1px solid #cd0160;
+}
+.jq-selectbox__select-text {
+  background-color: #cd0160;
+}
+.jq-selectbox__dropdown li:hover {
+  background-color: #f4f4f4;
+}
+.jq-selectbox__dropdown {
+  border: 1px solid #cd0160;
+}
+.jq-selectbox__select-text {
+  border: 1px solid #cd0160;
+}
+.product-item .text-area a {
+  background-color: #cd0160;
+}
+.product-item .text-area a:hover {
+  background-color: #9b014e;
+}
+/******************************/
+/******* DASHBOARD PAGE *******/
+/******************************/
+.separator-sign-in {
+  background-color: #cd0160;
+}
+.dashboard-content .profile-statistic .purchases .sum {
+  color: #cd0160;
+}
+.dashboard-content .top-rewards > a {
+  background-color: #cd0160;
+}
+.dashboard-content .top-rewards > a:hover {
+  background-color: #9b014e;
+}
+.dashboard-content .top-rewards h3 i:before {
+  color: #cd0160;
+}
+.dashboard-content .resent-act-dif-color:hover {
+  color: #9b014e;
+}
+/******************************/
+/***** SEARCH RESULT PAGE *****/
+/******************************/
+.search-result-count {
+  background-color: #cd0160;
+}
+/******************************/
+/******* PAGE NOT FOUND *******/
+/******************************/
+.main-holder .n-found a {
+  background-color: #f9c50f;
+  border-color: #e4981f;
+}
+.main-holder .n-found a:hover {
+  background-color: #ffd739;
+}
+/******************************/
+/******* LANDING PAGE *******/
+/******************************/
+.landing-page h2 i:before,
+.landing-page h3 i:before {
+  color: #cd0160;
+}
+/******************************/
+/******* LANDING PAGE *******/
+/******************************/
+.contact-area .send-contacts {
+  background-color: #cd0160;
+}
+.contact-area .send-contacts:hover {
+  background-color: #9b014e;
+}
+/******************************/
+/**** Conversions pop-up  *****/
+/******************************/
+.conversions .sum {
+  color: #cd0160;
+}
+.conversions .redeem {
+  color: #cd0160;
+}
+.conversions .redeem:hover {
+  color: #9b014e;
+}
+/*============================================================================*/
+/*AMAZON redirect landing page*/
+/*============================================================================*/
+.cancer-research-landing .amazon-redirect .wrapper-link a {
+  background-color: #cd0160;
+}
+/*============================================================================*/
+/*End of AMAZON redirect landing page*/
+/*============================================================================*/
+/******************************/
+/********** FOOTER ************/
+/******************************/
+html.front #footer ul .active a {
+  color: #cd0160;
+}
+.glyphicons.primary i:before,
+.glyphicons-social.primary i:before {
+  color: #cd0160;
+}
+@media all and (max-width: 990px) {
+  .drop-down-menu {
+    background-color: #cd0160;
+  }
+  .drop-down-menu:hover {
+    background-color: #9b014e;
+  }
+  .profile-content .widget.widget-tabs .drop-down-menu-content li a {
+    color: #cd0160 !important;
+  }
+  .profile-content .widget.widget-tabs .drop-down-menu-content li a:hover {
+    color: #9b014e;
+  }
+  .credits-content .aside-list a:hover {
+    color: #9b014e;
+  }
+  .credits-content .aside-list .active a {
+    color: #cd0160;
+  }
+}

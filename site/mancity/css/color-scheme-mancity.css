@@ -1,0 +1,570 @@
+/* Colors for site settings */
+/* Header */
+html.front.top-full .navbar.main {
+  background-color: #62ade9;
+}
+.autocomplete-suggestions strong {
+  color: #62ade9;
+}
+.toolbar .button {
+  color: #ffffff;
+  background-color: #62ade9;
+}
+.text-brand {
+  color: #62ade9;
+}
+.toolbar .button:hover {
+  background-color: #16609c;
+}
+.toolbar .company-logo {
+  height: 36px;
+  margin-right: 6px;
+  margin-top: 2px;
+}
+.number {
+  background-color: #ffd739;
+  color: #62ade9;
+  border-color: #62ade9;
+}
+.additional-navigation li a.activatedItem,
+.additional-navigation li a:hover {
+  background-color: #16609c;
+}
+.profile-hover .statistics .earned *,
+.profile-hover .statistics .donated * {
+  color: #62ade9;
+}
+.service-message a {
+  background-color: #62ade9;
+}
+.service-message a:hover {
+  background-color: #3596e3;
+}
+/******** Cookies ********/
+.cookies-block p {
+  color: #62ade9;
+}
+.cookies-block a {
+  background-color: #62ade9;
+}
+.cookies-block a:hover {
+  background-color: #3596e3;
+}
+/******************************/
+/******** SIGN UP PAGE ********/
+/******************************/
+.featherlight .featherlight-heading {
+  background-color: #62ade9;
+}
+.fancybox-close {
+  background: url(../../assets/images/btn-close.png) no-repeat;
+}
+.wrapper-title {
+  background-color: #62ade9;
+}
+.form-title span {
+  color: #62ade9;
+}
+body .modal-fancy .gg {
+  background-color: #6b6b6b;
+}
+body .modal-fancy .gg:hover {
+  background-color: #4c4c4c;
+}
+.install-wrap a {
+  background-color: #62ade9;
+}
+.install-wrap a:hover {
+  background-color: #3596e3;
+}
+/******************************/
+/********* LOGIN PAGE *********/
+/******************************/
+.modal-fancy .sign-in.alt {
+  background-color: #62ade9;
+}
+.modal-fancy .sign-in.alt:hover {
+  background-color: #3596e3;
+}
+/******************************/
+/**** FORGOT PASSWORD PAGE ****/
+/******************************/
+.modal-fancy.forgot-password .sign-in.alt {
+  background-color: #62ade9;
+}
+.modal-fancy.forgot-password .sign-in.alt:hover {
+  background-color: #3596e3;
+}
+/******************************/
+/******** PROFILE PAGE ********/
+/******************************/
+.save-img {
+  background-color: #62ade9;
+}
+.save-img:hover {
+  background-color: #3596e3;
+}
+.profile-name a {
+  color: #62ade9;
+}
+.profile-name a:hover {
+  color: #3596e3;
+}
+.profile-name-adaptive a {
+  color: #62ade9;
+}
+.profile-name-adaptive a:hover {
+  color: #3596e3;
+}
+.member-info .date {
+  color: #62ade9;
+}
+.member-info .save-img {
+  background-color: #62ade9;
+}
+.member-info .save-img:hover {
+  background-color: #3596e3;
+}
+.profile-statistic .popover-title {
+  color: #62ade9;
+}
+.profile-statistic .donations .sum {
+  color: #62ade9;
+}
+.profile-statistic .available {
+  background-color: #62ade9;
+}
+.profile-statistic .available:hover {
+  background-color: #3596e3;
+}
+.profile-content .widget.widget-tabs .drop-down-menu {
+  background-color: #62ade9;
+}
+.profile-content .widget.widget-tabs .drop-down-menu:hover {
+  background-color: #3596e3;
+}
+/* Profile page tab profile */
+.main-holder .profile-content .big-btn div a,
+.main-holder .profile-content .big-btn div button {
+  background-color: #62ade9;
+}
+.main-holder .profile-content .big-btn div a:hover,
+.main-holder .profile-content .big-btn div button:hover {
+  background-color: #3596e3;
+}
+.profile-content .resent-activity h2 i::before {
+  color: #62ade9;
+}
+.profile-content .widget.widget-tabs > .widget-head ul li.active a i:before {
+  color: #62ade9;
+}
+.resent-act-dif-color {
+  color: #62ade9;
+}
+/* Profile page tab gift to a friend */
+.profile-content .send-sum input {
+  color: #62ade9;
+}
+.profile-content .search-block .email a {
+  background-color: #62ade9;
+}
+.profile-content .search-block .email a:hover {
+  background-color: #3596e3;
+}
+.profile-content .result-count {
+  background-color: #62ade9;
+}
+.profile-content .send-to {
+  background-color: #62ade9;
+}
+.profile-content .send-to:hover {
+  background-color: #3596e3;
+}
+/* Profile page tab redeem credits */
+.profile-content .redemption-code .code {
+  color: #62ade9;
+}
+.profile-content .store-btn {
+  background-color: #62ade9;
+}
+.profile-content .store-btn:hover {
+  background-color: #3596e3;
+}
+/* Profile page tab redeem on load */
+.profile-content .total {
+  color: #62ade9;
+}
+/* Profile page tab settings */
+.profile-content .send-settings {
+  background-color: #62ade9;
+}
+.profile-content .send-settings:hover {
+  background-color: #3596e3;
+}
+.profile-statistic li {
+  background-color: #62ade9;
+}
+.datepicker .datepicker-days thead tr .dow,
+.datepicker .datepicker-days tbody tr .day.active,
+.datepicker-months table tr td span.active,
+.datepicker-years tr td .year.active {
+  background-color: #62ade9 !important;
+}
+.profile-content .checkbox-custom i.checked {
+  color: #62ade9;
+}
+.send-sum .jq-selectbox__select-text,
+.profile-content .send-sum .jq-selectbox__dropdown li {
+  color: #62ade9 !important;
+}
+/******************************/
+/******** CREDITS PAGE ********/
+/******************************/
+.filters-block h3 i::before {
+  color: #62ade9;
+}
+.advertisement {
+  background-color: #62ade9;
+}
+.advertisement .invite {
+  background-color: #ffd739;
+}
+.advertisement .invite:hover {
+  background-color: #eec738;
+}
+.aside-list a {
+  color: #62ade9;
+}
+.aside-list .active a,
+.aside-list a:hover {
+  background-color: #62ade9;
+  border: 1px solid #62ade9;
+}
+.jq-selectbox__select-text {
+  background-color: #62ade9;
+}
+.jq-selectbox__dropdown li:hover {
+  background-color: #f4f4f4;
+}
+.jq-selectbox__dropdown {
+  border: 1px solid #62ade9;
+}
+.jq-selectbox__select-text {
+  border: 1px solid #62ade9;
+}
+.product-item .text-area a {
+  background-color: #62ade9;
+}
+.product-item .text-area a:hover {
+  background-color: #3596e3;
+}
+/******************************/
+/******* DASHBOARD PAGE *******/
+/******************************/
+.separator-sign-in {
+  background-color: #62ade9;
+}
+.dashboard-content .profile-statistic .purchases .sum {
+  color: #62ade9;
+}
+.dashboard-content .top-rewards > a {
+  background-color: #62ade9;
+}
+.dashboard-content .top-rewards > a:hover {
+  background-color: #3596e3;
+}
+.dashboard-content .top-rewards h3 i:before {
+  color: #62ade9;
+}
+.dashboard-content .resent-act-dif-color:hover {
+  color: #3596e3;
+}
+.user-description .joined span {
+  color: #62ade9;
+}
+.progress-item.available {
+  background: #62ade9;
+}
+.progress-item.donated .count {
+  color: #3596e3;
+}
+.profile-content .widget-tabs .widget-head .active a i {
+  color: #62ade9;
+}
+/******************************/
+/***** SEARCH RESULT PAGE *****/
+/******************************/
+.search-result-count {
+  background-color: #62ade9;
+}
+/******************************/
+/******* PAGE NOT FOUND *******/
+/******************************/
+.main-holder .n-found a {
+  background-color: #ffd739;
+  border-color: #e4981f;
+}
+.main-holder .n-found a:hover {
+  background-color: #eec738;
+}
+/******************************/
+/******* LANDING PAGE *******/
+/******************************/
+.landing-page h2 i:before,
+.landing-page h3 i:before {
+  color: #62ade9;
+}
+.lotteryFootballBG .progress-bar-triple .progress-fill {
+  background: #62ade9;
+}
+.lotteryFootballBG .progress-bar-triple span {
+  background: #62ade9;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(2).full {
+  background: #62ade9;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(3) {
+  color: #62ade9;
+}
+.lotteryFootballBG .progress-bar-triple span:nth-of-type(3).full {
+  background: #62ade9;
+}
+.lotteryFootballBG.animated .buttonBlue,
+.lotteryFootballBG.animated .buttonBlue:active,
+.lotteryFootballBG.animated .buttonBlue:focus {
+  background-color: #62ade9;
+  border-bottom-color: #1c7cc9;
+}
+.lotteryFootballBG.animated .buttonBlue:hover {
+  background-color: #1c7cc9;
+  border-bottom-color: #1c7cc9;
+}
+.lotteryFootballBG {
+  background: url('../images/bg-team-training.png') no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.lotteryFootballBG.animated {
+  background: url('../images/bg-team-training-saturated.png') no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.lotteryFootballBG.animated .prize-image-holder:after {
+  background: url("../images/logo_square.png") no-repeat;
+  background-size: cover;
+}
+.lotteryFootballBG.animated .prize-image-holder.prize-image-placeholder {
+  background-color: #62ade9;
+}
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body .extension-notification-arrow {
+  background: url('../images/arrow_top.png') no-repeat;
+  background-size: cover;
+}
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body,
+.extension-notification .extension-overlay .extension-notification-holder .extension-notification-body-macsafari {
+  background-color: #62ade9;
+  border-bottom: 8px solid #1c7cc9;
+}
+/**********************************/
+/******* Notification popup *******/
+/**********************************/
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-image {
+  background: #62ade9;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action {
+  background: #196eb2;
+  border-bottom-color: #135386;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action:hover {
+  background: #135386;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action.action-tw {
+  background: #62ade9;
+  border-bottom-color: #3596e3;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action.action-tw:hover {
+  background: #3596e3;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action.action-fr {
+  background-color: #e4981f;
+  border-color: #ba7b16;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action.action-fr:hover {
+  background-color: #ba7b16;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action.action-dv {
+  background-color: #ffd739;
+  border-color: #e4981f;
+}
+.notification-holder > .notification-body > .notification-content > .draw-action.action-dv:hover {
+  background-color: #e4981f;
+}
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-bottom > .collapsed-cta {
+  background: #62ade9;
+  border-bottom-color: #3596e3;
+}
+.notification-holder > .notification-body > .notification-draw-holder > .notification-draw-bottom > .collapsed-cta:hover {
+  background: #3596e3;
+}
+.notification-holder > .tickets-animation .ticket-image {
+  background: url('../images/tickets_image.png') no-repeat;
+  background-size: cover;
+}
+/******************************/
+/******* LANDING PAGE *******/
+/******************************/
+.contact-area .send-contacts {
+  background-color: #62ade9;
+}
+.contact-area .send-contacts:hover {
+  background-color: #3596e3;
+}
+/******************************/
+/**** Conversions pop-up  *****/
+/******************************/
+.conversions .sum {
+  color: #62ade9;
+}
+.conversions .redeem {
+  color: #62ade9;
+}
+.conversions .redeem:hover {
+  color: #3596e3;
+}
+/******************************/
+/********** FOOTER ************/
+/******************************/
+html.front #footer ul .active a {
+  color: #62ade9;
+}
+.glyphicons.primary i:before,
+.glyphicons-social.primary i:before {
+  color: #62ade9;
+}
+/******************************/
+/**********  MISC  ************/
+/******************************/
+a.ctm_btn {
+  text-shadow: #3596e3 1px 1px 1px;
+}
+.gallery-holder .pagination a {
+  color: #62ade9;
+}
+.amazon-redirect .product-item .text-area h4 {
+  color: #62ade9;
+}
+/* ************************************* */
+/* CHRISTMAS PAGES STYLES                */
+/* ************************************* */
+.christmas-holder .tooltip .tooltip-inner {
+  background: #62ade9;
+}
+.christmas-holder .tooltip .tooltip-arrow {
+  border-top-color: #62ade9;
+}
+.christmas-page .video-section .right-side .bottom-text {
+  color: #62ade9;
+}
+.christmas-page .explanation-section .explanation-row .explanation-card {
+  color: #62ade9;
+}
+.christmas-page .btn-christmas.btn-brand {
+  background-color: #62ade9;
+}
+.christmas-holding-page .header-section {
+  /* GRADIENT */
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4674bf+0,002053+100 */
+  background: #4674bf;
+  /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, #4674bf 0%, #002053 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #4674bf), color-stop(100%, #002053));
+  /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover, #4674bf 0%, #002053 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, #4674bf 0%, #002053 100%);
+  /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, #4674bf 0%, #002053 100%);
+  /* IE10+ */
+  background: radial-gradient(ellipse at center, #4674bf 0%, #002053 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4674bf', endColorstr='#002053', GradientType=1);
+  /* IE6-9 fallback on horizontal gradient */
+  text-align: right;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+.christmas-holding-page .holding-middle-section h3,
+.christmas-holding-page .holding-middle-section h4 {
+  color: #62ade9;
+}
+.christmas-holding-page .holding-footer {
+  background-color: #62ade9;
+}
+/* ****************************************************************** */
+/* Christmas Dashboard styles                                         */
+/* ****************************************************************** */
+.christmas-dashboard section h2,
+.christmas-dashboard section .christmas-stats-block .stat,
+.christmas-dashboard section .invite-options .fa:hover,
+.christmas-dashboard section .invite-options .fa.active,
+.christmas-dashboard section .invitation-form form button:hover,
+.christmas-dashboard section.trophies .top-part .right-block,
+.christmas-dashboard section.trophies .top-part .right-block h3 {
+  color: #62ade9;
+}
+.christmas-dashboard section.christmas-stats .christmas-cta:hover,
+.christmas-dashboard section.invites table tbody td button:hover {
+  background-color: #62ade9;
+  color: #62ade9;
+}
+.christmas-dashboard section .invitation-form form input:not([type=submit]):focus {
+  border-bottom-color: #62ade9;
+}
+.christmas-dashboard section .invitation-form form button {
+  background-color: #62ade9;
+  color: #FFFFFF;
+}
+.christmas-dashboard section.trophies > div:nth-child(1):after {
+  background-image: url('../../everton/images/crimbo/gaffer.png');
+}
+.christmas-dashboard section.trophies .bottom-part .left-block {
+  background-color: #62ade9;
+}
+.christmas-dashboard section.invites table tbody td .tick div {
+  border-color: #62ade9;
+}
+.christmas-dashboard .christmas-notification {
+  background: #62ade9;
+}
+.christmas-dashboard section.sign-up > .fan-shouts {
+  background-image: url('../images/crimbo/fan_scarf_sprite.png');
+}
+.christmas-dashboard section.trophies .top-part .right-block .row div .small-separator {
+  background-image: url('../images/crimbo/arrow.png');
+}
+@media all and (max-width: 1025px) {
+  .additional-navigation .info-amount {
+    display: none;
+  }
+}
+@media all and (max-width: 990px) {
+  .drop-down-menu {
+    background-color: #62ade9;
+  }
+  .drop-down-menu:hover {
+    background-color: #3596e3;
+  }
+  .profile-content .widget.widget-tabs .drop-down-menu-content li a {
+    color: #62ade9 !important;
+  }
+  .profile-content .widget.widget-tabs .drop-down-menu-content li a:hover {
+    color: #3596e3;
+  }
+  .credits-content .aside-list a:hover {
+    color: #3596e3;
+  }
+  .credits-content .aside-list .active a {
+    color: #62ade9;
+  }
+}
