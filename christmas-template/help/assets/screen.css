@@ -1,0 +1,56 @@
+/*  
+Document Name: Business Design Theme Documentation
+Description: 
+Author: <a href="http://www.imperialthemes.com" target="_blank">Imperial Themes</a>
+Author URI: http://www.imperialthemes.com
+Version: 1.0
+*/
+
+body, html {margin:0;padding:0;background:#eee;color:#5d5d5d}
+
+body {
+    font-family: Tahoma, Arial, sans-serif; 
+    font-size: 12px;
+    line-height: 18px;
+    color: #5d5d5d;
+}
+
+.alignright {float:right}
+.alignleft {float:left}
+.aligncenter {margin-right:auto;margin-left:auto}
+.clear {clear:both;display: block;font-size: 0px;height: 0px;line-height: 0;width: 100%;overflow:hidden;}
+.center {text-align: center;}
+.hidden {display: none;visibility: hidden;}
+.invisible {visibility: hidden;}
+
+a {color:#CD2C1F}
+
+p {margin-bottom:10px}
+
+h1, h2, h3, h4, h5, h6 {line-height: 1.5em;margin:0 0 8px 0;color:#393943; font-weight: normal}
+h1 {font-size: 26px}
+h2 {font-size: 22px}
+h3 {font-size: 14px;color:#8e0c02}
+
+#header {background:#e8e8e8 url(header.jpg) no-repeat top center;height:240px;}
+
+.theme_info_wrapper {background:url(themeinfolines.png) no-repeat 0 24px;width:982px;margin:-24px auto 40px;}
+.theme_info {background:#eee;width:948px;margin:0 auto;padding:0 16px;-webkit-border-top-left-radius: 5px;
+-webkit-border-top-right-radius: 5px;
+-moz-border-radius-topleft: 5px;
+-moz-border-radius-topright: 5px;
+border-top-left-radius: 5px;
+border-top-right-radius: 5px;}
+.theme_info ul{list-style:none;margin:0 0 0 0;padding:0;width:100%;clear:both;height:38px;line-height:38px;border-bottom:1px dotted #bebebe;}
+.theme_info ul li{float:left;margin-right:20px}
+
+code { color: #279aea;font-family: Tahoma, Arial, sans-serif; }
+
+.wrapper {width:960px;margin:0 auto}
+.section {background:#fff;margin-bottom:24px;border:1px solid #e0e0e0;padding:20px;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
+
+.image_frame {width:908px;background:#eee;border:5px solid #eee;overflow:hidden;margin-bottom:10px}
+.image_frame img{display:block;}
+
+
+
