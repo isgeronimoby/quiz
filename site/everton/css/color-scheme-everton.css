@@ -464,7 +464,7 @@ a.ctm_btn {
   color: #00369c;
 }
 .christmas-page .btn-christmas.btn-brand {
-  background-color: #00369c;
+  background-color: #ffd739;
 }
 .christmas-holding-page .header-section {
   /* GRADIENT */
@@ -497,7 +497,7 @@ a.ctm_btn {
   background-color: #00369c;
 }
 .christmas-holding-page .header-section h1:after,
-.christmas-page .video-section .right-side .header h1:nth-child(2):after {
+.christmas-page .video-section .crimbo-text .header h1:nth-child(1):after {
   background-image: url('../images/crimbo/christmas_hat.png');
 }
 .christmas-holding-page .header-section .wrap:after {
@@ -506,11 +506,14 @@ a.ctm_btn {
 .christmas-holding-page .header-section .wrap:before {
   background-image: url('../images/crimbo/stars-left.png');
 }
-.christmas-page .explanation-section {
-  background-image: url('../images/crimbo/christmas_lines_tree_2.png');
-}
 .christmas-page .explanation-section .explanation-row:nth-child(1):after {
   background-image: url('../images/crimbo/big_star_1.png');
+}
+.christmas-page .video-section .crimbo-dear {
+  background-image: url('../images/crimbo/bigScreen.png');
+}
+.christmas-page .explanation-section .explanation-row .explanation-card .step {
+  background: #00369c;
 }
 /* ****************************************************************** */
 /* Christmas Dashboard styles                                         */
@@ -552,7 +555,16 @@ a.ctm_btn {
   background-image: url('../images/crimbo/fan_scarf_sprite.png');
 }
 .christmas-dashboard section.trophies .top-part .right-block .row div .small-separator {
-  background-image: url('../images/crimbo/arrow.png');
+  background-image: url('../images/crimbo/circular_arrow_stroked.svg');
+}
+.christmas-page .video-section .crimbo-tree {
+  background-image: url('../images/crimbo/tree.png');
+}
+.christmas-page .video-section .crimbo-tree:after {
+  background-image: url('../images/crimbo/messageArea.png');
+}
+.christmas-page .video-section .crimbo-pole {
+  background-image: url('../images/crimbo/northPole1.png');
 }
 @media all and (max-width: 990px) {
   .drop-down-menu {

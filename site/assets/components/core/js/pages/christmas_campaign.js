@@ -184,4 +184,8 @@ $(document).ready(function(){
 
     $('[data-toggle="tooltip"]').tooltip();
 
+    if ( currentPlatform === 'mobile' ) {
+        $('.snowEffect').hide();
+    }
+
 });
