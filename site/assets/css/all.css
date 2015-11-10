@@ -8926,9 +8926,14 @@ html body .christmas-holder #content{
 	.lotteryFootballBG.animated .first-slide-holder.prize-section .prize-image-holder,
 	.lotteryFootballBG.animated .first-slide-holder.prize-section .prize-image-holder.prize-image-placeholder {
 		width: 150px;
-		height: 150px;
 		display: block;
 		margin: 20px auto -15px;
+	}
+	.lotteryFootballBG.animated .first-slide-holder.prize-section .prize-image-holder {
+		height: auto;
+	}
+	.lotteryFootballBG.animated .first-slide-holder.prize-section .prize-image-holder.prize-image-placeholder {
+		height: 150px;
 	}
 	.lotteryFootballBG.animated .first-slide-holder.prize-section h1 {
 		font-size: 38px;
