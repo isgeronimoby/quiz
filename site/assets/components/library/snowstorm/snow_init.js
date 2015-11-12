@@ -15,7 +15,8 @@ $(document).ready(function(){
     var windowHalfY = window.innerHeight / 2;
     var particles = [];
     var particleImage = new Image();
-    particleImage.src = './images/crimbo/snow.png';
+    particleImage.src = document.querySelector('.snowEffect').getAttribute('data-snow-img');
+
     /* Variables - End */
 
     function snowEffectBind() {
