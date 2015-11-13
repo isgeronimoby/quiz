@@ -1,13 +1,13 @@
 /* --- LOADING [css.bootstrap.min] from assets/components/library/bootstrap/css/bootstrap.min.css */
-@import '../components/library/bootstrap/css/bootstrap.min.css';
+@import '../js/library/bootstrap/css/bootstrap.min.css';
 /* --- LOADING [css.font-awesome.min] from assets/components/library/icons/fontawesome/assets/css/font-awesome.min.css */
-@import '../components/library/icons/fontawesome/assets/css/font-awesome.min.css';
+@import '../js/library/icons/fontawesome/assets/css/font-awesome.min.css';
 /* --- LOADING [css.glyphicons_regular] from assets/components/library/icons/glyphicons/assets/css/glyphicons_regular.css */
-@import '../components/library/icons/glyphicons/assets/css/glyphicons_regular.css';
+@import '../js/library/icons/glyphicons/assets/css/glyphicons_regular.css';
 /* --- LOADING [css.glyphicons_social] from assets/components/library/icons/glyphicons/assets/css/glyphicons_social.css */
-@import '../components/library/icons/glyphicons/assets/css/glyphicons_social.css';
+@import '../js/library/icons/glyphicons/assets/css/glyphicons_social.css';
 /* --- LOADING [css.glyphicons_filetypes] from assets/components/library/icons/glyphicons/assets/css/glyphicons_filetypes.css */
-@import '../components/library/icons/glyphicons/assets/css/glyphicons_filetypes.css';
+@import '../js/library/icons/glyphicons/assets/css/glyphicons_filetypes.css';
 /* --- LOADING [less.variables] from assets/components/core/less/variables.less */
 /* --- LOADING [less.mixins] from assets/components/core/less/mixins.less */
 /* --- LOADING [less.scaffolding] from assets/components/core/less/scaffolding.less */
