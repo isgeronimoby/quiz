@@ -204,7 +204,7 @@ jQuery(document).ready(function($){
 
 		if ( window.innerWidth < 1080 ) {
 			startPageSlide.height(startPageSlide.height());
-			startPageSlide.addClass('misc-states');
+			//startPageSlide.addClass('misc-states');
 			dontChangeSlide = true;
 		}
 		elsToHide.hide();
