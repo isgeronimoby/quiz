@@ -8754,6 +8754,16 @@ html body .christmas-holder #content{
 	}
 	.christmas-page .video-section .crimbo-tree {
 		left: 3%;
+		margin-left: -90px;
+		width: 403px;
+		height: 420px;
+		background-size: cover;
+	}
+	.christmas-page .video-section .crimbo-tree:after {
+		background-size: cover;
+		width: 380px;
+		height: 182px;
+		left: 60%;
 	}
 	.christmas-page .screen-holder {
 		display: none;
