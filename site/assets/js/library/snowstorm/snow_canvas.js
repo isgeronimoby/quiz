@@ -82,6 +82,8 @@ $(document).ready(function(){
     }
 
     //animation loop
-    if ($(window).width() > 480 && !(navigator.userAgent.toLowerCase().indexOf('safari') > -1 && navigator.userAgent.toLowerCase().indexOf('chrome') == -1))
-        setInterval(draw, 33);
+    if ($(window).width() > 480)
+        // uncomment if FIREFOX overloads CPU
+        // if ( !(typeof InstallTrigger !== 'undefined') )
+            setInterval(draw, 33);
 });

@@ -7870,7 +7870,9 @@ html body .christmas-holder #content{
 		text-align: center;
 	}
 	.christmas-page .video-section .crimbo-video {
-		position: static;
+		position: relative;
+		top: 0;
+		left: 0;
 		transform: translate(0,0);
 		-webkit-transform: translate(0,0);
 		-moz-transform: translate(0,0);
@@ -8743,7 +8745,10 @@ html body .christmas-holder #content{
 		position: relative;
 	}
 	.christmas-page .video-section .crimbo-video {
-		position: static;
+		position: relative;
+		top: 0;
+		left: 0;
+		z-index: 800;
 		transform: translate(0,0);
 		-webkit-transform: translate(0,0);
 		-moz-transform: translate(0,0);
