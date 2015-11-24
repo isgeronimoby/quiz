@@ -6263,7 +6263,7 @@ html body .christmas-holder #content{
 .christmas-page .video-section .tell-more {
 	position: absolute;
 	bottom: 60px;
-	z-index: 1000;
+	z-index: 100;
 	left: 50%;
 	transform: translateX(-50%);
 	-webkit-transform: translateX(-50%);
