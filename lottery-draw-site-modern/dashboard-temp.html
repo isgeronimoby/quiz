@@ -1,0 +1,489 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Everton. Lottery draw</title>
+	<link href="./css/fancybox-styles.css" rel="stylesheet" type="text/css" />
+	<link href="./css/style.css" rel="stylesheet" type="text/css" />
+	<link href="./css/everton_scheme.css" rel="stylesheet" type="text/css" />
+	<link href="./css/landscape-media.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+
+<div class="draw-wrapper">
+
+<div class="dashboard-header showDesktop">
+	<div class="header-container">
+		<div class="logo-holder pull-left">
+			<a href="#"><img src="images/everton/logo_text.png"/></a>
+		</div>
+		<a href="#" class="back-to-dashboard pull-right">Back to the dashboard</a>
+	</div>
+</div>
+
+<div class="draw-container text-center">
+	<div class="staticTop">
+		<div class="countdown">
+			<div>
+				<div>
+					<span class="numbers">0</span>
+					<span>days</span>
+				</div>
+			</div>
+			<div>
+				<div>
+					<span class="numbers">00</span>
+					<span>hrs</span>
+				</div>
+			</div>
+			<div>
+				<div>
+					<span class="numbers">00</span>
+					<span>mins</span>
+				</div>
+			</div>
+			<div>
+				<div>
+					<span class="numbers">00</span>
+					<span>secs</span>
+				</div>
+			</div>
+		</div>
+		<a href="#"><article class="article showDesktopBlock">
+			<div class="articleImage articleImageDesktop">
+				<img src="images/everton/prize_image.png" />
+			</div>
+			<div class="greyBox greyBoxDesktop">
+				<h3 class="color-aqua"><b>the prize</b></h3>
+				<h3 class="condensedFont">Meet the team, get signed T-shirts and watch a training session</h3>
+			</div>
+			<div class="clearfix"></div>
+		</article></a>
+		<div class="clearfix"></div>
+	</div>
+
+	<section id="dashboard" class="sectionLayout">
+		<div class="circularChartsGroup">
+			<h1>Your progress</h1>
+			<!--<p class="color-aqua subtopic">Each action - another entry into the draw</p>-->
+			<div class="canvasHolder">
+				<canvas id="overallCircleProgress" width="500" height="500"></canvas>
+				<canvas id="daysCircleProgress" width="500" height="500"></canvas>
+
+				<div class=infoBlock>
+					<div class="infoHolder">
+						<div class="circleSection" id="infoOverall">
+							<div class="circleTicketsSection">
+								<p class="circlePercentage color-aqua"></p>
+								<p class="color-aqua">tickets</p>
+							</div>
+							<div class="circleDaysSection">
+								<p class="daysPercentage">1/4</p>
+								<p>tickets</p>
+							</div>
+						</div>
+						<div class="circleSection" id="infoTickets">
+							<div class="circleTicketsSection">
+								<p class="circlePercentage color-aqua"></p>
+								<p class="color-aqua">tickets</p>
+							</div>
+							<div>
+								<p class="color-aqua">Each ticket gets you an extra entry into the draw</p>
+							</div>
+						</div>
+						<div class="circleSection" id="infoDays">
+							<div>
+								<p class="color-gold">Open the app 4 days <br>in a row<br>get extra ticket</p>
+							</div>
+							<div class="circleDaysSection">
+								<p class="daysPercentage">1/4</p>
+								<p>tickets</p>
+							</div>
+						</div>
+						<ul class="circleToggles">
+							<li class="active"></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</div>
+				</div>
+				<div class="circularPortrait">
+					<div class="portraitHolder">
+						<img src="./images/everton/profile-image.png"/>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="optionsGroup">
+			<div class="greyBox curOptionBox" id="connectFBBox">
+				<h3>One step left!<br/><span class="color-aqua">To finish your registration and earn 5 more tickets</span> connect to facebook</h3>
+				<div class="tickets showMobileBlock"><span>+5</span><br/>tickets</div><a href="#" class="button buttonBlue buttonDefault"><span><span>Connect with Facebook</span></span></a>
+				<div class="showMobileBlock"><a href="#alreadyMemberPopup" class="simpleLink fancybox">Already a member?</a></div>
+				<div class="showDesktopBlock">
+					<p>we'll never post anything without your permission</p>
+					<a href="#signUpWithEmailPopup" class="button buttonDefault buttonStroke fancybox"><span><span>or sign up with email</span></span></a>
+					<a href="#alreadyMemberPopup" class="simpleLink fancybox">Already a member?</a>
+				</div>
+			</div>
+
+			<div class="greyBox curOptionBox" id="shareFacebookBox">
+				<h3><span class="color-aqua">Earn 10 more tickets</span> by sharing on facebook</h3>
+				<div class="tickets"><span>+10</span><br/>tickets</div><a href="#" class="button buttonBlue buttonDefault"><span><span>Share on Facebook</span></span></a>
+			</div>
+
+			<div class="greyBox curOptionBox" id="shareTwitterBox">
+				<h3><span class="color-aqua">Earn 5 more tickets</span> by sharing on twitter</h3>
+				<div class="tickets"><span>+5</span><br/>tickets</div><a href="#" class="button buttonLightBlue buttonDefault"><span><span>Share on twitter</span></span></a>
+			</div>
+
+			<div class="greyBox curOptionBox" id="connectDeviceBox">
+				<h3><span class="color-aqua">Earn 5 more tickets</span> connecting another device</h3>
+				<div class="tickets"><span>+5</span><br/>tickets</div><a href="#connectDevice" class="button buttonYellow buttonDefault fancybox"><span><span>Connect device</span></span></a>
+			</div>
+
+			<div class="greyBox curOptionBox" id="openBrowserBox">
+				<h3 class="marginBottom"><span class="color-aqua">Earn 5 more tickets</span> by opening your browser 4 days in a row</h3>
+				<div class="tickets"><span>+5</span><br/>tickets</div> <h3 class="insteadButtonText">Set Everton Browser as your default browser</h3>
+			</div>
+
+			<div class="greyBox curOptionBox" id="installAppBox">
+				<div class="showMobile">
+					<h3 class="marginBottom"><span class="color-aqua">Get the Everton Browser app</span> to get 5 more tickets</h3>
+					<a href="#" class="button buttonBlue buttonDefault"><span><span>Get Everton Browser</span></span></a>
+					<img class="img-responsive" src="./images/everton/iphone_circle_zoom.png" />
+				</div>
+				<div class="showDesktop">
+					<h3 class="marginBottom"><span class="color-aqua">Get the Everton browser extension</span> to get 5 more tickets</h3>
+					<img class="img-responsive" src="./images/everton/macbook_logo.png" />
+					<a href="#" class="button buttonBlue buttonDefault"><span><span>Get Browser Extension</span></span></a>
+				</div>
+			</div>
+
+			<div class="earningOptions">
+				<ul>
+					<li id="shareTwitterItem"><div class="listArrow"></div><div class="tickets"><span>+15</span><br/>tickets</div><a href="#" class="button buttonDefault buttonLightBlue"><span><span>Share on Twitter</span></span></a></li>
+					<li id="signUpWithEmailItem" class="showMobileBlock"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#signUpWithEmailPopup" class="button buttonDefault buttonStroke fancybox"><span><span>Share on Twitter</span></span></a></li>
+					<li id="shareFacebookItem"><div class="listArrow"></div><div class="tickets"><span>+10</span><br/>tickets</div><a href="#" class="button buttonDefault buttonBlue"><span><span>Like a post</span></span></a></li>
+					<li id="shareTwitterItem"><div class="listArrow"></div><div class="tickets"><span>+15</span><br/>tickets</div><a href="#" class="button buttonDefault buttonYellow"><span><span>Invite a friend</span></span></a></li>
+					<li id="connectDeviceItem"><div class="listArrow"></div><div class="tickets"><span>+5</span><br/>tickets</div><a href="#connectDevice" class="button buttonDefault buttonYellow fancybox"><span><span><span class="showDesktop">Get the Everton Browser on your phone</span><span class="showMobile">Watch the video</span></span></span></a></li>
+					<li id="installAppItem"><div class="listArrow"></div><div class="tickets"><span>+10</span><br/>tickets</div><a href="#" class="button buttonDefault buttonBlue fancybox"><span><span><span class="showDesktop">Get Browser Extension</span><span class="showMobile">Check-in</span></span></span></a></li>
+					<li id="exampleMutedItem"><div class="listArrow"></div><div class="tickets"><span>+10</span><br/>tickets</div><a href="#" class="button buttonDefault buttonLightBlue"><span><span>Share on facebook again in 4 days</span></span></a></li>
+					<!--<li class="optionDisabled"><div class="listArrow"></div><div class="tickets"><span>5</span><br/>earned</div><div class="button buttonDefault buttonDisabled"><span><span>Disabled Button</span></span></div></li>-->
+				</ul>
+			</div>
+
+			<article class="article showMobileBlock">
+				<div class="articleImage articleMobileImage">
+					<img class="img-responsive" src="images/everton/prize_image.png" />
+				</div>
+				<div class="greyBox greyBoxMobile">
+					<a href="#" class="thinLink allCenterHolder"><h3 class="allCenterElement color-aqua"><b>find out about the prize</b></h3></a>
+				</div>
+				<div class="clearfix"></div>
+			</article>
+		</div>
+		<div class="clearfix"></div>
+	</section>
+
+	<div class="scoreHolder">
+		<p class="score">SCORE</p>
+	</div>
+</div>
+
+
+<!-- POPUPS -->
+
+<div class="club-amazing-popups">
+	<div id="connectDevice" class="club-popup-container">
+		<div class="club-popup">
+			<div class="club-popup-header">
+				<a href="#" class="club-popup-close">&times;</a>
+				<div class="club-popup-clearfix"></div>
+				<h4></h4>
+			</div>
+			<!-- Box -->
+			<div class="club-popup-body popupInner">
+				<h2></h2>
+				<!-- Alert -->
+				<div class="alert alert-danger">
+					<button data-dismiss="alert" class="close" type="button">&times;</button>
+					<strong>Warning!</strong>
+					<div data-valmsg-summary="true" class="validation-summary-errors">
+						<ul><li>Email is required.</li>
+							<li>Some other error.</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="alert alert-success">
+					<button data-dismiss="alert" class="close" type="button">×</button><strong>Success!</strong>
+					<div data-valmsg-summary="true" class="validation-summary-errors">
+						<ul>
+							<li>Link was successfully sent to you email.</li>
+						</ul>
+					</div>
+				</div>
+				<!-- // Alert END -->
+				<!-- Form -->
+				<div class="showMobile">
+					<img src="./images/everton/macbook_logo.png">
+				</div>
+				<div class="showDesktop">
+					<img src="./images/everton/iphone_circle_zoom.png">
+				</div>
+				<div class="text-holder">
+					<h2 class="popup-heading showMobile">Email yourself a link to install the browser extension on your pc</h2>
+					<h2 class="popup-heading showDesktop">Email yourself a link to install the Everton browser app on your phone</h2>
+				</div>
+				<div class="showDesktop">
+					<span class="connectSuccessMessage">SUCCESS!<br/>PLEASE CHECK YOUR EMAIL TO INSTALL THE EVERTON BROWSER APP ON YOUR PHONE</span>
+				</div>
+				<div class="showMobile">
+					<span class="connectSuccessMessage">SUCCESS!<br/>PLEASE CHECK YOUR EMAIL TO INSTALL THE EVERTON BROWSER EXTENSION ON YOUR PC</span>
+				</div>
+				<form method="post" class="popupForm login-form" id="connectDeviceForm" action="index.html?lang=en">
+					<div class="form-group email-group">
+						<label for="email" class="strong">Enter your email</label>
+						<input type="text" id="connect-email" name="connect-email"
+							   class="input-block-level form-control" placeholder="john@example.com" autofocus/>
+					</div>
+					<button type="submit" class="button buttonDefault buttonYellow"><i></i>
+						<span class="align-wrapp">
+							<span>
+								<span class="showMobile">Get Everton PC extension</span>
+								<span class="showDesktop">Get the Everton Browser app on your phone</span>
+							</span>
+						</span></button>
+				</form>
+				<!-- // Form END -->
+			</div>
+			<!-- // Box END -->
+		</div>
+	</div>
+</div>
+
+<div class="club-amazing-popups">
+	<div id="signUpWithEmailPopup" class="club-popup-container">
+		<div class="club-popup">
+			<div class="club-popup-header">
+				<a href="#" class="club-popup-close">&times;</a>
+				<div class="club-popup-clearfix"></div>
+			</div>
+			<!-- Box -->
+			<div class="club-popup-body popupInner">
+				<h2>Sign up</h2>
+				<!-- Alert -->
+				<div class="alert alert-danger">
+					<button data-dismiss="alert" class="close" type="button">&times;</button>
+					<strong>Warning!</strong>
+					<div data-valmsg-summary="true" class="validation-summary-errors">
+						<ul><li>Email is required.</li>
+							<li>Some other error.</li>
+						</ul>
+					</div>
+				</div>
+				<!-- // Alert END -->
+				<!-- Form -->
+				<form method="post" class="popupForm login-form" id="signUpWithEmailForm" action="index.html?lang=en">
+					<div class="form-group">
+						<label form="name" class="strong">Your name</label>
+						<input type="text" class="input-block-level form-control" id="name"
+							   name="name" placeholder="John Smith"/>
+					</div>
+					<div class="form-group email-group">
+						<label for="email" class="strong">Email</label>
+						<input type="text" id="email" name="email"
+							   class="input-block-level form-control" placeholder="john@example.com"/>
+					</div>
+					<div class="form-group">
+						<label for="password" class="strong">Password</label>
+						<input type="password" id="password" name="password"
+							   class="input-block-level form-control" placeholder="Your Password"/>
+					</div>
+					<button type="submit" class="button buttonDefault buttonYellow"><i></i>
+					<span class="align-wrapp"><span>SIGN UP</span></span></button>
+				</form>
+				<!-- // Form END -->
+				<p class="terms no-transform">By signing up to Everton Rewards I agree to the <a class="no-transform" href="/terms-and-conditions.html">Terms and Conditions</a></p>
+			</div>
+			<!-- // Box END -->
+		</div>
+	</div>
+</div>
+
+
+<div class="club-amazing-popups">
+	<div id="alreadyMemberPopup" class="club-popup-container">
+		<div class="club-popup">
+			<div class="club-popup-header">
+				<a href="#" class="club-popup-close">&times;</a>
+				<div class="club-popup-clearfix"></div>
+			</div>
+			<!-- Box -->
+			<div class="club-popup-body popupInner">
+				<h2>Sign in</h2>
+				<!-- Alert -->
+				<div class="alert alert-danger">
+					<button data-dismiss="alert" class="close" type="button">&times;</button>
+					<strong>Warning!</strong>
+					<div data-valmsg-summary="true" class="validation-summary-errors">
+						<ul><li>Email is required.</li>
+							<li>Some other error.</li>
+						</ul>
+					</div>
+				</div>
+				<!-- // Alert END -->
+				<!-- Form -->
+				<form method="post" class="popupForm login-form" id="signInForm" action="index.html?lang=en">
+					<div class="form-group email-group">
+						<label for="email" class="strong">Email address</label>
+						<input type="text" id="emailRegistered" name="email"
+							   class="input-block-level form-control" placeholder="john@example.com"/>
+					</div>
+					<div class="form-group">
+						<label for="password" class="strong">Password</label>
+						<input type="password" id="passwordRegistered" name="password"
+							   class="input-block-level form-control" placeholder="Your Password"/>
+					</div>
+					<div class="form-group">
+						<a href="#forgot" class="simpleLink">Forgot password?</a>
+					</div>
+					<button type="submit" class="button buttonDefault buttonYellow"><i></i>
+						<span class="align-wrapp"><span>SIGN IN</span></span></button>
+				</form>
+				<!-- // Form END -->
+
+				<!-- FACEBOOK SIGN IN button -->
+				<a href="#" target="_top" class="button buttonDefault buttonBlue">
+					<span><span>SIGN IN WITH FACEBOOK</span></span>
+				</a>
+			</div>
+			<!-- // Box END -->
+		</div>
+	</div>
+</div>
+
+<div class="club-amazing-popups">
+	<div id="challengeafriend" class="club-popup-container">
+		<div class="club-popup">
+			<div class="club-popup-header">
+				<a href="#" class="club-popup-close">&times;</a>
+				<div class="club-popup-clearfix"></div>
+				<h4></h4>
+			</div>
+			<!-- Box -->
+			<div class="club-popup-body popupInner">
+				<h2></h2>
+				<!-- Alert -->
+				<div class="alert alert-danger">
+					<button data-dismiss="alert" class="close" type="button">&times;</button>
+					<strong>Warning!</strong>
+					<div data-valmsg-summary="true" class="validation-summary-errors">
+						<ul><li>Email is required.</li>
+							<li>Some other error.</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- // Alert END -->
+				<!-- Form -->
+				<div class="showMobile">
+					<img src="./images/everton/iphone-challenge.png">
+				</div>
+				<div class="showDesktop">
+					<img src="./images/everton/iphone-challenge.png">
+				</div>
+				<div class="text-holder">
+					<h2 class="popup-heading">CHALLENGE FRIENDS TO ANSWER EVERTON QUESTIONS</h2>
+				</div>
+				<div class="">
+					<span class="connectSuccessMessage">SUCCESS!<br/>YOU’LL GET 5 TICKETS FOR EACH FRIEND THAT ANSWERS CORRECTLY AND SIGNS UP</span>
+				</div>
+				<form method="post" class="popupForm login-form" id="challengeafriendForm" action="index.html?lang=en">
+					<div class="form-group email-group">
+						<label for="email" class="strong">Enter your friends email addresses, seperate addresses with a comma</label>
+						<input type="text" id="challenge-email" name="challenge-email"
+							   class="input-block-level form-control" placeholder="john@example.com, john@example.com" autofocus/>
+					</div>
+					<button type="submit" class="button buttonDefault buttonYellow"><i></i>
+						<span class="align-wrapp">
+							<span>
+								<span class="">Send Email</span>
+							</span>
+						</span></button>
+				</form>
+				<!-- // Form END -->
+			</div>
+			<!-- // Box END -->
+		</div>
+	</div>
+</div>
+
+<div class="push"></div>
+</div>
+
+<footer class="footer">
+	<div class="pull-left showMobile">
+		<a href="#"><img src="images/everton/logo_text.png"/></a>
+	</div>
+	<div class="pull-right">
+		<a href="/terms-and-conditions.html" class="thinLink">T&Cs</a>
+		<a href="/faq.html" class="thinLink">FAQs</a>
+		<a href="#" class="thinLink">Contact</a>
+	</div>
+	<div class="clearfix"></div>
+</footer>
+
+<script type="text/javascript" src="./js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="./js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="./js/jquery.easing.compatibility.js"></script>
+<script type="text/javascript" src="./js/progresscircle.min.js"></script>
+<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="./js/jquery.countdown.min.js"></script>
+<script type="text/javascript" src="./js/countdown.js"></script>
+<script type="text/javascript" src="./js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="./js/overthrow.min.js"></script>
+<!--<script type="text/javascript" src="./js/form-validator.init.js"></script>-->
+<script type="text/javascript" src="./js/detectMobileShowElements.js"></script>
+<script type="text/javascript" src="./js/app.js"></script>
+<script type="text/javascript" src="./js/fastclick.js"></script>
+<script>
+window.fbAsyncInit = function () {
+	FB.init({
+		appId: '614550598660833',
+		xfbml: false,
+		version: 'v2.1'
+	});
+};
+
+(function (d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) { return; }
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/en_US/sdk.js";
+	fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<script>
+	var ua = window.navigator.userAgent.toLowerCase();
+	if (ua.indexOf("android") <= 0) {
+		window.twttr = (function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], t = window.twttr || {}; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); t._e = []; t.ready = function (f) { t._e.push(f); }; return t; }(document, "script", "twitter-wjs"));
+	}
+</script>
+<script>
+	DrawApp.ticketsCurrent = 20;
+	DrawApp.ticketsMax = 35;
+
+	DrawApp.daysInRow = 2;
+	DrawApp.daysInRowMax = 4;
+	DrawApp.facebookSharePauseDays = 4;
+	DrawApp.twitterSharePauseDays = 4;
+</script>
+
+</body>
+</html>
