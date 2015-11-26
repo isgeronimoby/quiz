@@ -322,6 +322,8 @@
 		$('.service-message').hide();
 	}
 
+	$('.select').styler();
+
 })(jQuery, window);
 
 jQuery(window).ready(function(){

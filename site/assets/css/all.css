@@ -756,7 +756,7 @@ html.no-touch body #content {
 }
 
 .number {
-	font: 11px/17px 'questrial';
+	font: 11px/17px Arial, sans-serif;
 	position: absolute;
 	display: block;
 	height: 17px;
