@@ -3,10 +3,6 @@
 html.front.top-full .navbar.main {
   background-color: #00369c;
 }
-.toolbar .company-logo a img.big-logo {
-  width: 70px;
-  margin-bottom: -13px;
-}
 .autocomplete-suggestions strong {
   color: #00369c;
 }
