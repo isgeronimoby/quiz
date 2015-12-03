@@ -129,6 +129,7 @@
 @media (max-width: 767px) {
 	body{overflow-x: hidden;}
 	.widget-maximize, .widget-toggle, .widget-popout {display: none;}
+	#userTables .widget-toggle {display: inline-block;}
 	.mobile-sidebar{left: 0px;}
 	.mobile-content{left: 250px;right: -250px;}
 	.box-info table{margin: 0 0 0 0;}

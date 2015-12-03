@@ -5987,3 +5987,6 @@ footer .footer-links a:last-child {
   background-color: #4B8A71;
   color: #ffffff;
 }
+#userTables h2 {
+  text-transform: uppercase;
+}
