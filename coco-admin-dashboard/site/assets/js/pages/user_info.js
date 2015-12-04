@@ -203,7 +203,18 @@ jQuery(document).ready(function ($) {
             ]
         }
     };
+    var typeButtons = $('.form-radio-buttons .form-inline .form-group > div');
 
+    $('#idType label').on('click', function(e){
+
+        if ($(this).find('input').val() == 'email') {
+            typeButtons.removeClass('active');
+            $('#emailInput').addClass('active');
+        } else {
+            typeButtons.removeClass('active');
+            $('#idInput').addClass('active');
+        }
+    });
 
     function tableConstructor(key, value){
 

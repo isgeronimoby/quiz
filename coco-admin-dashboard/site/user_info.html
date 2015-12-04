@@ -189,19 +189,32 @@
 				<div class="widget-header transparent">
 					<h2>Enter user <strong>email</strong> or <strong>ID</strong></h2>
 				</div>
-				<div class="widget-content padding">
-					<form class="form-inline" role="form">
-						<div class="form-group">
-							<label class="sr-only" for="userEmail">Email address</label>
-							<input type="email" class="form-control" id="userEmail" placeholder="Enter email">
+				<div class="form-radio-buttons">
+					<div class="widget-content padding">
+						<div id="idType" class="btn-group" data-toggle="buttons">
+							<label class="btn active">
+								<input type="radio" name="mode" value="email"> Email
+							</label>
+							<label class="btn ">
+								<input type="radio" name="mode" value="id"> ID
+							</label>
 						</div>
-						<div class="form-group">
-							<label class="sr-only" for="userId">Enter user ID</label>
-							<input type="text" class="form-control" id="userId" placeholder="User ID">
-						</div>
+						<form class="form-inline" role="form">
+							<div class="form-group">
+								<div id="emailInput" class="active">
+									<label class="sr-only" for="userEmail">Enter user email</label>
+									<input type="email" class="form-control" id="userEmail" placeholder="User email">
+								</div>
+								<div id="idInput">
+									<label class="sr-only" for="userId">Enter user ID</label>
+									<input type="text" class="form-control" id="userId" placeholder="User ID">
+								</div>
+							</div>
 
-						<button type="submit" class="btn btn-default">Show data</button>
-					</form>
+							<button type="submit" class="btn btn-default">Show data</button>
+						</form>
+					</div>
+
 				</div>
 			</div>
 
