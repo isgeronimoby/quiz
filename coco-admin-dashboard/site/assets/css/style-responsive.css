@@ -307,6 +307,7 @@
 		width: 49%;
 		padding: 0;
 		margin-top: -2px;
+		vertical-align: top;
 	}
 	.sections-responsive > div .widget {
 		margin-bottom: 5px;
@@ -317,6 +318,7 @@
 	.sections-responsive > div .widget-content {
 		max-height: initial;
 		padding: 10px 15px 15px;
+		min-height: 120px;
 	}
 }
 
