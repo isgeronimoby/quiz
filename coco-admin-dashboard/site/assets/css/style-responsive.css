@@ -320,6 +320,17 @@
 		padding: 10px 15px 15px;
 		min-height: 120px;
 	}
+	.form-radio-buttons .form-inline input,
+	.form-radio-buttons .form-inline button {
+		min-width: 100%;
+	}
+	.form-radio-buttons .form-inline .form-group > div.active {
+		display: block;
+	}
+	.form-radio-buttons .btn-group .btn {
+		font-size: 14px;
+		padding: 8px 22px;
+	}
 }
 
 @media (max-width: 480px){
@@ -378,6 +389,7 @@
 		display: none;
 		width: 0;
 	}
+
 }
 
 @media (max-width: 420px){

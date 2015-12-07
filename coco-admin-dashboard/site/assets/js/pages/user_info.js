@@ -13,6 +13,13 @@ jQuery(document).ready(function ($) {
                 'InvitedByUserId': null,
                 'IsBlocked': false
             },
+            'wallet': {
+                'MoneyPending': '53.00',
+                'MoneyConfirmed': '-12.65',
+                'DonationsPending': '21.20',
+                'DonationsConfirmed': '52.94',
+                'PurchasesCount': 68
+            },
             'applications': [{
                 'ApplicationId': '67b26006-0d89-46b3-9441-9f20dbbd0a8f',
                 'Title': 'Everton Chrome Extension',
@@ -28,13 +35,6 @@ jQuery(document).ready(function ($) {
                     'Title': 'CreateAccount',
                     'Date': '2014-10-29 12:54:55'
                 }],
-            'wallet': {
-                'MoneyPending': '53.00',
-                'MoneyConfirmed': '-12.65',
-                'DonationsPending': '21.20',
-                'DonationsConfirmed': '52.94',
-                'PurchasesCount': 68
-            },
             'transactions': [{
                 'Type': 'Redemption',
                 'Direction': 'Outflow',
@@ -170,7 +170,7 @@ jQuery(document).ready(function ($) {
                     'RedeemedOn': '2014-12-05 12:40:37'
                 }],
             'draws': [
-                {
+/*                {
                     'Prize': 'Exclusive Goodison Road Tee',
                     'StartDate': '2015-10-27 12:00:00',
                     'EndDate': '2015-10-31 12:00:00',
@@ -199,7 +199,7 @@ jQuery(document).ready(function ($) {
                     'LastFacebookShareDate': null,
                     'LastTwitterShareDate': null,
                     'IsWinner': true
-                }
+                }*/
             ]
         }
     };
@@ -219,36 +219,52 @@ jQuery(document).ready(function ($) {
     function tableConstructor(key, value){
 
         var tableLayoutWidth;
+        var checkForNull = function(cont) {
+            return cont === null ? '-' : cont;
+        };
 
         function getRows(value) {
             var rowHeading = '',
                 rowValue = '';
-            if (value.length) {
+            if (value.length >= 0) {
                 // array
                 tableLayoutWidth = 'array';
-                value.forEach(function(el, ind){
-                    tableLayoutWidth = Object.keys(el).length > 2 ? tableLayoutWidth : 'object';
-                    rowValue += '<tr>';
-                    if (ind === 0) {
-                        rowHeading += '<thead><tr>';
-                        $.each(el, function(heading, content){
-                            rowHeading += '<th>' + heading + '</th>';
-                            rowValue += '<td>' + content + '</td>';
-                        });
-                        rowHeading += '</tr></thead>';
-                    } else {
-                        $.each(el, function(heading, content){
-                            rowValue += '<td>' + content + '</td>';
-                        });
-                    }
-                    rowValue += '</tr>';
-                });
-                return rowHeading + rowValue;
 
+                if (value.length !== 0) {
+                    // array contains data
+                    value.forEach(function (el, ind) {
+                        rowValue += '<tr>';
+                        if (ind === 0) {
+                            rowHeading += '<thead><tr>';
+                            $.each(el, function (heading, content) {
+                                content = checkForNull(content);
+                                rowHeading += '<th>' + heading + '</th>';
+                                rowValue += '<td>' + content + '</td>';
+                            });
+                            rowHeading += '</tr></thead>';
+                        } else {
+                            $.each(el, function (heading, content) {
+                                content = checkForNull(content);
+                                rowValue += '<td>' + content + '</td>';
+                            });
+                        }
+                        rowValue += '</tr>';
+                    });
+                    return rowHeading + rowValue;
+                } else {
+                    // empty array
+                    return '<tr><td class="empty-table"></td></tr>'
+                }
             } else {
                 //object
                 tableLayoutWidth = 'object';
                 $.each(value, function(ind, el){
+                    if (ind === 'Facebook' && el !== null) {
+                        el = '<a href="' + el + '">' + el + '</a>';
+                    } else if (ind === 'Email' && el !== null) {
+                        el = '<a href="mailto:' + el + '">' + el + '</a>';
+                    }
+                    el = checkForNull(el);
                     rowValue += '<tr><th>' + ind + '</th>' + '<td>' + el + '</td></tr>';
                 });
                 return rowValue;
@@ -285,8 +301,14 @@ jQuery(document).ready(function ($) {
         $.each(data.userReport, function(key, value){
             tablesArea.append(tableConstructor(key, value));
         });
-        tablesArea.find('> div').not(':contains("' + Object.keys(data.userReport)[0] +
-        '")').find('.widget-toggle').click();
+
+        (function tablesPostWork(){
+            // Adding additional styles to empty widgets
+            $('.empty-table').parents('.widget').addClass('empty-table');
+
+            // Closing widgets by default, except noted below
+            tablesArea.find('> div').not(':contains("info"), :contains("wallet"), :contains("applications")').find('.widget-toggle').click();
+        })();
     }
 
     fillTables(fakeData);

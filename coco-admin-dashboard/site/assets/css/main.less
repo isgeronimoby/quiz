@@ -5981,7 +5981,9 @@ footer .footer-links a:last-child{
 .form-radio-buttons .form-inline .form-group > div.active {
   display: inline-block;
 }
-
+.form-radio-buttons .form-inline input {
+  min-width: 400px;
+}
 .form-radio-buttons .form-inline .error {
   color: red;
   list-style: none;
@@ -5991,4 +5993,17 @@ footer .footer-links a:last-child{
   color: #333333;
   list-style: none;
   margin-top: 10px;
+}
+
+.widget.empty-table {
+  background-color: rgba(0,0,250,0.07);
+  .additional-btn {
+	display: none;
+  }
+  h2 {
+	color: #bf5b5b;
+	:before {
+	  content: 'No ';
+	}
+  }
 }
