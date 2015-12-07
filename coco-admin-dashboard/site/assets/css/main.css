@@ -6003,12 +6003,13 @@ footer .footer-links a:last-child {
 .form-radio-buttons .form-inline .form-group > div.active {
   display: inline-block;
 }
-
 .form-radio-buttons .form-inline .error {
   color: red;
   list-style: none;
+  margin-top: 10px;
 }
 .form-radio-buttons .form-inline .not-found {
   color: #333333;
   list-style: none;
+  margin-top: 10px;
 }
