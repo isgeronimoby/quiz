@@ -91,9 +91,11 @@ $(".open-left").click(function(e){
 
 			if (!$(this).hasClass("subdrop")) {
 				// hide any open menus and remove all other classes
+				/*
 				$("ul", $(this).parents("ul:first")).slideUp(350);
 				$("a", $(this).parents("ul:first")).removeClass("subdrop");
 				$("#sidebar-menu .pull-right i").removeClass("fa-angle-up").addClass("fa-angle-down");
+				*/
 
 				// open our new menu and add the open class
 				$(this).next("ul").slideDown(350);
@@ -201,8 +203,16 @@ $(document).on("click", ".widget", function(){
 	$('.selectpicker').selectpicker();
 
 // SIDE-BAR menu on minimized interface
-	$('#sidebar-menu ul > li').on('click', function () {
-		$(this).toggleClass('mouseHover');
+	var sideBarSections = $('#sidebar-menu > ul > li');
+	sideBarSections.on('click', function () {
+		if ($(this).hasClass('mouseHover')) {
+			// menu is opened
+			sideBarSections.removeClass('mouseHover');
+		} else {
+			// menu is closed
+			sideBarSections.removeClass('mouseHover');
+			$(this).addClass('mouseHover');
+		}
 	});
 	$('button.button-menu-mobile.open-left').click(function(){
 		$('#sidebar-menu ul > li').removeClass('mouseHover');

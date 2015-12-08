@@ -73,10 +73,10 @@ body.cru .button-menu-mobile:hover {
   background: #f5f5ff;
 }
 #sidebar-menu > ul > li > a:hover {
-  background: #ffffff;
+  background: #3498db;
 }
 #sidebar-menu > ul > li > a.subdrop {
-  background: #ffffff;
+  background: #1d6fa5;
 }
 #sidebar-menu > ul > li > a.active,
 #sidebar-menu > ul > li > a.active.subdrop {
