@@ -592,6 +592,13 @@ html.mm-opened .top-header .mobile-menu {
     max-width: 190px;
 }
 
+.section .img-winner {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    max-width: 600px;
+}
+
 #linesHolder {
 /*    position: absolute;
     width: 100%;
@@ -1878,11 +1885,17 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
     .show-mobile {
         display: inline-block !important;
     }
+    .section .img-winner {
+        max-width: 100%;
+    }
 }
 
 @media all and (max-width: 550px) {
     .middle-block {
         padding: 80px 10px;
+    }
+    .section .img-winner {
+        position: static;
     }
 }
 

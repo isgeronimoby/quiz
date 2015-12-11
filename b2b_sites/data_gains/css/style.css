@@ -297,7 +297,10 @@ h1 {
 
 .bottom-content {
     position: absolute;
-    bottom: 30px;
+    bottom: 0;
+    padding-bottom: 20px;
+    padding-top: 10px;
+    background-color: rgba(0,0,0,0.25);
     left: 50%;
     width: 100%;
     text-align: center;
@@ -332,7 +335,7 @@ h1 {
     display: inline-block;
 }
 .bottom-content .logos img {
-    max-width: 130px;
+    max-width: 100px;
     display: inline-block;
     vertical-align: middle;
     margin: 0 5px;
@@ -344,8 +347,9 @@ h1 {
 
 .bottom-content .logos.ribbons p {
     font-weight: 100;
-    font-size: 14px;
-    margin: 10px 10px 0 -5px;
+    font-size: 12px;
+    margin: 10px 0 0 -5px;
+    text-align: center;
 }
 .bottom-content .logos.ribbons .ribbon {
     display: inline-block;
@@ -369,6 +373,12 @@ h1 {
 .middle-content .btns-holder {
     text-align: center;
     padding: 15px 0;
+}
+
+.middle-content .img-reward {
+    max-width: 600px;
+    display: block;
+    margin: 30px auto 0;
 }
 
 .btn {
@@ -722,6 +732,12 @@ p b {
         min-width: 0;
         padding: 20px 20px;
     }
+
+    .middle-content .img-reward {
+        max-width: 90%;
+        margin: 10px auto 0;
+    }
+
     h1 {
         font-size: 30px;
         letter-spacing: 2px;
@@ -775,6 +791,9 @@ p b {
     }
     .section-header h1 {
         line-height: 100px;
+    }
+    .bottom-content {
+        background-color: transparent;
     }
 }
 
