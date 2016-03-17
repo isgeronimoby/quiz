@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>Server</title>
+
+    <script src="js/easyxdm/easyXDM.debug.js"></script>
+    <script type="text/javascript">
+        easyXDM.DomHelper.requiresJSON("js/easyxdm/json2.js");
+    </script>
+
+    <script>
+        (function(){
+            'use strict';
+            var dgServerModules = {};
+
+            dgServerModules.cookies = {
+                createCookie: function(name, value, days) {
+                    if (days) {
+                        var date = new Date(),
+                                expires;
+                        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                        expires = '; expires=' + date.toGMTString();
+                    }
+                    else expires = '';
+                    document.cookie = name + '=' + value + expires + '; path=/';
+                },
+                readCookie: function(name) {
+                    var nameEQ = name + '=';
+                    var ca = document.cookie.split(';');
+                    for (var i = 0; i < ca.length; i++) {
+                        var c = ca[i];
+                        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+                    }
+                    return null;
+                },
+                eraseCookie: function(name) {
+                    dgServerModules.cookies.createCookie(name, '', -1);
+                }
+            };
+
+            dgServerModules.easyXDM = easyXDM.noConflict('dgServerModules');
+
+            var rpc = new dgServerModules.easyXDM.Rpc({},
+                    {
+                        local: {
+                            writeClubCookie: function (cookieName, onSuccess, onFailure) {
+
+                                if (dgServerModules.cookies.readCookie(cookieName) === null) {
+                                    // set cookie
+                                    dgServerModules.cookies.createCookie(cookieName, 0, 30);
+                                    if (dgServerModules.cookies.readCookie(cookieName) === null){
+                                        // setting third-party cookies is disabled on the client
+                                        return false;
+                                    }
+                                } else {
+                                    // increase cookie && this user is a fan
+                                    dgServerModules.cookies.createCookie(cookieName, 1, 30);
+                                }
+
+                                return String(window.location.hostname + ': ' + cookieName + ' ' + dgServerModules.cookies.readCookie(cookieName));
+                            },
+                            readClubCookie: function (cookieName, onSuccess, onFailure) {
+                                return dgServerModules.cookies.readCookie(cookieName);
+                            }
+                        }
+                    }
+            );
+
+
+        })();
+    </script>
+
+
+</head>
+<body>
+
+</body>
+</html>

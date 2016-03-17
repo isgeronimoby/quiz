@@ -1,0 +1,10 @@
+#dg-side-widget #dg-side-widget-wrapper {
+  position: fixed;
+  bottom: 100px;
+  right: 0;
+}
+#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body {
+  width: 140px;
+  height: 200px;
+  background-color: burlywood;
+}

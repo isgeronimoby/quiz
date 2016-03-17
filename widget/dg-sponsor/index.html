@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>Sponsor</title>
+
+    <script src="js/easyxdm/easyXDM.debug.js"></script>
+    <script type="text/javascript">
+        easyXDM.DomHelper.requiresJSON("js/easyxdm/json2.js");
+    </script>
+
+    <script>
+        (function(){
+            'use strict';
+            
+            var modules = {};
+            modules.easyXDM = easyXDM.noConflict('modules');
+
+            var rpc = new modules.easyXDM.Rpc(
+                    {
+                        remote: "http://dg-api.cool-link.com/"
+                    },
+                    {
+                        local: {
+
+                        },
+                        remote: {
+                            readClubCookie: {}
+                        }
+                    }
+            );
+
+            rpc.readClubCookie('FClub', function(response){
+                console.warn(response);
+                document.getElementById('response').innerHTML = (response != 1) ? 'You\'re not a fan of FClub yet' : 'You\'re definitely a FAN OF FCLUB!!!!';
+            });
+        })();
+
+    </script>
+
+</head>
+<body>
+
+<h1 id="response"></h1>
+
+</body>
+</html>
