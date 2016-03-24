@@ -16,8 +16,8 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                 '</div>' +
                                                 '<div class="dg-o-w-menu-profile">' +
                                                     '<div class="profile-menu-item">' +
+                                                        '<img src="http://lorempixel.com/100/100/cats" />' +
                                                         '<div class="profile-menu-unauthorized">' +
-                                                            '<img src="http://lorempixel.com/100/100/cats" />' +
                                                             '<div>' +
                                                                 '<h4>Hello, guest!</h4>' +
                                                                 '<div class="dg-o-w-login-dropdown">' +
@@ -34,10 +34,9 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                             '</div>' +
                                                         '</div>' +
                                                         '<div class="profile-menu-authorized">' +
-                                                            '<img src="http://lorempixel.com/100/100/cats" />' +
                                                             '<div>' +
                                                                 '<h4>Hello, Paul!</h4>' +
-                                                                '<p><span id="dg-o-w-points">25</span> points | <span id="dg-o-w-credits">115.25</span> credits</p>' +
+                                                                '<p><span id="dg-o-w-points">25</span> | <span id="dg-o-w-credits">115.25</span></p>' +
                                                             '</div>' +
                                                         '</div>' +
                                                     '</div>' +
@@ -63,6 +62,7 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                 '</footer>' +
                                             '</div></div>' +
                                             '<div class="dg-o-w-close">&times;</div>' +
+                                            '<div class="dg-o-w-spinner"></div>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>';
@@ -93,18 +93,18 @@ DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
                         '<div class="dg-o-w-section-content dg-o-w-submenu-exist">' +
                             '<h3>Available draws</h3>' +
                             '<ul class="dg-o-w-list-draws">' +
-                                '<li></li><li></li><li></li><li></li><li></li><li></li><li></li>' +
+                                //'<li></li><li></li><li></li><li></li><li></li><li></li><li></li>' +
                             '</ul>' +
                         '</div>';
 
 DGW.templates.profileMain = '<div class="dg-o-w-profile">' +
                                 '<div class="dg-o-w-left-side">' +
-                                    '<div class="dg-o-w-image-holder"><img src="http://lorempixel.com/500/500/cats" /></div>' +
-                                    '<p><span>15</span> friends</p>' +
+                                    '<div class="dg-o-w-image-holder"><img id="profileImage" src="http://lorempixel.com/500/500/cats" /></div>' +
+                                    '<p><span id="profileFriendsAmount">15</span> friends</p>' +
                                 '</div>' +
                                 '<div class="dg-o-w-right-side">' +
                                     '<div class="dg-o-w-profile-top">' +
-                                        '<div class="dg-o-w-float-left"><h3>Captain Deadpool</h3><h5>2 badges</h5></div>' +
+                                        '<div class="dg-o-w-float-left"><h3 id="profileName">Captain Deadpool</h3><h5>2 badges</h5></div>' +
                                         '<div class="dg-o-w-float-right">' +
                                             '<div class="dg-o-w-profile-points"><h3>115</h3><h5>20</h5></div>' +
                                             '<div class="dg-o-w-profile-credits"><h3>215.20</h3><h5>25.15</h5></div>' +
@@ -127,7 +127,7 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile">' +
                                     '</div>' +
                                 '</div>' +
                             '</div>' +
-                            '<div class="dg-o-w-section-content">' +
+                            '<div class="dg-o-w-section-content content-static">' +
                                 '<h3>Badges</h3>' +
                                 '<div class="dg-o-w-badges-holder"><ul></ul></div>' +
                             '</div>';
