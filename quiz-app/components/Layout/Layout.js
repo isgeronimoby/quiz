@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import './Layout.scss';
 import Navigation from '../Navigation';
+import './Layout.scss';
 
 class Layout extends Component {
 
@@ -10,8 +10,9 @@ class Layout extends Component {
 
 	render() {
 		return (
-			<div className="Layout">
+			<div className="layout">
 				<Navigation />
+
 				{this.props.children}
 			</div>
 		);
