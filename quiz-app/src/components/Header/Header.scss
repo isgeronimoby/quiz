@@ -11,17 +11,44 @@
 
 $brand-color: #61dafb;
 
+// temporary prototype layout
+
 .root {
-  background: #373277;
-  color: #fff;
+  background: #fff;
+  color: #338956;
+  height: 90px;
+  display: flex;
+  width: 640px;
+  font-size: 30px;
+  margin: auto;
+}
+
+.menuIcon {
+  width: 105px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 45px;
+  }
+}
+
+.titleSection {
+  flex-grow: 1;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.points {
+  width: 100px;
+  padding-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
-  max-width: $max-content-width;
-}
-
-.brand {
-  color: color($brand-color lightness(+10%));
-  text-decoration: none;
-  font-size: 1.75em; /* ~28px */
+  // max-width: $max-content-width;
 }

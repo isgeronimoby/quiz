@@ -12,13 +12,17 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Header.scss';
 
 class Header extends Component {
+  
+  // "title" className cannot be used (wtf?)
 
   render() {
     return (
       <div className={s.root}>
-        <div className={s.container}>
-          Header
+        <div className={s.menuIcon}>
+          <img src={require('./menu.svg')} alt="Menu" />
         </div>
+        <div className={s.titleSection}>Fixtures</div>
+        <div className={s.points}>210 pts</div>
       </div>
     );
   }
