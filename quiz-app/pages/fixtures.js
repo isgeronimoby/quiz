@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FixtureList from '../components/FixtureList';
 
 class Fixtures extends Component {
 
@@ -6,9 +7,7 @@ class Fixtures extends Component {
 
 	render() {
 		return (
-			<div>
-				<h1>Coming soon</h1>
-			</div>
+			<FixtureList/>
 		);
 	}
 }
