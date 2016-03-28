@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import NavButton from './NavButton.js';
 import Link from '../Link';
+
 import './Header.scss';
 
 class Header extends Component {
@@ -12,17 +13,20 @@ class Header extends Component {
 	render() {
 		return (
 			<div className="header">
-				<div className="header-menu">
-					<NavButton onClick={ () => this.props.onMenuBtnClick() }/>
-				</div>
 				<div className="header-title">
 					<h2>{ this.props.title }</h2>
 				</div>
+
+
+				<div
+					className="nav-button"
+					onClick={ () => this.props.onMenuBtnClick() }>
+					<img className="icon-menu" src={require('./images/menu.svg')} />
+				</div>
+				
 				<div className="header-points">
-					<h2>
-						<span className="title-icon">[?]</span>
-						{220}pts
-					</h2>
+					<img className="icon-points" src={require('./images/points.svg')} />
+					220 pts
 				</div>
 			</div>
 		);

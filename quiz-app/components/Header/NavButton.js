@@ -9,9 +9,7 @@ class NavButton extends Component {
 	render() {
 		return (
 			<div className="nav-button" {...this.props}>
-				<span className="dash top"></span>
-				<span className="dash middle"></span>
-				<span className="dash bottom"></span>
+				
 			</div>
 		);
 	}

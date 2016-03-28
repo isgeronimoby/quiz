@@ -1,25 +1,44 @@
+@import '../reset.scss';
 @import '../variables.scss';
+
+html {
+  font-size: 10px;
+}
 
 html, body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
   background-color: $body-bg;
   color: $text-color;
   font-family: $font-family-roboto;
 }
+
 .layout {
   margin: 0 auto;
 }
+
+.content {
+  padding-top: 88px;
+  overflow: auto;
+}
+
 @media (min-width: $screen-sm-min) {
   .layout {
     width: calc($screen-sm-min - 18px);
   }
 }
+
 @media (min-width: $screen-md-min) {
   .layout {
     width: calc($screen-md-min - 22px);
   }
 }
+
 @media (min-width: $screen-lg-min) {
   .layout {
     width: calc($screen-lg-min - 30px);

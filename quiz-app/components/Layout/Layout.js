@@ -30,8 +30,9 @@ class Layout extends Component {
 				<Menu
 					show={ this.state.showMenu }
 					onClick={ () => this.toggleMenu(false) }/>
-
-				{ this.props.children }
+				<div className="content">
+					{ this.props.children }
+				</div>
 			</div>
 		);
 	}
