@@ -6,7 +6,7 @@ class Index extends Component {
 	render() {
 		return (
 			<div style={{margin: '20px auto', textAlign: 'center'}}>
-				<a href="/fixtures" onClick={Link.handleClick}>Fixtures</a>
+				<Link to="/fixtures">Fixtures</Link>
 			</div>
 		);
 	}

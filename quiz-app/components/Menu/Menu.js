@@ -17,18 +17,18 @@ class Menu extends Component {
 			<div className={"menu " + hiddenClass } {...others} >
 				<div className="menu-panel">
 					<div className="menu-header"></div>
-					<a className="menu-item" href="/fixtures" onClick={Link.handleClick}>
+					<Link className="menu-item" to="/fixtures">
 						<h3>Fixtures</h3>
-					</a>
-					<a className="menu-item" href="/" onClick={Link.handleClick}>
+					</Link>
+					<Link className="menu-item" to="/">
 						<h3>Leaderboard</h3>
-					</a>
-					<a className="menu-item" href="/" onClick={Link.handleClick}>
+					</Link>
+					<Link className="menu-item" to="/">
 						<h3>Earn</h3>
-					</a>
-					<a className="menu-item" href="/" onClick={Link.handleClick}>
-						<h3>Draws</h3>
-					</a>
+					</Link>
+					<Link className="menu-item" to="/">
+						<h3>Earn</h3>
+					</Link>
 				</div>
 			</div>
 		);
