@@ -10,11 +10,11 @@ function sortFixtures(a, b) {
 class FixtureList extends Component {
 
 	static propTypes = {
-		items: PropTypes.array.isRequired
+		data: PropTypes.array.isRequired
 	};
 
 	render() {
-		const items = this.props.items
+		const items = this.props.data
 			.sort(sortFixtures)
 			.map((data) => {
 				const { date, competition } = data;
