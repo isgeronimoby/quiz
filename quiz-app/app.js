@@ -17,7 +17,10 @@ const route = async (path, callback) => {
 function run() {
 	const container = document.getElementById('app');
 	Location.listen(location => {
-		route(location.pathname, async (component) => ReactDOM.render(component, container, () => {
+		const pathname = location.pathname;
+		const path = pathname.slice(pathname.lastIndexOf('/'));
+
+		route(path, async (component) => ReactDOM.render(component, container, () => {
 			// Track the page view event via Google Analytics
 			//window.ga('send', 'pageview');
 		}));
