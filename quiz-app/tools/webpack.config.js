@@ -114,7 +114,8 @@ const appConfig = merge({}, config, {
 					warnings: VERBOSE
 				}
 			}),
-			new webpack.optimize.AggressiveMergingPlugin(),
+			//new webpack.optimize.AggressiveMergingPlugin(),
+			new webpack.optimize.LimitChunkCountPlugin({maxChunks: 1}), // TODO - figure out relative chunk paths
 		]),
 		...(WATCH ? [
 			new webpack.HotModuleReplacementPlugin(),
