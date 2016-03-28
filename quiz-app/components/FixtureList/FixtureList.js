@@ -1,43 +1,40 @@
 import React, { Component, PropTypes } from 'react';
-import Link from '../Link';
+import FixtureListItem from './FixtureListItem.js';
 import './FixtureList.scss';
 
-const data = [];
+
+function sortFixtures(a, b) {
+	return 0; // TODO
+}
 
 class FixtureList extends Component {
 
+	static propTypes = {
+		items: PropTypes.array.isRequired
+	};
+
 	render() {
+		const items = this.props.items
+			.sort(sortFixtures)
+			.map((data) => {
+				const { date, competition } = data;
+				const header = `${date} - ${competition}`;
+
+				return { ...data, header };
+			})
+			.map((data, idx, array) => {
+				const { header, ...others } = data;
+				const { header: prevHeader } = array[idx-1] || {};
+				const showHeader = !prevHeader || prevHeader !== header;
+
+				return (
+					<FixtureListItem key={'fixture-' + idx} header={showHeader ? header: null} data={others}/>
+				);
+			});
+
 		return (
 			<ul className="fixture-list">
-				<li className="fixture-group-head">28 APRIL - Champions League</li>
-				<li className="fixture-group-item">
-					<div className="fixture-item-icons"></div>
-					<div className="fixture-item-content">
-						<h3 className="list-title">Everton vs Chelsea</h3>
-						<h5 className="list-meta">19:00. 3rd Tour, London</h5>
-						<div className="badge">+32 friends</div>
-					</div>
-					<div className="fixture-item-arrow"></div>
-				</li>
-				<li className="fixture-group-item last">
-					<div className="fixture-item-icons"></div>
-					<div className="fixture-item-content">
-						<h3 className="list-title">Everton vs Chelsea</h3>
-						<h5 className="list-meta">19:00. 3rd Tour, London</h5>
-						<div className="badge">+32 friends</div>
-					</div>
-					<div className="fixture-item-arrow"></div>
-				</li>
-				<li className="fixture-group-head">28 APRIL - Champions League</li>
-				<li className="fixture-group-item">
-					<div className="fixture-item-icons"></div>
-					<div className="fixture-item-content">
-						<h3 className="list-title">Everton vs Chelsea</h3>
-						<h5 className="list-meta">19:00. 3rd Tour, London</h5>
-						<div className="badge">+32 friends</div>
-					</div>
-					<div className="fixture-item-arrow"></div>
-				</li>
+				{ items }
 			</ul>
 		);
 	}

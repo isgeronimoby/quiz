@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FixtureList from '../components/FixtureList';
+import items from '../components/FixtureList/data.js';
 
 class Fixtures extends Component {
 
@@ -7,7 +8,7 @@ class Fixtures extends Component {
 
 	render() {
 		return (
-			<FixtureList/>
+			<FixtureList items={items} />
 		);
 	}
 }
