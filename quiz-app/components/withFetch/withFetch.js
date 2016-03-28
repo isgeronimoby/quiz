@@ -3,6 +3,8 @@ import React, { Component, PropTypes } from 'react';
 function withFetch (ComposedComponent, fetch) {
 	return class WithFetch extends Component {
 
+		static title = ComposedComponent.title;
+
 		state = {
 			data: {},
 			loading: true,
