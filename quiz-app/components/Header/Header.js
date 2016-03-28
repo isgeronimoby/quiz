@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import NavButton from './NavButton.js';
 import Link from '../Link';
 
 import './Header.scss';
@@ -17,15 +16,14 @@ class Header extends Component {
 					<h2>{ this.props.title }</h2>
 				</div>
 
-
 				<div
 					className="nav-button"
 					onClick={ () => this.props.onMenuBtnClick() }>
-					<img className="icon-menu" src={require('./images/menu.svg')} />
+					<img className="icon-menu" src={require('./images/icon-menu.svg')} />
 				</div>
 				
 				<div className="header-points">
-					<img className="icon-points" src={require('./images/points.svg')} />
+					<img className="icon-points" src={require('../../static/images/icon-cup.svg')} />
 					220 pts
 				</div>
 			</div>

@@ -17,17 +17,29 @@ class Menu extends Component {
 			<div className={"menu " + hiddenClass } {...others} >
 				<div className="menu-panel">
 					<div className="menu-header"></div>
-					<Link className="menu-item" to="/fixtures">
+					<Link className="menu-item menu-item-fixtures" to="/fixtures">
+						<div className="icon-menu-item">
+							<img src={require('./images/icon-fixtures.svg')} />
+						</div>
 						<h3>Fixtures</h3>
 					</Link>
-					<Link className="menu-item" to="/">
+					<Link className="menu-item menu-item-leaderboard" to="/">
+						<div className="icon-menu-item">
+							<img src={require('./images/icon-leaderboard.svg')} />
+						</div>
 						<h3>Leaderboard</h3>
 					</Link>
-					<Link className="menu-item" to="/">
+					<Link className="menu-item menu-item-earn" to="/">
+						<div className="icon-menu-item">
+							<img src={require('../../static/images/icon-cup.svg')} />
+						</div>
 						<h3>Earn</h3>
 					</Link>
-					<Link className="menu-item" to="/">
-						<h3>Earn</h3>
+					<Link className="menu-item menu-item-draws" to="/">
+						<div className="icon-menu-item">
+							<img src={require('./images/icon-draws.svg')} />
+						</div>
+						<h3>Draws</h3>
 					</Link>
 				</div>
 			</div>
