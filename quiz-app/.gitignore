@@ -5,6 +5,7 @@ build
 node_modules
 ncp-debug.log
 npm-debug.log
+.idea
 
 # Win specific
 *.lnk

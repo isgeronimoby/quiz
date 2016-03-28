@@ -7,10 +7,9 @@
 import GitRepo from 'git-repository';
 import task from './lib/task';
 
-// TODO: Update deployment URL
 const remote = {
-	name: 'github',
-	url: 'https://github.com/{user}/{repo}.git',
+	name: 'origin',
+	url: 'https://github.com/pavek/quiz-app.git',
 	branch: 'gh-pages',
 };
 
