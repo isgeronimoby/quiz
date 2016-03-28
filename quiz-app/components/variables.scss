@@ -3,14 +3,18 @@
  * -------------------------------------------------------------------------- */
 
 $body-bg: #f7f7f7;
-$text-color: #333;
-$brand-color: #21ce99;
+$text-color: #117453;
+$brand-color: #338956;
 
 /*
  * Typography
  * -------------------------------------------------------------------------- */
 
 $font-family-base: 'Roboto', 'Helvetica', sans-serif;
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
+}
 
 /*
  * Media queries breakpoints
@@ -19,3 +23,9 @@ $font-family-base: 'Roboto', 'Helvetica', sans-serif;
 $screen-sm-min: 768px;
 $screen-md-min: 992px;
 $screen-lg-min: 1200px;
+
+/*
+ * Layout
+ * -------------------------------------------------------------------------- */
+
+$header-height: 90px;

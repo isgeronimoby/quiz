@@ -1,0 +1,40 @@
+@import '../variables.scss';
+.menu {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  background: rgba(0,0,0,.4);
+  transition: background .3s ease;
+  pointer-events: all;
+
+  &.is-hidden {
+    pointer-events: none;
+    background: rgba(0,0,0,0);
+
+    .menu-panel {
+      transform: translateX(-100%);
+    }
+  }
+}
+.menu-panel {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 70px;
+  background: #fff;
+  transform: translateX(0);
+  transition: transform .3s ease;
+
+  .menu-header {
+    height: 150px;
+    background: $brand-color;
+    margin-bottom: 10px;
+  }
+
+  a.menu-item {
+    display: block;
+    margin: 0;
+    padding: 20px 0 20px 50px;
+    color: $text-color;
+    text-decoration: none;
+  }
+}

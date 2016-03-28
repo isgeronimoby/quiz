@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import Link from '../components/Link';
 
-export default class extends Component {
+class Index extends Component {
 
 	render() {
 		return (
-			<div>
-				<h1>Home Page</h1>
-				<p>Coming soon.</p>
+			<div style={{margin: '20px auto', textAlign: 'center'}}>
+				<a href="/fixtures" onClick={Link.handleClick}>Fixtures</a>
 			</div>
 		);
 	}
 }
+
+export default Index;

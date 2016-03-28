@@ -1,9 +1,3 @@
-/**
- * React Static Boilerplate
- * https://github.com/koistya/react-static-boilerplate
- * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
- */
-
 import 'babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -16,7 +10,8 @@ const routes = {}; // Auto-generated on build. See tools/lib/routes-loader.js
 const route = async (path, callback) => {
 	const handler = routes[path] || routes['/404'];
 	const Component = await handler();
-	await callback(<Layout><Component/></Layout>);
+	const pageTitle = Component.title || 'Index';
+	await callback(<Layout title={pageTitle}><Component/></Layout>);
 };
 
 function run() {
