@@ -12,19 +12,6 @@ $brand-color: #338956;
 
 $font-family-roboto: 'Roboto', 'Helvetica', sans-serif;
 $font-family-roboto-bold: 'Roboto bold', 'Helvetica', sans-serif;
-h2 {
-  /*font-size: 3.2rem;*/
-}
-h3 {
-  font-size: 2rem;
-}
-h4 {
-  font-size: 1.4rem;
-}
-
-a, p, div, li {
-  font-size: 1.6rem;
-}
 
 /*
  * Media queries breakpoints
@@ -38,14 +25,4 @@ $screen-lg-min: 1200px;
  * Layout
  * -------------------------------------------------------------------------- */
 
-$header-height: 88px;
-
-h1, h2, h3, h4, h5 {
-  margin: 0;
-}
-
-ul, ol, li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+$header-height: 4.4rem;
