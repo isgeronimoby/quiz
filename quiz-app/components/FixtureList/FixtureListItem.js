@@ -23,13 +23,21 @@ class FixtureListItem extends Component {
                     <h5>{ this.props.header }</h5>
                 </div>
                 <Link className="fixture-item-body" to="/quiz">
-                    <div className="fixture-item-icons"></div>
+                    <div className="fixture-item-team-icons">
+                        <div className="fixture-item-team">
+                            <img src={require('../../static/images/team-chelsea.svg')} />
+                        </div>
+                        <div className="fixture-item-team fixture-item-team-overlap">
+                            <img src={require('../../static/images/team-everton.svg')} />
+                        </div>
+                    </div>
                     <div className="fixture-item-content">
                         <h3 className="list-title">{ title }</h3>
                         <h5 className="list-meta">{ subTitle }</h5>
-                        <div className="badge">{ badgeText }</div>
                     </div>
-                    <div className="fixture-item-arrow"></div>
+                    <div className="fixture-item-arrow">
+                        <img src={require('../../static/images/icon-arrow.svg')} />
+                    </div>
                 </Link>
             </li>
         );

@@ -7,26 +7,55 @@
 .fixture-item {
   display: flex;
   flex-direction: column;
+  height: 8rem;
 }
 
 .fixture-item-header {
-  padding: 5px 10px;
-  background: rgba(0, 0, 0, .1);
+  background: rgba(51, 137, 86, .2);
+  height: 2.1rem;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  color: rgba(0, 0, 0, .2);
+  font-family: $font-family-roboto-bold;
   &.is-collapsed {
-    padding: 0;
-    height: 3px;
+    height: 0.1rem;
   }
 }
 
 .fixture-item-body {
-  min-height: 100px;
-  line-height: 25px;
   display: flex;
+  height: 100%;
   color: #fff;
   text-decoration: none;
 
-  .fixture-item-icons {
-    width: 90px;
+  .fixture-item-team-icons {
+    width: 7.6rem;
+    padding-left: 1.5em;
+    margin-right: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .fixture-item-team {
+    width: 4rem;
+    background: #fff;
+    height: 4rem;
+    border-radius: 50%;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:first-child {
+      position: relative;
+    }
+    img {
+      width: 3rem;
+    }
+  }
+  .fixture-item-team-overlap {
+    margin-left: -0.8rem;
   }
   .fixture-item-content {
     flex-grow: 1;
@@ -36,19 +65,21 @@
     align-items: flex-start;
   }
   .fixture-item-arrow {
-    width: 30px;
+    width: 3.6rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 0.8rem;
+    }
   }
 }
 
-.list-meta {
-  color: #ddd;
+.list-title {
+  font-size: 1.4rem;
 }
 
-.badge {
-  display: inline-block;
-  background-color: #3E5965;
-  border-radius: 10px;
-  padding: 0 10px;
-  font-size: 1.4rem;
-  line-height: 1.5;
+.list-meta {
+  font-size: 1rem;
+  color: #ddd;
 }

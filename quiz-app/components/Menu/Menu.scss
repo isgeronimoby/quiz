@@ -18,14 +18,15 @@
 }
 .menu-panel {
   position: absolute;
+  z-index: 1;
   top: 0; bottom: 0;
-  left: 0; right: 70px;
+  left: 0; right: 7rem;
   background: #fff;
   transform: translateX(0);
   transition: transform .3s ease;
 
   .menu-header {
-    height: 100px;
+    height: 10rem;
     background: $brand-color;
     margin-bottom: 2rem;
   }
