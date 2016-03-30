@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<script src="http://localhostdev/spr-static/content/api/easyXDM.min.js"></script>
+<script src="http://localhostdev/spr-static/content/api/jquery.min.js"></script>
+<script>
+	function apiTunnel(request, onSuccess, onFailure) {
+		try {
+			var options = {
+				type: request.method,
+				url: 'http://localhostdev/spr-api/publisher/v1/' + request.endpoint,
+				data: request.params,
+				contentType: 'application/json; charset=UTF-8',
+				headers: {
+					'X-Publisher-Origin': rpc.origin,
+					'X-Api-Key': request.apiKey
+				}
+			};
+			options.complete = function (xhr) {
+				var response = {};
+				if (xhr.status !== 200) {
+					response.error = xhr.responseText;
+					response.status = xhr.status;
+				} else {
+					response.data = xhr.responseText.length > 0 ? JSON.parse(xhr.responseText) : null;
+				}
+				onSuccess(response);
+			};
+
+			$.ajax(options);
+		}
+		catch (ex) {
+			onFailure(ex.message);
+		}
+	}
+
+	var rpc = new easyXDM.Rpc({}, {
+		local: {
+			apiTunnel: apiTunnel
+		}
+	});
+</script>
+</head>
+</html>
