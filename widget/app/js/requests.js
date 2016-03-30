@@ -1,6 +1,6 @@
 DGW.global.api.easyXDM = easyXDM.noConflict('DGW.global.api');
 DGW.global.api.rpc = new DGW.global.api.easyXDM.Rpc({
-    remote: "http://spr-api-test.cloudapp.net/tunnel.html"
+    remote: DGW.global.tunnelPath
 }, {
     remote: {
         apiTunnel: {}

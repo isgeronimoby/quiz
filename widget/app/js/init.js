@@ -1,7 +1,18 @@
 window.DGW = function () {
     if (document.getElementById('dgl-gamified-widget')) {
-        var key = document.getElementById('dgl-gamified-widget').getAttribute('data-key');
+        var widgetScript = document.getElementById('dgl-gamified-widget');
+        var key = widgetScript.getAttribute('data-key');
+        var tunnelPath;
         if (key) {
+            if (widgetScript.getAttribute('data-tunnel') !== null) {
+                tunnelPath = 'http://spr-api-test.cloudapp.net/tunnel.html';
+                if (widgetScript.getAttribute('data-tunnel') === 'local') {
+                    tunnelPath = 'http://localhostdev/spr-api/tunnel.html';
+                }
+            } else {
+                // No parameter - use production path
+                tunnelPath = 'https://api.rewarded.club/tunnel.html';
+            }
             return {
                 templates: {},
                 main: {
@@ -27,7 +38,8 @@ window.DGW = function () {
                         requests: {}
                     },
                     elements: {},
-                    methods: {}
+                    methods: {},
+                    tunnelPath: tunnelPath
                 },
                 states: {},
                 helpers: {}
