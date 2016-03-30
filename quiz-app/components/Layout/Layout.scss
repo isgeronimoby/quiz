@@ -1,0 +1,59 @@
+@import '../reset.scss';
+@import '../variables.scss';
+
+html {
+  font-size: 10px;
+  /*
+    1rem = 10px
+    1rem inside media queries = 16px
+  */
+}
+
+h2 {
+  /*font-size: 3.2rem;*/
+}
+h3 {
+  font-size: 2rem;
+}
+h4 {
+  font-size: 1.4rem;
+}
+
+a, p, div, li {
+  font-size: 1.6rem;
+}
+
+
+
+body {
+  background-color: $body-bg;
+  color: $text-color;
+  font-family: $font-family-roboto;
+}
+
+.layout {
+  margin: 0 auto;
+}
+
+.content {
+  padding-top: $header-height;
+  overflow: auto;
+}
+
+@media (min-width: $screen-sm-min) {
+  .layout {
+    width: calc($screen-sm-min - 18px);
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .layout {
+    width: calc($screen-md-min - 22px);
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  .layout {
+    width: calc($screen-lg-min - 30px);
+  }
+}

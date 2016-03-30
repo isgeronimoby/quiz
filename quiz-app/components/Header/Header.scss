@@ -1,0 +1,48 @@
+@import '../variables.scss';
+
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  height: $header-height;
+  border-bottom: 1px solid rgba(0, 0, 0, .33);
+  background: #fff;
+  justify-content: space-between;
+}
+
+.nav-button {
+  width: 5.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-title {
+  line-height: $header-height;
+  text-align: center;
+  font-size: 1.7rem;
+  position: absolute;
+  left: 5.2rem;
+  right: 5.2rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+.header-points {
+  font-size: 1.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 1rem;
+}
+
+.icon-menu {
+  width: 2.2rem;
+}
+
+.icon-points {
+  width: 1.8rem;
+  margin-right: 0.8rem;
+}
