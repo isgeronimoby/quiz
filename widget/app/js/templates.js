@@ -23,7 +23,7 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                                 '<div class="dg-o-w-login-dropdown">' +
                                                                     '<a href="#">Log in by email</a>' +
                                                                     '<div class="dg-o-w-email-login-form">' +
-                                                                        '<form>' +
+                                                                        '<form id="dg-o-w-form-login-top">' +
                                                                             '<label>Email <input type="email" placeholder="mail@mail.com" /></label>' +
                                                                             '<label>Password <input type="password" /></label>' +
                                                                             '<input type="submit" value="Sign In" />' +
@@ -52,9 +52,14 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                         '<div class="inline-part"><a id="dg-o-w-footer-email-login" href="#" class="btn-radius btn-large btn-white">Sign up with email</a></div>' +
                                                     '</div>' +
                                                     '<div class="footer-section footer-section-step-2">' +
-                                                        '<a id="dg-o-w-footer-login-select" href="#" class="btn-back-footer">&larr; Back</a><form>' +
+                                                        '<a id="dg-o-w-footer-login-select" href="#" class="btn-back-footer">&larr; Back</a><form id="dg-o-w-footer-signup-email">' +
                                                             '<div class="inline-part"><label>Name <input type="text" placeholder="First Name" /></label></div>' +
                                                             '<div class="inline-part"><label>Email <input type="email" placeholder="mail@mail.com" /></label></div>' +
+                                                            '<div class="inline-part"><label>&nbsp; <input class="btn-dg-o-w-outline" type="submit" value="Submit" /></label></div>' +
+                                                        '</form>' +
+                                                    '</div>' +
+                                                    '<div class="footer-section footer-section-step-3">' +
+                                                        '<a id="dg-o-w-footer-login-select-2" href="#" class="btn-back-footer">&larr; Back</a><form id="dg-o-w-footer-signup-pass">' +
                                                             '<div class="inline-part"><label>Password <input type="password" /></label></div>' +
                                                             '<div class="inline-part"><label>&nbsp; <input class="btn-dg-o-w-outline" type="submit" value="Sign Up" /></label></div>' +
                                                         '</form>' +
@@ -79,7 +84,7 @@ DGW.templates.earnMain = '<div class="dg-o-w-submenu">' +
                                 '<option>Nike</option>' +
                                 '<option>Telco</option></select>' +
                         '</div>' +
-                        '<div class="dg-o-w-section-content dg-o-w-submenu-exist">' +
+                        '<div class="dg-o-w-section-content">' +
                             '<h3>Complete the tasks and earn +500 points today</h3>' +
                             '<ul class="dg-o-w-list-offers">' +
                                 '<li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>' +
@@ -88,12 +93,11 @@ DGW.templates.earnMain = '<div class="dg-o-w-submenu">' +
 DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
                             '<ul><li class="dg-o-w-active">All draws</li><li>Finished soon</li>' +
                                 '<li>My draws</li><li>Games</li></ul>' +
-                            '<label class="checkbox-slider">Show finished draws <input type="checkbox" class="ios-switch bigswitch" /><div><div></div></div></label>' +
+                            '<label class="checkbox-slider">Show finished draws <input id="dg-o-w-show-expired" type="checkbox" class="ios-switch bigswitch" /><div><div></div></div></label>' +
                         '</div>' +
-                        '<div class="dg-o-w-section-content dg-o-w-submenu-exist">' +
+                        '<div class="dg-o-w-section-content">' +
                             '<h3>Available draws</h3>' +
                             '<ul class="dg-o-w-list-draws">' +
-                                //'<li></li><li></li><li></li><li></li><li></li><li></li><li></li>' +
                             '</ul>' +
                         '</div>';
 
@@ -122,7 +126,7 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile">' +
                                             ' and get <span>+50</span> points for each friend</p>' +
                                         '</div>' +
                                         '<div class="dg-o-w-profile-signout dg-o-w-float-right">' +
-                                            '<p class="color-brand-light"><a href="#">Sign out</a></p>' +
+                                            '<p class="color-brand-light"><a id="dg-o-w-sign-out-btn" href="#">Sign out</a></p>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +
@@ -154,7 +158,7 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul><li class="toggl
                                         '<div class="dg-o-w-activity-slider"><ul></ul></div>' +
                                     '</div>' +
                                 '</div>' +
-                                '<div class="dg-o-w-section-content dg-o-w-submenu-activities">' +
+                                '<div class="dg-o-w-section-content">' +
                                     '<div class="dg-o-w-activities-header">' +
                                         '<p class="dg-o-w-float-left">Activities for today</p>' +
                                         '<p class="dg-o-w-floating-link"><a href="#">Invite more friends</a> and get +50 points for each</p>' +

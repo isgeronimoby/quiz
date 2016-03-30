@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Facebook redirect</title>
+
+    <script src="js/easyXDM.min.js"></script>
+
+    <script>
+        var tunnelHelper = {};
+        tunnelHelper.easyXDM = easyXDM.noConflict('tunnelHelper');
+        tunnelHelper.rpc = new DGW.global.api.easyXDM.Rpc({
+            remote: "http://spr-api-test.cloudapp.net/tunnel.html"
+        }, {
+            remote: {
+                apiTunnel: {}
+            }
+        });
+        tunnelHelper.rpc.apiTunnel({
+                    apiKey: DGW.global.api.apiKey,
+                    method: method,
+                    endpoint: endpoint,
+                    params: requestBody
+                },
+                function onSuccess(response) {
+                    if (response.error) {
+
+                    } else if (response.data !== null) {
+
+                    } else {
+
+                    }
+                },
+                function onError(error) {
+                    console.error(error.message);
+                });
+
+        var tunnelBack = {};
+        tunnelBack.easyXDM = easyXDM.noConflict('tunnelBack');
+        tunnelBack.rpc = new DGW.global.api.easyXDM.Rpc({
+            remote: "url2"
+        }, {
+            remote: {
+                apiTunnel: {}
+            }
+        });
+    </script>
+
+    <style>
+        .fbloginbutton {
+            display: inline-block;
+            padding: 14px 40px;
+            background: blue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="fbloginbutton">Connect</div>
+
+
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '614550048660888',
+            cookie: true,  // enable cookies to allow the server to access
+            // the session
+            xfbml: true,  // parse social plugins on this page
+            version: 'v2.2' // use version 2.2
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    var wind;
+
+    document.querySelector('.fbloginbutton').addEventListener('click', function(){
+
+        var strWindowFeatures = "menubar=no,location=no,resizable=no,scrollbars=no,status=yes,width=200,height=200";
+
+        wind = window.open("https://www.facebook.com/dialog/oauth?scope=email%2Cpublic_profile%2Cuser_friends&client_id=614550048660888&redirect_uri=https://www.facebook.com/connect/login_success.html&display=popup&response_type=token",
+                    "my_window", strWindowFeatures);
+
+        wind.close();
+
+//        FB.login(function (response) {
+//                    if (response.status === "connected") {
+//                        // Logged into your app and Facebook.
+//
+//                    }
+//                    else if (response.status === "not_authorized") {
+//                        // The person is logged into Facebook, but not your app.
+//                    }
+//                    else {
+//                        // The person is not logged into Facebook, so we're not sure if
+//                        // they are logged into this app or not.
+//                    }
+//                },
+//                { scope: "email" }
+//        );
+    });
+
+</script>
+
+</body>
+</html>

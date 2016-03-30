@@ -4,6 +4,8 @@
 #dg-o-w {
 	opacity: 0;
 	animation: dg-widget-fade-in 0.3s ease forwards 1;
+	position: fixed;
+	z-index: 10000;
 
 	&.hiding {
 		animation: dg-widget-fade-out 0.3s ease backwards 1;
@@ -18,7 +20,15 @@
 			margin: 0;
 			padding: 0;
 			box-sizing: border-box;
-//			transform: translate3d(0,0,0);
+			border: 0;
+			font-size: 100%;
+			font: inherit;
+			vertical-align: middle;
+			float: none;
+			text-shadow: none;
+			background: none;
+			clear: none;
+			text-transform: none;
 		}
 
 		ul {
@@ -95,13 +105,13 @@
 		}
 
 		.dg-o-w-overlay {
-			position: absolute;
+			position: fixed;
 			left: 0;
 			top: 0;
 			width: 100%;
 			height: 100%;
 			background-color: rgba(0,0,0,0.3);
-			z-index: 5000;
+			z-index: 100000;
 
 			.dg-o-w-body {
 				position: absolute;
@@ -299,6 +309,14 @@
 					}
 				}
 
+				.dg-o-w-draw-login-show {
+					display: block;
+				}
+
+				.dg-o-w-draw-auth-show {
+					display: none;
+				}
+
 				&.loading {
 					.dg-o-w-spinner {
 						display: block;
@@ -306,6 +324,14 @@
 				}
 
 				&.authorized {
+					.dg-o-w-draw-login-show {
+						display: none;
+					}
+
+					.dg-o-w-draw-auth-show {
+						display: block;
+					}
+
 					.dg-o-w-header {
 						.dg-o-w-menu-profile {
 							.profile-menu-item {
@@ -367,6 +393,14 @@
 									}
 								}
 							}
+						}
+					}
+				}
+
+				&.draws-expired {
+					.dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li {
+						&.expired {
+							display: inline-block;
 						}
 					}
 				}
@@ -655,7 +689,7 @@
 						width: 100%;
 						position: absolute;
 						bottom: 0;
-						background-color: @color-white;
+						background: @color-white;
 						border-top: 1px solid #cecece;
 						box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);
 						text-align: center;
@@ -668,6 +702,17 @@
 								}
 								&.footer-section-step-2 {
 									transform: translateX(0);
+								}
+							}
+
+							&.password {
+								.footer-section {
+									&.footer-section-step-2 {
+										transform: translateX(-100%);
+									}
+									&.footer-section-step-3 {
+										transform: translateX(0);
+									}
 								}
 							}
 						}
@@ -683,6 +728,10 @@
 								transform: translateX(0);
 							}
 							&.footer-section-step-2 {
+								transform: translateX(100%);
+								margin-top: -@dg-widget-overlay-footer-height;
+							}
+							&.footer-section-step-3 {
 								transform: translateX(100%);
 								margin-top: -@dg-widget-overlay-footer-height;
 							}
@@ -833,6 +882,7 @@
 							}
 
 							.dg-o-w-form-message {
+								position: static;
 								display: block;
 								left: 0;
 								line-height: 20px;
@@ -844,6 +894,7 @@
 
 						.dg-o-w-form {
 							display: block;
+							margin-bottom: 20px;
 
 							input, select {
 								width: 49%;
@@ -1003,6 +1054,7 @@
 								margin: 0.5%;
 								text-align: center;
 								position: relative;
+								cursor: pointer;
 
 								img {
 									max-height: 180px;
@@ -1043,6 +1095,28 @@
 										color: @color-brand;
 									}
 								}
+
+								&.expired {
+									display: none;
+									opacity: 0.8;
+								}
+								&.expired.winner {
+
+									&:after {
+										content: 'WINNER';
+										position: absolute;
+										bottom: 0;
+										right: 0;
+									}
+									&.claim-prize {
+										display: inline-block;
+										opacity: 1;
+
+										&:after {
+											content: 'WINNER, CLAIM A PRIZE';
+										}
+									}
+								}
 							}
 						}
 
@@ -1061,6 +1135,8 @@
 							.dg-o-w-draw-left-side {
 								width: 30%;
 								height: 100%;
+								position: relative;
+
 								.prize-image {
 									.dg-o-w-list-item-frame;
 									position: absolute;
@@ -1079,7 +1155,7 @@
 
 							.dg-o-w-draw-right-side {
 								width: 70%;
-								padding-left: 20px;
+								padding: 10px 0 30px 20px;
 
 								h2 {
 									font-size: 40px;
@@ -1116,6 +1192,48 @@
 
 								.dg-o-w-draw-bet-action {
 									margin-bottom: 30px;
+								}
+
+								.dg-o-w-draw-winner {
+									margin-bottom: 20px;
+
+									img {
+										max-width: 70px;
+										border-radius: 50%;
+										display: inline-block;
+										vertical-align: middle;
+										margin-right: 20px;
+									}
+
+									h4 {
+										display: inline-block;
+										vertical-align: middle;
+									}
+								}
+							}
+
+							&.expired {
+								.dg-o-w-draw-right-side {
+									.dg-o-w-draw-bet-action {
+										display: none;
+									}
+									.dg-o-w-countdown {
+										display: none;
+									}
+								}
+							}
+							.hide-claimed {
+								display: block;
+							}
+							.show-claimed {
+								display: none;
+							}
+							&.claimed {
+								.hide-claimed {
+									display: none;
+								}
+								.show-claimed {
+									display: block;
 								}
 							}
 						}
