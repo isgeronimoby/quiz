@@ -5,7 +5,10 @@ widgetStyles.type = 'text/css';
 widgetStyles.addEventListener('load', function(){
     DGW.global.methods.init();
 });
-//widgetStyles.href = 'dist/style.min.css';
-widgetStyles.href = 'http://football.cool-link.com/widget/build/style.min.css';
+
+var pathName = document.getElementById('dgl-gamified-widget').src;
+pathName = pathName.substring(pathName.lastIndexOf('/') + 1, 0);
+widgetStyles.href = pathName + 'style.min.css';
+
 document.head.appendChild(widgetStyles);
 
