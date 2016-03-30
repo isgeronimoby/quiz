@@ -2,6 +2,8 @@ window.addEventListener('load', function(){
 window.DGW = function () {
     if (document.getElementById('dgl-gamified-widget')) {
         var widgetScript = document.getElementById('dgl-gamified-widget');
+        var widgetPathName = widgetScript.src;
+        widgetPathName = widgetPathName.substring(widgetPathName.lastIndexOf('/') + 1, 0);
         var key = widgetScript.getAttribute('data-key');
         var tunnelPath;
         if (key) {
@@ -40,7 +42,8 @@ window.DGW = function () {
                     },
                     elements: {},
                     methods: {},
-                    tunnelPath: tunnelPath
+                    tunnelPath: tunnelPath,
+                    widgetPathName: widgetPathName
                 },
                 states: {},
                 helpers: {}
@@ -51,6 +54,7 @@ window.DGW = function () {
 }();
 
 if (!DGW) return;
+
 /**
  * easyXDM
  * http://easyxdm.net/
@@ -514,56 +518,6 @@ DGW.global.api.requests.getUser = function(){
     });
 };
 
-//Prefacebook loaders
-(function(){
-//fbAsyncInit
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '614550048660888',
-            cookie: true,  // enable cookies to allow the server to access
-            // the session
-            xfbml: true,  // parse social plugins on this page
-            version: 'v2.2' // use version 2.2
-        });
-    };
-
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-})();
-
-DGW.global.api.requests.fbConnect = function(){
-    FB.login(function (response) {
-            if (response.status === "connected") {
-                // Logged into your app and Facebook.
-
-                DGW.global.api.generic('facebookLogIn', function(result){
-                    if (!result.error) {
-                        console.info(result.data);
-                    } else {
-                        console.error(result.error);
-                    }
-                }, {
-                    AccessToken: response.authResponse.accessToken,
-                    ExpiresIn: response.authResponse.expiresIn
-                });
-            }
-            else if (response.status === "not_authorized") {
-                // The person is logged into Facebook, but not your app.
-            }
-            else {
-                // The person is not logged into Facebook, so we're not sure if
-                // they are logged into this app or not.
-            }
-        },
-        { scope: "email" }
-    );
-};
-
 DGW.global.api.requests.getDraws = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getDraws', function(result) {
@@ -741,6 +695,14 @@ DGW.helpers.drawsTimerConstr = function(params){
 
 DGW.helpers.drawsTimer = new DGW.helpers.drawsTimerConstr([]);
 
+DGW.helpers.checkImagesForSrc = function(src) {
+    if (src) {
+        return src;
+    } else {
+        return DGW.global.widgetPathName + 'imgs/avatar-placeholder.png'
+    }
+};
+
 DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body"></div>' +
                                '</div>';
@@ -750,7 +712,7 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                         '<div class="dg-o-w-body">' +
                                             '<div class="dg-o-w-header">' +
                                                 '<div class="dg-o-w-logo">' +
-                                                    '<img src="./imgs/everton-logo.jpg" alt="Club Logo" />' +
+                                                    //'<img src="./imgs/everton-logo.jpg" alt="Club Logo" />' +
                                                 '</div>' +
                                                 '<div class="dg-o-w-menu">' +
                                                     '<ul><li class="earn-menu-item">Earn</li>' +
@@ -759,7 +721,7 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                 '</div>' +
                                                 '<div class="dg-o-w-menu-profile">' +
                                                     '<div class="profile-menu-item">' +
-                                                        '<img src="http://lorempixel.com/100/100/cats" />' +
+                                                        '<img class="avatar" src="" />' +
                                                         '<div class="profile-menu-unauthorized">' +
                                                             '<div>' +
                                                                 '<h4>Hello, guest!</h4>' +
@@ -846,7 +808,7 @@ DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
 
 DGW.templates.profileMain = '<div class="dg-o-w-profile">' +
                                 '<div class="dg-o-w-left-side">' +
-                                    '<div class="dg-o-w-image-holder"><img id="profileImage" src="http://lorempixel.com/500/500/cats" /></div>' +
+                                    '<div class="dg-o-w-image-holder"><img id="profileImage" class="avatar" src="" /></div>' +
                                     '<p><span id="profileFriendsAmount">15</span> friends</p>' +
                                 '</div>' +
                                 '<div class="dg-o-w-right-side">' +
@@ -881,12 +843,12 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile">' +
 
 
 DGW.templates.loginMain = '<div class="dg-o-w-login">' +
-                                '<div class="dg-o-w-left-side"><div class="dg-o-w-image-holder"><img src="./imgs/kevin-mirallas.png" /></div></div>' +
+                                '<div class="dg-o-w-left-side"><div class="dg-o-w-image-holder"><div class="dg-o-w-brand-player-image"></div></div></div>' +
                                 '<div class="dg-o-w-right-side">' +
                                     '<h1>Win exclusive prizes handling simple tasks</h1>' +
                                     '<a href="#" class="btn-radius btn-large btn-brand-3d">Join now</a>' +
                                     '<div class="dg-o-w-login-winners">' +
-                                        '<img src="http://lorempixel.com/100/100/cats" />' +
+                                        '<img class="avatar" src="" />' +
                                         '<div><h4>Daniel won a signed t-shirt!</h4><h5>Sign up and get your own prize now</h5></div>' +
                                     '</div>' +
                                 '</div>' +
@@ -1014,6 +976,10 @@ DGW.main.methods.changeMainState = function(state){
 
     }
 
+    Array.prototype.slice.call(DGW.main.elements.widgetContent.querySelectorAll('.avatar')).forEach(function(img){
+        img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
+    });
+
     DGW.main.currentState = state;
     DGW.main.methods.checkSectionHeight();
 };
@@ -1036,7 +1002,9 @@ DGW.side.methods.hideWidget = function(){
 
 
 DGW.global.methods.init = function(){
-
+    Array.prototype.slice.call(DGW.main.elements.widget.querySelectorAll('.avatar')).forEach(function(img){
+        img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
+    });
     // Handling clicks
     DGW.side.elements.widget.addEventListener('click', function(){
         DGW.main.methods.showWidget();
@@ -1151,7 +1119,8 @@ DGW.main.methods.addPageEvents = function () {
     });
     (function(){
         var newUser = {};
-        DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-signup-email').addEventListener('submit', function(){
+        DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-signup-email').addEventListener('submit', function(ev){
+            ev.preventDefault();
             var name = this.querySelector('[type=text]').value,
                 email = this.querySelector('[type=email]').value;
             if (name != '' && email != '') {
@@ -1163,7 +1132,8 @@ DGW.main.methods.addPageEvents = function () {
                 //TODO: validation
             }
         });
-        DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-signup-pass').addEventListener('submit', function(){
+        DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-signup-pass').addEventListener('submit', function(ev){
+            ev.preventDefault();
             var pass = this.querySelector('[type=password]').value;
             if (pass != '' && pass.length >= 5) {
                 newUser.Password = pass;
@@ -1220,7 +1190,7 @@ DGW.global.methods.profileSetData = function(data) {
         };
 
     profileImageHolders.forEach(function(image){
-        image.src = data.ImageUrl || image.src;
+        image.src = data.ImageUrl || DGW.helpers.checkImagesForSrc(image.getAttribute('src'));
     });
 
     profileNames.forEach(function(name){
@@ -1379,7 +1349,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                                     '<div class="btn-dg-o-w-outline">Get additional points</div>' +
                                 '</div>' +
                                     ((draw.Winner !== null) ?
-                                        '<div class="dg-o-w-draw-winner"><h2>Winner</h2><img src="' + (draw.Winner.ImageUrl || './imgs/avatars/p21.jpg') + '" /><h4>' + draw.Winner.UserName + '</h4></div>' :
+                                        '<div class="dg-o-w-draw-winner"><h2>Winner</h2><img src="' + (draw.Winner.ImageUrl || DGW.helpers.checkImagesForSrc()) + '" /><h4>' + draw.Winner.UserName + '</h4></div>' :
                                     '') +
                                 shareSect +
                             '</div>' +
@@ -1478,16 +1448,14 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
 };
 
 var widgetStyles = document.createElement('link');
-widgetStyles.rel = 'stylesheet';
-widgetStyles.type = 'text/css';
+    widgetStyles.rel = 'stylesheet';
+    widgetStyles.type = 'text/css';
 
 widgetStyles.addEventListener('load', function(){
     DGW.global.methods.init();
 });
 
-var pathName = document.getElementById('dgl-gamified-widget').src;
-pathName = pathName.substring(pathName.lastIndexOf('/') + 1, 0);
-widgetStyles.href = pathName + 'style.min.css';
+widgetStyles.href = DGW.global.widgetPathName + 'style.min.css';
 
 document.head.appendChild(widgetStyles);
 

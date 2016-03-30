@@ -7,7 +7,7 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                         '<div class="dg-o-w-body">' +
                                             '<div class="dg-o-w-header">' +
                                                 '<div class="dg-o-w-logo">' +
-                                                    '<img src="./imgs/everton-logo.jpg" alt="Club Logo" />' +
+                                                    //'<img src="./imgs/everton-logo.jpg" alt="Club Logo" />' +
                                                 '</div>' +
                                                 '<div class="dg-o-w-menu">' +
                                                     '<ul><li class="earn-menu-item">Earn</li>' +
@@ -16,7 +16,7 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                 '</div>' +
                                                 '<div class="dg-o-w-menu-profile">' +
                                                     '<div class="profile-menu-item">' +
-                                                        '<img src="http://lorempixel.com/100/100/cats" />' +
+                                                        '<img class="avatar" src="" />' +
                                                         '<div class="profile-menu-unauthorized">' +
                                                             '<div>' +
                                                                 '<h4>Hello, guest!</h4>' +
@@ -103,7 +103,7 @@ DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
 
 DGW.templates.profileMain = '<div class="dg-o-w-profile">' +
                                 '<div class="dg-o-w-left-side">' +
-                                    '<div class="dg-o-w-image-holder"><img id="profileImage" src="http://lorempixel.com/500/500/cats" /></div>' +
+                                    '<div class="dg-o-w-image-holder"><img id="profileImage" class="avatar" src="" /></div>' +
                                     '<p><span id="profileFriendsAmount">15</span> friends</p>' +
                                 '</div>' +
                                 '<div class="dg-o-w-right-side">' +
@@ -138,12 +138,12 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile">' +
 
 
 DGW.templates.loginMain = '<div class="dg-o-w-login">' +
-                                '<div class="dg-o-w-left-side"><div class="dg-o-w-image-holder"><img src="./imgs/kevin-mirallas.png" /></div></div>' +
+                                '<div class="dg-o-w-left-side"><div class="dg-o-w-image-holder"><div class="dg-o-w-brand-player-image"></div></div></div>' +
                                 '<div class="dg-o-w-right-side">' +
                                     '<h1>Win exclusive prizes handling simple tasks</h1>' +
                                     '<a href="#" class="btn-radius btn-large btn-brand-3d">Join now</a>' +
                                     '<div class="dg-o-w-login-winners">' +
-                                        '<img src="http://lorempixel.com/100/100/cats" />' +
+                                        '<img class="avatar" src="" />' +
                                         '<div><h4>Daniel won a signed t-shirt!</h4><h5>Sign up and get your own prize now</h5></div>' +
                                     '</div>' +
                                 '</div>' +

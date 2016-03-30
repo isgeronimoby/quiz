@@ -71,7 +71,8 @@ DGW.main.methods.addPageEvents = function () {
     });
     (function(){
         var newUser = {};
-        DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-signup-email').addEventListener('submit', function(){
+        DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-signup-email').addEventListener('submit', function(ev){
+            ev.preventDefault();
             var name = this.querySelector('[type=text]').value,
                 email = this.querySelector('[type=email]').value;
             if (name != '' && email != '') {
@@ -83,7 +84,8 @@ DGW.main.methods.addPageEvents = function () {
                 //TODO: validation
             }
         });
-        DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-signup-pass').addEventListener('submit', function(){
+        DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-signup-pass').addEventListener('submit', function(ev){
+            ev.preventDefault();
             var pass = this.querySelector('[type=password]').value;
             if (pass != '' && pass.length >= 5) {
                 newUser.Password = pass;

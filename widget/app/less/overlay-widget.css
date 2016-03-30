@@ -19,14 +19,41 @@
   padding: 0;
   box-sizing: border-box;
   border: 0;
-  font-size: 100%;
-  font: inherit;
   vertical-align: middle;
+}
+#dg-o-w #dg-o-w-wrapper a,
+#dg-o-w #dg-o-w-wrapper p,
+#dg-o-w #dg-o-w-wrapper div,
+#dg-o-w #dg-o-w-wrapper span,
+#dg-o-w #dg-o-w-wrapper h1,
+#dg-o-w #dg-o-w-wrapper h2,
+#dg-o-w #dg-o-w-wrapper h3,
+#dg-o-w #dg-o-w-wrapper h4,
+#dg-o-w #dg-o-w-wrapper h5,
+#dg-o-w #dg-o-w-wrapper h6,
+#dg-o-w #dg-o-w-wrapper section,
+#dg-o-w #dg-o-w-wrapper header,
+#dg-o-w #dg-o-w-wrapper aside,
+#dg-o-w #dg-o-w-wrapper ul,
+#dg-o-w #dg-o-w-wrapper ol,
+#dg-o-w #dg-o-w-wrapper li,
+#dg-o-w #dg-o-w-wrapper b,
+#dg-o-w #dg-o-w-wrapper i,
+#dg-o-w #dg-o-w-wrapper label,
+#dg-o-w #dg-o-w-wrapper input,
+#dg-o-w #dg-o-w-wrapper form,
+#dg-o-w #dg-o-w-wrapper textarea,
+#dg-o-w #dg-o-w-wrapper select {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
   float: none;
   text-shadow: none;
   background: none;
   clear: none;
   text-transform: none;
+  outline: none;
 }
 #dg-o-w #dg-o-w-wrapper ul {
   list-style: none;
@@ -79,6 +106,7 @@
   margin-bottom: 10px;
   padding: 0 10px;
   outline: 0;
+  background-color: #ffffff;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-forms input:focus {
   border-color: #00369c;
@@ -125,6 +153,8 @@
   width: 200px;
   float: left;
   position: relative;
+  background: url('imgs/everton-logo.jpg') no-repeat;
+  background-position: center;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-header .dg-o-w-logo img {
   height: auto;
@@ -153,6 +183,7 @@
   transition: border 0.4s ease;
   cursor: pointer;
   font-weight: bold;
+  font-size: 16px;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-header .dg-o-w-menu li:hover {
   border-bottom: 4px solid #7cdb40;
@@ -174,6 +205,7 @@
   height: 40px;
   border-radius: 50%;
   margin-right: 10px;
+  cursor: pointer;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-header .dg-o-w-menu-profile .profile-menu-item > * {
   display: inline-block;
@@ -261,6 +293,7 @@
   margin-bottom: 10px;
   padding: 0 10px;
   outline: 0;
+  background-color: #ffffff;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-header .dg-o-w-menu-profile .profile-menu-item > * .dg-o-w-login-dropdown .dg-o-w-email-login-form form input:focus {
   border-color: #00369c;
@@ -342,6 +375,10 @@
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body.profile-anon .dg-o-w-content .dg-o-w-section .dg-o-w-footer-login .footer-section form label {
   font-size: 12px;
   color: #bababa;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body.profile-anon .dg-o-w-content .dg-o-w-section .dg-o-w-footer-login .footer-section form input {
+  border: 1px solid #bababa;
+  background-color: #ffffff;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body.profile-anon .dg-o-w-content .dg-o-w-section .dg-o-w-footer-login .footer-section .inline-part h3 {
   color: #ffffff;
@@ -581,7 +618,7 @@
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-submenu input[type="checkbox"].ios-switch:checked + div > div {
   -webkit-transform: translate3d(20px, 0, 0);
-  -moz-transform: translate3d(20px, 0, 0);
+          transform: translate3d(20px, 0, 0);
   background-color: #ffffff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3), 0 0 0 1px #0850ac;
 }
@@ -592,7 +629,7 @@
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-submenu input[type="checkbox"].bigswitch.ios-switch:checked + div > div {
   -webkit-transform: translate3d(25px, 0, 0);
-  -moz-transform: translate3d(16px, 0, 0);
+          transform: translate3d(25px, 0, 0);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 0 0 1px #0850ac;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .btn-dg-o-w-outline {
@@ -682,6 +719,8 @@
   display: block;
   width: 90%;
   font-size: 14px;
+  border: 1px solid #bababa;
+  background-color: #ffffff;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-footer-login .footer-section .btn-back-footer {
   float: left;
@@ -1113,7 +1152,7 @@
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-single-draw .dg-o-w-draw-right-side {
   display: inline-block;
   font-size: 1rem;
-  vertical-align: top;
+  vertical-align: middle;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-single-draw .dg-o-w-draw-left-side {
   width: 30%;
@@ -1402,6 +1441,15 @@
   position: absolute;
   bottom: -5px;
   left: 0;
+  width: 100%;
+  height: 100%;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-login .dg-o-w-left-side .dg-o-w-image-holder .dg-o-w-brand-player-image {
+  width: 100%;
+  height: 100%;
+  background: url('imgs/kevin-mirallas.png') no-repeat;
+  background-position: center bottom;
+  background-size: cover;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-login .dg-o-w-right-side {
   width: 70%;

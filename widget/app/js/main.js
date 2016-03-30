@@ -100,6 +100,10 @@ DGW.main.methods.changeMainState = function(state){
 
     }
 
+    Array.prototype.slice.call(DGW.main.elements.widgetContent.querySelectorAll('.avatar')).forEach(function(img){
+        img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
+    });
+
     DGW.main.currentState = state;
     DGW.main.methods.checkSectionHeight();
 };
@@ -122,7 +126,9 @@ DGW.side.methods.hideWidget = function(){
 
 
 DGW.global.methods.init = function(){
-
+    Array.prototype.slice.call(DGW.main.elements.widget.querySelectorAll('.avatar')).forEach(function(img){
+        img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
+    });
     // Handling clicks
     DGW.side.elements.widget.addEventListener('click', function(){
         DGW.main.methods.showWidget();

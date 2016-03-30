@@ -25,7 +25,7 @@ DGW.global.methods.profileSetData = function(data) {
         };
 
     profileImageHolders.forEach(function(image){
-        image.src = data.ImageUrl || image.src;
+        image.src = data.ImageUrl || DGW.helpers.checkImagesForSrc(image.getAttribute('src'));
     });
 
     profileNames.forEach(function(name){
@@ -184,7 +184,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                                     '<div class="btn-dg-o-w-outline">Get additional points</div>' +
                                 '</div>' +
                                     ((draw.Winner !== null) ?
-                                        '<div class="dg-o-w-draw-winner"><h2>Winner</h2><img src="' + (draw.Winner.ImageUrl || './imgs/avatars/p21.jpg') + '" /><h4>' + draw.Winner.UserName + '</h4></div>' :
+                                        '<div class="dg-o-w-draw-winner"><h2>Winner</h2><img src="' + (draw.Winner.ImageUrl || DGW.helpers.checkImagesForSrc()) + '" /><h4>' + draw.Winner.UserName + '</h4></div>' :
                                     '') +
                                 shareSect +
                             '</div>' +

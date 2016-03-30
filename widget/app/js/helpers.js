@@ -115,3 +115,11 @@ DGW.helpers.drawsTimerConstr = function(params){
 };
 
 DGW.helpers.drawsTimer = new DGW.helpers.drawsTimerConstr([]);
+
+DGW.helpers.checkImagesForSrc = function(src) {
+    if (src) {
+        return src;
+    } else {
+        return DGW.global.widgetPathName + 'imgs/avatar-placeholder.png'
+    }
+};

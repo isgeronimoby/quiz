@@ -1,6 +1,8 @@
 window.DGW = function () {
     if (document.getElementById('dgl-gamified-widget')) {
         var widgetScript = document.getElementById('dgl-gamified-widget');
+        var widgetPathName = widgetScript.src;
+        widgetPathName = widgetPathName.substring(widgetPathName.lastIndexOf('/') + 1, 0);
         var key = widgetScript.getAttribute('data-key');
         var tunnelPath;
         if (key) {
@@ -39,7 +41,8 @@ window.DGW = function () {
                     },
                     elements: {},
                     methods: {},
-                    tunnelPath: tunnelPath
+                    tunnelPath: tunnelPath,
+                    widgetPathName: widgetPathName
                 },
                 states: {},
                 helpers: {}
