@@ -29,6 +29,9 @@
   height: 100%;
   color: $contrast-color;
   text-decoration: none;
+  &.completed {
+    background: rgba(51, 137, 86, .5);
+  }
 
   .fixture-item-team-icons {
     width: 7.6rem;

@@ -10,7 +10,7 @@ class FixtureListItem extends Component {
     };
 
     render() {
-        const { teamHome, teamAway, time, tour, city, friends } = this.props.data;
+        const { teamHome, teamAway, time, tour, city, friends, completed } = this.props.data;
         const headerClass = !this.props.header ? 'is-collapsed' : '';
         const title = `${teamHome.name} vs ${teamAway.name}`;
         const subTitle = `${time}. ${tour}, ${city}`;
@@ -22,7 +22,7 @@ class FixtureListItem extends Component {
                 <div className={ "fixture-item-header " + headerClass }>
                     <h5>{ this.props.header }</h5>
                 </div>
-                <Link className="fixture-item-body" to="/quiz">
+                <Link className={"fixture-item-body " + (completed ? "completed" : "")} to="/quiz">
                     <div className="fixture-item-team-icons">
                         <div className="fixture-item-team">
                             <img src={require('./../../static/images/team-chelsea.svg')} />

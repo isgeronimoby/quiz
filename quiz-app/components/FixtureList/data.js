@@ -13,7 +13,8 @@ const data = [
         teamAway: {
             name: 'Chelsea',
             icon: './xxx'
-        }
+        },
+        completed: true
     },
     {
         date: '28 April',
@@ -29,7 +30,8 @@ const data = [
         teamAway: {
             name: 'Chelsea',
             icon: './xxx'
-        }
+        },
+        completed: false
     },
     {
         date: '29 April',
@@ -45,7 +47,8 @@ const data = [
         teamAway: {
             name: 'Arsenal',
             icon: './xxx'
-        }
+        },
+        completed: false
     },
     {
         date: '29 April',
@@ -61,8 +64,9 @@ const data = [
         teamAway: {
             name: 'Manchester City',
             icon: './xxx'
-        }
+        },
+        completed: false
     }
 ];
 
-export default data;
+export default data.concat(data.concat(data));
