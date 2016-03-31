@@ -1,7 +1,7 @@
 @import '../variables.scss';
 
 .fixture-list {
-  background: #46BC76;
+  
 }
 
 .fixture-item {
@@ -27,12 +27,15 @@
 .fixture-item-body {
   display: flex;
   height: 100%;
-  color: #fff;
+  color: $contrast-color;
   text-decoration: none;
+  &.completed {
+    background: rgba(51, 137, 86, .5);
+  }
 
   .fixture-item-team-icons {
     width: 7.6rem;
-    padding-left: 1.5em;
+    padding-left: 1.5rem;
     margin-right: 0.8rem;
     display: flex;
     align-items: center;
@@ -40,7 +43,7 @@
   }
   .fixture-item-team {
     width: 4rem;
-    background: #fff;
+    background: $contrast-color;
     height: 4rem;
     border-radius: 50%;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
@@ -77,9 +80,11 @@
 
 .list-title {
   font-size: 1.4rem;
+  margin-bottom: 0.6rem;
 }
 
 .list-meta {
   font-size: 1rem;
-  color: #ddd;
+  color: rgba(214, 231, 221, 1);
+  text-transform: uppercase;
 }

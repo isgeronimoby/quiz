@@ -18,7 +18,7 @@ class FixtureList extends Component {
 			.sort(sortFixtures)
 			.map((data) => {
 				const { date, competition } = data;
-				const header = `${date} - ${competition}`;
+				const header = `${date.toUpperCase()} - ${competition}`;
 
 				return { ...data, header };
 			})
