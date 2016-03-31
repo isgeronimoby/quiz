@@ -79,12 +79,17 @@ DGW.main.methods.updateUserInfoBet = function(draw, user){
         credit.innerHTML = user.Wallet.CreditsPending;
     });
 
-    betPoints.innerHTML = draw.TicketsAmount || 0;
+    if (betPoints) {
+        betPoints.innerHTML = draw.TicketsAmount || 0;
+    } else {
+
+    }
 };
 
-DGW.main.methods.drawsConstructor = function(cacheObj){
+DGW.main.methods.drawsConstructor = function(cacheObj, _context){
     var drawsList = DGW.main.elements.pages.drawsMain.querySelector('.dg-o-w-list-draws');
     drawsList.innerHTML = '';
+    DGW.global.activeDrawsExist = false;
     if (cacheObj) {
         cacheObj.drawsList.forEach(function (draw) {
             var li = document.createElement('li');
@@ -98,7 +103,9 @@ DGW.main.methods.drawsConstructor = function(cacheObj){
             }
             //console.log(drawEntry);
             li.innerHTML = '<div class="dg-o-w-draw">' +
-                                '<img src="' + draw.Prize.ImageUrl.replace(/api/g, 'everton') + '" />' + //TODO: ask to change this server-side
+                                '<div class="dg-o-w-draw-image-holder">' +
+                                    '<img src="' + draw.Prize.ImageUrl + '" />' +
+                                '</div>' +
                                 '<div class="dg-o-w-draw-text">' +
                                     //'<h2>' + draw.Prize.Title + '</h2>' +
                                     '<h2 class="dg-o-w-draw-countdown">' + '&nbsp;' + '</h2>' +
@@ -111,6 +118,9 @@ DGW.main.methods.drawsConstructor = function(cacheObj){
                             '</div>';
             if (!DGW.helpers.drawsTimer.push({dt:draw.EndDate, elem:li.querySelector('.dg-o-w-draw-countdown')})) {
                 DGW.helpers.addClass(li, 'expired');
+                li.querySelector('.dg-o-w-draw-countdown').innerHTML = 'Finished ' + String(moment(draw.EndDate).fromNow());
+            } else {
+                DGW.global.activeDrawsExist = true;
             }
             if (drawEntry && drawEntry.IsWinner) {
                 DGW.helpers.addClass(li, 'winner');
@@ -123,6 +133,17 @@ DGW.main.methods.drawsConstructor = function(cacheObj){
             });
             drawsList.appendChild(li);
         });
+
+        if (DGW.global.activeDrawsExist) {
+            DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'no-active-draws');
+            DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'no-in-current-draws');
+        } else {
+            if (_context && _context == 'my-draws') {
+                DGW.helpers.addClass(DGW.main.elements.widgetBody, 'no-in-current-draws');
+            } else {
+                DGW.helpers.addClass(DGW.main.elements.widgetBody, 'no-active-draws');
+            }
+        }
     }
 };
 
@@ -145,7 +166,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                     '</div>';
     var submenu = '<div class="dg-o-w-submenu">' +
                         '<ul><li class="dg-o-w-back-draws">&lt; Back</li></ul><div class="right-side">' +
-        (!(drawEntry != undefined && drawEntry.IsWinner) ?'Minimum bet is 10' : 'You\'ve spent ' + drawEntry.TicketsAmount + ' points and won!') +
+        (!(drawEntry != undefined && drawEntry.IsWinner) ? /*'Minimum bet is 10'*/ '' : 'You\'ve spent ' + drawEntry.TicketsAmount + ' points and won!') +
                             '</div>' +
                     '</div>';
 
@@ -163,7 +184,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                                 '<h5>' + draw.Prize.Title + '</h5>' +
                                 '<p>' + draw.Prize.Description + '</p>' +
                                 '<div class="dg-o-w-draw-bet-info dg-o-w-draw-auth-show">' +
-                                    '<div class="dg-o-w-your-bet">You\'ve bet <span></span> points</div>' +
+                                    '<div class="dg-o-w-your-bet">You\'ve bet <span>' + ((drawEntry) ? drawEntry.TicketsAmount : 0 ) + '</span> points</div>' +
                                     '<div class="dg-o-w-users-done">' +
                                         '<div>' +
                                             '<img src="http://lorempixel.com/70/70/people/1" />' +
@@ -173,18 +194,18 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                                         '<p>10 users have done this</p>' +
                                     '</div>' +
                                 '</div>' +
-                                '<h2 class="dg-o-w-draw-login-show">Please, log in to bet</h2>' +
+                                ((moment(draw.EndDate).diff() > 0) ? '<h2 class="dg-o-w-draw-login-show">Please, log in to bet</h2>' : '') +
                                 '<div class="dg-o-w-draw-bet-action dg-o-w-draw-auth-show">' +
                                     '<h5>How much do you want to bet?</h5>' +
                                     '<form id="bet-form" class="dg-o-w-one-field-form">' +
-                                        '<input type="number" min="10" max="1000" placeholder="10 points"/>' +
+                                        '<input type="number" min="1" max="1000" placeholder="50"/>' +
                                         '<input type="submit" value="Bet points" />' +
                                         '<p class="dg-o-w-form-message">something has happened</p>' +
                                     '</form>' +
                                     '<div class="btn-dg-o-w-outline">Get additional points</div>' +
                                 '</div>' +
                                     ((draw.Winner !== null) ?
-                                        '<div class="dg-o-w-draw-winner"><h2>Winner</h2><img src="' + (draw.Winner.ImageUrl || DGW.helpers.checkImagesForSrc()) + '" /><h4>' + draw.Winner.UserName + '</h4></div>' :
+                                        '<div class="dg-o-w-draw-winner"><img src="' + (draw.Winner.ImageUrl || DGW.helpers.checkImagesForSrc()) + '" /><h4>' + draw.Winner.UserName + ' has won this draw. Our congratulations!</h4></div>' :
                                     '') +
                                 shareSect +
                             '</div>' +
@@ -276,6 +297,9 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
 
     if (!DGW.helpers.drawsTimer.push({dt:draw.EndDate, elem:el.querySelector('.dg-o-w-countdown')})) {
         DGW.helpers.addClass(el.querySelector('.dg-o-w-single-draw'), 'expired');
+        if (el.querySelector('.dg-o-w-countdown')) {
+            el.querySelector('.dg-o-w-countdown').innerHTML = 'Finished ' + String(moment(draw.EndDate).fromNow());
+        }
     }
 
     DGW.main.elements.widgetContent.appendChild(el);

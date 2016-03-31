@@ -45,3 +45,34 @@
 		box-shadow: 0em -3em 0 0 @color-brand, 2em -2em 0 -1em @color-brand, 3em 0 0 -1em @color-brand, 2em 2em 0 -1em @color-brand, 0 3em 0 -1em @color-brand, -2em 2em 0 0 @color-brand, -3em 0em 0 0 @color-brand, -2em -2em 0 0.2em @color-brand;
 	}
 }
+
+@keyframes dg-widget-pop-in {
+	0% {
+		top: 100%;
+		transform: translate(-50%,10%);
+	}
+	100% {
+		top: 50%;
+		transform: translate(-50%,-50%);
+	}
+}
+
+@keyframes dg-widget-pop-out {
+	0% {
+		top: 50%;
+		transform: translate(-50%,-50%);
+	}
+	100% {
+		top: 100%;
+		transform: translate(-50%,10%);
+	}
+}
+
+@keyframes dg-o-wlinear-rotation {
+	0% {
+		transform: rotateZ(0deg);
+	}
+	100% {
+		transform: rotateZ(359deg);
+	}
+}

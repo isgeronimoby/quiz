@@ -47,7 +47,7 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                 '<footer class="dg-o-w-footer-login">' +
                                                     '<div class="footer-section footer-section-step-1">' +
                                                         '<div class="inline-part"><h3>Log in with Facebook and get +10 points</h3></div>' +
-                                                        '<div class="inline-part"><a href="#" class="btn-radius btn-large btn-brand">Facebook</a></div>' +
+                                                        '<div class="inline-part"><a href="#" id="dg-o-w-footer-fb-connect" class="btn-radius btn-large btn-brand">Facebook</a></div>' +
                                                         '<div class="inline-part"><p>or</p></div>' +
                                                         '<div class="inline-part"><a id="dg-o-w-footer-email-login" href="#" class="btn-radius btn-large btn-white">Sign up with email</a></div>' +
                                                     '</div>' +
@@ -91,14 +91,15 @@ DGW.templates.earnMain = '<div class="dg-o-w-submenu">' +
                         '</div>';
 
 DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
-                            '<ul><li class="dg-o-w-active">All draws</li><li>Finished soon</li>' +
-                                '<li>My draws</li><li>Games</li></ul>' +
+                            '<ul><li class="dg-o-w-active" id="dg-o-w-show-all-draws">All draws</li><li id="dg-o-w-show-finished-soon">Finished soon</li>' +
+                                '<li id="dg-o-w-show-my-draws">My draws</li><li id="dg-o-w-show-games">Games</li></ul>' +
                             '<label class="checkbox-slider">Show finished draws <input id="dg-o-w-show-expired" type="checkbox" class="ios-switch bigswitch" /><div><div></div></div></label>' +
                         '</div>' +
                         '<div class="dg-o-w-section-content">' +
-                            '<h3>Available draws</h3>' +
-                            '<ul class="dg-o-w-list-draws">' +
-                            '</ul>' +
+                            '<div class="dg-o-w-draws-active">' +
+                            '<ul class="dg-o-w-list-draws"></ul></div>' +
+                            '<div class="dg-o-w-draws-no-active"><h2>Sorry, but there are no draws running at the moment.</h2><br/><div class="dg-o-w-draws-refresh"></div></div>' +
+                            '<div class="dg-o-w-draws-no-in-draws"><h2>Seems like you don\'t playing any current draw :(</h2></div>' +
                         '</div>';
 
 DGW.templates.profileMain = '<div class="dg-o-w-profile">' +
@@ -117,7 +118,7 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile">' +
                                     '<div class="dg-o-w-profile-earnings-info">' +
                                         '<p class="color-brand-light">Today earned: <span>15</span> pts | left: <span>5</span>pts</p>' +
                                         '<p>Get +10 additional points by adding your other accounts from ' +
-                                            '<a href="#" class="facebook">f</a> and <a href="#" class="twitter">t</a></p>' +
+                                            '<a href="#" class="dg-o-w-fb-connect"></a> and <a href="#" class="dg-o-w-tw-connect"></a></p>' +
                                     '</div>' +
                                     '<div class="dg-o-w-profile-progress"><div style="width:35%;"></div></div>' +
                                     '<div class="dg-o-w-profile-bottom">' +

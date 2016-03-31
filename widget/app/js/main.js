@@ -81,6 +81,7 @@ DGW.main.methods.changeMainState = function(state){
             //TODO: work on this further
             if (DGW.main.currentState !== 'draws') {
                 DGW.global.api.requests.getDraws();
+                DGW.main.methods.drawSubmenuReset();
             }
             DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.drawsMain);
             break;

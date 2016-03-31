@@ -99,6 +99,12 @@ DGW.main.methods.addPageEvents = function () {
             }
         });
     })();
+    DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-fb-connect').addEventListener('click', function(ev){
+        ev.preventDefault();
+
+        DGW.global.api.requests.connectFB();
+    });
+
 
     //Draws page clicks
     DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired').addEventListener('change', function (ev) {
@@ -108,6 +114,74 @@ DGW.main.methods.addPageEvents = function () {
             DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'draws-expired');
         }
     });
+
+    DGW.main.elements.pages.drawsMain.querySelector('.dg-o-w-draws-refresh').addEventListener('click', function(){
+        DGW.global.api.requests.getDraws();
+    });
+
+    //Draw filters
+    (function(){
+        var submenuItems = Array.prototype.slice.call(DGW.main.elements.pages.drawsMain.querySelectorAll('.dg-o-w-submenu ul li'));
+        function removeActive(){
+            submenuItems.forEach(function(item){
+                DGW.helpers.removeClass(item, 'dg-o-w-active');
+            });
+        }
+        function expiredDisable(){
+            DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired').checked = false;
+            DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired').disabled = true;
+            DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'draws-expired');
+        }
+        function expiredEnable(){
+            DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired').disabled = false;
+        }
+        submenuItems.forEach(function(item){
+            item.addEventListener('click', function(){
+                removeActive();
+                DGW.helpers.addClass(this, 'dg-o-w-active');
+                switch (this.id) {
+                    case 'dg-o-w-show-all-draws':
+                        DGW.main.cache.drawsList = DGW.main.cache.drawsList.sort(function(a,b){
+                            return new Date(b.EndDate) - new Date(a.EndDate)
+                        });
+                        expiredEnable();
+                        DGW.main.methods.drawsConstructor(DGW.main.cache);
+                        break;
+                    case 'dg-o-w-show-finished-soon':
+                        // (moment(a.EndDate).diff() > 0)
+                        DGW.main.cache.drawsList = DGW.main.cache.drawsList.sort(function(a, b){
+                            return new Date(a.StartDate) - new Date(b.StartDate);
+                        });
+                        expiredDisable();
+                        DGW.main.methods.drawsConstructor(DGW.main.cache);
+                        break;
+                    case 'dg-o-w-show-my-draws':
+                        var myDraws = [];
+                        DGW.main.cache.drawsEntries.forEach(function(drawE){
+                            DGW.main.cache.drawsList.filter(function(draw){
+                                if (draw.DrawId == drawE.DrawId) {
+                                    myDraws.push(draw);
+                                }
+                            });
+                        });
+                        DGW.main.cache.drawsList = DGW.main.cache.drawsList.sort(function(a,b){
+                            return new Date(b.EndDate) - new Date(a.EndDate)
+                        });
+                        expiredEnable();
+                        DGW.main.methods.drawsConstructor({drawsList: myDraws, drawsEntries: DGW.main.cache.drawsEntries}, 'my-draws');
+                        break;
+                    case 'dg-o-w-show-games':
+
+                        break;
+                }
+            });
+        });
+        DGW.main.methods.drawSubmenuReset = function(){
+            removeActive();
+            expiredEnable();
+            DGW.helpers.addClass(DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-all-draws'), 'dg-o-w-active');
+        };
+    })();
 
     //Profile page clicks
     DGW.main.elements.pages.profileMain.querySelector('#dg-o-w-sign-out-btn').addEventListener('click', function (ev) {

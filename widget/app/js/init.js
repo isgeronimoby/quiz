@@ -35,6 +35,7 @@ window.DGW = function () {
                 global: {
                     authorized: false,
                     launched: false,
+                    activeDrawsExist: false,
                     api: {
                         apiKey: key,
                         requests: {}
