@@ -23,15 +23,26 @@ body {
   background-color: $body-bg;
   color: $text-color;
   font-family: $font-family-roboto;
+  background-image: url('./../../static/images/bg.svg');
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 100%;
+  background-attachment: fixed;
+}
+
+#app,
+.layout {
+  height: 100%;
 }
 
 .layout {
-  margin: 0 auto;
+
 }
 
 .content {
   padding-top: $header-height;
   overflow: auto;
+  height: calc(100% - $header-height);
 }
 
 @media (min-width: $screen-sm-min) {
