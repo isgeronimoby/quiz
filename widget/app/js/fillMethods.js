@@ -28,9 +28,13 @@ DGW.global.methods.profileSetData = function(data) {
         image.src = data.ImageUrl || DGW.helpers.checkImagesForSrc(image.getAttribute('src'));
     });
 
+    DGW.global.userStats.imageUrl = data.ImageUrl || DGW.global.userStats.imageUrl;
+
     profileNames.forEach(function(name){
         name.innerHTML = data.UserName;
     });
+
+    DGW.global.userStats.name = data.UserName || DGW.global.userStats.name;
 
     points.confirmed.forEach(function(point){
        point.innerHTML = data.Wallet.PointsConfirmed;
@@ -45,6 +49,11 @@ DGW.global.methods.profileSetData = function(data) {
     credits.pending.forEach(function(credit){
         credit.innerHTML = data.Wallet.CreditsPending;
     });
+
+    DGW.global.userStats.pointsC = data.Wallet.PointsConfirmed;
+    DGW.global.userStats.pointsP = data.Wallet.PointsPending;
+    DGW.global.userStats.creditsC = data.Wallet.CreditsConfirmed;
+    DGW.global.userStats.creditsP = data.Wallet.CreditsPending;
 };
 
 DGW.main.methods.updateUserInfoBet = function(draw, user){
@@ -78,6 +87,11 @@ DGW.main.methods.updateUserInfoBet = function(draw, user){
     credits.pending.forEach(function(credit){
         credit.innerHTML = user.Wallet.CreditsPending;
     });
+
+    DGW.global.userStats.pointsC = user.Wallet.PointsConfirmed;
+    DGW.global.userStats.pointsP = user.Wallet.PointsPending;
+    DGW.global.userStats.creditsC = user.Wallet.CreditsConfirmed;
+    DGW.global.userStats.creditsP = user.Wallet.CreditsPending;
 
     if (betPoints) {
         betPoints.innerHTML = draw.TicketsAmount || 0;
@@ -304,4 +318,144 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
 
     DGW.main.elements.widgetContent.appendChild(el);
     DGW.main.methods.checkSectionHeight();
+};
+
+DGW.main.methods.activitiesConstructor = function(activities){
+    activities.sort(function(a, b){
+        return new Date(b.Date) - new Date(a.Date);
+    });
+    var activitiesHolder = DGW.main.elements.pages.activitiesMain.querySelector('.dg-o-w-activities-holder ul');
+    activitiesHolder.innerHTML = '';
+
+    activities.forEach(function(activity){
+        var ownStats = false;
+        if (!activity.User) {
+            ownStats = true;
+            activity.User = {
+                //UserName: DGW.global.userStats.name,
+                UserName: 'You',
+                ImageUrl: DGW.global.userStats.imageUrl
+            }
+        }
+        var li = document.createElement('li');
+        var message = '';
+        message += activity.User.UserName;
+        message += (ownStats !== true) ? ' has ' : ' have ';
+        message += '<span>';
+        message += (activity.Direction === 'Outflow') ? 'spent ' : 'earned ';
+        message += activity.PointsAmount;
+        message += '</span>';
+        message += ' points';
+
+        if (activity.ActivityType === 'GamePurchase') {
+            if (activity.GameOrder.GameType === 'Draw') {
+                message += ' playing the draw';
+                message += (' to win ' + activity.GameOrder.PrizeTitle);
+            }
+        }
+
+        if (activity.ActivityType === 'RewardedActionReward') {
+            switch (activity.RewardedAction.Type) {
+                case 'UserRegister':
+                    message += ' for joining our rewarded program';
+                    break;
+                case 'FacebookConnect':
+                    message += ' for connecting with Facebook';
+                    break;
+                case 'FriendSignUp':
+                    message += ' inviting a friend to our rewarding program';
+                    break;
+                case 'ConnectNewApp':
+                    message += ' connecting another app';
+                    break;
+                case 'FacebookShare':
+                    message += ' shouting out about us on Facebook';
+                    break;
+                case 'TwitterShare':
+                    message += ' tweeting about us';
+                    break;
+                case 'CommissionConfirmed':
+                    message += ' for making a great purchase';
+                    break;
+                default:
+            }
+        }
+
+        if (activity.ActivityType === 'OfferActionReward') {
+            if (activity.OfferAction.Type.Group.Name === 'Share') {
+                switch (activity.OfferAction.Type.Name) {
+                    case 'FacebookShare':
+                        message += ' finishing Facebook share offer';
+                        break;
+                    case 'TwitterShare':
+                        message += ' finishing Twitter share offer';
+                }
+            } else if (activity.OfferAction.Type.Group.Name === 'Watch') {
+                message += ' watching a video';
+            } else if (activity.OfferAction.Type.Group.Name === 'Discover') {
+                message += ' downloading an app';
+            }
+        }
+
+
+        if (activity.ActivityType === 'BadgeReward') {
+            message += ' getting a shiny new badge "' + activity.BadgeReward.Title + '"';
+        }
+
+        li.innerHTML =
+            '<div class="dg-o-w-single-activity">' +
+                '<img src="' + DGW.helpers.checkImagesForSrc(activity.User.ImageUrl) + '" alt=""/>' +
+                '<div class="dg-o-w-activity-message-holder">' +
+                    '<p>' + message + '</p>' +
+                '</div>' +
+            '</div>' +
+            '<h6>' + moment(activity.Date).fromNow() + '</h6>';
+        if (activity.Direction === 'Outflow') {
+            DGW.helpers.addClass(li, 'spent');
+        }
+
+        activitiesHolder.appendChild(li);
+    });
+};
+
+DGW.main.methods.offersConstructor = function(offers) {
+    var offersHolder = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-list-offers'),
+        offersSubmenu = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-submenu ul'),
+        offersSponsors = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-submenu select'),
+        pointsSum = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-section-content h3 span');
+    var lists = {
+        sponsors: [],
+        categories: []
+    };
+
+    pointsSum.innerHTML = offers.TotalPointsReward;
+    offersHolder.innerHTML = '';
+
+    offers.Offers.forEach(function(offer){
+        var li = document.createElement('li');
+
+        console.info(offer);
+
+        li.innerHTML =
+            '<a class="dg-o-w-offer" href="#">' +
+                '<div class="dg-o-w-offer-left">' +
+                    '<img src="' + (offer.Type.ImageUrl || 'http://lorempixel.com/100/100/sports') + '" />' +
+                    '<span>' + offer.PointsReward + '</span>' +
+                '</div>' +
+                '<div class="dg-o-w-offer-right">' +
+                    '<h4>' + offer.Type.Name + '</h4>' +
+                    '<h5>Some amazing offer, best one you only could imagine</h5>' +
+                    '<div class="dg-o-w-users-done">' +
+                        '<div>' +
+                            '<img src="http://lorempixel.com/70/70/people/1" />' +
+                            '<img src="http://lorempixel.com/70/70/people/2" />' +
+                            '<img src="http://lorempixel.com/70/70/people/3" />' +
+                        '</div>' +
+                        '<p>10 users have done this</p>' +
+                    '</div>' +
+                '</div>' +
+            '</a>';
+
+        offersHolder.appendChild(li);
+    });
 };

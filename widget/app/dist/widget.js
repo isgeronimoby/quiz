@@ -1,5 +1,5 @@
 window.addEventListener('load', function(){
-window.DGW = function () {
+var DGW = function () {
     if (document.getElementById('dgl-gamified-widget')) {
         var widgetScript = document.getElementById('dgl-gamified-widget');
         var widgetPathName = widgetScript.src;
@@ -11,11 +11,14 @@ window.DGW = function () {
                 tunnelPath = 'http://spr-api-test.cloudapp.net/tunnel.html';
                 if (widgetScript.getAttribute('data-tunnel') === 'local') {
                     tunnelPath = 'http://localhostdev/spr-api/tunnel.html';
+                } else if (widgetScript.getAttribute('data-tunnel') === 'live') {
+                    tunnelPath = 'https://api.rewarded.club/tunnel.html';
                 }
             } else {
                 // No parameter - use production path
                 tunnelPath = 'https://api.rewarded.club/tunnel.html';
             }
+            console.log(tunnelPath);
             return {
                 templates: {},
                 main: {
@@ -44,7 +47,8 @@ window.DGW = function () {
                     elements: {},
                     methods: {},
                     tunnelPath: tunnelPath,
-                    widgetPathName: widgetPathName
+                    widgetPathName: widgetPathName,
+                    userStats: {}
                 },
                 states: {},
                 helpers: {}
@@ -427,6 +431,18 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             endpoint = 'draw/claimprize';
             requestBody = JSON.stringify(requestBody);
             break;
+        case 'getAllActivities':
+            method = 'GET';
+            endpoint = 'activityfeed/getallactivities';
+            break;
+        case 'getUserActivities':
+            method = 'GET';
+            endpoint = 'activityfeed/getuseractivities';
+            break;
+        case 'getOffers':
+            method = 'GET';
+            endpoint = 'offer/getoffers';
+            break;
         default:
     }
     DGW.global.api.rpc.apiTunnel({
@@ -617,6 +633,45 @@ DGW.global.api.requests.connectFB = function(){
     }
 
     PopupCenter(DGW.global.tunnelPath.substring(DGW.global.tunnelPath.lastIndexOf('/') + 1, 0) + 'publisher/v1/auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340);
+};
+
+DGW.global.api.requests.getAllActivities = function(){
+    DGW.main.methods.loadingStarted();
+    DGW.global.api.generic('getAllActivities', function(result){
+        if (!result.error) {
+            console.info(result.data);
+            DGW.main.methods.activitiesConstructor(result.data.Activities);
+            DGW.main.methods.loadingFinished();
+        } else {
+            console.error(result.error);
+        }
+    });
+};
+
+DGW.global.api.requests.getUserActivities = function(){
+    DGW.main.methods.loadingStarted();
+    DGW.global.api.generic('getUserActivities', function(result){
+        if (!result.error) {
+            console.info(result.data);
+            DGW.main.methods.loadingFinished();
+            DGW.main.methods.activitiesConstructor(result.data.Activities);
+        } else {
+            console.error(result.error);
+        }
+    });
+};
+
+DGW.global.api.requests.getOffers = function(){
+    DGW.main.methods.loadingStarted();
+    DGW.global.api.generic('getOffers', function(result){
+        if (!result.error) {
+            console.info(result.data);
+            DGW.main.methods.loadingFinished();
+            DGW.main.methods.offersConstructor(result.data);
+        } else {
+            console.error(result.error);
+        }
+    });
 };
 DGW.helpers.addClass = function(obj, className){
     if (!(new RegExp(className).test(obj.className))) {
@@ -831,9 +886,8 @@ DGW.templates.earnMain = '<div class="dg-o-w-submenu">' +
                                 '<option>Telco</option></select>' +
                         '</div>' +
                         '<div class="dg-o-w-section-content">' +
-                            '<h3>Complete the tasks and earn +500 points today</h3>' +
-                            '<ul class="dg-o-w-list-offers">' +
-                                '<li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>' +
+                            '<h3>Complete the tasks and earn +<span></span> points today</h3>' +
+                            '<ul class="dg-o-w-list-offers"></ul>' +
                         '</div>';
 
 DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
@@ -909,8 +963,9 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul><li class="toggl
                                     '<div class="dg-o-w-activities-header">' +
                                         '<p class="dg-o-w-float-left">Activities for today</p>' +
                                         '<p class="dg-o-w-floating-link"><a href="#">Invite more friends</a> and get +50 points for each</p>' +
-                                        '<select class="dg-o-w-float-right">' +
-                                            '<option>All activities</option>' +
+                                        '<select id="dg-o-w-activities-filter" class="dg-o-w-float-right">' +
+                                            '<option value="all-activities">All activities</option>' +
+                                            '<option value="my-activities">My Activities</option>' +
                                         '</select>' +
                                     '</div>' +
                                     '<div class="dg-o-w-activities-holder"><ul></ul></div>' +
@@ -992,7 +1047,7 @@ DGW.main.methods.changeMainState = function(state){
     DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'profile-anon');
     switch (state) {
         case 'earn':
-
+            DGW.global.api.requests.getOffers();
             DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.earnMain);
             break;
         case 'draws':
@@ -1004,7 +1059,11 @@ DGW.main.methods.changeMainState = function(state){
             DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.drawsMain);
             break;
         case 'activities':
-
+            if (DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').value === 'all-activities') {
+                DGW.global.api.requests.getAllActivities();
+            } else {
+                DGW.global.api.requests.getUserActivities();
+            }
             DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.activitiesMain);
             break;
         case 'profile':
@@ -1066,6 +1125,13 @@ DGW.global.methods.init = function(){
             };
         }(item));
     }
+
+    DGW.global.userStats.imageUrl = DGW.helpers.checkImagesForSrc();
+    DGW.global.userStats.name = 'Guest';
+    DGW.global.userStats.pointsC = 0;
+    DGW.global.userStats.pointsP = 0;
+    DGW.global.userStats.creditsC = 0;
+    DGW.global.userStats.creditsP = 0;
 
     //Initializing or checking user
     DGW.global.api.requests.getUser();
@@ -1147,6 +1213,15 @@ DGW.main.methods.addPageEvents = function () {
         DGW.main.methods.checkSectionHeight();
     });
 
+    DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').addEventListener('change', function(){
+        if (this.value === 'all-activities') {
+            DGW.global.api.requests.getAllActivities();
+        } else {
+            DGW.global.api.requests.getUserActivities();
+        }
+    });
+
+
     //Footer login init
     DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-email-login').addEventListener('click', function (ev) {
         ev.preventDefault();
@@ -1218,32 +1293,30 @@ DGW.main.methods.addPageEvents = function () {
                 DGW.helpers.removeClass(item, 'dg-o-w-active');
             });
         }
-        function expiredDisable(){
-            DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired').checked = false;
-            DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired').disabled = true;
-            DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'draws-expired');
-        }
-        function expiredEnable(){
-            DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired').disabled = false;
-        }
+
         submenuItems.forEach(function(item){
             item.addEventListener('click', function(){
                 removeActive();
                 DGW.helpers.addClass(this, 'dg-o-w-active');
                 switch (this.id) {
                     case 'dg-o-w-show-all-draws':
-                        DGW.main.cache.drawsList = DGW.main.cache.drawsList.sort(function(a,b){
+                        DGW.main.cache.drawsList.sort(function(a,b){
                             return new Date(b.EndDate) - new Date(a.EndDate)
                         });
-                        expiredEnable();
                         DGW.main.methods.drawsConstructor(DGW.main.cache);
                         break;
                     case 'dg-o-w-show-finished-soon':
-                        // (moment(a.EndDate).diff() > 0)
-                        DGW.main.cache.drawsList = DGW.main.cache.drawsList.sort(function(a, b){
-                            return new Date(a.StartDate) - new Date(b.StartDate);
+                        var expArr = DGW.main.cache.drawsList.filter(function(draw){
+                            return moment(draw.EndDate).diff() <= 0;
                         });
-                        expiredDisable();
+                        var actArr = DGW.main.cache.drawsList.filter(function(draw){
+                            return moment(draw.EndDate).diff() > 0;
+                        }).sort(function(a, b){
+                            return new Date(a.EndDate) - new Date(b.EndDate);
+                        });
+
+                        DGW.main.cache.drawsList = actArr.concat(expArr);
+
                         DGW.main.methods.drawsConstructor(DGW.main.cache);
                         break;
                     case 'dg-o-w-show-my-draws':
@@ -1258,7 +1331,7 @@ DGW.main.methods.addPageEvents = function () {
                         DGW.main.cache.drawsList = DGW.main.cache.drawsList.sort(function(a,b){
                             return new Date(b.EndDate) - new Date(a.EndDate)
                         });
-                        expiredEnable();
+
                         DGW.main.methods.drawsConstructor({drawsList: myDraws, drawsEntries: DGW.main.cache.drawsEntries}, 'my-draws');
                         break;
                     case 'dg-o-w-show-games':
@@ -1269,7 +1342,6 @@ DGW.main.methods.addPageEvents = function () {
         });
         DGW.main.methods.drawSubmenuReset = function(){
             removeActive();
-            expiredEnable();
             DGW.helpers.addClass(DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-all-draws'), 'dg-o-w-active');
         };
     })();
@@ -1310,9 +1382,13 @@ DGW.global.methods.profileSetData = function(data) {
         image.src = data.ImageUrl || DGW.helpers.checkImagesForSrc(image.getAttribute('src'));
     });
 
+    DGW.global.userStats.imageUrl = data.ImageUrl || DGW.global.userStats.imageUrl;
+
     profileNames.forEach(function(name){
         name.innerHTML = data.UserName;
     });
+
+    DGW.global.userStats.name = data.UserName || DGW.global.userStats.name;
 
     points.confirmed.forEach(function(point){
        point.innerHTML = data.Wallet.PointsConfirmed;
@@ -1327,6 +1403,11 @@ DGW.global.methods.profileSetData = function(data) {
     credits.pending.forEach(function(credit){
         credit.innerHTML = data.Wallet.CreditsPending;
     });
+
+    DGW.global.userStats.pointsC = data.Wallet.PointsConfirmed;
+    DGW.global.userStats.pointsP = data.Wallet.PointsPending;
+    DGW.global.userStats.creditsC = data.Wallet.CreditsConfirmed;
+    DGW.global.userStats.creditsP = data.Wallet.CreditsPending;
 };
 
 DGW.main.methods.updateUserInfoBet = function(draw, user){
@@ -1360,6 +1441,11 @@ DGW.main.methods.updateUserInfoBet = function(draw, user){
     credits.pending.forEach(function(credit){
         credit.innerHTML = user.Wallet.CreditsPending;
     });
+
+    DGW.global.userStats.pointsC = user.Wallet.PointsConfirmed;
+    DGW.global.userStats.pointsP = user.Wallet.PointsPending;
+    DGW.global.userStats.creditsC = user.Wallet.CreditsConfirmed;
+    DGW.global.userStats.creditsP = user.Wallet.CreditsPending;
 
     if (betPoints) {
         betPoints.innerHTML = draw.TicketsAmount || 0;
@@ -1588,6 +1674,145 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
     DGW.main.methods.checkSectionHeight();
 };
 
+DGW.main.methods.activitiesConstructor = function(activities){
+    activities.sort(function(a, b){
+        return new Date(b.Date) - new Date(a.Date);
+    });
+    var activitiesHolder = DGW.main.elements.pages.activitiesMain.querySelector('.dg-o-w-activities-holder ul');
+    activitiesHolder.innerHTML = '';
+
+    activities.forEach(function(activity){
+        var ownStats = false;
+        if (!activity.User) {
+            ownStats = true;
+            activity.User = {
+                //UserName: DGW.global.userStats.name,
+                UserName: 'You',
+                ImageUrl: DGW.global.userStats.imageUrl
+            }
+        }
+        var li = document.createElement('li');
+        var message = '';
+        message += activity.User.UserName;
+        message += (ownStats !== true) ? ' has ' : ' have ';
+        message += '<span>';
+        message += (activity.Direction === 'Outflow') ? 'spent ' : 'earned ';
+        message += activity.PointsAmount;
+        message += '</span>';
+        message += ' points';
+
+        if (activity.ActivityType === 'GamePurchase') {
+            if (activity.GameOrder.GameType === 'Draw') {
+                message += ' playing the draw';
+                message += (' to win ' + activity.GameOrder.PrizeTitle);
+            }
+        }
+
+        if (activity.ActivityType === 'RewardedActionReward') {
+            switch (activity.RewardedAction.Type) {
+                case 'UserRegister':
+                    message += ' for joining our rewarded program';
+                    break;
+                case 'FacebookConnect':
+                    message += ' for connecting with Facebook';
+                    break;
+                case 'FriendSignUp':
+                    message += ' inviting a friend to our rewarding program';
+                    break;
+                case 'ConnectNewApp':
+                    message += ' connecting another app';
+                    break;
+                case 'FacebookShare':
+                    message += ' shouting out about us on Facebook';
+                    break;
+                case 'TwitterShare':
+                    message += ' tweeting about us';
+                    break;
+                case 'CommissionConfirmed':
+                    message += ' for making a great purchase';
+                    break;
+                default:
+            }
+        }
+
+        if (activity.ActivityType === 'OfferActionReward') {
+            if (activity.OfferAction.Type.Group.Name === 'Share') {
+                switch (activity.OfferAction.Type.Name) {
+                    case 'FacebookShare':
+                        message += ' finishing Facebook share offer';
+                        break;
+                    case 'TwitterShare':
+                        message += ' finishing Twitter share offer';
+                }
+            } else if (activity.OfferAction.Type.Group.Name === 'Watch') {
+                message += ' watching a video';
+            } else if (activity.OfferAction.Type.Group.Name === 'Discover') {
+                message += ' downloading an app';
+            }
+        }
+
+
+        if (activity.ActivityType === 'BadgeReward') {
+            message += ' getting a shiny new badge "' + activity.BadgeReward.Title + '"';
+        }
+
+        li.innerHTML =
+            '<div class="dg-o-w-single-activity">' +
+                '<img src="' + DGW.helpers.checkImagesForSrc(activity.User.ImageUrl) + '" alt=""/>' +
+                '<div class="dg-o-w-activity-message-holder">' +
+                    '<p>' + message + '</p>' +
+                '</div>' +
+            '</div>' +
+            '<h6>' + moment(activity.Date).fromNow() + '</h6>';
+        if (activity.Direction === 'Outflow') {
+            DGW.helpers.addClass(li, 'spent');
+        }
+
+        activitiesHolder.appendChild(li);
+    });
+};
+
+DGW.main.methods.offersConstructor = function(offers) {
+    var offersHolder = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-list-offers'),
+        offersSubmenu = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-submenu ul'),
+        offersSponsors = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-submenu select'),
+        pointsSum = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-section-content h3 span');
+    var lists = {
+        sponsors: [],
+        categories: []
+    };
+
+    pointsSum.innerHTML = offers.TotalPointsReward;
+    offersHolder.innerHTML = '';
+
+    offers.Offers.forEach(function(offer){
+        var li = document.createElement('li');
+
+        console.info(offer);
+
+        li.innerHTML =
+            '<a class="dg-o-w-offer" href="#">' +
+                '<div class="dg-o-w-offer-left">' +
+                    '<img src="' + (offer.Type.ImageUrl || 'http://lorempixel.com/100/100/sports') + '" />' +
+                    '<span>' + offer.PointsReward + '</span>' +
+                '</div>' +
+                '<div class="dg-o-w-offer-right">' +
+                    '<h4>' + offer.Type.Name + '</h4>' +
+                    '<h5>Some amazing offer, best one you only could imagine</h5>' +
+                    '<div class="dg-o-w-users-done">' +
+                        '<div>' +
+                            '<img src="http://lorempixel.com/70/70/people/1" />' +
+                            '<img src="http://lorempixel.com/70/70/people/2" />' +
+                            '<img src="http://lorempixel.com/70/70/people/3" />' +
+                        '</div>' +
+                        '<p>10 users have done this</p>' +
+                    '</div>' +
+                '</div>' +
+            '</a>';
+
+        offersHolder.appendChild(li);
+    });
+};
 var widgetStyles = document.createElement('link');
     widgetStyles.rel = 'stylesheet';
     widgetStyles.type = 'text/css';

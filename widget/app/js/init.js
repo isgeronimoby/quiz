@@ -1,4 +1,4 @@
-window.DGW = function () {
+var DGW = function () {
     if (document.getElementById('dgl-gamified-widget')) {
         var widgetScript = document.getElementById('dgl-gamified-widget');
         var widgetPathName = widgetScript.src;
@@ -10,11 +10,14 @@ window.DGW = function () {
                 tunnelPath = 'http://spr-api-test.cloudapp.net/tunnel.html';
                 if (widgetScript.getAttribute('data-tunnel') === 'local') {
                     tunnelPath = 'http://localhostdev/spr-api/tunnel.html';
+                } else if (widgetScript.getAttribute('data-tunnel') === 'live') {
+                    tunnelPath = 'https://api.rewarded.club/tunnel.html';
                 }
             } else {
                 // No parameter - use production path
                 tunnelPath = 'https://api.rewarded.club/tunnel.html';
             }
+            console.log(tunnelPath);
             return {
                 templates: {},
                 main: {
@@ -43,7 +46,8 @@ window.DGW = function () {
                     elements: {},
                     methods: {},
                     tunnelPath: tunnelPath,
-                    widgetPathName: widgetPathName
+                    widgetPathName: widgetPathName,
+                    userStats: {}
                 },
                 states: {},
                 helpers: {}

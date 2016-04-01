@@ -56,6 +56,15 @@ DGW.main.methods.addPageEvents = function () {
         DGW.main.methods.checkSectionHeight();
     });
 
+    DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').addEventListener('change', function(){
+        if (this.value === 'all-activities') {
+            DGW.global.api.requests.getAllActivities();
+        } else {
+            DGW.global.api.requests.getUserActivities();
+        }
+    });
+
+
     //Footer login init
     DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-email-login').addEventListener('click', function (ev) {
         ev.preventDefault();
@@ -127,32 +136,30 @@ DGW.main.methods.addPageEvents = function () {
                 DGW.helpers.removeClass(item, 'dg-o-w-active');
             });
         }
-        function expiredDisable(){
-            DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired').checked = false;
-            DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired').disabled = true;
-            DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'draws-expired');
-        }
-        function expiredEnable(){
-            DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired').disabled = false;
-        }
+
         submenuItems.forEach(function(item){
             item.addEventListener('click', function(){
                 removeActive();
                 DGW.helpers.addClass(this, 'dg-o-w-active');
                 switch (this.id) {
                     case 'dg-o-w-show-all-draws':
-                        DGW.main.cache.drawsList = DGW.main.cache.drawsList.sort(function(a,b){
+                        DGW.main.cache.drawsList.sort(function(a,b){
                             return new Date(b.EndDate) - new Date(a.EndDate)
                         });
-                        expiredEnable();
                         DGW.main.methods.drawsConstructor(DGW.main.cache);
                         break;
                     case 'dg-o-w-show-finished-soon':
-                        // (moment(a.EndDate).diff() > 0)
-                        DGW.main.cache.drawsList = DGW.main.cache.drawsList.sort(function(a, b){
-                            return new Date(a.StartDate) - new Date(b.StartDate);
+                        var expArr = DGW.main.cache.drawsList.filter(function(draw){
+                            return moment(draw.EndDate).diff() <= 0;
                         });
-                        expiredDisable();
+                        var actArr = DGW.main.cache.drawsList.filter(function(draw){
+                            return moment(draw.EndDate).diff() > 0;
+                        }).sort(function(a, b){
+                            return new Date(a.EndDate) - new Date(b.EndDate);
+                        });
+
+                        DGW.main.cache.drawsList = actArr.concat(expArr);
+
                         DGW.main.methods.drawsConstructor(DGW.main.cache);
                         break;
                     case 'dg-o-w-show-my-draws':
@@ -167,7 +174,7 @@ DGW.main.methods.addPageEvents = function () {
                         DGW.main.cache.drawsList = DGW.main.cache.drawsList.sort(function(a,b){
                             return new Date(b.EndDate) - new Date(a.EndDate)
                         });
-                        expiredEnable();
+
                         DGW.main.methods.drawsConstructor({drawsList: myDraws, drawsEntries: DGW.main.cache.drawsEntries}, 'my-draws');
                         break;
                     case 'dg-o-w-show-games':
@@ -178,7 +185,6 @@ DGW.main.methods.addPageEvents = function () {
         });
         DGW.main.methods.drawSubmenuReset = function(){
             removeActive();
-            expiredEnable();
             DGW.helpers.addClass(DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-all-draws'), 'dg-o-w-active');
         };
     })();

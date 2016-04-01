@@ -56,6 +56,18 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             endpoint = 'draw/claimprize';
             requestBody = JSON.stringify(requestBody);
             break;
+        case 'getAllActivities':
+            method = 'GET';
+            endpoint = 'activityfeed/getallactivities';
+            break;
+        case 'getUserActivities':
+            method = 'GET';
+            endpoint = 'activityfeed/getuseractivities';
+            break;
+        case 'getOffers':
+            method = 'GET';
+            endpoint = 'offer/getoffers';
+            break;
         default:
     }
     DGW.global.api.rpc.apiTunnel({
@@ -246,4 +258,43 @@ DGW.global.api.requests.connectFB = function(){
     }
 
     PopupCenter(DGW.global.tunnelPath.substring(DGW.global.tunnelPath.lastIndexOf('/') + 1, 0) + 'publisher/v1/auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340);
+};
+
+DGW.global.api.requests.getAllActivities = function(){
+    DGW.main.methods.loadingStarted();
+    DGW.global.api.generic('getAllActivities', function(result){
+        if (!result.error) {
+            console.info(result.data);
+            DGW.main.methods.activitiesConstructor(result.data.Activities);
+            DGW.main.methods.loadingFinished();
+        } else {
+            console.error(result.error);
+        }
+    });
+};
+
+DGW.global.api.requests.getUserActivities = function(){
+    DGW.main.methods.loadingStarted();
+    DGW.global.api.generic('getUserActivities', function(result){
+        if (!result.error) {
+            console.info(result.data);
+            DGW.main.methods.loadingFinished();
+            DGW.main.methods.activitiesConstructor(result.data.Activities);
+        } else {
+            console.error(result.error);
+        }
+    });
+};
+
+DGW.global.api.requests.getOffers = function(){
+    DGW.main.methods.loadingStarted();
+    DGW.global.api.generic('getOffers', function(result){
+        if (!result.error) {
+            console.info(result.data);
+            DGW.main.methods.loadingFinished();
+            DGW.main.methods.offersConstructor(result.data);
+        } else {
+            console.error(result.error);
+        }
+    });
 };

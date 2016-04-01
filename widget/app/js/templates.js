@@ -85,9 +85,8 @@ DGW.templates.earnMain = '<div class="dg-o-w-submenu">' +
                                 '<option>Telco</option></select>' +
                         '</div>' +
                         '<div class="dg-o-w-section-content">' +
-                            '<h3>Complete the tasks and earn +500 points today</h3>' +
-                            '<ul class="dg-o-w-list-offers">' +
-                                '<li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul>' +
+                            '<h3>Complete the tasks and earn +<span></span> points today</h3>' +
+                            '<ul class="dg-o-w-list-offers"></ul>' +
                         '</div>';
 
 DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
@@ -163,8 +162,9 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul><li class="toggl
                                     '<div class="dg-o-w-activities-header">' +
                                         '<p class="dg-o-w-float-left">Activities for today</p>' +
                                         '<p class="dg-o-w-floating-link"><a href="#">Invite more friends</a> and get +50 points for each</p>' +
-                                        '<select class="dg-o-w-float-right">' +
-                                            '<option>All activities</option>' +
+                                        '<select id="dg-o-w-activities-filter" class="dg-o-w-float-right">' +
+                                            '<option value="all-activities">All activities</option>' +
+                                            '<option value="my-activities">My Activities</option>' +
                                         '</select>' +
                                     '</div>' +
                                     '<div class="dg-o-w-activities-holder"><ul></ul></div>' +

@@ -74,7 +74,7 @@ DGW.main.methods.changeMainState = function(state){
     DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'profile-anon');
     switch (state) {
         case 'earn':
-
+            DGW.global.api.requests.getOffers();
             DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.earnMain);
             break;
         case 'draws':
@@ -86,7 +86,11 @@ DGW.main.methods.changeMainState = function(state){
             DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.drawsMain);
             break;
         case 'activities':
-
+            if (DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').value === 'all-activities') {
+                DGW.global.api.requests.getAllActivities();
+            } else {
+                DGW.global.api.requests.getUserActivities();
+            }
             DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.activitiesMain);
             break;
         case 'profile':
@@ -148,6 +152,13 @@ DGW.global.methods.init = function(){
             };
         }(item));
     }
+
+    DGW.global.userStats.imageUrl = DGW.helpers.checkImagesForSrc();
+    DGW.global.userStats.name = 'Guest';
+    DGW.global.userStats.pointsC = 0;
+    DGW.global.userStats.pointsP = 0;
+    DGW.global.userStats.creditsC = 0;
+    DGW.global.userStats.creditsP = 0;
 
     //Initializing or checking user
     DGW.global.api.requests.getUser();
