@@ -1778,40 +1778,95 @@ DGW.main.methods.offersConstructor = function(offers) {
         offersSponsors = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-submenu select'),
         pointsSum = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-section-content h3 span');
     var lists = {
+        offers: offers.Offers,
         sponsors: [],
         categories: []
     };
 
     pointsSum.innerHTML = offers.TotalPointsReward;
-    offersHolder.innerHTML = '';
+    offersSubmenu.innerHTML = '';
+    offersSponsors.innerHTML = '';
+
+    lists.categories.push('All');
 
     offers.Offers.forEach(function(offer){
-        var li = document.createElement('li');
-
-        console.info(offer);
-
-        li.innerHTML =
-            '<a class="dg-o-w-offer" href="#">' +
-                '<div class="dg-o-w-offer-left">' +
-                    '<img src="' + (offer.Type.ImageUrl || 'http://lorempixel.com/100/100/sports') + '" />' +
-                    '<span>' + offer.PointsReward + '</span>' +
-                '</div>' +
-                '<div class="dg-o-w-offer-right">' +
-                    '<h4>' + offer.Type.Name + '</h4>' +
-                    '<h5>Some amazing offer, best one you only could imagine</h5>' +
-                    '<div class="dg-o-w-users-done">' +
-                        '<div>' +
-                            '<img src="http://lorempixel.com/70/70/people/1" />' +
-                            '<img src="http://lorempixel.com/70/70/people/2" />' +
-                            '<img src="http://lorempixel.com/70/70/people/3" />' +
-                        '</div>' +
-                        '<p>10 users have done this</p>' +
-                    '</div>' +
-                '</div>' +
-            '</a>';
-
-        offersHolder.appendChild(li);
+        if (lists.sponsors.filter(function(sponsor){return sponsor.Name === offer.Sponsor.Name;}).length == 0) {
+            lists.sponsors.push(offer.Sponsor);
+        }
+        if (lists.categories.filter(function(categorie){return categorie === offer.Type.Group.Name;}).length == 0) {
+            lists.categories.push(offer.Type.Group.Name);
+        }
     });
+
+    lists.sponsors.forEach(function(sponsor){
+        var option = document.createElement('option');
+        option.innerHTML = sponsor.Name;
+        option.value = sponsor.Name.toLowerCase();
+
+        offersSponsors.appendChild(option);
+    });
+
+    lists.categories.forEach(function(category, ind){
+        var li = document.createElement('li');
+        li.innerHTML = category;
+        li.addEventListener('click', function(){
+            Array.prototype.slice.call(offersSubmenu.querySelectorAll('li')).forEach(function(item){
+                DGW.helpers.removeClass(item, 'dg-o-w-active');
+            });
+            DGW.helpers.addClass(this, 'dg-o-w-active');
+
+            if (category.toLowerCase() == 'all') {
+                showOffersPanels(lists.offers);
+            } else {
+                var filteredOffers = lists.offers.filter(function (offer) {
+                    return offer.Type.Group.Name.toLowerCase() == category.toLowerCase();
+                });
+                showOffersPanels(filteredOffers);
+            }
+        });
+        if (category.toLowerCase() == 'all') {DGW.helpers.addClass(li, 'dg-o-w-active')}
+        offersSubmenu.appendChild(li);
+    });
+
+    offersSponsors.addEventListener('change', function(){
+        var that = this;
+        var filteredOffers = lists.offers.filter(function (offer) {
+            return offer.Sponsor.Name.toLowerCase() == that.value;
+        });
+        showOffersPanels(filteredOffers);
+    });
+
+    function showOffersPanels(filteredOffers) {
+        offersHolder.innerHTML = '';
+
+        filteredOffers.forEach(function (offer) {
+            var li = document.createElement('li');
+
+            li.innerHTML =
+                '<div class="dg-o-w-offer">' +
+                    '<div class="dg-o-w-offer-left">' +
+                        '<img src="' + (offer.Type.ImageUrl || 'http://lorempixel.com/100/100/sports') + '" />' +
+                        '<span>' + offer.PointsReward + '</span>' +
+                    '</div>' +
+                    '<div class="dg-o-w-offer-right">' +
+                        '<h4>' + offer.Type.Name + '</h4>' +
+                        '<h5>Some amazing offer, best one you only could imagine</h5>' +
+                        '<div class="dg-o-w-users-done">' +
+                            '<div>' +
+                                '<img src="http://lorempixel.com/70/70/people/1" />' +
+                                '<img src="http://lorempixel.com/70/70/people/2" />' +
+                                '<img src="http://lorempixel.com/70/70/people/3" />' +
+                            '</div>' +
+                            '<p>10 users have done this</p>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+
+            offersHolder.appendChild(li);
+        });
+    }
+
+    showOffersPanels(lists.offers)
 };
 var widgetStyles = document.createElement('link');
     widgetStyles.rel = 'stylesheet';
