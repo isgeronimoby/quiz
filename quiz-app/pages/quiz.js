@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import QuizItem from '../components/QuizItem';
+
 import './../components/quiz.scss'
-
-
 
 class Quiz extends Component {
 
@@ -31,9 +31,9 @@ class Quiz extends Component {
 				</div>
 
 				
-				<div className="quiz-content">
-					<div className="quiz-info">23 March, 19:00, 3thd tour, London</div>
-					<div className="quiz-title">Who will win in a half-time?</div>
+				<QuizItem
+					info="23 March, 19:00, 3thd tour, London"
+					title="Who will win in a half-time?">
 
 					<div className="quiz-teams">
 						<div className="team-container">
@@ -50,7 +50,7 @@ class Quiz extends Component {
 						</div>
 						Draw
 					</div>
-				</div>
+				</QuizItem>
 
 
 			</div>
