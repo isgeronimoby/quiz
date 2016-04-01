@@ -43,6 +43,7 @@ body {
   padding-top: $header-height;
   overflow: auto;
   height: calc(100% - $header-height);
+  -webkit-overflow-scrolling: touch;
 }
 
 @media (min-width: $screen-sm-min) {

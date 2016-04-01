@@ -31,6 +31,7 @@
   text-decoration: none;
   &.completed {
     background: rgba(51, 137, 86, .5);
+    pointer-events: none;
   }
 
   .fixture-item-team-icons {
