@@ -8,8 +8,8 @@ class QuizItem extends Component {
 
 	renderPlayers() {
 		return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(player => {
-			return <li>
-				<div className="player-number" key={`player-${player}`}>{player}</div>
+			return <li key={`player-${player}`}>
+				<div className="player-number">{player}</div>
 				<div className="player-info">
 					<div className="player-name">Aaron Lennon</div>
 					<div className="player-position">Everton, Middle Forward</div>
