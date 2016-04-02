@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import QuizItem from '../components/QuizItem';
+import QuizItemType1 from '../components/QuizItemType1';
+import QuizItemType2 from '../components/QuizItemType2';
 
 import './../components/quiz.scss'
 
@@ -31,7 +32,7 @@ class Quiz extends Component {
 				</div>
 
 				
-				<QuizItem />
+				<QuizItemType2 />
 
 
 			</div>
