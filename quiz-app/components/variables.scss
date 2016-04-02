@@ -2,17 +2,23 @@
  * Scaffolding
  * -------------------------------------------------------------------------- */
 
-$body-bg: #46BC76;
-$text-color: #117453;
-$brand-color: #338956; /* 51, 137, 86 */
+$body-bg: rgba(240, 240, 240, 0.06);
+$text-color: #fff;
+$brand-color: #4CAF50; /* 76, 175, 80 */
 $contrast-color: #fff;
+
+$color-1: #B6B6B6; /* 182, 182, 182 */
+$color-2: #F0F0F0; /* 240, 240, 240 */
+$color-3: #727272; /* 114, 114, 114 */
+
+ /* EAEAEA */
 
 /*
  * Typography
  * -------------------------------------------------------------------------- */
 
 $font-family-roboto: 'Roboto', 'Helvetica', sans-serif;
-$font-family-roboto-bold: 'Roboto bold', 'Helvetica', sans-serif;
+$font-family-roboto-bold: 'Roboto bold', 'Helvetica', sans-serif; /* figure out if it works */
 
 /*
  * Media queries breakpoints

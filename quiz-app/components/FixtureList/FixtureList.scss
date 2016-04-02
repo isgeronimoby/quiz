@@ -11,14 +11,14 @@
 }
 
 .fixture-item-header {
-  background: rgba(51, 137, 86, .2);
+  background: $color-1;
   height: 2.1rem;
   padding: 0 1.5rem;
   display: flex;
   align-items: center;
   font-size: 1.1rem;
-  color: rgba(0, 0, 0, .2);
-  font-family: $font-family-roboto-bold;
+  color: $text-color;
+  font-weight: bold;
   &.is-collapsed {
     height: 0.1rem;
   }
@@ -30,7 +30,7 @@
   color: $contrast-color;
   text-decoration: none;
   &.completed {
-    background: rgba(51, 137, 86, .5);
+    background: rgba(182, 182, 182, .5);
     pointer-events: none;
   }
 
@@ -82,10 +82,11 @@
 .list-title {
   font-size: 1.4rem;
   margin-bottom: 0.6rem;
+  color: $color-3;
 }
 
 .list-meta {
   font-size: 1rem;
-  color: rgba(214, 231, 221, 1);
+  color: $color-1;
   text-transform: uppercase;
 }
