@@ -11,13 +11,12 @@
 }
 
 .fixture-item-header {
-  background: $color-1;
+  background: var(--color-1);
   height: 2.1rem;
   padding: 0 1.5rem;
   display: flex;
   align-items: center;
   font-size: 1.1rem;
-  color: $text-color;
   font-weight: bold;
   &.is-collapsed {
     height: 0.1rem;
@@ -82,11 +81,11 @@
 .list-title {
   font-size: 1.4rem;
   margin-bottom: 0.6rem;
-  color: $color-3;
+  color: var(--color-3);
 }
 
 .list-meta {
   font-size: 1rem;
-  color: $color-1;
+  color: var(--color-1);
   text-transform: uppercase;
 }
