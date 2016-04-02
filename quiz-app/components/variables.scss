@@ -2,7 +2,7 @@
  * Scaffolding
  * -------------------------------------------------------------------------- */
 
-$body-bg: rgba(240, 240, 240, 0.06);
+$body-bg: rgba(140, 140, 140, 0.06); /* TODO: change due to newest mockups */
 $text-color: #fff; /* 255, 255, 255*/
 $brand-color: #4CAF50; /* 76, 175, 80 */
 $contrast-color: #fff;
@@ -33,3 +33,5 @@ $screen-lg-min: 1200px;
  * -------------------------------------------------------------------------- */
 
 $header-height: 4.4rem;
+
+/* TODO: move all used font-sizes in here! */

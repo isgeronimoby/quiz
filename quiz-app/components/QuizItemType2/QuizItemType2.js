@@ -6,7 +6,6 @@ class QuizItem extends Component {
 
 	};
 
-
 	render() {
 		return (
 			<div className="quiz-content">
@@ -26,7 +25,9 @@ class QuizItem extends Component {
 						<div className="team-name">Manchester United</div>
 					</div>
 				</div>
-				<div className="quiz-title">Select a score for Everton</div>
+				<div className="quiz-title">
+					Select a score for Everton
+				</div>
 
 				<div className="score-choice">
 					<div>1</div>
