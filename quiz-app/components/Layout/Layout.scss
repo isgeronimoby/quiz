@@ -30,18 +30,17 @@ body {
   background-attachment: fixed;
 }
 
-#app,
-.layout {
+#app {
   height: 100%;
 }
 
 .layout {
-
+  padding-top: var(--header-height);
+  height: calc(100% - var(--header-height));
 }
 
 .content {
-  padding-top: var(--header-height);
+  height: 100%;
   overflow: auto;
-  height: calc(100% - var(--header-height));
   -webkit-overflow-scrolling: touch;
 }
