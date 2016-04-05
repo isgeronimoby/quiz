@@ -68,6 +68,10 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             method = 'GET';
             endpoint = 'offer/getoffers';
             break;
+        case 'getActions':
+            method = 'GET';
+            endpoint = 'rewardedaction/getactions';
+            break;
         default:
     }
     DGW.global.api.rpc.apiTunnel({
@@ -110,7 +114,7 @@ DGW.global.api.requests.signUp = function(userObj){
             console.info(result.data);
             DGW.global.authorized = true;
             DGW.global.methods.authorize();
-            DGW.global.methods.profileSetData(result.data);
+            DGW.main.methods.profileSetData(result.data);
         } else {
             DGW.global.authorized = false;
             console.error(result.error);
@@ -127,7 +131,7 @@ DGW.global.api.requests.signIn = function(userObj){
         if (!result.error) {
             console.info(result.data);
             DGW.global.methods.authorize();
-            DGW.global.methods.profileSetData(result.data);
+            DGW.main.methods.profileSetData(result.data);
             DGW.global.authorized = true;
         } else {
             DGW.global.authorized = false;
@@ -155,7 +159,7 @@ DGW.global.api.requests.getUser = function(){
             if (DGW.global.authorized === false) {
                 DGW.global.authorized = true;
                 DGW.global.methods.authorize();
-                DGW.global.methods.profileSetData(result.data);
+                DGW.main.methods.profileSetData(result.data);
             }
         } else {
             DGW.global.authorized = false;
@@ -293,6 +297,18 @@ DGW.global.api.requests.getOffers = function(){
             console.info(result.data);
             DGW.main.methods.loadingFinished();
             DGW.main.methods.offersConstructor(result.data);
+        } else {
+            console.error(result.error);
+        }
+    });
+};
+
+DGW.global.api.requests.getActions = function(){
+    DGW.global.api.generic('getActions', function(result){
+        if (!result.error) {
+            console.info(result.data);
+            DGW.main.cache.rewardedActions = result.data.Actions;
+            DGW.main.methods.setRewardedActions();
         } else {
             console.error(result.error);
         }

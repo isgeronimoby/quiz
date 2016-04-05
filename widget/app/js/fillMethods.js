@@ -1,4 +1,19 @@
-DGW.global.methods.profileSetData = function(data) {
+DGW.main.methods.setRewardedActions = function(w, a){
+    if (!w) w = DGW.main.elements.widget;
+    if (!a) a = DGW.main.cache.rewardedActions;
+    if (w.querySelector('.dg-o-w-rewarded-action')) {
+        if (w.querySelector('#dg-o-w-login-fb-reward'))
+            w.querySelector('#dg-o-w-login-fb-reward').innerHTML = a.filter(function(action){return action.Type == 'FacebookConnect'})[0].PointsReward;
+        if (w.querySelector('#dg-o-w-friends-sign-up-reward'))
+            w.querySelector('#dg-o-w-friends-sign-up-reward').innerHTML = a.filter(function(action){return action.Type == 'FriendSignUp'})[0].PointsReward;
+        if (w.querySelector('#dg-o-w-facebook-like-reward'))
+            w.querySelector('#dg-o-w-facebook-like-reward').innerHTML = a.filter(function(action){return action.Type == 'FacebookShare'})[0].PointsReward;
+        if (w.querySelector('#dg-o-w-tweeter-like-reward'))
+            w.querySelector('#dg-o-w-tweeter-like-reward').innerHTML = a.filter(function(action){return action.Type == 'TwitterShare'})[0].PointsReward;
+    }
+};
+
+DGW.main.methods.profileSetData = function(data) {
     var profileImageHolders = [
             DGW.main.elements.widgetBody.querySelector('.dg-o-w-menu-profile .profile-menu-item img'),
             DGW.main.elements.pages.profileMain.querySelector('#profileImage')
@@ -132,7 +147,7 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
                             '</div>';
             if (!DGW.helpers.drawsTimer.push({dt:draw.EndDate, elem:li.querySelector('.dg-o-w-draw-countdown')})) {
                 DGW.helpers.addClass(li, 'expired');
-                li.querySelector('.dg-o-w-draw-countdown').innerHTML = 'Finished ' + String(moment(draw.EndDate).fromNow());
+                li.querySelector('.dg-o-w-draw-countdown').innerHTML = 'Finished ' + String(moment(new Date(draw.EndDate)).fromNow());
             } else {
                 DGW.global.activeDrawsExist = true;
             }
@@ -159,6 +174,8 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
             }
         }
     }
+
+    DGW.main.methods.setRewardedActions();
 };
 
 DGW.main.methods.singleDrawConstructor = function(drawId){
@@ -172,11 +189,11 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
 
     var el = DGW.main.elements.pages.singleDraw;
     var prizeSect = '<div class="dg-o-w-draw-left-side">' +
-                        '<div class="prize-image"><div><img src="' + draw.Prize.ImageUrl.replace(/api/g, 'everton') + '" /></div></div>' +
+                        '<div class="prize-image"><div><img src="' + draw.Prize.ImageUrl + '" /></div></div>' +
                     '</div>';
     var shareSect = '<div class="dg-o-w-draw-share">' +
-                        '<a href="#" class="dg-o-w-like dg-o-w-facebook-like">Like and get 10 points</a>' +
-                        '<a href="#" class="dg-o-w-like dg-o-w-twitter-like">Tweet and get 10 points</a>' +
+                        '<a href="#" class="dg-o-w-like dg-o-w-facebook-like">Share and get <span class="dg-o-w-rewarded-action" id="dg-o-w-facebook-like-reward">10</span> points</a>' +
+                        '<a href="#" class="dg-o-w-like dg-o-w-twitter-like">Tweet and get <span class="dg-o-w-rewarded-action" id="dg-o-w-tweeter-like-reward">10</span> points</a>' +
                     '</div>';
     var submenu = '<div class="dg-o-w-submenu">' +
                         '<ul><li class="dg-o-w-back-draws">&lt; Back</li></ul><div class="right-side">' +
@@ -312,13 +329,15 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
     if (!DGW.helpers.drawsTimer.push({dt:draw.EndDate, elem:el.querySelector('.dg-o-w-countdown')})) {
         DGW.helpers.addClass(el.querySelector('.dg-o-w-single-draw'), 'expired');
         if (el.querySelector('.dg-o-w-countdown')) {
-            el.querySelector('.dg-o-w-countdown').innerHTML = 'Finished ' + String(moment(draw.EndDate).fromNow());
+            el.querySelector('.dg-o-w-countdown').innerHTML = 'Finished ' + String(moment(new Date(draw.EndDate)).fromNow());
         }
     }
 
     DGW.main.elements.widgetContent.appendChild(el);
     DGW.main.methods.checkSectionHeight();
+    DGW.main.methods.setRewardedActions();
 };
+
 
 DGW.main.methods.activitiesConstructor = function(activities){
     activities.sort(function(a, b){
@@ -409,13 +428,14 @@ DGW.main.methods.activitiesConstructor = function(activities){
                     '<p>' + message + '</p>' +
                 '</div>' +
             '</div>' +
-            '<h6>' + moment(activity.Date).fromNow() + '</h6>';
+            '<h6>' + moment(new Date(activity.Date)).fromNow() + '</h6>';
         if (activity.Direction === 'Outflow') {
             DGW.helpers.addClass(li, 'spent');
         }
 
         activitiesHolder.appendChild(li);
     });
+    DGW.main.methods.setRewardedActions();
 };
 
 DGW.main.methods.offersConstructor = function(offers) {
@@ -474,13 +494,17 @@ DGW.main.methods.offersConstructor = function(offers) {
         offersSubmenu.appendChild(li);
     });
 
-    offersSponsors.addEventListener('change', function(){
-        var that = this;
-        var filteredOffers = lists.offers.filter(function (offer) {
-            return offer.Sponsor.Name.toLowerCase() == that.value;
+    if (lists.sponsors.length > 1) {
+        offersSponsors.addEventListener('change', function () {
+            var that = this;
+            var filteredOffers = lists.offers.filter(function (offer) {
+                return offer.Sponsor.Name.toLowerCase() == that.value;
+            });
+            showOffersPanels(filteredOffers);
         });
-        showOffersPanels(filteredOffers);
-    });
+    } else {
+        offersSponsors.style.display = 'none';
+    }
 
     function showOffersPanels(filteredOffers) {
         offersHolder.innerHTML = '';
@@ -512,5 +536,6 @@ DGW.main.methods.offersConstructor = function(offers) {
         });
     }
 
-    showOffersPanels(lists.offers)
+    showOffersPanels(lists.offers);
+    DGW.main.methods.setRewardedActions();
 };

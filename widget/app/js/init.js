@@ -1,4 +1,4 @@
-var DGW = function () {
+window.DGW = function () {
     if (document.getElementById('dgl-gamified-widget')) {
         var widgetScript = document.getElementById('dgl-gamified-widget');
         var widgetPathName = widgetScript.src;
@@ -28,7 +28,8 @@ var DGW = function () {
                     currentState: 'earn',
                     cache: {
                         drawsList: [],
-                        drawsEntries: []
+                        drawsEntries: [],
+                        rewardedActions: []
                     }
                 },
                 side: {

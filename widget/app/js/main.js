@@ -110,6 +110,7 @@ DGW.main.methods.changeMainState = function(state){
     });
 
     DGW.main.currentState = state;
+    DGW.main.methods.setRewardedActions();
     DGW.main.methods.checkSectionHeight();
 };
 
@@ -159,6 +160,8 @@ DGW.global.methods.init = function(){
     DGW.global.userStats.pointsP = 0;
     DGW.global.userStats.creditsC = 0;
     DGW.global.userStats.creditsP = 0;
+
+    DGW.global.api.requests.getActions();
 
     //Initializing or checking user
     DGW.global.api.requests.getUser();

@@ -1,5 +1,5 @@
 window.addEventListener('load', function(){
-var DGW = function () {
+window.DGW = function () {
     if (document.getElementById('dgl-gamified-widget')) {
         var widgetScript = document.getElementById('dgl-gamified-widget');
         var widgetPathName = widgetScript.src;
@@ -29,7 +29,8 @@ var DGW = function () {
                     currentState: 'earn',
                     cache: {
                         drawsList: [],
-                        drawsEntries: []
+                        drawsEntries: [],
+                        rewardedActions: []
                     }
                 },
                 side: {
@@ -443,6 +444,10 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             method = 'GET';
             endpoint = 'offer/getoffers';
             break;
+        case 'getActions':
+            method = 'GET';
+            endpoint = 'rewardedaction/getactions';
+            break;
         default:
     }
     DGW.global.api.rpc.apiTunnel({
@@ -485,7 +490,7 @@ DGW.global.api.requests.signUp = function(userObj){
             console.info(result.data);
             DGW.global.authorized = true;
             DGW.global.methods.authorize();
-            DGW.global.methods.profileSetData(result.data);
+            DGW.main.methods.profileSetData(result.data);
         } else {
             DGW.global.authorized = false;
             console.error(result.error);
@@ -502,7 +507,7 @@ DGW.global.api.requests.signIn = function(userObj){
         if (!result.error) {
             console.info(result.data);
             DGW.global.methods.authorize();
-            DGW.global.methods.profileSetData(result.data);
+            DGW.main.methods.profileSetData(result.data);
             DGW.global.authorized = true;
         } else {
             DGW.global.authorized = false;
@@ -530,7 +535,7 @@ DGW.global.api.requests.getUser = function(){
             if (DGW.global.authorized === false) {
                 DGW.global.authorized = true;
                 DGW.global.methods.authorize();
-                DGW.global.methods.profileSetData(result.data);
+                DGW.main.methods.profileSetData(result.data);
             }
         } else {
             DGW.global.authorized = false;
@@ -668,6 +673,18 @@ DGW.global.api.requests.getOffers = function(){
             console.info(result.data);
             DGW.main.methods.loadingFinished();
             DGW.main.methods.offersConstructor(result.data);
+        } else {
+            console.error(result.error);
+        }
+    });
+};
+
+DGW.global.api.requests.getActions = function(){
+    DGW.global.api.generic('getActions', function(result){
+        if (!result.error) {
+            console.info(result.data);
+            DGW.main.cache.rewardedActions = result.data.Actions;
+            DGW.main.methods.setRewardedActions();
         } else {
             console.error(result.error);
         }
@@ -847,7 +864,7 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                 '<section></section>' +
                                                 '<footer class="dg-o-w-footer-login">' +
                                                     '<div class="footer-section footer-section-step-1">' +
-                                                        '<div class="inline-part"><h3>Log in with Facebook and get +10 points</h3></div>' +
+                                                        '<div class="inline-part"><h3>Log in with Facebook and get +<span id="dg-o-w-login-fb-reward" class="dg-o-w-rewarded-action">30</span> points</h3></div>' +
                                                         '<div class="inline-part"><a href="#" id="dg-o-w-footer-fb-connect" class="btn-radius btn-large btn-brand">Facebook</a></div>' +
                                                         '<div class="inline-part"><p>or</p></div>' +
                                                         '<div class="inline-part"><a id="dg-o-w-footer-email-login" href="#" class="btn-radius btn-large btn-white">Sign up with email</a></div>' +
@@ -905,7 +922,10 @@ DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
 DGW.templates.profileMain = '<div class="dg-o-w-profile">' +
                                 '<div class="dg-o-w-left-side">' +
                                     '<div class="dg-o-w-image-holder"><img id="profileImage" class="avatar" src="" /></div>' +
+                                    // TODO: hide until we have invite friends functionality
+                                    /*
                                     '<p><span id="profileFriendsAmount">15</span> friends</p>' +
+                                    */
                                 '</div>' +
                                 '<div class="dg-o-w-right-side">' +
                                     '<div class="dg-o-w-profile-top">' +
@@ -917,14 +937,17 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile">' +
                                     '</div>' +
                                     '<div class="dg-o-w-profile-earnings-info">' +
                                         '<p class="color-brand-light">Today earned: <span>15</span> pts | left: <span>5</span>pts</p>' +
-                                        '<p>Get +10 additional points by adding your other accounts from ' +
+                                        '<p>Get +<span class="dg-o-w-rewarded-action" id="dg-o-w-login-fb-reward">50</span> additional points by adding your other accounts from ' +
                                             '<a href="#" class="dg-o-w-fb-connect"></a> and <a href="#" class="dg-o-w-tw-connect"></a></p>' +
                                     '</div>' +
                                     '<div class="dg-o-w-profile-progress"><div style="width:35%;"></div></div>' +
                                     '<div class="dg-o-w-profile-bottom">' +
                                         '<div class="dg-o-w-profile-invite dg-o-w-float-left">' +
+                                            // TODO: hide until we have invite friends functionality
+                                            /*
                                             '<p class="color-brand-light"><a href="#" class="btn-dg-o-w-outline">Invite more friends</a>' +
-                                            ' and get <span>+50</span> points for each friend</p>' +
+                                            ' and get +<span class="dg-o-w-rewarded-action" id="dg-o-w-friends-sign-up-reward">50</span> points for each friend</p>' +
+                                            */
                                         '</div>' +
                                         '<div class="dg-o-w-profile-signout dg-o-w-float-right">' +
                                             '<p class="color-brand-light"><a id="dg-o-w-sign-out-btn" href="#">Sign out</a></p>' +
@@ -962,7 +985,8 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul><li class="toggl
                                 '<div class="dg-o-w-section-content">' +
                                     '<div class="dg-o-w-activities-header">' +
                                         '<p class="dg-o-w-float-left">Activities for today</p>' +
-                                        '<p class="dg-o-w-floating-link"><a href="#">Invite more friends</a> and get +50 points for each</p>' +
+                                        // TODO: don't show until we have invite friends functionality
+                                        // '<p class="dg-o-w-floating-link"><a href="#">Invite more friends</a> and get +<span id="dg-o-w-friends-sign-up-reward" class="dg-o-w-rewarded-action">50</span> points for each</p>' +
                                         '<select id="dg-o-w-activities-filter" class="dg-o-w-float-right">' +
                                             '<option value="all-activities">All activities</option>' +
                                             '<option value="my-activities">My Activities</option>' +
@@ -970,7 +994,6 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul><li class="toggl
                                     '</div>' +
                                     '<div class="dg-o-w-activities-holder"><ul></ul></div>' +
                                 '</div>';
-
 DGW.global.elements.documentBody = document.body;
 
 DGW.side.elements.widget = document.createElement('div');
@@ -1083,6 +1106,7 @@ DGW.main.methods.changeMainState = function(state){
     });
 
     DGW.main.currentState = state;
+    DGW.main.methods.setRewardedActions();
     DGW.main.methods.checkSectionHeight();
 };
 
@@ -1132,6 +1156,8 @@ DGW.global.methods.init = function(){
     DGW.global.userStats.pointsP = 0;
     DGW.global.userStats.creditsC = 0;
     DGW.global.userStats.creditsP = 0;
+
+    DGW.global.api.requests.getActions();
 
     //Initializing or checking user
     DGW.global.api.requests.getUser();
@@ -1352,7 +1378,22 @@ DGW.main.methods.addPageEvents = function () {
         DGW.global.api.requests.signOut();
     });
 };
-DGW.global.methods.profileSetData = function(data) {
+DGW.main.methods.setRewardedActions = function(w, a){
+    if (!w) w = DGW.main.elements.widget;
+    if (!a) a = DGW.main.cache.rewardedActions;
+    if (w.querySelector('.dg-o-w-rewarded-action')) {
+        if (w.querySelector('#dg-o-w-login-fb-reward'))
+            w.querySelector('#dg-o-w-login-fb-reward').innerHTML = a.filter(function(action){return action.Type == 'FacebookConnect'})[0].PointsReward;
+        if (w.querySelector('#dg-o-w-friends-sign-up-reward'))
+            w.querySelector('#dg-o-w-friends-sign-up-reward').innerHTML = a.filter(function(action){return action.Type == 'FriendSignUp'})[0].PointsReward;
+        if (w.querySelector('#dg-o-w-facebook-like-reward'))
+            w.querySelector('#dg-o-w-facebook-like-reward').innerHTML = a.filter(function(action){return action.Type == 'FacebookShare'})[0].PointsReward;
+        if (w.querySelector('#dg-o-w-tweeter-like-reward'))
+            w.querySelector('#dg-o-w-tweeter-like-reward').innerHTML = a.filter(function(action){return action.Type == 'TwitterShare'})[0].PointsReward;
+    }
+};
+
+DGW.main.methods.profileSetData = function(data) {
     var profileImageHolders = [
             DGW.main.elements.widgetBody.querySelector('.dg-o-w-menu-profile .profile-menu-item img'),
             DGW.main.elements.pages.profileMain.querySelector('#profileImage')
@@ -1486,7 +1527,7 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
                             '</div>';
             if (!DGW.helpers.drawsTimer.push({dt:draw.EndDate, elem:li.querySelector('.dg-o-w-draw-countdown')})) {
                 DGW.helpers.addClass(li, 'expired');
-                li.querySelector('.dg-o-w-draw-countdown').innerHTML = 'Finished ' + String(moment(draw.EndDate).fromNow());
+                li.querySelector('.dg-o-w-draw-countdown').innerHTML = 'Finished ' + String(moment(new Date(draw.EndDate)).fromNow());
             } else {
                 DGW.global.activeDrawsExist = true;
             }
@@ -1513,6 +1554,8 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
             }
         }
     }
+
+    DGW.main.methods.setRewardedActions();
 };
 
 DGW.main.methods.singleDrawConstructor = function(drawId){
@@ -1526,11 +1569,11 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
 
     var el = DGW.main.elements.pages.singleDraw;
     var prizeSect = '<div class="dg-o-w-draw-left-side">' +
-                        '<div class="prize-image"><div><img src="' + draw.Prize.ImageUrl.replace(/api/g, 'everton') + '" /></div></div>' +
+                        '<div class="prize-image"><div><img src="' + draw.Prize.ImageUrl + '" /></div></div>' +
                     '</div>';
     var shareSect = '<div class="dg-o-w-draw-share">' +
-                        '<a href="#" class="dg-o-w-like dg-o-w-facebook-like">Like and get 10 points</a>' +
-                        '<a href="#" class="dg-o-w-like dg-o-w-twitter-like">Tweet and get 10 points</a>' +
+                        '<a href="#" class="dg-o-w-like dg-o-w-facebook-like">Share and get <span class="dg-o-w-rewarded-action" id="dg-o-w-facebook-like-reward">10</span> points</a>' +
+                        '<a href="#" class="dg-o-w-like dg-o-w-twitter-like">Tweet and get <span class="dg-o-w-rewarded-action" id="dg-o-w-tweeter-like-reward">10</span> points</a>' +
                     '</div>';
     var submenu = '<div class="dg-o-w-submenu">' +
                         '<ul><li class="dg-o-w-back-draws">&lt; Back</li></ul><div class="right-side">' +
@@ -1666,13 +1709,15 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
     if (!DGW.helpers.drawsTimer.push({dt:draw.EndDate, elem:el.querySelector('.dg-o-w-countdown')})) {
         DGW.helpers.addClass(el.querySelector('.dg-o-w-single-draw'), 'expired');
         if (el.querySelector('.dg-o-w-countdown')) {
-            el.querySelector('.dg-o-w-countdown').innerHTML = 'Finished ' + String(moment(draw.EndDate).fromNow());
+            el.querySelector('.dg-o-w-countdown').innerHTML = 'Finished ' + String(moment(new Date(draw.EndDate)).fromNow());
         }
     }
 
     DGW.main.elements.widgetContent.appendChild(el);
     DGW.main.methods.checkSectionHeight();
+    DGW.main.methods.setRewardedActions();
 };
+
 
 DGW.main.methods.activitiesConstructor = function(activities){
     activities.sort(function(a, b){
@@ -1763,13 +1808,14 @@ DGW.main.methods.activitiesConstructor = function(activities){
                     '<p>' + message + '</p>' +
                 '</div>' +
             '</div>' +
-            '<h6>' + moment(activity.Date).fromNow() + '</h6>';
+            '<h6>' + moment(new Date(activity.Date)).fromNow() + '</h6>';
         if (activity.Direction === 'Outflow') {
             DGW.helpers.addClass(li, 'spent');
         }
 
         activitiesHolder.appendChild(li);
     });
+    DGW.main.methods.setRewardedActions();
 };
 
 DGW.main.methods.offersConstructor = function(offers) {
@@ -1828,13 +1874,17 @@ DGW.main.methods.offersConstructor = function(offers) {
         offersSubmenu.appendChild(li);
     });
 
-    offersSponsors.addEventListener('change', function(){
-        var that = this;
-        var filteredOffers = lists.offers.filter(function (offer) {
-            return offer.Sponsor.Name.toLowerCase() == that.value;
+    if (lists.sponsors.length > 1) {
+        offersSponsors.addEventListener('change', function () {
+            var that = this;
+            var filteredOffers = lists.offers.filter(function (offer) {
+                return offer.Sponsor.Name.toLowerCase() == that.value;
+            });
+            showOffersPanels(filteredOffers);
         });
-        showOffersPanels(filteredOffers);
-    });
+    } else {
+        offersSponsors.style.display = 'none';
+    }
 
     function showOffersPanels(filteredOffers) {
         offersHolder.innerHTML = '';
@@ -1866,7 +1916,8 @@ DGW.main.methods.offersConstructor = function(offers) {
         });
     }
 
-    showOffersPanels(lists.offers)
+    showOffersPanels(lists.offers);
+    DGW.main.methods.setRewardedActions();
 };
 var widgetStyles = document.createElement('link');
     widgetStyles.rel = 'stylesheet';

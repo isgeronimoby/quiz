@@ -46,7 +46,7 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                 '<section></section>' +
                                                 '<footer class="dg-o-w-footer-login">' +
                                                     '<div class="footer-section footer-section-step-1">' +
-                                                        '<div class="inline-part"><h3>Log in with Facebook and get +10 points</h3></div>' +
+                                                        '<div class="inline-part"><h3>Log in with Facebook and get +<span id="dg-o-w-login-fb-reward" class="dg-o-w-rewarded-action">30</span> points</h3></div>' +
                                                         '<div class="inline-part"><a href="#" id="dg-o-w-footer-fb-connect" class="btn-radius btn-large btn-brand">Facebook</a></div>' +
                                                         '<div class="inline-part"><p>or</p></div>' +
                                                         '<div class="inline-part"><a id="dg-o-w-footer-email-login" href="#" class="btn-radius btn-large btn-white">Sign up with email</a></div>' +
@@ -104,7 +104,10 @@ DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
 DGW.templates.profileMain = '<div class="dg-o-w-profile">' +
                                 '<div class="dg-o-w-left-side">' +
                                     '<div class="dg-o-w-image-holder"><img id="profileImage" class="avatar" src="" /></div>' +
+                                    // TODO: hide until we have invite friends functionality
+                                    /*
                                     '<p><span id="profileFriendsAmount">15</span> friends</p>' +
+                                    */
                                 '</div>' +
                                 '<div class="dg-o-w-right-side">' +
                                     '<div class="dg-o-w-profile-top">' +
@@ -116,14 +119,17 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile">' +
                                     '</div>' +
                                     '<div class="dg-o-w-profile-earnings-info">' +
                                         '<p class="color-brand-light">Today earned: <span>15</span> pts | left: <span>5</span>pts</p>' +
-                                        '<p>Get +10 additional points by adding your other accounts from ' +
+                                        '<p>Get +<span class="dg-o-w-rewarded-action" id="dg-o-w-login-fb-reward">50</span> additional points by adding your other accounts from ' +
                                             '<a href="#" class="dg-o-w-fb-connect"></a> and <a href="#" class="dg-o-w-tw-connect"></a></p>' +
                                     '</div>' +
                                     '<div class="dg-o-w-profile-progress"><div style="width:35%;"></div></div>' +
                                     '<div class="dg-o-w-profile-bottom">' +
                                         '<div class="dg-o-w-profile-invite dg-o-w-float-left">' +
+                                            // TODO: hide until we have invite friends functionality
+                                            /*
                                             '<p class="color-brand-light"><a href="#" class="btn-dg-o-w-outline">Invite more friends</a>' +
-                                            ' and get <span>+50</span> points for each friend</p>' +
+                                            ' and get +<span class="dg-o-w-rewarded-action" id="dg-o-w-friends-sign-up-reward">50</span> points for each friend</p>' +
+                                            */
                                         '</div>' +
                                         '<div class="dg-o-w-profile-signout dg-o-w-float-right">' +
                                             '<p class="color-brand-light"><a id="dg-o-w-sign-out-btn" href="#">Sign out</a></p>' +
@@ -161,7 +167,8 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul><li class="toggl
                                 '<div class="dg-o-w-section-content">' +
                                     '<div class="dg-o-w-activities-header">' +
                                         '<p class="dg-o-w-float-left">Activities for today</p>' +
-                                        '<p class="dg-o-w-floating-link"><a href="#">Invite more friends</a> and get +50 points for each</p>' +
+                                        // TODO: don't show until we have invite friends functionality
+                                        // '<p class="dg-o-w-floating-link"><a href="#">Invite more friends</a> and get +<span id="dg-o-w-friends-sign-up-reward" class="dg-o-w-rewarded-action">50</span> points for each</p>' +
                                         '<select id="dg-o-w-activities-filter" class="dg-o-w-float-right">' +
                                             '<option value="all-activities">All activities</option>' +
                                             '<option value="my-activities">My Activities</option>' +
