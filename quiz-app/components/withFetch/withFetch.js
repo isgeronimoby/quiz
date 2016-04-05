@@ -4,6 +4,8 @@ import '../utils.scss';
 function withFetch(ComposedComponent, fetch) {
 	return class WithFetch extends Component {
 
+		static title = ComposedComponent.title;
+
 		state = {
 			data: {},
 			loading: true,
@@ -28,10 +30,4 @@ function withFetch(ComposedComponent, fetch) {
 	}
 }
 
-export default function withStatics(ComposedComponent, ...args) {
-	const { title } = ComposedComponent; // copy certain statics
-	const ComponentWtihFetch = withFetch(ComposedComponent, ...args);
-	Object.assign(ComponentWtihFetch, {title});
-
-	return ComponentWtihFetch;
-};
+export default withFetch;

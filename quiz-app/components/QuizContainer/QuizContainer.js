@@ -29,7 +29,7 @@ class QuizContainer extends Component {
 		});
 
 		return (
-			<div className="quiz-container">
+			<div className="quiz">
 				<ProgressBar total={ data.length } current={1} />
 				{ quizes }
 			</div>

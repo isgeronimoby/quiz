@@ -16,13 +16,13 @@ async function fetch({ id }) {
 		// Emulate different number of Quiz steps in quizes
 
 		if (id === 1) {
-			return [ items[0] ];
+			return [items[0]];
 		}
 		else if (id === 2) {
-			return [ items[1], items[0] ];
+			return [items[1], items[0]];
 		}
 		else {
-			return [ items[2], items[1], items[0] ];
+			return [items[2], items[1], items[0]];
 		}
 	});
 }
@@ -37,9 +37,7 @@ class Quiz extends Component {
 
 	render() {
 		return (
-			<div className="quiz">
-				<QuizContainer {...this.props} />
-			</div>
+			<QuizContainer {...this.props} />
 		);
 	}
 
