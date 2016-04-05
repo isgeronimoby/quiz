@@ -20,46 +20,27 @@ h4 {
 }
 
 body {
-  background-color: $body-bg;
-  color: $text-color;
-  font-family: $font-family-roboto;
-  background-image: url('./../../static/images/bg.svg');
+  background-color: var(--body-bg);
+  color: var(--text-color);
+  font-family: var(--font-family-roboto);
+  background-image: url('../../static/images/bg.svg');
   background-repeat: no-repeat;
   background-position: left bottom;
   background-size: 100%;
   background-attachment: fixed;
 }
 
-#app,
-.layout {
+#app {
   height: 100%;
 }
 
 .layout {
-
+  padding-top: var(--header-height);
+  height: calc(100% - var(--header-height));
 }
 
 .content {
-  padding-top: $header-height;
+  height: 100%;
   overflow: auto;
-  height: calc(100% - $header-height);
   -webkit-overflow-scrolling: touch;
-}
-
-@media (min-width: $screen-sm-min) {
-  .layout {
-    width: calc($screen-sm-min - 18px);
-  }
-}
-
-@media (min-width: $screen-md-min) {
-  .layout {
-    width: calc($screen-md-min - 22px);
-  }
-}
-
-@media (min-width: $screen-lg-min) {
-  .layout {
-    width: calc($screen-lg-min - 30px);
-  }
 }

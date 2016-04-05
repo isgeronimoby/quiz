@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 
 export default class extends Component {
 
+	static title = 'Error';
+
 	static propTypes = {
 		error: PropTypes.instanceOf(Error),
 	};
@@ -18,5 +20,4 @@ export default class extends Component {
 			</div>
 		);
 	}
-
 }

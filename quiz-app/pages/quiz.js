@@ -1,62 +1,46 @@
 import React, { Component, PropTypes } from 'react';
-import './../components/quiz.scss'
+import withFetch from '../components/withFetch';
+import QuizContainer from '../components/QuizContainer';
+import items from '../components/QuizContainer/data.js';
 
+const DELAY = 500;
 
+async function fetch({ id }) {
+
+	console.log('>>TODO: fetch /quiz/[%s]', id);
+
+	return new Promise((resolve, reject) => {
+		setTimeout(() => resolve(items), DELAY);
+	}).then((items) => {
+
+		// Emulate different number of Quiz steps in quizes
+
+		if (id === 1) {
+			return [items[0]];
+		}
+		else if (id === 2) {
+			return [items[1], items[0]];
+		}
+		else {
+			return [items[2], items[1], items[0]];
+		}
+	});
+}
 
 class Quiz extends Component {
 
 	static title = 'Match Quiz';
 
-	state = {
-		currentQuizIndex: 1,
-		quizTotalAmount: 5
+	static propTypes = {
+		params: PropTypes.object.isRequired
 	};
 
-	getProgressBarInfo() {
-		let percentage = this.state.currentQuizIndex / this.state.quizTotalAmount;
-		let style = {
-			transform: `scaleX(${percentage})`
-		};
-
-		return { style };
-	}
-
 	render() {
-		let { style } = this.getProgressBarInfo();
-
 		return (
-			<div className="quiz">
-				<div className="progress-bar">
-					<div className="progress-bar-completed" style={style} />
-				</div>
-
-				
-				<div className="quiz-content">
-					<div className="quiz-info">23 March, 19:00, 3thd tour, London</div>
-					<div className="quiz-title">Who will win in a half-time?</div>
-
-					<div className="quiz-teams">
-						<div className="team-container">
-							<img src={require("./../static/images/team-chelsea.svg")} />
-						</div>
-						<div className="versus">vs</div>
-						<div className="team-container">
-							<img src={require("./../static/images/team-everton.svg")} />
-						</div>
-					</div>
-					<div className="result-draw">
-						<div className="result-draw-icon">
-							<img src={require("./../static/images/icon-friendship.svg")} />
-						</div>
-						Draw
-					</div>
-				</div>
-
-
-			</div>
-		)
+			<QuizContainer {...this.props} />
+		);
 	}
 
 }
 
-export default Quiz;
+export default withFetch(Quiz, fetch);

@@ -25,10 +25,10 @@ class FixtureListItem extends Component {
                 <Link className={"fixture-item-body " + (completed ? "completed" : "")} to="/quiz">
                     <div className="fixture-item-team-icons">
                         <div className="fixture-item-team">
-                            <img src={require('./../../static/images/team-chelsea.svg')} />
+                            <img src={require('../../static/images/team-chelsea.svg')} />
                         </div>
                         <div className="fixture-item-team fixture-item-team-overlap">
-                            <img src={require('./../../static/images/team-everton.svg')} />
+                            <img src={require('../../static/images/team-everton.svg')} />
                         </div>
                     </div>
                     <div className="fixture-item-content">
@@ -36,7 +36,7 @@ class FixtureListItem extends Component {
                         <h5 className="list-meta">{ subTitle }</h5>
                     </div>
                     <div className="fixture-item-arrow">
-                        <img src={require('./../../static/images/icon-arrow.svg')} />
+                        <img src={require('../../static/images/icon-arrow.svg')} />
                     </div>
                 </Link>
             </li>

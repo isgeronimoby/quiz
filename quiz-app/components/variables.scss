@@ -1,29 +1,37 @@
-/*
- * Scaffolding
- * -------------------------------------------------------------------------- */
+:root {
+  --text-color: #fff;
+  --brand-color: #4CAF50; /* 76, 175, 80 */
+  --header-height: 4.4rem;
+  --brand-color: #4CAF50; /* 76, 175, 80 */
+  --body-bg: rgba(140, 140, 140, 0.06); /* TODO: change due to newest mockups */
 
-$body-bg: #46BC76;
-$text-color: #117453;
-$brand-color: #338956; /* 51, 137, 86 */
-$contrast-color: #fff;
+  /* TODO: rename when stable */
+  --color-1: #B6B6B6; /* 182, 182, 182 */
+  --color-2: #F0F0F0; /* 240, 240, 240 */
+  --color-3: #727272; /* 114, 114, 114 */
+  
+  --font-family-roboto: 'Roboto', 'Helvetica', sans-serif;
+  --font-family-roboto-bold: 'Roboto bold', 'Helvetica', sans-serif; /* TODO: figure out if it works */
+}
 
-/*
- * Typography
- * -------------------------------------------------------------------------- */
+$contrast-color: #fff; /* ? */
 
-$font-family-roboto: 'Roboto', 'Helvetica', sans-serif;
-$font-family-roboto-bold: 'Roboto bold', 'Helvetica', sans-serif;
 
-/*
- * Media queries breakpoints
- * -------------------------------------------------------------------------- */
 
-$screen-sm-min: 768px;
-$screen-md-min: 992px;
-$screen-lg-min: 1200px;
 
 /*
- * Layout
- * -------------------------------------------------------------------------- */
+	All used font throughout the project (requires naming and usage only via variables)
 
-$header-height: 4.4rem;
+	20px => 10px => 1rem
+	22px => 11px => 1.1rem
+	24px => 12px => 1.2rem
+	28px => 14px => 1.4rem
+	34px => 17px => 1.7rem
+	38px => 19px => 1.9rem
+	48px => 24px => 2.4rem
+	66px => 33px => 3.3rem
+	88px => 44px => 4.4rem
+
+mixins postcss
+
+*/

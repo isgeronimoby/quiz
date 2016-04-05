@@ -7,6 +7,9 @@ const DELAY = 1000;
 
 
 async function fetch() {
+
+	console.log('>>TODO: fetch /fixtures');
+
 	return new Promise((resolve, reject) => {
 		setTimeout(() => resolve(items),  DELAY);
 	});
@@ -15,7 +18,7 @@ async function fetch() {
 class Fixtures extends Component {
 
 	static title = 'Fixtures';
-	
+
 	render() {
 		return (
 			<FixtureList {...this.props} />

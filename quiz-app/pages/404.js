@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 export default class extends Component {
 
+	static title = 'Not Found';
+
 	render() {
 		return (
 			<div>
@@ -10,5 +12,4 @@ export default class extends Component {
 			</div>
 		);
 	}
-
 }

@@ -20,7 +20,7 @@ class Link extends Component {
 		onClick: PropTypes.func,
 	};
 
-	static handleClick = event => {
+	handleClick (event) {
 		let allowTransition = true;
 		let clickResult;
 
@@ -50,8 +50,9 @@ class Link extends Component {
 	render() {
 		const { to, children, ...props } = this.props;
 		const href = '.' + to; // relative path!
-		
-		return <a href={href} onClick={Link.handleClick.bind(this)} {...props}>{children}</a>;
+		const onClick = (e) => this.handleClick(e);
+
+		return <a href={href} onClick={onClick} {...props}>{children}</a>;
 	}
 
 }
