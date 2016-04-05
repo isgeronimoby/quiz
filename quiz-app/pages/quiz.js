@@ -1,24 +1,48 @@
 import React, { Component, PropTypes } from 'react';
-import QuizItemType1 from '../components/QuizItemType1';
-import QuizItemType2 from '../components/QuizItemType2';
-import QuizItemType3 from '../components/QuizItemType3';
-import ProgressBar from '../components/ProgressBar';
+import withFetch from '../components/withFetch';
+import QuizContainer from '../components/QuizContainer';
+import items from '../components/QuizContainer/data.js';
 
-import './../components/quiz.scss'
+const DELAY = 500;
+
+async function fetch({ id }) {
+
+	console.log('>>TODO: fetch /quiz/[%s]', id);
+
+	return new Promise((resolve, reject) => {
+		setTimeout(() => resolve(items), DELAY);
+	}).then((items) => {
+
+		// Emulate different number of Quiz steps in quizes
+
+		if (id === 1) {
+			return [ items[0] ];
+		}
+		else if (id === 2) {
+			return [ items[1], items[0] ];
+		}
+		else {
+			return [ items[2], items[1], items[0] ];
+		}
+	});
+}
 
 class Quiz extends Component {
 
 	static title = 'Match Quiz';
 
+	static propTypes = {
+		params: PropTypes.object.isRequired
+	};
+
 	render() {
 		return (
 			<div className="quiz">
-				<ProgressBar />
-				<QuizItemType3 />
+				<QuizContainer {...this.props} />
 			</div>
-		)
+		);
 	}
 
 }
 
-export default Quiz;
+export default withFetch(Quiz, fetch);

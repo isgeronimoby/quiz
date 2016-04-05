@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+import '../utils.scss';
 
-function withFetch (ComposedComponent, fetch) {
+function withFetch(ComposedComponent, fetch) {
 	return class WithFetch extends Component {
-
-		static title = ComposedComponent.title;
 
 		state = {
 			data: {},
@@ -12,7 +11,7 @@ function withFetch (ComposedComponent, fetch) {
 		};
 
 		async componentDidMount() {
-			fetch().then((data) => {
+			fetch(this.props.params).then((data) => {
 				this.setState({
 					data,
 					loading: false
@@ -22,12 +21,17 @@ function withFetch (ComposedComponent, fetch) {
 
 		render() {
 			if (this.state.loading) {
-				return <div>Loading...</div>;
+				return <div className="text-dark">Loading...</div>;
 			}
-			return <ComposedComponent {...this.props} data={this.state.data}/>;
+			return <ComposedComponent ref="composed" {...this.props} data={this.state.data}/>;
 		}
-
 	}
 }
 
-export default withFetch;
+export default function withStatics(ComposedComponent, ...args) {
+	const { title } = ComposedComponent; // copy certain statics
+	const ComponentWtihFetch = withFetch(ComposedComponent, ...args);
+	Object.assign(ComponentWtihFetch, {title});
+
+	return ComponentWtihFetch;
+};

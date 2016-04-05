@@ -2,14 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import './ProgressBar.scss';
 
 class ProgressBar extends Component {
-	
-	state = {
-		currentQuizIndex: 1,
-		quizTotalAmount: 5
+
+	static propTypes = {
+		current: PropTypes.number.isRequired,
+		total: PropTypes.number.isRequired
 	};
 
 	getProgressBarInfo() {
-		let percentage = this.state.currentQuizIndex / this.state.quizTotalAmount;
+		let percentage = this.props.current / this.props.total;
 		let style = {
 			transform: `scaleX(${percentage})`
 		};
