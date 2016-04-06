@@ -115,6 +115,96 @@ DGW.main.methods.updateUserInfoBet = function(draw, user){
     }
 };
 
+DGW.main.methods.updateBadgesInfo = function(){
+    var ba = DGW.global.userStats.badges.all,
+        be = DGW.global.userStats.badges.earned;
+    var pr = DGW.main.elements.pages.profileMain;
+    var wc = DGW.main.elements.widgetContent;
+    var ul = pr.querySelector('.dg-o-w-badges-holder ul');
+
+    // DGW.main.elements.widgetContent.removeChild(DGW.main.elements.widgetContent.childNodes[1]);
+
+    pr.querySelector('#dg-o-w-badges-earned-amount').innerHTML = be.length;
+
+
+    ul.innerHTML = '';
+    ba.forEach(function(b){
+        var li = document.createElement('li');
+        li.innerHTML = '<img src="' + b.ImageUrl + '" alt=""/><p>' + b.Title + '</p>';
+
+        li.addEventListener('click', function(){
+            showFullBadgePage(ba, b.Id);
+        });
+
+        ul.appendChild(li);
+    });
+
+    function showFullBadgePage(badges, curBadgeId){
+        var submenu = '<div class="dg-o-w-submenu"><ul><li class="dg-o-w-back-draws">&lt; Back</li></ul></div>';
+        var pageContent = '<div class="dg-o-w-badge-single"><ul></ul><div class="dg-o-w-badge-single-left"><</div><div class="dg-o-w-badge-single-right">></div></div>';
+        var page = document.createElement('div');
+            page.className = 'dg-o-w-badge-single-page';
+            page.innerHTML = submenu + pageContent;
+        var ul = page.querySelector('.dg-o-w-badge-single ul');
+        var leftBtn = page.querySelector('.dg-o-w-badge-single-left'),
+            rightBtn = page.querySelector('.dg-o-w-badge-single-right');
+
+        var badgesArr = [];
+
+        function hideBadges(){
+            badgesArr.forEach(function(li){
+                DGW.helpers.removeClass(li, 'dg-o-w-active');
+            });
+        }
+
+        function slideBadges(direction){
+            var curB = badgesArr.indexOf(badgesArr.filter(function(b, ind){
+               return DGW.helpers.hasClass(b, 'dg-o-w-active');
+            })[0]);
+
+            // TODO: add slideLeft and slideRight animations
+            hideBadges();
+            if (direction === 'left') {
+                if (curB > 0) {
+                    DGW.helpers.addClass(badgesArr[curB - 1], 'dg-o-w-active');
+                } else {
+                    DGW.helpers.addClass(badgesArr[badgesArr.length - 1], 'dg-o-w-active');
+                }
+            } else {
+                if (curB < badgesArr.length - 1) {
+                    DGW.helpers.addClass(badgesArr[curB + 1], 'dg-o-w-active');
+                } else {
+                    DGW.helpers.addClass(badgesArr[0], 'dg-o-w-active');
+                }
+            }
+        }
+
+        badges.forEach(function(badge){
+            var li = document.createElement('li');
+            li.innerHTML = '<div><img src="' + badge.ImageUrl + '" /><h3>' + badge.Title + '</h3><p>' + badge.Description + '</p></div>';
+            if (badge.Id === curBadgeId) {
+                li.className = 'dg-o-w-active';
+            }
+            badgesArr.push(li);
+            ul.appendChild(li);
+        });
+
+        page.querySelector('.dg-o-w-submenu li').addEventListener('click', function(){
+            DGW.main.elements.widgetContent.removeChild(DGW.main.elements.widgetContent.childNodes[1]);
+        });
+
+        leftBtn.addEventListener('click', function(){
+            slideBadges('left');
+        });
+        rightBtn.addEventListener('click', function(){
+            slideBadges('right');
+        });
+
+        wc.appendChild(page);
+    }
+
+};
+
 DGW.main.methods.drawsConstructor = function(cacheObj, _context){
     var drawsList = DGW.main.elements.pages.drawsMain.querySelector('.dg-o-w-list-draws');
     drawsList.innerHTML = '';
@@ -539,3 +629,23 @@ DGW.main.methods.offersConstructor = function(offers) {
     showOffersPanels(lists.offers);
     DGW.main.methods.setRewardedActions();
 };
+
+DGW.main.methods.leaderboardConstructor = function(earners) {
+    var s = DGW.main.elements.pages.activitiesMain;
+    var ul = s.querySelector('.dg-o-w-activity-slider ul');
+
+    ul.innerHTML = '';
+    earners.forEach(function(earner){
+        var li = document.createElement('li');
+        li.innerHTML = '<div><img src="' + earner.ImageUrl +'"><span>' + earner.Amount + '</span></div><h4>' + earner.UserName + '</h4>';
+
+        ul.appendChild(li);
+    });
+
+    DGW.global.elements.leaderboardSlider = new Slider(ul.parentNode, {
+        visibles: 5,
+        controlNext: '.dg-o-w-activity-slider-next',
+        controlPrev: '.dg-o-w-activity-slider-prev'
+    });
+};
+

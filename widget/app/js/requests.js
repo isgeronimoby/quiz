@@ -10,9 +10,9 @@ DGW.global.api.rpc = new DGW.global.api.easyXDM.Rpc({
 DGW.global.api.generic = function(apiName, callback, requestBody){
     var result = {},
         interval,
-        method = '',
-        endpoint= '';
-    requestBody = requestBody || '';
+        method = 'GET',
+        endpoint = '';
+        requestBody = requestBody || '';
 
     switch (apiName) {
         case 'signUp':
@@ -35,15 +35,12 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             requestBody = JSON.stringify(requestBody);
             break;
         case 'getUser':
-            method = 'GET';
             endpoint = 'user/getuser';
             break;
         case 'getDraws':
-            method = 'GET';
             endpoint = 'draw/getdraws';
             break;
         case 'getDrawEntries':
-            method = 'GET';
             endpoint = 'draw/getdrawentries';
             break;
         case 'drawBet':
@@ -57,20 +54,25 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             requestBody = JSON.stringify(requestBody);
             break;
         case 'getAllActivities':
-            method = 'GET';
             endpoint = 'activityfeed/getallactivities';
             break;
         case 'getUserActivities':
-            method = 'GET';
             endpoint = 'activityfeed/getuseractivities';
             break;
         case 'getOffers':
-            method = 'GET';
             endpoint = 'offer/getoffers';
             break;
         case 'getActions':
-            method = 'GET';
             endpoint = 'rewardedaction/getactions';
+            break;
+        case 'getLeaderboard':
+            endpoint = 'leaderboard/gettopearners';
+            break;
+        case 'getBadges':
+            endpoint = 'badge/getbadges';
+            break;
+        case 'getEarnedBadges':
+            endpoint = 'badge/getearnedbadges';
             break;
         default:
     }
@@ -309,6 +311,41 @@ DGW.global.api.requests.getActions = function(){
             console.info(result.data);
             DGW.main.cache.rewardedActions = result.data.Actions;
             DGW.main.methods.setRewardedActions();
+        } else {
+            console.error(result.error);
+        }
+    });
+};
+
+DGW.global.api.requests.getLeaderboard = function(){
+    DGW.global.api.generic('getLeaderboard', function(result){
+        if (!result.error) {
+            console.info(result.data);
+            DGW.main.methods.leaderboardConstructor(result.data.Earners);
+        } else {
+            console.error(result.error);
+        }
+    });
+};
+
+DGW.global.api.requests.getAllBadges = function(){
+    DGW.global.api.generic('getBadges', function(result){
+        if (!result.error) {
+            console.info(result.data);
+            DGW.global.userStats.badges.all = result.data.Badges;
+            DGW.global.api.requests.getEarnedBadges();
+        } else {
+            console.error(result.error);
+        }
+    });
+};
+
+DGW.global.api.requests.getEarnedBadges = function(){
+    DGW.global.api.generic('getEarnedBadges', function(result){
+        if (!result.error) {
+            console.info(result.data);
+            DGW.global.userStats.badges.earned = result.data.EarnedBadges;
+            DGW.main.methods.updateBadgesInfo();
         } else {
             console.error(result.error);
         }

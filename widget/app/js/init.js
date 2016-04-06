@@ -25,7 +25,7 @@ window.DGW = function () {
                     elements: {
                         pages: {}
                     },
-                    currentState: 'earn',
+                    currentState: '',
                     cache: {
                         drawsList: [],
                         drawsEntries: [],

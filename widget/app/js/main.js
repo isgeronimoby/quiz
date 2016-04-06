@@ -43,7 +43,9 @@ DGW.main.elements.activitiesSliderParent = DGW.main.elements.pages.activitiesMai
 DGW.main.methods.showWidget = function(){
     DGW.helpers.removeClass(DGW.main.elements.widget, 'hiding');
     DGW.global.elements.documentBody.appendChild(DGW.main.elements.widget);
-    DGW.main.methods.changeMainState(DGW.main.currentState);
+    if (DGW.main.currentState === '') {
+        DGW.main.methods.changeMainState('earn');
+    }
 };
 DGW.main.methods.hideWidget = function(){
     DGW.helpers.addClass(DGW.main.elements.widget, 'hiding');
@@ -65,7 +67,9 @@ DGW.main.methods.changeMainState = function(state){
         }
     }
     if (DGW.main.elements.widgetContent.children.length > 0) {
-        DGW.main.elements.widgetContent.removeChild(DGW.main.elements.widgetContent.childNodes[0]);
+        Array.prototype.slice.call(DGW.main.elements.widgetContent.children).forEach(function(ch){
+            DGW.main.elements.widgetContent.removeChild(ch);
+        });
     }
 
     if (DGW.main.currentState !== 'draws') {
@@ -91,11 +95,13 @@ DGW.main.methods.changeMainState = function(state){
             } else {
                 DGW.global.api.requests.getUserActivities();
             }
+            DGW.global.api.requests.getLeaderboard();
             DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.activitiesMain);
             break;
         case 'profile':
             if ( DGW.global.authorized ) {
                 DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.profileMain);
+                DGW.global.api.requests.getAllBadges();
             } else {
                 DGW.helpers.addClass(DGW.main.elements.widgetBody, 'profile-anon');
                 DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.loginMain);
@@ -160,6 +166,10 @@ DGW.global.methods.init = function(){
     DGW.global.userStats.pointsP = 0;
     DGW.global.userStats.creditsC = 0;
     DGW.global.userStats.creditsP = 0;
+    DGW.global.userStats.badges = {
+        all: {},
+        earned: {}
+    };
 
     DGW.global.api.requests.getActions();
 

@@ -111,7 +111,7 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile">' +
                                 '</div>' +
                                 '<div class="dg-o-w-right-side">' +
                                     '<div class="dg-o-w-profile-top">' +
-                                        '<div class="dg-o-w-float-left"><h3 id="profileName">Captain Deadpool</h3><h5>2 badges</h5></div>' +
+                                        '<div class="dg-o-w-float-left"><h3 id="profileName">Captain Deadpool</h3><h5><span id="dg-o-w-badges-earned-amount"></span> badges</h5></div>' +
                                         '<div class="dg-o-w-float-right">' +
                                             '<div class="dg-o-w-profile-points"><h3>115</h3><h5>20</h5></div>' +
                                             '<div class="dg-o-w-profile-credits"><h3>215.20</h3><h5>25.15</h5></div>' +

@@ -26,7 +26,7 @@ window.DGW = function () {
                     elements: {
                         pages: {}
                     },
-                    currentState: 'earn',
+                    currentState: '',
                     cache: {
                         drawsList: [],
                         drawsEntries: [],
@@ -386,9 +386,9 @@ DGW.global.api.rpc = new DGW.global.api.easyXDM.Rpc({
 DGW.global.api.generic = function(apiName, callback, requestBody){
     var result = {},
         interval,
-        method = '',
-        endpoint= '';
-    requestBody = requestBody || '';
+        method = 'GET',
+        endpoint = '';
+        requestBody = requestBody || '';
 
     switch (apiName) {
         case 'signUp':
@@ -411,15 +411,12 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             requestBody = JSON.stringify(requestBody);
             break;
         case 'getUser':
-            method = 'GET';
             endpoint = 'user/getuser';
             break;
         case 'getDraws':
-            method = 'GET';
             endpoint = 'draw/getdraws';
             break;
         case 'getDrawEntries':
-            method = 'GET';
             endpoint = 'draw/getdrawentries';
             break;
         case 'drawBet':
@@ -433,20 +430,25 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             requestBody = JSON.stringify(requestBody);
             break;
         case 'getAllActivities':
-            method = 'GET';
             endpoint = 'activityfeed/getallactivities';
             break;
         case 'getUserActivities':
-            method = 'GET';
             endpoint = 'activityfeed/getuseractivities';
             break;
         case 'getOffers':
-            method = 'GET';
             endpoint = 'offer/getoffers';
             break;
         case 'getActions':
-            method = 'GET';
             endpoint = 'rewardedaction/getactions';
+            break;
+        case 'getLeaderboard':
+            endpoint = 'leaderboard/gettopearners';
+            break;
+        case 'getBadges':
+            endpoint = 'badge/getbadges';
+            break;
+        case 'getEarnedBadges':
+            endpoint = 'badge/getearnedbadges';
             break;
         default:
     }
@@ -685,6 +687,41 @@ DGW.global.api.requests.getActions = function(){
             console.info(result.data);
             DGW.main.cache.rewardedActions = result.data.Actions;
             DGW.main.methods.setRewardedActions();
+        } else {
+            console.error(result.error);
+        }
+    });
+};
+
+DGW.global.api.requests.getLeaderboard = function(){
+    DGW.global.api.generic('getLeaderboard', function(result){
+        if (!result.error) {
+            console.info(result.data);
+            DGW.main.methods.leaderboardConstructor(result.data.Earners);
+        } else {
+            console.error(result.error);
+        }
+    });
+};
+
+DGW.global.api.requests.getAllBadges = function(){
+    DGW.global.api.generic('getBadges', function(result){
+        if (!result.error) {
+            console.info(result.data);
+            DGW.global.userStats.badges.all = result.data.Badges;
+            DGW.global.api.requests.getEarnedBadges();
+        } else {
+            console.error(result.error);
+        }
+    });
+};
+
+DGW.global.api.requests.getEarnedBadges = function(){
+    DGW.global.api.generic('getEarnedBadges', function(result){
+        if (!result.error) {
+            console.info(result.data);
+            DGW.global.userStats.badges.earned = result.data.EarnedBadges;
+            DGW.main.methods.updateBadgesInfo();
         } else {
             console.error(result.error);
         }
@@ -929,7 +966,7 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile">' +
                                 '</div>' +
                                 '<div class="dg-o-w-right-side">' +
                                     '<div class="dg-o-w-profile-top">' +
-                                        '<div class="dg-o-w-float-left"><h3 id="profileName">Captain Deadpool</h3><h5>2 badges</h5></div>' +
+                                        '<div class="dg-o-w-float-left"><h3 id="profileName">Captain Deadpool</h3><h5><span id="dg-o-w-badges-earned-amount"></span> badges</h5></div>' +
                                         '<div class="dg-o-w-float-right">' +
                                             '<div class="dg-o-w-profile-points"><h3>115</h3><h5>20</h5></div>' +
                                             '<div class="dg-o-w-profile-credits"><h3>215.20</h3><h5>25.15</h5></div>' +
@@ -1039,7 +1076,9 @@ DGW.main.elements.activitiesSliderParent = DGW.main.elements.pages.activitiesMai
 DGW.main.methods.showWidget = function(){
     DGW.helpers.removeClass(DGW.main.elements.widget, 'hiding');
     DGW.global.elements.documentBody.appendChild(DGW.main.elements.widget);
-    DGW.main.methods.changeMainState(DGW.main.currentState);
+    if (DGW.main.currentState === '') {
+        DGW.main.methods.changeMainState('earn');
+    }
 };
 DGW.main.methods.hideWidget = function(){
     DGW.helpers.addClass(DGW.main.elements.widget, 'hiding');
@@ -1061,7 +1100,9 @@ DGW.main.methods.changeMainState = function(state){
         }
     }
     if (DGW.main.elements.widgetContent.children.length > 0) {
-        DGW.main.elements.widgetContent.removeChild(DGW.main.elements.widgetContent.childNodes[0]);
+        Array.prototype.slice.call(DGW.main.elements.widgetContent.children).forEach(function(ch){
+            DGW.main.elements.widgetContent.removeChild(ch);
+        });
     }
 
     if (DGW.main.currentState !== 'draws') {
@@ -1087,11 +1128,13 @@ DGW.main.methods.changeMainState = function(state){
             } else {
                 DGW.global.api.requests.getUserActivities();
             }
+            DGW.global.api.requests.getLeaderboard();
             DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.activitiesMain);
             break;
         case 'profile':
             if ( DGW.global.authorized ) {
                 DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.profileMain);
+                DGW.global.api.requests.getAllBadges();
             } else {
                 DGW.helpers.addClass(DGW.main.elements.widgetBody, 'profile-anon');
                 DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.loginMain);
@@ -1156,6 +1199,10 @@ DGW.global.methods.init = function(){
     DGW.global.userStats.pointsP = 0;
     DGW.global.userStats.creditsC = 0;
     DGW.global.userStats.creditsP = 0;
+    DGW.global.userStats.badges = {
+        all: {},
+        earned: {}
+    };
 
     DGW.global.api.requests.getActions();
 
@@ -1493,6 +1540,96 @@ DGW.main.methods.updateUserInfoBet = function(draw, user){
     } else {
 
     }
+};
+
+DGW.main.methods.updateBadgesInfo = function(){
+    var ba = DGW.global.userStats.badges.all,
+        be = DGW.global.userStats.badges.earned;
+    var pr = DGW.main.elements.pages.profileMain;
+    var wc = DGW.main.elements.widgetContent;
+    var ul = pr.querySelector('.dg-o-w-badges-holder ul');
+
+    // DGW.main.elements.widgetContent.removeChild(DGW.main.elements.widgetContent.childNodes[1]);
+
+    pr.querySelector('#dg-o-w-badges-earned-amount').innerHTML = be.length;
+
+
+    ul.innerHTML = '';
+    ba.forEach(function(b){
+        var li = document.createElement('li');
+        li.innerHTML = '<img src="' + b.ImageUrl + '" alt=""/><p>' + b.Title + '</p>';
+
+        li.addEventListener('click', function(){
+            showFullBadgePage(ba, b.Id);
+        });
+
+        ul.appendChild(li);
+    });
+
+    function showFullBadgePage(badges, curBadgeId){
+        var submenu = '<div class="dg-o-w-submenu"><ul><li class="dg-o-w-back-draws">&lt; Back</li></ul></div>';
+        var pageContent = '<div class="dg-o-w-badge-single"><ul></ul><div class="dg-o-w-badge-single-left"><</div><div class="dg-o-w-badge-single-right">></div></div>';
+        var page = document.createElement('div');
+            page.className = 'dg-o-w-badge-single-page';
+            page.innerHTML = submenu + pageContent;
+        var ul = page.querySelector('.dg-o-w-badge-single ul');
+        var leftBtn = page.querySelector('.dg-o-w-badge-single-left'),
+            rightBtn = page.querySelector('.dg-o-w-badge-single-right');
+
+        var badgesArr = [];
+
+        function hideBadges(){
+            badgesArr.forEach(function(li){
+                DGW.helpers.removeClass(li, 'dg-o-w-active');
+            });
+        }
+
+        function slideBadges(direction){
+            var curB = badgesArr.indexOf(badgesArr.filter(function(b, ind){
+               return DGW.helpers.hasClass(b, 'dg-o-w-active');
+            })[0]);
+
+            // TODO: add slideLeft and slideRight animations
+            hideBadges();
+            if (direction === 'left') {
+                if (curB > 0) {
+                    DGW.helpers.addClass(badgesArr[curB - 1], 'dg-o-w-active');
+                } else {
+                    DGW.helpers.addClass(badgesArr[badgesArr.length - 1], 'dg-o-w-active');
+                }
+            } else {
+                if (curB < badgesArr.length - 1) {
+                    DGW.helpers.addClass(badgesArr[curB + 1], 'dg-o-w-active');
+                } else {
+                    DGW.helpers.addClass(badgesArr[0], 'dg-o-w-active');
+                }
+            }
+        }
+
+        badges.forEach(function(badge){
+            var li = document.createElement('li');
+            li.innerHTML = '<div><img src="' + badge.ImageUrl + '" /><h3>' + badge.Title + '</h3><p>' + badge.Description + '</p></div>';
+            if (badge.Id === curBadgeId) {
+                li.className = 'dg-o-w-active';
+            }
+            badgesArr.push(li);
+            ul.appendChild(li);
+        });
+
+        page.querySelector('.dg-o-w-submenu li').addEventListener('click', function(){
+            DGW.main.elements.widgetContent.removeChild(DGW.main.elements.widgetContent.childNodes[1]);
+        });
+
+        leftBtn.addEventListener('click', function(){
+            slideBadges('left');
+        });
+        rightBtn.addEventListener('click', function(){
+            slideBadges('right');
+        });
+
+        wc.appendChild(page);
+    }
+
 };
 
 DGW.main.methods.drawsConstructor = function(cacheObj, _context){
@@ -1919,6 +2056,27 @@ DGW.main.methods.offersConstructor = function(offers) {
     showOffersPanels(lists.offers);
     DGW.main.methods.setRewardedActions();
 };
+
+DGW.main.methods.leaderboardConstructor = function(earners) {
+    var s = DGW.main.elements.pages.activitiesMain;
+    var ul = s.querySelector('.dg-o-w-activity-slider ul');
+
+    ul.innerHTML = '';
+    earners.forEach(function(earner){
+        var li = document.createElement('li');
+        li.innerHTML = '<div><img src="' + earner.ImageUrl +'"><span>' + earner.Amount + '</span></div><h4>' + earner.UserName + '</h4>';
+
+        ul.appendChild(li);
+    });
+
+    DGW.global.elements.leaderboardSlider = new Slider(ul.parentNode, {
+        visibles: 5,
+        controlNext: '.dg-o-w-activity-slider-next',
+        controlPrev: '.dg-o-w-activity-slider-prev'
+    });
+};
+
+
 var widgetStyles = document.createElement('link');
     widgetStyles.rel = 'stylesheet';
     widgetStyles.type = 'text/css';
