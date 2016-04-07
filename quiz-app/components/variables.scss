@@ -1,15 +1,15 @@
 :root {
   --text-color: #fff;
   --brand-color: #4CAF50; /* 76, 175, 80 */
+  --brand-color-dark: #388E3C;
   --header-height: 4.4rem;
-  --brand-color: #4CAF50; /* 76, 175, 80 */
   --body-bg: rgba(140, 140, 140, 0.06); /* TODO: change due to newest mockups */
 
   /* TODO: rename when stable */
   --color-1: #B6B6B6; /* 182, 182, 182 */
   --color-2: #F0F0F0; /* 240, 240, 240 */
   --color-3: #727272; /* 114, 114, 114 */
-  
+
   --font-family-roboto: 'Roboto', 'Helvetica', sans-serif;
   --font-family-roboto-bold: 'Roboto bold', 'Helvetica', sans-serif; /* TODO: figure out if it works */
 }
