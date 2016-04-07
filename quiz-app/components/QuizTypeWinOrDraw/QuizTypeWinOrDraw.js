@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-class QuizItem extends Component {
+class QuizTypeWinOrDraw extends Component {
 
 	static propTypes = {
 
@@ -33,4 +33,4 @@ class QuizItem extends Component {
 	}
 }
 
-export default QuizItem;
+export default QuizTypeWinOrDraw;

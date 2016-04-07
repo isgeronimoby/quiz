@@ -74,7 +74,7 @@ const config = {
 				loader: 'raw-loader',
 			}, {
 				test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-				loader: 'url-loader?limit=10000',
+				loader: 'url-loader?prefix=./?limit=10000', // prefix is required until we are on gh-pages
 			}, {
 				test: /\.(eot|ttf|wav|mp3)$/,
 				loader: 'file-loader',

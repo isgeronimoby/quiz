@@ -1,15 +1,15 @@
 const data = [
 	{
 		quizId: 1,
-		type: 'xxx',
+		type: 'win-or-draw',
 	},
 	{
 		quizId: 2,
-		type: 'yyy',
+		type: 'score',
 	},
 	{
 		quizId: 3,
-		type: 'zzz',
+		type: 'first-goal',
 	}
 ];
 
