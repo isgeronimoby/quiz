@@ -31,6 +31,7 @@ gulp.task('styles', function(){
     return gulp.src('css/style.css')
             .pipe(cssnano({zindex: false}))
             .pipe(rename('style.min.css'))
+            .pipe(eol('\r\n'))
             .pipe(gulp.dest('dist'));
 });
 
