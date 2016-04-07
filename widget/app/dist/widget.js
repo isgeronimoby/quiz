@@ -460,7 +460,7 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         },
         function onSuccess(response) {
             if (response.error) {
-                result.error = response.error;
+                result.error = response;
             } else if (response.data !== null) {
                 result.data = response.data;
             } else {
@@ -484,6 +484,21 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             console.log('retrieving data');
         }
     }, 500);
+};
+
+DGW.global.api.requests.checkServerAvailability = function(){
+    DGW.global.api.generic('getUser', function(result){
+        if (!result.error) {
+            DGW.global.methods.init();
+            console.info(result.data);
+        } else {
+            if (result.error.status != 500) {
+                DGW.global.methods.init();
+                console.info(result.data);
+            }
+            console.error(result);
+        }
+    });
 };
 
 DGW.global.api.requests.signUp = function(userObj){
@@ -540,8 +555,12 @@ DGW.global.api.requests.getUser = function(){
                 DGW.main.methods.profileSetData(result.data);
             }
         } else {
-            DGW.global.authorized = false;
-            console.error(result.error);
+            if (result.error.status == 500) {
+                console.log('error error error');
+            } else {
+                DGW.global.authorized = false;
+            }
+            console.error(result);
         }
         if (!DGW.global.launched) {
             // Showing side widget
@@ -612,34 +631,8 @@ DGW.global.api.requests.claimPrize = function(drawId, address, el){
 };
 
 DGW.global.api.requests.connectFB = function(){
-    function PopupCenter(url, title, w, h) {
-        // Fixes dual-screen position                         Most browsers      Firefox
-        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
-        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
-
-        var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-        var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-
-        var left = ((width / 2) - (w / 2)) + dualScreenLeft;
-        var top = ((height / 2) - (h / 2)) + dualScreenTop;
-        var windowCheckCloseInterval;
-
-        var fbWindow = window.open(url, title, 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
-
-        // Puts focus on the newWindow
-        if (window.focus) {
-            fbWindow.focus();
-        }
-
-        windowCheckCloseInterval = window.setInterval(function(){
-            if (fbWindow.closed) {
-                clearInterval(windowCheckCloseInterval);
-                DGW.global.api.requests.getUser();
-            }
-        }, 50);
-    }
-
-    PopupCenter(DGW.global.tunnelPath.substring(DGW.global.tunnelPath.lastIndexOf('/') + 1, 0) + 'publisher/v1/auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340);
+    DGW.helpers.centerWindowPopup(DGW.global.tunnelPath.substring(DGW.global.tunnelPath.lastIndexOf('/') + 1, 0) +
+    'publisher/v1/auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340);
 };
 
 DGW.global.api.requests.getAllActivities = function(){
@@ -727,6 +720,10 @@ DGW.global.api.requests.getEarnedBadges = function(){
         }
     });
 };
+DGW.global.api.requests.shareOfferFb = function(offerId){
+    DGW.helpers.centerWindowPopup(DGW.global.tunnelPath.substring(DGW.global.tunnelPath.lastIndexOf('/') + 1, 0) +
+    'publisher/v1/offer/facebookshare?api_key=' + DGW.global.api.apiKey + '&offerid=' + offerId, 'fbWindow', 460, 340);
+};
 DGW.helpers.addClass = function(obj, className){
     if (!(new RegExp(className).test(obj.className))) {
         if (obj.className.length === 0) {
@@ -756,17 +753,6 @@ DGW.helpers.hasClass = function(obj, className) {
 DGW.helpers.isArray = function(o){
     return Object.prototype.toString.call(o) === '[object Array]';
 };
-
-var a = [
-    {
-        dt: 'data',
-        elem: 'li'
-    },
-    {
-        dt: 'data',
-        elem: 'li'
-    }];
-
 
 DGW.helpers.drawsTimerConstr = function(params){
     var draws;
@@ -853,6 +839,33 @@ DGW.helpers.checkImagesForSrc = function(src) {
     }
 };
 
+DGW.helpers.centerWindowPopup = function(url, title, w, h){
+    // Fixes dual-screen position                         Most browsers      Firefox
+    var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+    var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+    var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+    var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+    var top = ((height / 2) - (h / 2)) + dualScreenTop;
+    var windowCheckCloseInterval;
+
+    var fbWindow = window.open(url, title, 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+
+    // Puts focus on the newWindow
+    if (window.focus) {
+        fbWindow.focus();
+    }
+
+    windowCheckCloseInterval = window.setInterval(function(){
+        if (fbWindow.closed) {
+            clearInterval(windowCheckCloseInterval);
+            fbWindow = null;
+            DGW.global.api.requests.getUser();
+        }
+    }, 50);
+};
 DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body"></div>' +
                                '</div>';
@@ -1549,8 +1562,6 @@ DGW.main.methods.updateBadgesInfo = function(){
     var wc = DGW.main.elements.widgetContent;
     var ul = pr.querySelector('.dg-o-w-badges-holder ul');
 
-    // DGW.main.elements.widgetContent.removeChild(DGW.main.elements.widgetContent.childNodes[1]);
-
     pr.querySelector('#dg-o-w-badges-earned-amount').innerHTML = be.length;
 
 
@@ -1558,6 +1569,11 @@ DGW.main.methods.updateBadgesInfo = function(){
     ba.forEach(function(b){
         var li = document.createElement('li');
         li.innerHTML = '<img src="' + b.ImageUrl + '" alt=""/><p>' + b.Title + '</p>';
+
+        if ( be.filter(function(earned){return earned.BadgeId == b.BadgeId;}).length > 0 ) {
+            //badge was earned
+            DGW.helpers.addClass(li, 'dg-o-w-earned');
+        }
 
         li.addEventListener('click', function(){
             showFullBadgePage(ba, b.Id);
@@ -1568,7 +1584,11 @@ DGW.main.methods.updateBadgesInfo = function(){
 
     function showFullBadgePage(badges, curBadgeId){
         var submenu = '<div class="dg-o-w-submenu"><ul><li class="dg-o-w-back-draws">&lt; Back</li></ul></div>';
-        var pageContent = '<div class="dg-o-w-badge-single"><ul></ul><div class="dg-o-w-badge-single-left"><</div><div class="dg-o-w-badge-single-right">></div></div>';
+        var pageContent = '<div class="dg-o-w-badge-single">' +
+            //'<div class="dg-o-w-badge-single-filters">' +
+            //    '<a href="#" id="dg-o-w-badges-all">All badges</a><a href="#" id="dg-o-w-badges-missed">Missed badges</a><a href="#" id="dg-o-w-badges-my">My badges</a>' +
+            //'</div>' +
+            '<ul></ul><div class="dg-o-w-badge-single-left"><</div><div class="dg-o-w-badge-single-right">></div></div>';
         var page = document.createElement('div');
             page.className = 'dg-o-w-badge-single-page';
             page.innerHTML = submenu + pageContent;
@@ -1611,6 +1631,10 @@ DGW.main.methods.updateBadgesInfo = function(){
             li.innerHTML = '<div><img src="' + badge.ImageUrl + '" /><h3>' + badge.Title + '</h3><p>' + badge.Description + '</p></div>';
             if (badge.Id === curBadgeId) {
                 li.className = 'dg-o-w-active';
+            }
+            if ( be.filter(function(earned){return earned.BadgeId == badge.BadgeId;}).length > 0 ) {
+                //badge was earned
+                DGW.helpers.addClass(li, 'dg-o-w-earned');
             }
             badgesArr.push(li);
             ul.appendChild(li);
@@ -1976,7 +2000,7 @@ DGW.main.methods.offersConstructor = function(offers) {
         if (lists.sponsors.filter(function(sponsor){return sponsor.Name === offer.Sponsor.Name;}).length == 0) {
             lists.sponsors.push(offer.Sponsor);
         }
-        if (lists.categories.filter(function(categorie){return categorie === offer.Type.Group.Name;}).length == 0) {
+        if (lists.categories.filter(function(category){return category === offer.Type.Group.Name;}).length == 0) {
             lists.categories.push(offer.Type.Group.Name);
         }
     });
@@ -2032,12 +2056,12 @@ DGW.main.methods.offersConstructor = function(offers) {
             li.innerHTML =
                 '<div class="dg-o-w-offer">' +
                     '<div class="dg-o-w-offer-left">' +
-                        '<img src="' + (offer.Type.ImageUrl || 'http://lorempixel.com/100/100/sports') + '" />' +
+                        '<img src="' + (offer.ImageUrl || 'http://lorempixel.com/100/100/sports') + '" />' +
                         '<span>' + offer.PointsReward + '</span>' +
                     '</div>' +
                     '<div class="dg-o-w-offer-right">' +
-                        '<h4>' + offer.Type.Name + '</h4>' +
-                        '<h5>Some amazing offer, best one you only could imagine</h5>' +
+                        '<h4>' + offer.Title + '</h4>' +
+                        '<h5>' + offer.Description + '</h5>' +
                         '<div class="dg-o-w-users-done">' +
                             '<div>' +
                                 '<img src="http://lorempixel.com/70/70/people/1" />' +
@@ -2049,6 +2073,11 @@ DGW.main.methods.offersConstructor = function(offers) {
                     '</div>' +
                 '</div>';
 
+            if (offer.Type.Name == 'FacebookShare') {
+                li.addEventListener('click', function(){
+                    DGW.global.api.requests.shareOfferFb(offer.Id);
+                });
+            }
             offersHolder.appendChild(li);
         });
     }
@@ -2082,7 +2111,8 @@ var widgetStyles = document.createElement('link');
     widgetStyles.type = 'text/css';
 
 widgetStyles.addEventListener('load', function(){
-    DGW.global.methods.init();
+    //DGW.global.methods.init();
+    DGW.global.api.requests.checkServerAvailability();
 });
 
 widgetStyles.href = DGW.global.widgetPathName + 'style.min.css';

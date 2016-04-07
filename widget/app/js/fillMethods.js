@@ -122,8 +122,6 @@ DGW.main.methods.updateBadgesInfo = function(){
     var wc = DGW.main.elements.widgetContent;
     var ul = pr.querySelector('.dg-o-w-badges-holder ul');
 
-    // DGW.main.elements.widgetContent.removeChild(DGW.main.elements.widgetContent.childNodes[1]);
-
     pr.querySelector('#dg-o-w-badges-earned-amount').innerHTML = be.length;
 
 
@@ -131,6 +129,11 @@ DGW.main.methods.updateBadgesInfo = function(){
     ba.forEach(function(b){
         var li = document.createElement('li');
         li.innerHTML = '<img src="' + b.ImageUrl + '" alt=""/><p>' + b.Title + '</p>';
+
+        if ( be.filter(function(earned){return earned.BadgeId == b.BadgeId;}).length > 0 ) {
+            //badge was earned
+            DGW.helpers.addClass(li, 'dg-o-w-earned');
+        }
 
         li.addEventListener('click', function(){
             showFullBadgePage(ba, b.Id);
@@ -141,7 +144,11 @@ DGW.main.methods.updateBadgesInfo = function(){
 
     function showFullBadgePage(badges, curBadgeId){
         var submenu = '<div class="dg-o-w-submenu"><ul><li class="dg-o-w-back-draws">&lt; Back</li></ul></div>';
-        var pageContent = '<div class="dg-o-w-badge-single"><ul></ul><div class="dg-o-w-badge-single-left"><</div><div class="dg-o-w-badge-single-right">></div></div>';
+        var pageContent = '<div class="dg-o-w-badge-single">' +
+            //'<div class="dg-o-w-badge-single-filters">' +
+            //    '<a href="#" id="dg-o-w-badges-all">All badges</a><a href="#" id="dg-o-w-badges-missed">Missed badges</a><a href="#" id="dg-o-w-badges-my">My badges</a>' +
+            //'</div>' +
+            '<ul></ul><div class="dg-o-w-badge-single-left"><</div><div class="dg-o-w-badge-single-right">></div></div>';
         var page = document.createElement('div');
             page.className = 'dg-o-w-badge-single-page';
             page.innerHTML = submenu + pageContent;
@@ -184,6 +191,10 @@ DGW.main.methods.updateBadgesInfo = function(){
             li.innerHTML = '<div><img src="' + badge.ImageUrl + '" /><h3>' + badge.Title + '</h3><p>' + badge.Description + '</p></div>';
             if (badge.Id === curBadgeId) {
                 li.className = 'dg-o-w-active';
+            }
+            if ( be.filter(function(earned){return earned.BadgeId == badge.BadgeId;}).length > 0 ) {
+                //badge was earned
+                DGW.helpers.addClass(li, 'dg-o-w-earned');
             }
             badgesArr.push(li);
             ul.appendChild(li);
@@ -549,7 +560,7 @@ DGW.main.methods.offersConstructor = function(offers) {
         if (lists.sponsors.filter(function(sponsor){return sponsor.Name === offer.Sponsor.Name;}).length == 0) {
             lists.sponsors.push(offer.Sponsor);
         }
-        if (lists.categories.filter(function(categorie){return categorie === offer.Type.Group.Name;}).length == 0) {
+        if (lists.categories.filter(function(category){return category === offer.Type.Group.Name;}).length == 0) {
             lists.categories.push(offer.Type.Group.Name);
         }
     });
@@ -605,12 +616,12 @@ DGW.main.methods.offersConstructor = function(offers) {
             li.innerHTML =
                 '<div class="dg-o-w-offer">' +
                     '<div class="dg-o-w-offer-left">' +
-                        '<img src="' + (offer.Type.ImageUrl || 'http://lorempixel.com/100/100/sports') + '" />' +
+                        '<img src="' + (offer.ImageUrl || 'http://lorempixel.com/100/100/sports') + '" />' +
                         '<span>' + offer.PointsReward + '</span>' +
                     '</div>' +
                     '<div class="dg-o-w-offer-right">' +
-                        '<h4>' + offer.Type.Name + '</h4>' +
-                        '<h5>Some amazing offer, best one you only could imagine</h5>' +
+                        '<h4>' + offer.Title + '</h4>' +
+                        '<h5>' + offer.Description + '</h5>' +
                         '<div class="dg-o-w-users-done">' +
                             '<div>' +
                                 '<img src="http://lorempixel.com/70/70/people/1" />' +
@@ -622,6 +633,11 @@ DGW.main.methods.offersConstructor = function(offers) {
                     '</div>' +
                 '</div>';
 
+            if (offer.Type.Name == 'FacebookShare') {
+                li.addEventListener('click', function(){
+                    DGW.global.api.requests.shareOfferFb(offer.Id);
+                });
+            }
             offersHolder.appendChild(li);
         });
     }

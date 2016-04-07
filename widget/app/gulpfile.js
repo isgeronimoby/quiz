@@ -4,16 +4,18 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     wrap = require('gulp-wrap'),
     del = require('del'),
-    rename = require("gulp-rename");
+    rename = require('gulp-rename'),
+    eol = require('gulp-eol');
 
 
-var scripts = ['js/init.js', 'js/easyXDM.min.js', 'js/vanilla-slider.js', 'js/moment.min.js', 'js/requests.js', 'js/helpers.js','js/templates.js', 'js/main.js', 'js/page-events.js', 'js/fillMethods.js', 'js/launch.js'];
+var scripts = ['js/init.js', 'js/easyXDM.min.js', 'js/vanilla-slider.js', 'js/moment.min.js', 'js/requests.js', 'js/offers-requests.js', 'js/helpers.js','js/templates.js', 'js/main.js', 'js/page-events.js', 'js/fillMethods.js', 'js/launch.js'];
 
 gulp.task('scripts-min', function(){
     return gulp.src(scripts)
             .pipe(concat('widget.min.js'))
             .pipe(wrap("window.addEventListener('load', function(){\n<%= contents %>\n});"))
             .pipe(uglify())
+            .pipe(eol('\r\n'))
             .pipe(gulp.dest('dist'));
 });
 
@@ -21,6 +23,7 @@ gulp.task('scripts', function(){
     return gulp.src(scripts)
             .pipe(concat('widget.js'))
             .pipe(wrap("window.addEventListener('load', function(){\n<%= contents %>\n});"))
+            .pipe(eol('\r\n'))
             .pipe(gulp.dest('dist'));
 });
 

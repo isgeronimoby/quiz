@@ -3,7 +3,8 @@ var widgetStyles = document.createElement('link');
     widgetStyles.type = 'text/css';
 
 widgetStyles.addEventListener('load', function(){
-    DGW.global.methods.init();
+    //DGW.global.methods.init();
+    DGW.global.api.requests.checkServerAvailability();
 });
 
 widgetStyles.href = DGW.global.widgetPathName + 'style.min.css';

@@ -84,7 +84,7 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         },
         function onSuccess(response) {
             if (response.error) {
-                result.error = response.error;
+                result.error = response;
             } else if (response.data !== null) {
                 result.data = response.data;
             } else {
@@ -108,6 +108,21 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             console.log('retrieving data');
         }
     }, 500);
+};
+
+DGW.global.api.requests.checkServerAvailability = function(){
+    DGW.global.api.generic('getUser', function(result){
+        if (!result.error) {
+            DGW.global.methods.init();
+            console.info(result.data);
+        } else {
+            if (result.error.status != 500) {
+                DGW.global.methods.init();
+                console.info(result.data);
+            }
+            console.error(result);
+        }
+    });
 };
 
 DGW.global.api.requests.signUp = function(userObj){
@@ -164,8 +179,12 @@ DGW.global.api.requests.getUser = function(){
                 DGW.main.methods.profileSetData(result.data);
             }
         } else {
-            DGW.global.authorized = false;
-            console.error(result.error);
+            if (result.error.status == 500) {
+                console.log('error error error');
+            } else {
+                DGW.global.authorized = false;
+            }
+            console.error(result);
         }
         if (!DGW.global.launched) {
             // Showing side widget
@@ -236,34 +255,8 @@ DGW.global.api.requests.claimPrize = function(drawId, address, el){
 };
 
 DGW.global.api.requests.connectFB = function(){
-    function PopupCenter(url, title, w, h) {
-        // Fixes dual-screen position                         Most browsers      Firefox
-        var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
-        var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
-
-        var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-        var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-
-        var left = ((width / 2) - (w / 2)) + dualScreenLeft;
-        var top = ((height / 2) - (h / 2)) + dualScreenTop;
-        var windowCheckCloseInterval;
-
-        var fbWindow = window.open(url, title, 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
-
-        // Puts focus on the newWindow
-        if (window.focus) {
-            fbWindow.focus();
-        }
-
-        windowCheckCloseInterval = window.setInterval(function(){
-            if (fbWindow.closed) {
-                clearInterval(windowCheckCloseInterval);
-                DGW.global.api.requests.getUser();
-            }
-        }, 50);
-    }
-
-    PopupCenter(DGW.global.tunnelPath.substring(DGW.global.tunnelPath.lastIndexOf('/') + 1, 0) + 'publisher/v1/auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340);
+    DGW.helpers.centerWindowPopup(DGW.global.tunnelPath.substring(DGW.global.tunnelPath.lastIndexOf('/') + 1, 0) +
+    'publisher/v1/auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340);
 };
 
 DGW.global.api.requests.getAllActivities = function(){
