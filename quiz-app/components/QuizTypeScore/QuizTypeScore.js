@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-class QuizItem extends Component {
+class QuizTypeScore extends Component {
 
 	static propTypes = {
 
@@ -10,16 +10,16 @@ class QuizItem extends Component {
 		return (
 			<div className="quiz-content">
 				<div className="quiz-info">23 March, 19:00, 3thd tour, London</div>
-				
-				
-				<div className="teams-idle-wrapper">	
+
+
+				<div className="teams-idle-wrapper">
 					<div className="team-idle">
 						<div className="team-idle-content">?</div>
 						<div className="team-name">Everton</div>
 					</div>
 
 					<div className="colon">:</div>
-					
+
 					<div className="team-idle disabled">
 						<div className="team-idle-content">?</div>
 						<div className="team-name">Manchester United</div>
@@ -47,4 +47,4 @@ class QuizItem extends Component {
 	}
 }
 
-export default QuizItem;
+export default QuizTypeScore;
