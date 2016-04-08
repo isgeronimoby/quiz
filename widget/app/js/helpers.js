@@ -37,7 +37,9 @@ DGW.helpers.drawsTimerConstr = function(params){
     var timer;
 
     function checkExpirationDate(draw){
-        var end = new Date(draw.dt);
+
+        //var end = new Date(draw.dt + 'Z');
+        var end = (draw.dt.substring(draw.dt.length - 1).toLowerCase() == 'z') ? new Date(draw.dt) : new Date(draw.dt + 'Z');
         var now = new Date();
         if ((end - now) > 0) {
             return true;
@@ -49,7 +51,8 @@ DGW.helpers.drawsTimerConstr = function(params){
     function updateTime(){
         draws.forEach(function(draw){
 
-            var end = new Date(draw.dt);
+            //var end = new Date(draw.dt + 'Z');
+            var end = (draw.dt.substring(draw.dt.length - 1).toLowerCase() == 'z') ? new Date(draw.dt) : new Date(draw.dt + 'Z');
 
             var now = new Date();
             var distance = end - now;
@@ -141,3 +144,56 @@ DGW.helpers.centerWindowPopup = function(url, title, w, h, _callback){
         }
     }, 50);
 };
+
+DGW.helpers.getDateFromNow = (function(undefined){
+    var SECOND = 1000,
+        MINUTE = 60 * SECOND,
+        HOUR = 60 * MINUTE,
+        DAY = 24 * HOUR,
+        WEEK = 7 * DAY,
+        YEAR = DAY * 365,
+        MONTH = YEAR / 12;
+
+    var formats = [
+        [ 0.7 * MINUTE, 'just now' ],
+        [ 1.5 * MINUTE, 'a minute ago' ],
+        [ 60 * MINUTE, 'minutes ago', MINUTE ],
+        [ 1.5 * HOUR, 'an hour ago' ],
+        [ DAY, 'hours ago', HOUR ],
+        [ 2 * DAY, 'yesterday' ],
+        [ 7 * DAY, 'days ago', DAY ],
+        [ 1.5 * WEEK, 'a week ago'],
+        [ MONTH, 'weeks ago', WEEK ],
+        [ 1.5 * MONTH, 'a month ago' ],
+        [ YEAR, 'months ago', MONTH ],
+        [ 1.5 * YEAR, 'a year ago' ],
+        [ Number.MAX_VALUE, 'years ago', YEAR ]
+    ];
+
+    function relativeDate(input,reference){
+        input = (input.substring(input.length - 1).toLowerCase() == 'z') ? input : input + 'Z';
+        input = new Date(input);
+        !reference && ( reference = (new Date).getTime() );
+        reference instanceof Date && ( reference = reference.getTime() );
+        input instanceof Date && ( input = input.getTime() );
+
+        var delta = reference - input,
+            format, i, len;
+
+        for(i = -1, len=formats.length; ++i < len;){
+            format = formats[i];
+            if(delta < format[0]){
+                return format[2] == undefined ? format[1] : Math.round(delta/format[2]) + ' ' + format[1];
+            }
+        }
+    }
+
+    return relativeDate;
+})();
+
+DGW.helpers.dateDiff = function(endDate){
+    endDate = (endDate.substring(endDate.length - 1).toLowerCase() == 'z') ? endDate : endDate + 'Z';
+    return new Date(endDate) - new Date();
+};
+
+// TODO: remove " + 'Z' " from helpers, when server provides right time format

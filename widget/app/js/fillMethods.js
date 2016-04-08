@@ -136,7 +136,7 @@ DGW.main.methods.updateBadgesInfo = function(){
         }
 
         li.addEventListener('click', function(){
-            showFullBadgePage(ba, b.Id);
+            showFullBadgePage(ba, b.BadgeId);
         });
 
         ul.appendChild(li);
@@ -189,7 +189,7 @@ DGW.main.methods.updateBadgesInfo = function(){
         badges.forEach(function(badge){
             var li = document.createElement('li');
             li.innerHTML = '<div><img src="' + badge.ImageUrl + '" /><h3>' + badge.Title + '</h3><p>' + badge.Description + '</p></div>';
-            if (badge.Id === curBadgeId) {
+            if (badge.BadgeId === curBadgeId) {
                 li.className = 'dg-o-w-active';
             }
             if ( be.filter(function(earned){return earned.BadgeId == badge.BadgeId;}).length > 0 ) {
@@ -248,7 +248,7 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
                             '</div>';
             if (!DGW.helpers.drawsTimer.push({dt:draw.EndDate, elem:li.querySelector('.dg-o-w-draw-countdown')})) {
                 DGW.helpers.addClass(li, 'expired');
-                li.querySelector('.dg-o-w-draw-countdown').innerHTML = 'Finished ' + String(moment(new Date(draw.EndDate)).fromNow());
+                li.querySelector('.dg-o-w-draw-countdown').innerHTML = 'Finished ' + DGW.helpers.getDateFromNow(draw.EndDate);
             } else {
                 DGW.global.activeDrawsExist = true;
             }
@@ -288,6 +288,8 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
         return draws.DrawId === drawId;
     })[0];
 
+    var drawState = 'active';
+
     var el = DGW.main.elements.pages.singleDraw;
     var prizeSect = '<div class="dg-o-w-draw-left-side">' +
                         '<div class="prize-image"><div><img src="' + draw.Prize.ImageUrl + '" /></div></div>' +
@@ -307,6 +309,21 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
         DGW.main.elements.widgetContent.removeChild(DGW.main.elements.widgetContent.childNodes[0]);
     }
 
+    if (DGW.helpers.dateDiff(draw.EndDate) <= 0) {
+        // Draw is finished
+        if (draw.isDrawn == false) {
+            // Draw has been finished and not drawn
+            drawState = 'not-drawn';
+        } else {
+            // Draw has been finished and drawn
+            drawState = 'drawn';
+            if (draw.Winner == null) {
+                // No one has participated in the draw
+                drawState = 'drawn-no-players';
+            }
+        }
+    }
+    console.log('draw state: ', drawState);
     el.innerHTML =  submenu +
                     '<div class="dg-o-w-section-content">' +
                         '<div class="dg-o-w-single-draw">' +
@@ -326,7 +343,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                                         '<p>10 users have done this</p>' +
                                     '</div>' +
                                 '</div>' +
-                                ((moment(draw.EndDate).diff() > 0) ? '<h2 class="dg-o-w-draw-login-show">Please, log in to bet</h2>' : '') +
+                                ((DGW.helpers.dateDiff(draw.EndDate) > 0) ? '<h2 class="dg-o-w-draw-login-show">Please, log in to bet</h2>' : '') +
                                 '<div class="dg-o-w-draw-bet-action dg-o-w-draw-auth-show">' +
                                     '<h5>How much do you want to bet?</h5>' +
                                     '<form id="bet-form" class="dg-o-w-one-field-form">' +
@@ -339,6 +356,8 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                                     ((draw.Winner !== null) ?
                                         '<div class="dg-o-w-draw-winner"><img src="' + (draw.Winner.ImageUrl || DGW.helpers.checkImagesForSrc()) + '" /><h4>' + draw.Winner.UserName + ' has won this draw. Our congratulations!</h4></div>' :
                                     '') +
+                                    ((drawState == 'not-drawn') ? '<div class="dg-o-w-draw-winner"><h4>Winner will be announced very soon!</h4></div>' : '') +
+                                    ((drawState == 'drawn-no-players') ? '<div class="dg-o-w-draw-winner"><h4>Unfortunately, no one has participated in this Draw</h4></div>' : '') +
                                 shareSect +
                             '</div>' +
                         '</div>' +
@@ -390,6 +409,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
         }
     }
 
+
     el.querySelector('.dg-o-w-submenu li.dg-o-w-back-draws').addEventListener('click', function(){
         DGW.main.methods.changeMainState('draws');
     });
@@ -430,7 +450,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
     if (!DGW.helpers.drawsTimer.push({dt:draw.EndDate, elem:el.querySelector('.dg-o-w-countdown')})) {
         DGW.helpers.addClass(el.querySelector('.dg-o-w-single-draw'), 'expired');
         if (el.querySelector('.dg-o-w-countdown')) {
-            el.querySelector('.dg-o-w-countdown').innerHTML = 'Finished ' + String(moment(new Date(draw.EndDate)).fromNow());
+            el.querySelector('.dg-o-w-countdown').innerHTML = 'Finished ' + String(DGW.helpers.getDateFromNow(draw.EndDate));
         }
     }
 
@@ -529,7 +549,7 @@ DGW.main.methods.activitiesConstructor = function(activities){
                     '<p>' + message + '</p>' +
                 '</div>' +
             '</div>' +
-            '<h6>' + moment(new Date(activity.Date)).fromNow() + '</h6>';
+            '<h6>' + DGW.helpers.getDateFromNow(activity.Date) + '</h6>';
         if (activity.Direction === 'Outflow') {
             DGW.helpers.addClass(li, 'spent');
         }
@@ -546,29 +566,30 @@ DGW.main.methods.offersConstructor = function(offers) {
         pointsSum = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-section-content h3 span');
     var lists = {
         offers: offers.Offers,
-        sponsors: [],
-        categories: []
+        sponsors: ['All sponsors'],
+        categories: ['All']
     };
 
     pointsSum.innerHTML = offers.TotalPointsReward;
     offersSubmenu.innerHTML = '';
     offersSponsors.innerHTML = '';
 
-    lists.categories.push('All');
+    //lists.categories.push('All');
 
     offers.Offers.forEach(function(offer){
-        if (lists.sponsors.filter(function(sponsor){return sponsor.Name === offer.Sponsor.Name;}).length == 0) {
-            lists.sponsors.push(offer.Sponsor);
+        if (lists.sponsors.filter(function(sponsor){return sponsor === offer.Sponsor.Name;}).length == 0) {
+            lists.sponsors.push(offer.Sponsor.Name);
         }
         if (lists.categories.filter(function(category){return category === offer.Type.Group.Name;}).length == 0) {
             lists.categories.push(offer.Type.Group.Name);
         }
     });
 
+
     lists.sponsors.forEach(function(sponsor){
         var option = document.createElement('option');
-        option.innerHTML = sponsor.Name;
-        option.value = sponsor.Name.toLowerCase();
+        option.innerHTML = sponsor;
+        option.value = sponsor.toLowerCase();
 
         offersSponsors.appendChild(option);
     });
@@ -595,12 +616,20 @@ DGW.main.methods.offersConstructor = function(offers) {
         offersSubmenu.appendChild(li);
     });
 
-    if (lists.sponsors.length > 1) {
+    //TODO: make categories and sponsors as separate filters
+
+    if (lists.sponsors.length > 2) {
         offersSponsors.addEventListener('change', function () {
             var that = this;
-            var filteredOffers = lists.offers.filter(function (offer) {
-                return offer.Sponsor.Name.toLowerCase() == that.value;
-            });
+            var filteredOffers;
+            console.log(that.value);
+            if (that.value != 'all sponsors') {
+                filteredOffers = lists.offers.filter(function (offer) {
+                    return offer.Sponsor.Name.toLowerCase() == that.value;
+                });
+            } else {
+                filteredOffers = lists.offers;
+            }
             showOffersPanels(filteredOffers);
         });
     } else {
@@ -614,7 +643,7 @@ DGW.main.methods.offersConstructor = function(offers) {
             var li = document.createElement('li');
 
             li.innerHTML =
-                '<div class="dg-o-w-offer">' +
+                '<a href="" target="_blank"><div class="dg-o-w-offer">' +
                     '<div class="dg-o-w-offer-left">' +
                         '<img src="' + (offer.ImageUrl || 'http://lorempixel.com/100/100/sports') + '" />' +
                         '<span>' + offer.PointsReward + '</span>' +
@@ -631,20 +660,26 @@ DGW.main.methods.offersConstructor = function(offers) {
                             '<p>10 users have done this</p>' +
                         '</div>' +
                     '</div>' +
-                '</div>';
-
-                li.addEventListener('click', function(){
-                    if (DGW.global.authorized) {
-                        if (offer.Type.Name == 'FacebookShare') {
-                            DGW.global.api.requests.shareOfferFb(offer.Id);
-                        } else if (offer.Type.Name == 'TwitterShare'){
-                            DGW.global.api.requests.shareOfferTw(offer.Id, offer.CustomData);
-                        }
-
-                    } else {
-                        DGW.main.methods.changeMainState('profile');
+                '</div></a>';
+            if (offer.Type.Name == 'DownloadApp') {
+                li.querySelector('a').href = offer.CustomData;
+            }
+            li.querySelector('a').addEventListener('click', function(ev){
+                if (DGW.global.authorized) {
+                    if (offer.Type.Name != 'DownloadApp') {
+                        ev.preventDefault();
                     }
-                });
+                    if (offer.Type.Name == 'FacebookShare') {
+                        DGW.global.api.requests.shareOfferFb(offer.Id);
+                    } else if (offer.Type.Name == 'TwitterShare'){
+                        DGW.global.api.requests.shareOfferTw(offer.Id, offer.CustomData);
+                    }
+
+                } else {
+                    ev.preventDefault();
+                    DGW.main.methods.changeMainState('profile');
+                }
+            });
             offersHolder.appendChild(li);
         });
     }

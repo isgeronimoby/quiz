@@ -150,10 +150,10 @@ DGW.main.methods.addPageEvents = function () {
                         break;
                     case 'dg-o-w-show-finished-soon':
                         var expArr = DGW.main.cache.drawsList.filter(function(draw){
-                            return moment(draw.EndDate).diff() <= 0;
+                            return DGW.helpers.dateDiff(draw.EndDate) <= 0;
                         });
                         var actArr = DGW.main.cache.drawsList.filter(function(draw){
-                            return moment(draw.EndDate).diff() > 0;
+                            return DGW.helpers.dateDiff(draw.EndDate) > 0;
                         }).sort(function(a, b){
                             return new Date(a.EndDate) - new Date(b.EndDate);
                         });

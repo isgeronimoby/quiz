@@ -125,10 +125,10 @@ DGW.main.methods.changeMainState = function(state){
 };
 
 DGW.main.methods.loadingStarted = function(){
-    DGW.helpers.addClass(DGW.main.elements.widgetBody, 'loading');
+    DGW.helpers.addClass(DGW.main.elements.widgetBody, 'dg-o-w-loading');
 };
 DGW.main.methods.loadingFinished = function(){
-    DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'loading');
+    DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'dg-o-w-loading');
 };
 
 

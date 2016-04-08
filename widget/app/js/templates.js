@@ -52,17 +52,21 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                         '<div class="inline-part"><a id="dg-o-w-footer-email-login" href="#" class="btn-radius btn-large btn-white">Sign up with email</a></div>' +
                                                     '</div>' +
                                                     '<div class="footer-section footer-section-step-2">' +
-                                                        '<a id="dg-o-w-footer-login-select" href="#" class="btn-back-footer">&larr; Back</a><form id="dg-o-w-footer-signup-email">' +
-                                                            '<div class="inline-part"><label>Name <input type="text" placeholder="First Name" /></label></div>' +
-                                                            '<div class="inline-part"><label>Email <input type="email" placeholder="mail@mail.com" /></label></div>' +
-                                                            '<div class="inline-part"><label>&nbsp; <input class="btn-dg-o-w-outline" type="submit" value="Submit" /></label></div>' +
-                                                        '</form>' +
+                                                        '<div>' +
+                                                            '<a id="dg-o-w-footer-login-select" href="#" class="btn-back-footer">&larr; Back</a><form id="dg-o-w-footer-signup-email">' +
+                                                                '<div class="inline-part"><label>Name <input type="text" placeholder="First Name" /></label></div>' +
+                                                                '<div class="inline-part"><label>Email <input type="email" placeholder="mail@mail.com" /></label></div>' +
+                                                                '<div class="inline-part"><label>&nbsp; <input class="btn-dg-o-w-outline" type="submit" value="Submit" /></label></div>' +
+                                                            '</form>' +
+                                                        '</div>' +
                                                     '</div>' +
                                                     '<div class="footer-section footer-section-step-3">' +
-                                                        '<a id="dg-o-w-footer-login-select-2" href="#" class="btn-back-footer">&larr; Back</a><form id="dg-o-w-footer-signup-pass">' +
-                                                            '<div class="inline-part"><label>Password <input type="password" /></label></div>' +
-                                                            '<div class="inline-part"><label>&nbsp; <input class="btn-dg-o-w-outline" type="submit" value="Sign Up" /></label></div>' +
-                                                        '</form>' +
+                                                        '<div>' +
+                                                            '<a id="dg-o-w-footer-login-select-2" href="#" class="btn-back-footer">&larr; Back</a><form id="dg-o-w-footer-signup-pass">' +
+                                                                '<div class="inline-part"><label>Password <input type="password" /></label></div>' +
+                                                                '<div class="inline-part"><label>&nbsp; <input class="btn-dg-o-w-outline" type="submit" value="Sign Up" /></label></div>' +
+                                                            '</form>' +
+                                                        '</div>' +
                                                     '</div>' +
                                                 '</footer>' +
                                             '</div></div>' +

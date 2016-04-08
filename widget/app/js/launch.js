@@ -3,7 +3,6 @@ var widgetStyles = document.createElement('link');
     widgetStyles.type = 'text/css';
 
 widgetStyles.addEventListener('load', function(){
-    //DGW.global.methods.init();
     DGW.global.api.requests.checkServerAvailability();
 });
 
