@@ -4,6 +4,7 @@ import QuizTypeWinOrDraw from '../QuizTypeWinOrDraw';
 import QuizTypeScore from '../QuizTypeScore';
 import QuizTypeFirstGoal from '../QuizTypeFirstGoal';
 
+
 import '../quiz.scss'
 
 const type2componet = {
