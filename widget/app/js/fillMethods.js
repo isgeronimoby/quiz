@@ -633,11 +633,18 @@ DGW.main.methods.offersConstructor = function(offers) {
                     '</div>' +
                 '</div>';
 
-            if (offer.Type.Name == 'FacebookShare') {
                 li.addEventListener('click', function(){
-                    DGW.global.api.requests.shareOfferFb(offer.Id);
+                    if (DGW.global.authorized) {
+                        if (offer.Type.Name == 'FacebookShare') {
+                            DGW.global.api.requests.shareOfferFb(offer.Id);
+                        } else if (offer.Type.Name == 'TwitterShare'){
+                            DGW.global.api.requests.shareOfferTw(offer.Id, offer.CustomData);
+                        }
+
+                    } else {
+                        DGW.main.methods.changeMainState('profile');
+                    }
                 });
-            }
             offersHolder.appendChild(li);
         });
     }

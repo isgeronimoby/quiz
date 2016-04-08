@@ -78,7 +78,11 @@ DGW.main.methods.changeMainState = function(state){
     DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'profile-anon');
     switch (state) {
         case 'earn':
-            DGW.global.api.requests.getOffers();
+            if (DGW.global.authorized) {
+                DGW.global.api.requests.getUserOffers();
+            } else {
+                DGW.global.api.requests.getOffers();
+            }
             DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.earnMain);
             break;
         case 'draws':
@@ -180,10 +184,14 @@ DGW.global.methods.init = function(){
 DGW.global.methods.authorize = function(){
     DGW.helpers.addClass(DGW.main.elements.widgetBody, 'authorized');
     DGW.global.authorized = true;
+    // ********
     if (DGW.main.currentState === 'profile') {
         DGW.main.methods.changeMainState('profile');
+        // ********
     } else if (DGW.main.currentState === 'draws') {
         DGW.global.api.requests.getDraws();
+    } else if (DGW.main.currentState === 'earn') {
+        DGW.global.api.requests.getUserOffers();
     }
 };
 

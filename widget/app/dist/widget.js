@@ -438,6 +438,19 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         case 'getOffers':
             endpoint = 'offer/getoffers';
             break;
+        case 'trackOffer':
+            method = 'POST';
+            endpoint = 'offer/trackoffer';
+            requestBody = JSON.stringify(requestBody);
+            break;
+        case 'completeOffer':
+            method = 'POST';
+            endpoint = 'offer/completeoffer';
+            requestBody = JSON.stringify(requestBody);
+            break;
+        case 'getUserOffers':
+            endpoint = 'offer/getuseroffers';
+            break;
         case 'getActions':
             endpoint = 'rewardedaction/getactions';
             break;
@@ -552,8 +565,8 @@ DGW.global.api.requests.getUser = function(){
             if (DGW.global.authorized === false) {
                 DGW.global.authorized = true;
                 DGW.global.methods.authorize();
-                DGW.main.methods.profileSetData(result.data);
             }
+            DGW.main.methods.profileSetData(result.data);
         } else {
             if (result.error.status == 500) {
                 console.log('error error error');
@@ -674,6 +687,43 @@ DGW.global.api.requests.getOffers = function(){
     });
 };
 
+DGW.global.api.requests.getUserOffers = function(){
+    DGW.main.methods.loadingStarted();
+    DGW.global.api.generic('getUserOffers', function(result){
+        if (!result.error) {
+            console.info(result.data);
+            DGW.main.methods.loadingFinished();
+            DGW.main.methods.offersConstructor(result.data);
+        } else {
+            console.error(result.error);
+        }
+    });
+};
+
+DGW.global.api.requests.trackOffer = function(offerId){
+    DGW.global.api.generic('getOffers', function(result){
+        if (!result.error) {
+            console.info(result.data);
+        } else {
+            console.error(result.error);
+        }
+    }, {
+        OfferId: offerId
+    });
+};
+
+DGW.global.api.requests.completeOffer = function(offerId){
+    DGW.global.api.generic('completeOffer', function(result){
+        if (!result.error) {
+            console.info(result.data);
+        } else {
+            console.error(result.error);
+        }
+    }, {
+        OfferId: offerId
+    });
+};
+
 DGW.global.api.requests.getActions = function(){
     DGW.global.api.generic('getActions', function(result){
         if (!result.error) {
@@ -722,7 +772,18 @@ DGW.global.api.requests.getEarnedBadges = function(){
 };
 DGW.global.api.requests.shareOfferFb = function(offerId){
     DGW.helpers.centerWindowPopup(DGW.global.tunnelPath.substring(DGW.global.tunnelPath.lastIndexOf('/') + 1, 0) +
-    'publisher/v1/offer/facebookshare?api_key=' + DGW.global.api.apiKey + '&offerid=' + offerId, 'fbWindow', 460, 340);
+    'publisher/v1/offer/facebookshare?api_key=' + DGW.global.api.apiKey + '&offerid=' + offerId, 'fbWindow', 460, 340, function(){
+        DGW.global.api.requests.getUserOffers();
+    });
+};
+
+DGW.global.api.requests.shareOfferTw = function(offerId, offerShareUrl){
+    DGW.global.api.requests.trackOffer(offerId);
+
+    DGW.helpers.centerWindowPopup('https://twitter.com/intent/tweet?text=Some+offer+text&url=' + encodeURIComponent(offerShareUrl), 'twWindow', 460, 340, function(){
+        DGW.global.api.requests.completeOffer(offerId);
+        DGW.global.api.requests.getUserOffers();
+    });
 };
 DGW.helpers.addClass = function(obj, className){
     if (!(new RegExp(className).test(obj.className))) {
@@ -839,7 +900,7 @@ DGW.helpers.checkImagesForSrc = function(src) {
     }
 };
 
-DGW.helpers.centerWindowPopup = function(url, title, w, h){
+DGW.helpers.centerWindowPopup = function(url, title, w, h, _callback){
     // Fixes dual-screen position                         Most browsers      Firefox
     var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
     var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
@@ -862,6 +923,7 @@ DGW.helpers.centerWindowPopup = function(url, title, w, h){
         if (fbWindow.closed) {
             clearInterval(windowCheckCloseInterval);
             fbWindow = null;
+            if (_callback) _callback();
             DGW.global.api.requests.getUser();
         }
     }, 50);
@@ -1124,7 +1186,11 @@ DGW.main.methods.changeMainState = function(state){
     DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'profile-anon');
     switch (state) {
         case 'earn':
-            DGW.global.api.requests.getOffers();
+            if (DGW.global.authorized) {
+                DGW.global.api.requests.getUserOffers();
+            } else {
+                DGW.global.api.requests.getOffers();
+            }
             DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.earnMain);
             break;
         case 'draws':
@@ -1226,10 +1292,14 @@ DGW.global.methods.init = function(){
 DGW.global.methods.authorize = function(){
     DGW.helpers.addClass(DGW.main.elements.widgetBody, 'authorized');
     DGW.global.authorized = true;
+    // ********
     if (DGW.main.currentState === 'profile') {
         DGW.main.methods.changeMainState('profile');
+        // ********
     } else if (DGW.main.currentState === 'draws') {
         DGW.global.api.requests.getDraws();
+    } else if (DGW.main.currentState === 'earn') {
+        DGW.global.api.requests.getUserOffers();
     }
 };
 
@@ -2073,11 +2143,18 @@ DGW.main.methods.offersConstructor = function(offers) {
                     '</div>' +
                 '</div>';
 
-            if (offer.Type.Name == 'FacebookShare') {
                 li.addEventListener('click', function(){
-                    DGW.global.api.requests.shareOfferFb(offer.Id);
+                    if (DGW.global.authorized) {
+                        if (offer.Type.Name == 'FacebookShare') {
+                            DGW.global.api.requests.shareOfferFb(offer.Id);
+                        } else if (offer.Type.Name == 'TwitterShare'){
+                            DGW.global.api.requests.shareOfferTw(offer.Id, offer.CustomData);
+                        }
+
+                    } else {
+                        DGW.main.methods.changeMainState('profile');
+                    }
                 });
-            }
             offersHolder.appendChild(li);
         });
     }

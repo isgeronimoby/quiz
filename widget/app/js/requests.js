@@ -62,6 +62,19 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         case 'getOffers':
             endpoint = 'offer/getoffers';
             break;
+        case 'trackOffer':
+            method = 'POST';
+            endpoint = 'offer/trackoffer';
+            requestBody = JSON.stringify(requestBody);
+            break;
+        case 'completeOffer':
+            method = 'POST';
+            endpoint = 'offer/completeoffer';
+            requestBody = JSON.stringify(requestBody);
+            break;
+        case 'getUserOffers':
+            endpoint = 'offer/getuseroffers';
+            break;
         case 'getActions':
             endpoint = 'rewardedaction/getactions';
             break;
@@ -176,8 +189,8 @@ DGW.global.api.requests.getUser = function(){
             if (DGW.global.authorized === false) {
                 DGW.global.authorized = true;
                 DGW.global.methods.authorize();
-                DGW.main.methods.profileSetData(result.data);
             }
+            DGW.main.methods.profileSetData(result.data);
         } else {
             if (result.error.status == 500) {
                 console.log('error error error');
@@ -295,6 +308,43 @@ DGW.global.api.requests.getOffers = function(){
         } else {
             console.error(result.error);
         }
+    });
+};
+
+DGW.global.api.requests.getUserOffers = function(){
+    DGW.main.methods.loadingStarted();
+    DGW.global.api.generic('getUserOffers', function(result){
+        if (!result.error) {
+            console.info(result.data);
+            DGW.main.methods.loadingFinished();
+            DGW.main.methods.offersConstructor(result.data);
+        } else {
+            console.error(result.error);
+        }
+    });
+};
+
+DGW.global.api.requests.trackOffer = function(offerId){
+    DGW.global.api.generic('getOffers', function(result){
+        if (!result.error) {
+            console.info(result.data);
+        } else {
+            console.error(result.error);
+        }
+    }, {
+        OfferId: offerId
+    });
+};
+
+DGW.global.api.requests.completeOffer = function(offerId){
+    DGW.global.api.generic('completeOffer', function(result){
+        if (!result.error) {
+            console.info(result.data);
+        } else {
+            console.error(result.error);
+        }
+    }, {
+        OfferId: offerId
     });
 };
 

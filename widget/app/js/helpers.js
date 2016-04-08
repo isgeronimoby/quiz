@@ -113,7 +113,7 @@ DGW.helpers.checkImagesForSrc = function(src) {
     }
 };
 
-DGW.helpers.centerWindowPopup = function(url, title, w, h){
+DGW.helpers.centerWindowPopup = function(url, title, w, h, _callback){
     // Fixes dual-screen position                         Most browsers      Firefox
     var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
     var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
@@ -136,6 +136,7 @@ DGW.helpers.centerWindowPopup = function(url, title, w, h){
         if (fbWindow.closed) {
             clearInterval(windowCheckCloseInterval);
             fbWindow = null;
+            if (_callback) _callback();
             DGW.global.api.requests.getUser();
         }
     }, 50);
