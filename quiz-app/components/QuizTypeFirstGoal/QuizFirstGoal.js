@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import QuizControls from './QuizScoreControls';
-import QuizStats from './QuizScoreStats';
-import './score.scss';
+import QuizControls from './QuizFirstGoalControls';
+import QuizStats from './QuizFirstGoalStats';
+import './players.scss';
+
 
 const DELAY = 300;
 const dataStats = {
@@ -17,7 +18,7 @@ async function post(id, data) {
 	});
 }
 
-class QuizScore extends Component {
+class QuizFirstGoal extends Component {
 
 	static propTypes = {
 		quizId: PropTypes.number.isRequired
@@ -50,8 +51,7 @@ class QuizScore extends Component {
 
 	render() {
 		const info = '23 March, 18:00, 2nd tour, London';
-		const teams = ['Chelsea', 'Everton'];
-		const params = {info, teams};
+		const params = { info };
 
 		const { showStats, ...restStats } = this.state;
 		const onSubmit = (choice) => this.handleSubmit(choice);
@@ -62,7 +62,7 @@ class QuizScore extends Component {
 				<QuizControls {...params} onSubmit={ onSubmit }/>
 				<QuizStats
 					hidden={ !showStats }
-					order={ [ teams[0], teams[1] ] }
+					order={ [ /* TODO*/ ] }
 					{...restStats}
 					onDismiss={ onDismiss }/>
 			</div>
@@ -70,4 +70,4 @@ class QuizScore extends Component {
 	}
 }
 
-export default QuizScore;
+export default QuizFirstGoal;

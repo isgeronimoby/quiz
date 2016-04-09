@@ -19,7 +19,7 @@ async function post(id, data) {
 	});
 }
 
-class QuizTypeWinOrDraw extends Component {
+class QuizWinOrDraw extends Component {
 
 	static propTypes = {
 		quizId: PropTypes.number.isRequired
@@ -72,4 +72,4 @@ class QuizTypeWinOrDraw extends Component {
 	}
 }
 
-export default QuizTypeWinOrDraw;
+export default QuizWinOrDraw;
