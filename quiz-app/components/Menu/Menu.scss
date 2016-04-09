@@ -7,6 +7,7 @@
   background: rgba(0,0,0,.4);
   transition: background .3s ease;
   pointer-events: all;
+  z-index: 2;
 
   &.is-hidden {
     pointer-events: none;
