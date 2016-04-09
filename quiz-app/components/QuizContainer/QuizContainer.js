@@ -32,7 +32,7 @@ class QuizContainer extends Component {
 		const quizes = data.map(({ type, ...rest }) => {
 			const Quiz = type2componet[type];
 			return (
-				<Quiz key={ "type" + Math.random() } {...rest} />
+				<Quiz key={ "type-" + Math.random() } {...rest} />
 			);
 		});
 

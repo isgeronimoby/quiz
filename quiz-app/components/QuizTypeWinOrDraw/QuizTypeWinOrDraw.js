@@ -1,35 +1,67 @@
 import React, { Component, PropTypes } from 'react';
+import QuizControls from './QuizWinOrDrawControls';
+import QuizStats from './QuizWinOrDrawStats';
 import './draw.scss';
 
+const DELAY = 600;
+const resultStats = {
+	'chelsea': 55,
+	'everton': 30,
+	'-': 15
+};
+
+async function post(id, data) {
+
+	console.log('>>TODO: post /quiz/[%s]/result: %s', id, JSON.stringify(data));
+
+	return new Promise((resolve, reject) => {
+		setTimeout(() => resolve(resultStats),  DELAY);
+	});
+}
 
 class QuizTypeWinOrDraw extends Component {
 
 	static propTypes = {
-
+		quizId: PropTypes.number.isRequired
 	};
 
+	state = {
+		showStats: false,
+		stats: null,
+		choice: null,
+	};
+
+	handleSubmit(choice) {
+		this.setState({ showStats: true }, () => {
+			post(this.props.quizId, {choice}).then((stats) => {
+				this.setState({
+					showStats: true,
+					stats,
+					choice
+				});
+			});
+		});
+	}
+
+	hideStats() {
+		this.setState({
+			showStats: false
+		});
+	}
 
 	render() {
+		const info = '23 March, 19:00, 3thd tour, London';
+		const title = 'Who will win in a half-time?';
+		const teams = ['chelsea', 'everton'];
+		const params = {info, title, teams};
+		const onSubmit = (choice) => this.handleSubmit(choice);
+		const { showStats } = this.state;
+
 		return (
 			<div className="quiz-content">
-				<div className="quiz-info">23 March, 19:00, 3thd tour, London</div>
-				<div className="quiz-title">Who will win in a half-time?</div>
-
-				<div className="quiz-teams">
-					<div className="team-container">
-						<img src={require("../../static/images/team-chelsea.svg")} />
-					</div>
-					<div className="versus">vs</div>
-					<div className="team-container">
-						<img src={require("../../static/images/team-everton.svg")} />
-					</div>
-				</div>
-				<div className="result-draw">
-					<div className="result-draw-icon">
-						<img src={require("../../static/images/icon-friendship.svg")} />
-					</div>
-					<div>Draw</div>
-				</div>
+				<QuizControls {...params} onSubmit={ onSubmit } />
+				<QuizStats order={ [...teams, '-']} hidden={ !showStats } {...this.state}
+					onDismiss={ () => this.hideStats() } />
 			</div>
 		);
 	}

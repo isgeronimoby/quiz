@@ -15,25 +15,22 @@
   }
 }
 .quiz-content {
+  position: relative;
   flex-grow: 1;
   height: 100%;
   width: 100%;
-  padding: 2rem 0;
+  overflow: hidden;
+  box-shadow: 0 0 4px -1px rgba(0, 0, 0, .3);
+}
+.quiz-controls {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
-  box-shadow: 0 0 4px -1px rgba(0,0,0,.3);
-
-  &.red {
-    background: red;
-  }
-  &.blue {
-    background: blue;
-  }
-  &.green {
-    background: green;
-  }
 }
 .quiz-info {
   font-size: 1.2rem;
@@ -46,4 +43,10 @@
   width: 50%;
   text-align: center;
   padding-bottom: 2rem;
+}
+
+.quiz-stats {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
 }
