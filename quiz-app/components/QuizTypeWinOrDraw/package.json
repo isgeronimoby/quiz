@@ -1,4 +1,4 @@
 {
   "name": "QuizTypeWinOrDraw",
-  "main": "./QuizTypeWinOrDraw.js"
+  "main": "./QuizWinOrDraw.js"
 }
