@@ -1,48 +1,70 @@
 import React, { Component, PropTypes } from 'react';
+import QuizControls from './QuizScoreControls';
+import QuizStats from './QuizScoreStats';
 import './score.scss';
+
+const DELAY = 300;
+const dataStats = {
+	// TODO
+};
+
+async function post(id, data) {
+
+	console.log('>>TODO: post /quiz/[%s]/result: %s', id, JSON.stringify(data));
+
+	return new Promise((resolve, reject) => {
+		setTimeout(() => resolve(dataStats), DELAY);
+	});
+}
 
 class QuizTypeScore extends Component {
 
 	static propTypes = {
-
+		quizId: PropTypes.number.isRequired
 	};
 
+	state = {
+		showStats: false,
+		stats: null,
+		choice: null,
+	};
+
+	handleSubmit(choice) {
+		this.setState({showStats: true}, () => {
+			post(this.props.quizId, {choice}).then((stats) => {
+				this.setState({
+					showStats: true,
+					stats,
+					choice
+				});
+			});
+		});
+	}
+
+	hideStats() {
+		this.setState({
+			showStats: false,
+			stats: null
+		});
+	}
+
 	render() {
+		const info = '23 March, 18:00, 2nd tour, London';
+		const teams = ['Chelsea', 'Everton'];
+		const params = {info, teams};
+
+		const { showStats, ...restStats } = this.state;
+		const onSubmit = (choice) => this.handleSubmit(choice);
+		const onDismiss = () => this.hideStats();
+
 		return (
 			<div className="quiz-content">
-				<div className="quiz-info">23 March, 19:00, 3thd tour, London</div>
-
-
-				<div className="teams-idle-wrapper">
-					<div className="team-idle">
-						<div className="team-idle-content">?</div>
-						<div className="team-name">Everton</div>
-					</div>
-
-					<div className="colon">:</div>
-
-					<div className="team-idle disabled">
-						<div className="team-idle-content">?</div>
-						<div className="team-name">Manchester United</div>
-					</div>
-				</div>
-				<div className="quiz-title">
-					Select a score for Everton
-				</div>
-
-				<div className="score-choice">
-					<div>1</div>
-					<div>2</div>
-					<div>3</div>
-					<div>4</div>
-					<div>5</div>
-					<div>6</div>
-					<div>7</div>
-					<div>8</div>
-					<div>9</div>
-					<div>10</div>
-				</div>
-
+				<QuizControls {...params} onSubmit={ onSubmit }/>
+				<QuizStats
+					hidden={ !showStats }
+					order={ [ teams[0], teams[1] ] }
+					{...restStats}
+					onDismiss={ onDismiss }/>
 			</div>
 		);
 	}
