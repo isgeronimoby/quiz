@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import './players.scss';
 
 class QuizItem extends Component {
 

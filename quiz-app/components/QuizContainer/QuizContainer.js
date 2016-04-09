@@ -1,11 +1,14 @@
 import React, { Component, PropTypes } from 'react';
+import Hammer from 'react-hammerjs';
 import ProgressBar from '../ProgressBar';
 import QuizTypeWinOrDraw from '../QuizTypeWinOrDraw';
 import QuizTypeScore from '../QuizTypeScore';
 import QuizTypeFirstGoal from '../QuizTypeFirstGoal';
+import './quiz.scss'
 
+const DIRECTION_LEFT = 2; //from Hammer
+const DIRECTION_RIGHT = 4; //from Hammer
 
-import '../quiz.scss'
 
 const type2componet = {
 	'win-or-draw': QuizTypeWinOrDraw,
@@ -20,6 +23,10 @@ class QuizContainer extends Component {
 		data: PropTypes.array.isRequired
 	};
 
+	state = {
+		currentStep: 1
+	};
+
 	render() {
 		const { data } = this.props;
 		const quizes = data.map(({ type, ...rest }) => {
@@ -28,10 +35,20 @@ class QuizContainer extends Component {
 				<Quiz key={ "type" + Math.random() } {...rest} />
 			);
 		});
+		const onSwipe = (e) => {
+
+		};
 
 		return (
 			<div className="quiz">
-				<ProgressBar total={ data.length } current={1} />
+				<ProgressBar total={ data.length } current={ this.state.currentStep } />
+				{/*<Hammer onSwipe={onSwipe}>
+					<div className="quiz-swiper">
+						<div className="quiz-content red"></div>
+						<div className="quiz-content red"></div>
+					</div>
+				</Hammer>
+				*/}
 				{ quizes }
 			</div>
 		);

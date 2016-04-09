@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import './score.scss';
 
 class QuizTypeScore extends Component {
 

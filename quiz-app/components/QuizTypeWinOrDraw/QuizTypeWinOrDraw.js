@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import './draw.scss';
+
 
 class QuizTypeWinOrDraw extends Component {
 
