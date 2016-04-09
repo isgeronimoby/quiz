@@ -22,7 +22,7 @@ class FixtureListItem extends Component {
                 <div className={ "fixture-item-header " + headerClass }>
                     <h5>{ this.props.header }</h5>
                 </div>
-                <Link className={"fixture-item-body " + (completed ? "completed" : "")} to="/quiz">
+                <Link className={"fixture-item-body " + (completed ? "completed" : "")} to="./quiz">
                     <div className="fixture-item-team-icons">
                         <div className="fixture-item-team">
                             <img src={require('../../static/images/team-chelsea.svg')} />
