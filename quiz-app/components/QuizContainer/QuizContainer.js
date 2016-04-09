@@ -35,21 +35,34 @@ class QuizContainer extends Component {
 				<Quiz key={ "type" + Math.random() } {...rest} />
 			);
 		});
-		const onSwipe = (e) => {
 
+		const step = this.state.currentStep;
+		const totalSteps = data.length;
+		const containerWidth = 100 * data.length + '%';
+		const scrollX = -100 * (step - 1) / totalSteps + '%';
+		const containerStyle = {width: containerWidth, transform: `translateX(${scrollX})`};
+		const onSwipe = (e) => {
+			if (e.direction === DIRECTION_LEFT && step < totalSteps) {
+				this.setState({
+					currentStep: step + 1
+				})
+			}
+
+			if (e.direction === DIRECTION_RIGHT && step > 1) {
+				this.setState({
+					currentStep: step - 1
+				})
+			}
 		};
 
 		return (
 			<div className="quiz">
-				<ProgressBar total={ data.length } current={ this.state.currentStep } />
-				{/*<Hammer onSwipe={onSwipe}>
-					<div className="quiz-swiper">
-						<div className="quiz-content red"></div>
-						<div className="quiz-content red"></div>
+				<ProgressBar total={ totalSteps } current={ this.state.currentStep } />
+				<Hammer onSwipe={onSwipe}>
+					<div className="quiz-swiper" style={ containerStyle }>
+						{ quizes }
 					</div>
 				</Hammer>
-				*/}
-				{ quizes }
 			</div>
 		);
 	}
