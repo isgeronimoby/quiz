@@ -52,10 +52,53 @@
 */
 .quiz-stats {
   background: rgba(0, 0, 0, .3);
-  transform: translateY(100%);
+  transform: translateY(-100%);
   transition: transform .3s ease;
+  overflow: hidden;
 
   &.reveal {
     transform: translateY(0%);
+  }
+}
+.cols-3 {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  .col {
+    position: relative;
+    flex: 0 1 auto;
+    width: 25%;
+    transform: translateY(100%);
+    transition: transform .4s ease;
+  }
+}
+
+$bar-width: 2px;
+$icon-sz: 30px;
+.stats-bar {
+  height: 100%;
+  margin-top: $icon-sz;
+  font-size: 1.7rem;
+  text-align: center;
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 55px; bottom: 0;
+    left: 50%;
+    width: $bar-width;
+    margin-left: -$bar-width/2;
+    background: #fff;
+  }
+
+  &.winner:before {
+    content: '( ! )'; /*TODO - icon*/
+    display: inline-block;
+    position: absolute;
+    top: 0; left: 0;
+    height: $icon-sz;
+    line-height: $icon-sz;
+    width: 100%;
+    text-align: center;
   }
 }

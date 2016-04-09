@@ -38,9 +38,12 @@ class QuizContainer extends Component {
 
 		const step = this.state.currentStep;
 		const totalSteps = data.length;
-		const containerWidth = 100 * data.length + '%';
-		const scrollX = -100 * (step - 1) / totalSteps + '%';
-		const containerStyle = {width: containerWidth, transform: `translateX(${scrollX})`};
+		const width = 100 * data.length;
+		const scrollX = -100 * (step - 1) / totalSteps;
+		const containerStyle = {
+			width: `${width}%`,
+			transform: `translateX(${scrollX}%)`
+		};
 		const onSwipe = (e) => {
 			if (e.direction === DIRECTION_LEFT && step < totalSteps) {
 				this.setState({
