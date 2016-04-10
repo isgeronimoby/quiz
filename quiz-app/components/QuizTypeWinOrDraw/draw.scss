@@ -74,31 +74,32 @@
 }
 
 $bar-width: 2px;
-$icon-sz: 30px;
+$icon-sz: 54px;
 .stats-bar {
   height: 100%;
   margin-top: $icon-sz;
   font-size: 1.7rem;
+  line-height: 3rem;
   text-align: center;
 
   &:after {
     content: "";
     position: absolute;
-    top: 55px; bottom: 0;
+    top: 85px; bottom: 0;
     left: 50%;
     width: $bar-width;
-    margin-left: -$bar-width/2;
+    margin-left: calc(-$bar-width/2);
     background: #fff;
   }
 
   &.winner:before {
-    content: '( ! )'; /*TODO - icon*/
+    content: '';
     display: inline-block;
     position: absolute;
-    top: 0; left: 0;
+    top: 0; left: 50%;
+    margin-left: calc(-$icon-sz/2);
     height: $icon-sz;
-    line-height: $icon-sz;
-    width: 100%;
-    text-align: center;
+    width: $icon-sz;
+    background: url('../../static/images/icon-checked.svg') no-repeat;
   }
 }

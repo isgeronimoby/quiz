@@ -19,12 +19,13 @@ class QuizWinOrDrawStats extends Component {
 		const { hidden, order, choice, stats, onDismiss } = this.props;
 		const classes = !hidden ? 'reveal' : '';
 		const columns = order
-			.map(name => [name, 100 - (stats ? stats[name] : 0)])
-			.map(([name, sz], i) => {
+			.map(name => [name, stats ? stats[name] : 0])
+			.map(([name, percent]) => [name, percent, 100 - percent])
+			.map(([name, percent, sz], i) => {
 				const winnerClass = (choice === name ? 'winner' : '');
 				return (
 					<div key={`score-${i}`} className="col" style={{transform: `translateY(${sz}%)`}}>
-						<div className={ "stats-bar " + winnerClass }>{ sz }%</div>
+						<div className={ "stats-bar " + winnerClass }>{ percent }%</div>
 					</div>
 				);
 			});
