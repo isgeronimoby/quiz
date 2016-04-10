@@ -46,7 +46,8 @@ class QuizWinOrDraw extends Component {
 	hideStats() {
 		this.setState({
 			showStats: false,
-			stats: null
+			stats: null,
+			choice: null,
 		});
 	}
 
