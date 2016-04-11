@@ -1,4 +1,6 @@
 @import '../variables.scss';
+@import '../utils.scss';
+
 .quiz-teams {
   width: 100%;
   display: flex;
@@ -60,18 +62,7 @@
     transform: translateY(0%);
   }
 }
-.cols-3 {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  .col {
-    position: relative;
-    flex: 0 1 auto;
-    width: 25%;
-    transform: translateY(100%);
-    transition: transform .4s ease;
-  }
-}
+
 
 $bar-width: 2px;
 $icon-sz: 54px;

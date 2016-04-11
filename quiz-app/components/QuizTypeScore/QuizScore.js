@@ -4,13 +4,17 @@ import QuizStats from './QuizScoreStats';
 import './score.scss';
 
 const DELAY = 300;
-const dataStats = {
-	// TODO
-};
 
 async function post(id, data) {
 
 	console.log('>>TODO: post /quiz/[%s]/result: %s', id, JSON.stringify(data));
+
+	const dataStats = Object.keys(data).reduce((acc, name) => {
+		return {
+			...acc,
+			[name]: Math.round(Math.random()*90)
+		};
+	}, {});
 
 	return new Promise((resolve, reject) => {
 		setTimeout(() => resolve(dataStats), DELAY);
@@ -25,17 +29,15 @@ class QuizScore extends Component {
 
 	state = {
 		showStats: false,
-		stats: null,
-		choice: null,
+		stats: null
 	};
 
-	handleSubmit(choice) {
+	handleSubmit(scores) {
 		this.setState({showStats: true}, () => {
-			post(this.props.quizId, {choice}).then((stats) => {
+			post(this.props.quizId, scores).then((stats) => {
 				this.setState({
 					showStats: true,
-					stats,
-					choice
+					stats
 				});
 			});
 		});
@@ -54,7 +56,7 @@ class QuizScore extends Component {
 		const params = {info, teams};
 
 		const { showStats, ...restStats } = this.state;
-		const onSubmit = (choice) => this.handleSubmit(choice);
+		const onSubmit = (scores) => this.handleSubmit(scores);
 		const onDismiss = () => this.hideStats();
 
 		return (
@@ -62,7 +64,7 @@ class QuizScore extends Component {
 				<QuizControls {...params} onSubmit={ onSubmit }/>
 				<QuizStats
 					hidden={ !showStats }
-					order={ [ teams[0], teams[1] ] }
+					order={ teams }
 					{...restStats}
 					onDismiss={ onDismiss }/>
 			</div>
