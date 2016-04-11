@@ -24,7 +24,8 @@ async function post(id, data) {
 class QuizScore extends Component {
 
 	static propTypes = {
-		quizId: PropTypes.number.isRequired
+		quizId: PropTypes.number.isRequired,
+		onStatsShown: PropTypes.func.isRequired,
 	};
 
 	state = {
@@ -33,12 +34,13 @@ class QuizScore extends Component {
 	};
 
 	handleSubmit(scores) {
-		this.setState({showStats: true}, () => {
-			post(this.props.quizId, scores).then((stats) => {
-				this.setState({
-					showStats: true,
-					stats
-				});
+		const {quizId, onStatsShown} = this.props;
+
+		this.setState({
+			showStats: true,
+		}, () => {
+			post(quizId, scores).then((stats) => {
+				this.setState({ stats }, () => onStatsShown(quizId));
 			});
 		});
 	}
