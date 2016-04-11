@@ -12,6 +12,7 @@ class QuizFirstGoalControls extends Component {
 
 	render() {
 		const { info, onSubmit } = this.props;
+		const title = <span>Which team<br/>will score first?</span>;
 
 		let players = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(player => {
 			return <li key={`player-${player}`}>
@@ -26,7 +27,7 @@ class QuizFirstGoalControls extends Component {
 		return (
 			<div className="quiz-controls" onClick={ () => onSubmit() }>
 				<div className="quiz-info">{ info }</div>
-				<div className="quiz-title">Who will score the first?</div>
+				<div className="quiz-title">{ title }</div>
 
 				<ul className="players-list">
 					{ players }

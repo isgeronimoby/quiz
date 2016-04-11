@@ -13,6 +13,7 @@ class QuizScoreControls extends Component {
 
 	render() {
 		const { info, teams: [team1, team2], onSubmit } = this.props;
+		const title = <span>Select a score<br/>for {team1}</span>;
 
 		return (
 			<div className="quiz-controls" onClick={ () => onSubmit() }>
@@ -31,21 +32,20 @@ class QuizScoreControls extends Component {
 						<div className="team-name">{ team2 }</div>
 					</div>
 				</div>
-				<div className="quiz-title">
-					Select a score for Everton
-				</div>
+
+				<div className="quiz-title">{ title }</div>
 
 				<div className="score-choice">
-					<div>1</div>
-					<div>2</div>
-					<div>3</div>
-					<div>4</div>
-					<div>5</div>
-					<div>6</div>
-					<div>7</div>
-					<div>8</div>
-					<div>9</div>
-					<div>10</div>
+					<div className="score-btn">1</div>
+					<div className="score-btn">2</div>
+					<div className="score-btn">3</div>
+					<div className="score-btn">4</div>
+					<div className="score-btn">5</div>
+					<div className="score-btn">6</div>
+					<div className="score-btn">7</div>
+					<div className="score-btn">8</div>
+					<div className="score-btn">9</div>
+					<div className="score-btn">10</div>
 				</div>
 			</div>
 		);

@@ -53,7 +53,7 @@ class QuizWinOrDraw extends Component {
 
 	render() {
 		const info = '23 March, 19:00, 3rd tour, London';
-		const title = 'Who will win in a half-time?';
+		const title = <span>Who will be winning<br/>at half-time?</span>;
 		const teams = ['chelsea', 'everton'];
 		const params = {info, title, teams};
 		const { showStats, ...restStats } = this.state;

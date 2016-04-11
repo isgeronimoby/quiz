@@ -6,7 +6,7 @@ class QuizWinOrDrawControls extends Component {
 
 	static propTypes = {
 		info: PropTypes.string.isRequired,
-		title: PropTypes.string.isRequired,
+		title: PropTypes.element.isRequired,
 		teams: PropTypes.array.isRequired,
 		onSubmit: PropTypes.func.isRequired,
 	};

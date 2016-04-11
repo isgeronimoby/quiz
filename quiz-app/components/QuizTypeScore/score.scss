@@ -38,10 +38,9 @@
 }
 .score-choice {
   display: flex;
-  padding: 0 2.7rem;
   flex-wrap: wrap;
   justify-content: space-between;
-  div {
+  .score-btn {
     width: 4.4rem;
     height: 4.4rem;
     border-radius: 50%;
