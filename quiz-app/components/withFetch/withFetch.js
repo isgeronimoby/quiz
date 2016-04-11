@@ -23,7 +23,7 @@ function withFetch(ComposedComponent, fetch) {
 
 		render() {
 			if (this.state.loading) {
-				return <div className="text-dark">Loading...</div>;
+				return <img className="loader-image" src={ require('../../static/images/loader.gif') }/>;
 			}
 			return <ComposedComponent ref="composed" {...this.props} data={this.state.data}/>;
 		}

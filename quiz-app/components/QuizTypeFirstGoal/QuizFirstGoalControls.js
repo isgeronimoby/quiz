@@ -1,13 +1,19 @@
 import React, { Component, PropTypes } from 'react';
+import './players.scss';
 
-class QuizItem extends Component {
+
+class QuizFirstGoalControls extends Component {
 
 	static propTypes = {
-
+		info: PropTypes.string.isRequired,
+		onSubmit: PropTypes.func.isRequired,
 	};
 
-	renderPlayers() {
-		return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(player => {
+
+	render() {
+		const { info, onSubmit } = this.props;
+
+		let players = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(player => {
 			return <li key={`player-${player}`}>
 				<div className="player-number">{player}</div>
 				<div className="player-info">
@@ -15,15 +21,11 @@ class QuizItem extends Component {
 					<div className="player-position">Everton, Middle Forward</div>
 				</div>
 			</li>;
-		})
-	}
+		});
 
-
-	render() {
-		let players = this.renderPlayers();
 		return (
-			<div className="quiz-content">
-				<div className="quiz-info">23 March, 19:00, 3thd tour, London</div>
+			<div className="quiz-controls" onClick={ () => onSubmit() }>
+				<div className="quiz-info">{ info }</div>
 				<div className="quiz-title">Who will score the first?</div>
 
 				<ul className="players-list">
@@ -34,4 +36,4 @@ class QuizItem extends Component {
 	}
 }
 
-export default QuizItem;
+export default QuizFirstGoalControls;

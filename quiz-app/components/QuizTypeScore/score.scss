@@ -1,0 +1,57 @@
+@import '../variables.scss';
+.teams-idle-wrapper {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 3rem;
+}
+.team-idle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 15rem;
+  max-width: 15rem;
+}
+.team-idle-content {
+  background: rgba(114, 114, 114, .3);
+  width: 10.5rem;
+  height: 10.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6rem;
+  margin-bottom: 1rem;
+  .team-idle.disabled & {
+    background: rgba(114, 114, 114, .15);
+    color: rgba(255, 255, 255, .5);
+  }
+}
+.team-name {
+  font-size: 2.4rem;
+  color: var(--color-1);
+  text-align: center;
+}
+.colon {
+  font-size: 5rem;
+  color: var(--color-1);
+  font-weight: bold;
+}
+.score-choice {
+  display: flex;
+  padding: 0 2.7rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  div {
+    width: 4.4rem;
+    height: 4.4rem;
+    border-radius: 50%;
+    background: $contrast-color;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, .33);
+    margin: 0 0.6rem 1.2rem;
+    color: var(--brand-color);
+    font-size: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

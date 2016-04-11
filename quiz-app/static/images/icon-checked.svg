@@ -2,7 +2,7 @@
 <!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="24px" height="24px" viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+	 width="54px" height="54px" viewBox="0 0 54 54" style="enable-background:new 0 0 54 54;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#FFFFFF;}
 	.st1{fill:none;stroke:#FFFFFF;stroke-miterlimit:10;}
@@ -137,13 +137,14 @@
 	.st130{fill:none;stroke:#FFFFFF;stroke-width:3.5;stroke-miterlimit:10;}
 	.st131{fill:none;stroke:#FFFFFF;stroke-width:4;stroke-miterlimit:10;}
 </style>
-<g>
-	<polyline class="st123" points="20,6.6 22.5,6.6 22.5,12.5 1.5,12.5 1.5,6.6 4.2,6.6 	"/>
+<g class="st128">
 	<g>
-		<path class="st124" d="M20,13v10H4V13H20 M21,12H3v12h18V12L21,12z"/>
+		<path class="st0" d="M27,4c12.7,0,23,10.3,23,23S39.7,50,27,50S4,39.7,4,27S14.3,4,27,4 M27,0C12.1,0,0,12.1,0,27s12.1,27,27,27
+			s27-12.1,27-27S41.9,0,27,0L27,0z"/>
 	</g>
-	<line class="st125" x1="12" y1="6.1" x2="12" y2="23.1"/>
-	<path class="st126" d="M12,11.2c0,0-11.4-3.7-7.1-8.9c3-3.7,6,0.8,7.1,4.7"/>
-	<path class="st126" d="M12,11.2c0,0,11.4-3.7,7.1-8.9c-3-3.7-6,0.8-7.1,4.7"/>
+	<g>
+		<line class="st129" x1="13.5" y1="26.5" x2="23.2" y2="39.7"/>
+		<line class="st129" x1="41" y1="16.1" x2="23.7" y2="40"/>
+	</g>
 </g>
 </svg>

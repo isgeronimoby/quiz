@@ -1,28 +1,34 @@
 import React, { Component, PropTypes } from 'react';
+import './score.scss';
 
-class QuizTypeScore extends Component {
+
+class QuizScoreControls extends Component {
 
 	static propTypes = {
-
+		info: PropTypes.string.isRequired,
+		teams: PropTypes.array.isRequired,
+		onSubmit: PropTypes.func.isRequired,
 	};
 
-	render() {
-		return (
-			<div className="quiz-content">
-				<div className="quiz-info">23 March, 19:00, 3thd tour, London</div>
 
+	render() {
+		const { info, teams: [team1, team2], onSubmit } = this.props;
+
+		return (
+			<div className="quiz-controls" onClick={ () => onSubmit() }>
+				<div className="quiz-info">{ info }</div>
 
 				<div className="teams-idle-wrapper">
 					<div className="team-idle">
 						<div className="team-idle-content">?</div>
-						<div className="team-name">Everton</div>
+						<div className="team-name">{ team1 }</div>
 					</div>
 
 					<div className="colon">:</div>
 
 					<div className="team-idle disabled">
 						<div className="team-idle-content">?</div>
-						<div className="team-name">Manchester United</div>
+						<div className="team-name">{ team2 }</div>
 					</div>
 				</div>
 				<div className="quiz-title">
@@ -41,10 +47,9 @@ class QuizTypeScore extends Component {
 					<div>9</div>
 					<div>10</div>
 				</div>
-
 			</div>
 		);
 	}
 }
 
-export default QuizTypeScore;
+export default QuizScoreControls;
