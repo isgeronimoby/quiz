@@ -59,7 +59,7 @@ class QuizScoreControls extends Component {
 			const scoreLabel = (score === undefined) ? '?' : score;
 
 			return (
-				<div className={"team-idle " + disabledClass } onClick={ onClick }>
+				<div key={`team-btn-${i}`} className={"team-idle " + disabledClass } onClick={ onClick }>
 					<div className="team-idle-content">{ scoreLabel }</div>
 					<div className="team-name">{ name }</div>
 				</div>

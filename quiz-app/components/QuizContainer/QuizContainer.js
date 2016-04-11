@@ -29,10 +29,10 @@ class QuizContainer extends Component {
 
 	render() {
 		const { data } = this.props;
-		const quizes = data.map(({ type, ...rest }) => {
+		const quizes = data.map(({ type, ...rest }, i) => {
 			const Quiz = type2componet[type];
 			return (
-				<Quiz key={ "type-" + Math.random() } {...rest} />
+				<Quiz key={ `type-${i}` } {...rest} />
 			);
 		});
 

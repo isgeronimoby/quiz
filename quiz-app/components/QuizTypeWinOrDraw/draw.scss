@@ -14,15 +14,23 @@
     text-transform: uppercase;
   }
 }
-.team-container {
-  width: 10.5rem;
-  height: 10.5rem;
+
+.select-btn {
   background: $contrast-color;
   border-radius: 50%;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, .3);
+
+  &.selected {
+    background: $selected-color;
+  }
+}
+
+.team-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, .3);
+  width: 10.5rem;
+  height: 10.5rem;
   img {
     width: 8rem;
   }
@@ -34,16 +42,13 @@
   text-align: center;
 }
 .result-draw-icon {
-  width: 7.5rem;
-  height: 7.5rem;
-  background: $contrast-color;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  width: 7.5rem;
+  height: 7.5rem;
   margin-bottom: 0.7rem;
-  box-shadow: 0 4px 0px rgba(0, 0, 0, .3);
+  overflow: hidden;
   img {
     width: 100%;
   }
