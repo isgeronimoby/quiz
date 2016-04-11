@@ -36,11 +36,15 @@ DGW.main.elements.pages.loginMain = document.createElement('div');
 
 DGW.main.elements.pages.singleDraw = document.createElement('div');
 
+DGW.main.elements.pages.videoHolder = document.createElement('div');
+    DGW.main.elements.pages.videoHolder.innerHTML = DGW.templates.videoHolder;
+
 DGW.main.elements.activitiesSliderParent = DGW.main.elements.pages.activitiesMain.querySelector('.dg-o-w-activities');
 
 
 // Main widget global methods
 DGW.main.methods.showWidget = function(){
+    DGW.main.shown = true;
     DGW.helpers.removeClass(DGW.main.elements.widget, 'hiding');
     DGW.global.elements.documentBody.appendChild(DGW.main.elements.widget);
     if (DGW.main.currentState === '') {
@@ -48,6 +52,7 @@ DGW.main.methods.showWidget = function(){
     }
 };
 DGW.main.methods.hideWidget = function(){
+    DGW.main.shown = false;
     DGW.helpers.addClass(DGW.main.elements.widget, 'hiding');
     setTimeout(function(){
         DGW.global.elements.documentBody.removeChild(DGW.main.elements.widget);
@@ -105,6 +110,7 @@ DGW.main.methods.changeMainState = function(state){
         case 'profile':
             if ( DGW.global.authorized ) {
                 DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.profileMain);
+                DGW.global.api.requests.getUser();
                 DGW.global.api.requests.getAllBadges();
             } else {
                 DGW.helpers.addClass(DGW.main.elements.widgetBody, 'profile-anon');
@@ -175,6 +181,7 @@ DGW.global.methods.init = function(){
         earned: {}
     };
 
+    DGW.global.api.requests.getDraws();
     DGW.global.api.requests.getActions();
 
     //Initializing or checking user

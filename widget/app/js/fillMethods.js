@@ -1,7 +1,7 @@
 DGW.main.methods.setRewardedActions = function(w, a){
     if (!w) w = DGW.main.elements.widget;
     if (!a) a = DGW.main.cache.rewardedActions;
-    if (w.querySelector('.dg-o-w-rewarded-action')) {
+    if (w.querySelector('.dg-o-w-rewarded-action') && a.length > 0) {
         if (w.querySelector('#dg-o-w-login-fb-reward'))
             w.querySelector('#dg-o-w-login-fb-reward').innerHTML = a.filter(function(action){return action.Type == 'FacebookConnect'})[0].PointsReward;
         if (w.querySelector('#dg-o-w-friends-sign-up-reward'))
@@ -670,9 +670,11 @@ DGW.main.methods.offersConstructor = function(offers) {
                         ev.preventDefault();
                     }
                     if (offer.Type.Name == 'FacebookShare') {
-                        DGW.global.api.requests.shareOfferFb(offer.Id);
+                        DGW.global.offers.requests.shareOfferFb(offer.Id);
                     } else if (offer.Type.Name == 'TwitterShare'){
-                        DGW.global.api.requests.shareOfferTw(offer.Id, offer.CustomData);
+                        DGW.global.offers.requests.shareOfferTw(offer.Id, offer.CustomData);
+                    } else if (offer.Type.Name == 'WatchVideo'){
+                        DGW.global.offers.requests.watchVideo(offer.Id, offer.CustomData);
                     }
 
                 } else {

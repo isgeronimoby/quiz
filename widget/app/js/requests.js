@@ -72,6 +72,11 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             endpoint = 'offer/completeoffer';
             requestBody = JSON.stringify(requestBody);
             break;
+        case 'cancelOffer':
+            method = 'POST';
+            endpoint = 'offer/canceloffer';
+            requestBody = JSON.stringify(requestBody);
+            break;
         case 'getUserOffers':
             endpoint = 'offer/getuseroffers';
             break;
@@ -96,25 +101,14 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             params: requestBody
         },
         function onSuccess(response) {
-            if (response.error) {
-                result.error = response;
-            } else if (response.data !== null) {
-                result.data = response.data;
-            } else {
-                if (result !== undefined)
-                    result = null;
-            }
+            result = response;
         },
         function onError(error) {
             console.error(error.message);
         });
 
     interval = setInterval(function(){
-        if (result === null || result === undefined) {
-            clearInterval(interval);
-            console.log('no data');
-            callback(result);
-        } else if ( Object.keys(result).length > 0 ) {
+        if ( Object.keys(result).length > 0 ) {
             clearInterval(interval);
             callback(result);
         }  else {
@@ -125,7 +119,7 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
 
 DGW.global.api.requests.checkServerAvailability = function(){
     DGW.global.api.generic('getUser', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             DGW.global.methods.init();
             console.info(result.data);
         } else {
@@ -140,7 +134,7 @@ DGW.global.api.requests.checkServerAvailability = function(){
 
 DGW.global.api.requests.signUp = function(userObj){
     DGW.global.api.generic('signUp', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.global.authorized = true;
             DGW.global.methods.authorize();
@@ -158,7 +152,7 @@ DGW.global.api.requests.signUp = function(userObj){
 
 DGW.global.api.requests.signIn = function(userObj){
     DGW.global.api.generic('signIn', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.global.methods.authorize();
             DGW.main.methods.profileSetData(result.data);
@@ -184,7 +178,7 @@ DGW.global.api.requests.signOut = function(){
 
 DGW.global.api.requests.getUser = function(){
     DGW.global.api.generic('getUser', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             if (DGW.global.authorized === false) {
                 DGW.global.authorized = true;
@@ -210,9 +204,13 @@ DGW.global.api.requests.getUser = function(){
 DGW.global.api.requests.getDraws = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getDraws', function(result) {
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.main.cache.drawsList = result.data.Draws.sort(function(a,b){return new Date(b.EndDate) - new Date(a.EndDate)});
+
+            DGW.global.cache.last.winner = DGW.main.cache.drawsList.filter(function(draw){return draw.Winner !== null})[0].Winner;
+            DGW.global.cache.last.prize = DGW.main.cache.drawsList[0].Prize;
+
             if (DGW.global.authorized == true) {
                 DGW.global.api.requests.getDrawEntries();
             } else {
@@ -227,7 +225,7 @@ DGW.global.api.requests.getDraws = function(){
 
 DGW.global.api.requests.getDrawEntries = function(){
     DGW.global.api.generic('getDrawEntries', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.main.cache.drawsEntries = result.data.DrawEntries;
 
@@ -241,7 +239,7 @@ DGW.global.api.requests.getDrawEntries = function(){
 
 DGW.global.api.requests.drawBet = function(drawId, pointsAmount){
     DGW.global.api.generic('drawBet', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.log(result);
             DGW.global.api.requests.getDrawEntries();
             DGW.main.methods.updateUserInfoBet(result.data.DrawEntry, result.data.User);
@@ -256,7 +254,7 @@ DGW.global.api.requests.drawBet = function(drawId, pointsAmount){
 
 DGW.global.api.requests.claimPrize = function(drawId, address, el){
     DGW.global.api.generic('claimPrize', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             DGW.helpers.addClass(el, 'claimed');
         } else {
             console.error(result.error);
@@ -275,7 +273,7 @@ DGW.global.api.requests.connectFB = function(){
 DGW.global.api.requests.getAllActivities = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getAllActivities', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.main.methods.activitiesConstructor(result.data.Activities);
             DGW.main.methods.loadingFinished();
@@ -288,7 +286,7 @@ DGW.global.api.requests.getAllActivities = function(){
 DGW.global.api.requests.getUserActivities = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getUserActivities', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.main.methods.loadingFinished();
             DGW.main.methods.activitiesConstructor(result.data.Activities);
@@ -301,7 +299,7 @@ DGW.global.api.requests.getUserActivities = function(){
 DGW.global.api.requests.getOffers = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getOffers', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.main.methods.loadingFinished();
             DGW.main.methods.offersConstructor(result.data);
@@ -314,7 +312,7 @@ DGW.global.api.requests.getOffers = function(){
 DGW.global.api.requests.getUserOffers = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getUserOffers', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.main.methods.loadingFinished();
             DGW.main.methods.offersConstructor(result.data);
@@ -325,9 +323,11 @@ DGW.global.api.requests.getUserOffers = function(){
 };
 
 DGW.global.api.requests.trackOffer = function(offerId){
-    DGW.global.api.generic('getOffers', function(result){
-        if (!result.error) {
+    DGW.global.api.generic('trackOffer', function(result){
+        if (result.status == 200) {
             console.info(result.data);
+            console.info('Tracking of ' + offerId + ' has started');
+            console.log(result)
         } else {
             console.error(result.error);
         }
@@ -338,8 +338,26 @@ DGW.global.api.requests.trackOffer = function(offerId){
 
 DGW.global.api.requests.completeOffer = function(offerId){
     DGW.global.api.generic('completeOffer', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
+            console.info('Offer ' + offerId + ' has been completed');
+            DGW.global.api.requests.getUser();
+            DGW.global.api.requests.getUserOffers();
+        } else {
+            console.error(result.error);
+        }
+    }, {
+        OfferId: offerId
+    });
+};
+
+DGW.global.api.requests.cancelOffer = function(offerId){
+    DGW.global.api.generic('cancelOffer', function(result){
+        if (result.status == 200) {
+            console.info(result.data);
+            console.info('Offer ' + offerId + ' has been cancelled');
+            DGW.global.api.requests.getUser();
+            DGW.global.api.requests.getUserOffers();
         } else {
             console.error(result.error);
         }
@@ -350,7 +368,7 @@ DGW.global.api.requests.completeOffer = function(offerId){
 
 DGW.global.api.requests.getActions = function(){
     DGW.global.api.generic('getActions', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.main.cache.rewardedActions = result.data.Actions;
             DGW.main.methods.setRewardedActions();
@@ -362,7 +380,7 @@ DGW.global.api.requests.getActions = function(){
 
 DGW.global.api.requests.getLeaderboard = function(){
     DGW.global.api.generic('getLeaderboard', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.main.methods.leaderboardConstructor(result.data.Earners);
         } else {
@@ -373,7 +391,7 @@ DGW.global.api.requests.getLeaderboard = function(){
 
 DGW.global.api.requests.getAllBadges = function(){
     DGW.global.api.generic('getBadges', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.global.userStats.badges.all = result.data.Badges;
             DGW.global.api.requests.getEarnedBadges();
@@ -385,7 +403,7 @@ DGW.global.api.requests.getAllBadges = function(){
 
 DGW.global.api.requests.getEarnedBadges = function(){
     DGW.global.api.generic('getEarnedBadges', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.global.userStats.badges.earned = result.data.EarnedBadges;
             DGW.main.methods.updateBadgesInfo();

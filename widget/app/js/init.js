@@ -30,19 +30,26 @@ window.DGW = function () {
                         drawsList: [],
                         drawsEntries: [],
                         rewardedActions: []
-                    }
+                    },
+                    shown: false
                 },
                 side: {
                     methods: {},
-                    elements: {}
+                    elements: {},
                 },
                 global: {
                     authorized: false,
                     launched: false,
                     activeDrawsExist: false,
+                    offers: {
+                        requests: {}
+                    },
                     api: {
                         apiKey: key,
                         requests: {}
+                    },
+                    cache: {
+                        last: {}
                     },
                     elements: {},
                     methods: {},

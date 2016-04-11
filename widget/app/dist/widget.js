@@ -31,19 +31,26 @@ window.DGW = function () {
                         drawsList: [],
                         drawsEntries: [],
                         rewardedActions: []
-                    }
+                    },
+                    shown: false
                 },
                 side: {
                     methods: {},
-                    elements: {}
+                    elements: {},
                 },
                 global: {
                     authorized: false,
                     launched: false,
                     activeDrawsExist: false,
+                    offers: {
+                        requests: {}
+                    },
                     api: {
                         apiKey: key,
                         requests: {}
+                    },
+                    cache: {
+                        last: {}
                     },
                     elements: {},
                     methods: {},
@@ -441,6 +448,11 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             endpoint = 'offer/completeoffer';
             requestBody = JSON.stringify(requestBody);
             break;
+        case 'cancelOffer':
+            method = 'POST';
+            endpoint = 'offer/canceloffer';
+            requestBody = JSON.stringify(requestBody);
+            break;
         case 'getUserOffers':
             endpoint = 'offer/getuseroffers';
             break;
@@ -465,25 +477,14 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             params: requestBody
         },
         function onSuccess(response) {
-            if (response.error) {
-                result.error = response;
-            } else if (response.data !== null) {
-                result.data = response.data;
-            } else {
-                if (result !== undefined)
-                    result = null;
-            }
+            result = response;
         },
         function onError(error) {
             console.error(error.message);
         });
 
     interval = setInterval(function(){
-        if (result === null || result === undefined) {
-            clearInterval(interval);
-            console.log('no data');
-            callback(result);
-        } else if ( Object.keys(result).length > 0 ) {
+        if ( Object.keys(result).length > 0 ) {
             clearInterval(interval);
             callback(result);
         }  else {
@@ -494,7 +495,7 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
 
 DGW.global.api.requests.checkServerAvailability = function(){
     DGW.global.api.generic('getUser', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             DGW.global.methods.init();
             console.info(result.data);
         } else {
@@ -509,7 +510,7 @@ DGW.global.api.requests.checkServerAvailability = function(){
 
 DGW.global.api.requests.signUp = function(userObj){
     DGW.global.api.generic('signUp', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.global.authorized = true;
             DGW.global.methods.authorize();
@@ -527,7 +528,7 @@ DGW.global.api.requests.signUp = function(userObj){
 
 DGW.global.api.requests.signIn = function(userObj){
     DGW.global.api.generic('signIn', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.global.methods.authorize();
             DGW.main.methods.profileSetData(result.data);
@@ -553,7 +554,7 @@ DGW.global.api.requests.signOut = function(){
 
 DGW.global.api.requests.getUser = function(){
     DGW.global.api.generic('getUser', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             if (DGW.global.authorized === false) {
                 DGW.global.authorized = true;
@@ -579,9 +580,13 @@ DGW.global.api.requests.getUser = function(){
 DGW.global.api.requests.getDraws = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getDraws', function(result) {
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.main.cache.drawsList = result.data.Draws.sort(function(a,b){return new Date(b.EndDate) - new Date(a.EndDate)});
+
+            DGW.global.cache.last.winner = DGW.main.cache.drawsList.filter(function(draw){return draw.Winner !== null})[0].Winner;
+            DGW.global.cache.last.prize = DGW.main.cache.drawsList[0].Prize;
+
             if (DGW.global.authorized == true) {
                 DGW.global.api.requests.getDrawEntries();
             } else {
@@ -596,7 +601,7 @@ DGW.global.api.requests.getDraws = function(){
 
 DGW.global.api.requests.getDrawEntries = function(){
     DGW.global.api.generic('getDrawEntries', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.main.cache.drawsEntries = result.data.DrawEntries;
 
@@ -610,7 +615,7 @@ DGW.global.api.requests.getDrawEntries = function(){
 
 DGW.global.api.requests.drawBet = function(drawId, pointsAmount){
     DGW.global.api.generic('drawBet', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.log(result);
             DGW.global.api.requests.getDrawEntries();
             DGW.main.methods.updateUserInfoBet(result.data.DrawEntry, result.data.User);
@@ -625,7 +630,7 @@ DGW.global.api.requests.drawBet = function(drawId, pointsAmount){
 
 DGW.global.api.requests.claimPrize = function(drawId, address, el){
     DGW.global.api.generic('claimPrize', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             DGW.helpers.addClass(el, 'claimed');
         } else {
             console.error(result.error);
@@ -644,7 +649,7 @@ DGW.global.api.requests.connectFB = function(){
 DGW.global.api.requests.getAllActivities = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getAllActivities', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.main.methods.activitiesConstructor(result.data.Activities);
             DGW.main.methods.loadingFinished();
@@ -657,7 +662,7 @@ DGW.global.api.requests.getAllActivities = function(){
 DGW.global.api.requests.getUserActivities = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getUserActivities', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.main.methods.loadingFinished();
             DGW.main.methods.activitiesConstructor(result.data.Activities);
@@ -670,7 +675,7 @@ DGW.global.api.requests.getUserActivities = function(){
 DGW.global.api.requests.getOffers = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getOffers', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.main.methods.loadingFinished();
             DGW.main.methods.offersConstructor(result.data);
@@ -683,7 +688,7 @@ DGW.global.api.requests.getOffers = function(){
 DGW.global.api.requests.getUserOffers = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getUserOffers', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.main.methods.loadingFinished();
             DGW.main.methods.offersConstructor(result.data);
@@ -694,9 +699,11 @@ DGW.global.api.requests.getUserOffers = function(){
 };
 
 DGW.global.api.requests.trackOffer = function(offerId){
-    DGW.global.api.generic('getOffers', function(result){
-        if (!result.error) {
+    DGW.global.api.generic('trackOffer', function(result){
+        if (result.status == 200) {
             console.info(result.data);
+            console.info('Tracking of ' + offerId + ' has started');
+            console.log(result)
         } else {
             console.error(result.error);
         }
@@ -707,8 +714,26 @@ DGW.global.api.requests.trackOffer = function(offerId){
 
 DGW.global.api.requests.completeOffer = function(offerId){
     DGW.global.api.generic('completeOffer', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
+            console.info('Offer ' + offerId + ' has been completed');
+            DGW.global.api.requests.getUser();
+            DGW.global.api.requests.getUserOffers();
+        } else {
+            console.error(result.error);
+        }
+    }, {
+        OfferId: offerId
+    });
+};
+
+DGW.global.api.requests.cancelOffer = function(offerId){
+    DGW.global.api.generic('cancelOffer', function(result){
+        if (result.status == 200) {
+            console.info(result.data);
+            console.info('Offer ' + offerId + ' has been cancelled');
+            DGW.global.api.requests.getUser();
+            DGW.global.api.requests.getUserOffers();
         } else {
             console.error(result.error);
         }
@@ -719,7 +744,7 @@ DGW.global.api.requests.completeOffer = function(offerId){
 
 DGW.global.api.requests.getActions = function(){
     DGW.global.api.generic('getActions', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.main.cache.rewardedActions = result.data.Actions;
             DGW.main.methods.setRewardedActions();
@@ -731,7 +756,7 @@ DGW.global.api.requests.getActions = function(){
 
 DGW.global.api.requests.getLeaderboard = function(){
     DGW.global.api.generic('getLeaderboard', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.main.methods.leaderboardConstructor(result.data.Earners);
         } else {
@@ -742,7 +767,7 @@ DGW.global.api.requests.getLeaderboard = function(){
 
 DGW.global.api.requests.getAllBadges = function(){
     DGW.global.api.generic('getBadges', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.global.userStats.badges.all = result.data.Badges;
             DGW.global.api.requests.getEarnedBadges();
@@ -754,7 +779,7 @@ DGW.global.api.requests.getAllBadges = function(){
 
 DGW.global.api.requests.getEarnedBadges = function(){
     DGW.global.api.generic('getEarnedBadges', function(result){
-        if (!result.error) {
+        if (result.status == 200) {
             console.info(result.data);
             DGW.global.userStats.badges.earned = result.data.EarnedBadges;
             DGW.main.methods.updateBadgesInfo();
@@ -763,20 +788,102 @@ DGW.global.api.requests.getEarnedBadges = function(){
         }
     });
 };
-DGW.global.api.requests.shareOfferFb = function(offerId){
+DGW.global.offers.requests.shareOfferFb = function(offerId){
     DGW.helpers.centerWindowPopup(DGW.global.tunnelPath.substring(DGW.global.tunnelPath.lastIndexOf('/') + 1, 0) +
     'publisher/v1/offer/facebookshare?api_key=' + DGW.global.api.apiKey + '&offerid=' + offerId, 'fbWindow', 460, 340, function(){
         DGW.global.api.requests.getUserOffers();
     });
 };
 
-DGW.global.api.requests.shareOfferTw = function(offerId, offerShareUrl){
+DGW.global.offers.requests.shareOfferTw = function(offerId, offerShareUrl){
     DGW.global.api.requests.trackOffer(offerId);
 
     DGW.helpers.centerWindowPopup('https://twitter.com/intent/tweet?text=Some+offer+text&url=' + encodeURIComponent(offerShareUrl), 'twWindow', 460, 340, function(){
         DGW.global.api.requests.completeOffer(offerId);
-        DGW.global.api.requests.getUserOffers();
     });
+};
+
+DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
+    var player;
+    var scriptCheckingInterval, widgetShownInterval, playbackInterval;
+
+    if (!window.YT) {
+        var ytScript = document.createElement('script');
+
+        ytScript.onload = function () {
+            showVideoOffer();
+        };
+
+        ytScript.src = 'https://www.youtube.com/player_api';
+        document.head.appendChild(ytScript);
+    } else {
+        showVideoOffer();
+    }
+
+    function onYouTubePlayerAPIReady() {
+        player = new YT.Player('dg-o-w-video-playing', {
+            height: DGW.main.elements.widgetBody.clientHeight,
+            width: DGW.main.elements.widgetBody.clientWidth,
+            videoId: DGW.helpers.getURLParameter('v', videoUrl),
+            playerVars: {
+                controls: 0,
+                rel: 0,
+                origin: window.document.origin,
+                fs: 0,
+                modestbranding: 1 // player that does not show a YouTube logo
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // autoplay video
+    function onPlayerReady(event) {
+        event.target.playVideo();
+        DGW.global.api.requests.trackOffer(offerId);
+        widgetShownInterval = window.setInterval(function(){
+            if (DGW.main.shown == false) {
+                hidePlayer();
+                DGW.global.api.requests.cancelOffer(offerId);
+            }
+        }, 100);
+        playbackInterval = window.setInterval(function(){
+            DGW.main.elements.pages.videoHolder.querySelector('span').innerHTML =
+                Math.floor(player.getDuration() - player.getCurrentTime());
+        }, 1000);
+        console.log('Video has started')
+    }
+
+    // when video ends
+    function onPlayerStateChange(event) {
+        if(event.data === 0) {
+            // Video has finished
+            hidePlayer();
+            DGW.global.api.requests.completeOffer(offerId);
+            console.log('Video has finished');
+        }
+    }
+
+    function hidePlayer(){
+        DGW.main.elements.widgetBody.removeChild(DGW.main.elements.pages.videoHolder);
+        DGW.main.elements.pages.videoHolder.querySelector('span').innerHTML = '';
+        window.clearInterval(widgetShownInterval);
+        window.clearInterval(playbackInterval);
+    }
+
+    function showVideoOffer(){
+        scriptCheckingInterval = window.setInterval(function(){
+            if (window.YT.Player) {
+                window.clearInterval(scriptCheckingInterval);
+                DGW.main.elements.widgetBody.appendChild(DGW.main.elements.pages.videoHolder);
+                window.setTimeout(function(){
+                    onYouTubePlayerAPIReady();
+                }, 0);
+            }
+        }, 50);
+    }
 };
 DGW.helpers.addClass = function(obj, className){
     if (!(new RegExp(className).test(obj.className))) {
@@ -977,6 +1084,16 @@ DGW.helpers.dateDiff = function(endDate){
 };
 
 // TODO: remove " + 'Z' " from helpers, when server provides right time format
+
+DGW.helpers.getURLParameter = function(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+};
 DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body"></div>' +
                                '</div>';
@@ -1159,6 +1276,8 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul><li class="toggl
                                     '</div>' +
                                     '<div class="dg-o-w-activities-holder"><ul></ul></div>' +
                                 '</div>';
+
+DGW.templates.videoHolder = '<div class="dg-o-w-video-holder"><div id="dg-o-w-video-playing"></div><div class="dg-o-w-video-text"><span></span></div></div>';
 DGW.global.elements.documentBody = document.body;
 
 DGW.side.elements.widget = document.createElement('div');
@@ -1197,11 +1316,15 @@ DGW.main.elements.pages.loginMain = document.createElement('div');
 
 DGW.main.elements.pages.singleDraw = document.createElement('div');
 
+DGW.main.elements.pages.videoHolder = document.createElement('div');
+    DGW.main.elements.pages.videoHolder.innerHTML = DGW.templates.videoHolder;
+
 DGW.main.elements.activitiesSliderParent = DGW.main.elements.pages.activitiesMain.querySelector('.dg-o-w-activities');
 
 
 // Main widget global methods
 DGW.main.methods.showWidget = function(){
+    DGW.main.shown = true;
     DGW.helpers.removeClass(DGW.main.elements.widget, 'hiding');
     DGW.global.elements.documentBody.appendChild(DGW.main.elements.widget);
     if (DGW.main.currentState === '') {
@@ -1209,6 +1332,7 @@ DGW.main.methods.showWidget = function(){
     }
 };
 DGW.main.methods.hideWidget = function(){
+    DGW.main.shown = false;
     DGW.helpers.addClass(DGW.main.elements.widget, 'hiding');
     setTimeout(function(){
         DGW.global.elements.documentBody.removeChild(DGW.main.elements.widget);
@@ -1266,6 +1390,7 @@ DGW.main.methods.changeMainState = function(state){
         case 'profile':
             if ( DGW.global.authorized ) {
                 DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.profileMain);
+                DGW.global.api.requests.getUser();
                 DGW.global.api.requests.getAllBadges();
             } else {
                 DGW.helpers.addClass(DGW.main.elements.widgetBody, 'profile-anon');
@@ -1336,6 +1461,7 @@ DGW.global.methods.init = function(){
         earned: {}
     };
 
+    DGW.global.api.requests.getDraws();
     DGW.global.api.requests.getActions();
 
     //Initializing or checking user
@@ -1564,7 +1690,7 @@ DGW.main.methods.addPageEvents = function () {
 DGW.main.methods.setRewardedActions = function(w, a){
     if (!w) w = DGW.main.elements.widget;
     if (!a) a = DGW.main.cache.rewardedActions;
-    if (w.querySelector('.dg-o-w-rewarded-action')) {
+    if (w.querySelector('.dg-o-w-rewarded-action') && a.length > 0) {
         if (w.querySelector('#dg-o-w-login-fb-reward'))
             w.querySelector('#dg-o-w-login-fb-reward').innerHTML = a.filter(function(action){return action.Type == 'FacebookConnect'})[0].PointsReward;
         if (w.querySelector('#dg-o-w-friends-sign-up-reward'))
@@ -2233,9 +2359,11 @@ DGW.main.methods.offersConstructor = function(offers) {
                         ev.preventDefault();
                     }
                     if (offer.Type.Name == 'FacebookShare') {
-                        DGW.global.api.requests.shareOfferFb(offer.Id);
+                        DGW.global.offers.requests.shareOfferFb(offer.Id);
                     } else if (offer.Type.Name == 'TwitterShare'){
-                        DGW.global.api.requests.shareOfferTw(offer.Id, offer.CustomData);
+                        DGW.global.offers.requests.shareOfferTw(offer.Id, offer.CustomData);
+                    } else if (offer.Type.Name == 'WatchVideo'){
+                        DGW.global.offers.requests.watchVideo(offer.Id, offer.CustomData);
                     }
 
                 } else {

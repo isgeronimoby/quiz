@@ -180,3 +180,5 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul><li class="toggl
                                     '</div>' +
                                     '<div class="dg-o-w-activities-holder"><ul></ul></div>' +
                                 '</div>';
+
+DGW.templates.videoHolder = '<div class="dg-o-w-video-holder"><div id="dg-o-w-video-playing"></div><div class="dg-o-w-video-text"><span></span></div></div>';
