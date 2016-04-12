@@ -18,9 +18,10 @@ class QuizWinOrDrawStats extends Component {
 	render() {
 		const { hidden, order, choice, stats, onDismiss } = this.props;
 		const classes = !hidden ? 'reveal' : '';
+		const bottomPercent = 84; // by trial
 		const columns = order
 			.map(name => [name, stats ? stats[name] : 0])
-			.map(([name, percent]) => [name, percent, 100 - percent - 10]) // TODO - fix!
+			.map(([name, percent]) => [name, percent, !stats ? 100 : bottomPercent - bottomPercent*percent/100])
 			.map(([name, percent, sz], i) => {
 				const winnerClass = (choice === name ? 'winner' : '');
 				return (

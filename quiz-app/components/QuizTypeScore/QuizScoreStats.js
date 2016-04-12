@@ -9,12 +9,25 @@ class QuizScoreStats extends Component {
 	static propTypes = {
 		hidden: PropTypes.bool.isRequired,
 		onDismiss: PropTypes.func.isRequired,
+		order: PropTypes.array.isRequired,
+		stats: PropTypes.object,
 	};
 
 
 	render() {
-		const { hidden, onDismiss } = this.props;
+		const { hidden, onDismiss, order, stats } = this.props;
 		const classes = !hidden ? 'reveal' : '';
+		const bottomPercent = 84; // by trial
+		const columns = order
+			.map(name => [name, stats ? stats[name] : 0])
+			.map(([name, percent]) => [name, percent, !stats ? 100 : bottomPercent - bottomPercent*percent/100])
+			.map(([name, percent, sz], i) => {
+				return (
+					<div key={`score-${i}`} className="col" style={{transform: `translateY(${sz}%)`}}>
+						<div className="stats-bar">{ percent }%</div>
+					</div>
+				);
+			});
 
 		const hammerOptions = {
 			recognizers: {
@@ -27,8 +40,8 @@ class QuizScoreStats extends Component {
 
 		return (
 			<Hammer onSwipe={onSwipe} options={ hammerOptions }>
-				<div className={"quiz-stats cols-3 " + classes } onClick={ onDismiss }>
-					TODO
+				<div className={"quiz-stats cols-2 " + classes } onClick={ onDismiss }>
+					{ columns }
 				</div>
 			</Hammer>
 		);

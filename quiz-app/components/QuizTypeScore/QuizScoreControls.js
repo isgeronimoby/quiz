@@ -10,42 +10,81 @@ class QuizScoreControls extends Component {
 		onSubmit: PropTypes.func.isRequired,
 	};
 
+	state = {
+		currentTeam: this.props.teams[0],
+		scores: {}
+	};
+
+	selectTeam(team) {
+		this.setState({
+			currentTeam: team
+		});
+	}
+
+	selectScore(num) {
+		const { teams, onSubmit } = this.props;
+
+		this.setState({
+			scores: {
+				...this.state.scores,
+				[this.state.currentTeam]: num
+			}
+		}, () => {
+			const {scores, currentTeam} = this.state;
+			const nextTeam = teams.reduce((acc, name) => {
+				return scores[name] === undefined ? name : acc;
+			}, currentTeam);
+
+			this.setState({
+				currentTeam: nextTeam, // auto-switch to non-scored one
+			}, () => {
+				const {scores} = this.state;
+				const complete = Object.keys(scores).length === 2;
+
+				if (complete) {
+					onSubmit(scores);
+				}
+			});
+		});
+	}
 
 	render() {
-		const { info, teams: [team1, team2], onSubmit } = this.props;
+		const { info, teams } = this.props;
+		const { currentTeam } = this.state;
+		const title = <span>Select a score<br/>for {currentTeam}</span>;
+		const [ teamBtn1, teamBtn2 ] = teams.map((name, i) => {
+			const disabledClass = (name === currentTeam) ? '' : 'disabled';
+			const onClick = () => this.selectTeam(name);
+			const score = this.state.scores[name];
+			const scoreLabel = (score === undefined) ? '?' : score;
+
+			return (
+				<div key={`team-btn-${i}`} className={"team-idle " + disabledClass } onClick={ onClick }>
+					<div className="team-idle-content">{ scoreLabel }</div>
+					<div className="team-name">{ name }</div>
+				</div>
+			);
+		});
+		const scoreBtns = [...Array(10).keys()].map(i => {
+			return (
+				<div key={`btn-${i}`} className="score-btn" onClick={() => this.selectScore(i)}>{ i }</div>
+			);
+		});
 
 		return (
-			<div className="quiz-controls" onClick={ () => onSubmit() }>
+			<div className="quiz-controls">
 				<div className="quiz-info">{ info }</div>
 
 				<div className="teams-idle-wrapper">
-					<div className="team-idle">
-						<div className="team-idle-content">?</div>
-						<div className="team-name">{ team1 }</div>
-					</div>
-
+					{ teamBtn1 }
 					<div className="colon">:</div>
+					{ teamBtn2 }
+				</div>
 
-					<div className="team-idle disabled">
-						<div className="team-idle-content">?</div>
-						<div className="team-name">{ team2 }</div>
-					</div>
-				</div>
-				<div className="quiz-title">
-					Select a score for Everton
-				</div>
+				<div className="quiz-title">{ title }</div>
 
 				<div className="score-choice">
-					<div>1</div>
-					<div>2</div>
-					<div>3</div>
-					<div>4</div>
-					<div>5</div>
-					<div>6</div>
-					<div>7</div>
-					<div>8</div>
-					<div>9</div>
-					<div>10</div>
+					{ scoreBtns }
 				</div>
 			</div>
 		);

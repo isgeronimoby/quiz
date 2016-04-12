@@ -1,4 +1,5 @@
 @import '../variables.scss';
+@import '../utils.scss';
 .teams-idle-wrapper {
   display: flex;
   align-items: baseline;
@@ -38,10 +39,10 @@
 }
 .score-choice {
   display: flex;
-  padding: 0 2.7rem;
   flex-wrap: wrap;
   justify-content: space-between;
-  div {
+  padding: 0 2rem;
+  .score-btn {
     width: 4.4rem;
     height: 4.4rem;
     border-radius: 50%;

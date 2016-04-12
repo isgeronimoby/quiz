@@ -22,23 +22,25 @@ async function post(id, data) {
 class QuizWinOrDraw extends Component {
 
 	static propTypes = {
-		quizId: PropTypes.number.isRequired
+		quizId: PropTypes.number.isRequired,
+		onStatsShown: PropTypes.func.isRequired,
 	};
 
 	state = {
+		choice: null,
 		showStats: false,
 		stats: null,
-		choice: null,
 	};
 
 	handleSubmit(choice) {
-		this.setState({showStats: true}, () => {
-			post(this.props.quizId, {choice}).then((stats) => {
-				this.setState({
-					showStats: true,
-					stats,
-					choice
-				});
+		const {quizId, onStatsShown} = this.props;
+
+		this.setState({
+			choice,
+			showStats: true,
+		}, () => {
+			post(quizId, {choice}).then((stats) => {
+				this.setState({ stats }, () => onStatsShown(quizId));
 			});
 		});
 	}
@@ -47,26 +49,26 @@ class QuizWinOrDraw extends Component {
 		this.setState({
 			showStats: false,
 			stats: null,
-			choice: null,
 		});
 	}
 
 	render() {
 		const info = '23 March, 19:00, 3rd tour, London';
-		const title = 'Who will win in a half-time?';
+		const title = <span>Who will be winning<br/>at half-time?</span>;
 		const teams = ['chelsea', 'everton'];
-		const params = {info, title, teams};
-		const { showStats, ...restStats } = this.state;
+		const { choice, showStats, stats} = this.state;
+		const controlParams = {info, title, teams, choice};
 		const onSubmit = (choice) => this.handleSubmit(choice);
 		const onDismiss = () => this.hideStats();
 
 		return (
 			<div className="quiz-content">
-				<QuizControls {...params} onSubmit={ onSubmit }/>
+				<QuizControls {...controlParams} onSubmit={ onSubmit }/>
 				<QuizStats
-					hidden={ !showStats }
 					order={ [ teams[0], '-', teams[1] ] }
-					{...restStats}
+					hidden={ !showStats }
+					choice={ showStats ? choice : null }
+					stats={stats}
 					onDismiss={ onDismiss }/>
 			</div>
 		);
