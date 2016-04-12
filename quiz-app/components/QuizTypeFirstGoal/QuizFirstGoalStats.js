@@ -19,7 +19,7 @@ class QuizFirstGoalStats extends Component {
 	render() {
 		const { hidden, order, choice, stats, onDismiss, offsetHeight } = this.props;
 		const classes = !hidden ? 'reveal' : '';
-		const bottom = 158 + order.length * 81 - offsetHeight;
+		const bottom = 139 + order.length * 81 - offsetHeight;
 		const [fromX, toX] = [25, 90];
 
 		const listItems = order
