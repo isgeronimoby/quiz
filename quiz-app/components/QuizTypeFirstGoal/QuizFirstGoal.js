@@ -63,20 +63,23 @@ class QuizFirstGoal extends Component {
 	render() {
 		const info = '23 March, 18:00, 2nd tour, London';
 		const { showStats, choice, stats } = this.state;
-
 		const controlParams = { info, players, choice };
+
+		const container = this.refs['container'];
+		const offsetHeight = container ? container.offsetHeight: 0;
 		const onSubmit = (choice) => this.handleSubmit(choice);
 		const onDismiss = () => this.hideStats();
 
 		return (
-			<div className="quiz-content">
+			<div ref="container" className="quiz-content">
 				<QuizControls {...controlParams} onSubmit={ onSubmit }>
 					<QuizStats
 						hidden={ !showStats }
 						order={ playerNumbers }
 						stats={ showStats ? stats : null}
 						choice={choice}
-						onDismiss={ onDismiss }/>
+						offsetHeight={ offsetHeight }
+						onDismiss={ onDismiss } />
 				</QuizControls>
 			</div>
 		);

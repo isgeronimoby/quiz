@@ -12,14 +12,14 @@ class QuizFirstGoalStats extends Component {
 		choice: PropTypes.number,
 		stats: PropTypes.object,
 		onDismiss: PropTypes.func.isRequired,
-
+		offsetHeight: PropTypes.number,
 	};
 
 
 	render() {
-		const { hidden, order, choice, stats, onDismiss } = this.props;
+		const { hidden, order, choice, stats, onDismiss, offsetHeight } = this.props;
 		const classes = !hidden ? 'reveal' : '';
-		const bottom = 158 + order.length * 81 - 520; // TODO: use offsetHeight of container
+		const bottom = 158 + order.length * 81 - offsetHeight;
 		const [fromX, toX] = [25, 90];
 
 		const listItems = order
