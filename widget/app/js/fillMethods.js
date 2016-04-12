@@ -16,25 +16,29 @@ DGW.main.methods.setRewardedActions = function(w, a){
 DGW.main.methods.profileSetData = function(data) {
     var profileImageHolders = [
             DGW.main.elements.widgetBody.querySelector('.dg-o-w-menu-profile .profile-menu-item img'),
-            DGW.main.elements.pages.profileMain.querySelector('#profileImage')
+            DGW.main.elements.pages.profileMain.querySelector('#profileImage'),
+            DGW.side.elements.widgetBody.querySelector('#dg-side-widget-userpic')
         ],
         profileNames = [
             DGW.main.elements.widgetBody.querySelector('.dg-o-w-menu-profile .profile-menu-authorized h4'),
-            DGW.main.elements.pages.profileMain.querySelector('#profileName')
+            DGW.main.elements.pages.profileMain.querySelector('#profileName'),
+            DGW.side.elements.widgetBody.querySelector('#dg-side-widget-name')
         ],
         friendsNumber = DGW.main.elements.pages.profileMain.querySelector('#profileFriendsAmount');
 
     var points = {
             confirmed: [
                 DGW.main.elements.widgetBody.querySelector('#dg-o-w-points'),
-                DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-points h3')
+                DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-points h3'),
+                DGW.side.elements.widgetBody.querySelector('#dg-side-points')
             ],
             pending: [DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-points h5')]
         },
         credits = {
             confirmed: [
                 DGW.main.elements.widgetBody.querySelector('#dg-o-w-credits'),
-                DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-credits h3')
+                DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-credits h3'),
+                DGW.side.elements.widgetBody.querySelector('#dg-side-credits')
             ],
             pending: [DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-credits h5')]
         };

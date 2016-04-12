@@ -35,7 +35,7 @@ window.DGW = function () {
                 },
                 side: {
                     methods: {},
-                    elements: {},
+                    elements: {}
                 },
                 global: {
                     authorized: false,

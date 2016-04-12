@@ -1,14 +1,36 @@
 DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
-                                    '<div class="dg-side-widget-body"></div>' +
+                                    '<div class="dg-side-widget-body">' +
+                                        '<div class="dg-side-widget-content dg-o-w-authorized">' +
+                                            '<div class="dg-side-widget-content-inner">' +
+                                                '<div class="dg-side-section"><div class="dg-side-img-holder"><img id="dg-side-widget-userpic" class="avatar" src="" /></div>' +
+                                                    '<div class="dg-side-expanded">' +
+                                                        '<h4 id="dg-side-widget-name">Name Surname Whatever</h4>' +
+                                                        '<h6><span id="dg-side-points">00</span> | <span id="dg-side-credits">00</span></h6>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<div class="dg-side-collapsed"><p>210 pts</p></div>' +
+                                                '<div class="dg-side-expanded"><p>Earned: <span>15</span> pts | left: <span>5</span>pts</p></div>' +
+                                            '</div>' +
+                                        '</div>' +
+                                        '<div class="dg-side-widget-content dg-o-w-anonymous">' +
+                                            '<div class="dg-side-widget-content-inner">' +
+                                                '<div class="dg-side-section">' +
+                                                    '<div class="dg-side-img-holder"><img class="dg-side-prize" src="./dist/imgs/everton-crest.png" alt="Prize" /></div>' +
+                                                    '<div class="dg-side-expanded"><p>Some cool prize description goes here and there and even one extra line here</p></div>' +
+                                                '</div>' +
+                                                '<div class="dg-side-collapsed"><div class="dg-side-cta">Get it</div></div>' +
+                                                '<div class="dg-side-expanded"><div class="dg-side-cta">Get the prize</div></div>' +
+                                            '</div>' +
+                                        '</div>' +
+                                        '<div class="dg-side-widget-resizer"></div>' +
+                                    '</div>' +
                                '</div>';
 
 DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                     '<div class="dg-o-w-overlay">' +
                                         '<div class="dg-o-w-body">' +
                                             '<div class="dg-o-w-header">' +
-                                                '<div class="dg-o-w-logo">' +
-                                                    //'<img src="./imgs/everton-logo.jpg" alt="Club Logo" />' +
-                                                '</div>' +
+                                                '<div class="dg-o-w-logo"></div>' +
                                                 '<div class="dg-o-w-menu">' +
                                                     '<ul><li class="earn-menu-item">Earn</li>' +
                                                     '<li class="draws-menu-item">Draws & Games</li>' +

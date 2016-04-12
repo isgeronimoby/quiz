@@ -36,7 +36,7 @@ window.DGW = function () {
                 },
                 side: {
                     methods: {},
-                    elements: {},
+                    elements: {}
                 },
                 global: {
                     authorized: false,
@@ -478,32 +478,25 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         },
         function onSuccess(response) {
             result = response;
+            callback(response);
         },
         function onError(error) {
             console.error(error.message);
         });
-
-    interval = setInterval(function(){
-        if ( Object.keys(result).length > 0 ) {
-            clearInterval(interval);
-            callback(result);
-        }  else {
-            console.log('retrieving data');
-        }
-    }, 500);
 };
 
 DGW.global.api.requests.checkServerAvailability = function(){
     DGW.global.api.generic('getUser', function(result){
-        if (result.status == 200) {
+        if (!result.error) {
             DGW.global.methods.init();
-            console.info(result.data);
+            console.info('checkServerAvailability: registered ', result.data);
         } else {
             if (result.error.status != 500) {
                 DGW.global.methods.init();
-                console.info(result.data);
+                console.info('checkServerAvailability: anonymous ', result.data);
+            } else {
+                console.error('checkServerAvailability no-server', result);
             }
-            console.error(result);
         }
     });
 };
@@ -511,13 +504,13 @@ DGW.global.api.requests.checkServerAvailability = function(){
 DGW.global.api.requests.signUp = function(userObj){
     DGW.global.api.generic('signUp', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('signUp: ', result.data);
             DGW.global.authorized = true;
             DGW.global.methods.authorize();
             DGW.main.methods.profileSetData(result.data);
         } else {
             DGW.global.authorized = false;
-            console.error(result.error);
+            console.error('signUp ', result.error);
         }
     }, {
         Username: userObj.Username,
@@ -529,13 +522,13 @@ DGW.global.api.requests.signUp = function(userObj){
 DGW.global.api.requests.signIn = function(userObj){
     DGW.global.api.generic('signIn', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('signIn ', result.data);
             DGW.global.methods.authorize();
             DGW.main.methods.profileSetData(result.data);
             DGW.global.authorized = true;
         } else {
             DGW.global.authorized = false;
-            console.error(result.error);
+            console.error('signIn ', result.error);
         }
     }, {
         Email: userObj.Email,
@@ -555,19 +548,15 @@ DGW.global.api.requests.signOut = function(){
 DGW.global.api.requests.getUser = function(){
     DGW.global.api.generic('getUser', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getUser success ', result.data);
             if (DGW.global.authorized === false) {
                 DGW.global.authorized = true;
                 DGW.global.methods.authorize();
             }
             DGW.main.methods.profileSetData(result.data);
         } else {
-            if (result.error.status == 500) {
-                console.log('error error error');
-            } else {
-                DGW.global.authorized = false;
-            }
-            console.error(result);
+            DGW.global.authorized = false;
+            console.error('getUser anon ', result);
         }
         if (!DGW.global.launched) {
             // Showing side widget
@@ -581,7 +570,7 @@ DGW.global.api.requests.getDraws = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getDraws', function(result) {
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getDraws ', result.data);
             DGW.main.cache.drawsList = result.data.Draws.sort(function(a,b){return new Date(b.EndDate) - new Date(a.EndDate)});
 
             DGW.global.cache.last.winner = DGW.main.cache.drawsList.filter(function(draw){return draw.Winner !== null})[0].Winner;
@@ -594,7 +583,7 @@ DGW.global.api.requests.getDraws = function(){
                 DGW.main.methods.loadingFinished();
             }
         } else {
-            console.error(result.error);
+            console.error('getDraws ', result.error);
         }
     });
 };
@@ -602,13 +591,13 @@ DGW.global.api.requests.getDraws = function(){
 DGW.global.api.requests.getDrawEntries = function(){
     DGW.global.api.generic('getDrawEntries', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getDrawEntries ', result.data);
             DGW.main.cache.drawsEntries = result.data.DrawEntries;
 
             DGW.main.methods.drawsConstructor(DGW.main.cache);
             DGW.main.methods.loadingFinished();
         } else {
-            console.error(result.error);
+            console.error('getDrawEntries ', result.error);
         }
     });
 };
@@ -616,11 +605,11 @@ DGW.global.api.requests.getDrawEntries = function(){
 DGW.global.api.requests.drawBet = function(drawId, pointsAmount){
     DGW.global.api.generic('drawBet', function(result){
         if (result.status == 200) {
-            console.log(result);
+            console.log('drawBet ', result);
             DGW.global.api.requests.getDrawEntries();
             DGW.main.methods.updateUserInfoBet(result.data.DrawEntry, result.data.User);
         } else {
-            console.error(result.error);
+            console.error('drawBet ', result.error);
         }
     },{
         DrawId: drawId,
@@ -650,11 +639,11 @@ DGW.global.api.requests.getAllActivities = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getAllActivities', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getAllActivities ', result.data);
             DGW.main.methods.activitiesConstructor(result.data.Activities);
             DGW.main.methods.loadingFinished();
         } else {
-            console.error(result.error);
+            console.error('getAllActivities ', result.error);
         }
     });
 };
@@ -663,11 +652,11 @@ DGW.global.api.requests.getUserActivities = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getUserActivities', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getUserActivities ', result.data);
             DGW.main.methods.loadingFinished();
             DGW.main.methods.activitiesConstructor(result.data.Activities);
         } else {
-            console.error(result.error);
+            console.error('getUserActivities ', result.error);
         }
     });
 };
@@ -676,11 +665,11 @@ DGW.global.api.requests.getOffers = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getOffers', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getOffers ', result.data);
             DGW.main.methods.loadingFinished();
             DGW.main.methods.offersConstructor(result.data);
         } else {
-            console.error(result.error);
+            console.error('getOffers ', result.error);
         }
     });
 };
@@ -689,11 +678,11 @@ DGW.global.api.requests.getUserOffers = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getUserOffers', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getUserOffers ', result.data);
             DGW.main.methods.loadingFinished();
             DGW.main.methods.offersConstructor(result.data);
         } else {
-            console.error(result.error);
+            console.error('getUserOffers ', result.error);
         }
     });
 };
@@ -705,7 +694,7 @@ DGW.global.api.requests.trackOffer = function(offerId){
             console.info('Tracking of ' + offerId + ' has started');
             console.log(result)
         } else {
-            console.error(result.error);
+            console.error('trackOffer ', result.error);
         }
     }, {
         OfferId: offerId
@@ -720,7 +709,7 @@ DGW.global.api.requests.completeOffer = function(offerId){
             DGW.global.api.requests.getUser();
             DGW.global.api.requests.getUserOffers();
         } else {
-            console.error(result.error);
+            console.error('completeOffer ', result.error);
         }
     }, {
         OfferId: offerId
@@ -735,7 +724,7 @@ DGW.global.api.requests.cancelOffer = function(offerId){
             DGW.global.api.requests.getUser();
             DGW.global.api.requests.getUserOffers();
         } else {
-            console.error(result.error);
+            console.error('cancelOffer ', result.error);
         }
     }, {
         OfferId: offerId
@@ -745,11 +734,11 @@ DGW.global.api.requests.cancelOffer = function(offerId){
 DGW.global.api.requests.getActions = function(){
     DGW.global.api.generic('getActions', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getActions ', result.data);
             DGW.main.cache.rewardedActions = result.data.Actions;
             DGW.main.methods.setRewardedActions();
         } else {
-            console.error(result.error);
+            console.error('getActions ', result.error);
         }
     });
 };
@@ -757,10 +746,10 @@ DGW.global.api.requests.getActions = function(){
 DGW.global.api.requests.getLeaderboard = function(){
     DGW.global.api.generic('getLeaderboard', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getLeaderboard ', result.data);
             DGW.main.methods.leaderboardConstructor(result.data.Earners);
         } else {
-            console.error(result.error);
+            console.error('getLeaderboard ', result.error);
         }
     });
 };
@@ -768,11 +757,11 @@ DGW.global.api.requests.getLeaderboard = function(){
 DGW.global.api.requests.getAllBadges = function(){
     DGW.global.api.generic('getBadges', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getBadges ', result.data);
             DGW.global.userStats.badges.all = result.data.Badges;
             DGW.global.api.requests.getEarnedBadges();
         } else {
-            console.error(result.error);
+            console.error('getBadges ', result.error);
         }
     });
 };
@@ -780,11 +769,11 @@ DGW.global.api.requests.getAllBadges = function(){
 DGW.global.api.requests.getEarnedBadges = function(){
     DGW.global.api.generic('getEarnedBadges', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getEarnedBadges ', result.data);
             DGW.global.userStats.badges.earned = result.data.EarnedBadges;
             DGW.main.methods.updateBadgesInfo();
         } else {
-            console.error(result.error);
+            console.error('getEarnedBadges ', result.error);
         }
     });
 };
@@ -1095,16 +1084,38 @@ DGW.helpers.getURLParameter = function(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 };
 DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
-                                    '<div class="dg-side-widget-body"></div>' +
+                                    '<div class="dg-side-widget-body">' +
+                                        '<div class="dg-side-widget-content dg-o-w-authorized">' +
+                                            '<div class="dg-side-widget-content-inner">' +
+                                                '<div class="dg-side-section"><div class="dg-side-img-holder"><img id="dg-side-widget-userpic" class="avatar" src="" /></div>' +
+                                                    '<div class="dg-side-expanded">' +
+                                                        '<h4 id="dg-side-widget-name">Name Surname Whatever</h4>' +
+                                                        '<h6><span id="dg-side-points">00</span> | <span id="dg-side-credits">00</span></h6>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<div class="dg-side-collapsed"><p>210 pts</p></div>' +
+                                                '<div class="dg-side-expanded"><p>Earned: <span>15</span> pts | left: <span>5</span>pts</p></div>' +
+                                            '</div>' +
+                                        '</div>' +
+                                        '<div class="dg-side-widget-content dg-o-w-anonymous">' +
+                                            '<div class="dg-side-widget-content-inner">' +
+                                                '<div class="dg-side-section">' +
+                                                    '<div class="dg-side-img-holder"><img class="dg-side-prize" src="./dist/imgs/everton-crest.png" alt="Prize" /></div>' +
+                                                    '<div class="dg-side-expanded"><p>Some cool prize description goes here and there and even one extra line here</p></div>' +
+                                                '</div>' +
+                                                '<div class="dg-side-collapsed"><div class="dg-side-cta">Get it</div></div>' +
+                                                '<div class="dg-side-expanded"><div class="dg-side-cta">Get the prize</div></div>' +
+                                            '</div>' +
+                                        '</div>' +
+                                        '<div class="dg-side-widget-resizer"></div>' +
+                                    '</div>' +
                                '</div>';
 
 DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                     '<div class="dg-o-w-overlay">' +
                                         '<div class="dg-o-w-body">' +
                                             '<div class="dg-o-w-header">' +
-                                                '<div class="dg-o-w-logo">' +
-                                                    //'<img src="./imgs/everton-logo.jpg" alt="Club Logo" />' +
-                                                '</div>' +
+                                                '<div class="dg-o-w-logo"></div>' +
                                                 '<div class="dg-o-w-menu">' +
                                                     '<ul><li class="earn-menu-item">Earn</li>' +
                                                     '<li class="draws-menu-item">Draws & Games</li>' +
@@ -1283,6 +1294,7 @@ DGW.global.elements.documentBody = document.body;
 DGW.side.elements.widget = document.createElement('div');
     DGW.side.elements.widget.id = 'dg-side-widget';
     DGW.side.elements.widget.innerHTML = DGW.templates.sideWidgetCore;
+DGW.side.elements.widgetBody = DGW.side.elements.widget.querySelector('.dg-side-widget-body');
 
 DGW.main.elements.widget = document.createElement('div');
     DGW.main.elements.widget.id = 'dg-o-w';
@@ -1431,10 +1443,11 @@ DGW.global.methods.init = function(){
     Array.prototype.slice.call(DGW.main.elements.widget.querySelectorAll('.avatar')).forEach(function(img){
         img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
     });
+
+    DGW.side.methods.initEvents();
+
     // Handling clicks
-    DGW.side.elements.widget.addEventListener('click', function(){
-        DGW.main.methods.showWidget();
-    });
+
     DGW.main.elements.widget.querySelector('.dg-o-w-close').addEventListener('click', function(){
         DGW.main.methods.hideWidget();
     });
@@ -1471,6 +1484,7 @@ DGW.global.methods.init = function(){
 DGW.global.methods.authorize = function(){
     DGW.helpers.addClass(DGW.main.elements.widgetBody, 'authorized');
     DGW.global.authorized = true;
+    DGW.helpers.addClass(DGW.side.elements.widgetBody, 'dg-o-w-authorized');
     // ********
     if (DGW.main.currentState === 'profile') {
         DGW.main.methods.changeMainState('profile');
@@ -1484,12 +1498,40 @@ DGW.global.methods.authorize = function(){
 
 DGW.global.methods.unAuthorize = function(){
     DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'authorized');
+    DGW.helpers.removeClass(DGW.side.elements.widgetBody, 'dg-o-w-authorized');
     DGW.global.authorized = false;
     if (DGW.main.currentState === 'profile') {
         DGW.main.methods.changeMainState('profile');
     }
 };
 
+DGW.side.methods.initEvents = function(){
+    var wBody = DGW.side.elements.widgetBody;
+    var resizerBtn = wBody.querySelector('.dg-side-widget-resizer');
+    var ctas = Array.prototype.slice.call(wBody.querySelectorAll('.dg-side-cta'));
+    var registeredArea = wBody.querySelector('.dg-side-widget-content.dg-o-w-authorized .dg-side-section');
+    ctas.push(registeredArea);
+
+    resizerBtn.addEventListener('click', function(){
+        if (DGW.helpers.hasClass(wBody, 'dg-side-widget-expanded')) {
+            DGW.helpers.removeClass(wBody, 'dg-side-widget-expanded');
+        } else {
+            DGW.helpers.addClass(wBody, 'dg-side-widget-expanded');
+        }
+    });
+
+    ctas.forEach(function(cta){
+        cta.addEventListener('click', function(){
+            if (!DGW.main.shown) {
+                DGW.main.methods.showWidget();
+            } else {
+                DGW.main.methods.hideWidget();
+            }
+
+        });
+    });
+
+};
 DGW.main.methods.checkSectionHeight = function() {
     var section = DGW.main.elements.widgetBody.querySelector('.dg-o-w-section');
     var sectionContent = DGW.main.elements.widgetBody.querySelector('.dg-o-w-section-content');
@@ -1705,25 +1747,29 @@ DGW.main.methods.setRewardedActions = function(w, a){
 DGW.main.methods.profileSetData = function(data) {
     var profileImageHolders = [
             DGW.main.elements.widgetBody.querySelector('.dg-o-w-menu-profile .profile-menu-item img'),
-            DGW.main.elements.pages.profileMain.querySelector('#profileImage')
+            DGW.main.elements.pages.profileMain.querySelector('#profileImage'),
+            DGW.side.elements.widgetBody.querySelector('#dg-side-widget-userpic')
         ],
         profileNames = [
             DGW.main.elements.widgetBody.querySelector('.dg-o-w-menu-profile .profile-menu-authorized h4'),
-            DGW.main.elements.pages.profileMain.querySelector('#profileName')
+            DGW.main.elements.pages.profileMain.querySelector('#profileName'),
+            DGW.side.elements.widgetBody.querySelector('#dg-side-widget-name')
         ],
         friendsNumber = DGW.main.elements.pages.profileMain.querySelector('#profileFriendsAmount');
 
     var points = {
             confirmed: [
                 DGW.main.elements.widgetBody.querySelector('#dg-o-w-points'),
-                DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-points h3')
+                DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-points h3'),
+                DGW.side.elements.widgetBody.querySelector('#dg-side-points')
             ],
             pending: [DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-points h5')]
         },
         credits = {
             confirmed: [
                 DGW.main.elements.widgetBody.querySelector('#dg-o-w-credits'),
-                DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-credits h3')
+                DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-credits h3'),
+                DGW.side.elements.widgetBody.querySelector('#dg-side-credits')
             ],
             pending: [DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-credits h5')]
         };

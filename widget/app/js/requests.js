@@ -102,32 +102,25 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         },
         function onSuccess(response) {
             result = response;
+            callback(response);
         },
         function onError(error) {
             console.error(error.message);
         });
-
-    interval = setInterval(function(){
-        if ( Object.keys(result).length > 0 ) {
-            clearInterval(interval);
-            callback(result);
-        }  else {
-            console.log('retrieving data');
-        }
-    }, 500);
 };
 
 DGW.global.api.requests.checkServerAvailability = function(){
     DGW.global.api.generic('getUser', function(result){
-        if (result.status == 200) {
+        if (!result.error) {
             DGW.global.methods.init();
-            console.info(result.data);
+            console.info('checkServerAvailability: registered ', result.data);
         } else {
             if (result.error.status != 500) {
                 DGW.global.methods.init();
-                console.info(result.data);
+                console.info('checkServerAvailability: anonymous ', result.data);
+            } else {
+                console.error('checkServerAvailability no-server', result);
             }
-            console.error(result);
         }
     });
 };
@@ -135,13 +128,13 @@ DGW.global.api.requests.checkServerAvailability = function(){
 DGW.global.api.requests.signUp = function(userObj){
     DGW.global.api.generic('signUp', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('signUp: ', result.data);
             DGW.global.authorized = true;
             DGW.global.methods.authorize();
             DGW.main.methods.profileSetData(result.data);
         } else {
             DGW.global.authorized = false;
-            console.error(result.error);
+            console.error('signUp ', result.error);
         }
     }, {
         Username: userObj.Username,
@@ -153,13 +146,13 @@ DGW.global.api.requests.signUp = function(userObj){
 DGW.global.api.requests.signIn = function(userObj){
     DGW.global.api.generic('signIn', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('signIn ', result.data);
             DGW.global.methods.authorize();
             DGW.main.methods.profileSetData(result.data);
             DGW.global.authorized = true;
         } else {
             DGW.global.authorized = false;
-            console.error(result.error);
+            console.error('signIn ', result.error);
         }
     }, {
         Email: userObj.Email,
@@ -179,19 +172,15 @@ DGW.global.api.requests.signOut = function(){
 DGW.global.api.requests.getUser = function(){
     DGW.global.api.generic('getUser', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getUser success ', result.data);
             if (DGW.global.authorized === false) {
                 DGW.global.authorized = true;
                 DGW.global.methods.authorize();
             }
             DGW.main.methods.profileSetData(result.data);
         } else {
-            if (result.error.status == 500) {
-                console.log('error error error');
-            } else {
-                DGW.global.authorized = false;
-            }
-            console.error(result);
+            DGW.global.authorized = false;
+            console.error('getUser anon ', result);
         }
         if (!DGW.global.launched) {
             // Showing side widget
@@ -205,7 +194,7 @@ DGW.global.api.requests.getDraws = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getDraws', function(result) {
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getDraws ', result.data);
             DGW.main.cache.drawsList = result.data.Draws.sort(function(a,b){return new Date(b.EndDate) - new Date(a.EndDate)});
 
             DGW.global.cache.last.winner = DGW.main.cache.drawsList.filter(function(draw){return draw.Winner !== null})[0].Winner;
@@ -218,7 +207,7 @@ DGW.global.api.requests.getDraws = function(){
                 DGW.main.methods.loadingFinished();
             }
         } else {
-            console.error(result.error);
+            console.error('getDraws ', result.error);
         }
     });
 };
@@ -226,13 +215,13 @@ DGW.global.api.requests.getDraws = function(){
 DGW.global.api.requests.getDrawEntries = function(){
     DGW.global.api.generic('getDrawEntries', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getDrawEntries ', result.data);
             DGW.main.cache.drawsEntries = result.data.DrawEntries;
 
             DGW.main.methods.drawsConstructor(DGW.main.cache);
             DGW.main.methods.loadingFinished();
         } else {
-            console.error(result.error);
+            console.error('getDrawEntries ', result.error);
         }
     });
 };
@@ -240,11 +229,11 @@ DGW.global.api.requests.getDrawEntries = function(){
 DGW.global.api.requests.drawBet = function(drawId, pointsAmount){
     DGW.global.api.generic('drawBet', function(result){
         if (result.status == 200) {
-            console.log(result);
+            console.log('drawBet ', result);
             DGW.global.api.requests.getDrawEntries();
             DGW.main.methods.updateUserInfoBet(result.data.DrawEntry, result.data.User);
         } else {
-            console.error(result.error);
+            console.error('drawBet ', result.error);
         }
     },{
         DrawId: drawId,
@@ -274,11 +263,11 @@ DGW.global.api.requests.getAllActivities = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getAllActivities', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getAllActivities ', result.data);
             DGW.main.methods.activitiesConstructor(result.data.Activities);
             DGW.main.methods.loadingFinished();
         } else {
-            console.error(result.error);
+            console.error('getAllActivities ', result.error);
         }
     });
 };
@@ -287,11 +276,11 @@ DGW.global.api.requests.getUserActivities = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getUserActivities', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getUserActivities ', result.data);
             DGW.main.methods.loadingFinished();
             DGW.main.methods.activitiesConstructor(result.data.Activities);
         } else {
-            console.error(result.error);
+            console.error('getUserActivities ', result.error);
         }
     });
 };
@@ -300,11 +289,11 @@ DGW.global.api.requests.getOffers = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getOffers', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getOffers ', result.data);
             DGW.main.methods.loadingFinished();
             DGW.main.methods.offersConstructor(result.data);
         } else {
-            console.error(result.error);
+            console.error('getOffers ', result.error);
         }
     });
 };
@@ -313,11 +302,11 @@ DGW.global.api.requests.getUserOffers = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getUserOffers', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getUserOffers ', result.data);
             DGW.main.methods.loadingFinished();
             DGW.main.methods.offersConstructor(result.data);
         } else {
-            console.error(result.error);
+            console.error('getUserOffers ', result.error);
         }
     });
 };
@@ -329,7 +318,7 @@ DGW.global.api.requests.trackOffer = function(offerId){
             console.info('Tracking of ' + offerId + ' has started');
             console.log(result)
         } else {
-            console.error(result.error);
+            console.error('trackOffer ', result.error);
         }
     }, {
         OfferId: offerId
@@ -344,7 +333,7 @@ DGW.global.api.requests.completeOffer = function(offerId){
             DGW.global.api.requests.getUser();
             DGW.global.api.requests.getUserOffers();
         } else {
-            console.error(result.error);
+            console.error('completeOffer ', result.error);
         }
     }, {
         OfferId: offerId
@@ -359,7 +348,7 @@ DGW.global.api.requests.cancelOffer = function(offerId){
             DGW.global.api.requests.getUser();
             DGW.global.api.requests.getUserOffers();
         } else {
-            console.error(result.error);
+            console.error('cancelOffer ', result.error);
         }
     }, {
         OfferId: offerId
@@ -369,11 +358,11 @@ DGW.global.api.requests.cancelOffer = function(offerId){
 DGW.global.api.requests.getActions = function(){
     DGW.global.api.generic('getActions', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getActions ', result.data);
             DGW.main.cache.rewardedActions = result.data.Actions;
             DGW.main.methods.setRewardedActions();
         } else {
-            console.error(result.error);
+            console.error('getActions ', result.error);
         }
     });
 };
@@ -381,10 +370,10 @@ DGW.global.api.requests.getActions = function(){
 DGW.global.api.requests.getLeaderboard = function(){
     DGW.global.api.generic('getLeaderboard', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getLeaderboard ', result.data);
             DGW.main.methods.leaderboardConstructor(result.data.Earners);
         } else {
-            console.error(result.error);
+            console.error('getLeaderboard ', result.error);
         }
     });
 };
@@ -392,11 +381,11 @@ DGW.global.api.requests.getLeaderboard = function(){
 DGW.global.api.requests.getAllBadges = function(){
     DGW.global.api.generic('getBadges', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getBadges ', result.data);
             DGW.global.userStats.badges.all = result.data.Badges;
             DGW.global.api.requests.getEarnedBadges();
         } else {
-            console.error(result.error);
+            console.error('getBadges ', result.error);
         }
     });
 };
@@ -404,11 +393,11 @@ DGW.global.api.requests.getAllBadges = function(){
 DGW.global.api.requests.getEarnedBadges = function(){
     DGW.global.api.generic('getEarnedBadges', function(result){
         if (result.status == 200) {
-            console.info(result.data);
+            console.info('getEarnedBadges ', result.data);
             DGW.global.userStats.badges.earned = result.data.EarnedBadges;
             DGW.main.methods.updateBadgesInfo();
         } else {
-            console.error(result.error);
+            console.error('getEarnedBadges ', result.error);
         }
     });
 };

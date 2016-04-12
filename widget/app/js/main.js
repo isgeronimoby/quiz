@@ -3,6 +3,7 @@ DGW.global.elements.documentBody = document.body;
 DGW.side.elements.widget = document.createElement('div');
     DGW.side.elements.widget.id = 'dg-side-widget';
     DGW.side.elements.widget.innerHTML = DGW.templates.sideWidgetCore;
+DGW.side.elements.widgetBody = DGW.side.elements.widget.querySelector('.dg-side-widget-body');
 
 DGW.main.elements.widget = document.createElement('div');
     DGW.main.elements.widget.id = 'dg-o-w';
@@ -151,10 +152,11 @@ DGW.global.methods.init = function(){
     Array.prototype.slice.call(DGW.main.elements.widget.querySelectorAll('.avatar')).forEach(function(img){
         img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
     });
+
+    DGW.side.methods.initEvents();
+
     // Handling clicks
-    DGW.side.elements.widget.addEventListener('click', function(){
-        DGW.main.methods.showWidget();
-    });
+
     DGW.main.elements.widget.querySelector('.dg-o-w-close').addEventListener('click', function(){
         DGW.main.methods.hideWidget();
     });
@@ -191,6 +193,7 @@ DGW.global.methods.init = function(){
 DGW.global.methods.authorize = function(){
     DGW.helpers.addClass(DGW.main.elements.widgetBody, 'authorized');
     DGW.global.authorized = true;
+    DGW.helpers.addClass(DGW.side.elements.widgetBody, 'dg-o-w-authorized');
     // ********
     if (DGW.main.currentState === 'profile') {
         DGW.main.methods.changeMainState('profile');
@@ -204,6 +207,7 @@ DGW.global.methods.authorize = function(){
 
 DGW.global.methods.unAuthorize = function(){
     DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'authorized');
+    DGW.helpers.removeClass(DGW.side.elements.widgetBody, 'dg-o-w-authorized');
     DGW.global.authorized = false;
     if (DGW.main.currentState === 'profile') {
         DGW.main.methods.changeMainState('profile');
