@@ -67,7 +67,7 @@ class QuizContainer extends Component {
 		const quizes = data.map(({ type, ...rest }, i) => {
 			const Quiz = type2componet[type];
 			return (
-				<Quiz key={ `type-${i}` } {...rest} onStatsShown={ () => this.onStatsShown() }/>
+				<Quiz key={ `type-${i}` } {...rest} onStatsShown={ (quizId) => this.onStatsShown(quizId) }/>
 			);
 		});
 
