@@ -5,9 +5,18 @@ import './players.scss';
 
 
 const DELAY = 300;
-const dataStats = {
-	// TODO
-};
+const playerNumbers = [...Array(10).keys()].map(n => n+1);
+const players = playerNumbers.map((n) => ({
+	number: n,
+	name: 'Aaron Lennon',
+	position: 'Everton, Middle Forward',
+}));
+const dataStats = playerNumbers.reduce((acc, number) => {
+	return {
+		...acc,
+		[number]: Math.round(Math.random()*90)
+	};
+}, {});
 
 async function post(id, data) {
 
@@ -53,20 +62,22 @@ class QuizFirstGoal extends Component {
 
 	render() {
 		const info = '23 March, 18:00, 2nd tour, London';
-		const params = { info };
+		const { showStats, choice, stats } = this.state;
 
-		const { showStats, ...restStats } = this.state;
+		const controlParams = { info, players, choice };
 		const onSubmit = (choice) => this.handleSubmit(choice);
 		const onDismiss = () => this.hideStats();
 
 		return (
 			<div className="quiz-content">
-				<QuizControls {...params} onSubmit={ onSubmit }/>
-				<QuizStats
-					hidden={ !showStats }
-					order={ [ /* TODO*/ ] }
-					{...restStats}
-					onDismiss={ onDismiss }/>
+				<QuizControls {...controlParams} onSubmit={ onSubmit }>
+					<QuizStats
+						hidden={ !showStats }
+						order={ playerNumbers }
+						stats={ showStats ? stats : null}
+						choice={choice}
+						onDismiss={ onDismiss }/>
+				</QuizControls>
 			</div>
 		);
 	}

@@ -26,7 +26,7 @@
   position: absolute;
   top: 0; bottom: 0;
   left: 0; right: 0;
-  padding: 2rem;
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,4 +48,58 @@
   position: absolute;
   top: 0; bottom: 0;
   left: 0; right: 0;
+}
+/*
+Stats
+*/
+$bar-sz: 2px;
+$icon-sz: 54px;
+
+.stats-bar {
+  height: 100%;
+  margin-top: $icon-sz;
+  font-size: 1.7rem;
+  line-height: 3rem;
+  text-align: center;
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 85px; bottom: 0;
+    left: 50%;
+    width: $bar-sz;
+    margin-left: calc(-$bar-sz/2);
+    background: #fff;
+  }
+
+  &.winner:before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0; left: 50%;
+    margin-left: calc(-$icon-sz/2);
+    height: $icon-sz;
+    width: $icon-sz;
+    background: url('../../static/images/icon-checked.svg') no-repeat;
+  }
+}
+
+
+$row-height: 82px;
+.stats-item {
+  transform: translateX(100%);
+  transition: transform .4s ease;
+}
+.stats-row {
+  font-size: 1.7rem;
+  line-height: $row-height;
+  &:after {
+    content: "";
+    position: absolute;
+    left: 35px; right: 0;
+    top: 50%;
+    height: $bar-sz;
+    margin-top: calc(-$bar-sz/2);
+    background: #fff;
+  }
 }

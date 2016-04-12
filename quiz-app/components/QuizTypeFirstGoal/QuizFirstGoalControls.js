@@ -6,32 +6,39 @@ class QuizFirstGoalControls extends Component {
 
 	static propTypes = {
 		info: PropTypes.string.isRequired,
+		players: PropTypes.array.isRequired,
 		onSubmit: PropTypes.func.isRequired,
+		choice: PropTypes.number
 	};
 
-
 	render() {
-		const { info, onSubmit } = this.props;
-		const title = <span>Which team<br/>will score first?</span>;
+		const { info, players, onSubmit, choice, children } = this.props;
+		const title = <span>Who will score<br/>the first goal?</span>;
+		const selectedClass = (number) => (number === choice ? 'selected' : '');
 
-		let players = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(player => {
-			return <li key={`player-${player}`}>
-				<div className="player-number">{player}</div>
-				<div className="player-info">
-					<div className="player-name">Aaron Lennon</div>
-					<div className="player-position">Everton, Middle Forward</div>
-				</div>
-			</li>;
+		let playerItems = players.map(({number, name, position}, i) => {
+			return (
+				<li key={`player-${i}`} className={"player-item " + selectedClass(number)}
+					onClick={ () => onSubmit(number) }>
+					<div className="player-number">{ number }</div>
+					<div className="player-info">
+						<div className="player-name">{ name }</div>
+						<div className="player-position">{ position }</div>
+					</div>
+				</li>
+			);
 		});
 
 		return (
-			<div className="quiz-controls" onClick={ () => onSubmit() }>
+			<div className="quiz-controls">
 				<div className="quiz-info">{ info }</div>
 				<div className="quiz-title">{ title }</div>
 
 				<ul className="players-list">
-					{ players }
+					{ playerItems }
 				</ul>
+
+				{ children }
 			</div>
 		);
 	}
