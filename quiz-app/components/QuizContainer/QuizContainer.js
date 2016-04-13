@@ -4,6 +4,7 @@ import ProgressBar from '../ProgressBar';
 import QuizTypeWinOrDraw from '../QuizTypeWinOrDraw';
 import QuizTypeScore from '../QuizTypeScore';
 import QuizTypeFirstGoal from '../QuizTypeFirstGoal';
+import QuizSummary from '../QuizSummary';
 import './quiz.scss'
 
 const DIRECTION_LEFT = 2; //from Hammer
@@ -30,7 +31,7 @@ class QuizContainer extends Component {
 	};
 
 	nextStep() {
-		const totalSteps = this.props.data.length;
+		const totalSteps = this.props.data.length + 1;
 		const step = this.state.currentStep;
 		if (step < totalSteps) {
 			this.setState({
@@ -72,8 +73,8 @@ class QuizContainer extends Component {
 		});
 
 		const step = this.state.currentStep;
-		const totalSteps = data.length;
-		const width = 100 * data.length;
+		const totalSteps = data.length + 1;
+		const width = 100 * totalSteps;
 		const scrollX = -100 * (step - 1) / totalSteps;
 		const containerStyle = {
 			width: `${width}%`,
@@ -94,6 +95,7 @@ class QuizContainer extends Component {
 				<Hammer onSwipe={onSwipe}>
 					<div className="quiz-swiper" style={ containerStyle }>
 						{ quizes }
+						<QuizSummary />
 					</div>
 				</Hammer>
 			</div>
