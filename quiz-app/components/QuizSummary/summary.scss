@@ -1,0 +1,137 @@
+@import '../variables.scss';
+.summary-banner {
+  display: flex;
+  align-items: center;
+  height: 4rem;
+  margin: 0 15px;
+  overflow: hidden;
+
+  > * {
+    line-height: 4rem;
+    background: #fff;
+  }
+
+  .team-score-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+}
+.team-logo-small {
+  width: 4rem;
+  height: 4rem;
+  &.left {
+    border-radius: 2rem 0 0 2rem;
+  }
+  &.right {
+    border-radius: 0 2rem 2rem 0;
+  }
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 3rem;
+  }
+}
+.text-small {
+  font-size: 1.3rem;
+  color: var(--color-3);
+}
+.team-score {
+  width: 6.5rem;
+  height: 6.5rem;
+  line-height: 6.5rem;
+  text-align: center;
+  font-size: 2.4rem;
+  border-radius: 50%;
+  background: var(--color-3);
+}
+.summary-choices {
+  margin: 0 20px 15px;
+}
+.summary-choice {
+  display: flex;
+  align-items: flex-end;
+
+  .choice-text {
+    flex-grow: 1;
+    text-align: center;
+    margin: 15px 15px 5px;
+    border-bottom: 1px solid var(--color-1);
+  }
+
+  .choice-check {
+    width: 2.2rem;
+    height: 2.2rem;
+    margin-bottom: 5px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    &.selected {
+      background: #fff;
+    }
+  }
+}
+/*
+TODO - to util
+*/
+
+.big-btn {
+  text-align: center;
+  margin: 0 15px 25px;
+  padding: 12px 0;
+  line-height: 22px;
+  border-radius: 2px;
+}
+.money-btn {
+  font-size: 2.3rem;
+  background: var(--brand-color);
+  color: var(--text-color);
+  box-shadow: 0 2px 3px -1px rgba(0, 0, 0, .4);
+}
+.share-btn {
+  font-size: 2rem;
+  color: var(--brand-color);
+  border: 1px solid var(--brand-color);
+}
+/*
+Popup
+*/
+$popup-height: 102px;
+.popup {
+  position: absolute;
+  top: 0; height: $popup-height;
+  left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .3s ease;
+  transform: translateY(-100%);
+  &.visible {
+    transform: translateY(0%);
+  }
+
+  &.blue {
+    background: rgba(81, 97, 187, 0.9);
+    color: #fff;
+  }
+}
+$popup-icon-sz: 65px;
+.popup-icon {
+  flex: 1 0 auto;
+  max-width: $popup-icon-sz;
+  min-width: $popup-icon-sz;
+  height: $popup-icon-sz;
+  border-radius: 50%;
+  background-color: #fff;
+}
+.popup-content {
+  padding-left: 15px;
+}
+.popup-title {
+  font-size: 2rem;
+}
+.popup-text {
+  font-size: 1.2rem;
+}
+

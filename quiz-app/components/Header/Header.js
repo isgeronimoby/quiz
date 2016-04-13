@@ -2,13 +2,20 @@ import React, { Component, PropTypes } from 'react';
 
 import './Header.scss';
 
+const data = {
+	pts: 220,
+};
+
 class Header extends Component {
+
 	static propTypes = {
 		title: PropTypes.string.isRequired,
 		onMenuBtnClick: PropTypes.func.isRequired
 	};
 
 	render() {
+		const { pts } = data;
+
 		return (
 			<div className="header">
 				<div className="header-title">
@@ -23,7 +30,7 @@ class Header extends Component {
 
 				<div className="header-points">
 					<img className="icon-points" src={require('../../static/images/icon-cup.svg')} />
-					220 pts
+					{ pts }
 				</div>
 			</div>
 		);
