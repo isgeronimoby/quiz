@@ -4,7 +4,7 @@ import './summary.scss';
 class Button extends Component {
 
 	static propTypes = {
-		onClick: PropTypes.func.isRequired
+		onClick: PropTypes.func
 	};
 
 	render() {
