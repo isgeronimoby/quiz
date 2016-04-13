@@ -63,7 +63,7 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
             DGW.main.elements.pages.videoHolder.querySelector('span').innerHTML =
                 Math.floor(player.getDuration() - player.getCurrentTime());
         }, 1000);
-        console.log('Video has started')
+        DGW.helpers.console.log('Video has started')
     }
 
     // when video ends
@@ -72,7 +72,7 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
             // Video has finished
             hidePlayer();
             DGW.global.api.requests.completeOffer(offerId);
-            console.log('Video has finished');
+            DGW.helpers.console.log('Video has finished');
         }
     }
 

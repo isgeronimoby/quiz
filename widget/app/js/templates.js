@@ -15,8 +15,8 @@ DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                         '<div class="dg-side-widget-content dg-o-w-anonymous">' +
                                             '<div class="dg-side-widget-content-inner">' +
                                                 '<div class="dg-side-section">' +
-                                                    '<div class="dg-side-img-holder"><img class="dg-side-prize" src="./dist/imgs/everton-crest.png" alt="Prize" /></div>' +
-                                                    '<div class="dg-side-expanded"><p>Some cool prize description goes here and there and even one extra line here</p></div>' +
+                                                    '<div class="dg-side-img-holder"><img class="dg-side-prize" src="" alt="Prize" /></div>' +
+                                                    '<div class="dg-side-expanded"><p id="dg-side-widget-prize-desc"></p></div>' +
                                                 '</div>' +
                                                 '<div class="dg-side-collapsed"><div class="dg-side-cta">Get it</div></div>' +
                                                 '<div class="dg-side-expanded"><div class="dg-side-cta">Get the prize</div></div>' +

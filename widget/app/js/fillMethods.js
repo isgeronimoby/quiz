@@ -235,7 +235,7 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
             if (drawEntry) {
                 var ticketsInDraw = drawEntry.TicketsAmount;
             }
-            //console.log(drawEntry);
+            //DGW.helpers.console.log(drawEntry);
             li.innerHTML = '<div class="dg-o-w-draw">' +
                                 '<div class="dg-o-w-draw-image-holder">' +
                                     '<img src="' + draw.Prize.ImageUrl + '" />' +
@@ -327,7 +327,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
             }
         }
     }
-    console.log('draw state: ', drawState);
+    DGW.helpers.console.log('draw state: ', drawState);
     el.innerHTML =  submenu +
                     '<div class="dg-o-w-section-content">' +
                         '<div class="dg-o-w-single-draw">' +
@@ -442,7 +442,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                 address += '; ';
             });
 
-            console.log(address);
+            DGW.helpers.console.log(address);
 
             if (address != '') {
                 DGW.global.api.requests.claimPrize(drawId, address, el.querySelector('.dg-o-w-single-draw'));
@@ -626,7 +626,7 @@ DGW.main.methods.offersConstructor = function(offers) {
         offersSponsors.addEventListener('change', function () {
             var that = this;
             var filteredOffers;
-            console.log(that.value);
+            DGW.helpers.console.log(that.value);
             if (that.value != 'all sponsors') {
                 filteredOffers = lists.offers.filter(function (offer) {
                     return offer.Sponsor.Name.toLowerCase() == that.value;

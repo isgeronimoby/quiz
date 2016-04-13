@@ -110,7 +110,7 @@
 			}
 
 			.dg-side-widget-content {
-				padding: 15px 5px 0;
+				padding: 10px 8px 0;
 				text-align: center;
 				color: @color-white;
 
@@ -127,14 +127,23 @@
 					}
 
 					.dg-side-img-holder {
-						width: @dg-side-widget-collapsed-width - 10;
-						height: @dg-side-widget-collapsed-width - 10;
+						max-width: @dg-side-widget-collapsed-width - 10;
+						width: 100%;
+						height: @dg-side-widget-collapsed-width - 20;
+						margin-bottom: 10px;
 						position: relative;
+						border-radius: 4px;
+						border: 2px solid @color-white;
+						overflow: hidden;
 
 						img {
 							position: absolute;
 							left: 50%;
-							transform: translate(-50%, 0);
+							top: 50%;
+							transform: translate(-50%, -50%);
+							height: 100%;
+							width: auto;
+							max-width: none;
 
 							&.avatar {
 								max-width: 80%;

@@ -17,7 +17,6 @@ window.DGW = function () {
                 // No parameter - use production path
                 tunnelPath = 'https://api.rewarded.club/tunnel.html';
             }
-            console.log(tunnelPath);
             return {
                 templates: {},
                 main: {
@@ -55,7 +54,8 @@ window.DGW = function () {
                     methods: {},
                     tunnelPath: tunnelPath,
                     widgetPathName: widgetPathName,
-                    userStats: {}
+                    userStats: {},
+                    debug: widgetScript.getAttribute('data-debug') !== null
                 },
                 states: {},
                 helpers: {}

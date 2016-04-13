@@ -1,4 +1,12 @@
 DGW.side.methods.initEvents = function(){
+
+    if (!DGW.global.launched) {
+        // Showing side widget
+        DGW.side.methods.showWidget();
+        DGW.global.launched = true;
+    }
+
+    var initInterval;
     var wBody = DGW.side.elements.widgetBody;
     var resizerBtn = wBody.querySelector('.dg-side-widget-resizer');
     var ctas = Array.prototype.slice.call(wBody.querySelectorAll('.dg-side-cta'));
@@ -24,4 +32,12 @@ DGW.side.methods.initEvents = function(){
         });
     });
 
+
+    initInterval = window.setInterval(function(){
+        if (DGW.global.cache.last.prize) {
+            window.clearInterval(initInterval);
+            wBody.querySelector('.dg-side-prize').src = DGW.global.cache.last.prize.ImageUrl;
+            wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
+        }
+    }, 100);
 };

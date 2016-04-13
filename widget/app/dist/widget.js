@@ -18,7 +18,6 @@ window.DGW = function () {
                 // No parameter - use production path
                 tunnelPath = 'https://api.rewarded.club/tunnel.html';
             }
-            console.log(tunnelPath);
             return {
                 templates: {},
                 main: {
@@ -56,7 +55,8 @@ window.DGW = function () {
                     methods: {},
                     tunnelPath: tunnelPath,
                     widgetPathName: widgetPathName,
-                    userStats: {}
+                    userStats: {},
+                    debug: widgetScript.getAttribute('data-debug') !== null
                 },
                 states: {},
                 helpers: {}
@@ -481,7 +481,7 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             callback(response);
         },
         function onError(error) {
-            console.error(error.message);
+            DGW.helpers.console.error(error.message);
         });
 };
 
@@ -489,13 +489,13 @@ DGW.global.api.requests.checkServerAvailability = function(){
     DGW.global.api.generic('getUser', function(result){
         if (!result.error) {
             DGW.global.methods.init();
-            console.info('checkServerAvailability: registered ', result.data);
+            DGW.helpers.console.info('checkServerAvailability: registered ', result.data);
         } else {
             if (result.error.status != 500) {
                 DGW.global.methods.init();
-                console.info('checkServerAvailability: anonymous ', result.data);
+                DGW.helpers.console.info('checkServerAvailability: anonymous ', result.data);
             } else {
-                console.error('checkServerAvailability no-server', result);
+                DGW.helpers.console.error('checkServerAvailability no-server', result);
             }
         }
     });
@@ -504,13 +504,13 @@ DGW.global.api.requests.checkServerAvailability = function(){
 DGW.global.api.requests.signUp = function(userObj){
     DGW.global.api.generic('signUp', function(result){
         if (result.status == 200) {
-            console.info('signUp: ', result.data);
+            DGW.helpers.console.info('signUp: ', result.data);
             DGW.global.authorized = true;
             DGW.global.methods.authorize();
             DGW.main.methods.profileSetData(result.data);
         } else {
             DGW.global.authorized = false;
-            console.error('signUp ', result.error);
+            DGW.helpers.console.error('signUp ', result.error);
         }
     }, {
         Username: userObj.Username,
@@ -522,13 +522,13 @@ DGW.global.api.requests.signUp = function(userObj){
 DGW.global.api.requests.signIn = function(userObj){
     DGW.global.api.generic('signIn', function(result){
         if (result.status == 200) {
-            console.info('signIn ', result.data);
+            DGW.helpers.console.info('signIn ', result.data);
             DGW.global.methods.authorize();
             DGW.main.methods.profileSetData(result.data);
             DGW.global.authorized = true;
         } else {
             DGW.global.authorized = false;
-            console.error('signIn ', result.error);
+            DGW.helpers.console.error('signIn ', result.error);
         }
     }, {
         Email: userObj.Email,
@@ -539,7 +539,7 @@ DGW.global.api.requests.signIn = function(userObj){
 DGW.global.api.requests.signOut = function(){
     DGW.global.api.generic('signOut', function(result){
         //TODO: review it later, maybe
-        console.info('Signed out');
+        DGW.helpers.console.info('Signed out');
         DGW.global.authorized = false;
         DGW.global.methods.unAuthorize();
     });
@@ -548,7 +548,7 @@ DGW.global.api.requests.signOut = function(){
 DGW.global.api.requests.getUser = function(){
     DGW.global.api.generic('getUser', function(result){
         if (result.status == 200) {
-            console.info('getUser success ', result.data);
+            DGW.helpers.console.info('getUser success ', result.data);
             if (DGW.global.authorized === false) {
                 DGW.global.authorized = true;
                 DGW.global.methods.authorize();
@@ -556,12 +556,7 @@ DGW.global.api.requests.getUser = function(){
             DGW.main.methods.profileSetData(result.data);
         } else {
             DGW.global.authorized = false;
-            console.error('getUser anon ', result);
-        }
-        if (!DGW.global.launched) {
-            // Showing side widget
-            DGW.side.methods.showWidget();
-            DGW.global.launched = true;
+            DGW.helpers.console.error('getUser anon ', result);
         }
     });
 };
@@ -570,7 +565,7 @@ DGW.global.api.requests.getDraws = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getDraws', function(result) {
         if (result.status == 200) {
-            console.info('getDraws ', result.data);
+            DGW.helpers.console.info('getDraws ', result.data);
             DGW.main.cache.drawsList = result.data.Draws.sort(function(a,b){return new Date(b.EndDate) - new Date(a.EndDate)});
 
             DGW.global.cache.last.winner = DGW.main.cache.drawsList.filter(function(draw){return draw.Winner !== null})[0].Winner;
@@ -583,7 +578,7 @@ DGW.global.api.requests.getDraws = function(){
                 DGW.main.methods.loadingFinished();
             }
         } else {
-            console.error('getDraws ', result.error);
+            DGW.helpers.console.error('getDraws ', result.error);
         }
     });
 };
@@ -591,13 +586,13 @@ DGW.global.api.requests.getDraws = function(){
 DGW.global.api.requests.getDrawEntries = function(){
     DGW.global.api.generic('getDrawEntries', function(result){
         if (result.status == 200) {
-            console.info('getDrawEntries ', result.data);
+            DGW.helpers.console.info('getDrawEntries ', result.data);
             DGW.main.cache.drawsEntries = result.data.DrawEntries;
 
             DGW.main.methods.drawsConstructor(DGW.main.cache);
             DGW.main.methods.loadingFinished();
         } else {
-            console.error('getDrawEntries ', result.error);
+            DGW.helpers.console.error('getDrawEntries ', result.error);
         }
     });
 };
@@ -605,11 +600,11 @@ DGW.global.api.requests.getDrawEntries = function(){
 DGW.global.api.requests.drawBet = function(drawId, pointsAmount){
     DGW.global.api.generic('drawBet', function(result){
         if (result.status == 200) {
-            console.log('drawBet ', result);
+            DGW.helpers.console.info('drawBet ', result);
             DGW.global.api.requests.getDrawEntries();
             DGW.main.methods.updateUserInfoBet(result.data.DrawEntry, result.data.User);
         } else {
-            console.error('drawBet ', result.error);
+            DGW.helpers.console.error('drawBet ', result.error);
         }
     },{
         DrawId: drawId,
@@ -622,7 +617,7 @@ DGW.global.api.requests.claimPrize = function(drawId, address, el){
         if (result.status == 200) {
             DGW.helpers.addClass(el, 'claimed');
         } else {
-            console.error(result.error);
+            DGW.helpers.console.error(result.error);
         }
     },{
         DrawId: drawId,
@@ -639,11 +634,11 @@ DGW.global.api.requests.getAllActivities = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getAllActivities', function(result){
         if (result.status == 200) {
-            console.info('getAllActivities ', result.data);
+            DGW.helpers.console.info('getAllActivities ', result.data);
             DGW.main.methods.activitiesConstructor(result.data.Activities);
             DGW.main.methods.loadingFinished();
         } else {
-            console.error('getAllActivities ', result.error);
+            DGW.helpers.console.error('getAllActivities ', result.error);
         }
     });
 };
@@ -652,11 +647,11 @@ DGW.global.api.requests.getUserActivities = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getUserActivities', function(result){
         if (result.status == 200) {
-            console.info('getUserActivities ', result.data);
+            DGW.helpers.console.info('getUserActivities ', result.data);
             DGW.main.methods.loadingFinished();
             DGW.main.methods.activitiesConstructor(result.data.Activities);
         } else {
-            console.error('getUserActivities ', result.error);
+            DGW.helpers.console.error('getUserActivities ', result.error);
         }
     });
 };
@@ -665,11 +660,11 @@ DGW.global.api.requests.getOffers = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getOffers', function(result){
         if (result.status == 200) {
-            console.info('getOffers ', result.data);
+            DGW.helpers.console.info('getOffers ', result.data);
             DGW.main.methods.loadingFinished();
             DGW.main.methods.offersConstructor(result.data);
         } else {
-            console.error('getOffers ', result.error);
+            DGW.helpers.console.error('getOffers ', result.error);
         }
     });
 };
@@ -678,11 +673,11 @@ DGW.global.api.requests.getUserOffers = function(){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getUserOffers', function(result){
         if (result.status == 200) {
-            console.info('getUserOffers ', result.data);
+            DGW.helpers.console.info('getUserOffers ', result.data);
             DGW.main.methods.loadingFinished();
             DGW.main.methods.offersConstructor(result.data);
         } else {
-            console.error('getUserOffers ', result.error);
+            DGW.helpers.console.error('getUserOffers ', result.error);
         }
     });
 };
@@ -690,11 +685,10 @@ DGW.global.api.requests.getUserOffers = function(){
 DGW.global.api.requests.trackOffer = function(offerId){
     DGW.global.api.generic('trackOffer', function(result){
         if (result.status == 200) {
-            console.info(result.data);
-            console.info('Tracking of ' + offerId + ' has started');
-            console.log(result)
+            DGW.helpers.console.info(result.data);
+            DGW.helpers.console.info('Tracking of ' + offerId + ' has started');
         } else {
-            console.error('trackOffer ', result.error);
+            DGW.helpers.console.error('trackOffer ', result.error);
         }
     }, {
         OfferId: offerId
@@ -704,12 +698,12 @@ DGW.global.api.requests.trackOffer = function(offerId){
 DGW.global.api.requests.completeOffer = function(offerId){
     DGW.global.api.generic('completeOffer', function(result){
         if (result.status == 200) {
-            console.info(result.data);
-            console.info('Offer ' + offerId + ' has been completed');
+            DGW.helpers.console.info(result.data);
+            DGW.helpers.console.info('Offer ' + offerId + ' has been completed');
             DGW.global.api.requests.getUser();
             DGW.global.api.requests.getUserOffers();
         } else {
-            console.error('completeOffer ', result.error);
+            DGW.helpers.console.error('completeOffer ', result.error);
         }
     }, {
         OfferId: offerId
@@ -719,12 +713,12 @@ DGW.global.api.requests.completeOffer = function(offerId){
 DGW.global.api.requests.cancelOffer = function(offerId){
     DGW.global.api.generic('cancelOffer', function(result){
         if (result.status == 200) {
-            console.info(result.data);
-            console.info('Offer ' + offerId + ' has been cancelled');
+            DGW.helpers.console.info(result.data);
+            DGW.helpers.console.info('Offer ' + offerId + ' has been cancelled');
             DGW.global.api.requests.getUser();
             DGW.global.api.requests.getUserOffers();
         } else {
-            console.error('cancelOffer ', result.error);
+            DGW.helpers.console.error('cancelOffer ', result.error);
         }
     }, {
         OfferId: offerId
@@ -734,11 +728,11 @@ DGW.global.api.requests.cancelOffer = function(offerId){
 DGW.global.api.requests.getActions = function(){
     DGW.global.api.generic('getActions', function(result){
         if (result.status == 200) {
-            console.info('getActions ', result.data);
+            DGW.helpers.console.info('getActions ', result.data);
             DGW.main.cache.rewardedActions = result.data.Actions;
             DGW.main.methods.setRewardedActions();
         } else {
-            console.error('getActions ', result.error);
+            DGW.helpers.console.error('getActions ', result.error);
         }
     });
 };
@@ -746,10 +740,10 @@ DGW.global.api.requests.getActions = function(){
 DGW.global.api.requests.getLeaderboard = function(){
     DGW.global.api.generic('getLeaderboard', function(result){
         if (result.status == 200) {
-            console.info('getLeaderboard ', result.data);
+            DGW.helpers.console.info('getLeaderboard ', result.data);
             DGW.main.methods.leaderboardConstructor(result.data.Earners);
         } else {
-            console.error('getLeaderboard ', result.error);
+            DGW.helpers.console.error('getLeaderboard ', result.error);
         }
     });
 };
@@ -757,11 +751,11 @@ DGW.global.api.requests.getLeaderboard = function(){
 DGW.global.api.requests.getAllBadges = function(){
     DGW.global.api.generic('getBadges', function(result){
         if (result.status == 200) {
-            console.info('getBadges ', result.data);
+            DGW.helpers.console.info('getBadges ', result.data);
             DGW.global.userStats.badges.all = result.data.Badges;
             DGW.global.api.requests.getEarnedBadges();
         } else {
-            console.error('getBadges ', result.error);
+            DGW.helpers.console.error('getBadges ', result.error);
         }
     });
 };
@@ -769,11 +763,11 @@ DGW.global.api.requests.getAllBadges = function(){
 DGW.global.api.requests.getEarnedBadges = function(){
     DGW.global.api.generic('getEarnedBadges', function(result){
         if (result.status == 200) {
-            console.info('getEarnedBadges ', result.data);
+            DGW.helpers.console.info('getEarnedBadges ', result.data);
             DGW.global.userStats.badges.earned = result.data.EarnedBadges;
             DGW.main.methods.updateBadgesInfo();
         } else {
-            console.error('getEarnedBadges ', result.error);
+            DGW.helpers.console.error('getEarnedBadges ', result.error);
         }
     });
 };
@@ -842,7 +836,7 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
             DGW.main.elements.pages.videoHolder.querySelector('span').innerHTML =
                 Math.floor(player.getDuration() - player.getCurrentTime());
         }, 1000);
-        console.log('Video has started')
+        DGW.helpers.console.log('Video has started')
     }
 
     // when video ends
@@ -851,7 +845,7 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
             // Video has finished
             hidePlayer();
             DGW.global.api.requests.completeOffer(offerId);
-            console.log('Video has finished');
+            DGW.helpers.console.log('Video has finished');
         }
     }
 
@@ -1083,6 +1077,30 @@ DGW.helpers.getURLParameter = function(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 };
+
+DGW.helpers.console = (function(){
+    return {
+        log: function(){
+            if (DGW.global.debug)
+                console.log.apply(console, Array.prototype.slice.call(arguments));
+        },
+        info: function(){
+            if (DGW.global.debug)
+                console.info.apply(console, Array.prototype.slice.call(arguments));
+        },
+        warn: function(){
+            if (DGW.global.debug)
+                console.warn.apply(console, Array.prototype.slice.call(arguments));
+        },
+        error: function(){
+            if (DGW.global.debug)
+                console.error.apply(console, Array.prototype.slice.call(arguments));
+        }
+    };
+})();
+
+
+
 DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body">' +
                                         '<div class="dg-side-widget-content dg-o-w-authorized">' +
@@ -1100,8 +1118,8 @@ DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                         '<div class="dg-side-widget-content dg-o-w-anonymous">' +
                                             '<div class="dg-side-widget-content-inner">' +
                                                 '<div class="dg-side-section">' +
-                                                    '<div class="dg-side-img-holder"><img class="dg-side-prize" src="./dist/imgs/everton-crest.png" alt="Prize" /></div>' +
-                                                    '<div class="dg-side-expanded"><p>Some cool prize description goes here and there and even one extra line here</p></div>' +
+                                                    '<div class="dg-side-img-holder"><img class="dg-side-prize" src="" alt="Prize" /></div>' +
+                                                    '<div class="dg-side-expanded"><p id="dg-side-widget-prize-desc"></p></div>' +
                                                 '</div>' +
                                                 '<div class="dg-side-collapsed"><div class="dg-side-cta">Get it</div></div>' +
                                                 '<div class="dg-side-expanded"><div class="dg-side-cta">Get the prize</div></div>' +
@@ -1506,6 +1524,14 @@ DGW.global.methods.unAuthorize = function(){
 };
 
 DGW.side.methods.initEvents = function(){
+
+    if (!DGW.global.launched) {
+        // Showing side widget
+        DGW.side.methods.showWidget();
+        DGW.global.launched = true;
+    }
+
+    var initInterval;
     var wBody = DGW.side.elements.widgetBody;
     var resizerBtn = wBody.querySelector('.dg-side-widget-resizer');
     var ctas = Array.prototype.slice.call(wBody.querySelectorAll('.dg-side-cta'));
@@ -1531,6 +1557,14 @@ DGW.side.methods.initEvents = function(){
         });
     });
 
+
+    initInterval = window.setInterval(function(){
+        if (DGW.global.cache.last.prize) {
+            window.clearInterval(initInterval);
+            wBody.querySelector('.dg-side-prize').src = DGW.global.cache.last.prize.ImageUrl;
+            wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
+        }
+    }, 100);
 };
 DGW.main.methods.checkSectionHeight = function() {
     var section = DGW.main.elements.widgetBody.querySelector('.dg-o-w-section');
@@ -1966,7 +2000,7 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
             if (drawEntry) {
                 var ticketsInDraw = drawEntry.TicketsAmount;
             }
-            //console.log(drawEntry);
+            //DGW.helpers.console.log(drawEntry);
             li.innerHTML = '<div class="dg-o-w-draw">' +
                                 '<div class="dg-o-w-draw-image-holder">' +
                                     '<img src="' + draw.Prize.ImageUrl + '" />' +
@@ -2058,7 +2092,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
             }
         }
     }
-    console.log('draw state: ', drawState);
+    DGW.helpers.console.log('draw state: ', drawState);
     el.innerHTML =  submenu +
                     '<div class="dg-o-w-section-content">' +
                         '<div class="dg-o-w-single-draw">' +
@@ -2173,7 +2207,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                 address += '; ';
             });
 
-            console.log(address);
+            DGW.helpers.console.log(address);
 
             if (address != '') {
                 DGW.global.api.requests.claimPrize(drawId, address, el.querySelector('.dg-o-w-single-draw'));
@@ -2357,7 +2391,7 @@ DGW.main.methods.offersConstructor = function(offers) {
         offersSponsors.addEventListener('change', function () {
             var that = this;
             var filteredOffers;
-            console.log(that.value);
+            DGW.helpers.console.log(that.value);
             if (that.value != 'all sponsors') {
                 filteredOffers = lists.offers.filter(function (offer) {
                     return offer.Sponsor.Name.toLowerCase() == that.value;

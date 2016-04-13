@@ -207,3 +207,26 @@ DGW.helpers.getURLParameter = function(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 };
+
+DGW.helpers.console = (function(){
+    return {
+        log: function(){
+            if (DGW.global.debug)
+                console.log.apply(console, Array.prototype.slice.call(arguments));
+        },
+        info: function(){
+            if (DGW.global.debug)
+                console.info.apply(console, Array.prototype.slice.call(arguments));
+        },
+        warn: function(){
+            if (DGW.global.debug)
+                console.warn.apply(console, Array.prototype.slice.call(arguments));
+        },
+        error: function(){
+            if (DGW.global.debug)
+                console.error.apply(console, Array.prototype.slice.call(arguments));
+        }
+    };
+})();
+
+
