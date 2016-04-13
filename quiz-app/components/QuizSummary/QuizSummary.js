@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Button from './Button.js';
+import Popup from './Popup.js';
 import './summary.scss';
 
 
@@ -22,6 +23,10 @@ class QuizSummary extends Component {
 	};
 
 	state = {};
+
+	showPopup() {
+		this.refs['sharing-popup'].show(3000);
+	}
 
 	render() {
 		const info = '23 March, 18:00, 2nd tour, London';
@@ -57,6 +62,16 @@ class QuizSummary extends Component {
 
 		return (
 			<div className="quiz-content">
+				<Popup ref="sharing-popup" className="blue">
+					<div className="popup-icon">
+						{ /*TODO*/ }
+					</div>
+					<div className="popup-content">
+						<div className="popup-title">You got +10 points!</div>
+						<div className="popup-text">Thank you for sharing</div>
+					</div>
+				</Popup>
+
 				<div className="quiz-info">{ info }</div>
 
 				<div className="summary-banner">
@@ -81,7 +96,9 @@ class QuizSummary extends Component {
 
 				<Button className="big-btn money-btn">Make a free bet</Button>
 
-				<Button className="big-btn share-btn">Share your prediction</Button>
+				<Button className="big-btn share-btn" onClick={ () => this.showPopup() }>
+					Share your prediction
+				</Button>
 			</div>
 		);
 	}
