@@ -110,6 +110,10 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         });
 };
 
+DGW.global.api.requests.safariFix = function(){
+    var w = window.open(DGW.global.tunnelPath, 'safariFixWindow', 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' + 300 + ', height=' + 200 + ', top=' + 100 + ', left=' + 100);
+};
+
 DGW.global.api.requests.checkServerAvailability = function(){
     DGW.global.api.generic('getUser', function(result){
 
@@ -124,7 +128,6 @@ DGW.global.api.requests.checkServerAvailability = function(){
                 DGW.helpers.console.warn('Please, add "data-type" attribute to the widget');
             }
         }
-
     });
 };
 

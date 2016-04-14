@@ -5,23 +5,23 @@ window.DGW = function () {
         var widgetPathName = widgetScript.src;
         widgetPathName = widgetPathName.substring(widgetPathName.lastIndexOf('/') + 1, 0);
         var key = widgetScript.getAttribute('data-key');
-        var tunnelPath;
+        var envPath;
         var debugMode = false;
-        var widgetType;
+        var widgetType = 'club';
 
         if (key) {
 
             // getting tunnel file path
             if (widgetScript.getAttribute('data-tunnel') !== null) {
-                tunnelPath = 'http://spr-api-test.cloudapp.net/tunnel.html';
+                envPath = 'http://spr-api-test.cloudapp.net/tunnel.html';
                 if (widgetScript.getAttribute('data-tunnel') === 'local') {
-                    tunnelPath = 'http://localhostdev/spr-api/tunnel.html';
+                    envPath = 'http://localhostdev/spr-api/tunnel.html';
                 } else if (widgetScript.getAttribute('data-tunnel') === 'live') {
-                    tunnelPath = 'https://api.rewarded.club/tunnel.html';
+                    envPath = 'https://api.rewarded.club/tunnel.html';
                 }
             } else {
                 // No parameter - use production path
-                tunnelPath = 'https://api.rewarded.club/tunnel.html';
+                envPath = 'https://api.rewarded.club/tunnel.html';
             }
 
             // checking for debug mode
@@ -69,7 +69,7 @@ window.DGW = function () {
                     },
                     elements: {},
                     methods: {},
-                    tunnelPath: tunnelPath,
+                    tunnelPath: envPath,
                     widgetPathName: widgetPathName,
                     userStats: {},
                     debug: debugMode
@@ -502,6 +502,10 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         });
 };
 
+DGW.global.api.requests.safariFix = function(){
+    var w = window.open(DGW.global.tunnelPath, 'safariFixWindow', 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' + 300 + ', height=' + 200 + ', top=' + 100 + ', left=' + 100);
+};
+
 DGW.global.api.requests.checkServerAvailability = function(){
     DGW.global.api.generic('getUser', function(result){
 
@@ -516,7 +520,6 @@ DGW.global.api.requests.checkServerAvailability = function(){
                 DGW.helpers.console.warn('Please, add "data-type" attribute to the widget');
             }
         }
-
     });
 };
 
