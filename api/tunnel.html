@@ -18,9 +18,10 @@
 			};
 			options.complete = function (xhr) {
 				var response = {};
+				response.status = xhr.status;
+
 				if (xhr.status !== 200) {
 					response.error = xhr.responseText;
-					response.status = xhr.status;
 				} else {
 					response.data = xhr.responseText.length > 0 ? JSON.parse(xhr.responseText) : null;
 				}
