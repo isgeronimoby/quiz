@@ -6,7 +6,12 @@ window.DGW = function () {
         widgetPathName = widgetPathName.substring(widgetPathName.lastIndexOf('/') + 1, 0);
         var key = widgetScript.getAttribute('data-key');
         var tunnelPath;
+        var debugMode = false;
+        var widgetType;
+
         if (key) {
+
+            // getting tunnel file path
             if (widgetScript.getAttribute('data-tunnel') !== null) {
                 tunnelPath = 'http://spr-api-test.cloudapp.net/tunnel.html';
                 if (widgetScript.getAttribute('data-tunnel') === 'local') {
@@ -17,6 +22,16 @@ window.DGW = function () {
             } else {
                 // No parameter - use production path
                 tunnelPath = 'https://api.rewarded.club/tunnel.html';
+            }
+
+            // checking for debug mode
+            if (widgetScript.getAttribute('data-debug') !== null) {
+                debugMode = widgetScript.getAttribute('data-debug') !== 'false';
+            }
+
+            // checking for type
+            if (widgetScript.getAttribute('data-type') !== null && widgetScript.getAttribute('data-type') !== '') {
+                widgetType = widgetScript.getAttribute('data-type');
             }
             return {
                 templates: {},
@@ -38,6 +53,7 @@ window.DGW = function () {
                     elements: {}
                 },
                 global: {
+                    type: widgetType, // sponsor || club
                     authorized: false,
                     launched: false,
                     activeDrawsExist: false,
@@ -56,7 +72,7 @@ window.DGW = function () {
                     tunnelPath: tunnelPath,
                     widgetPathName: widgetPathName,
                     userStats: {},
-                    debug: widgetScript.getAttribute('data-debug') !== null
+                    debug: debugMode
                 },
                 states: {},
                 helpers: {}
@@ -1196,7 +1212,12 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                 '</footer>' +
                                             '</div></div>' +
                                             '<div class="dg-o-w-close">&times;</div>' +
-                                            '<div class="dg-o-w-spinner"></div>' +
+                                            '<div class="dg-o-w-spinner">' +
+                                                '<div class="sk-circle1 sk-circle"></div><div class="sk-circle2 sk-circle"></div><div class="sk-circle3 sk-circle"></div>' +
+                                                '<div class="sk-circle4 sk-circle"></div><div class="sk-circle5 sk-circle"></div><div class="sk-circle6 sk-circle"></div>' +
+                                                '<div class="sk-circle7 sk-circle"></div><div class="sk-circle8 sk-circle"></div><div class="sk-circle9 sk-circle"></div>' +
+                                                '<div class="sk-circle10 sk-circle"></div><div class="sk-circle11 sk-circle"></div><div class="sk-circle12 sk-circle"></div>' +
+                                            '</div>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>';
@@ -1369,6 +1390,130 @@ DGW.main.methods.hideWidget = function(){
     }, 310);
 };
 
+DGW.main.methods.loadingStarted = function(){
+    DGW.helpers.addClass(DGW.main.elements.widgetBody, 'dg-o-w-loading');
+};
+DGW.main.methods.loadingFinished = function(){
+    DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'dg-o-w-loading');
+};
+
+
+// Side widget global methods
+DGW.side.methods.showWidget = function(){
+    DGW.global.elements.documentBody.appendChild(DGW.side.elements.widget);
+};
+DGW.side.methods.hideWidget = function(){
+    DGW.global.elements.documentBody.removeChild(DGW.side.elements.widget);
+};
+
+
+DGW.global.methods.authorize = function(){
+    DGW.helpers.addClass(DGW.main.elements.widgetBody, 'authorized');
+    DGW.global.authorized = true;
+    DGW.helpers.addClass(DGW.side.elements.widgetBody, 'dg-o-w-authorized');
+    // ********
+    if (DGW.main.currentState === 'profile') {
+        DGW.main.methods.changeMainState('profile');
+        // ********
+    } else if (DGW.main.currentState === 'draws') {
+        DGW.global.api.requests.getDraws();
+    } else if (DGW.main.currentState === 'earn') {
+        DGW.global.api.requests.getUserOffers();
+    }
+};
+
+DGW.global.methods.unAuthorize = function(){
+    DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'authorized');
+    DGW.helpers.removeClass(DGW.side.elements.widgetBody, 'dg-o-w-authorized');
+    DGW.global.authorized = false;
+    if (DGW.main.currentState === 'profile') {
+        DGW.main.methods.changeMainState('profile');
+    }
+};
+
+
+DGW.global.methods.init = function(){
+
+    // initialising widget events
+    DGW.side.methods.initEvents();
+    DGW.main.methods.initEvents();
+
+    // filling user default data
+    DGW.global.userStats.imageUrl = DGW.helpers.checkImagesForSrc();
+    DGW.global.userStats.name = 'Guest';
+    DGW.global.userStats.pointsC = 0;
+    DGW.global.userStats.pointsP = 0;
+    DGW.global.userStats.creditsC = 0;
+    DGW.global.userStats.creditsP = 0;
+    DGW.global.userStats.badges = {
+        all: {},
+        earned: {}
+    };
+
+    // requesting basic apis to get some cached data
+    DGW.global.api.requests.getDraws();
+    DGW.global.api.requests.getActions();
+
+    //Initializing or checking user
+    DGW.global.api.requests.getUser();
+};
+DGW.side.methods.initEvents = function(){
+
+    if (!DGW.global.launched) {
+        // Showing side widget
+        DGW.side.methods.showWidget();
+        DGW.global.launched = true;
+    }
+
+    var initInterval;
+    var wBody = DGW.side.elements.widgetBody;
+    var resizerBtn = wBody.querySelector('.dg-side-widget-resizer');
+    var ctas = Array.prototype.slice.call(wBody.querySelectorAll('.dg-side-cta'));
+    var registeredArea = wBody.querySelector('.dg-side-widget-content.dg-o-w-authorized .dg-side-section');
+    ctas.push(registeredArea);
+
+    resizerBtn.addEventListener('click', function(){
+        if (DGW.helpers.hasClass(wBody, 'dg-side-widget-expanded')) {
+            DGW.helpers.removeClass(wBody, 'dg-side-widget-expanded');
+        } else {
+            DGW.helpers.addClass(wBody, 'dg-side-widget-expanded');
+        }
+    });
+
+    ctas.forEach(function(cta){
+        cta.addEventListener('click', function(){
+            if (!DGW.main.shown) {
+                DGW.main.methods.showWidget();
+            } else {
+                DGW.main.methods.hideWidget();
+            }
+
+        });
+    });
+
+
+    initInterval = window.setInterval(function(){
+        if (DGW.global.cache.last.prize) {
+            window.clearInterval(initInterval);
+            wBody.querySelector('.dg-side-prize').src = DGW.global.cache.last.prize.ImageUrl;
+            wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
+        }
+    }, 100);
+};
+DGW.main.methods.checkSectionHeight = function() {
+    var section = DGW.main.elements.widgetBody.querySelector('.dg-o-w-section');
+    var sectionContent = DGW.main.elements.widgetBody.querySelector('.dg-o-w-section-content');
+
+    if ( section.querySelector('.dg-o-w-submenu') ) {
+        DGW.helpers.addClass(sectionContent, 'dg-o-w-submenu-only');
+        DGW.helpers.removeClass(sectionContent, 'dg-o-w-submenu-activities');
+        if ( section.querySelector('.dg-o-w-activity-slider-holder') && !DGW.helpers.hasClass(section.querySelector('.dg-o-w-activities'), 'collapsed') ) {
+            DGW.helpers.addClass(sectionContent, 'dg-o-w-submenu-activities');
+            DGW.helpers.removeClass(sectionContent, 'dg-o-w-submenu-only');
+        }
+    }
+};
+
 DGW.main.methods.changeMainState = function(state){
     for (item in DGW.main.elements.menuItems) {
         DGW.helpers.removeClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');
@@ -1440,39 +1585,20 @@ DGW.main.methods.changeMainState = function(state){
     DGW.main.methods.checkSectionHeight();
 };
 
-DGW.main.methods.loadingStarted = function(){
-    DGW.helpers.addClass(DGW.main.elements.widgetBody, 'dg-o-w-loading');
-};
-DGW.main.methods.loadingFinished = function(){
-    DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'dg-o-w-loading');
-};
+DGW.main.methods.initEvents = function () {
+// Login header
 
-
-// Side widget global methods
-DGW.side.methods.showWidget = function(){
-    DGW.global.elements.documentBody.appendChild(DGW.side.elements.widget);
-};
-DGW.side.methods.hideWidget = function(){
-    DGW.global.elements.documentBody.removeChild(DGW.side.elements.widget);
-};
-
-
-DGW.global.methods.init = function(){
+    // filling avatar images with default pictures
     Array.prototype.slice.call(DGW.main.elements.widget.querySelectorAll('.avatar')).forEach(function(img){
         img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
     });
 
-    DGW.side.methods.initEvents();
-
-    // Handling clicks
-
+    // handling close button
     DGW.main.elements.widget.querySelector('.dg-o-w-close').addEventListener('click', function(){
         DGW.main.methods.hideWidget();
     });
 
-    DGW.main.methods.addPageEvents();
-
-    //Main widget, main menu clicks
+    // main widget, main menu clicks
     for (item in DGW.main.elements.menuItems) {
         DGW.main.elements.menuItems[item].addEventListener('click', function(item){
             return function(){
@@ -1481,107 +1607,7 @@ DGW.global.methods.init = function(){
         }(item));
     }
 
-    DGW.global.userStats.imageUrl = DGW.helpers.checkImagesForSrc();
-    DGW.global.userStats.name = 'Guest';
-    DGW.global.userStats.pointsC = 0;
-    DGW.global.userStats.pointsP = 0;
-    DGW.global.userStats.creditsC = 0;
-    DGW.global.userStats.creditsP = 0;
-    DGW.global.userStats.badges = {
-        all: {},
-        earned: {}
-    };
-
-    DGW.global.api.requests.getDraws();
-    DGW.global.api.requests.getActions();
-
-    //Initializing or checking user
-    DGW.global.api.requests.getUser();
-};
-
-DGW.global.methods.authorize = function(){
-    DGW.helpers.addClass(DGW.main.elements.widgetBody, 'authorized');
-    DGW.global.authorized = true;
-    DGW.helpers.addClass(DGW.side.elements.widgetBody, 'dg-o-w-authorized');
-    // ********
-    if (DGW.main.currentState === 'profile') {
-        DGW.main.methods.changeMainState('profile');
-        // ********
-    } else if (DGW.main.currentState === 'draws') {
-        DGW.global.api.requests.getDraws();
-    } else if (DGW.main.currentState === 'earn') {
-        DGW.global.api.requests.getUserOffers();
-    }
-};
-
-DGW.global.methods.unAuthorize = function(){
-    DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'authorized');
-    DGW.helpers.removeClass(DGW.side.elements.widgetBody, 'dg-o-w-authorized');
-    DGW.global.authorized = false;
-    if (DGW.main.currentState === 'profile') {
-        DGW.main.methods.changeMainState('profile');
-    }
-};
-
-DGW.side.methods.initEvents = function(){
-
-    if (!DGW.global.launched) {
-        // Showing side widget
-        DGW.side.methods.showWidget();
-        DGW.global.launched = true;
-    }
-
-    var initInterval;
-    var wBody = DGW.side.elements.widgetBody;
-    var resizerBtn = wBody.querySelector('.dg-side-widget-resizer');
-    var ctas = Array.prototype.slice.call(wBody.querySelectorAll('.dg-side-cta'));
-    var registeredArea = wBody.querySelector('.dg-side-widget-content.dg-o-w-authorized .dg-side-section');
-    ctas.push(registeredArea);
-
-    resizerBtn.addEventListener('click', function(){
-        if (DGW.helpers.hasClass(wBody, 'dg-side-widget-expanded')) {
-            DGW.helpers.removeClass(wBody, 'dg-side-widget-expanded');
-        } else {
-            DGW.helpers.addClass(wBody, 'dg-side-widget-expanded');
-        }
-    });
-
-    ctas.forEach(function(cta){
-        cta.addEventListener('click', function(){
-            if (!DGW.main.shown) {
-                DGW.main.methods.showWidget();
-            } else {
-                DGW.main.methods.hideWidget();
-            }
-
-        });
-    });
-
-
-    initInterval = window.setInterval(function(){
-        if (DGW.global.cache.last.prize) {
-            window.clearInterval(initInterval);
-            wBody.querySelector('.dg-side-prize').src = DGW.global.cache.last.prize.ImageUrl;
-            wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
-        }
-    }, 100);
-};
-DGW.main.methods.checkSectionHeight = function() {
-    var section = DGW.main.elements.widgetBody.querySelector('.dg-o-w-section');
-    var sectionContent = DGW.main.elements.widgetBody.querySelector('.dg-o-w-section-content');
-
-    if ( section.querySelector('.dg-o-w-submenu') ) {
-        DGW.helpers.addClass(sectionContent, 'dg-o-w-submenu-only');
-        DGW.helpers.removeClass(sectionContent, 'dg-o-w-submenu-activities');
-        if ( section.querySelector('.dg-o-w-activity-slider-holder') && !DGW.helpers.hasClass(section.querySelector('.dg-o-w-activities'), 'collapsed') ) {
-            DGW.helpers.addClass(sectionContent, 'dg-o-w-submenu-activities');
-            DGW.helpers.removeClass(sectionContent, 'dg-o-w-submenu-only');
-        }
-    }
-};
-
-DGW.main.methods.addPageEvents = function () {
-    // Login header
+    // login dropdown menu
     DGW.main.elements.loginMenuButton.addEventListener('click', function (e) {
         e.preventDefault();
         var that = this;
@@ -1599,6 +1625,7 @@ DGW.main.methods.addPageEvents = function () {
         }
     });
 
+    // login form submit
     DGW.main.elements.widgetBody.querySelector('#dg-o-w-form-login-top').addEventListener('submit', function(ev){
         ev.preventDefault();
         var emailF = this.querySelector('[type=email]').value,
@@ -1612,7 +1639,7 @@ DGW.main.methods.addPageEvents = function () {
         }
     });
 
-    //Activities page
+//Activities page
     DGW.main.elements.pages.activitiesMain.querySelector('.toggle-section-height').addEventListener('click', function () {
         if (DGW.helpers.hasClass(this, 'collapsed')) {
             DGW.helpers.removeClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
@@ -1633,7 +1660,7 @@ DGW.main.methods.addPageEvents = function () {
     });
 
 
-    //Footer login init
+//Footer login init
     DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-email-login').addEventListener('click', function (ev) {
         ev.preventDefault();
         DGW.helpers.addClass(DGW.main.elements.loginFooter, 'email-sign-up');
@@ -1683,7 +1710,7 @@ DGW.main.methods.addPageEvents = function () {
     });
 
 
-    //Draws page clicks
+//Draws page clicks
     DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired').addEventListener('change', function (ev) {
         if (this.checked) {
             DGW.helpers.addClass(DGW.main.elements.widgetBody, 'draws-expired');
@@ -1696,7 +1723,7 @@ DGW.main.methods.addPageEvents = function () {
         DGW.global.api.requests.getDraws();
     });
 
-    //Draw filters
+//Draw filters
     (function(){
         var submenuItems = Array.prototype.slice.call(DGW.main.elements.pages.drawsMain.querySelectorAll('.dg-o-w-submenu ul li'));
         function removeActive(){
@@ -1757,7 +1784,7 @@ DGW.main.methods.addPageEvents = function () {
         };
     })();
 
-    //Profile page clicks
+//Profile page clicks
     DGW.main.elements.pages.profileMain.querySelector('#dg-o-w-sign-out-btn').addEventListener('click', function (ev) {
         ev.preventDefault();
         DGW.global.api.requests.signOut();

@@ -12,8 +12,100 @@ DGW.main.methods.checkSectionHeight = function() {
     }
 };
 
-DGW.main.methods.addPageEvents = function () {
-    // Login header
+DGW.main.methods.changeMainState = function(state){
+    for (item in DGW.main.elements.menuItems) {
+        DGW.helpers.removeClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');
+        DGW.helpers.removeClass(DGW.main.elements.menuItems['profile'].parentNode, 'dg-o-w-active');
+        if (item === state) {
+            if (state === 'profile') {
+                DGW.helpers.addClass(DGW.main.elements.menuItems[item].parentNode, 'dg-o-w-active');
+            } else {
+                DGW.helpers.addClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');
+            }
+        }
+    }
+    if (DGW.main.elements.widgetContent.children.length > 0) {
+        Array.prototype.slice.call(DGW.main.elements.widgetContent.children).forEach(function(ch){
+            DGW.main.elements.widgetContent.removeChild(ch);
+        });
+    }
+
+    if (DGW.main.currentState !== 'draws') {
+        DGW.helpers.drawsTimer.setDraws([]);
+    }
+    DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'profile-anon');
+    switch (state) {
+        case 'earn':
+            if (DGW.global.authorized) {
+                DGW.global.api.requests.getUserOffers();
+            } else {
+                DGW.global.api.requests.getOffers();
+            }
+            DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.earnMain);
+            break;
+        case 'draws':
+            //TODO: work on this further
+            if (DGW.main.currentState !== 'draws') {
+                DGW.global.api.requests.getDraws();
+                DGW.main.methods.drawSubmenuReset();
+            }
+            DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.drawsMain);
+            break;
+        case 'activities':
+            if (DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').value === 'all-activities') {
+                DGW.global.api.requests.getAllActivities();
+            } else {
+                DGW.global.api.requests.getUserActivities();
+            }
+            DGW.global.api.requests.getLeaderboard();
+            DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.activitiesMain);
+            break;
+        case 'profile':
+            if ( DGW.global.authorized ) {
+                DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.profileMain);
+                DGW.global.api.requests.getUser();
+                DGW.global.api.requests.getAllBadges();
+            } else {
+                DGW.helpers.addClass(DGW.main.elements.widgetBody, 'profile-anon');
+                DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.loginMain);
+            }
+            break;
+        default:
+
+    }
+
+    Array.prototype.slice.call(DGW.main.elements.widgetContent.querySelectorAll('.avatar')).forEach(function(img){
+        img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
+    });
+
+    DGW.main.currentState = state;
+    DGW.main.methods.setRewardedActions();
+    DGW.main.methods.checkSectionHeight();
+};
+
+DGW.main.methods.initEvents = function () {
+// Login header
+
+    // filling avatar images with default pictures
+    Array.prototype.slice.call(DGW.main.elements.widget.querySelectorAll('.avatar')).forEach(function(img){
+        img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
+    });
+
+    // handling close button
+    DGW.main.elements.widget.querySelector('.dg-o-w-close').addEventListener('click', function(){
+        DGW.main.methods.hideWidget();
+    });
+
+    // main widget, main menu clicks
+    for (item in DGW.main.elements.menuItems) {
+        DGW.main.elements.menuItems[item].addEventListener('click', function(item){
+            return function(){
+                DGW.main.methods.changeMainState(item);
+            };
+        }(item));
+    }
+
+    // login dropdown menu
     DGW.main.elements.loginMenuButton.addEventListener('click', function (e) {
         e.preventDefault();
         var that = this;
@@ -31,6 +123,7 @@ DGW.main.methods.addPageEvents = function () {
         }
     });
 
+    // login form submit
     DGW.main.elements.widgetBody.querySelector('#dg-o-w-form-login-top').addEventListener('submit', function(ev){
         ev.preventDefault();
         var emailF = this.querySelector('[type=email]').value,
@@ -44,7 +137,7 @@ DGW.main.methods.addPageEvents = function () {
         }
     });
 
-    //Activities page
+//Activities page
     DGW.main.elements.pages.activitiesMain.querySelector('.toggle-section-height').addEventListener('click', function () {
         if (DGW.helpers.hasClass(this, 'collapsed')) {
             DGW.helpers.removeClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
@@ -65,7 +158,7 @@ DGW.main.methods.addPageEvents = function () {
     });
 
 
-    //Footer login init
+//Footer login init
     DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-email-login').addEventListener('click', function (ev) {
         ev.preventDefault();
         DGW.helpers.addClass(DGW.main.elements.loginFooter, 'email-sign-up');
@@ -115,7 +208,7 @@ DGW.main.methods.addPageEvents = function () {
     });
 
 
-    //Draws page clicks
+//Draws page clicks
     DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired').addEventListener('change', function (ev) {
         if (this.checked) {
             DGW.helpers.addClass(DGW.main.elements.widgetBody, 'draws-expired');
@@ -128,7 +221,7 @@ DGW.main.methods.addPageEvents = function () {
         DGW.global.api.requests.getDraws();
     });
 
-    //Draw filters
+//Draw filters
     (function(){
         var submenuItems = Array.prototype.slice.call(DGW.main.elements.pages.drawsMain.querySelectorAll('.dg-o-w-submenu ul li'));
         function removeActive(){
@@ -189,7 +282,7 @@ DGW.main.methods.addPageEvents = function () {
         };
     })();
 
-    //Profile page clicks
+//Profile page clicks
     DGW.main.elements.pages.profileMain.querySelector('#dg-o-w-sign-out-btn').addEventListener('click', function (ev) {
         ev.preventDefault();
         DGW.global.api.requests.signOut();

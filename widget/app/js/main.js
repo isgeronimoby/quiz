@@ -60,77 +60,6 @@ DGW.main.methods.hideWidget = function(){
     }, 310);
 };
 
-DGW.main.methods.changeMainState = function(state){
-    for (item in DGW.main.elements.menuItems) {
-        DGW.helpers.removeClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');
-        DGW.helpers.removeClass(DGW.main.elements.menuItems['profile'].parentNode, 'dg-o-w-active');
-        if (item === state) {
-            if (state === 'profile') {
-                DGW.helpers.addClass(DGW.main.elements.menuItems[item].parentNode, 'dg-o-w-active');
-            } else {
-                DGW.helpers.addClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');
-            }
-        }
-    }
-    if (DGW.main.elements.widgetContent.children.length > 0) {
-        Array.prototype.slice.call(DGW.main.elements.widgetContent.children).forEach(function(ch){
-            DGW.main.elements.widgetContent.removeChild(ch);
-        });
-    }
-
-    if (DGW.main.currentState !== 'draws') {
-        DGW.helpers.drawsTimer.setDraws([]);
-    }
-    DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'profile-anon');
-    switch (state) {
-        case 'earn':
-            if (DGW.global.authorized) {
-                DGW.global.api.requests.getUserOffers();
-            } else {
-                DGW.global.api.requests.getOffers();
-            }
-            DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.earnMain);
-            break;
-        case 'draws':
-            //TODO: work on this further
-            if (DGW.main.currentState !== 'draws') {
-                DGW.global.api.requests.getDraws();
-                DGW.main.methods.drawSubmenuReset();
-            }
-            DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.drawsMain);
-            break;
-        case 'activities':
-            if (DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').value === 'all-activities') {
-                DGW.global.api.requests.getAllActivities();
-            } else {
-                DGW.global.api.requests.getUserActivities();
-            }
-            DGW.global.api.requests.getLeaderboard();
-            DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.activitiesMain);
-            break;
-        case 'profile':
-            if ( DGW.global.authorized ) {
-                DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.profileMain);
-                DGW.global.api.requests.getUser();
-                DGW.global.api.requests.getAllBadges();
-            } else {
-                DGW.helpers.addClass(DGW.main.elements.widgetBody, 'profile-anon');
-                DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.loginMain);
-            }
-            break;
-        default:
-
-    }
-
-    Array.prototype.slice.call(DGW.main.elements.widgetContent.querySelectorAll('.avatar')).forEach(function(img){
-        img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
-    });
-
-    DGW.main.currentState = state;
-    DGW.main.methods.setRewardedActions();
-    DGW.main.methods.checkSectionHeight();
-};
-
 DGW.main.methods.loadingStarted = function(){
     DGW.helpers.addClass(DGW.main.elements.widgetBody, 'dg-o-w-loading');
 };
@@ -147,48 +76,6 @@ DGW.side.methods.hideWidget = function(){
     DGW.global.elements.documentBody.removeChild(DGW.side.elements.widget);
 };
 
-
-DGW.global.methods.init = function(){
-    Array.prototype.slice.call(DGW.main.elements.widget.querySelectorAll('.avatar')).forEach(function(img){
-        img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
-    });
-
-    DGW.side.methods.initEvents();
-
-    // Handling clicks
-
-    DGW.main.elements.widget.querySelector('.dg-o-w-close').addEventListener('click', function(){
-        DGW.main.methods.hideWidget();
-    });
-
-    DGW.main.methods.addPageEvents();
-
-    //Main widget, main menu clicks
-    for (item in DGW.main.elements.menuItems) {
-        DGW.main.elements.menuItems[item].addEventListener('click', function(item){
-            return function(){
-                DGW.main.methods.changeMainState(item);
-            };
-        }(item));
-    }
-
-    DGW.global.userStats.imageUrl = DGW.helpers.checkImagesForSrc();
-    DGW.global.userStats.name = 'Guest';
-    DGW.global.userStats.pointsC = 0;
-    DGW.global.userStats.pointsP = 0;
-    DGW.global.userStats.creditsC = 0;
-    DGW.global.userStats.creditsP = 0;
-    DGW.global.userStats.badges = {
-        all: {},
-        earned: {}
-    };
-
-    DGW.global.api.requests.getDraws();
-    DGW.global.api.requests.getActions();
-
-    //Initializing or checking user
-    DGW.global.api.requests.getUser();
-};
 
 DGW.global.methods.authorize = function(){
     DGW.helpers.addClass(DGW.main.elements.widgetBody, 'authorized');
@@ -212,4 +99,31 @@ DGW.global.methods.unAuthorize = function(){
     if (DGW.main.currentState === 'profile') {
         DGW.main.methods.changeMainState('profile');
     }
+};
+
+
+DGW.global.methods.init = function(){
+
+    // initialising widget events
+    DGW.side.methods.initEvents();
+    DGW.main.methods.initEvents();
+
+    // filling user default data
+    DGW.global.userStats.imageUrl = DGW.helpers.checkImagesForSrc();
+    DGW.global.userStats.name = 'Guest';
+    DGW.global.userStats.pointsC = 0;
+    DGW.global.userStats.pointsP = 0;
+    DGW.global.userStats.creditsC = 0;
+    DGW.global.userStats.creditsP = 0;
+    DGW.global.userStats.badges = {
+        all: {},
+        earned: {}
+    };
+
+    // requesting basic apis to get some cached data
+    DGW.global.api.requests.getDraws();
+    DGW.global.api.requests.getActions();
+
+    //Initializing or checking user
+    DGW.global.api.requests.getUser();
 };

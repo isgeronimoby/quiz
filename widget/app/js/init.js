@@ -5,7 +5,12 @@ window.DGW = function () {
         widgetPathName = widgetPathName.substring(widgetPathName.lastIndexOf('/') + 1, 0);
         var key = widgetScript.getAttribute('data-key');
         var tunnelPath;
+        var debugMode = false;
+        var widgetType;
+
         if (key) {
+
+            // getting tunnel file path
             if (widgetScript.getAttribute('data-tunnel') !== null) {
                 tunnelPath = 'http://spr-api-test.cloudapp.net/tunnel.html';
                 if (widgetScript.getAttribute('data-tunnel') === 'local') {
@@ -16,6 +21,16 @@ window.DGW = function () {
             } else {
                 // No parameter - use production path
                 tunnelPath = 'https://api.rewarded.club/tunnel.html';
+            }
+
+            // checking for debug mode
+            if (widgetScript.getAttribute('data-debug') !== null) {
+                debugMode = widgetScript.getAttribute('data-debug') !== 'false';
+            }
+
+            // checking for type
+            if (widgetScript.getAttribute('data-type') !== null && widgetScript.getAttribute('data-type') !== '') {
+                widgetType = widgetScript.getAttribute('data-type');
             }
             return {
                 templates: {},
@@ -37,6 +52,7 @@ window.DGW = function () {
                     elements: {}
                 },
                 global: {
+                    type: widgetType, // sponsor || club
                     authorized: false,
                     launched: false,
                     activeDrawsExist: false,
@@ -55,7 +71,7 @@ window.DGW = function () {
                     tunnelPath: tunnelPath,
                     widgetPathName: widgetPathName,
                     userStats: {},
-                    debug: widgetScript.getAttribute('data-debug') !== null
+                    debug: debugMode
                 },
                 states: {},
                 helpers: {}
