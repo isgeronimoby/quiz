@@ -395,13 +395,14 @@ DGW.global.api.rpc = new DGW.global.api.easyXDM.Rpc({
     remote: DGW.global.tunnelPath
 }, {
     remote: {
-        apiTunnel: {}
+        apiTunnel: {},
+        writeClubCookie: {},
+        readClubCookie: {}
     }
 });
 
 DGW.global.api.generic = function(apiName, callback, requestBody){
     var result = {},
-        interval,
         method = 'GET',
         endpoint = '';
         requestBody = requestBody || '';
@@ -503,16 +504,38 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
 
 DGW.global.api.requests.checkServerAvailability = function(){
     DGW.global.api.generic('getUser', function(result){
-        if (!result.error) {
-            DGW.global.methods.init();
-            DGW.helpers.console.info('checkServerAvailability: registered ', result.data);
+
+        if (result.error && result.status == 500) {
+            DGW.helpers.console.error('checkServerAvailability no-server', result);
         } else {
-            if (result.error.status != 500) {
-                DGW.global.methods.init();
-                DGW.helpers.console.info('checkServerAvailability: anonymous ', result.data);
+            if (DGW.global.type == 'club') {
+                DGW.global.api.requests.setClubCookie('TEST_CLUB');
+            } else if (DGW.global.type == 'sponsor') {
+                DGW.global.api.requests.readClubCookie('TEST_CLUB');
             } else {
-                DGW.helpers.console.error('checkServerAvailability no-server', result);
+                DGW.helpers.console.warn('Please, add "data-type" attribute to the widget');
             }
+        }
+
+    });
+};
+
+DGW.global.api.requests.setClubCookie = function(cookieName){
+    DGW.global.api.rpc.writeClubCookie(cookieName, function onSuccess(response){
+        DGW.helpers.console.info(response);
+        if (response) {
+            DGW.global.methods.init();
+        } else {
+            DGW.helpers.console.warn('no third party cookies enabled');
+        }
+    });
+};
+
+DGW.global.api.requests.readClubCookie = function(cookieName){
+    DGW.global.api.rpc.readClubCookie(cookieName, function onSuccess(response){
+        DGW.helpers.console.info(response);
+        if (response == 1) {
+            DGW.global.methods.init();
         }
     });
 };
