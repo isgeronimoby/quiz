@@ -505,12 +505,12 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
 
 
 DGW.global.api.requests.safariFix = function(){
-    var w = window.open(DGW.global.tunnelPath, 'safariFixWindow', 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' + 300 + ', height=' + 200 + ', top=' + 100 + ', left=' + 100);
+    var w = window.open(DGW.global.tunnelPath, '_blank', 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' + 300 + ', height=' + 200 + ', top=' + 100 + ', left=' + 100);
     setTimeout(function(){
         w.close();
         DGW.global.safariFix = true;
         DGW.global.api.requests.checkServerAvailability();
-    }, 1000)
+    }, 1000);
 };
 
 DGW.global.api.requests.checkServerAvailability = function(){
@@ -2522,8 +2522,9 @@ DGW.main.methods.offersConstructor = function(offers) {
                         DGW.global.offers.requests.shareOfferTw(offer.Id, offer.CustomData);
                     } else if (offer.Type.Name == 'WatchVideo'){
                         DGW.global.offers.requests.watchVideo(offer.Id, offer.CustomData);
+                    } else if (offer.Type.Name == 'DownloadToolbar') {
+                        DGW.global.api.requests.trackOffer(offer.Id);
                     }
-
                 } else {
                     ev.preventDefault();
                     DGW.main.methods.changeMainState('profile');

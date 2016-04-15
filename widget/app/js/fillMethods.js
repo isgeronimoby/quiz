@@ -679,8 +679,9 @@ DGW.main.methods.offersConstructor = function(offers) {
                         DGW.global.offers.requests.shareOfferTw(offer.Id, offer.CustomData);
                     } else if (offer.Type.Name == 'WatchVideo'){
                         DGW.global.offers.requests.watchVideo(offer.Id, offer.CustomData);
+                    } else if (offer.Type.Name == 'DownloadToolbar') {
+                        DGW.global.api.requests.trackOffer(offer.Id);
                     }
-
                 } else {
                     ev.preventDefault();
                     DGW.main.methods.changeMainState('profile');
