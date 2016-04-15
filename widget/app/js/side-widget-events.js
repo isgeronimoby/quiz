@@ -41,3 +41,12 @@ DGW.side.methods.initEvents = function(){
         }
     }, 100);
 };
+
+DGW.side.methods.initSafariFixEvents = function(){
+    var wBody = DGW.side.elements.widgetBody;
+    DGW.side.methods.showWidget();
+
+    wBody.addEventListener('click', function(){
+        DGW.global.api.requests.safariFix();
+    });
+};

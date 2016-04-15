@@ -665,12 +665,12 @@ DGW.main.methods.offersConstructor = function(offers) {
                         '</div>' +
                     '</div>' +
                 '</div></a>';
-            if (offer.Type.Name == 'DownloadApp') {
+            if (offer.Type.Name == 'DownloadMobileApp' || offer.Type.Name == 'DownloadToolbar') {
                 li.querySelector('a').href = offer.CustomData;
             }
             li.querySelector('a').addEventListener('click', function(ev){
                 if (DGW.global.authorized) {
-                    if (offer.Type.Name != 'DownloadApp') {
+                    if (offer.Type.Name != 'DownloadMobileApp' && offer.Type.Name != 'DownloadToolbar') {
                         ev.preventDefault();
                     }
                     if (offer.Type.Name == 'FacebookShare') {

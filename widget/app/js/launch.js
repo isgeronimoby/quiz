@@ -10,3 +10,7 @@ widgetStyles.href = DGW.global.widgetPathName + 'style.min.css';
 
 document.head.appendChild(widgetStyles);
 
+DGW.global.activateDebugMode = function(){
+    DGW.global.debug = true;
+};
+

@@ -55,6 +55,7 @@ window.DGW = function () {
                     type: widgetType, // sponsor || club
                     authorized: false,
                     launched: false,
+                    safariFix: false,
                     activeDrawsExist: false,
                     offers: {
                         requests: {}

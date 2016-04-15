@@ -145,13 +145,16 @@
   border: 2px solid #ffffff;
   overflow: hidden;
 }
+#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-widget-content .dg-side-section .dg-side-img-holder.no-border {
+  border: none;
+}
 #dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-widget-content .dg-side-section .dg-side-img-holder img {
   position: absolute;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  height: 100%;
+  height: auto;
   width: auto;
   max-width: none;
 }

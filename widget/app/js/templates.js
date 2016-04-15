@@ -2,7 +2,7 @@ DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body">' +
                                         '<div class="dg-side-widget-content dg-o-w-authorized">' +
                                             '<div class="dg-side-widget-content-inner">' +
-                                                '<div class="dg-side-section"><div class="dg-side-img-holder"><img id="dg-side-widget-userpic" class="avatar" src="" /></div>' +
+                                                '<div class="dg-side-section"><div class="dg-side-img-holder no-border"><img id="dg-side-widget-userpic" class="avatar" src="" /></div>' +
                                                     '<div class="dg-side-expanded">' +
                                                         '<h4 id="dg-side-widget-name">Name Surname Whatever</h4>' +
                                                         '<h6><span id="dg-side-points">00</span> | <span id="dg-side-credits">00</span></h6>' +

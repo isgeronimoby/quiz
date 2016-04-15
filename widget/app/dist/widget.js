@@ -56,6 +56,7 @@ window.DGW = function () {
                     type: widgetType, // sponsor || club
                     authorized: false,
                     launched: false,
+                    safariFix: false,
                     activeDrawsExist: false,
                     offers: {
                         requests: {}
@@ -502,16 +503,27 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         });
 };
 
+
 DGW.global.api.requests.safariFix = function(){
     var w = window.open(DGW.global.tunnelPath, 'safariFixWindow', 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' + 300 + ', height=' + 200 + ', top=' + 100 + ', left=' + 100);
+    setTimeout(function(){
+        w.close();
+        DGW.global.safariFix = true;
+        DGW.global.api.requests.checkServerAvailability();
+    }, 1000)
 };
 
 DGW.global.api.requests.checkServerAvailability = function(){
     DGW.global.api.generic('getUser', function(result){
+        var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
 
         if (result.error && result.status == 500) {
             DGW.helpers.console.error('checkServerAvailability no-server', result);
         } else {
+            if (isSafari && !DGW.global.safariFix) {
+                DGW.global.methods.safariFixInit();
+                return;
+            }
             if (DGW.global.type == 'club') {
                 DGW.global.api.requests.setClubCookie('TEST_CLUB');
             } else if (DGW.global.type == 'sponsor') {
@@ -1147,7 +1159,7 @@ DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body">' +
                                         '<div class="dg-side-widget-content dg-o-w-authorized">' +
                                             '<div class="dg-side-widget-content-inner">' +
-                                                '<div class="dg-side-section"><div class="dg-side-img-holder"><img id="dg-side-widget-userpic" class="avatar" src="" /></div>' +
+                                                '<div class="dg-side-section"><div class="dg-side-img-holder no-border"><img id="dg-side-widget-userpic" class="avatar" src="" /></div>' +
                                                     '<div class="dg-side-expanded">' +
                                                         '<h4 id="dg-side-widget-name">Name Surname Whatever</h4>' +
                                                         '<h6><span id="dg-side-points">00</span> | <span id="dg-side-credits">00</span></h6>' +
@@ -1483,6 +1495,10 @@ DGW.global.methods.init = function(){
     //Initializing or checking user
     DGW.global.api.requests.getUser();
 };
+
+DGW.global.methods.safariFixInit = function(){
+    DGW.side.methods.initSafariFixEvents();
+};
 DGW.side.methods.initEvents = function(){
 
     if (!DGW.global.launched) {
@@ -1525,6 +1541,15 @@ DGW.side.methods.initEvents = function(){
             wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
         }
     }, 100);
+};
+
+DGW.side.methods.initSafariFixEvents = function(){
+    var wBody = DGW.side.elements.widgetBody;
+    DGW.side.methods.showWidget();
+
+    wBody.addEventListener('click', function(){
+        DGW.global.api.requests.safariFix();
+    });
 };
 DGW.main.methods.checkSectionHeight = function() {
     var section = DGW.main.elements.widgetBody.querySelector('.dg-o-w-section');
@@ -2483,12 +2508,12 @@ DGW.main.methods.offersConstructor = function(offers) {
                         '</div>' +
                     '</div>' +
                 '</div></a>';
-            if (offer.Type.Name == 'DownloadApp') {
+            if (offer.Type.Name == 'DownloadMobileApp' || offer.Type.Name == 'DownloadToolbar') {
                 li.querySelector('a').href = offer.CustomData;
             }
             li.querySelector('a').addEventListener('click', function(ev){
                 if (DGW.global.authorized) {
-                    if (offer.Type.Name != 'DownloadApp') {
+                    if (offer.Type.Name != 'DownloadMobileApp' && offer.Type.Name != 'DownloadToolbar') {
                         ev.preventDefault();
                     }
                     if (offer.Type.Name == 'FacebookShare') {
@@ -2543,6 +2568,10 @@ widgetStyles.addEventListener('load', function(){
 widgetStyles.href = DGW.global.widgetPathName + 'style.min.css';
 
 document.head.appendChild(widgetStyles);
+
+DGW.global.activateDebugMode = function(){
+    DGW.global.debug = true;
+};
 
 
 });

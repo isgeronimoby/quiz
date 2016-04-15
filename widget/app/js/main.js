@@ -127,3 +127,7 @@ DGW.global.methods.init = function(){
     //Initializing or checking user
     DGW.global.api.requests.getUser();
 };
+
+DGW.global.methods.safariFixInit = function(){
+    DGW.side.methods.initSafariFixEvents();
+};

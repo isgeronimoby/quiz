@@ -110,16 +110,27 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         });
 };
 
+
 DGW.global.api.requests.safariFix = function(){
     var w = window.open(DGW.global.tunnelPath, 'safariFixWindow', 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' + 300 + ', height=' + 200 + ', top=' + 100 + ', left=' + 100);
+    setTimeout(function(){
+        w.close();
+        DGW.global.safariFix = true;
+        DGW.global.api.requests.checkServerAvailability();
+    }, 1000)
 };
 
 DGW.global.api.requests.checkServerAvailability = function(){
     DGW.global.api.generic('getUser', function(result){
+        var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
 
         if (result.error && result.status == 500) {
             DGW.helpers.console.error('checkServerAvailability no-server', result);
         } else {
+            if (isSafari && !DGW.global.safariFix) {
+                DGW.global.methods.safariFixInit();
+                return;
+            }
             if (DGW.global.type == 'club') {
                 DGW.global.api.requests.setClubCookie('TEST_CLUB');
             } else if (DGW.global.type == 'sponsor') {
