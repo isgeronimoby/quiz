@@ -14,6 +14,7 @@
 			if (!results[2]) return '';
 			return decodeURIComponent(results[2].replace(/\+/g, " "));
 		};
+		var interval;
 
 		var apiTunnel = function(request, onSuccess, onFailure) {
 			try {
@@ -93,8 +94,16 @@
 			onSuccess(cookies.readCookie(cookieName));
 		};
 
+
+
 		if (getURLParameter('safarifix') !== null) {
 			cookies.createCookie('safarifix', 1, 30);
+			interval = setInterval(function(){
+				if (cookies.readCookie('safarifix')) {
+					clearInterval(interval);
+					window.opener.postMessage('safarifix');
+				}
+			}, 50);
 		}
 
 		var rpc = new easyXDM.Rpc({}, {
