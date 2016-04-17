@@ -1,0 +1,55 @@
+@import '../variables.scss';
+.slider {
+  display: flex;
+  align-items: center;
+  margin: 15px 10px;
+}
+.slider-icon {
+  width: 16px;
+  height: 16px;
+  padding: 15px;
+  background-position: 15px 15px;
+  background-repeat: no-repeat;
+}
+.icon-minus {
+  background-image: url('./images/icon-slider-minus.svg');
+}
+.icon-plus {
+  background-image: url('./images/icon-slider-plus.svg');
+}
+$gripper-sz: 26px;
+.slider-body {
+  position: relative;
+  flex: 1 0 auto;
+  height: 30px;
+  overflow: hidden;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    top: calc(50% - 1px);
+    height: 2px;
+    background: $brand-color-dark;
+  }
+}
+.slider-gripper {
+  position: absolute;
+  top: 14px;
+  left: 0; right: 0;
+  height: 2px;
+  margin-left: calc($gripper-sz + 2px); /*for shadow*/
+  background: $color-grey;
+  transform: translateX(0%);
+  transition: transform .2s;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -13px; left: calc(-$gripper-sz - 2px);
+    width: $gripper-sz;
+    height: $gripper-sz;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 2px 2px 0 0 rgba(0, 0, 0, .33);
+  }
+}

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Popup from '../Popup';
 import Button from '../Button';
+import Slider from '../Slider';
 import './bet.scss';
 
 
@@ -11,14 +12,24 @@ class QuizBet extends Component {
 	};
 
 	state = {
+		betValue: 20
 	};
 
 	showPopup() {
 		this.refs['sharing-popup'].show(3000);
 	}
 
+	handelBetValueChange(betValue) {
+		this.setState({ betValue });
+	}
+
 	render() {
 		const title = 'How much you want to bet?';
+		const points = 220;
+		const odds = [10, 1];
+		const { betValue } = this.state;
+		const winValue = odds[0] * betValue;
+		const onChange = (v) => this.handelBetValueChange(v);
 
 		return (
 			<div className="quiz-content">
@@ -30,7 +41,20 @@ class QuizBet extends Component {
 					</div>
 				</Popup>
 
-				<div className="quiz-subtitle">{ title }</div>
+				<div className="bet-subtitle">{ title }</div>
+
+				<div className="bet-value">
+					<span className="bet-points">{ betValue }</span>
+					<span> points</span>
+				</div>
+
+				<Slider max={ points } value={ betValue } step={ 5 } onChange={ onChange } />
+
+				<div className="bet-subtitle">
+					Odds: <span className="text-lg">{ odds.join('-') }</span>
+					win <span className="text-lg">{ winValue }</span>
+					<span className="text-sm"> points</span>
+				</div>
 
 				<Button className="big-btn money-btn">Bet points</Button>
 
