@@ -68,7 +68,10 @@
     border-radius: 50%;
     border: 2px solid #fff;
     &.selected {
-      background: #fff;
+      background-color: #fff;
+      background-image: url('./images/icon-checkbox.svg');
+      background-repeat: no-repeat;
+      background-position: 4px 4px;
     }
   }
 }
@@ -112,7 +115,7 @@ $popup-height: 102px;
   }
 
   &.blue {
-    background: rgba(81, 97, 187, 0.9);
+    background: $popup-bg;
     color: #fff;
   }
 }
@@ -124,6 +127,9 @@ $popup-icon-sz: 65px;
   height: $popup-icon-sz;
   border-radius: 50%;
   background-color: #fff;
+  background-image: url('./images/icon-shared.svg');
+  background-repeat: no-repeat;
+  background-position: 17px 17px;
 }
 .popup-content {
   padding-left: 15px;
