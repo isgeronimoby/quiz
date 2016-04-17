@@ -1,17 +1,16 @@
 @import '../variables.scss';
-
 .menu {
   position: absolute;
   top: 0; bottom: 0;
   left: 0; right: 0;
-  background: rgba(0,0,0,.4);
+  background: rgba(0, 0, 0, .4);
   transition: background .3s ease;
   pointer-events: all;
   z-index: 2;
 
   &.is-hidden {
     pointer-events: none;
-    background: rgba(0,0,0,0);
+    background: rgba(0, 0, 0, 0);
 
     .menu-panel {
       transform: translateX(-100%);
@@ -23,13 +22,13 @@
   z-index: 1;
   top: 0; bottom: 0;
   left: 0; right: 7rem;
-  background: var(--brand-color);
+  background: $brand-color;
   transform: translateX(0);
   transition: transform .3s ease;
 
   .menu-header {
     height: 10rem;
-    background: var(--color-3);
+    background-color: $brand-color-lite;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -51,11 +50,10 @@
     display: flex;
     align-items: center;
     &:active {
-      background: var(--brand-color-dark);
+      background: $brand-color-dark;
     }
   }
 }
-
 .icon-menu-item {
   width: 56px;
   display: flex;
@@ -68,28 +66,22 @@
     margin-top: -0.5rem;
   }
 }
-
 .user-info {
-
 }
-
 .user-name {
-  color: $contrast-color;
+  color: #fff;
   font-size: 1.4rem;
   margin-bottom: 1rem;
 }
-
 .user-stats {
   font-size: 1rem;
   color: rgba(214, 231, 221, 1); /* create a variable instead and use mixin. set alpha channel as a parameter */
   flex-grow: 1;
   display: flex;
 }
-
 .user-stats-pending {
   color: rgba(214, 231, 221, .5);
 }
-
 .separator {
   padding: 0 0.3rem;
   color: rgba(214, 231, 221, .25);

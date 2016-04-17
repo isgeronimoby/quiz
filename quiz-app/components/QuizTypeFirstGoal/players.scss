@@ -6,7 +6,7 @@
     padding: 0 1.5rem;
     display: flex;
     align-items: center;
-    border-top: 0.1rem solid var(--color-2);
+    border-top: 0.1rem solid $color-grey-lite;
 
     &.selected {
       background: $selected-color;
@@ -21,19 +21,19 @@
   border-radius: 50%;
   margin-right: 1rem;
   font-size: 2.4rem;
-  color: var(--color-3);
-  background: $contrast-color;
+  color: $color-grey-dark;
+  background: #fff;
 }
 .player-info {
   flex-grow: 1;
 }
 .player-name {
   font-size: 1.7rem;
-  color: var(--color-3);
+  color: $color-grey-dark;
 }
 .player-position {
   font-size: 1.2rem;
-  color: var(--color-1);
+  color: $color-grey;
 }
 
 

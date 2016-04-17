@@ -10,7 +10,7 @@
 }
 
 .fixture-item-header {
-  background: var(--color-1);
+  background: $color-grey;
   height:   2.2rem;
   padding: 0 1.5rem;
   display: flex;
@@ -25,7 +25,7 @@
 .fixture-item-body {
   display: flex;
   height: 8rem;
-  color: $contrast-color;
+  color: #fff;
   text-decoration: none;
   &.completed {
     background: rgba(182, 182, 182, .5);
@@ -42,7 +42,7 @@
   }
   .fixture-item-team {
     width: 4rem;
-    background: $contrast-color;
+    background: #fff;
     height: 4rem;
     border-radius: 50%;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
@@ -80,11 +80,11 @@
 .list-title {
   font-size: 1.4rem;
   margin-bottom: 0.6rem;
-  color: var(--color-3);
+  color: $color-grey-dark;
 }
 
 .list-meta {
   font-size: 1rem;
-  color: var(--color-1);
+  color: $color-grey;
   text-transform: uppercase;
 }

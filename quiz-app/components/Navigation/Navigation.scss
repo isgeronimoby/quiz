@@ -12,13 +12,13 @@
 }
 .navigation-link {
   padding: 0.5em 1em;
-  color: var(--brand-color);
+  color: $brand-color;
   text-decoration: none;
   text-transform: uppercase;
   cursor: pointer;
 
   &:hover {
-    border-bottom: 3px solid var(--brand-color);
-    color: var(--text-color);
+    border-bottom: 3px solid $brand-color;
+    color: $text-color;
   }
 }

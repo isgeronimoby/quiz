@@ -1,15 +1,10 @@
-.text-dark {
-  color: #000;
-}
-
 $loader-sz: 82px;
 .loader-image {
   display: inline-block;
   position: absolute;
   top: 50%; left: 50%;
-  margin: calc(-$loader-sz/2) 0 0 calc(-$loader-sz/2);
+  margin: calc(-$loader-sz / 2) 0 0 calc(-$loader-sz / 2);
 }
-
 .cols-3 {
   display: flex;
   justify-content: center;
@@ -22,7 +17,6 @@ $loader-sz: 82px;
     transition: transform .4s ease;
   }
 }
-
 .cols-2 {
   display: flex;
   justify-content: center;

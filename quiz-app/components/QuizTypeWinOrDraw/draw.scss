@@ -10,13 +10,13 @@
   .versus {
     padding: 0 1.5rem;
     font-size: 1.7rem;
-    color: var(--color-1);
+    color: $color-grey;
     text-transform: uppercase;
   }
 }
 
 .select-btn {
-  background: $contrast-color;
+  background: #fff;
   border-radius: 50%;
   box-shadow: 0 4px 0 rgba(0, 0, 0, .3);
 
@@ -37,7 +37,7 @@
 }
 .result-draw {
   font-size: 1.4rem;
-  color: var(--color-1);
+  color: $color-grey;
   text-transform: uppercase;
   text-align: center;
 }

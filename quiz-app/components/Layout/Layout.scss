@@ -1,6 +1,5 @@
 @import '../reset.scss';
 @import '../variables.scss';
-
 html {
   font-size: 10px;
   /*
@@ -8,7 +7,6 @@ html {
     1rem inside media queries = 16px
   */
 }
-
 h2 {
   /*font-size: 3.2rem;*/
 }
@@ -18,27 +16,23 @@ h3 {
 h4 {
   /*font-size: 1.4rem;*/
 }
-
 body {
-  background-color: var(--body-bg);
-  color: var(--text-color);
-  font-family: var(--font-family-roboto);
+  background-color: $body-bg;
+  color: $text-color;
+  font-family: $font-family-roboto;
   background-image: url('../../static/images/bg.svg');
   background-repeat: no-repeat;
   background-position: left bottom;
   background-size: 100%;
   background-attachment: fixed;
 }
-
 #app {
   height: 100%;
 }
-
 .layout {
-  padding-top: var(--header-height);
-  height: calc(100% - var(--header-height));
+  padding-top: $header-height;
+  height: calc(100% - $header-height);
 }
-
 .content {
   height: 100%;
   overflow: auto;

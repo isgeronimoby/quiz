@@ -1,14 +1,14 @@
 @import '../variables.scss';
 .progress-bar {
   height: 4px;
-  background: #388E3C; /* TODO: move to variables */
+  background: $brand-color-dark;
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
 }
 .progress-bar-completed {
-  background: #C8E6C9; /* TODO: move to variables */
+  background: $brand-color-lite;
   transform-origin: 0 0;
   width: 100%;
   height: 100%;
