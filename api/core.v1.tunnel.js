@@ -1,4 +1,15 @@
 (function () {
+	var getURLParameter = function (name, url) {
+		if (!url) url = window.location.href;
+		name = name.replace(/[\[\]]/g, "\\$&");
+		var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+			results = regex.exec(url);
+		if (!results) return null;
+		if (!results[2]) return '';
+		return decodeURIComponent(results[2].replace(/\+/g, " "));
+	};
+	var interval;
+
 	var apiTunnel = function (request, onSuccess, onFailure) {
 		try {
 			var options = {
@@ -76,6 +87,18 @@
 	var readClubCookie = function (cookieName, onSuccess, onFailure) {
 		onSuccess(cookies.readCookie(cookieName));
 	};
+
+
+
+	if (getURLParameter('safarifix') !== null) {
+		cookies.createCookie('safarifix', 1, 30);
+		interval = setInterval(function () {
+			if (cookies.readCookie('safarifix')) {
+				clearInterval(interval);
+				window.opener.postMessage('safarifix');
+			}
+		}, 50);
+	}
 
 	var rpc = new easyXDM.Rpc({}, {
 		local: {
