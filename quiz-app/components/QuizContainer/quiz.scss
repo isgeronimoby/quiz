@@ -3,16 +3,15 @@
   height: 100%;
   position: relative;
   overflow: hidden;
-
-  .quiz-swiper {
-    display: flex;
-    position: absolute;
-    top: 4px; /*TODO - to var*/
-    bottom: 0;
-    left: 0;
-    transform: translateX(0%);
-    transition: transform .3s ease;
-  }
+}
+.quiz-swiper {
+  display: flex;
+  position: absolute;
+  top: 4px; /*TODO - to var*/
+  bottom: 0;
+  left: 0;
+  transform: translateX(0%);
+  transition: transform .3s ease;
 }
 .quiz-content {
   position: relative;

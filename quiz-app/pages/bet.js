@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import withFetch from '../components/withFetch';
-import QuizBet from '../components/QuizBet';
+import QuizBetContainer from '../components/QuizBetContainer';
 
 const DELAY = 500;
 
@@ -23,7 +23,7 @@ class Quiz extends Component {
 
 	render() {
 		return (
-			<QuizBet {...this.props} />
+			<QuizBetContainer {...this.props} />
 		);
 	}
 

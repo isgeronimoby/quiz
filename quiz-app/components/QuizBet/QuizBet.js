@@ -8,7 +8,9 @@ import './bet.scss';
 class QuizBet extends Component {
 
 	static propTypes = {
-		data: PropTypes.array.isRequired,
+		points: PropTypes.number.isRequired,
+		odds: PropTypes.array.isRequired,
+		onSubmit: PropTypes.func.isRequired,
 	};
 
 	state = {
@@ -24,9 +26,7 @@ class QuizBet extends Component {
 	}
 
 	render() {
-		const title = 'How much you want to bet?';
-		const points = 220;
-		const odds = [10, 1];
+		const { points, odds, onSubmit } = this.props;
 		const { betValue } = this.state;
 		const winValue = odds[0] * betValue;
 		const onChange = (v) => this.handelBetValueChange(v);
@@ -41,7 +41,7 @@ class QuizBet extends Component {
 					</div>
 				</Popup>
 
-				<div className="bet-subtitle">{ title }</div>
+				<div className="bet-subtitle">How much you want to bet?</div>
 
 				<div className="bet-value">
 					<span className="bet-points">{ betValue }</span>
@@ -56,7 +56,7 @@ class QuizBet extends Component {
 					<span className="text-sm"> points</span>
 				</div>
 
-				<Button className="big-btn money-btn">Bet points</Button>
+				<Button className="big-btn money-btn" onClick={() => onSubmit()} >Bet points</Button>
 
 				<Button className="big-btn share-btn" onClick={ () => this.showPopup() }>
 					Share and get +10 points
