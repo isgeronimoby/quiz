@@ -29,6 +29,7 @@
   .menu-header {
     height: 10rem;
     background-color: $brand-color-lite;
+    background-image: url('./images/menu-bg.svg');
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -69,7 +70,7 @@
 .user-info {
 }
 .user-name {
-  color: #fff;
+  color: $color-grey-dark;
   font-size: 1.4rem;
   margin-bottom: 1rem;
 }
@@ -79,10 +80,13 @@
   flex-grow: 1;
   display: flex;
 }
+.user-stats-points {
+  color: #000;
+}
 .user-stats-pending {
-  color: rgba(214, 231, 221, .5);
+  color: $color-grey; /*rgba(214, 231, 221, .5);*/
 }
 .separator {
   padding: 0 0.3rem;
-  color: rgba(214, 231, 221, .25);
+  color: $color-grey; /*rgba(214, 231, 221, .25);*/
 }

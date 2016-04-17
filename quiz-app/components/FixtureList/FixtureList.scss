@@ -11,6 +11,7 @@
 
 .fixture-item-header {
   background: $color-grey;
+  color: $brand-color-lite;
   height:   2.2rem;
   padding: 0 1.5rem;
   display: flex;
@@ -28,7 +29,7 @@
   color: #fff;
   text-decoration: none;
   &.completed {
-    background: rgba(182, 182, 182, .5);
+    background: $color-selection;
     pointer-events: none;
   }
 
