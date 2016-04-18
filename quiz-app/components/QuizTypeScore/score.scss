@@ -13,7 +13,6 @@
   max-width: 15rem;
 }
 .team-idle-content {
-  background: rgba(114, 114, 114, .3);
   width: 10.5rem;
   height: 10.5rem;
   border-radius: 50%;
@@ -21,16 +20,28 @@
   align-items: center;
   justify-content: center;
   font-size: 6rem;
+  font-weight: 300;
   margin-bottom: 1rem;
-  .team-idle.disabled & {
-    background: rgba(114, 114, 114, .15);
-    color: rgba(255, 255, 255, .5);
+  background: rgba(114, 114, 114, .15);
+
+  .team-idle.touched & {
+    background: rgba(114, 114, 114, .3);
+  }
+  .team-idle.selected & {
+    background: $brand-color-dark;
   }
 }
 .team-name {
   font-size: 2.4rem;
-  color: $color-grey;
   text-align: center;
+  color: rgba(182, 182, 182, .3);
+
+  .team-idle.touched & {
+    color: $color-grey;
+  }
+  .team-idle.selected & {
+    color: $brand-color-dark;
+  }
 }
 .colon {
   font-size: 5rem;
