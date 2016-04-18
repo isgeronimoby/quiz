@@ -16,8 +16,10 @@ class Slider extends Component {
 
 	getValueByOffset(pageX) {
 		const { max } = this.props;
-		const offset = pageX - this._bodyEl.offsetLeft;
 		const width = this._bodyEl.offsetWidth;
+		let offset = pageX - this._bodyEl.offsetLeft;
+		offset = Math.max(0, Math.min(width, offset));
+
 		return Math.floor(offset / width * max);
 	}
 
@@ -29,23 +31,23 @@ class Slider extends Component {
 	render() {
 		const { max, value, step = 10, onChange } = this.props;
 		const posPercent = value / max * 100;
-		const onPlus = () => onChange(this.getValueByDiff(step));
-		const onMinus = () => onChange(this.getValueByDiff(-step));
-		const onClick = (e) => onChange(this.getValueByOffset(e.pageX));
+		const onPlusClick = () => onChange(this.getValueByDiff(step));
+		const onMinusClick = () => onChange(this.getValueByDiff(-step));
+		const onLineClick = (e) => onChange(this.getValueByOffset(e.pageX));
 		const onPanStart = (e) => onChange(this.getValueByOffset(e.center.x));
 		const onPan = (e) => onChange(this.getValueByOffset(e.center.x));
 
 		return (
 			<div className="slider">
-				<div className="slider-icon icon-minus" onClick={ onMinus }></div>
+				<div className="slider-icon icon-minus" onClick={ onMinusClick }></div>
 
 				<Hammer onPanStart={onPanStart} onPan={onPan}>
-					<div ref={(c) => this._bodyEl = c} className="slider-body" onClick={ onClick }>
+					<div ref={(c) => this._bodyEl = c} className="slider-body" onClick={ onLineClick }>
 						<div className="slider-gripper" style={{transform: `translateX(${posPercent}%)`}}></div>
 					</div>
 				</Hammer>
 
-				<div className="slider-icon icon-plus" onClick={ onPlus }></div>
+				<div className="slider-icon icon-plus" onClick={ onPlusClick }></div>
 			</div>
 		);
 	}
