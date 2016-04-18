@@ -1,5 +1,6 @@
 const data = [
     {
+		quizId: 1,
         date: '28 April',
         time: '19:00',
         competition: 'Champions league',
@@ -17,6 +18,7 @@ const data = [
         completed: true
     },
     {
+		quizId: 2,
         date: '28 April',
         time: '19:00',
         competition: 'Champions league',
@@ -34,6 +36,7 @@ const data = [
         completed: false
     },
     {
+		quizId: 3,
         date: '29 April',
         time: '19:00',
         competition: 'Champions league',
@@ -51,6 +54,7 @@ const data = [
         completed: false
     },
     {
+		quizId: 1,
         date: '29 April',
         time: '19:00',
         competition: 'Unknown tournament',
