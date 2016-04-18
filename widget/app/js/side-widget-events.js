@@ -13,6 +13,8 @@ DGW.side.methods.initEvents = function(){
     var registeredArea = wBody.querySelector('.dg-side-widget-content.dg-o-w-authorized .dg-side-section');
     ctas.push(registeredArea);
 
+    wBody.removeEventListener('click', DGW.global.api.requests.safariFix);
+
     resizerBtn.addEventListener('click', function(){
         if (DGW.helpers.hasClass(wBody, 'dg-side-widget-expanded')) {
             DGW.helpers.removeClass(wBody, 'dg-side-widget-expanded');
@@ -28,7 +30,6 @@ DGW.side.methods.initEvents = function(){
             } else {
                 DGW.main.methods.hideWidget();
             }
-
         });
     });
 
@@ -43,10 +44,17 @@ DGW.side.methods.initEvents = function(){
 };
 
 DGW.side.methods.initSafariFixEvents = function(){
+    var initInterval;
     var wBody = DGW.side.elements.widgetBody;
     DGW.side.methods.showWidget();
 
-    wBody.addEventListener('click', function(){
-        DGW.global.api.requests.safariFix();
-    });
+    wBody.addEventListener('click', DGW.global.api.requests.safariFix);
+
+    initInterval = window.setInterval(function(){
+        if (DGW.global.cache.last.prize) {
+            window.clearInterval(initInterval);
+            wBody.querySelector('.dg-side-prize').src = DGW.global.cache.last.prize.ImageUrl;
+            wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
+        }
+    }, 100);
 };

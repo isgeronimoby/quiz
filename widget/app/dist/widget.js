@@ -54,6 +54,9 @@ window.DGW = function () {
                 },
                 global: {
                     type: widgetType, // sponsor || club
+                    club: {
+                        name: 'TEST_CLUB'
+                    },
                     authorized: false,
                     launched: false,
                     safariFix: false,
@@ -73,7 +76,8 @@ window.DGW = function () {
                     tunnelPath: envPath,
                     widgetPathName: widgetPathName,
                     userStats: {},
-                    debug: debugMode
+                    debug: debugMode,
+                    safariFixFirstOpen: false
                 },
                 states: {},
                 helpers: {}
@@ -505,53 +509,71 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
 
 
 DGW.global.api.requests.safariFix = function(){
-    var w = window.open(DGW.global.tunnelPath, '_blank', 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' + 300 + ', height=' + 200 + ', top=' + 100 + ', left=' + 100);
+    var w = window.open(DGW.global.tunnelPath +
+    '?safarifix', '_blank', 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, ' +
+    'width=' + 1 + ', height=' + 1 + ', top=' + 0 + ', left=' + 0);
+
     setTimeout(function(){
         w.close();
         DGW.global.safariFix = true;
+        DGW.global.safariFixFirstOpen = true;
         DGW.global.api.requests.checkServerAvailability();
-    }, 1000);
+    }, 200);
 };
 
 DGW.global.api.requests.checkServerAvailability = function(){
     DGW.global.api.generic('getUser', function(result){
-        var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
-
         if (result.error && result.status == 500) {
             DGW.helpers.console.error('checkServerAvailability no-server', result);
         } else {
-            if (isSafari && !DGW.global.safariFix) {
-                DGW.global.methods.safariFixInit();
-                return;
-            }
-            if (DGW.global.type == 'club') {
-                DGW.global.api.requests.setClubCookie('TEST_CLUB');
-            } else if (DGW.global.type == 'sponsor') {
-                DGW.global.api.requests.readClubCookie('TEST_CLUB');
-            } else {
-                DGW.helpers.console.warn('Please, add "data-type" attribute to the widget');
-            }
+            DGW.global.api.requests.getDraws(DGW.global.api.requests.initMainFlow);
         }
     });
 };
 
-DGW.global.api.requests.setClubCookie = function(cookieName){
+DGW.global.api.requests.initMainFlow = function(){
+    var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+    if (isSafari && !DGW.global.safariFix) {
+        DGW.global.api.requests.readServerCookie('safarifix', function (response) {
+            if (!response) {
+                DGW.global.methods.safariFixInit();
+            } else {
+                DGW.global.safariFix = true;
+                DGW.global.api.requests.checkServerAvailability();
+            }
+        });
+    } else {
+        if (DGW.global.type == 'club') {
+            DGW.global.api.requests.setServerCookie(DGW.global.club.name, function (response) {
+                if (response) {
+                    DGW.global.methods.init();
+                } else {
+                    DGW.helpers.console.warn('no third party cookies enabled');
+                }
+            });
+        } else if (DGW.global.type == 'sponsor') {
+            DGW.global.api.requests.readServerCookie(DGW.global.club.name, function (response) {
+                if (response == 1) {
+                    DGW.global.methods.init();
+                }
+            });
+        } else {
+            DGW.helpers.console.warn('Please, add "data-type" attribute to the widget');
+        }
+    }
+};
+
+DGW.global.api.requests.setServerCookie = function(cookieName, _callback){
     DGW.global.api.rpc.writeClubCookie(cookieName, function onSuccess(response){
         DGW.helpers.console.info(response);
-        if (response) {
-            DGW.global.methods.init();
-        } else {
-            DGW.helpers.console.warn('no third party cookies enabled');
-        }
+        if (_callback) _callback(response);
     });
 };
 
-DGW.global.api.requests.readClubCookie = function(cookieName){
+DGW.global.api.requests.readServerCookie = function(cookieName, _callback){
     DGW.global.api.rpc.readClubCookie(cookieName, function onSuccess(response){
         DGW.helpers.console.info(response);
-        if (response == 1) {
-            DGW.global.methods.init();
-        }
+        if (_callback) _callback(response);
     });
 };
 
@@ -591,7 +613,7 @@ DGW.global.api.requests.signIn = function(userObj){
 };
 
 DGW.global.api.requests.signOut = function(){
-    DGW.global.api.generic('signOut', function(result){
+    DGW.global.api.generic('signOut', function(){
         //TODO: review it later, maybe
         DGW.helpers.console.info('Signed out');
         DGW.global.authorized = false;
@@ -615,7 +637,7 @@ DGW.global.api.requests.getUser = function(){
     });
 };
 
-DGW.global.api.requests.getDraws = function(){
+DGW.global.api.requests.getDraws = function(_callback){
     DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getDraws', function(result) {
         if (result.status == 200) {
@@ -631,6 +653,7 @@ DGW.global.api.requests.getDraws = function(){
                 DGW.main.methods.drawsConstructor(DGW.main.cache);
                 DGW.main.methods.loadingFinished();
             }
+            if (_callback) _callback();
         } else {
             DGW.helpers.console.error('getDraws ', result.error);
         }
@@ -1494,6 +1517,10 @@ DGW.global.methods.init = function(){
 
     //Initializing or checking user
     DGW.global.api.requests.getUser();
+
+    if (DGW.global.safariFixFirstOpen) {
+        DGW.main.methods.showWidget();
+    }
 };
 
 DGW.global.methods.safariFixInit = function(){
@@ -1514,6 +1541,8 @@ DGW.side.methods.initEvents = function(){
     var registeredArea = wBody.querySelector('.dg-side-widget-content.dg-o-w-authorized .dg-side-section');
     ctas.push(registeredArea);
 
+    wBody.removeEventListener('click', DGW.global.api.requests.safariFix);
+
     resizerBtn.addEventListener('click', function(){
         if (DGW.helpers.hasClass(wBody, 'dg-side-widget-expanded')) {
             DGW.helpers.removeClass(wBody, 'dg-side-widget-expanded');
@@ -1529,7 +1558,6 @@ DGW.side.methods.initEvents = function(){
             } else {
                 DGW.main.methods.hideWidget();
             }
-
         });
     });
 
@@ -1544,12 +1572,19 @@ DGW.side.methods.initEvents = function(){
 };
 
 DGW.side.methods.initSafariFixEvents = function(){
+    var initInterval;
     var wBody = DGW.side.elements.widgetBody;
     DGW.side.methods.showWidget();
 
-    wBody.addEventListener('click', function(){
-        DGW.global.api.requests.safariFix();
-    });
+    wBody.addEventListener('click', DGW.global.api.requests.safariFix);
+
+    initInterval = window.setInterval(function(){
+        if (DGW.global.cache.last.prize) {
+            window.clearInterval(initInterval);
+            wBody.querySelector('.dg-side-prize').src = DGW.global.cache.last.prize.ImageUrl;
+            wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
+        }
+    }, 100);
 };
 DGW.main.methods.checkSectionHeight = function() {
     var section = DGW.main.elements.widgetBody.querySelector('.dg-o-w-section');
@@ -2570,7 +2605,7 @@ widgetStyles.href = DGW.global.widgetPathName + 'style.min.css';
 
 document.head.appendChild(widgetStyles);
 
-DGW.global.activateDebugMode = function(){
+window.dgwActivateDebugMode = function(){
     DGW.global.debug = true;
 };
 

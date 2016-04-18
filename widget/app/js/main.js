@@ -126,6 +126,10 @@ DGW.global.methods.init = function(){
 
     //Initializing or checking user
     DGW.global.api.requests.getUser();
+
+    if (DGW.global.safariFixFirstOpen) {
+        DGW.main.methods.showWidget();
+    }
 };
 
 DGW.global.methods.safariFixInit = function(){

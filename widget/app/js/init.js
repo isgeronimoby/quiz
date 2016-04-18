@@ -53,6 +53,9 @@ window.DGW = function () {
                 },
                 global: {
                     type: widgetType, // sponsor || club
+                    club: {
+                        name: 'TEST_CLUB'
+                    },
                     authorized: false,
                     launched: false,
                     safariFix: false,
@@ -72,7 +75,8 @@ window.DGW = function () {
                     tunnelPath: envPath,
                     widgetPathName: widgetPathName,
                     userStats: {},
-                    debug: debugMode
+                    debug: debugMode,
+                    safariFixFirstOpen: false
                 },
                 states: {},
                 helpers: {}
