@@ -65,7 +65,7 @@ class QuizContainer extends Component {
 
 	render() {
 		const { data } = this.props;
-		const quizes = data.map(({ type, ...rest }, i) => {
+		const quizSteps = data.map(({ type, ...rest }, i) => {
 			const Quiz = type2componet[type];
 			return (
 				<Quiz key={ `type-${i}` } {...rest} onStatsShown={ (quizId) => this.onStatsShown(quizId) }/>
@@ -94,7 +94,7 @@ class QuizContainer extends Component {
 				<ProgressBar total={ totalSteps } current={ this.state.currentStep }/>
 				<Hammer onSwipe={onSwipe}>
 					<div className="quiz-swiper" style={ containerStyle }>
-						{ quizes }
+						{ quizSteps }
 						<QuizSummary />
 					</div>
 				</Hammer>

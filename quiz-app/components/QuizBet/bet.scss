@@ -1,0 +1,25 @@
+@import '../variables.scss';
+.bet-subtitle {
+  font-size: 1.8rem;
+  padding: 2rem 0;
+  text-align: center;
+  color: $color-grey-dark;
+
+  .text-lg {
+    font-size: 3.2rem;
+  }
+  .text-sm {
+    font-size: 1.2rem;
+  }
+}
+
+.bet-value {
+  font-weight: bold;
+  font-size: 1.9rem;
+  text-align: center;
+  color: $color-grey-dark;
+
+  .bet-points {
+    font-size: 4.4rem;
+  }
+}

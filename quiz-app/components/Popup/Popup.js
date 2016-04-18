@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import './summary.scss';
+import './popup.scss';
 
 class Popup extends Component {
 
