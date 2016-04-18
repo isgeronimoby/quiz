@@ -15,7 +15,7 @@ class QuizBetExit extends Component {
 					Amazing illustration here
 				</div>
 
-				<a className="big-btn money-btn" href="//google.com">
+				<a className="big-btn money-btn" href="//google.com" target="_blank">
 					Sign Up to our betting partner<br/>
 					<span className="btn-text-sm">and earn +500 more points</span>
 				</a>

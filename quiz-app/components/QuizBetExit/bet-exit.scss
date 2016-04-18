@@ -1,5 +1,7 @@
 @import '../variables.scss';
 .quiz-exit {
+  height: 100%;
+  overflow-y: auto;
   text-align: center;
 
   & > .text-regular {
