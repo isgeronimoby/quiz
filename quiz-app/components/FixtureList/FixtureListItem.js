@@ -6,7 +6,7 @@ class FixtureListItem extends Component {
 
     static propTypes = {
         header: PropTypes.string,
-        data: PropTypes.object.isRequired
+        data: PropTypes.object.isRequired,
     };
 
     render() {

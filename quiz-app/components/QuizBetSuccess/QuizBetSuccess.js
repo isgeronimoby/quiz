@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import './bet-success.scss';
 
-const SHOW_TIME = 3000;
+const SHOW_TIME = 1000;
 
 
 class QuizBetSuccess extends Component {
