@@ -40,7 +40,6 @@ $gripper-sz: 26px;
   margin-left: calc($gripper-sz + 2px); /*for shadow*/
   background: $color-grey;
   transform: translateX(0%);
-  transition: transform .2s;
 
   &::before {
     content: '';

@@ -48,7 +48,7 @@ class QuizBet extends Component {
 					<span> points</span>
 				</div>
 
-				<Slider max={ points } value={ betValue } step={ 5 } onChange={ onChange } />
+				<Slider max={ points } value={ betValue } step={ 1 } onChange={ onChange } />
 
 				<div className="bet-subtitle">
 					Odds: <span className="text-lg">{ odds.join('-') }</span>
