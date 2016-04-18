@@ -95,7 +95,7 @@
 		interval = setInterval(function () {
 			if (cookies.readCookie('safarifix')) {
 				clearInterval(interval);
-				window.opener.postMessage('safarifix');
+				window.close();
 			}
 		}, 50);
 	}
