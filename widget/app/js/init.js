@@ -49,7 +49,10 @@ window.DGW = function () {
                         drawsEntries: [],
                         rewardedActions: []
                     },
-                    shown: false
+                    shown: false,
+                    settings: {
+                        hiddenDrawsShow: false
+                    }
                 },
                 side: {
                     methods: {},

@@ -1537,6 +1537,11 @@
   margin-bottom: 12px;
   font-weight: 100;
 }
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-offers:empty:after {
+  font-size: 1rem;
+  content: 'Sorry, no matched offers found, try another filters';
+  color: #00369c;
+}
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws {
   font-size: 0;
 }

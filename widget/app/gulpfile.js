@@ -8,7 +8,14 @@ var gulp = require('gulp'),
     eol = require('gulp-eol');
 
 
-var scripts = ['js/init.js', 'js/easyXDM.min.js', 'js/vanilla-slider.js', 'js/requests.js', 'js/offers-requests.js', 'js/helpers.js','js/templates.js', 'js/main.js', 'js/side-widget-events.js', 'js/page-events.js', 'js/fillMethods.js', 'js/launch.js'];
+var scripts = [
+    'js/init.js', 'js/easyXDM.min.js',
+    'js/vanilla-slider.js', 'js/requests.js',
+    'js/offers-requests.js', 'js/helpers.js',
+    'js/templates.js', 'js/main.js',
+    'js/side-widget-events.js', 'js/page-events.js',
+    'js/fill-methods.js', 'js/launch.js'
+];
 
 gulp.task('scripts-min', function(){
     return gulp.src(scripts)

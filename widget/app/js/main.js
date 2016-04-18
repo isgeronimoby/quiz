@@ -99,6 +99,7 @@ DGW.global.methods.unAuthorize = function(){
     if (DGW.main.currentState === 'profile') {
         DGW.main.methods.changeMainState('profile');
     }
+    DGW.main.methods.resetStates();
 };
 
 
