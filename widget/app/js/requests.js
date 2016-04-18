@@ -55,10 +55,10 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             requestBody = JSON.stringify(requestBody);
             break;
         case 'getAllActivities':
-            endpoint = 'activityfeed/getallactivities';
+            endpoint = 'activity/getallactivities';
             break;
         case 'getUserActivities':
-            endpoint = 'activityfeed/getuseractivities';
+            endpoint = 'activity/getuseractivities';
             break;
         case 'getOffers':
             endpoint = 'offer/getoffers';
@@ -115,13 +115,15 @@ DGW.global.api.requests.safariFix = function(){
     var w = window.open(DGW.global.tunnelPath +
     '?safarifix', '_blank', 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, ' +
     'width=' + 1 + ', height=' + 1 + ', top=' + 0 + ', left=' + 0);
-
-    setTimeout(function(){
-        w.close();
-        DGW.global.safariFix = true;
-        DGW.global.safariFixFirstOpen = true;
-        DGW.global.api.requests.checkServerAvailability();
-    }, 200);
+    var interval;
+    interval = setInterval(function(){
+        if (w.closed) {
+            window.clearInterval(interval);
+            DGW.global.safariFix = true;
+            DGW.global.safariFixFirstOpen = true;
+            DGW.global.api.requests.checkServerAvailability();
+        }
+    }, 50);
 };
 
 DGW.global.api.requests.checkServerAvailability = function(){
@@ -306,8 +308,8 @@ DGW.global.api.requests.claimPrize = function(drawId, address, el){
 };
 
 DGW.global.api.requests.connectFB = function(){
-    DGW.helpers.centerWindowPopup(DGW.global.tunnelPath.substring(DGW.global.tunnelPath.lastIndexOf('/') + 1, 0) +
-    'publisher/v1/auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340);
+    DGW.helpers.centerWindowPopup(DGW.global.envPath +
+    'auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340);
 };
 
 DGW.global.api.requests.getAllActivities = function(){

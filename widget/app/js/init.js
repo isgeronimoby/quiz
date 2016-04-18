@@ -4,7 +4,7 @@ window.DGW = function () {
         var widgetPathName = widgetScript.src;
         widgetPathName = widgetPathName.substring(widgetPathName.lastIndexOf('/') + 1, 0);
         var key = widgetScript.getAttribute('data-key');
-        var envPath;
+        var envPath, tunnelPath;
         var debugMode = false;
         var widgetType = 'club';
 
@@ -12,15 +12,19 @@ window.DGW = function () {
 
             // getting tunnel file path
             if (widgetScript.getAttribute('data-tunnel') !== null) {
-                envPath = 'http://spr-api-test.cloudapp.net/tunnel.html';
+                tunnelPath = 'http://spr-api-test.cloudapp.net/core/v1/xdm/tunnel';
+                envPath = tunnelPath.substring(tunnelPath.lastIndexOf('/xdm/') + 1, 0);
                 if (widgetScript.getAttribute('data-tunnel') === 'local') {
-                    envPath = 'http://localhostdev/spr-api/tunnel.html';
+                    tunnelPath = 'http://localhostdev/spr-api/core/v1/xdm/tunnel';
+                    envPath = tunnelPath.substring(tunnelPath.lastIndexOf('/xdm/') + 1, 0);
                 } else if (widgetScript.getAttribute('data-tunnel') === 'live') {
-                    envPath = 'https://api.rewarded.club/tunnel.html';
+                    tunnelPath = 'https://api.rewarded.club/core/v1/xdm/tunnel';
+                    envPath = tunnelPath.substring(tunnelPath.lastIndexOf('/xdm/') + 1, 0);
                 }
             } else {
                 // No parameter - use production path
-                envPath = 'https://api.rewarded.club/tunnel.html';
+                tunnelPath = 'https://api.rewarded.club/tunnel.html';
+                envPath = tunnelPath.substring(DGW.global.tunnelPath.lastIndexOf('/xdm/') + 1, 0);
             }
 
             // checking for debug mode
@@ -72,7 +76,8 @@ window.DGW = function () {
                     },
                     elements: {},
                     methods: {},
-                    tunnelPath: envPath,
+                    tunnelPath: tunnelPath,
+                    envPath: envPath,
                     widgetPathName: widgetPathName,
                     userStats: {},
                     debug: debugMode,

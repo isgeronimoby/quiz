@@ -5,7 +5,7 @@ window.DGW = function () {
         var widgetPathName = widgetScript.src;
         widgetPathName = widgetPathName.substring(widgetPathName.lastIndexOf('/') + 1, 0);
         var key = widgetScript.getAttribute('data-key');
-        var envPath;
+        var envPath, tunnelPath;
         var debugMode = false;
         var widgetType = 'club';
 
@@ -13,15 +13,19 @@ window.DGW = function () {
 
             // getting tunnel file path
             if (widgetScript.getAttribute('data-tunnel') !== null) {
-                envPath = 'http://spr-api-test.cloudapp.net/tunnel.html';
+                tunnelPath = 'http://spr-api-test.cloudapp.net/core/v1/xdm/tunnel';
+                envPath = tunnelPath.substring(tunnelPath.lastIndexOf('/xdm/') + 1, 0);
                 if (widgetScript.getAttribute('data-tunnel') === 'local') {
-                    envPath = 'http://localhostdev/spr-api/tunnel.html';
+                    tunnelPath = 'http://localhostdev/spr-api/core/v1/xdm/tunnel';
+                    envPath = tunnelPath.substring(tunnelPath.lastIndexOf('/xdm/') + 1, 0);
                 } else if (widgetScript.getAttribute('data-tunnel') === 'live') {
-                    envPath = 'https://api.rewarded.club/tunnel.html';
+                    tunnelPath = 'https://api.rewarded.club/core/v1/xdm/tunnel';
+                    envPath = tunnelPath.substring(tunnelPath.lastIndexOf('/xdm/') + 1, 0);
                 }
             } else {
                 // No parameter - use production path
-                envPath = 'https://api.rewarded.club/tunnel.html';
+                tunnelPath = 'https://api.rewarded.club/tunnel.html';
+                envPath = tunnelPath.substring(DGW.global.tunnelPath.lastIndexOf('/xdm/') + 1, 0);
             }
 
             // checking for debug mode
@@ -73,7 +77,8 @@ window.DGW = function () {
                     },
                     elements: {},
                     methods: {},
-                    tunnelPath: envPath,
+                    tunnelPath: tunnelPath,
+                    envPath: envPath,
                     widgetPathName: widgetPathName,
                     userStats: {},
                     debug: debugMode,
@@ -452,10 +457,10 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             requestBody = JSON.stringify(requestBody);
             break;
         case 'getAllActivities':
-            endpoint = 'activityfeed/getallactivities';
+            endpoint = 'activity/getallactivities';
             break;
         case 'getUserActivities':
-            endpoint = 'activityfeed/getuseractivities';
+            endpoint = 'activity/getuseractivities';
             break;
         case 'getOffers':
             endpoint = 'offer/getoffers';
@@ -512,13 +517,15 @@ DGW.global.api.requests.safariFix = function(){
     var w = window.open(DGW.global.tunnelPath +
     '?safarifix', '_blank', 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, ' +
     'width=' + 1 + ', height=' + 1 + ', top=' + 0 + ', left=' + 0);
-
-    setTimeout(function(){
-        w.close();
-        DGW.global.safariFix = true;
-        DGW.global.safariFixFirstOpen = true;
-        DGW.global.api.requests.checkServerAvailability();
-    }, 200);
+    var interval;
+    interval = setInterval(function(){
+        if (w.closed) {
+            window.clearInterval(interval);
+            DGW.global.safariFix = true;
+            DGW.global.safariFixFirstOpen = true;
+            DGW.global.api.requests.checkServerAvailability();
+        }
+    }, 50);
 };
 
 DGW.global.api.requests.checkServerAvailability = function(){
@@ -703,8 +710,8 @@ DGW.global.api.requests.claimPrize = function(drawId, address, el){
 };
 
 DGW.global.api.requests.connectFB = function(){
-    DGW.helpers.centerWindowPopup(DGW.global.tunnelPath.substring(DGW.global.tunnelPath.lastIndexOf('/') + 1, 0) +
-    'publisher/v1/auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340);
+    DGW.helpers.centerWindowPopup(DGW.global.envPath +
+    'auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340);
 };
 
 DGW.global.api.requests.getAllActivities = function(){
@@ -849,8 +856,8 @@ DGW.global.api.requests.getEarnedBadges = function(){
     });
 };
 DGW.global.offers.requests.shareOfferFb = function(offerId){
-    DGW.helpers.centerWindowPopup(DGW.global.tunnelPath.substring(DGW.global.tunnelPath.lastIndexOf('/') + 1, 0) +
-    'publisher/v1/offer/facebookshare?api_key=' + DGW.global.api.apiKey + '&offerid=' + offerId, 'fbWindow', 460, 340, function(){
+    DGW.helpers.centerWindowPopup(DGW.global.envPath +
+    'offer/facebookshare?api_key=' + DGW.global.api.apiKey + '&offerid=' + offerId, 'fbWindow', 460, 340, function(){
         DGW.global.api.requests.getUserOffers();
     });
 };
