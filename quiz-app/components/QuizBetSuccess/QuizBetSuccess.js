@@ -11,7 +11,7 @@ class QuizBetSuccess extends Component {
 	};
 
 	componentDidMount() {
-		//setTimeout(() => this.props.onDismiss(), SHOW_TIME);
+		setTimeout(() => this.props.onDismiss(), SHOW_TIME);
 	}
 
 	render() {

@@ -1,1 +1,19 @@
 @import '../variables.scss';
+.quiz-exit {
+  text-align: center;
+
+  & > .text-regular {
+    margin: -20px 0 15px;
+  }
+}
+.big-image {
+  margin: 15px;
+  background: $color-grey;
+  height: 300px;
+  line-height: 300px;
+}
+/*TODO - to util*/
+.text-regular {
+  font-size: 1.8rem;
+  color: $color-grey-dark
+}
