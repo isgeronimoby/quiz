@@ -11,7 +11,11 @@ const route = async (path, params = {}, callback) => {
 	const handler = routes[path] || routes['/404'];
 	const Component = await handler();
 	const pageTitle = Component.title || 'Index';
-	await callback(<Layout title={pageTitle}><Component params={params}/></Layout>);
+	await callback(
+		<Layout title={pageTitle} path={path}>
+			<Component params={params}/>
+		</Layout>
+	);
 };
 
 function run() {

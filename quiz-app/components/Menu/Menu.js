@@ -5,21 +5,44 @@ import './Menu.scss';
 
 const DIRECTION_LEFT = 2; //from Hammer
 
+
+const MenuItem = (props) => {
+	const { label, path, active } = props;
+	const path2icon = (path) => {
+		if (path === 'earn') {
+			return require('../../static/images/icon-cup.svg');
+		}
+		return require(`./images/icon-${path}.svg`);
+	};
+
+	return (
+		<Link className={`menu-item menu-item-${path} ${active ? 'active' : ''}`} to={`./${path}`}>
+			<div className="icon-menu-item">
+				<img src={ path2icon(path) }/>
+			</div>
+			<h3>{ label }</h3>
+		</Link>
+	)
+};
+
 class Menu extends Component {
 
 	static propTypes = {
+		activePath: PropTypes.string,
 		show: PropTypes.bool.isRequired,
 		onClick: PropTypes.func.isRequired,
 	};
 
 	render() {
-		const { show, ...others} = this.props;
+		const { activePath, show, ...others} = this.props;
 		const hiddenClass = !show ? 'is-hidden' : '';
 		const onSwipe = (e) => {
 			if (e.direction === DIRECTION_LEFT) {
 				this.props.onClick(); // close menu
 			}
 		};
+		const isActiveItem = (path) => (activePath === `/${path}`);
+
 
 		return (
 			<Hammer onSwipe={onSwipe}>
@@ -40,30 +63,13 @@ class Menu extends Component {
 							</div>
 						</div>
 
-						<Link className="menu-item menu-item-fixtures" to="./fixtures">
-							<div className="icon-menu-item">
-								<img src={require('./images/icon-fixtures.svg')}/>
-							</div>
-							<h3>Fixtures</h3>
-						</Link>
-						<Link className="menu-item menu-item-leaderboard" to="./">
-							<div className="icon-menu-item">
-								<img src={require('./images/icon-leaderboard.svg')}/>
-							</div>
-							<h3>Leaderboard</h3>
-						</Link>
-						<Link className="menu-item menu-item-earn" to="./">
-							<div className="icon-menu-item">
-								<img src={require('../../static/images/icon-cup.svg')}/>
-							</div>
-							<h3>Earn</h3>
-						</Link>
-						<Link className="menu-item menu-item-draws" to="./">
-							<div className="icon-menu-item">
-								<img src={require('./images/icon-draws.svg')}/>
-							</div>
-							<h3>Draws</h3>
-						</Link>
+						<MenuItem label="Fixtures" path='fixtures' active={ isActiveItem('fixtures') } />
+
+						<MenuItem label="Leaderboard" path='leaderboard' active={ isActiveItem('leaderboard') } />
+
+						<MenuItem label="Earn" path='earn' active={ isActiveItem('earn') } />
+
+						<MenuItem label="Draws" path='draws' active={ isActiveItem('draws') } />
 					</div>
 				</div>
 			</Hammer>
