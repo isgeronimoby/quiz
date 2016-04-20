@@ -5,17 +5,27 @@
  */
 
 import webpack from 'webpack';
+import path from 'path';
+import merge from 'lodash.merge';
 import task from './lib/task';
-import config from './webpack.config';
+import configs from './webpack.config';
 
-export default task(function bundle() {
+export default task(function bundle(dir = 'build') {
+
+	// overwrite path config
+	const configsWithDir = configs.map((c) => merge({}, c, {
+		output: {
+			path: path.join(__dirname, `../${dir}`)
+		}
+	}));
+
 	return new Promise((resolve, reject) => {
-		const bundler = webpack(config);
+		const bundler = webpack(configsWithDir);
 		const run = (err, stats) => {
 			if (err) {
 				reject(err);
 			} else {
-				console.log(stats.toString(config[0].stats));
+				console.log(stats.toString(configsWithDir[0].stats));
 				resolve();
 			}
 		};
