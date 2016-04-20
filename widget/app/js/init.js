@@ -51,7 +51,7 @@ window.DGW = function () {
                     },
                     shown: false,
                     settings: {
-                        hiddenDrawsShow: false
+                        hiddenDrawsShow: true
                     }
                 },
                 side: {

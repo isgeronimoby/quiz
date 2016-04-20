@@ -181,7 +181,7 @@ DGW.templates.loginMain = '<div class="dg-o-w-login">' +
                                     '<a href="#" class="btn-radius btn-large btn-brand-3d">Join now</a>' +
                                     '<div class="dg-o-w-login-winners">' +
                                         '<img class="avatar" src="" />' +
-                                        '<div><h4>Daniel won a signed t-shirt!</h4><h5>Sign up and get your own prize now</h5></div>' +
+                                        '<div><h4><span></span> has won a signed t-shirt!</h4><h5>Sign up and get your own prize now</h5></div>' +
                                     '</div>' +
                                 '</div>' +
                             '</div>';

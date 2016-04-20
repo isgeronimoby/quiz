@@ -1,0 +1,10 @@
+@media screen and (max-height: 700px) {
+  #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body {
+    height: 500px;
+  }
+}
+@media screen and (max-height: 600px) {
+  #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body {
+    height: 400px;
+  }
+}

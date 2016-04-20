@@ -439,14 +439,21 @@
 								display: none;
 							}
 							.dg-o-w-section-content {
+								top: @dg-widget-overlay-header-height;
 								bottom: 0;
 
 								&.dg-o-w-submenu-only {
+									top: @dg-widget-overlay-header-height + @dg-widget-overlay-submenu-height;
 									bottom: 0;
 								}
 
 								&.dg-o-w-submenu-activities {
+									top: @dg-widget-overlay-header-height + @dg-widget-overlay-submenu-height + @dg-widget-overlay-activities-slider-height;
 									bottom: 0;
+								}
+
+								&.content-static {
+									top: 0;
 								}
 							}
 						}
@@ -461,6 +468,7 @@
 								border-top: 1px solid @color-brand;
 								box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);
 								color: @color-white;
+
 
 								.footer-section {
 									form {
@@ -521,6 +529,20 @@
 					}
 				}
 
+				&.close-to-finish {
+					.dg-o-w-content .dg-o-w-section .dg-o-w-section-content {
+						.dg-o-w-draws-active {
+							display: block;
+							.winner, .winner.claim-prize {
+								display: none;
+							}
+						}
+						.dg-o-w-draws-no-active {
+							display: none;
+						}
+					}
+				}
+
 				&.no-in-current-draws {
 					.dg-o-w-content .dg-o-w-section .dg-o-w-section-content {
 						.dg-o-w-draws-active {
@@ -545,16 +567,16 @@
 				.dg-o-w-content {
 					.dg-o-w-section {
 						.dg-o-w-section-content {
-							top: 0;
+							top: @dg-widget-overlay-header-height;
 							bottom: @dg-widget-overlay-footer-height;
 
 							&.dg-o-w-submenu-only {
-								top: @dg-widget-overlay-submenu-height;
+								top: @dg-widget-overlay-header-height + @dg-widget-overlay-submenu-height;
 								bottom: @dg-widget-overlay-footer-height;
 							}
 
 							&.dg-o-w-submenu-activities {
-								top: @dg-widget-overlay-submenu-height + @dg-widget-overlay-activities-slider-height;
+								top: @dg-widget-overlay-header-height + @dg-widget-overlay-submenu-height + @dg-widget-overlay-activities-slider-height;
 								bottom: @dg-widget-overlay-footer-height;
 							}
 						}
@@ -738,7 +760,7 @@
 				display: inline-block;
 				vertical-align: middle;
 				padding: 6px 16px;
-				border-radius: 16px;
+				border-radius: 4px;
 				font-size: 14px;
 				color: @color-white;
 				font-weight: 100;
@@ -746,11 +768,15 @@
 
 				&.btn-large {
 					padding: 16px 30px;
-					border-radius: 24px;
+					border-radius: 4px;
 				}
 
 				&.btn-brand {
 					background-color: @color-brand;
+
+					&:hover {
+						box-shadow: 0 0 6px @color-brand-light;
+					}
 				}
 
 				&.btn-brand-3d {
@@ -762,6 +788,10 @@
 					background-color: @color-white;
 					border: 1px solid @color-brand;
 					color: @color-brand;
+
+					&:hover {
+						box-shadow: 0 0 6px @color-brand-light;
+					}
 				}
 			}
 
@@ -772,7 +802,7 @@
 					height: 100%;
 					overflow: hidden;
 					margin-right: 0;
-					position: relative;
+//					position: relative;
 
 					section {
 						height: 100%;
@@ -994,6 +1024,7 @@
 						box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);
 						text-align: center;
 						white-space: nowrap;
+						overflow: hidden;
 
 						&.email-sign-up {
 							.footer-section {
@@ -1059,6 +1090,16 @@
 									font-size: 14px;
 									border: 1px solid @color-grey-light;
 									background-color: @color-white;
+									border-radius: 4px;
+
+									&[type=submit] {
+										text-align: center;
+
+										&:hover {
+											background-color: @color-brand;
+											color: @color-white;
+										}
+									}
 								}
 							}
 
@@ -1298,6 +1339,7 @@
 								height: 150px;
 								width: 49%;
 								margin: 0.5%;
+								transform: translateZ(0);
 
 								&:hover {
 									h4 {

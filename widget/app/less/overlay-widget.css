@@ -457,13 +457,19 @@
   display: none;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body.authorized .dg-o-w-content .dg-o-w-section .dg-o-w-section-content {
+  top: 80px;
   bottom: 0;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body.authorized .dg-o-w-content .dg-o-w-section .dg-o-w-section-content.dg-o-w-submenu-only {
+  top: 130px;
   bottom: 0;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body.authorized .dg-o-w-content .dg-o-w-section .dg-o-w-section-content.dg-o-w-submenu-activities {
+  top: 275px;
   bottom: 0;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body.authorized .dg-o-w-content .dg-o-w-section .dg-o-w-section-content.content-static {
+  top: 0;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body.profile-anon .dg-o-w-content .dg-o-w-section .dg-o-w-footer-login {
   background-color: #00369c;
@@ -502,6 +508,16 @@
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body.no-active-draws.draws-expired .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-draws-no-active {
   display: none;
 }
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body.close-to-finish .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-draws-active {
+  display: block;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body.close-to-finish .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-draws-active .winner,
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body.close-to-finish .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-draws-active .winner.claim-prize {
+  display: none;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body.close-to-finish .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-draws-no-active {
+  display: none;
+}
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body.no-in-current-draws .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-draws-active {
   display: none;
 }
@@ -515,15 +531,15 @@
   display: none;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-content .dg-o-w-section .dg-o-w-section-content {
-  top: 0;
+  top: 80px;
   bottom: 100px;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-content .dg-o-w-section .dg-o-w-section-content.dg-o-w-submenu-only {
-  top: 50px;
+  top: 130px;
   bottom: 100px;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-content .dg-o-w-section .dg-o-w-section-content.dg-o-w-submenu-activities {
-  top: 195px;
+  top: 275px;
   bottom: 100px;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-draws-no-active {
@@ -704,7 +720,7 @@
   display: inline-block;
   vertical-align: middle;
   padding: 6px 16px;
-  border-radius: 16px;
+  border-radius: 4px;
   font-size: 14px;
   color: #ffffff;
   font-weight: 100;
@@ -712,10 +728,13 @@
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-radius.btn-large {
   padding: 16px 30px;
-  border-radius: 24px;
+  border-radius: 4px;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-radius.btn-brand {
   background-color: #00369c;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-radius.btn-brand:hover {
+  box-shadow: 0 0 6px #9cbeff;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-radius.btn-brand-3d {
   background-color: #00369c;
@@ -726,6 +745,9 @@
   border: 1px solid #00369c;
   color: #00369c;
 }
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-radius.btn-white:hover {
+  box-shadow: 0 0 6px #9cbeff;
+}
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content {
   height: 520px;
 }
@@ -733,7 +755,6 @@
   height: 100%;
   overflow: hidden;
   margin-right: 0;
-  position: relative;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section section {
   height: 100%;
@@ -959,6 +980,7 @@
   box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);
   text-align: center;
   white-space: nowrap;
+  overflow: hidden;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-footer-login.email-sign-up .footer-section.footer-section-step-1 {
   -webkit-transform: translateX(-100%);
@@ -1021,6 +1043,14 @@
   font-size: 14px;
   border: 1px solid #bababa;
   background-color: #ffffff;
+  border-radius: 4px;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-footer-login .footer-section form input[type=submit] {
+  text-align: center;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-footer-login .footer-section form input[type=submit]:hover {
+  background-color: #00369c;
+  color: #ffffff;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-footer-login .footer-section .btn-back-footer {
   float: left;
@@ -1241,6 +1271,8 @@
   height: 150px;
   width: 49%;
   margin: 0.5%;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-offers li:hover {
   box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.3);
@@ -1389,7 +1421,7 @@
   display: inline-block;
   vertical-align: middle;
   padding: 6px 16px;
-  border-radius: 16px;
+  border-radius: 4px;
   font-size: 14px;
   color: #ffffff;
   font-weight: 100;
@@ -1397,10 +1429,13 @@
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li .floating.btn-large {
   padding: 16px 30px;
-  border-radius: 24px;
+  border-radius: 4px;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li .floating.btn-brand {
   background-color: #00369c;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li .floating.btn-brand:hover {
+  box-shadow: 0 0 6px #9cbeff;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li .floating.btn-brand-3d {
   background-color: #00369c;
@@ -1411,13 +1446,16 @@
   border: 1px solid #00369c;
   color: #00369c;
 }
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li .floating.btn-white:hover {
+  box-shadow: 0 0 6px #9cbeff;
+}
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li .dg-o-w-draw-bet {
   position: absolute;
   left: 0;
   display: inline-block;
   vertical-align: middle;
   padding: 6px 16px;
-  border-radius: 16px;
+  border-radius: 4px;
   font-size: 14px;
   color: #ffffff;
   font-weight: 100;
@@ -1427,10 +1465,13 @@
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li .dg-o-w-draw-bet.btn-large {
   padding: 16px 30px;
-  border-radius: 24px;
+  border-radius: 4px;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li .dg-o-w-draw-bet.btn-brand {
   background-color: #00369c;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li .dg-o-w-draw-bet.btn-brand:hover {
+  box-shadow: 0 0 6px #9cbeff;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li .dg-o-w-draw-bet.btn-brand-3d {
   background-color: #00369c;
@@ -1441,13 +1482,16 @@
   border: 1px solid #00369c;
   color: #00369c;
 }
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li .dg-o-w-draw-bet.btn-white:hover {
+  box-shadow: 0 0 6px #9cbeff;
+}
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li .dg-o-w-draw-connections {
   position: absolute;
   left: 0;
   display: inline-block;
   vertical-align: middle;
   padding: 6px 16px;
-  border-radius: 16px;
+  border-radius: 4px;
   font-size: 14px;
   color: #ffffff;
   font-weight: 100;
@@ -1457,10 +1501,13 @@
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li .dg-o-w-draw-connections.btn-large {
   padding: 16px 30px;
-  border-radius: 24px;
+  border-radius: 4px;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li .dg-o-w-draw-connections.btn-brand {
   background-color: #00369c;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li .dg-o-w-draw-connections.btn-brand:hover {
+  box-shadow: 0 0 6px #9cbeff;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li .dg-o-w-draw-connections.btn-brand-3d {
   background-color: #00369c;
@@ -1470,6 +1517,9 @@
   background-color: #ffffff;
   border: 1px solid #00369c;
   color: #00369c;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li .dg-o-w-draw-connections.btn-white:hover {
+  box-shadow: 0 0 6px #9cbeff;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li:hover h4 {
   color: #00369c;
@@ -1602,7 +1652,7 @@
   display: inline-block;
   vertical-align: middle;
   padding: 6px 16px;
-  border-radius: 16px;
+  border-radius: 4px;
   font-size: 14px;
   color: #ffffff;
   font-weight: 100;
@@ -1611,10 +1661,13 @@
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-single-draw .dg-o-w-draw-right-side .dg-o-w-draw-bet-info .dg-o-w-your-bet.btn-large {
   padding: 16px 30px;
-  border-radius: 24px;
+  border-radius: 4px;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-single-draw .dg-o-w-draw-right-side .dg-o-w-draw-bet-info .dg-o-w-your-bet.btn-brand {
   background-color: #00369c;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-single-draw .dg-o-w-draw-right-side .dg-o-w-draw-bet-info .dg-o-w-your-bet.btn-brand:hover {
+  box-shadow: 0 0 6px #9cbeff;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-single-draw .dg-o-w-draw-right-side .dg-o-w-draw-bet-info .dg-o-w-your-bet.btn-brand-3d {
   background-color: #00369c;
@@ -1624,6 +1677,9 @@
   background-color: #ffffff;
   border: 1px solid #00369c;
   color: #00369c;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-single-draw .dg-o-w-draw-right-side .dg-o-w-draw-bet-info .dg-o-w-your-bet.btn-white:hover {
+  box-shadow: 0 0 6px #9cbeff;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-single-draw .dg-o-w-draw-right-side .dg-o-w-draw-bet-action {
   margin-bottom: 30px;

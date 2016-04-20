@@ -84,8 +84,9 @@ DGW.main.methods.changeMainState = function(state){
 };
 
 DGW.main.methods.initEvents = function () {
-// Login header
+    DGW.main.methods.fillDefaultValues();
 
+// Login header
     // filling avatar images with default pictures
     Array.prototype.slice.call(DGW.main.elements.widget.querySelectorAll('.avatar')).forEach(function(img){
         img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
@@ -274,7 +275,7 @@ DGW.main.methods.initEvents = function () {
                         DGW.main.cache.drawsList = actArr.concat(expArr);
 
                         hideFinishedDraws();
-                        DGW.main.methods.drawsConstructor(DGW.main.cache);
+                        DGW.main.methods.drawsConstructor(DGW.main.cache, 'close-to-finish');
                         break;
                     case 'dg-o-w-show-my-draws':
                         var myDraws = [];
@@ -290,7 +291,6 @@ DGW.main.methods.initEvents = function () {
                         });
 
                         showFinishedDraws();
-
                         DGW.main.methods.drawsConstructor({drawsList: myDraws, drawsEntries: DGW.main.cache.drawsEntries}, 'my-draws');
                         break;
                     case 'dg-o-w-show-games':
@@ -315,6 +315,29 @@ DGW.main.methods.initEvents = function () {
 
 DGW.main.methods.resetStates = function(){
     DGW.main.elements.widgetBody.querySelector('.dg-o-w-menu-profile .profile-menu-item img').src = DGW.helpers.checkImagesForSrc();
+    DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').value = 'all-activities';
     DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'email-sign-up');
     DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'password');
+    DGW.main.methods.fillDefaultValues();
+};
+
+DGW.main.methods.fillDefaultValues = function(){
+
+    var hiddenDrawsChkBox = DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired');
+    getWinnerInterval = setInterval(function(){
+        if (DGW.global.cache.last.winner) {
+            var l = DGW.main.elements.pages.loginMain.querySelector('.dg-o-w-login-winners');
+            l.querySelector('img').src = DGW.global.cache.last.winner.ImageUrl;
+            l.querySelector('h4 span').innerHTML = DGW.global.cache.last.winner.UserName;
+            clearInterval(getWinnerInterval);
+        }
+    }, 50);
+
+    if (DGW.main.settings.hiddenDrawsShow) {
+        hiddenDrawsChkBox.checked = true;
+        DGW.helpers.addClass(DGW.main.elements.widgetBody, 'draws-expired');
+    } else {
+        hiddenDrawsChkBox.checked = false;
+        DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'draws-expired');
+    }
 };

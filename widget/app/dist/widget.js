@@ -52,7 +52,7 @@ window.DGW = function () {
                     },
                     shown: false,
                     settings: {
-                        hiddenDrawsShow: false
+                        hiddenDrawsShow: true
                     }
                 },
                 side: {
@@ -1371,7 +1371,7 @@ DGW.templates.loginMain = '<div class="dg-o-w-login">' +
                                     '<a href="#" class="btn-radius btn-large btn-brand-3d">Join now</a>' +
                                     '<div class="dg-o-w-login-winners">' +
                                         '<img class="avatar" src="" />' +
-                                        '<div><h4>Daniel won a signed t-shirt!</h4><h5>Sign up and get your own prize now</h5></div>' +
+                                        '<div><h4><span></span> has won a signed t-shirt!</h4><h5>Sign up and get your own prize now</h5></div>' +
                                     '</div>' +
                                 '</div>' +
                             '</div>';
@@ -1683,8 +1683,9 @@ DGW.main.methods.changeMainState = function(state){
 };
 
 DGW.main.methods.initEvents = function () {
-// Login header
+    DGW.main.methods.fillDefaultValues();
 
+// Login header
     // filling avatar images with default pictures
     Array.prototype.slice.call(DGW.main.elements.widget.querySelectorAll('.avatar')).forEach(function(img){
         img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
@@ -1873,7 +1874,7 @@ DGW.main.methods.initEvents = function () {
                         DGW.main.cache.drawsList = actArr.concat(expArr);
 
                         hideFinishedDraws();
-                        DGW.main.methods.drawsConstructor(DGW.main.cache);
+                        DGW.main.methods.drawsConstructor(DGW.main.cache, 'close-to-finish');
                         break;
                     case 'dg-o-w-show-my-draws':
                         var myDraws = [];
@@ -1889,7 +1890,6 @@ DGW.main.methods.initEvents = function () {
                         });
 
                         showFinishedDraws();
-
                         DGW.main.methods.drawsConstructor({drawsList: myDraws, drawsEntries: DGW.main.cache.drawsEntries}, 'my-draws');
                         break;
                     case 'dg-o-w-show-games':
@@ -1914,8 +1914,31 @@ DGW.main.methods.initEvents = function () {
 
 DGW.main.methods.resetStates = function(){
     DGW.main.elements.widgetBody.querySelector('.dg-o-w-menu-profile .profile-menu-item img').src = DGW.helpers.checkImagesForSrc();
+    DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').value = 'all-activities';
     DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'email-sign-up');
     DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'password');
+    DGW.main.methods.fillDefaultValues();
+};
+
+DGW.main.methods.fillDefaultValues = function(){
+
+    var hiddenDrawsChkBox = DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired');
+    getWinnerInterval = setInterval(function(){
+        if (DGW.global.cache.last.winner) {
+            var l = DGW.main.elements.pages.loginMain.querySelector('.dg-o-w-login-winners');
+            l.querySelector('img').src = DGW.global.cache.last.winner.ImageUrl;
+            l.querySelector('h4 span').innerHTML = DGW.global.cache.last.winner.UserName;
+            clearInterval(getWinnerInterval);
+        }
+    }, 50);
+
+    if (DGW.main.settings.hiddenDrawsShow) {
+        hiddenDrawsChkBox.checked = true;
+        DGW.helpers.addClass(DGW.main.elements.widgetBody, 'draws-expired');
+    } else {
+        hiddenDrawsChkBox.checked = false;
+        DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'draws-expired');
+    }
 };
 
 DGW.main.methods.setRewardedActions = function(w, a){
@@ -2195,16 +2218,21 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
             });
             drawsList.appendChild(li);
         });
-
+        DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'no-active-draws');
+        DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'no-in-current-draws');
+        DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'close-to-finish');
         if (DGW.global.activeDrawsExist) {
-            DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'no-active-draws');
-            DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'no-in-current-draws');
+            if (_context && _context == 'close-to-finish') {
+                DGW.helpers.addClass(DGW.main.elements.widgetBody, 'close-to-finish');
+            }
         } else {
             if (_context && _context == 'my-draws') {
                 DGW.helpers.addClass(DGW.main.elements.widgetBody, 'no-in-current-draws');
-                DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'no-active-draws');
+                //DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'no-active-draws');
+            } else if (_context && _context == 'close-to-finish') {
+                DGW.helpers.addClass(DGW.main.elements.widgetBody, 'close-to-finish');
             } else {
-                DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'no-in-current-draws');
+                //DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'no-in-current-draws');
                 DGW.helpers.addClass(DGW.main.elements.widgetBody, 'no-active-draws');
             }
         }
@@ -2244,20 +2272,23 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
     }
 
     if (DGW.helpers.dateDiff(draw.EndDate) <= 0) {
+        DGW.helpers.console.info('isdrawn: ', draw.IsDrawn);
         // Draw is finished
-        if (draw.isDrawn == false) {
+        if (draw.IsDrawn == false) {
             // Draw has been finished and not drawn
             drawState = 'not-drawn';
+            DGW.helpers.console.info('isdrawn: ', draw.IsDrawn);
         } else {
             // Draw has been finished and drawn
             drawState = 'drawn';
+            DGW.helpers.console.info(draw.IsDrawn);
             if (draw.Winner == null) {
                 // No one has participated in the draw
                 drawState = 'drawn-no-players';
             }
         }
     }
-    DGW.helpers.console.log('draw state: ', drawState);
+    //DGW.helpers.console.log('draw state: ', drawState);
     el.innerHTML =  submenu +
                     '<div class="dg-o-w-section-content">' +
                         '<div class="dg-o-w-single-draw">' +
@@ -2415,11 +2446,12 @@ DGW.main.methods.activitiesConstructor = function(activities){
         var message = '';
         message += activity.User.UserName;
         message += (ownStats !== true) ? ' has ' : ' have ';
-        message += '<span>';
         message += (activity.Direction === 'Outflow') ? 'spent ' : 'earned ';
+        message += '<span>';
         message += activity.PointsAmount;
-        message += '</span>';
         message += ' points';
+        message += '</span>';
+
 
         if (activity.ActivityType === 'GamePurchase') {
             if (activity.GameOrder.GameType === 'Draw') {
@@ -2500,7 +2532,7 @@ DGW.main.methods.offersConstructor = function(offers) {
         pointsSum = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-section-content h3 span');
     var lists = {
         offers: offers.Offers,
-        sponsors: ['All sponsors'],
+        sponsors: ['All offers'],
         categories: ['All']
     };
     var sponsorsAllString = lists.sponsors[0].toLowerCase(),
