@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import withFetch from '../components/withFetch';
 import QuizBetContainer from '../components/QuizBetContainer';
 
-const DELAY = 500;
+const DELAY = 100;
 
 async function fetch({ id }) {
 

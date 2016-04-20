@@ -3,7 +3,7 @@ import FixtureList from '../components/FixtureList';
 import withFetch from '../components/withFetch';
 import items from '../components/FixtureList/data.js';
 
-const DELAY = 1000;
+const DELAY = 100;
 
 
 async function fetch() {

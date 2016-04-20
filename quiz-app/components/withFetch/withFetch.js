@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import '../utils.scss';
 
-function withFetch(ComposedComponent, fetch) {
+function withFetch(ComposedComponent, fetch, showLoader = false) {
 	return class WithFetch extends Component {
 
 		static title = ComposedComponent.title;
@@ -23,6 +23,8 @@ function withFetch(ComposedComponent, fetch) {
 
 		render() {
 			if (this.state.loading) {
+				if (!showLoader) { return <div/>; } // TODO - show mini-loader
+
 				return (
 					<div className="preloader">
 						<div className="loader-image"></div>

@@ -20,13 +20,6 @@ class Menu extends Component {
 				this.props.onClick(); // close menu
 			}
 		};
-		/*const hammerOptions = {
-			recognizers: {
-				swipe: {
-					direction: DIRECTION_LEFT
-				}
-			}
-		};*/
 
 		return (
 			<Hammer onSwipe={onSwipe}>

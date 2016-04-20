@@ -53,13 +53,15 @@ class QuizScoreControls extends Component {
 		const { currentTeam } = this.state;
 		const title = <span>Select a score<br/>for {currentTeam}</span>;
 		const [ teamBtn1, teamBtn2 ] = teams.map((name, i) => {
-			const disabledClass = (name === currentTeam) ? '' : 'disabled';
-			const onClick = () => this.selectTeam(name);
 			const score = this.state.scores[name];
 			const scoreLabel = (score === undefined) ? '?' : score;
+			const touchedClass = (name === currentTeam) ? 'touched' : '';
+			const selectedClass = (score !== undefined) ? 'selected' : '';
+			const classes = [touchedClass, selectedClass].join(' ');
+			const onClick = () => this.selectTeam(name);
 
 			return (
-				<div key={`team-btn-${i}`} className={"team-idle " + disabledClass } onClick={ onClick }>
+				<div key={`team-btn-${i}`} className={'team-idle ' + classes } onClick={ onClick }>
 					<div className="team-idle-content">{ scoreLabel }</div>
 					<div className="team-name">{ name }</div>
 				</div>

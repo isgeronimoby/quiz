@@ -49,4 +49,4 @@ class Index extends Component {
 	}
 }
 
-export default withFetch(Index, fetch);
+export default withFetch(Index, fetch, true);
