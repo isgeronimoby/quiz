@@ -11,7 +11,7 @@ class UserProfile extends Component {
 
 
 	render() {
-		let { user: {name, picture, rank} } = this.props;
+		let { user: {name, picture, points} } = this.props;
 
 		return (
 			<div className="user-profile">
@@ -29,7 +29,7 @@ class UserProfile extends Component {
 
 					<div className="summary-aside">
 						<img className="aside-icon" src={require('./images/icon-points-sm.svg')} alt=""/>
-						<h4 className="aside-title">220 points</h4>
+						<h4 className="aside-title">{ points } points</h4>
 						<h5 className="aside-text">+50 pending</h5>
 					</div>
 				</div>
