@@ -9,6 +9,8 @@ import webpack from 'webpack';
 import hygienistMiddleware from 'hygienist-middleware';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import historyApiFallback from 'connect-history-api-fallback';
+
 
 global.watch = true;
 const webpackConfig = require('./webpack.config');
@@ -38,6 +40,9 @@ export default async () => {
 
 				// bundler should be the same as above
 				webpackHotMiddleware(bundler),
+
+				// returns index.html for any url on F5
+				historyApiFallback(),
 			],
 		},
 
