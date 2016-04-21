@@ -1,15 +1,16 @@
-/**
- * React Static Boilerplate
- * https://github.com/koistya/react-static-boilerplate
- * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
- */
 
 import path from 'path';
 import webpack from 'webpack';
 import merge from 'lodash.merge';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
+const NPM_SCRIPT = process.env.npm_lifecycle_event;
 const DEBUG = !process.argv.includes('release');
 const VERBOSE = process.argv.includes('verbose');
+
+console.log('>>TARGET', NPM_SCRIPT);
+
+
 const WATCH = global.watch;
 const AUTOPREFIXER_BROWSERS = [
 	'Android 2.3',
@@ -34,8 +35,9 @@ const JS_LOADER = {
 };
 
 
-// Base configuration
-const config = {
+// Common
+//
+const common = {
 	output: {
 		path: path.join(__dirname, '../build'), // may be overwritten in bundle.js
 		publicPath: '/',
@@ -55,6 +57,11 @@ const config = {
 		cachedAssets: VERBOSE,
 	},
 	plugins: [
+		new HtmlWebpackPlugin({
+			title: 'Quizz app',
+			template: 'components/index.html',
+			inject: 'body'
+		}),
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': DEBUG ? '"development"' : '"production"',
@@ -94,96 +101,108 @@ const config = {
 	},
 };
 
-// Configuration for the client-side bundle
-const appConfig = merge({}, config, {
-	entry: [
-		...(WATCH ? ['webpack-hot-middleware/client'] : []),
-		'./app.js',
-	],
-	output: {
-		filename: 'app.js',
-	},
-	// http://webpack.github.io/docs/configuration.html#devtool
-	devtool: DEBUG ? 'cheap-module-eval-source-map' : false,
-	plugins: [
-		...config.plugins,
-		...(DEBUG ? [] : [
+// Production
+//
+
+let appConfig;
+if (NPM_SCRIPT === 'build-prod') {
+	appConfig = merge({}, common, {
+		entry: {
+			app: './app.js',
+		},
+		output: {
+			filename: 'app.js',
+		},
+		plugins: [
+			...common.plugins,
 			new webpack.optimize.DedupePlugin(),
 			new webpack.optimize.UglifyJsPlugin({
 				compress: {
 					warnings: VERBOSE
 				}
 			}),
-			//new webpack.optimize.AggressiveMergingPlugin(),
+			new webpack.optimize.AggressiveMergingPlugin(),
 			new webpack.optimize.LimitChunkCountPlugin({maxChunks: 1}), // TODO - figure out relative chunk paths
-		]),
-		...(WATCH ? [
-			new webpack.HotModuleReplacementPlugin(),
-			new webpack.NoErrorsPlugin(),
-		] : []),
-	],
-	module: {
-		loaders: [
-			WATCH ? Object.assign({}, JS_LOADER, {
-				query: {
-					// Wraps all React components into arbitrary transforms
-					// https://github.com/gaearon/babel-plugin-react-transform
-					plugins: ['react-transform'],
-					extra: {
-						'react-transform': {
-							transforms: [
-								{
-									transform: 'react-transform-hmr',
-									imports: ['react'],
-									locals: ['module'],
-								}, {
-									transform: 'react-transform-catch-errors',
-									imports: ['react', 'redbox-react'],
-								},
-							],
+		],
+		module: {
+			loaders: [
+				JS_LOADER,
+				...common.module.loaders,
+				{
+					test: /\.scss$/,
+					loaders: ['style-loader', 'css-loader', 'postcss-loader'],
+				},
+			],
+		},
+	});
+
+
+	console.log(JSON.stringify(appConfig, null, 2));
+}
+
+// Dev/watch
+//
+
+if (NPM_SCRIPT === 'start') {
+	appConfig = merge({}, common, {
+		entry: [
+			...(WATCH ? ['webpack-hot-middleware/client'] : []),
+			'./app.js',
+		],
+		output: {
+			filename: 'app.js',
+		},
+		// http://webpack.github.io/docs/configuration.html#devtool
+		devtool: DEBUG ? 'cheap-module-eval-source-map' : false,
+		plugins: [
+			...common.plugins,
+			...(DEBUG ? [] : [
+				new webpack.optimize.DedupePlugin(),
+				new webpack.optimize.UglifyJsPlugin({
+					compress: {
+						warnings: VERBOSE
+					}
+				}),
+				new webpack.optimize.AggressiveMergingPlugin(),
+				new webpack.optimize.LimitChunkCountPlugin({maxChunks: 1}), // TODO - figure out relative chunk paths
+			]),
+			...(WATCH ? [
+				new webpack.HotModuleReplacementPlugin(),
+				new webpack.NoErrorsPlugin(),
+			] : []),
+		],
+		module: {
+			loaders: [
+				WATCH ? Object.assign({}, JS_LOADER, {
+					query: {
+						// Wraps all React components into arbitrary transforms
+						// https://github.com/gaearon/babel-plugin-react-transform
+						plugins: ['react-transform'],
+						extra: {
+							'react-transform': {
+								transforms: [
+									{
+										transform: 'react-transform-hmr',
+										imports: ['react'],
+										locals: ['module'],
+									}, {
+										transform: 'react-transform-catch-errors',
+										imports: ['react', 'redbox-react'],
+									},
+								],
+							},
 						},
 					},
+				}) : JS_LOADER,
+				...common.module.loaders,
+				{
+					test: /\.scss$/,
+					loaders: ['style-loader', 'css-loader', 'postcss-loader'],
 				},
-			}) : JS_LOADER,
-			...config.module.loaders,
-			{
-				test: /\.scss$/,
-				loaders: ['style-loader', 'css-loader', 'postcss-loader'],
-			},
-		],
-	},
-});
+			],
+		},
+	});
+}
 
-// Configuration for server-side pre-rendering bundle
-const pagesConfig = merge({}, config, {
-	entry: './app.js',
-	output: {
-		filename: 'app.node.js',
-		libraryTarget: 'commonjs2',
-	},
-	target: 'node',
-	node: {
-		console: false,
-		global: false,
-		process: false,
-		Buffer: false,
-		__filename: false,
-		__dirname: false,
-	},
-	externals: /^[a-z][a-z\.\-\/0-9]*$/i,
-	plugins: config.plugins.concat([
-		new webpack.optimize.LimitChunkCountPlugin({maxChunks: 1}),
-	]),
-	module: {
-		loaders: [
-			JS_LOADER,
-			...config.module.loaders,
-			{
-				test: /\.scss$/,
-				loaders: ['css-loader', 'postcss-loader'],
-			},
-		],
-	},
-});
 
-export default [appConfig, pagesConfig];
+export default appConfig;

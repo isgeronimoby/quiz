@@ -10,5 +10,5 @@ export default task(async function build(dir = 'build') {
 	await require('./clean')(dir);
 	await require('./copy')(dir);
 	await require('./bundle')(dir);
-	await require('./render')(dir);
+	//await require('./render')(dir);
 });

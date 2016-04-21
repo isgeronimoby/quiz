@@ -9,6 +9,6 @@ import task from './lib/task';
 import fs from './lib/fs';
 
 export default task(async function clean(dir = 'build') {
-	await del([`${dir}/*', '!${dir}/.git`], {dot: true});
+	await del([`${dir}/*`, `!${dir}/.git`], {dot: true});
 	await fs.mkdir(`${dir}`);
 });

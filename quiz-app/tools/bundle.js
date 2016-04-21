@@ -8,24 +8,24 @@ import webpack from 'webpack';
 import path from 'path';
 import merge from 'lodash.merge';
 import task from './lib/task';
-import configs from './webpack.config';
+import config from './webpack.config';
 
 export default task(function bundle(dir = 'build') {
 
 	// overwrite path config
-	const configsWithDir = configs.map((c) => merge({}, c, {
+	const configWithDir = merge({}, config, {
 		output: {
 			path: path.join(__dirname, `../${dir}`)
 		}
-	}));
+	});
 
 	return new Promise((resolve, reject) => {
-		const bundler = webpack(configsWithDir);
+		const bundler = webpack(configWithDir);
 		const run = (err, stats) => {
 			if (err) {
 				reject(err);
 			} else {
-				console.log(stats.toString(configsWithDir[0].stats));
+				console.log(stats.toString(configWithDir.stats));
 				resolve();
 			}
 		};
