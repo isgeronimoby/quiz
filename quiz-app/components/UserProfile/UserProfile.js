@@ -3,7 +3,6 @@ import Logo from './Logo.js';
 import './UserProfile.scss';
 
 
-
 class UserProfile extends Component {
 
 	static propTypes = {

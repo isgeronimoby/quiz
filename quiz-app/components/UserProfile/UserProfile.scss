@@ -68,3 +68,43 @@
     margin: 0 auto;
   }
 }
+
+
+/*Header overlay - hack but ok*/
+.header-overlay {
+  display: flex;
+  position: fixed;
+  left: 0; right: 0;
+  top: 0;
+  height: $header-height;
+  font-size: 1.7rem;
+  justify-content: space-between;
+
+  & > * {
+    background-color: $brand-color;
+  }
+
+  $back-btn-w: 8rem;
+  .header-title {
+    position: absolute;
+    left: $back-btn-w;
+    right: $back-btn-w;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .nav-button {
+    width: $back-btn-w;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      transform: rotate(180deg);
+      margin-right: 5px;
+    }
+  }
+}
