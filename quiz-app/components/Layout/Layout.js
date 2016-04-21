@@ -7,6 +7,7 @@ class Layout extends Component {
 
 	static propTypes = {
 		title: PropTypes.string.isRequired,
+		path: PropTypes.string.isRequired,
 		children: PropTypes.element.isRequired,
 	};
 
@@ -21,17 +22,21 @@ class Layout extends Component {
 	}
 
 	render() {
+		const {title, path, children} = this.props;
+
 		return (
 			<div className="layout">
 				<Header
-					title={ this.props.title }
+					title={ title }
 					onMenuBtnClick={ () => this.toggleMenu(true) }/>
 
 				<Menu
+					activePath={ path }
 					show={ this.state.showMenu }
 					onClick={ () => this.toggleMenu(false) }/>
+
 				<div className="content">
-					{ this.props.children }
+					{ children }
 				</div>
 			</div>
 		);

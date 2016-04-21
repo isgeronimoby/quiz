@@ -51,7 +51,8 @@
     text-decoration: none;
     display: flex;
     align-items: center;
-    &:active {
+
+    &:active, &.active{
       background: $brand-color-dark;
     }
   }

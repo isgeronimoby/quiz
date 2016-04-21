@@ -6,9 +6,9 @@
 
 import task from './lib/task';
 
-export default task(async function build() {
-	await require('./clean')();
-	await require('./copy')();
-	await require('./bundle')();
-	await require('./render')();
+export default task(async function build(dir = 'build') {
+	await require('./clean')(dir);
+	await require('./copy')(dir);
+	await require('./bundle')(dir);
+	//await require('./render')(dir);
 });

@@ -34,7 +34,7 @@
 .team-name {
   font-size: 2.4rem;
   text-align: center;
-  color: rgba(182, 182, 182, .3);
+  color: $color-grey-opaque;
 
   .team-idle.touched & {
     color: $color-grey;
