@@ -1,0 +1,70 @@
+@import '../variables.scss';
+.user-profile {
+}
+.profile-summary {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 0;
+
+  .summary-center {
+    text-align: center;
+  }
+}
+.summary-aside {
+  min-width: 80px;
+  margin-top: 15px;
+}
+.aside-icon {
+  float: left;
+  width: 17px;
+  height: 20px;
+  margin: 5px 5px 5px 0;
+}
+.aside-title {
+  font-size: 1.2rem;
+  color: $color-grey-dark;
+}
+.aside-text {
+  font-size: 1rem;
+  color: $color-grey;
+}
+.todo-title {
+  font-size: 1.9rem;
+  font-weight: bold;
+  color: $color-grey;
+  text-transform: uppercase;
+  text-align: center;
+}
+.todo-list {
+  & > li {
+    height: 8rem;
+    font-size: 1.9rem;
+    font-weight: bold;
+    background: $color-grey;
+    border-bottom: 1px solid $color-grey-lite;
+    display: flex;
+    align-items: center;
+
+    &:last-child {
+      background: $color-grey-lite;
+      color: $color-grey;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      border-bottom: 1px solid $color-grey;
+
+      h2 {
+        text-align: center;
+        width: 100%;
+      }
+    }
+  }
+
+  .todo-image {
+    width: 10rem;
+  }
+  .big-icon {
+    height: 6rem;
+    width: 100%;
+    margin: 0 auto;
+  }
+}

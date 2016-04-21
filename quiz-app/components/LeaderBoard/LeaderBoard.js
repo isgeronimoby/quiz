@@ -1,25 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Section from './Section.js';
-import './leader-board.scss'
-const defaultPicture = require("../../static/images/user-default.png");
-
-
-// TODO - to common?
-const Logo = (props) => {
-	const { src, rank } = props;
-	let medalImg;
-	if (rank) {
-		const medal = ['gold', 'silver', 'bronze'][rank - 1];
-		const medalSrc = require(`../../static/images/rank-${medal}.png`);
-		medalImg = <img className="user-medal" src={medalSrc} alt="User rank"/>;
-	}
-	return (
-		<div className="user-logo-cont">
-			<img className="user-logo" src={src} alt="User logo"/>
-			{ medalImg }
-		</div>
-	);
-};
+import Logo from '../UserProfile/Logo.js';
+import './leader-board.scss';
 
 
 const UserListOfTop = ({ listOf3, onSelect }) => {
@@ -27,7 +9,7 @@ const UserListOfTop = ({ listOf3, onSelect }) => {
 		const {picture, name, answers, rank} = user;
 		return (
 			<div key={`top-${i}`} className="col" onClick={ () => onSelect(user) }>
-				<Logo src={picture || defaultPicture} rank={rank} />
+				<Logo src={picture} rank={rank} />
 				<div className="user-name">{ name }</div>
 				<div className="user-answers">{ answers } answers</div>
 			</div>
@@ -49,7 +31,7 @@ const UserListOfAll = ({ list, onSelect }) => {
 		return (
 			<li key={`user-${i}`} className={"player-item " + myselfClass} onClick={ () => onSelect(user) }>
 				<div className="user-rank">{ rank }</div>
-				<Logo src={picture || defaultPicture} />
+				<Logo src={picture} />
 				<div className="user-details">
 					<div className="user-name large">{ name }</div>
 					<div className="user-answers large">{ answers } answers</div>
@@ -64,6 +46,7 @@ const UserListOfAll = ({ list, onSelect }) => {
 		</ul>
 	);
 };
+
 
 
 class LeaderBoard extends Component {

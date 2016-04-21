@@ -71,12 +71,15 @@ $progress-h: 4px; /*TODO - to vars*/
   transform: translateX(0%);
   transition: transform .3s ease;
 
+  & > * {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+  }
+
   &.with-progress {
     top: $progress-h;
   }
 }
 .screen-content {
-  flex-grow: 1;
-  width: 100%;
-  height: 100%;
 }

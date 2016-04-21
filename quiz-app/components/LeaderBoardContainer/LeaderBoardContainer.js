@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Hammer from 'react-hammerjs';
 import LeaderBoard from '../LeaderBoard';
+import UserProfile from '../UserProfile';
 import Section from '../LeaderBoard/Section.js';
 
 // TODO - to utils
@@ -90,19 +91,18 @@ class LeaderBoardContainer extends Component {
 
 	render() {
 		const { data } = this.props;
-		const isNextAllowed = () => {
-			return !!this.state.selectedUser
+		const { selectedUser } = this.state;
+		const isNextAllowed = () => !!selectedUser;
+
+		let profileMaybe = <div className="todo"></div>;
+		if (!!selectedUser) {
+			profileMaybe = <UserProfile user={selectedUser} />;
 		};
 
 		return (
 			<ScreenSwiper ref="swiper" isNextAllowed={ isNextAllowed }>
-
 				<LeaderBoard users={ data } onSelect={ (user) => this.selectUser(user) }/>
-				<div className="screen-content">
-					<Section title="TODO">
-						TODO
-					</Section>
-				</div>
+				{ profileMaybe }
 			</ScreenSwiper>
 		);
 	}
