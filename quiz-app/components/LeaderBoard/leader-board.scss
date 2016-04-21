@@ -1,14 +1,75 @@
 @import '../variables.scss';
 .content-section {
-
 }
 .section-header {
   display: flex;
   align-items: center;
-  height:   2.2rem;
+  height: 2.2rem;
   padding: 0 1.5rem;
   font-size: 1.1rem;
   font-weight: bold;
   color: $color-grey-lite;
   background: $color-grey;
+}
+.player-cols-3 {
+  display: flex;
+  justify-content: space-around;
+
+  .col {
+    padding: 15px 0;
+    text-align: center;
+  }
+}
+$logo-sz: 55px;
+.user-logo {
+  width: $logo-sz;
+  height: $logo-sz;
+  border-radius: 50%;
+}
+.user-logo-cont {
+  display: inline-block;
+  position: relative;
+  width: $logo-sz;
+  height: $logo-sz;
+  margin-bottom: 5px;
+
+  .user-medal {
+    position: absolute;
+    bottom: -2px;
+    right: 1px;
+  }
+}
+.user-name {
+  /*inherits from menu*/
+  margin-bottom: 0;
+  line-height: 1.4;
+
+  &.large {
+    font-size: 1.7rem;
+  }
+}
+.user-answers {
+  font-size: 1rem;
+  color: $color-grey;
+
+  &.large {
+    font-size: 1.2rem;
+  }
+}
+.player-item {
+  display: flex;
+  align-items: center;
+  height: 8rem;
+  color: $color-grey-dark;
+  border-bottom: 1px solid $color-grey-opaque;
+
+  &.myself {
+    background: $color-selection;
+  }
+}
+.user-rank {
+  padding: 0 15px;
+}
+.user-details {
+  margin-left: 10px;
 }

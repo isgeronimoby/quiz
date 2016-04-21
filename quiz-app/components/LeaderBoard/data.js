@@ -1,16 +1,47 @@
-const data = [
+const top3 = [
 	{
-		quizId: 1,
-		type: 'win-or-draw',
+		name: 'John Millson',
+		answers: '1200',
+		picture: require("../../static/images/user-picture.jpg"),
+		rank: 1
 	},
 	{
-		quizId: 2,
-		type: 'score',
+		name: 'Henry Smith',
+		answers: '5123',
+		picture: null,
+		rank: 2
 	},
 	{
-		quizId: 3,
-		type: 'first-goal',
+		name: 'Andy rocket',
+		answers: '6700',
+		picture: null,
+		rank: 3
 	}
 ];
 
-export default data;
+const rest = [
+	{
+		name: 'John Millson Jr',
+		answers: '1200',
+		picture: require("../../static/images/user-picture.jpg"),
+	},
+	{
+		name: 'Henry Smith Jr',
+		answers: '5123',
+		picture: null,
+	},
+	{
+		name: 'Andy rocket Jr',
+		answers: '1200',
+		picture: null,
+	}
+];
+
+export default {
+	top3: top3,
+	rest: rest.concat(rest, rest, rest).map((u, i) => ({
+		...u,
+		rank: 55 + i,
+		myself: i === 1
+	}))
+};
