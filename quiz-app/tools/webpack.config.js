@@ -1,4 +1,3 @@
-
 import path from 'path';
 import webpack from 'webpack';
 import merge from 'lodash.merge';
@@ -7,11 +6,11 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 const NPM_SCRIPT = process.env.npm_lifecycle_event;
 const DEBUG = !process.argv.includes('release');
 const VERBOSE = process.argv.includes('verbose');
+const WATCH = global.watch; // same as DEBUG, currently
 
-console.log('>>TARGET', NPM_SCRIPT);
+//console.log('>>TARGET', NPM_SCRIPT);
 
 
-const WATCH = global.watch;
 const AUTOPREFIXER_BROWSERS = [
 	'Android 2.3',
 	'Android >= 4',
@@ -73,18 +72,26 @@ const common = {
 			{
 				test: /[\\\/]app\.js$/,
 				loader: path.join(__dirname, './lib/routes-loader.js'),
-			}, {
+			},
+			{
 				test: /\.json$/,
 				loader: 'json-loader',
-			}, {
+			},
+			{
 				test: /\.txt$/,
 				loader: 'raw-loader',
-			}, {
+			},
+			{
 				test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
 				loader: 'url-loader?prefix=./?limit=10000', // prefix is required until we are on gh-pages
-			}, {
+			},
+			{
 				test: /\.(eot|ttf|wav|mp3)$/,
 				loader: 'file-loader',
+			},
+			{
+				test: /\.scss$/,
+				loaders: ['style-loader', 'css-loader', 'postcss-loader'],
 			},
 		],
 	},
@@ -113,6 +120,7 @@ if (NPM_SCRIPT === 'build-prod') {
 		output: {
 			filename: 'app.js',
 		},
+		devtool: false,
 		plugins: [
 			...common.plugins,
 			new webpack.optimize.DedupePlugin(),
@@ -121,23 +129,16 @@ if (NPM_SCRIPT === 'build-prod') {
 					warnings: VERBOSE
 				}
 			}),
-			new webpack.optimize.AggressiveMergingPlugin(),
+			//new webpack.optimize.AggressiveMergingPlugin(),
 			new webpack.optimize.LimitChunkCountPlugin({maxChunks: 1}), // TODO - figure out relative chunk paths
 		],
 		module: {
 			loaders: [
 				JS_LOADER,
-				...common.module.loaders,
-				{
-					test: /\.scss$/,
-					loaders: ['style-loader', 'css-loader', 'postcss-loader'],
-				},
+				...common.module.loaders
 			],
 		},
 	});
-
-
-	console.log(JSON.stringify(appConfig, null, 2));
 }
 
 // Dev/watch
@@ -146,34 +147,22 @@ if (NPM_SCRIPT === 'build-prod') {
 if (NPM_SCRIPT === 'start') {
 	appConfig = merge({}, common, {
 		entry: [
-			...(WATCH ? ['webpack-hot-middleware/client'] : []),
+			'webpack-hot-middleware/client', // WATCH
 			'./app.js',
 		],
 		output: {
 			filename: 'app.js',
 		},
 		// http://webpack.github.io/docs/configuration.html#devtool
-		devtool: DEBUG ? 'cheap-module-eval-source-map' : false,
+		devtool: 'cheap-module-eval-source-map',
 		plugins: [
 			...common.plugins,
-			...(DEBUG ? [] : [
-				new webpack.optimize.DedupePlugin(),
-				new webpack.optimize.UglifyJsPlugin({
-					compress: {
-						warnings: VERBOSE
-					}
-				}),
-				new webpack.optimize.AggressiveMergingPlugin(),
-				new webpack.optimize.LimitChunkCountPlugin({maxChunks: 1}), // TODO - figure out relative chunk paths
-			]),
-			...(WATCH ? [
-				new webpack.HotModuleReplacementPlugin(),
-				new webpack.NoErrorsPlugin(),
-			] : []),
+			new webpack.HotModuleReplacementPlugin(), // WATCH
+			new webpack.NoErrorsPlugin(), // WATCH
 		],
 		module: {
 			loaders: [
-				WATCH ? Object.assign({}, JS_LOADER, {
+				Object.assign({}, JS_LOADER, { // WATCH
 					query: {
 						// Wraps all React components into arbitrary transforms
 						// https://github.com/gaearon/babel-plugin-react-transform
@@ -193,12 +182,8 @@ if (NPM_SCRIPT === 'start') {
 							},
 						},
 					},
-				}) : JS_LOADER,
-				...common.module.loaders,
-				{
-					test: /\.scss$/,
-					loaders: ['style-loader', 'css-loader', 'postcss-loader'],
-				},
+				}),
+				...common.module.loaders
 			],
 		},
 	});
