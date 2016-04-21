@@ -138,3 +138,51 @@
             transform: translateX(0);
   }
 }
+@-webkit-keyframes dg-video-pop-in {
+  0% {
+    top: 100%;
+    -webkit-transform: translate(0, 10%);
+            transform: translate(0, 10%);
+  }
+  100% {
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+  }
+}
+@keyframes dg-video-pop-in {
+  0% {
+    top: 100%;
+    -webkit-transform: translate(0, 10%);
+            transform: translate(0, 10%);
+  }
+  100% {
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+  }
+}
+@-webkit-keyframes dg-video-pop-out {
+  0% {
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+  }
+  100% {
+    top: 100%;
+    -webkit-transform: translate(0, 50%);
+            transform: translate(0, 50%);
+  }
+}
+@keyframes dg-video-pop-out {
+  0% {
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+  }
+  100% {
+    top: 100%;
+    -webkit-transform: translate(0, 50%);
+            transform: translate(0, 50%);
+  }
+}

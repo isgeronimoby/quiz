@@ -1,21 +1,40 @@
+@import "variables";
+
 @media screen and (max-height: 700px){
 	#dg-o-w {
 		#dg-o-w-wrapper {
 			.dg-o-w-overlay {
 				.dg-o-w-body {
-					height: 500px;
-				}
-			}
-		}
-	}
-}
+					height: @dg-widget-overlay-widget-height - 100;
 
-@media screen and (max-height: 600px){
-	#dg-o-w {
-		#dg-o-w-wrapper {
-			.dg-o-w-overlay {
-				.dg-o-w-body {
-					height: 400px;
+					.dg-o-w-content {
+						.dg-o-w-section {
+							.dg-o-w-login {
+								height: @dg-widget-overlay-widget-height - 100 - @dg-widget-overlay-header-height;
+								padding: 20px 30px 100px 0;
+
+								.dg-o-w-left-side .dg-o-w-image-holder .dg-o-w-brand-player-image {
+									background-size: 80%;
+								}
+							}
+
+							.dg-o-w-profile {
+
+								padding: 10px 30px;
+
+								.dg-o-w-left-side {
+									img {
+										max-width: 80%;
+									}
+								}
+								.dg-o-w-right-side {
+									.dg-o-w-profile-top {
+										margin-bottom: 10px;
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 		}

@@ -14,10 +14,12 @@ DGW.main.elements.menuItems = {
     earn: DGW.main.elements.widget.querySelector('.dg-o-w-menu .earn-menu-item'),
     draws: DGW.main.elements.widget.querySelector('.dg-o-w-menu .draws-menu-item'),
     activities: DGW.main.elements.widget.querySelector('.dg-o-w-menu .activities-menu-item'),
-    profile: DGW.main.elements.widget.querySelector('.dg-o-w-menu-profile .profile-menu-item img')
+    profile: DGW.main.elements.widget.querySelector('.dg-o-w-menu-profile .profile-menu-item img'),
+    profileRegistered: DGW.main.elements.widget.querySelector('.dg-o-w-menu-profile .profile-menu-item .profile-menu-authorized')
 };
 
 DGW.main.elements.widgetContent = DGW.main.elements.widget.querySelector('.dg-o-w-content .dg-o-w-section section');
+DGW.main.elements.widgetWrapper = DGW.main.elements.widget.querySelector('.dg-o-w-body-wrapper');
 
 DGW.main.elements.loginFooter = DGW.main.elements.widget.querySelector('.dg-o-w-footer-login');
 
@@ -39,6 +41,10 @@ DGW.main.elements.pages.singleDraw = document.createElement('div');
 
 DGW.main.elements.pages.videoHolder = document.createElement('div');
     DGW.main.elements.pages.videoHolder.innerHTML = DGW.templates.videoHolder;
+
+DGW.main.elements.pages.notificationHolder = document.createElement('div');
+    DGW.main.elements.pages.notificationHolder.innerHTML = DGW.templates.notificationHolder;
+    DGW.main.elements.pages.notificationHolder = DGW.main.elements.pages.notificationHolder.querySelector('div');
 
 DGW.main.elements.activitiesSliderParent = DGW.main.elements.pages.activitiesMain.querySelector('.dg-o-w-activities');
 
@@ -90,6 +96,8 @@ DGW.global.methods.authorize = function(){
     } else if (DGW.main.currentState === 'earn') {
         DGW.global.api.requests.getUserOffers();
     }
+
+    DGW.global.api.requests.getUserActions();
 };
 
 DGW.global.methods.unAuthorize = function(){
@@ -109,9 +117,13 @@ DGW.global.methods.init = function(){
     DGW.side.methods.initEvents();
     DGW.main.methods.initEvents();
 
+    // adding notification panel to the DOM (hidden)
+    DGW.main.elements.widgetWrapper.appendChild(DGW.main.elements.pages.notificationHolder);
+
     // filling user default data
     DGW.global.userStats.imageUrl = DGW.helpers.checkImagesForSrc();
     DGW.global.userStats.name = 'Guest';
+    DGW.global.userStats.facebookId = null;
     DGW.global.userStats.pointsC = 0;
     DGW.global.userStats.pointsP = 0;
     DGW.global.userStats.creditsC = 0;
@@ -135,4 +147,14 @@ DGW.global.methods.init = function(){
 
 DGW.global.methods.safariFixInit = function(){
     DGW.side.methods.initSafariFixEvents();
+};
+
+DGW.main.methods.showNotificationBar = function(type){
+    if (!type) type = 'success';
+    DGW.helpers.addClass(DGW.main.elements.pages.notificationHolder, type);
+};
+
+DGW.main.methods.hideNotificationBar = function(){
+    DGW.helpers.removeClass(DGW.main.elements.pages.notificationHolder, 'success');
+    DGW.helpers.removeClass(DGW.main.elements.pages.notificationHolder, 'error');
 };

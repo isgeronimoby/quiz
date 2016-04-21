@@ -13,9 +13,32 @@ DGW.global.offers.requests.shareOfferTw = function(offerId, offerShareUrl){
     });
 };
 
+DGW.global.actions.requests.shareFb = function(drawId, _winner){
+    DGW.global.api.requests.shareRewardAction(drawId, function onSuccess(urls){
+        DGW.helpers.centerWindowPopup(DGW.global.envPath +
+            'rewardedaction/facebookshare?api_key=' + DGW.global.api.apiKey + '&shareurl=' + encodeURIComponent((!_winner) ? urls.ShareUrl : urls.WinnerShareUrl),
+            'fbWindow', 460, 340, function(){
+                DGW.global.api.requests.getUser();
+                DGW.global.api.requests.getUserActions();
+        });
+    });
+};
+
+DGW.global.actions.requests.shareTw = function(drawId, text, _winner){
+    DGW.global.api.requests.shareRewardAction(drawId, function onSuccess(urls){
+        DGW.helpers.centerWindowPopup('https://twitter.com/intent/tweet?text=' + text +
+            '&url=' + encodeURIComponent((!_winner) ? urls.ShareUrl : urls.WinnerShareUrl) + '&hashtags=' + DGW.global.club.name,
+            'twWindow', 460, 340, function(){
+                //DGW.global.api.requests.getUserActions();
+                DGW.global.api.requests.trackAction(5);
+            });
+    });
+};
+
 DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
     var player;
     var scriptCheckingInterval, widgetShownInterval, playbackInterval;
+    var wCloseBtn = DGW.main.elements.widget.querySelector('.dg-o-w-close');
 
     if (!window.YT) {
         var ytScript = document.createElement('script');
@@ -55,8 +78,7 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
         DGW.global.api.requests.trackOffer(offerId);
         widgetShownInterval = window.setInterval(function(){
             if (DGW.main.shown == false) {
-                hidePlayer();
-                DGW.global.api.requests.cancelOffer(offerId);
+                cancelVideoOffer();
             }
         }, 100);
         playbackInterval = window.setInterval(function(){
@@ -76,11 +98,23 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
         }
     }
 
+    function cancelVideoOffer(){
+        DGW.global.api.requests.cancelOffer(offerId);
+        hidePlayer();
+    }
+
     function hidePlayer(){
-        DGW.main.elements.widgetBody.removeChild(DGW.main.elements.pages.videoHolder);
+        DGW.helpers.addClass(DGW.main.elements.pages.videoHolder.querySelector('.dg-o-w-video-holder'), 'dg-video-hidden');
+        setTimeout(function(){
+            DGW.main.elements.widgetBody.removeChild(DGW.main.elements.pages.videoHolder);
+            DGW.helpers.removeClass(DGW.main.elements.pages.videoHolder.querySelector('.dg-o-w-video-holder'), 'dg-video-hidden');
+        }, 320);
         DGW.main.elements.pages.videoHolder.querySelector('span').innerHTML = '';
         window.clearInterval(widgetShownInterval);
         window.clearInterval(playbackInterval);
+
+        wCloseBtn.removeEventListener('click', cancelVideoOffer);
+        wCloseBtn.addEventListener('click', DGW.main.methods.hideWidget);
     }
 
     function showVideoOffer(){
@@ -88,6 +122,9 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
             if (window.YT.Player) {
                 window.clearInterval(scriptCheckingInterval);
                 DGW.main.elements.widgetBody.appendChild(DGW.main.elements.pages.videoHolder);
+
+                wCloseBtn.removeEventListener('click', DGW.main.methods.hideWidget);
+                wCloseBtn.addEventListener('click', cancelVideoOffer);
                 window.setTimeout(function(){
                     onYouTubePlayerAPIReady();
                 }, 0);

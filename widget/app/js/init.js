@@ -70,6 +70,9 @@ window.DGW = function () {
                     offers: {
                         requests: {}
                     },
+                    actions: {
+                        requests: {}
+                    },
                     api: {
                         apiKey: key,
                         requests: {}

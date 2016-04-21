@@ -30,6 +30,11 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             method = 'POST';
             endpoint = 'auth/logout';
             break;
+        case 'forgotPass':
+            method = 'POST';
+            endpoint = 'auth/forgotpassword';
+            requestBody = JSON.stringify(requestBody);
+            break;
         case 'facebookLogIn':
             method = 'POST';
             endpoint = 'auth/facebookconnect';
@@ -84,6 +89,14 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         case 'getActions':
             endpoint = 'rewardedaction/getactions';
             break;
+        case 'getUserActions':
+            endpoint = 'rewardedaction/getuseractions';
+            break;
+        case 'trackAction':
+            method = 'POST';
+            endpoint = 'rewardedaction/trackrewardedaction';
+            requestBody = JSON.stringify(requestBody);
+            break;
         case 'getLeaderboard':
             endpoint = 'leaderboard/gettopearners';
             break;
@@ -92,6 +105,9 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             break;
         case 'getEarnedBadges':
             endpoint = 'badge/getearnedbadges';
+            break;
+        case 'shareRewardAction':
+            endpoint = 'draw/getsharelinks?drawid=' + requestBody;
             break;
         default:
     }
@@ -103,11 +119,14 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         },
         function onSuccess(response) {
             result = response;
-            callback(response);
+            if(callback) callback(response);
+            DGW.main.methods.loadingFinished();
         },
         function onError(error) {
             DGW.helpers.console.error(error.message);
+            DGW.main.methods.loadingFinished();
         });
+    DGW.main.methods.loadingStarted();
 };
 
 
@@ -226,6 +245,20 @@ DGW.global.api.requests.signOut = function(){
     });
 };
 
+DGW.global.api.requests.forgotPass = function(email, onSuccess, onError){
+    DGW.global.api.generic('forgotPass', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('forgotPass ', result.data);
+            if (onSuccess) onSuccess();
+        } else {
+            DGW.helpers.console.error('forgotPass ', result.error);
+            if (onError) onError();
+        }
+    }, {
+        Email: email
+    });
+};
+
 DGW.global.api.requests.getUser = function(){
     DGW.global.api.generic('getUser', function(result){
         if (result.status == 200) {
@@ -243,7 +276,6 @@ DGW.global.api.requests.getUser = function(){
 };
 
 DGW.global.api.requests.getDraws = function(_callback){
-    DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getDraws', function(result) {
         if (result.status == 200) {
             DGW.helpers.console.info('getDraws ', result.data);
@@ -256,7 +288,6 @@ DGW.global.api.requests.getDraws = function(_callback){
                 DGW.global.api.requests.getDrawEntries();
             } else {
                 DGW.main.methods.drawsConstructor(DGW.main.cache);
-                DGW.main.methods.loadingFinished();
             }
             if (_callback) _callback();
         } else {
@@ -272,20 +303,21 @@ DGW.global.api.requests.getDrawEntries = function(){
             DGW.main.cache.drawsEntries = result.data.DrawEntries;
 
             DGW.main.methods.drawsConstructor(DGW.main.cache);
-            DGW.main.methods.loadingFinished();
         } else {
             DGW.helpers.console.error('getDrawEntries ', result.error);
         }
     });
 };
 
-DGW.global.api.requests.drawBet = function(drawId, pointsAmount){
+DGW.global.api.requests.drawBet = function(drawId, pointsAmount, onSuccess, onError){
     DGW.global.api.generic('drawBet', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('drawBet ', result);
             DGW.global.api.requests.getDrawEntries();
             DGW.main.methods.updateUserInfoBet(result.data.DrawEntry, result.data.User);
+            if (onSuccess) onSuccess();
         } else {
+            if (onError) onError();
             DGW.helpers.console.error('drawBet ', result.error);
         }
     },{
@@ -294,31 +326,35 @@ DGW.global.api.requests.drawBet = function(drawId, pointsAmount){
     });
 };
 
-DGW.global.api.requests.claimPrize = function(drawId, address, el){
+DGW.global.api.requests.claimPrize = function(drawId, address, onSuccess, onError){
     DGW.global.api.generic('claimPrize', function(result){
         if (result.status == 200) {
-            DGW.helpers.addClass(el, 'claimed');
+            if (onSuccess) onSuccess();
         } else {
+            if (onError) onError();
             DGW.helpers.console.error(result.error);
         }
     },{
         DrawId: drawId,
-        Address1: address
+        Address1: address.Address1,
+        Address2: address.Address2,
+        County: address.County,
+        Postcode: address.Postcode
     });
 };
 
-DGW.global.api.requests.connectFB = function(){
+DGW.global.api.requests.connectFB = function(onSuccess, onError){
     DGW.helpers.centerWindowPopup(DGW.global.envPath +
-    'auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340);
+    'auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340, function(){
+        if(onSuccess) onSuccess();
+    });
 };
 
 DGW.global.api.requests.getAllActivities = function(){
-    DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getAllActivities', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getAllActivities ', result.data);
             DGW.main.methods.activitiesConstructor(result.data.Activities);
-            DGW.main.methods.loadingFinished();
         } else {
             DGW.helpers.console.error('getAllActivities ', result.error);
         }
@@ -326,11 +362,9 @@ DGW.global.api.requests.getAllActivities = function(){
 };
 
 DGW.global.api.requests.getUserActivities = function(){
-    DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getUserActivities', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getUserActivities ', result.data);
-            DGW.main.methods.loadingFinished();
             DGW.main.methods.activitiesConstructor(result.data.Activities);
         } else {
             DGW.helpers.console.error('getUserActivities ', result.error);
@@ -339,11 +373,9 @@ DGW.global.api.requests.getUserActivities = function(){
 };
 
 DGW.global.api.requests.getOffers = function(){
-    DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getOffers', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getOffers ', result.data);
-            DGW.main.methods.loadingFinished();
             DGW.main.methods.offersConstructor(result.data);
         } else {
             DGW.helpers.console.error('getOffers ', result.error);
@@ -352,11 +384,9 @@ DGW.global.api.requests.getOffers = function(){
 };
 
 DGW.global.api.requests.getUserOffers = function(){
-    DGW.main.methods.loadingStarted();
     DGW.global.api.generic('getUserOffers', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getUserOffers ', result.data);
-            DGW.main.methods.loadingFinished();
             DGW.main.methods.offersConstructor(result.data);
         } else {
             DGW.helpers.console.error('getUserOffers ', result.error);
@@ -419,6 +449,40 @@ DGW.global.api.requests.getActions = function(){
     });
 };
 
+DGW.global.api.requests.getUserActions = function(){
+    DGW.global.api.generic('getUserActions', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('getUserActions ', result.data);
+            DGW.main.cache.rewardedActions = result.data.Actions;
+            DGW.main.methods.setRewardedActions();
+        } else {
+            DGW.helpers.console.error('getUserActions ', result.error);
+        }
+    });
+};
+
+DGW.global.api.requests.trackAction = function(actionType){
+    DGW.global.api.generic('trackAction', function(result){
+            if (result.status == 200) {
+                DGW.helpers.console.info('trackAction ', result.data);
+                DGW.global.api.requests.getUserActions();
+                DGW.global.api.requests.getUser();
+                if (result.data.RewardResult) {
+                    // rewarded
+                    //DGW.main.methods.notificationConstructor()
+                } else {
+
+                }
+            } else {
+                DGW.helpers.console.error('trackAction ', result.error);
+            }
+        },
+        {
+            RewardedActionTypeId: actionType
+        });
+};
+
+
 DGW.global.api.requests.getLeaderboard = function(){
     DGW.global.api.generic('getLeaderboard', function(result){
         if (result.status == 200) {
@@ -452,4 +516,16 @@ DGW.global.api.requests.getEarnedBadges = function(){
             DGW.helpers.console.error('getEarnedBadges ', result.error);
         }
     });
+};
+
+DGW.global.api.requests.shareRewardAction = function(drawId, onSuccess, onError){
+    DGW.global.api.generic('shareRewardAction', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('shareRewardedAction: ', result.data);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            DGW.helpers.console.error('shareRewardedAction: ', result.error);
+            if (onError) onError();
+        }
+    }, drawId)
 };

@@ -2,46 +2,61 @@ DGW.main.methods.setRewardedActions = function(w, a){
     if (!w) w = DGW.main.elements.widget;
     if (!a) a = DGW.main.cache.rewardedActions;
     if (w.querySelector('.dg-o-w-rewarded-action') && a.length > 0) {
-        if (w.querySelector('#dg-o-w-login-fb-reward'))
-            w.querySelector('#dg-o-w-login-fb-reward').innerHTML = a.filter(function(action){return action.Type == 'FacebookConnect'})[0].PointsReward;
-        if (w.querySelector('#dg-o-w-friends-sign-up-reward'))
-            w.querySelector('#dg-o-w-friends-sign-up-reward').innerHTML = a.filter(function(action){return action.Type == 'FriendSignUp'})[0].PointsReward;
-        if (w.querySelector('#dg-o-w-facebook-like-reward'))
-            w.querySelector('#dg-o-w-facebook-like-reward').innerHTML = a.filter(function(action){return action.Type == 'FacebookShare'})[0].PointsReward;
-        if (w.querySelector('#dg-o-w-tweeter-like-reward'))
-            w.querySelector('#dg-o-w-tweeter-like-reward').innerHTML = a.filter(function(action){return action.Type == 'TwitterShare'})[0].PointsReward;
+        if (w.querySelector('#dg-o-w-login-fb-reward')) {
+            if (a.filter(function(action){return action.Type == 'FacebookConnect'}).length > 0)
+                w.querySelector('#dg-o-w-login-fb-reward').innerHTML = a.filter(function(action){return action.Type == 'FacebookConnect'})[0].PointsReward;
+        }
+        if (w.querySelector('#dg-o-w-friends-sign-up-reward')) {
+            if (a.filter(function(action){return action.Type == 'FriendSignUp'}).length > 0)
+                w.querySelector('#dg-o-w-friends-sign-up-reward').innerHTML = a.filter(function(action){return action.Type == 'FriendSignUp'})[0].PointsReward;
+        }
+        if (w.querySelector('#dg-o-w-facebook-like-reward')) {
+            if (a.filter(function(action){return action.Type == 'FacebookShare'}).length > 0)
+                w.querySelector('#dg-o-w-facebook-like-reward').innerHTML = ' and get +' + a.filter(function(action){return action.Type == 'FacebookShare'})[0].PointsReward + ' points';
+            else w.querySelector('#dg-o-w-facebook-like-reward').innerHTML = '';
+        }
+        if (w.querySelector('#dg-o-w-tweeter-like-reward')) {
+            if (a.filter(function(action){return action.Type == 'TwitterShare'}).length > 0)
+                w.querySelector('#dg-o-w-tweeter-like-reward').innerHTML = ' and get +' + a.filter(function(action){return action.Type == 'TwitterShare'})[0].PointsReward + ' points';
+            else w.querySelector('#dg-o-w-tweeter-like-reward').innerHTML = '';
+        }
     }
 };
 
 DGW.main.methods.profileSetData = function(data) {
+    var pr = DGW.main.elements.pages.profileMain;
+    var wb = DGW.main.elements.widgetBody;
+    var sb = DGW.side.elements.widgetBody;
     var profileImageHolders = [
-            DGW.main.elements.widgetBody.querySelector('.dg-o-w-menu-profile .profile-menu-item img'),
-            DGW.main.elements.pages.profileMain.querySelector('#profileImage'),
-            DGW.side.elements.widgetBody.querySelector('#dg-side-widget-userpic')
+            wb.querySelector('.dg-o-w-menu-profile .profile-menu-item img'),
+            pr.querySelector('#profileImage'),
+            sb.querySelector('#dg-side-widget-userpic')
         ],
         profileNames = [
-            DGW.main.elements.widgetBody.querySelector('.dg-o-w-menu-profile .profile-menu-authorized h4'),
-            DGW.main.elements.pages.profileMain.querySelector('#profileName'),
-            DGW.side.elements.widgetBody.querySelector('#dg-side-widget-name')
+            wb.querySelector('.dg-o-w-menu-profile .profile-menu-authorized h4'),
+            pr.querySelector('#profileName'),
+            sb.querySelector('#dg-side-widget-name')
         ],
-        friendsNumber = DGW.main.elements.pages.profileMain.querySelector('#profileFriendsAmount');
+        friendsNumber = pr.querySelector('#profileFriendsAmount');
 
     var points = {
             confirmed: [
-                DGW.main.elements.widgetBody.querySelector('#dg-o-w-points'),
-                DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-points h3'),
-                DGW.side.elements.widgetBody.querySelector('#dg-side-points')
+                wb.querySelector('#dg-o-w-points'),
+                pr.querySelector('.dg-o-w-profile-points h3'),
+                sb.querySelector('#dg-side-points')
             ],
-            pending: [DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-points h5')]
+            pending: [pr.querySelector('.dg-o-w-profile-points h5')]
         },
         credits = {
             confirmed: [
-                DGW.main.elements.widgetBody.querySelector('#dg-o-w-credits'),
-                DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-credits h3'),
-                DGW.side.elements.widgetBody.querySelector('#dg-side-credits')
+                wb.querySelector('#dg-o-w-credits'),
+                pr.querySelector('.dg-o-w-profile-credits h3'),
+                sb.querySelector('#dg-side-credits')
             ],
-            pending: [DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-credits h5')]
+            pending: [pr.querySelector('.dg-o-w-profile-credits h5')]
         };
+
+    var fbAddText = pr.querySelector('#dg-o-w-login-fb-text');
 
     profileImageHolders.forEach(function(image){
         image.src = data.ImageUrl || DGW.helpers.checkImagesForSrc(image.getAttribute('src'));
@@ -54,6 +69,7 @@ DGW.main.methods.profileSetData = function(data) {
     });
 
     DGW.global.userStats.name = data.UserName || DGW.global.userStats.name;
+    DGW.global.userStats.facebookId = data.FacebookId;
 
     points.confirmed.forEach(function(point){
        point.innerHTML = data.Wallet.PointsConfirmed;
@@ -73,6 +89,10 @@ DGW.main.methods.profileSetData = function(data) {
     DGW.global.userStats.pointsP = data.Wallet.PointsPending;
     DGW.global.userStats.creditsC = data.Wallet.CreditsConfirmed;
     DGW.global.userStats.creditsP = data.Wallet.CreditsPending;
+
+    if (fbAddText && DGW.global.userStats.facebookId !== null) {
+        fbAddText.parentNode.removeChild(fbAddText);
+    }
 };
 
 DGW.main.methods.updateUserInfoBet = function(draw, user){
@@ -147,9 +167,9 @@ DGW.main.methods.updateBadgesInfo = function(){
     });
 
     function showFullBadgePage(badges, curBadgeId){
-        var submenu = '<div class="dg-o-w-submenu"><ul><li class="dg-o-w-back-draws">&lt; Back</li></ul></div>';
+        var submenu = '<div class="dg-o-w-submenu"><ul><li class="dg-o-w-back-draws">&larr; Back</li></ul></div>';
         var pageContent = '<div class="dg-o-w-badge-single">' +
-            '<ul></ul><div class="dg-o-w-badge-single-left"><</div><div class="dg-o-w-badge-single-right">></div></div>';
+            '<ul></ul><div class="dg-o-w-badge-single-left dg-o-w-arrow dg-o-w-arrow-left"></div><div class="dg-o-w-badge-single-right dg-o-w-arrow dg-o-w-arrow-right"></div></div>';
         var page = document.createElement('div');
             page.className = 'dg-o-w-badge-single-page';
             page.innerHTML = submenu + pageContent;
@@ -313,12 +333,12 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
     var prizeSect = '<div class="dg-o-w-draw-left-side">' +
                         '<div class="prize-image"><div><img src="' + draw.Prize.ImageUrl + '" /></div></div>' +
                     '</div>';
-    var shareSect = '<div class="dg-o-w-draw-share">' +
-                        '<a href="#" class="dg-o-w-like dg-o-w-facebook-like">Share and get <span class="dg-o-w-rewarded-action" id="dg-o-w-facebook-like-reward">10</span> points</a>' +
-                        '<a href="#" class="dg-o-w-like dg-o-w-twitter-like">Tweet and get <span class="dg-o-w-rewarded-action" id="dg-o-w-tweeter-like-reward">10</span> points</a>' +
+    var shareSect = '<div class="dg-o-w-draw-share dg-o-w-draw-auth-show">' +
+                        '<a href="#" class="dg-o-w-like dg-o-w-facebook-like">Share <span class="dg-o-w-rewarded-action" id="dg-o-w-facebook-like-reward"></span></a>' +
+                        '<a href="#" class="dg-o-w-like dg-o-w-twitter-like">Tweet <span class="dg-o-w-rewarded-action" id="dg-o-w-tweeter-like-reward"></span></a>' +
                     '</div>';
     var submenu = '<div class="dg-o-w-submenu">' +
-                        '<ul><li class="dg-o-w-back-draws">&lt; Back</li></ul><div class="right-side">' +
+                        '<ul><li class="dg-o-w-back-draws">&larr; Back</li></ul><div class="right-side">' +
         (!(drawEntry != undefined && drawEntry.IsWinner) ? /*'Minimum bet is 10'*/ '' : 'You\'ve spent ' + drawEntry.TicketsAmount + ' points and won!') +
                             '</div>' +
                     '</div>';
@@ -373,7 +393,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                                         '<input type="submit" value="Bet points" />' +
                                         '<p class="dg-o-w-form-message">something has happened</p>' +
                                     '</form>' +
-                                    '<div class="btn-dg-o-w-outline">Get additional points</div>' +
+                                    '<div id="dg-o-w-get-points-btn" class="btn-dg-o-w-outline">Get additional points</div>' +
                                 '</div>' +
                                     ((draw.Winner !== null) ?
                                         '<div class="dg-o-w-draw-winner"><img src="' + (draw.Winner.ImageUrl || DGW.helpers.checkImagesForSrc()) + '" /><h4>' + draw.Winner.UserName + ' has won this draw. Our congratulations!</h4></div>' :
@@ -400,10 +420,10 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                     '<h5 class="hide-claimed">Put your address to get the prize</h5>' +
                     '<form id="claim-prize" class="dg-o-w-form hide-claimed">' +
                         //'<select><option disabled>Select your country</option><option>UK</option><option>Ireland</option></select>' +
-                        '<input type="text" placeholder="Address line 1" />' +
-                        '<input type="text" placeholder="Address line 2" />' +
-                        '<input type="text" placeholder="County" />' +
-                        '<input type="text" placeholder="Postcode" />' +
+                        '<input type="text" name="Address1" placeholder="Address line 1" required />' +
+                        '<input type="text" name="Address2" placeholder="Address line 2" />' +
+                        '<input type="text" name="County" placeholder="County" />' +
+                        '<input type="text" name="Postcode" placeholder="Postcode" />' +
                         '<input type="submit" value="Submit " />' +
                         '<p class="dg-o-w-form-message">something has happened</p>' +
                     '</form>' +
@@ -431,6 +451,11 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
         }
     }
 
+    if (el.querySelector('#dg-o-w-get-points-btn')) {
+        el.querySelector('#dg-o-w-get-points-btn').addEventListener('click', function(){
+            DGW.main.methods.changeMainState('earn');
+        });
+    }
 
     el.querySelector('.dg-o-w-submenu li.dg-o-w-back-draws').addEventListener('click', function(){
         DGW.main.methods.changeMainState('draws');
@@ -439,10 +464,15 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
     if (el.querySelector('#bet-form')) {
         el.querySelector('#bet-form').addEventListener('submit', function (ev) {
             ev.preventDefault();
+            var betBtn = this.querySelector('input[type=submit]');
             var pointsToBet = +this.querySelector('input[type=number]').value;
 
             if (pointsToBet > 0) {
-                DGW.global.api.requests.drawBet(drawId, pointsToBet);
+                DGW.global.api.requests.drawBet(drawId, pointsToBet, function onSuccess(){
+                    betBtn.disabled = false;
+                    DGW.main.methods.notificationConstructor('We\'ve received your ' + pointsToBet + ' points. Bet more!');
+                });
+                betBtn.disabled = true;
             } else {
 
             }
@@ -452,18 +482,23 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
         el.querySelector('#claim-prize').addEventListener('submit', function(ev){
             ev.preventDefault();
             var that = this;
-            var address = '';
+            var address = {};
 
             Array.prototype.slice.call(that.querySelectorAll('input:not([type=submit])')).forEach(function(field){
-                address += (field.placeholder + ': ');
-                address += field.value;
-                address += '; ';
+                if (field.value == '') field.value = '-';
+                address[field.name] = field.value;
             });
 
             DGW.helpers.console.log(address);
 
-            if (address != '') {
-                DGW.global.api.requests.claimPrize(drawId, address, el.querySelector('.dg-o-w-single-draw'));
+            // //DGW.helpers.addClass(el, 'claimed');
+            // el.querySelector('.dg-o-w-single-draw')
+
+            if (address.Address1 != '') {
+                DGW.global.api.requests.claimPrize(drawId, address, function onSuccess(){
+                    DGW.helpers.addClass(el.querySelector('.dg-o-w-single-draw'), 'claimed');
+                    DGW.main.methods.notificationConstructor(['We\'ve received your address', 'And will contact you very soon!']);
+                });
             }
         });
     }
@@ -475,6 +510,19 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
             el.querySelector('.dg-o-w-countdown').innerHTML = 'Finished ' + String(DGW.helpers.getDateFromNow(draw.EndDate));
         }
     }
+
+    // Setting sharing buttons
+    var isWinner = false;
+    if (drawEntry && drawEntry.IsWinner) isWinner = true;
+
+    el.querySelector('.dg-o-w-like.dg-o-w-facebook-like').addEventListener('click', function(ev){
+        ev.preventDefault();
+        DGW.global.actions.requests.shareFb(drawId, isWinner);
+    });
+    el.querySelector('.dg-o-w-like.dg-o-w-twitter-like').addEventListener('click', function(ev){
+        ev.preventDefault();
+        DGW.global.actions.requests.shareTw(drawId, (!isWinner) ? 'Win ' : 'I\'ve just won ' + draw.Prize.Title, isWinner);
+    });
 
     DGW.main.elements.widgetContent.appendChild(el);
     DGW.main.methods.checkSectionHeight();
@@ -736,3 +784,24 @@ DGW.main.methods.leaderboardConstructor = function(earners) {
     });
 };
 
+DGW.main.methods.notificationConstructor = function(lis, _type) {
+    var ul = DGW.main.elements.pages.notificationHolder.querySelector('ul');
+        ul.innerHTML = '';
+    if (!_type) _type = 'success';
+
+    if (DGW.helpers.isArray(lis)) {
+        lis.forEach(function(el){
+            var li = document.createElement('li');
+            li.innerHTML = el;
+            ul.appendChild(li);
+        });
+        DGW.main.methods.showNotificationBar(_type);
+    } else if (typeof lis == 'string'){
+        var li = document.createElement('li');
+        li.innerHTML = lis;
+        ul.appendChild(li);
+        DGW.main.methods.showNotificationBar(_type);
+    } else {
+        DGW.helpers.console.warn('Notification parameters are not of the type of [Array] or String');
+    }
+};
