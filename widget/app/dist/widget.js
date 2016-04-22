@@ -609,16 +609,18 @@ DGW.global.api.requests.readServerCookie = function(cookieName, _callback){
     });
 };
 
-DGW.global.api.requests.signUp = function(userObj){
+DGW.global.api.requests.signUp = function(userObj, onSuccess, onError){
     DGW.global.api.generic('signUp', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('signUp: ', result.data);
             DGW.global.authorized = true;
             DGW.global.methods.authorize();
             DGW.main.methods.profileSetData(result.data);
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.global.authorized = false;
             DGW.helpers.console.error('signUp ', result.error);
+            if (onError) onError(result.error);
         }
     }, {
         Username: userObj.Username,
@@ -627,16 +629,18 @@ DGW.global.api.requests.signUp = function(userObj){
     });
 };
 
-DGW.global.api.requests.signIn = function(userObj){
+DGW.global.api.requests.signIn = function(userObj, onSuccess, onError){
     DGW.global.api.generic('signIn', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('signIn ', result.data);
             DGW.global.methods.authorize();
             DGW.main.methods.profileSetData(result.data);
             DGW.global.authorized = true;
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.global.authorized = false;
             DGW.helpers.console.error('signIn ', result.error);
+            if (onError) onError(result.error);
         }
     }, {
         Email: userObj.Email,
@@ -657,17 +661,17 @@ DGW.global.api.requests.forgotPass = function(email, onSuccess, onError){
     DGW.global.api.generic('forgotPass', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('forgotPass ', result.data);
-            if (onSuccess) onSuccess();
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('forgotPass ', result.error);
-            if (onError) onError();
+            if (onError) onError(result.error);
         }
     }, {
         Email: email
     });
 };
 
-DGW.global.api.requests.getUser = function(){
+DGW.global.api.requests.getUser = function(onSuccess, onError){
     DGW.global.api.generic('getUser', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getUser success ', result.data);
@@ -676,14 +680,16 @@ DGW.global.api.requests.getUser = function(){
                 DGW.global.methods.authorize();
             }
             DGW.main.methods.profileSetData(result.data);
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.global.authorized = false;
             DGW.helpers.console.error('getUser anon ', result);
+            if (onError) onError(result.error);
         }
     });
 };
 
-DGW.global.api.requests.getDraws = function(_callback){
+DGW.global.api.requests.getDraws = function(onSuccess, onError){
     DGW.global.api.generic('getDraws', function(result) {
         if (result.status == 200) {
             DGW.helpers.console.info('getDraws ', result.data);
@@ -697,22 +703,25 @@ DGW.global.api.requests.getDraws = function(_callback){
             } else {
                 DGW.main.methods.drawsConstructor(DGW.main.cache);
             }
-            if (_callback) _callback();
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getDraws ', result.error);
+            if (onError) onError(result.error);
         }
     });
 };
 
-DGW.global.api.requests.getDrawEntries = function(){
+DGW.global.api.requests.getDrawEntries = function(onSuccess, onError){
     DGW.global.api.generic('getDrawEntries', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getDrawEntries ', result.data);
             DGW.main.cache.drawsEntries = result.data.DrawEntries;
 
             DGW.main.methods.drawsConstructor(DGW.main.cache);
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getDrawEntries ', result.error);
+            if (onError) onError(result.error);
         }
     });
 };
@@ -723,9 +732,9 @@ DGW.global.api.requests.drawBet = function(drawId, pointsAmount, onSuccess, onEr
             DGW.helpers.console.info('drawBet ', result);
             DGW.global.api.requests.getDrawEntries();
             DGW.main.methods.updateUserInfoBet(result.data.DrawEntry, result.data.User);
-            if (onSuccess) onSuccess();
+            if (onSuccess) onSuccess(result.data);
         } else {
-            if (onError) onError();
+            if (onError) onError(result.error);
             DGW.helpers.console.error('drawBet ', result.error);
         }
     },{
@@ -737,9 +746,9 @@ DGW.global.api.requests.drawBet = function(drawId, pointsAmount, onSuccess, onEr
 DGW.global.api.requests.claimPrize = function(drawId, address, onSuccess, onError){
     DGW.global.api.generic('claimPrize', function(result){
         if (result.status == 200) {
-            if (onSuccess) onSuccess();
+            if (onSuccess) onSuccess(result.data);
         } else {
-            if (onError) onError();
+            if (onError) onError(result.error);
             DGW.helpers.console.error(result.error);
         }
     },{
@@ -758,131 +767,152 @@ DGW.global.api.requests.connectFB = function(onSuccess, onError){
     });
 };
 
-DGW.global.api.requests.getAllActivities = function(){
+DGW.global.api.requests.getAllActivities = function(onSuccess, onError){
     DGW.global.api.generic('getAllActivities', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getAllActivities ', result.data);
             DGW.main.methods.activitiesConstructor(result.data.Activities);
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getAllActivities ', result.error);
+            if (onError) onError(result.error);
         }
     });
 };
 
-DGW.global.api.requests.getUserActivities = function(){
+DGW.global.api.requests.getUserActivities = function(onSuccess, onError){
     DGW.global.api.generic('getUserActivities', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getUserActivities ', result.data);
             DGW.main.methods.activitiesConstructor(result.data.Activities);
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getUserActivities ', result.error);
+            if (onError) onError(result.error);
         }
     });
 };
 
-DGW.global.api.requests.getOffers = function(){
+DGW.global.api.requests.getOffers = function(onSuccess, onError){
     DGW.global.api.generic('getOffers', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getOffers ', result.data);
             DGW.main.methods.offersConstructor(result.data);
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getOffers ', result.error);
+            if (onError) onError(result.error);
         }
     });
 };
 
-DGW.global.api.requests.getUserOffers = function(){
+DGW.global.api.requests.getUserOffers = function(onSuccess, onError){
     DGW.global.api.generic('getUserOffers', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getUserOffers ', result.data);
             DGW.main.methods.offersConstructor(result.data);
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getUserOffers ', result.error);
+            if (onError) onError(result.error);
         }
     });
 };
 
-DGW.global.api.requests.trackOffer = function(offerId){
+DGW.global.api.requests.trackOffer = function(offerId, onSuccess, onError){
     DGW.global.api.generic('trackOffer', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info(result.data);
             DGW.helpers.console.info('Tracking of ' + offerId + ' has started');
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('trackOffer ', result.error);
+            if (onError) onError(result.error);
         }
     }, {
         OfferId: offerId
     });
 };
 
-DGW.global.api.requests.completeOffer = function(offerId){
+DGW.global.api.requests.completeOffer = function(offerId, onSuccess, onError){
     DGW.global.api.generic('completeOffer', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info(result.data);
             DGW.helpers.console.info('Offer ' + offerId + ' has been completed');
             DGW.global.api.requests.getUser();
             DGW.global.api.requests.getUserOffers();
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('completeOffer ', result.error);
+            if (onError) onError(result.error);
         }
     }, {
         OfferId: offerId
     });
 };
 
-DGW.global.api.requests.cancelOffer = function(offerId){
+DGW.global.api.requests.cancelOffer = function(offerId, onSuccess, onError){
     DGW.global.api.generic('cancelOffer', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info(result.data);
             DGW.helpers.console.info('Offer ' + offerId + ' has been cancelled');
             DGW.global.api.requests.getUser();
             DGW.global.api.requests.getUserOffers();
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('cancelOffer ', result.error);
+            if (onError) onError(result.error);
         }
     }, {
         OfferId: offerId
     });
 };
 
-DGW.global.api.requests.getActions = function(){
+DGW.global.api.requests.getActions = function(onSuccess, onError){
     DGW.global.api.generic('getActions', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getActions ', result.data);
             DGW.main.cache.rewardedActions = result.data.Actions;
             DGW.main.methods.setRewardedActions();
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getActions ', result.error);
+            if (onError) onError(result.error);
         }
     });
 };
 
-DGW.global.api.requests.getUserActions = function(){
+DGW.global.api.requests.getUserActions = function(onSuccess, onError){
     DGW.global.api.generic('getUserActions', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getUserActions ', result.data);
             DGW.main.cache.rewardedActions = result.data.Actions;
             DGW.main.methods.setRewardedActions();
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getUserActions ', result.error);
+            if (onError) onError(result.error);
         }
     });
 };
 
-DGW.global.api.requests.trackAction = function(actionType){
+DGW.global.api.requests.trackAction = function(actionType, onSuccess, onError){
     DGW.global.api.generic('trackAction', function(result){
             if (result.status == 200) {
                 DGW.helpers.console.info('trackAction ', result.data);
                 DGW.global.api.requests.getUserActions();
                 DGW.global.api.requests.getUser();
+
                 if (result.data.RewardResult) {
                     // rewarded
                     //DGW.main.methods.notificationConstructor()
+                    if (onSuccess) onSuccess(result.data);
                 } else {
 
                 }
             } else {
                 DGW.helpers.console.error('trackAction ', result.error);
+                if (onError) onError(result.error);
             }
         },
         {
@@ -891,37 +921,43 @@ DGW.global.api.requests.trackAction = function(actionType){
 };
 
 
-DGW.global.api.requests.getLeaderboard = function(){
+DGW.global.api.requests.getLeaderboard = function(onSuccess, onError){
     DGW.global.api.generic('getLeaderboard', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getLeaderboard ', result.data);
             DGW.main.methods.leaderboardConstructor(result.data.Earners);
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getLeaderboard ', result.error);
+            if (onError) onError(result.error);
         }
     });
 };
 
-DGW.global.api.requests.getAllBadges = function(){
+DGW.global.api.requests.getAllBadges = function(onSuccess, onError){
     DGW.global.api.generic('getBadges', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getBadges ', result.data);
             DGW.global.userStats.badges.all = result.data.Badges;
             DGW.global.api.requests.getEarnedBadges();
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getBadges ', result.error);
+            if (onError) onError(result.error);
         }
     });
 };
 
-DGW.global.api.requests.getEarnedBadges = function(){
+DGW.global.api.requests.getEarnedBadges = function(onSuccess, onError){
     DGW.global.api.generic('getEarnedBadges', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getEarnedBadges ', result.data);
             DGW.global.userStats.badges.earned = result.data.EarnedBadges;
             DGW.main.methods.updateBadgesInfo();
+            if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getEarnedBadges ', result.error);
+            if (onError) onError(result.error);
         }
     });
 };
@@ -933,7 +969,7 @@ DGW.global.api.requests.shareRewardAction = function(drawId, onSuccess, onError)
             if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('shareRewardedAction: ', result.error);
-            if (onError) onError();
+            if (onError) onError(result.error);
         }
     }, drawId)
 };
@@ -948,7 +984,10 @@ DGW.global.offers.requests.shareOfferTw = function(offerId, offerShareUrl){
     DGW.global.api.requests.trackOffer(offerId);
 
     DGW.helpers.centerWindowPopup('https://twitter.com/intent/tweet?text=Some+offer+text&url=' + encodeURIComponent(offerShareUrl), 'twWindow', 460, 340, function(){
-        DGW.global.api.requests.completeOffer(offerId);
+        DGW.global.api.requests.completeOffer(offerId,
+            function onSuccess(){
+                DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Sharing on Twitter');
+            });
     });
 };
 
@@ -956,7 +995,7 @@ DGW.global.actions.requests.shareFb = function(drawId, _winner){
     DGW.global.api.requests.shareRewardAction(drawId, function onSuccess(urls){
         DGW.helpers.centerWindowPopup(DGW.global.envPath +
             'rewardedaction/facebookshare?api_key=' + DGW.global.api.apiKey + '&shareurl=' + encodeURIComponent((!_winner) ? urls.ShareUrl : urls.WinnerShareUrl),
-            'fbWindow', 460, 340, function(){
+            'fbWindow2', 460, 340, function(){
                 DGW.global.api.requests.getUser();
                 DGW.global.api.requests.getUserActions();
         });
@@ -967,9 +1006,11 @@ DGW.global.actions.requests.shareTw = function(drawId, text, _winner){
     DGW.global.api.requests.shareRewardAction(drawId, function onSuccess(urls){
         DGW.helpers.centerWindowPopup('https://twitter.com/intent/tweet?text=' + text +
             '&url=' + encodeURIComponent((!_winner) ? urls.ShareUrl : urls.WinnerShareUrl) + '&hashtags=' + DGW.global.club.name,
-            'twWindow', 460, 340, function(){
+            'twWindow2', 460, 340, function(){
                 //DGW.global.api.requests.getUserActions();
-                DGW.global.api.requests.trackAction(5);
+                DGW.global.api.requests.trackAction(5, function onSuccess(){
+                    DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Sharing on Twitter');
+                });
             });
     });
 };
@@ -1032,7 +1073,9 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
         if(event.data === 0) {
             // Video has finished
             hidePlayer();
-            DGW.global.api.requests.completeOffer(offerId);
+            DGW.global.api.requests.completeOffer(offerId, function onSuccess(){
+                DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Watching this cool video');
+            });
             DGW.helpers.console.log('Video has finished');
         }
     }
@@ -1302,8 +1345,34 @@ DGW.helpers.console = (function(){
     };
 })();
 
+DGW.helpers.errorParser = function(error) {
+    error = JSON.parse(error);
+    var errorsArray = [];
+    var errorsFields = [];
+    if (error.ModelState) {
+        for (var model in error.ModelState) {
+            if (DGW.helpers.isArray(error.ModelState[model])) {
+                error.ModelState[model].forEach(function(el){
+                    errorsArray.push(el);
+                });
+                errorsFields.push(model.substr(6).toLowerCase());
+            }
+        }
+    } else {
+        return {messages: error.Message}
+    }
 
+    // TODO: use errorsFields as names for inputs
+    return {messages: errorsArray, inputs: errorsFields}
+};
 
+DGW.helpers.insertAfter = function (newNode, referenceNode, _fallbackNode) {
+    if (referenceNode) {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    } else {
+        if (_fallbackNode) _fallbackNode.appendChild(newNode);
+    }
+};
 DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body">' +
                                         '<div class="dg-side-widget-content dg-o-w-authorized">' +
@@ -1314,7 +1383,7 @@ DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                                         '<h6><span id="dg-side-points">00</span> | <span id="dg-side-credits">00</span></h6>' +
                                                     '</div>' +
                                                 '</div>' +
-                                                '<div class="dg-side-collapsed"><p>210 pts</p></div>' +
+                                                '<div class="dg-side-collapsed"><p><span id="dg-side-points-collapsed"></span> pts</p></div>' +
                                                 '<div class="dg-side-expanded"><p>Earned: <span>15</span> pts | left: <span>5</span>pts</p></div>' +
                                             '</div>' +
                                         '</div>' +
@@ -1824,6 +1893,8 @@ DGW.main.methods.changeMainState = function(state){
         img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
     });
 
+    DGW.main.methods.hideNotificationBar();
+
     DGW.main.currentState = state;
     DGW.main.methods.setRewardedActions();
     DGW.main.methods.checkSectionHeight();
@@ -1878,27 +1949,25 @@ DGW.main.methods.initEvents = function () {
         var emailF = this.querySelector('[type=email]').value,
             passF = this.querySelector('[type=password]').value;
 
-        if (emailF != '' && passF != '' && passF.length > 5) {
             DGW.global.api.requests.signIn({
                 Email: emailF,
                 Password: passF
+            }, function onSuccess(){
+                DGW.helpers.removeClass(DGW.main.elements.loginMenuButton.parentNode, 'shown');
+            }, function onError(result){
+                DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
             });
-            DGW.helpers.removeClass(DGW.main.elements.loginMenuButton.parentNode, 'shown');
-        }
     });
     topForgotForm.addEventListener('submit', function(ev){
         ev.preventDefault();
         var that = this;
         var emailF = that.querySelector('[type=email]').value;
-        if (emailF.length > 0) {
-            DGW.global.api.requests.forgotPass(emailF, function onSuccess(){
-                DGW.helpers.addClass(topForgotForm, 'success');
-                setTimeout(function(){
-                    that.querySelector('a').click();
-                    DGW.helpers.removeClass(topForgotForm, 'success');
-                }, 2000);
+        DGW.global.api.requests.forgotPass(emailF,
+            function onSuccess(){
+                DGW.main.methods.notificationConstructor('Check your email to confirm the new password.');
+            }, function onError(result){
+                DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
             });
-        }
     });
     topLoginForm.querySelector('a').addEventListener('click', function(ev){
         ev.preventDefault();
@@ -1957,22 +2026,23 @@ DGW.main.methods.initEvents = function () {
 
                 DGW.helpers.addClass(DGW.main.elements.loginFooter, 'password');
             } else {
-                //TODO: validation
+                var errorMessage = [];
+                if (name == '') errorMessage.push('Name is required field');
+                if (email == '') errorMessage.push('Email is required');
+                DGW.main.methods.notificationConstructor(errorMessage, 'error');
             }
         });
         DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-signup-pass').addEventListener('submit', function(ev){
             ev.preventDefault();
             var pass = this.querySelector('[type=password]').value;
-            if (pass != '' && pass.length >= 5) {
                 newUser.Password = pass;
-                DGW.global.api.requests.signUp(newUser);
-
-                //TODO: preloader and success messages
-                DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'email-sign-up');
-                DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'password');
-            } else {
-                //TODO: validation
-            }
+                DGW.global.api.requests.signUp(newUser,
+                    function onSuccess(){
+                        DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'email-sign-up');
+                        DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'password');
+                    }, function onError(result){
+                        DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
+                    });
         });
     })();
     DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-fb-connect').addEventListener('click', function(ev){
@@ -2173,7 +2243,8 @@ DGW.main.methods.profileSetData = function(data) {
             confirmed: [
                 wb.querySelector('#dg-o-w-points'),
                 pr.querySelector('.dg-o-w-profile-points h3'),
-                sb.querySelector('#dg-side-points')
+                sb.querySelector('#dg-side-points'),
+                sb.querySelector('#dg-side-points-collapsed')
             ],
             pending: [pr.querySelector('.dg-o-w-profile-points h5')]
         },
@@ -2550,7 +2621,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                     '<h5 class="hide-claimed">Put your address to get the prize</h5>' +
                     '<form id="claim-prize" class="dg-o-w-form hide-claimed">' +
                         //'<select><option disabled>Select your country</option><option>UK</option><option>Ireland</option></select>' +
-                        '<input type="text" name="Address1" placeholder="Address line 1" required />' +
+                        '<input type="text" name="Address1" placeholder="Address line 1" />' +
                         '<input type="text" name="Address2" placeholder="Address line 2" />' +
                         '<input type="text" name="County" placeholder="County" />' +
                         '<input type="text" name="Postcode" placeholder="Postcode" />' +
@@ -2597,15 +2668,14 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
             var betBtn = this.querySelector('input[type=submit]');
             var pointsToBet = +this.querySelector('input[type=number]').value;
 
-            if (pointsToBet > 0) {
-                DGW.global.api.requests.drawBet(drawId, pointsToBet, function onSuccess(){
-                    betBtn.disabled = false;
-                    DGW.main.methods.notificationConstructor('We\'ve received your ' + pointsToBet + ' points. Bet more!');
-                });
-                betBtn.disabled = true;
-            } else {
-
-            }
+            DGW.global.api.requests.drawBet(drawId, pointsToBet, function onSuccess(){
+                betBtn.disabled = false;
+                DGW.main.methods.notificationConstructor('We\'ve received your ' + pointsToBet + ' points. Bet more!');
+            }, function onError(result){
+                betBtn.disabled = false;
+                DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
+            });
+            betBtn.disabled = true;
         });
     }
     if (el.querySelector('#claim-prize')) {
@@ -2615,21 +2685,16 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
             var address = {};
 
             Array.prototype.slice.call(that.querySelectorAll('input:not([type=submit])')).forEach(function(field){
-                if (field.value == '') field.value = '-';
+                if (field.value == '' && field.name != 'Address1') field.value = '-';
                 address[field.name] = field.value;
             });
 
-            DGW.helpers.console.log(address);
-
-            // //DGW.helpers.addClass(el, 'claimed');
-            // el.querySelector('.dg-o-w-single-draw')
-
-            if (address.Address1 != '') {
-                DGW.global.api.requests.claimPrize(drawId, address, function onSuccess(){
-                    DGW.helpers.addClass(el.querySelector('.dg-o-w-single-draw'), 'claimed');
-                    DGW.main.methods.notificationConstructor(['We\'ve received your address', 'And will contact you very soon!']);
-                });
-            }
+            DGW.global.api.requests.claimPrize(drawId, address, function onSuccess(){
+                DGW.helpers.addClass(el.querySelector('.dg-o-w-single-draw'), 'claimed');
+                DGW.main.methods.notificationConstructor(['We\'ve received your address', 'And will contact you very soon!']);
+            }, function onError(result){
+                DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
+            });
         });
     }
 
@@ -2945,7 +3010,12 @@ widgetStyles.addEventListener('load', function(){
 
 widgetStyles.href = DGW.global.widgetPathName + 'style.min.css';
 
-document.head.appendChild(widgetStyles);
+
+var lastLinkElement = document.head.getElementsByTagName('link')[document.head.getElementsByTagName('link').length - 1];
+
+
+
+DGW.helpers.insertAfter(widgetStyles, lastLinkElement, document.head);
 
 window.dgwActivateDebugMode = function(){
     DGW.global.debug = true;

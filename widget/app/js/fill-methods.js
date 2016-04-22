@@ -43,7 +43,8 @@ DGW.main.methods.profileSetData = function(data) {
             confirmed: [
                 wb.querySelector('#dg-o-w-points'),
                 pr.querySelector('.dg-o-w-profile-points h3'),
-                sb.querySelector('#dg-side-points')
+                sb.querySelector('#dg-side-points'),
+                sb.querySelector('#dg-side-points-collapsed')
             ],
             pending: [pr.querySelector('.dg-o-w-profile-points h5')]
         },
@@ -420,7 +421,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                     '<h5 class="hide-claimed">Put your address to get the prize</h5>' +
                     '<form id="claim-prize" class="dg-o-w-form hide-claimed">' +
                         //'<select><option disabled>Select your country</option><option>UK</option><option>Ireland</option></select>' +
-                        '<input type="text" name="Address1" placeholder="Address line 1" required />' +
+                        '<input type="text" name="Address1" placeholder="Address line 1" />' +
                         '<input type="text" name="Address2" placeholder="Address line 2" />' +
                         '<input type="text" name="County" placeholder="County" />' +
                         '<input type="text" name="Postcode" placeholder="Postcode" />' +
@@ -467,15 +468,14 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
             var betBtn = this.querySelector('input[type=submit]');
             var pointsToBet = +this.querySelector('input[type=number]').value;
 
-            if (pointsToBet > 0) {
-                DGW.global.api.requests.drawBet(drawId, pointsToBet, function onSuccess(){
-                    betBtn.disabled = false;
-                    DGW.main.methods.notificationConstructor('We\'ve received your ' + pointsToBet + ' points. Bet more!');
-                });
-                betBtn.disabled = true;
-            } else {
-
-            }
+            DGW.global.api.requests.drawBet(drawId, pointsToBet, function onSuccess(){
+                betBtn.disabled = false;
+                DGW.main.methods.notificationConstructor('We\'ve received your ' + pointsToBet + ' points. Bet more!');
+            }, function onError(result){
+                betBtn.disabled = false;
+                DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
+            });
+            betBtn.disabled = true;
         });
     }
     if (el.querySelector('#claim-prize')) {
@@ -485,21 +485,16 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
             var address = {};
 
             Array.prototype.slice.call(that.querySelectorAll('input:not([type=submit])')).forEach(function(field){
-                if (field.value == '') field.value = '-';
+                if (field.value == '' && field.name != 'Address1') field.value = '-';
                 address[field.name] = field.value;
             });
 
-            DGW.helpers.console.log(address);
-
-            // //DGW.helpers.addClass(el, 'claimed');
-            // el.querySelector('.dg-o-w-single-draw')
-
-            if (address.Address1 != '') {
-                DGW.global.api.requests.claimPrize(drawId, address, function onSuccess(){
-                    DGW.helpers.addClass(el.querySelector('.dg-o-w-single-draw'), 'claimed');
-                    DGW.main.methods.notificationConstructor(['We\'ve received your address', 'And will contact you very soon!']);
-                });
-            }
+            DGW.global.api.requests.claimPrize(drawId, address, function onSuccess(){
+                DGW.helpers.addClass(el.querySelector('.dg-o-w-single-draw'), 'claimed');
+                DGW.main.methods.notificationConstructor(['We\'ve received your address', 'And will contact you very soon!']);
+            }, function onError(result){
+                DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
+            });
         });
     }
 

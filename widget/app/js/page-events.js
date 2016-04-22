@@ -78,6 +78,8 @@ DGW.main.methods.changeMainState = function(state){
         img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
     });
 
+    DGW.main.methods.hideNotificationBar();
+
     DGW.main.currentState = state;
     DGW.main.methods.setRewardedActions();
     DGW.main.methods.checkSectionHeight();
@@ -132,27 +134,25 @@ DGW.main.methods.initEvents = function () {
         var emailF = this.querySelector('[type=email]').value,
             passF = this.querySelector('[type=password]').value;
 
-        if (emailF != '' && passF != '' && passF.length > 5) {
             DGW.global.api.requests.signIn({
                 Email: emailF,
                 Password: passF
+            }, function onSuccess(){
+                DGW.helpers.removeClass(DGW.main.elements.loginMenuButton.parentNode, 'shown');
+            }, function onError(result){
+                DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
             });
-            DGW.helpers.removeClass(DGW.main.elements.loginMenuButton.parentNode, 'shown');
-        }
     });
     topForgotForm.addEventListener('submit', function(ev){
         ev.preventDefault();
         var that = this;
         var emailF = that.querySelector('[type=email]').value;
-        if (emailF.length > 0) {
-            DGW.global.api.requests.forgotPass(emailF, function onSuccess(){
-                DGW.helpers.addClass(topForgotForm, 'success');
-                setTimeout(function(){
-                    that.querySelector('a').click();
-                    DGW.helpers.removeClass(topForgotForm, 'success');
-                }, 2000);
+        DGW.global.api.requests.forgotPass(emailF,
+            function onSuccess(){
+                DGW.main.methods.notificationConstructor('Check your email to confirm the new password.');
+            }, function onError(result){
+                DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
             });
-        }
     });
     topLoginForm.querySelector('a').addEventListener('click', function(ev){
         ev.preventDefault();
@@ -211,22 +211,23 @@ DGW.main.methods.initEvents = function () {
 
                 DGW.helpers.addClass(DGW.main.elements.loginFooter, 'password');
             } else {
-                //TODO: validation
+                var errorMessage = [];
+                if (name == '') errorMessage.push('Name is required field');
+                if (email == '') errorMessage.push('Email is required');
+                DGW.main.methods.notificationConstructor(errorMessage, 'error');
             }
         });
         DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-signup-pass').addEventListener('submit', function(ev){
             ev.preventDefault();
             var pass = this.querySelector('[type=password]').value;
-            if (pass != '' && pass.length >= 5) {
                 newUser.Password = pass;
-                DGW.global.api.requests.signUp(newUser);
-
-                //TODO: preloader and success messages
-                DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'email-sign-up');
-                DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'password');
-            } else {
-                //TODO: validation
-            }
+                DGW.global.api.requests.signUp(newUser,
+                    function onSuccess(){
+                        DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'email-sign-up');
+                        DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'password');
+                    }, function onError(result){
+                        DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
+                    });
         });
     })();
     DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-fb-connect').addEventListener('click', function(ev){

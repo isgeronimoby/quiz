@@ -8,7 +8,12 @@ widgetStyles.addEventListener('load', function(){
 
 widgetStyles.href = DGW.global.widgetPathName + 'style.min.css';
 
-document.head.appendChild(widgetStyles);
+
+var lastLinkElement = document.head.getElementsByTagName('link')[document.head.getElementsByTagName('link').length - 1];
+
+
+
+DGW.helpers.insertAfter(widgetStyles, lastLinkElement, document.head);
 
 window.dgwActivateDebugMode = function(){
     DGW.global.debug = true;

@@ -229,4 +229,31 @@ DGW.helpers.console = (function(){
     };
 })();
 
+DGW.helpers.errorParser = function(error) {
+    error = JSON.parse(error);
+    var errorsArray = [];
+    var errorsFields = [];
+    if (error.ModelState) {
+        for (var model in error.ModelState) {
+            if (DGW.helpers.isArray(error.ModelState[model])) {
+                error.ModelState[model].forEach(function(el){
+                    errorsArray.push(el);
+                });
+                errorsFields.push(model.substr(6).toLowerCase());
+            }
+        }
+    } else {
+        return {messages: error.Message}
+    }
 
+    // TODO: use errorsFields as names for inputs
+    return {messages: errorsArray, inputs: errorsFields}
+};
+
+DGW.helpers.insertAfter = function (newNode, referenceNode, _fallbackNode) {
+    if (referenceNode) {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    } else {
+        if (_fallbackNode) _fallbackNode.appendChild(newNode);
+    }
+};

@@ -9,7 +9,10 @@ DGW.global.offers.requests.shareOfferTw = function(offerId, offerShareUrl){
     DGW.global.api.requests.trackOffer(offerId);
 
     DGW.helpers.centerWindowPopup('https://twitter.com/intent/tweet?text=Some+offer+text&url=' + encodeURIComponent(offerShareUrl), 'twWindow', 460, 340, function(){
-        DGW.global.api.requests.completeOffer(offerId);
+        DGW.global.api.requests.completeOffer(offerId,
+            function onSuccess(){
+                DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Sharing on Twitter');
+            });
     });
 };
 
@@ -17,7 +20,7 @@ DGW.global.actions.requests.shareFb = function(drawId, _winner){
     DGW.global.api.requests.shareRewardAction(drawId, function onSuccess(urls){
         DGW.helpers.centerWindowPopup(DGW.global.envPath +
             'rewardedaction/facebookshare?api_key=' + DGW.global.api.apiKey + '&shareurl=' + encodeURIComponent((!_winner) ? urls.ShareUrl : urls.WinnerShareUrl),
-            'fbWindow', 460, 340, function(){
+            'fbWindow2', 460, 340, function(){
                 DGW.global.api.requests.getUser();
                 DGW.global.api.requests.getUserActions();
         });
@@ -28,9 +31,11 @@ DGW.global.actions.requests.shareTw = function(drawId, text, _winner){
     DGW.global.api.requests.shareRewardAction(drawId, function onSuccess(urls){
         DGW.helpers.centerWindowPopup('https://twitter.com/intent/tweet?text=' + text +
             '&url=' + encodeURIComponent((!_winner) ? urls.ShareUrl : urls.WinnerShareUrl) + '&hashtags=' + DGW.global.club.name,
-            'twWindow', 460, 340, function(){
+            'twWindow2', 460, 340, function(){
                 //DGW.global.api.requests.getUserActions();
-                DGW.global.api.requests.trackAction(5);
+                DGW.global.api.requests.trackAction(5, function onSuccess(){
+                    DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Sharing on Twitter');
+                });
             });
     });
 };
@@ -93,7 +98,9 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
         if(event.data === 0) {
             // Video has finished
             hidePlayer();
-            DGW.global.api.requests.completeOffer(offerId);
+            DGW.global.api.requests.completeOffer(offerId, function onSuccess(){
+                DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Watching this cool video');
+            });
             DGW.helpers.console.log('Video has finished');
         }
     }

@@ -8,7 +8,7 @@ DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                                         '<h6><span id="dg-side-points">00</span> | <span id="dg-side-credits">00</span></h6>' +
                                                     '</div>' +
                                                 '</div>' +
-                                                '<div class="dg-side-collapsed"><p>210 pts</p></div>' +
+                                                '<div class="dg-side-collapsed"><p><span id="dg-side-points-collapsed"></span> pts</p></div>' +
                                                 '<div class="dg-side-expanded"><p>Earned: <span>15</span> pts | left: <span>5</span>pts</p></div>' +
                                             '</div>' +
                                         '</div>' +
