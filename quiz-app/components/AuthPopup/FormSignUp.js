@@ -11,6 +11,11 @@ class FormSignIn extends Component {
 		loading: PropTypes.bool,
 	};
 
+	static defaultProps = {
+		error: '',
+		loading: false,
+	};
+
 	handleSubmit() {
 		const emailEl = this.refs['email-input'];
 		const pwdEl = this.refs['pwd-input'];

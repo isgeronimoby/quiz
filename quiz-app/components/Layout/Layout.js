@@ -13,6 +13,16 @@ class Layout extends Component {
 		children: PropTypes.element.isRequired,
 	};
 
+	static childContextTypes = {
+		toggleAuthPopup: React.PropTypes.func,
+	};
+
+	getChildContext() {
+		return {
+			toggleAuthPopup: (on) => this.toggleAuthPopup(on)
+		};
+	}
+
 	state = {
 		showMenu: false,
 		showAuthPopup: false
@@ -32,6 +42,7 @@ class Layout extends Component {
 
 	render() {
 		const {title, path, children} = this.props;
+		const { showMenu, showAuthPopup } = this.state;
 
 		return (
 			<div className="layout">
@@ -41,11 +52,10 @@ class Layout extends Component {
 
 				<Menu
 					activePath={ path }
-					show={ this.state.showMenu }
+					show={ showMenu }
 					onClick={ () => this.toggleMenu(false) }/>
 
-				<AuthPopup
-					show={ true }/>
+				<AuthPopup show={ showAuthPopup }/>
 
 				<div className="content">
 					{ children }

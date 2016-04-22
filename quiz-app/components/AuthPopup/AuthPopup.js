@@ -19,11 +19,31 @@ async function post(url, data) {
 	const err = {
 		message: 'Email or password is incorrect. Please try again'
 	};
+	const randomFail = (Math.random() > .5);
 
 	return new Promise((resolve, reject) => {
-		setTimeout(() => reject(err),  DELAY);
+		setTimeout(() => {
+			if (randomFail) {
+				reject(err);
+			} else {
+				resolve('ok');
+			}
+		},  DELAY);
 	});
 }
+
+async function doPost(url, data) {
+	let error, res;
+	try {
+		res = await post(url, data); // TODO - use res?
+	}
+	catch (err) {
+		error = err.message;
+	}
+
+	return {error, res};
+}
+
 
 class AuthPopup extends Component {
 
@@ -32,69 +52,58 @@ class AuthPopup extends Component {
 		onClick: PropTypes.func,
 	};
 
+	static contextTypes = {
+		toggleAuthPopup: React.PropTypes.func
+	};
+
 	state = {
 		view: 'signup',
-		signup: {
-			error: undefined,
-			loading: false,
-		},
-		login: {
-			error: undefined,
-			loading: false,
-		},
-		forgot: {
-			error: undefined,
-			loading: false,
-		},
+		error: undefined,
+		loading: false,
 	};
 
 	navigateTo(view) {
 		this.setState({
 			view,
-			[view]: {
-				error: undefined,
-				loading: false,
-			}
+			error: undefined,
+			loading: false
 		});
 	}
 
-	doPost(view, url, data) {
+	handleSubmit(url, data) {
 		this.setState({
-			[view]: {
-				error: undefined,
-				loading: true
-			}
+			error: undefined,
+			loading: true
 		}, async () => {
-			let error, res;
-			try {
-				res = await post(url, data);
-			}
-			catch (err) {
-				error = err.message;
-			}
+			const {error, res} = await doPost(url, data);
 
 			this.setState({
-				[view]: {
-					error,
-					loading: false
+				error,
+				loading: false
+			}, () => {
+				if (!error) {
+					this.closePopup();
 				}
 			});
 		});
 	}
 
+	closePopup() {
+		this.context.toggleAuthPopup(false)
+	}
+
 	render() {
 		const { show } = this.props;
-		const { view } = this.state;
+		const { view, ...rest } = this.state;
 		const hiddenClass = !show ? 'is-hidden' : '';
 		const [Component, url] = view2comp[view];
-		const params = this.state[view];
 
 		return (
-			<div className={"auth-screen " + hiddenClass }>
+			<div className={"auth-screen " + hiddenClass } onClick={() => {}/*this.closePopup()*/ }>
 				<Component
 					onNavigate={ (view) => this.navigateTo(view) }
-					onSubmit={ (data) => this.doPost(view, url, data) }
-					{ ...params }
+					onSubmit={ (data) => this.handleSubmit(url, data) }
+					{ ...rest }
 				/>
 			</div>
 		);

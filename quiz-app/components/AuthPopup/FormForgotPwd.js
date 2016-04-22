@@ -4,6 +4,7 @@ import { EmailInput } from './Controls.js';
 
 
 class FormForgotPwd extends Component {
+
 	static propTypes = {
 		onNavigate: PropTypes.func.isRequired,
 		onSubmit: PropTypes.func.isRequired,
@@ -11,7 +12,9 @@ class FormForgotPwd extends Component {
 		loading: PropTypes.bool,
 	};
 
-	state = {
+	static defaultProps = {
+		error: '',
+		loading: false,
 	};
 
 	handleSubmit() {
