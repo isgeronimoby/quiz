@@ -1,36 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import Button from '../Button';
+import SignIn from './SignIn.js';
 import './AuthPopup.scss';
 
 
-class SignIn extends Component {
-	static propTypes = {
-		onClick: PropTypes.func,
-	};
+const view2comp = {
+	'signin': SignIn
+};
 
-	render() {
-		const { show, ...others} = this.props;
-
-		return (
-			<div className="auth-popup">
-				<div className="auth-icon">
-					<img src={ require('./images/icon-ball-lg.svg') } />
-				</div>
-
-				<a className="big-btn facebook-btn" href="//facebook.com" target="_blank">SignUp with Facebook</a>
-
-				<div className="auth-text">and get <span className="text-brand">+10 points</span></div>
-
-				<div className="auth-separator">
-					<img className="strike" src={ require('./images/or-separator.svg') } />
-					<div className="text-sm">Or</div>
-					<img className="strike flip" src={ require('./images/or-separator.svg') } />
-				</div>
-
-			</div>
-		);
-	}
-}
 
 class AuthPopup extends Component {
 
@@ -39,13 +15,17 @@ class AuthPopup extends Component {
 		onClick: PropTypes.func,
 	};
 
+	state = {
+		view: 'signin'
+	};
+
 	render() {
 		const { show } = this.props;
 		const hiddenClass = !show ? 'is-hidden' : '';
 
 		return (
 			<div className={"auth-screen " + hiddenClass }>
-				<SignIn />
+				<SignIn onNavigate={() => {}}/>
 			</div>
 		);
 	}

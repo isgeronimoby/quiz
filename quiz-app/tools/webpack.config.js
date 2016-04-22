@@ -152,6 +152,7 @@ if (NPM_SCRIPT === 'start') {
 		],
 		output: {
 			filename: 'app.js',
+			publicPath: '/',
 		},
 		// http://webpack.github.io/docs/configuration.html#devtool
 		devtool: 'cheap-module-eval-source-map',

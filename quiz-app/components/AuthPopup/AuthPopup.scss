@@ -59,3 +59,34 @@ $icon-sz: 55px;
     transform: rotate(180deg);
   }
 }
+/*
+Form
+*/
+
+.auth-form {
+  .input-group {
+    margin-bottom: 15px;
+  }
+
+  input {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    height: 34px;
+    line-height: 1.6;
+    padding: 10px 0;
+    font-size: 14px;
+    color: $color-grey-dark;
+    border: 0;
+    border-bottom: 2px solid $brand-color-lite;
+
+    &:focus,
+    &:active {
+      outline: 0;
+    }
+  }
+  .share-btn {
+    font-size: 1.4rem; /*TODO - make btn-sm, btn-md..*/
+    margin: 20px 0 10px;
+  }
+}
