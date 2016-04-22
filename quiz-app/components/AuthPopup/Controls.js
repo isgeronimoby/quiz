@@ -3,7 +3,13 @@ import React, { Component, PropTypes } from 'react';
 const EMAIL_RE = /.*@.*?\..*?/;
 
 
-export const Separator = () => {
+export const SeparatorOrError = ({ error }) => {
+	if (error) {
+		return (
+			<div className="input-error">{ error }</div>
+		);
+	}
+
 	return (
 		<div className="auth-separator">
 			<img className="strike" src={ require('./images/or-separator.svg') } />
@@ -86,7 +92,7 @@ export class EmailInput extends Input {
 		const errorClass = error ? `has-error` : '';
 		const errorStyle = (type) => {
 			return {
-				display: (type === error) ? 'block' : 'none'
+				visibility: (type === error) ? 'visible' : 'hidden'
 			};
 		};
 

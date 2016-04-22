@@ -108,18 +108,20 @@ Form
     }
   }
 
-  .input-error {
-    position: absolute;
-    font-size: 1rem;
-    color: $color-error;
-  }
-
   .share-btn {
     font-size: 1.4rem; /*TODO - make btn-sm, btn-md..*/
   }
   .money-btn {
     font-size: 1.9rem;
   }
+  .input-error {
+    position: absolute; /*inside form*/
+  }
+}
+
+.input-error {
+  font-size: 1rem;
+  color: $color-error;
 }
 
 .link-small {

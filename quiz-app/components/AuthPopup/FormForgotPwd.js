@@ -7,6 +7,8 @@ class FormForgotPwd extends Component {
 	static propTypes = {
 		onNavigate: PropTypes.func.isRequired,
 		onSubmit: PropTypes.func.isRequired,
+		error: PropTypes.string,
+		loading: PropTypes.bool,
 	};
 
 	state = {
@@ -26,7 +28,7 @@ class FormForgotPwd extends Component {
 	}
 
 	render() {
-		const { onNavigate } = this.props;
+		const { onNavigate, error } = this.props;
 		const toLogin = () => onNavigate('login');
 		const toSignup = () => onNavigate('signup');
 		const onSubmit = () => this.handleSubmit();
@@ -41,6 +43,8 @@ class FormForgotPwd extends Component {
 					<div className="auth-text">Don't feel bad</div>
 					<div className="auth-text-sm">It happens to the best of us</div>
 				</div>
+
+				<div className="input-error">{ error }</div>
 
 				<form className="auth-form">
 					<EmailInput ref="email-input" required={true} />

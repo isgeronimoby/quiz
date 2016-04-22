@@ -1,11 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import Button from '../Button';
-import { Separator, EmailInput, PasswordInput } from './Controls.js';
+import { SeparatorOrError, EmailInput, PasswordInput } from './Controls.js';
 
 
 class FormLogIn extends Component {
 	static propTypes = {
 		onNavigate: PropTypes.func.isRequired,
+		onSubmit: PropTypes.func.isRequired,
+		error: PropTypes.string,
+		loading: PropTypes.bool,
 	};
 
 	handleSubmit() {
@@ -28,7 +31,7 @@ class FormLogIn extends Component {
 	}
 
 	render() {
-		const { onNavigate } = this.props;
+		const { onNavigate, error } = this.props;
 		const toForgot = () => onNavigate('forgot');
 		const toSignup = () => onNavigate('signup');
 		const onSubmit = () => this.handleSubmit();
@@ -41,11 +44,7 @@ class FormLogIn extends Component {
 
 				<a className="big-btn facebook-btn" href="//facebook.com" target="_blank">LogIn with Facebook</a>
 
-				<div className="auth-separator">
-					<img className="strike" src={ require('./images/or-separator.svg') } />
-					<div className="auth-text-sm">Or</div>
-					<img className="strike flip" src={ require('./images/or-separator.svg') } />
-				</div>
+				<SeparatorOrError error={error} />
 
 				<form className="auth-form">
 					<EmailInput ref="email-input" required={true} />

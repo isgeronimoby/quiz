@@ -1,11 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import Button from '../Button';
-import { Separator, EmailInput, PasswordInput } from './Controls.js';
+import { SeparatorOrError, EmailInput, PasswordInput } from './Controls.js';
 
 
 class FormSignIn extends Component {
 	static propTypes = {
 		onNavigate: PropTypes.func.isRequired,
+		onSubmit: PropTypes.func.isRequired,
+		error: PropTypes.string,
+		loading: PropTypes.bool,
 	};
 
 	handleSubmit() {
@@ -28,14 +31,14 @@ class FormSignIn extends Component {
 	}
 
 	render() {
-		const { onNavigate } = this.props;
+		const { onNavigate, error } = this.props;
 		const toSignup = () => onNavigate('login');
 		const onSubmit = () => this.handleSubmit();
 
 		return (
 			<div className="auth-popup">
 				<div className="auth-icon">
-					<img src={ require('./images/icon-ball-lg.svg') } />
+					<img src={ require('./images/icon-ball-lg.svg') }/>
 				</div>
 
 				<a className="big-btn facebook-btn" href="//facebook.com" target="_blank">SignUp with Facebook</a>
@@ -43,11 +46,11 @@ class FormSignIn extends Component {
 					<div className="auth-text">and get <span className="text-brand">+10 points</span></div>
 				</div>
 
-				<Separator />
+				<SeparatorOrError error={error} />
 
 				<form className="auth-form">
-					<EmailInput ref="email-input" required={true} />
-					<PasswordInput ref="pwd-input" required={true} />
+					<EmailInput ref="email-input" required={true}/>
+					<PasswordInput ref="pwd-input" required={true}/>
 
 					<Button className="footer-btn big-btn share-btn" onClick={ onSubmit }>SignUp with Email</Button>
 				</form>
