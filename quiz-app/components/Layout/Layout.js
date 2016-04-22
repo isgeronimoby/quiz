@@ -19,7 +19,7 @@ class Layout extends Component {
 
 	getChildContext() {
 		return {
-			toggleAuthPopup: (on) => this.toggleAuthPopup(on)
+			toggleAuthPopup: this.toggleAuthPopup.bind(this)
 		};
 	}
 
@@ -28,15 +28,26 @@ class Layout extends Component {
 		showAuthPopup: false
 	};
 
+	_authCb = null; // hack
+
 	toggleMenu(on) {
 		this.setState({
 			showMenu: on
 		});
 	}
 
-	toggleAuthPopup(on) {
+	toggleAuthPopup(on, callback) {
+		if (callback) {
+			this._authCb = callback;
+		}
+
 		this.setState({
 			showAuthPopup: on
+		}, () => {
+			if (this._authCb && !this.state.showAuthPopup) {
+				this._authCb();
+				this._authCb = null;
+			}
 		});
 	}
 

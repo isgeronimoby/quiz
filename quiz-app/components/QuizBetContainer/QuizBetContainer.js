@@ -24,10 +24,10 @@ class QuizBetContainer extends Component {
 		this.setState({ view });
 	}
 
-	async submitBet(betValue) {
-		const auth = await this.context.toggleAuthPopup(true);
-
-		this.nextView('success')
+	submitBet(betValue) {
+		this.context.toggleAuthPopup(true, () => {
+			this.nextView('success');
+		});
 	}
 
 
