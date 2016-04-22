@@ -14,7 +14,7 @@ class SignIn extends Component {
 		return (
 			<div className="auth-popup">
 				<div className="auth-icon">
-					<img src={ require('../../static/images/user-default.png') } />
+					<img src={ require('./images/icon-ball-lg.svg') } />
 				</div>
 
 				<a className="big-btn facebook-btn" href="//facebook.com" target="_blank">SignUp with Facebook</a>
