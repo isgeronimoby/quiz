@@ -1,10 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import SignIn from './SignIn.js';
+import FormSignUp from './FormSignUp.js';
+import FormLogIn from './FormLogIn.js';
+import FormForgotPwd from './FormForgotPwd.js';
 import './AuthPopup.scss';
 
 
 const view2comp = {
-	'signin': SignIn
+	'signup': FormSignUp,
+	'login': FormLogIn,
+	'forgot': FormForgotPwd,
 };
 
 
@@ -16,16 +20,24 @@ class AuthPopup extends Component {
 	};
 
 	state = {
-		view: 'signin'
+		view: 'signup'
 	};
+
+	navigateTo(view) {
+		this.setState({
+			view
+		});
+	}
 
 	render() {
 		const { show } = this.props;
+		const { view } = this.state;
 		const hiddenClass = !show ? 'is-hidden' : '';
+		const Component = view2comp[view];
 
 		return (
 			<div className={"auth-screen " + hiddenClass }>
-				<SignIn onNavigate={() => {}}/>
+				<Component onNavigate={ (view) => this.navigateTo(view) }/>
 			</div>
 		);
 	}

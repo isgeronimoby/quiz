@@ -21,7 +21,7 @@ class AuthForm extends Component {
 
 				<Button className="big-btn share-btn">SignUp with Email</Button>
 
-				<div className="link-small text-center" onClick={ () => onNavigate('login')}>
+				<div className="link-small text-center text-brand" onClick={ () => onNavigate('login') }>
 					Already have an account? LogIn
 				</div>
 			</form>
