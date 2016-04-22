@@ -1,88 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Button from '../Button';
+import { EmailInput } from './Controls.js';
 
-
-const EMAIL_RE = /.*@.*?\..*?/;
-
-
-class EmailInput extends Component {
-	static propTypes = {
-		defaultValue: PropTypes.string,
-		required: PropTypes.bool,
-	};
-
-	_input = null;
-
-	state = {
-		value: '',
-		error: undefined
-	};
-
-	value() {
-		return this.state.value;
-	}
-
-	isEmpty() {
-		const { value } = this.state;
-		return value === '';
-	}
-
-	isValid() {
-		const { value } = this.state;
-		return EMAIL_RE.test(value);
-	}
-
-	setValid() {
-		this.setState({ error: undefined });
-	}
-
-	validate() {
-		const { required } = this.props;
-		let error;
-		if (required && this.isEmpty()) {
-			error = 'required';
-		}
-		else if (!this.isValid()) {
-			error = 'email';
-		}
-
-		this.setState({ error });
-
-		return !error;
-	}
-
-	focus() {
-		this._input.focus();
-	}
-
-	handleChange(value) {
-		this.setState({ value }, () => this.setValid());
-	}
-
-	render() {
-		const { defaultValue = '' } = this.props;
-		const { value, error } = this.state;
-		const onChange = (e) => this.handleChange(e.target.value);
-		const errorClass = error ? `has-error` : '';
-		const errorStyle = (type) => {
-			return {
-				display: (type === error) ? 'block' : 'none'
-			};
-		};
-
-		return (
-			<div className={"input-group " + errorClass}>
-				<input type="email" name="email" placeholder="Email"
-					ref={(c) => this._input = c}
-					defaultValue={ defaultValue }
-					value={ value }
-					onChange={ onChange } />
-				<div className="input-error" style={ errorStyle('required') } >Email is required</div>
-				<div className="input-error" style={ errorStyle('email') }>Email should have a format: email@example.com</div>
-			</div>
-		);
-	}
-}
 
 class FormForgotPwd extends Component {
 	static propTypes = {
@@ -95,11 +14,15 @@ class FormForgotPwd extends Component {
 
 	handleSubmit() {
 		const emailEl = this.refs['email-input'];
-		if (!emailEl.validate()) { return; }
+		if (!emailEl.validate()) {
+			emailEl.focus();
+			return;
+		}
 
-		this.props.onSubmit({
+		const data = {
 			email: emailEl.value()
-		});
+		};
+		this.props.onSubmit(data);
 	}
 
 	render() {

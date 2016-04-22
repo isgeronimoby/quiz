@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Button from '../Button';
-/*import AuthFrom from './AuthForm.js';*/
+import { Separator, EmailInput, PasswordInput } from './Controls.js';
 
 
 class FormSignIn extends Component {
@@ -8,9 +8,29 @@ class FormSignIn extends Component {
 		onNavigate: PropTypes.func.isRequired,
 	};
 
+	handleSubmit() {
+		const emailEl = this.refs['email-input'];
+		const pwdEl = this.refs['pwd-input'];
+		if (!emailEl.validate()) {
+			emailEl.focus();
+			return;
+		}
+		if (!pwdEl.validate()) {
+			pwdEl.focus();
+			return;
+		}
+
+		const data = {
+			email: emailEl.value(),
+			password: pwdEl.value(),
+		};
+		this.props.onSubmit(data);
+	}
+
 	render() {
 		const { onNavigate } = this.props;
 		const toSignup = () => onNavigate('login');
+		const onSubmit = () => this.handleSubmit();
 
 		return (
 			<div className="auth-popup">
@@ -19,26 +39,17 @@ class FormSignIn extends Component {
 				</div>
 
 				<a className="big-btn facebook-btn" href="//facebook.com" target="_blank">SignUp with Facebook</a>
-
 				<div className="auth-p">
 					<div className="auth-text">and get <span className="text-brand">+10 points</span></div>
 				</div>
 
-				<div className="auth-separator">
-					<img className="strike" src={ require('./images/or-separator.svg') } />
-					<div className="auth-text-sm">Or</div>
-					<img className="strike flip" src={ require('./images/or-separator.svg') } />
-				</div>
+				<Separator />
 
 				<form className="auth-form">
-					<div className="input-group">
-						<input type="email" name="email" placeholder="Email"/>
-					</div>
-					<div className="input-group">
-						<input type="password" name="password" placeholder="Password"/>
-					</div>
+					<EmailInput ref="email-input" required={true} />
+					<PasswordInput ref="pwd-input" required={true} />
 
-					<Button className="footer-btn big-btn share-btn">SignUp with Email</Button>
+					<Button className="footer-btn big-btn share-btn" onClick={ onSubmit }>SignUp with Email</Button>
 				</form>
 
 				<div className="auth-footer">

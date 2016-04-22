@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Button from '../Button';
+import { Separator, EmailInput, PasswordInput } from './Controls.js';
 
 
 class FormLogIn extends Component {
@@ -7,10 +8,30 @@ class FormLogIn extends Component {
 		onNavigate: PropTypes.func.isRequired,
 	};
 
+	handleSubmit() {
+		const emailEl = this.refs['email-input'];
+		const pwdEl = this.refs['pwd-input'];
+		if (!emailEl.validate()) {
+			emailEl.focus();
+			return;
+		}
+		if (!pwdEl.validate()) {
+			pwdEl.focus();
+			return;
+		}
+
+		const data = {
+			email: emailEl.value(),
+			password: pwdEl.value(),
+		};
+		this.props.onSubmit(data);
+	}
+
 	render() {
 		const { onNavigate } = this.props;
 		const toForgot = () => onNavigate('forgot');
 		const toSignup = () => onNavigate('signup');
+		const onSubmit = () => this.handleSubmit();
 
 		return (
 			<div className="auth-popup">
@@ -27,16 +48,12 @@ class FormLogIn extends Component {
 				</div>
 
 				<form className="auth-form">
-					<div className="input-group">
-						<input type="email" name="email" placeholder="Email"/>
-					</div>
-					<div className="input-group">
-						<input type="password" name="password" placeholder="Password"/>
-
+					<EmailInput ref="email-input" required={true} />
+					<PasswordInput ref="pwd-input" required={true} >
 						<div className="link-small-x text-brand" onClick={ toForgot }>Forgot Password?</div>
-					</div>
+					</PasswordInput>
 
-					<Button className="footer-btn big-btn share-btn">LogIn with Email</Button>
+					<Button className="footer-btn big-btn share-btn" onClick={ onSubmit }>LogIn with Email</Button>
 				</form>
 
 				<div className="auth-footer">
