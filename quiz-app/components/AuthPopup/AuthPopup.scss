@@ -79,6 +79,15 @@ Form
 .auth-form {
   .input-group {
     margin-bottom: 15px;
+
+    &.has-error {
+      input {
+        border-bottom: 2px solid $color-error;
+        &::placeholder {
+          color: $color-error;
+        }
+      }
+    }
   }
 
   input {
@@ -97,6 +106,12 @@ Form
     &:active {
       outline: 0;
     }
+  }
+
+  .input-error {
+    position: absolute;
+    font-size: 1rem;
+    color: $color-error;
   }
 
   .share-btn {
