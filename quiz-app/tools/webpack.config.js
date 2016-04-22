@@ -39,7 +39,7 @@ const JS_LOADER = {
 const common = {
 	output: {
 		path: path.join(__dirname, '../build'), // may be overwritten in bundle.js
-		publicPath: '/',
+		publicPath: './',
 		sourcePrefix: '  ',
 	},
 	cache: false,
@@ -108,11 +108,11 @@ const common = {
 	},
 };
 
-// Production
+// Production & staging
 //
 
 let appConfig;
-if (NPM_SCRIPT === 'build-prod') {
+if (/build|build-prod|deploy/.test(NPM_SCRIPT)) {
 	appConfig = merge({}, common, {
 		entry: {
 			app: './app.js',
