@@ -43,7 +43,6 @@ class Menu extends Component {
 		};
 		const isActiveItem = (path) => (activePath === `/${path}`);
 
-
 		return (
 			<Hammer onSwipe={onSwipe}>
 				<div className={"menu " + hiddenClass } {...others} >

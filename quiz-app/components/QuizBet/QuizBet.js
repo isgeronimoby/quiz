@@ -56,7 +56,7 @@ class QuizBet extends Component {
 					<span className="text-sm"> points</span>
 				</div>
 
-				<Button className="big-btn money-btn" onClick={() => onSubmit()} >Bet points</Button>
+				<Button className="big-btn money-btn" onClick={() => onSubmit(betValue)} >Bet points</Button>
 
 				<Button className="big-btn share-btn" onClick={ () => this.showPopup() }>
 					Share and get +10 points

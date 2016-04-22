@@ -19,7 +19,15 @@
   color: $brand-color;
   border: 1px solid $brand-color;
 }
+.facebook-btn {
+  margin: 0 0 10px;
+  font-size: 1.9rem;
+  color: #fff;
+  background: $color-facebook;
+  box-shadow: 0 2px 3px -1px rgba(0, 0, 0, .4);
+}
 .btn-text-sm {
   font-size: 1.4rem;
   color: $brand-color-lite
 }
+

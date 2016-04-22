@@ -11,6 +11,10 @@ class QuizBetContainer extends Component {
 		data: PropTypes.array.isRequired,
 	};
 
+	static contextTypes = {
+		toggleAuthPopup: React.PropTypes.func
+	};
+
 	state = {
 		view: 'bet'
 	};
@@ -20,13 +24,20 @@ class QuizBetContainer extends Component {
 		this.setState({ view });
 	}
 
+	submitBet(betValue) {
+		this.context.toggleAuthPopup(true, () => {
+			this.nextView('success');
+		});
+	}
+
+
 	render() {
 		const points = 220;
 		const odds = [10, 1];
 		const { view } = this.state;
 		let View;
 		if (view === 'bet') {
-			View = <QuizBet points={points} odds={odds} onSubmit={() => this.nextView('success') }/>;
+			View = <QuizBet points={points} odds={odds} onSubmit={() => this.submitBet() }/>;
 		}
 		else if (view === 'success') {
 			View = <QuizBetSuccess onDismiss={() => this.nextView('exit') }/>;

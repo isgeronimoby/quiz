@@ -54,3 +54,32 @@ $loader-sz: 210px;
   margin: calc(-$loader-sz / 2) 0 0 calc(-$loader-sz / 2);
   background: url('../../static/images/loader2.gif') no-repeat;
 }
+
+
+/*Screens*/
+$progress-h: 4px; /*TODO - to vars*/
+.screen {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.screen-swiper {
+  display: flex;
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; /*width is set by js*/
+  transform: translateX(0%);
+  transition: transform .3s ease;
+
+  & > * {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+  }
+
+  &.with-progress {
+    top: $progress-h;
+  }
+}
+.screen-content {
+}

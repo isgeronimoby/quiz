@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import Header from '../Header';
 import Menu from '../Menu';
+import AuthPopup from '../AuthPopup';
 import './Layout.scss';
+
 
 class Layout extends Component {
 
@@ -11,18 +13,47 @@ class Layout extends Component {
 		children: PropTypes.element.isRequired,
 	};
 
-	state = {
-		showMenu: false
+	static childContextTypes = {
+		toggleAuthPopup: React.PropTypes.func,
 	};
+
+	getChildContext() {
+		return {
+			toggleAuthPopup: this.toggleAuthPopup.bind(this)
+		};
+	}
+
+	state = {
+		showMenu: false,
+		showAuthPopup: false
+	};
+
+	_authCb = null; // hack
 
 	toggleMenu(on) {
 		this.setState({
 			showMenu: on
-		})
+		});
+	}
+
+	toggleAuthPopup(on, callback) {
+		if (callback) {
+			this._authCb = callback;
+		}
+
+		this.setState({
+			showAuthPopup: on
+		}, () => {
+			if (this._authCb && !this.state.showAuthPopup) {
+				this._authCb();
+				this._authCb = null;
+			}
+		});
 	}
 
 	render() {
 		const {title, path, children} = this.props;
+		const { showMenu, showAuthPopup } = this.state;
 
 		return (
 			<div className="layout">
@@ -32,8 +63,10 @@ class Layout extends Component {
 
 				<Menu
 					activePath={ path }
-					show={ this.state.showMenu }
+					show={ showMenu }
 					onClick={ () => this.toggleMenu(false) }/>
+
+				<AuthPopup show={ showAuthPopup }/>
 
 				<div className="content">
 					{ children }

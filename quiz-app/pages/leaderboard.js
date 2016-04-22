@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import withFetch from '../components/withFetch';
-import LeaderBoard from '../components/LeaderBoard';
-import data from '../components/LeaderBoard/data.js';
+import LeaderBoardContainer from '../components/LeaderBoardContainer';
+import data from '../components/LeaderBoardContainer/data.js';
 
 const DELAY = 100;
 
@@ -20,7 +20,7 @@ class Leaders extends Component {
 
 	render() {
 		return (
-			<LeaderBoard {...this.props} />
+			<LeaderBoardContainer {...this.props} />
 		);
 	}
 
