@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import Header from '../Header';
 import Menu from '../Menu';
+import AuthPopup from '../AuthPopup';
 import './Layout.scss';
+
 
 class Layout extends Component {
 
@@ -12,13 +14,20 @@ class Layout extends Component {
 	};
 
 	state = {
-		showMenu: false
+		showMenu: false,
+		showAuthPopup: false
 	};
 
 	toggleMenu(on) {
 		this.setState({
 			showMenu: on
-		})
+		});
+	}
+
+	toggleAuthPopup(on) {
+		this.setState({
+			showAuthPopup: on
+		});
 	}
 
 	render() {
@@ -34,6 +43,9 @@ class Layout extends Component {
 					activePath={ path }
 					show={ this.state.showMenu }
 					onClick={ () => this.toggleMenu(false) }/>
+
+				<AuthPopup
+					show={ true }/>
 
 				<div className="content">
 					{ children }

@@ -1,0 +1,61 @@
+@import '../variables.scss';
+.auth-screen {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  overflow: hidden;
+  font-size: 1.9rem;
+  color: $color-grey-dark;
+  background-color: rgba(58, 58, 58, .9);
+  transition: background-color .4s ease;
+  pointer-events: all;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.is-hidden {
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0);
+  }
+}
+.auth-popup {
+  position: relative;
+  width: 100%;
+  margin: 0 15px;
+  padding: 45px 35px 15px;
+  background: #fff;
+  border-radius: 12px;
+}
+$icon-sz: 55px;
+.auth-icon {
+  position: absolute;
+  top: calc(-$icon-sz / 2);
+  left: 50%;
+  margin-left: calc(-$icon-sz / 2);
+  border-radius: 50%;
+  background: #fff;
+
+  img {
+    width: calc($icon-sz - 10px);
+    margin: 5px;
+  }
+}
+.auth-text {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.auth-separator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .text-sm {
+    padding: 0 10px;
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+  .strike.flip {
+    transform: rotate(180deg);
+  }
+}
