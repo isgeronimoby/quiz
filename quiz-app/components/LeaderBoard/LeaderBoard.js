@@ -17,7 +17,7 @@ const UserListOfTop = ({ listOf3, onSelect }) => {
 	});
 
 	return (
-		<div className="player-cols-3">
+		<div className="user-cols-3">
 			{ top3cols }
 		</div>
 	);
@@ -29,7 +29,7 @@ const UserListOfAll = ({ list, onSelect }) => {
 		const {picture, name, answers, rank, myself} = user;
 		const myselfClass = myself ? 'myself' : '';
 		return (
-			<li key={`user-${i}`} className={"player-item " + myselfClass} onClick={ () => onSelect(user) }>
+			<li key={`user-${i}`} className={"user-list-item " + myselfClass} onClick={ () => onSelect(user) }>
 				<div className="user-rank">{ rank }</div>
 				<Logo src={picture} />
 				<div className="user-details">
@@ -41,7 +41,7 @@ const UserListOfAll = ({ list, onSelect }) => {
 	});
 
 	return (
-		<ul className="player-list">
+		<ul className="user-list">
 			{ playerItems }
 		</ul>
 	);

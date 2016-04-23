@@ -11,7 +11,7 @@
   color: $color-grey-lite;
   background: $color-grey;
 }
-.player-cols-3 {
+.user-cols-3 {
   display: flex;
   justify-content: space-around;
 
@@ -56,7 +56,7 @@ $logo-sz: 55px;
     font-size: 1.2rem;
   }
 }
-.player-item {
+.user-list-item {
   display: flex;
   align-items: center;
   height: 8rem;
