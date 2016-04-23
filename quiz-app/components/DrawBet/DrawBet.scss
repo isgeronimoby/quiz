@@ -3,3 +3,23 @@
   height: 100%;
   width: 100%;
 }
+
+.draw-details {
+  display: flex;
+  align-items: center;
+}
+
+$image-sz: 10rem;
+.draw-details-image {
+  width: $image-sz;
+  height: $image-sz;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  img {
+    width: $image-sz;
+  }
+}

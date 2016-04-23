@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Popup from '../Popup';
+import Link from '../Link';
 import Button from '../Button';
 import Slider from '../Slider';
 import './DrawBet.scss';
@@ -9,7 +10,7 @@ class DrawBet extends Component {
 
 	static propTypes = {
 		points: PropTypes.number.isRequired,
-		odds: PropTypes.array.isRequired,
+		data: PropTypes.object.isRequired,
 		onSubmit: PropTypes.func.isRequired,
 	};
 
@@ -17,29 +18,26 @@ class DrawBet extends Component {
 		betValue: 20
 	};
 
-	showPopup() {
-		this.refs['sharing-popup'].show(3000);
-	}
-
 	handelBetValueChange(betValue) {
 		this.setState({ betValue });
 	}
 
 	render() {
-		const { points, odds, onSubmit } = this.props;
+		const { data: {name, picture, description, endDate}, points, onSubmit } = this.props;
 		const { betValue } = this.state;
-		const winValue = odds[0] * betValue;
 		const onChange = (v) => this.handelBetValueChange(v);
 
 		return (
 			<div className="draw-content">
-				<Popup ref="sharing-popup" className="blue">
-					<div className="popup-icon"></div>
-					<div className="popup-content">
-						<div className="popup-title">You got +10 points!</div>
-						<div className="popup-text">Thank you for sharing</div>
+				<div className="draw-details">
+					<div className="draw-details-image">
+						<img src={ require(picture) } />
 					</div>
-				</Popup>
+					<div className="draw-details-content">
+						<h3 className="list-title">{ name }</h3>
+						<h5 className="list-meta">{ endDate }</h5>
+					</div>
+				</div>
 
 				<div className="bet-subtitle">How many points<br/> you want to place?</div>
 
@@ -52,9 +50,7 @@ class DrawBet extends Component {
 
 				<Button className="big-btn money-btn" onClick={() => onSubmit(betValue)} >Place points</Button>
 
-				<Button className="big-btn share-btn" onClick={ () => this.showPopup() }>
-					Share and get +10 points
-				</Button>
+				<Link className="big-btn share-btn" to="./draws" >Earn more points</Link>
 			</div>
 		);
 	}

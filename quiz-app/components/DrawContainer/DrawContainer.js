@@ -8,7 +8,7 @@ import '../QuizContainer/quiz.scss';
 class DrawContainer extends Component {
 
 	static propTypes = {
-		data: PropTypes.array.isRequired,
+		data: PropTypes.object.isRequired,
 	};
 
 	static contextTypes = {
@@ -33,11 +33,13 @@ class DrawContainer extends Component {
 
 	render() {
 		const points = 220;
-		const odds = [10, 1];
+		const { data } = this.props;
 		const { view } = this.state;
+		const onSubmit = () => this.submitBet();
+
 		let View;
 		if (view === 'bet') {
-			View = <DrawBet points={points} odds={odds} onSubmit={() => this.submitBet() }/>;
+			View = <DrawBet points={points} data={data} onSubmit={onSubmit }/>;
 		}
 		else if (view === 'success') {
 			View = <QuizBetSuccess onDismiss={() => this.nextView('exit') }/>;
