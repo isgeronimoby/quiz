@@ -1,0 +1,72 @@
+@import '../variables.scss';
+.draw-list {
+}
+.draw-item {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $color-grey-opaque;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+.draw-item-body {
+  display: flex;
+  height: 8rem;
+  color: #fff;
+  text-decoration: none;
+
+  &.completed {
+    background: $color-selection;
+    pointer-events: none;
+  }
+
+  .draw-item-aside {
+    padding-left: 15px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  $image-sz: 5.5rem;
+  .draw-item-image {
+    width: $image-sz;
+    height: $image-sz;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    img {
+      width: $image-sz;
+    }
+  }
+  .draw-item-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .draw-item-arrow {
+    width: 3.6rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 0.8rem;
+    }
+  }
+}
+.list-title {
+  font-size: 1.4rem;
+  margin-bottom: 0.6rem;
+  color: $color-grey-dark;
+}
+.list-meta {
+  font-size: 1rem;
+  color: $color-grey;
+  text-transform: uppercase;
+}
