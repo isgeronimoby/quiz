@@ -6,10 +6,15 @@ function parseDate(str) {
 	const target = moment.utc(str);
 	const diff = target.diff(moment());
 	const duration = moment.duration(diff);
+	const format = (num) => {
+		const n = Math.max(0, num);
+		return ('0' + n).slice(-2); // 0-padded
+	};
+
 	return {
-		days: duration.days(),
-		hours: duration.hours(),
-		minutes: duration.minutes(),
+		days: format(duration.days()),
+		hours: format(duration.hours()),
+		minutes: format(duration.minutes()),
 	};
 }
 
