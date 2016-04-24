@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import './Countdown.scss';
 
-function parseDate(date) {
-	const target = moment.utc(date);
+function parseDate(str) {
+	const target = moment.utc(str);
 	const diff = target.diff(moment());
 	const duration = moment.duration(diff);
 	return {
@@ -18,6 +18,16 @@ class Countdown extends Component {
 	static propTypes = {
 		dateStr: PropTypes.string.isRequired,
 	};
+
+	_interval = null;
+
+	componentDidMount() {
+		this._interval = setInterval(() => this.forceUpdate(), 5000); // every 5s is enough
+	}
+
+	componentWillUnmout() {
+		clearInterval(this._interval);
+	}
 
 	render() {
 		const { dateStr } = this.props;
