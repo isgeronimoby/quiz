@@ -5,6 +5,7 @@ import Link from '../Link';
 import Button from '../Button';
 import Slider from '../Slider';
 import SectionCollapsible from '../SectionCollapsible';
+import Countdown from '../Countdown';
 import './DrawBet.scss';
 
 
@@ -37,6 +38,7 @@ class DrawBet extends Component {
 						<img src={ require(picture) } />
 					</div>
 					<div className="draw-details-content">
+						<Countdown date={ endDateTime } />
 						<h3 className="list-title">{ name }</h3>
 						<h5 className="list-meta">{ dateFormatted }</h5>
 					</div>

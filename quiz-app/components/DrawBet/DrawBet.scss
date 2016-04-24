@@ -11,6 +11,10 @@
   align-items: center;
 }
 
+.draw-details-content {
+  flex-grow: 1;
+}
+
 $image-sz: 10rem;
 .draw-details-image {
   width: $image-sz;
