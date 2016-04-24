@@ -1,0 +1,36 @@
+@import '../variables.scss';
+$gripper-h: 22px;
+.section-collapsible {
+  background: $color-grey-opaque;
+}
+.collapsible-content {
+  overflow: hidden;
+  color: $color-grey-dark;
+  padding: 0 15px;
+  max-height: 0;
+  opacity: 0;
+  transition: all .2s ease;
+
+  .section-collapsible.expanded & {
+    opacity: 1;
+    padding: 15px 15px 5px;
+    max-height: 500px; /*TODO - OR more?*/
+  }
+}
+.collapsible-gripper {
+  height: $gripper-h;
+  padding: 0 1.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: $color-grey-lite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(0deg);
+
+  .section-collapsible.expanded & {
+    transform: rotate(180deg);
+  }
+}
+
+

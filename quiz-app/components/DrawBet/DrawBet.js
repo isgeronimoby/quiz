@@ -1,8 +1,11 @@
 import React, { Component, PropTypes } from 'react';
+import moment from 'moment';
 import Popup from '../Popup';
 import Link from '../Link';
 import Button from '../Button';
 import Slider from '../Slider';
+import SectionCollapsible from '../SectionCollapsible';
+import '../QuizBet/bet.scss';
 import './DrawBet.scss';
 
 
@@ -23,8 +26,9 @@ class DrawBet extends Component {
 	}
 
 	render() {
-		const { data: {name, picture, description, endDate}, points, onSubmit } = this.props;
+		const { data: {name, picture, description, endDateTime}, points, onSubmit } = this.props;
 		const { betValue } = this.state;
+		const dateFormatted = moment(endDateTime).format('YYY/MM');
 		const onChange = (v) => this.handelBetValueChange(v);
 
 		return (
@@ -35,9 +39,11 @@ class DrawBet extends Component {
 					</div>
 					<div className="draw-details-content">
 						<h3 className="list-title">{ name }</h3>
-						<h5 className="list-meta">{ endDate }</h5>
+						<h5 className="list-meta">{ dateFormatted }</h5>
 					</div>
 				</div>
+
+				<SectionCollapsible>{ description }</SectionCollapsible>
 
 				<div className="bet-subtitle">How many points<br/> you want to place?</div>
 

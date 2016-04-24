@@ -13,12 +13,13 @@ $image-sz: 10rem;
 .draw-details-image {
   width: $image-sz;
   height: $image-sz;
-  background: #fff;
+  margin: 15px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background: #fff;
   img {
     width: $image-sz;
   }
