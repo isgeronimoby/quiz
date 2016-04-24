@@ -8,11 +8,21 @@
 
 .draw-details {
   display: flex;
-  align-items: center;
+  align-items: stretch;
 }
 
 .draw-details-content {
   flex-grow: 1;
+
+  .countdown {
+    margin-top: 15px;
+  }
+  .list-title {
+    margin: 5px 0 0;
+  }
+  .list-meta {
+    font-size: 1.4rem;
+  }
 }
 
 $image-sz: 10rem;

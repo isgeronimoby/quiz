@@ -28,7 +28,7 @@ class DrawBet extends Component {
 	render() {
 		const { data: {name, picture, description, endDateTime}, points, onSubmit } = this.props;
 		const { betValue } = this.state;
-		const dateFormatted = moment(endDateTime).format('YYY/MM');
+		const dateFormatted = moment(endDateTime).format('YYYY/MM');
 		const onChange = (v) => this.handelBetValueChange(v);
 
 		return (
@@ -38,7 +38,7 @@ class DrawBet extends Component {
 						<img src={ require(picture) } />
 					</div>
 					<div className="draw-details-content">
-						<Countdown date={ endDateTime } />
+						<Countdown dateStr={ endDateTime } />
 						<h3 className="list-title">{ name }</h3>
 						<h5 className="list-meta">{ dateFormatted }</h5>
 					</div>

@@ -16,12 +16,13 @@ function parseDate(date) {
 class Countdown extends Component {
 
 	static propTypes = {
-		data: PropTypes.object.isRequied
+		dateStr: PropTypes.string.isRequired,
 	};
 
 	render() {
-		const { date } = this.props;
-		const { days, hours, minutes } = parseDate(date);
+		const { dateStr } = this.props;
+		const { days, hours, minutes } = parseDate(dateStr);
+
 		return (
 			<div className="countdown">
 				<div className="countdown-item">
