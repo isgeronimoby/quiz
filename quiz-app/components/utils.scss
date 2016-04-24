@@ -36,3 +36,10 @@
   font-size: 1.9rem;
   color: $brand-color;
 }
+
+/*Mixins*/
+@define-mixin ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

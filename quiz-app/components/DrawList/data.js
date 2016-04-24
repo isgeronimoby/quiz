@@ -8,7 +8,7 @@ const data = [
 		description: text,
 		friends: 10,
 		bet: 20,
-		completed: false
+		completed: true
 	},
 	{
 		drawId: 2,
@@ -18,7 +18,7 @@ const data = [
 		description: text,
 		friends: 10,
 		bet: 20,
-		completed: true
+		completed: false
 	},
 	{
 		drawId: 3,

@@ -18,7 +18,7 @@ async function fetch({ id }) {
 
 class Draw extends Component {
 
-	static title = 'TODO - change dinamically';
+	static title = ' '; // set dynamically to draw title
 
 	static propTypes = {
 		params: PropTypes.object.isRequired

@@ -2,8 +2,17 @@ import React, { Component, PropTypes } from 'react';
 import DrawBet from '../DrawBet';
 import QuizBetSuccess from '../QuizBetSuccess'; // TODO - rename
 import QuizBetExit from '../QuizBetExit';
-import '../QuizContainer/quiz.scss';
+import '../Header/Header.scss';
 
+const HeaderOverlay = ({ title }) => {
+	return (
+		<div className="header header-overlay">
+			<div className="header-title">
+				<h2>{ title }</h2>
+			</div>
+		</div>
+	);
+};
 
 class DrawContainer extends Component {
 
@@ -50,6 +59,7 @@ class DrawContainer extends Component {
 
 		return (
 			<div className="screen">
+				<HeaderOverlay title={ data.name }/>
 				{ View }
 			</div>
 		);

@@ -25,7 +25,7 @@ class Countdown extends Component {
 		this._interval = setInterval(() => this.forceUpdate(), 5000); // every 5s is enough
 	}
 
-	componentWillUnmout() {
+	componentWillUnmount() {
 		clearInterval(this._interval);
 	}
 
