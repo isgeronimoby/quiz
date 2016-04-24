@@ -1,7 +1,7 @@
 @import '../variables.scss';
 @import '../utils.scss';
 
-
+$title-pad: 6.8rem;
 .header {
   position: fixed;
   left: 0; right: 0;
@@ -21,7 +21,7 @@
 
 .header-title {
   position: absolute;
-  left: 6.8rem; right: 6.8rem;
+  left: $title-pad; right: $title-pad;
   height: 100%;
   display: flex;
   align-items: center;
@@ -57,20 +57,21 @@
 Header overlay - somewhat hacky way to change title/menu btn
 */
 .header.header-overlay {
+  left: $title-pad; right: $title-pad;
   background: transparent;
 
   & > * {
     background-color: $brand-color;
   }
 
-  $back-btn-w: 8rem;
-  .header-title.with-btn {
-    left: $back-btn-w;
-    right: $back-btn-w;
+  .header-title {
+    left: 0; right: 0;
   }
 
+  $back-btn-w: 8rem;
   .nav-button {
     width: $back-btn-w;
+    margin-left: -7rem;
     font-size: 1.7rem;
     display: flex;
     align-items: center;
