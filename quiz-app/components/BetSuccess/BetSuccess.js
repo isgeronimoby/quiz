@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import './bet-success.scss';
+import './BetSuccess.scss';
 
 const SHOW_TIME = 3000;
 
 
-class QuizBetSuccess extends Component {
+class BetSuccess extends Component {
 
 	static propTypes = {
 		onDismiss: PropTypes.func.isRequired
@@ -30,4 +30,4 @@ class QuizBetSuccess extends Component {
 	}
 }
 
-export default QuizBetSuccess;
+export default BetSuccess;

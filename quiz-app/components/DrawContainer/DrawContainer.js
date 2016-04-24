@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import DrawBet from '../DrawBet';
-import QuizBetSuccess from '../QuizBetSuccess'; // TODO - rename
-import QuizBetExit from '../QuizBetExit';
+import BetSuccess from '../BetSuccess'; // TODO - rename
+import DrawBetExit from '../DrawBetExit';
 import '../Header/Header.scss';
 
 const HeaderOverlay = ({ title }) => {
@@ -51,10 +51,10 @@ class DrawContainer extends Component {
 			View = <DrawBet points={points} data={data} onSubmit={onSubmit }/>;
 		}
 		else if (view === 'success') {
-			View = <QuizBetSuccess onDismiss={() => this.nextView('exit') }/>;
+			View = <BetSuccess onDismiss={() => this.nextView('exit') }/>;
 		}
 		else if (view === 'exit') {
-			View = <QuizBetExit />
+			View = <DrawBetExit />
 		}
 
 		return (

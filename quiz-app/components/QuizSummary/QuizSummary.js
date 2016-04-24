@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Link from '../Link';
-import Popup from '../Popup';
+import { SharingPopup } from '../Popup';
 import Button from '../Button';
 import './summary.scss';
 
@@ -63,13 +63,7 @@ class QuizSummary extends Component {
 
 		return (
 			<div className="quiz-content">
-				<Popup ref="sharing-popup" className="blue" autoHide={2000}>
-					<div className="popup-icon"></div>
-					<div className="popup-content">
-						<div className="popup-title">You got +10 points!</div>
-						<div className="popup-text">Thank you for sharing</div>
-					</div>
-				</Popup>
+				<SharingPopup ref="sharing-popup" />
 
 				<div className="quiz-info">{ info }</div>
 

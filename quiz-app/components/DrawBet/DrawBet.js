@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
-import Popup from '../Popup';
 import Link from '../Link';
 import Button from '../Button';
 import Slider from '../Slider';
