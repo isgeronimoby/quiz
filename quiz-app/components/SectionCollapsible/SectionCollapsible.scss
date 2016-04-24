@@ -1,5 +1,4 @@
 @import '../variables.scss';
-$gripper-h: 22px;
 .section-collapsible {
   background: $color-grey-opaque;
 }
@@ -18,7 +17,7 @@ $gripper-h: 22px;
   }
 }
 .collapsible-gripper {
-  height: $gripper-h;
+  height: $section-header-h;
   padding: 0 1.5rem;
   font-size: 1.1rem;
   font-weight: bold;

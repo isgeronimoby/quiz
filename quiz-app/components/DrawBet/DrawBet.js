@@ -5,7 +5,6 @@ import Link from '../Link';
 import Button from '../Button';
 import Slider from '../Slider';
 import SectionCollapsible from '../SectionCollapsible';
-import '../QuizBet/bet.scss';
 import './DrawBet.scss';
 
 

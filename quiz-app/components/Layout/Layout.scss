@@ -30,8 +30,8 @@ body {
   height: 100%;
 }
 .layout {
-  padding-top: $header-height;
-  height: calc(100% - $header-height);
+  padding-top: $header-h;
+  height: calc(100% - $header-h);
 }
 .content {
   height: 100%;

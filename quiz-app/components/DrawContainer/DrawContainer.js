@@ -49,7 +49,7 @@ class DrawContainer extends Component {
 		}
 
 		return (
-			<div className="quiz">
+			<div className="screen">
 				{ View }
 			</div>
 		);
