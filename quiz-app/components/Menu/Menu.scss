@@ -5,7 +5,7 @@
   left: 0; right: 0;
   background: rgba(0, 0, 0, .4);
   transition: background .3s ease;
-  pointer-events: all;
+  pointer-events: auto;
   z-index: 2;
 
   &.is-hidden {

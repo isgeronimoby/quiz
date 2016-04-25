@@ -88,8 +88,10 @@ class AuthPopup extends Component {
 		});
 	}
 
-	closePopup() {
-		this.context.toggleAuthPopup(false)
+	closePopup(e) {
+		if (e.target === this.refs['auth-shadow']) {
+			this.context.toggleAuthPopup(false)
+		}
 	}
 
 	render() {
@@ -99,7 +101,7 @@ class AuthPopup extends Component {
 		const [Component, url] = view2comp[view];
 
 		return (
-			<div className={"auth-screen " + hiddenClass } onClick={() => {}/*this.closePopup()*/ }>
+			<div ref="auth-shadow" className={"auth-screen " + hiddenClass } onClick={(e) => this.closePopup(e) }>
 				<Component
 					onNavigate={ (view) => this.navigateTo(view) }
 					onSubmit={ (data) => this.handleSubmit(url, data) }
