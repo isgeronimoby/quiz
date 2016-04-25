@@ -17,11 +17,8 @@ async function fetch({ id }) {
 		if (id === 1) {
 			return [items[0], items[1], items[2]];
 		}
-		else if (id === 2) {
-			return [items[1], items[2], items[0]];
-		}
 		else {
-			return [items[2], items[0], items[1]];
+			return [items[0], items[2], items[1]];
 		}
 	});
 }
