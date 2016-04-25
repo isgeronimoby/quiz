@@ -24,6 +24,8 @@
   left: 0; right: 7rem;
   background: $brand-color url('../../static/images/bg.svg') no-repeat;
   background-position: left bottom;
+  background-size: 100%;
+  background-attachment: fixed;
   transform: translateX(0);
   transition: transform .3s ease;
 
