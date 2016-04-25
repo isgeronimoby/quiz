@@ -17,17 +17,19 @@ DGW.global.offers.requests.shareOfferTw = function(offerId, offerShareUrl){
 };
 
 DGW.global.actions.requests.shareFb = function(drawId, _winner){
+    var win = DGW.helpers.createCenteredWindow('shareFbAction', 460, 340);
     DGW.global.api.requests.shareRewardAction(drawId, function onSuccess(urls){
         DGW.helpers.centerWindowPopup(DGW.global.envPath +
             'rewardedaction/facebookshare?api_key=' + DGW.global.api.apiKey + '&shareurl=' + encodeURIComponent((!_winner) ? urls.ShareUrl : urls.WinnerShareUrl),
             'fbWindow2', 460, 340, function(){
                 DGW.global.api.requests.getUser();
                 DGW.global.api.requests.getUserActions();
-        });
+        }, win);
     });
 };
 
 DGW.global.actions.requests.shareTw = function(drawId, text, _winner){
+    var win = DGW.helpers.createCenteredWindow('shareTwAction', 460, 340);
     DGW.global.api.requests.shareRewardAction(drawId, function onSuccess(urls){
         DGW.helpers.centerWindowPopup('https://twitter.com/intent/tweet?text=' + text +
             '&url=' + encodeURIComponent((!_winner) ? urls.ShareUrl : urls.WinnerShareUrl) + '&hashtags=' + DGW.global.club.name,
@@ -36,7 +38,7 @@ DGW.global.actions.requests.shareTw = function(drawId, text, _winner){
                 DGW.global.api.requests.trackAction(5, function onSuccess(){
                     DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Sharing on Twitter');
                 });
-            });
+            }, win);
     });
 };
 

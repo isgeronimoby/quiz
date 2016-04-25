@@ -16,6 +16,9 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         requestBody = requestBody || '';
 
     switch (apiName) {
+        case 'getApp':
+            endpoint = 'app/getapp';
+            break;
         case 'signUp':
             method = 'POST';
             endpoint = 'auth/signup';
@@ -53,6 +56,9 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             method = 'POST';
             endpoint = 'draw/bet';
             requestBody = JSON.stringify(requestBody);
+            break;
+        case 'drawPlayers':
+            endpoint = 'draw/getdrawplayers?drawid=' + requestBody;
             break;
         case 'claimPrize':
             method = 'POST';
@@ -146,10 +152,14 @@ DGW.global.api.requests.safariFix = function(){
 };
 
 DGW.global.api.requests.checkServerAvailability = function(){
-    DGW.global.api.generic('getUser', function(result){
+    DGW.global.api.generic('getApp', function(result){
         if (result.error && result.status == 500) {
             DGW.helpers.console.error('checkServerAvailability no-server', result);
         } else {
+            DGW.helpers.console.info('checkServerAvailability: ', result);
+
+            //TODO: refactor later
+            DGW.global.club.name = result.data.FoundationName;
             DGW.global.api.requests.getDraws(DGW.global.api.requests.initMainFlow);
         }
     });
@@ -333,6 +343,18 @@ DGW.global.api.requests.drawBet = function(drawId, pointsAmount, onSuccess, onEr
         DrawId: drawId,
         PointsAmount: pointsAmount
     });
+};
+
+DGW.global.api.requests.drawPlayers = function(drawId, onSuccess, onError){
+    DGW.global.api.generic('drawPlayers', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('drawPlayers ', result);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            if (onError) onError(result.error);
+            DGW.helpers.console.error('drawPlayers ', result.error);
+        }
+    }, drawId);
 };
 
 DGW.global.api.requests.claimPrize = function(drawId, address, onSuccess, onError){

@@ -116,19 +116,16 @@ DGW.helpers.checkImagesForSrc = function(src) {
     }
 };
 
-DGW.helpers.centerWindowPopup = function(url, title, w, h, _callback){
-    // Fixes dual-screen position                         Most browsers      Firefox
-    var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
-    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
-
-    var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-    var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-
-    var left = ((width / 2) - (w / 2)) + dualScreenLeft;
-    var top = ((height / 2) - (h / 2)) + dualScreenTop;
+DGW.helpers.centerWindowPopup = function(url, title, w, h, _callback, _win){
     var windowCheckCloseInterval;
+    var fbWindow;
 
-    var fbWindow = window.open(url, title, 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+    if (_win) {
+        fbWindow = _win;
+    } else {
+        fbWindow = DGW.helpers.createCenteredWindow(title, w, h);
+    }
+    fbWindow.location.href = url;
 
     // Puts focus on the newWindow
     if (window.focus) {
@@ -143,6 +140,18 @@ DGW.helpers.centerWindowPopup = function(url, title, w, h, _callback){
             DGW.global.api.requests.getUser();
         }
     }, 50);
+};
+
+DGW.helpers.createCenteredWindow = function(title, w, h){
+    // Fixes dual-screen position                         Most browsers      Firefox
+    var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+    var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+    var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+    var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+    var top = ((height / 2) - (h / 2)) + dualScreenTop;
+
+    return window.open('', title, 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
 };
 
 DGW.helpers.getDateFromNow = (function(undefined){

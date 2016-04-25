@@ -344,6 +344,10 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                             '</div>' +
                     '</div>';
 
+    var playersInDraw = document.createElement('div');
+        playersInDraw.className = 'dg-o-w-users-done';
+
+
     // Cleaning viewport from other sections
     if (DGW.main.elements.widgetContent.children.length > 0) {
         DGW.main.elements.widgetContent.removeChild(DGW.main.elements.widgetContent.childNodes[0]);
@@ -377,14 +381,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                                 '<p>' + draw.Prize.Description + '</p>' +
                                 '<div class="dg-o-w-draw-bet-info dg-o-w-draw-auth-show">' +
                                     '<div class="dg-o-w-your-bet">You\'ve bet <span>' + ((drawEntry) ? drawEntry.TicketsAmount : 0 ) + '</span> points</div>' +
-                                    '<div class="dg-o-w-users-done">' +
-                                        '<div>' +
-                                            '<img src="http://lorempixel.com/70/70/people/1" />' +
-                                            '<img src="http://lorempixel.com/70/70/people/2" />' +
-                                            '<img src="http://lorempixel.com/70/70/people/3" />' +
-                                        '</div>' +
-                                        '<p>10 users have done this</p>' +
-                                    '</div>' +
+                                    // playersInDraw +
                                 '</div>' +
                                 ((DGW.helpers.dateDiff(draw.EndDate) > 0) ? '<h2 class="dg-o-w-draw-login-show">Please, log in to bet</h2>' : '') +
                                 '<div class="dg-o-w-draw-bet-action dg-o-w-draw-auth-show">' +
@@ -392,7 +389,6 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                                     '<form id="bet-form" class="dg-o-w-one-field-form">' +
                                         '<input type="number" min="1" max="1000" placeholder="50"/>' +
                                         '<input type="submit" value="Bet points" />' +
-                                        '<p class="dg-o-w-form-message">something has happened</p>' +
                                     '</form>' +
                                     '<div id="dg-o-w-get-points-btn" class="btn-dg-o-w-outline">Get additional points</div>' +
                                 '</div>' +
@@ -426,7 +422,6 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                         '<input type="text" name="County" placeholder="County" />' +
                         '<input type="text" name="Postcode" placeholder="Postcode" />' +
                         '<input type="submit" value="Submit " />' +
-                        '<p class="dg-o-w-form-message">something has happened</p>' +
                     '</form>' +
                 '</div>' +
                 shareSect +
@@ -450,6 +445,32 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                 '</div>' +
             '</div>';
         }
+    }
+
+    if (el.querySelector('.dg-o-w-draw-bet-info')) {
+        DGW.global.api.requests.drawPlayers(drawId,
+            function onSuccess(result){
+                if (result.RecentPlayers.length > 0) {
+                    var playerImgsHolder = document.createElement('div');
+                    result.RecentPlayers.forEach(function(player, ind){
+                        if (ind > 2) return;
+                        var img = document.createElement('img');
+                        img.src = player.ImageUrl;
+
+                        playerImgsHolder.appendChild(img);
+                    });
+                    playersInDraw.appendChild(playerImgsHolder);
+
+                    if (result.TotalCount > 3) {
+                        var p = document.createElement('p');
+                        p.innerHTML = result.TotalCount + ' users have done this';
+                        playersInDraw.appendChild(p);
+                    }
+
+                    el.querySelector('.dg-o-w-draw-bet-info').appendChild(playersInDraw);
+                }
+            }
+        );
     }
 
     if (el.querySelector('#dg-o-w-get-points-btn')) {

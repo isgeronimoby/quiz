@@ -424,6 +424,9 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         requestBody = requestBody || '';
 
     switch (apiName) {
+        case 'getApp':
+            endpoint = 'app/getapp';
+            break;
         case 'signUp':
             method = 'POST';
             endpoint = 'auth/signup';
@@ -461,6 +464,9 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             method = 'POST';
             endpoint = 'draw/bet';
             requestBody = JSON.stringify(requestBody);
+            break;
+        case 'drawPlayers':
+            endpoint = 'draw/getdrawplayers?drawid=' + requestBody;
             break;
         case 'claimPrize':
             method = 'POST';
@@ -554,10 +560,14 @@ DGW.global.api.requests.safariFix = function(){
 };
 
 DGW.global.api.requests.checkServerAvailability = function(){
-    DGW.global.api.generic('getUser', function(result){
+    DGW.global.api.generic('getApp', function(result){
         if (result.error && result.status == 500) {
             DGW.helpers.console.error('checkServerAvailability no-server', result);
         } else {
+            DGW.helpers.console.info('checkServerAvailability: ', result);
+
+            //TODO: refactor later
+            DGW.global.club.name = result.data.FoundationName;
             DGW.global.api.requests.getDraws(DGW.global.api.requests.initMainFlow);
         }
     });
@@ -741,6 +751,18 @@ DGW.global.api.requests.drawBet = function(drawId, pointsAmount, onSuccess, onEr
         DrawId: drawId,
         PointsAmount: pointsAmount
     });
+};
+
+DGW.global.api.requests.drawPlayers = function(drawId, onSuccess, onError){
+    DGW.global.api.generic('drawPlayers', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('drawPlayers ', result);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            if (onError) onError(result.error);
+            DGW.helpers.console.error('drawPlayers ', result.error);
+        }
+    }, drawId);
 };
 
 DGW.global.api.requests.claimPrize = function(drawId, address, onSuccess, onError){
@@ -992,17 +1014,19 @@ DGW.global.offers.requests.shareOfferTw = function(offerId, offerShareUrl){
 };
 
 DGW.global.actions.requests.shareFb = function(drawId, _winner){
+    var win = DGW.helpers.createCenteredWindow('shareFbAction', 460, 340);
     DGW.global.api.requests.shareRewardAction(drawId, function onSuccess(urls){
         DGW.helpers.centerWindowPopup(DGW.global.envPath +
             'rewardedaction/facebookshare?api_key=' + DGW.global.api.apiKey + '&shareurl=' + encodeURIComponent((!_winner) ? urls.ShareUrl : urls.WinnerShareUrl),
             'fbWindow2', 460, 340, function(){
                 DGW.global.api.requests.getUser();
                 DGW.global.api.requests.getUserActions();
-        });
+        }, win);
     });
 };
 
 DGW.global.actions.requests.shareTw = function(drawId, text, _winner){
+    var win = DGW.helpers.createCenteredWindow('shareTwAction', 460, 340);
     DGW.global.api.requests.shareRewardAction(drawId, function onSuccess(urls){
         DGW.helpers.centerWindowPopup('https://twitter.com/intent/tweet?text=' + text +
             '&url=' + encodeURIComponent((!_winner) ? urls.ShareUrl : urls.WinnerShareUrl) + '&hashtags=' + DGW.global.club.name,
@@ -1011,7 +1035,7 @@ DGW.global.actions.requests.shareTw = function(drawId, text, _winner){
                 DGW.global.api.requests.trackAction(5, function onSuccess(){
                     DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Sharing on Twitter');
                 });
-            });
+            }, win);
     });
 };
 
@@ -1232,19 +1256,16 @@ DGW.helpers.checkImagesForSrc = function(src) {
     }
 };
 
-DGW.helpers.centerWindowPopup = function(url, title, w, h, _callback){
-    // Fixes dual-screen position                         Most browsers      Firefox
-    var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
-    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
-
-    var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-    var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
-
-    var left = ((width / 2) - (w / 2)) + dualScreenLeft;
-    var top = ((height / 2) - (h / 2)) + dualScreenTop;
+DGW.helpers.centerWindowPopup = function(url, title, w, h, _callback, _win){
     var windowCheckCloseInterval;
+    var fbWindow;
 
-    var fbWindow = window.open(url, title, 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+    if (_win) {
+        fbWindow = _win;
+    } else {
+        fbWindow = DGW.helpers.createCenteredWindow(title, w, h);
+    }
+    fbWindow.location.href = url;
 
     // Puts focus on the newWindow
     if (window.focus) {
@@ -1259,6 +1280,18 @@ DGW.helpers.centerWindowPopup = function(url, title, w, h, _callback){
             DGW.global.api.requests.getUser();
         }
     }, 50);
+};
+
+DGW.helpers.createCenteredWindow = function(title, w, h){
+    // Fixes dual-screen position                         Most browsers      Firefox
+    var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+    var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+    var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+    var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+    var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+    var top = ((height / 2) - (h / 2)) + dualScreenTop;
+
+    return window.open('', title, 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
 };
 
 DGW.helpers.getDateFromNow = (function(undefined){
@@ -2544,6 +2577,10 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                             '</div>' +
                     '</div>';
 
+    var playersInDraw = document.createElement('div');
+        playersInDraw.className = 'dg-o-w-users-done';
+
+
     // Cleaning viewport from other sections
     if (DGW.main.elements.widgetContent.children.length > 0) {
         DGW.main.elements.widgetContent.removeChild(DGW.main.elements.widgetContent.childNodes[0]);
@@ -2577,14 +2614,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                                 '<p>' + draw.Prize.Description + '</p>' +
                                 '<div class="dg-o-w-draw-bet-info dg-o-w-draw-auth-show">' +
                                     '<div class="dg-o-w-your-bet">You\'ve bet <span>' + ((drawEntry) ? drawEntry.TicketsAmount : 0 ) + '</span> points</div>' +
-                                    '<div class="dg-o-w-users-done">' +
-                                        '<div>' +
-                                            '<img src="http://lorempixel.com/70/70/people/1" />' +
-                                            '<img src="http://lorempixel.com/70/70/people/2" />' +
-                                            '<img src="http://lorempixel.com/70/70/people/3" />' +
-                                        '</div>' +
-                                        '<p>10 users have done this</p>' +
-                                    '</div>' +
+                                    // playersInDraw +
                                 '</div>' +
                                 ((DGW.helpers.dateDiff(draw.EndDate) > 0) ? '<h2 class="dg-o-w-draw-login-show">Please, log in to bet</h2>' : '') +
                                 '<div class="dg-o-w-draw-bet-action dg-o-w-draw-auth-show">' +
@@ -2592,7 +2622,6 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                                     '<form id="bet-form" class="dg-o-w-one-field-form">' +
                                         '<input type="number" min="1" max="1000" placeholder="50"/>' +
                                         '<input type="submit" value="Bet points" />' +
-                                        '<p class="dg-o-w-form-message">something has happened</p>' +
                                     '</form>' +
                                     '<div id="dg-o-w-get-points-btn" class="btn-dg-o-w-outline">Get additional points</div>' +
                                 '</div>' +
@@ -2626,7 +2655,6 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                         '<input type="text" name="County" placeholder="County" />' +
                         '<input type="text" name="Postcode" placeholder="Postcode" />' +
                         '<input type="submit" value="Submit " />' +
-                        '<p class="dg-o-w-form-message">something has happened</p>' +
                     '</form>' +
                 '</div>' +
                 shareSect +
@@ -2650,6 +2678,32 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                 '</div>' +
             '</div>';
         }
+    }
+
+    if (el.querySelector('.dg-o-w-draw-bet-info')) {
+        DGW.global.api.requests.drawPlayers(drawId,
+            function onSuccess(result){
+                if (result.RecentPlayers.length > 0) {
+                    var playerImgsHolder = document.createElement('div');
+                    result.RecentPlayers.forEach(function(player, ind){
+                        if (ind > 2) return;
+                        var img = document.createElement('img');
+                        img.src = player.ImageUrl;
+
+                        playerImgsHolder.appendChild(img);
+                    });
+                    playersInDraw.appendChild(playerImgsHolder);
+
+                    if (result.TotalCount > 3) {
+                        var p = document.createElement('p');
+                        p.innerHTML = result.TotalCount + ' users have done this';
+                        playersInDraw.appendChild(p);
+                    }
+
+                    el.querySelector('.dg-o-w-draw-bet-info').appendChild(playersInDraw);
+                }
+            }
+        );
     }
 
     if (el.querySelector('#dg-o-w-get-points-btn')) {
