@@ -17,8 +17,14 @@
 		}
 	};
 
+	console.log('Tunnel was loaded');
+	parent.postMessage("Tunnel was loaded","*");
+	window.opener.postMessage("Tunnel was loaded","*");
+
 	var apiTunnel = function (request, onSuccess, onFailure) {
 		console.log('Api tunnel was launched');
+		parent.postMessage("Api tunnel was launched","*");
+		window.opener.postMessage("Api tunnel was launched","*");
 		try {
 			var options = {
 				type: request.method,
@@ -32,6 +38,8 @@
 			};
 			options.complete = function (xhr) {
 				console.log('Complete method was launched');
+				parent.postMessage("Complete method was launched","*");
+				window.opener.postMessage("Complete method was launched","*");
 				var response = {};
 				response.status = xhr.status;
 
@@ -47,6 +55,8 @@
 		}
 		catch (ex) {
 			console.log('Exception occurred');
+			parent.postMessage("Exception occurred","*");
+			window.opener.postMessage("Exception occurred","*");
 			onFailure(ex.message);
 		}
 	};
