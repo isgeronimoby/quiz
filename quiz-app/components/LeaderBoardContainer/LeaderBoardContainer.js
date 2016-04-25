@@ -81,11 +81,11 @@ class ScreenSwiper extends Component {
 const HeaderOverlay = ({ title, onBackClick}) => {
 	return (
 		<div className="header header-overlay">
-			<div className="header-title">
+			<div className="header-title with-btn">
 				<h2>{ title }</h2>
 			</div>
 			<div className="nav-button" onClick={ () => onBackClick() }>
-				<img src={ require('../../static/images/icon-arrow.svg') } alt="Back"/> Back
+				<img src={ require('../../static/images/arrow-left-white.svg') } alt="Back"/> Back
 			</div>
 		</div>
 	);

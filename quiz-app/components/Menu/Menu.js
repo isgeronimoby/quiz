@@ -53,7 +53,7 @@ class Menu extends Component {
 								<img src={require("../../static/images/user-picture.jpg")}/>
 							</div>
 							<div className="user-info">
-								<div className="user-name">Edward Snowden</div>
+								<div className="menu-user-name">Edward Snowden</div>
 								<div className="user-stats">
 									<div className="user-stats-points">210 Points</div>
 									<div className="separator">|</div>

@@ -35,7 +35,7 @@ class DrawListItem extends Component {
                         <h5 className="list-meta">{ subTitle }</h5>
                     </div>
                     <div className="draw-item-arrow">
-                        <img src={ require('../../static/images/icon-arrow.svg') } />
+                        <img src={ require('../../static/images/arrow-right-grey.svg') } />
                     </div>
                 </Link>
             </li>
