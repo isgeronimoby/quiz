@@ -84,7 +84,7 @@ Form
       input {
         border-bottom: 2px solid $color-error;
         &::placeholder {
-          color: $color-error;
+          color: $color-error-opaque;
         }
       }
     }
@@ -121,6 +121,8 @@ Form
 
 .input-error {
   font-size: 1rem;
+  line-height: 1rem;
+  margin-top: 4px;
   color: $color-error;
 }
 
@@ -131,6 +133,8 @@ Form
 .link-small-x {
   position: absolute;
   font-size: 1rem;
+  line-height: 1rem;
+  margin-top: 4px;
 }
 
 /*
