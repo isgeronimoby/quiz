@@ -1,0 +1,40 @@
+@import '../variables.scss';
+.draw-exit {
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  & > * {
+    text-align: center;
+  }
+}
+.big-image {
+  margin: 15px;
+  background: $color-grey;
+  height: 300px;
+  line-height: 300px;
+}
+.social-link {
+  font-size: 1.9rem;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  img {
+    margin-right: 10px;
+  }
+
+  &.facebook {
+    color: $color-facebook;
+  }
+  &.twitter {
+    color: $color-twitter;
+  }
+  &.disabled {
+    opacity: .3;
+  }
+}

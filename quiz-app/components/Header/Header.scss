@@ -1,13 +1,14 @@
 @import '../variables.scss';
+@import '../utils.scss';
 
+$title-pad: 6.8rem;
 .header {
   position: fixed;
-  left: 0;
-  right: 0;
+  left: 0; right: 0;
   top: 0;
+  height: $header-h;
   display: flex;
   justify-content: space-between;
-  height: $header-height;
   background-color: $brand-color;
 }
 
@@ -20,7 +21,7 @@
 
 .header-title {
   position: absolute;
-  left: 5.2rem; right: 5.2rem;
+  left: $title-pad; right: $title-pad;
   height: 100%;
   display: flex;
   align-items: center;
@@ -28,6 +29,10 @@
   text-align: center;
   font-size: 1.7rem;
   pointer-events: none;
+
+  h2 {
+    @mixin ellipsis;
+  }
 }
 
 .header-points {
@@ -46,4 +51,34 @@
 .icon-points {
   width: 1.8rem;
   margin-right: 0.8rem;
+}
+
+/*
+Header overlay - somewhat hacky way to change title/menu btn
+*/
+.header.header-overlay {
+  left: $title-pad; right: $title-pad;
+  background: transparent;
+
+  & > * {
+    background-color: $brand-color;
+  }
+
+  .header-title {
+    left: 0; right: 0;
+  }
+
+  $back-btn-w: 8rem;
+  .nav-button {
+    width: $back-btn-w;
+    margin-left: -7rem;
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      transform: rotate(180deg);
+      margin-right: 5px;
+    }
+  }
 }

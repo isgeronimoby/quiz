@@ -1,6 +1,26 @@
 import React, { Component, PropTypes } from 'react';
 import './popup.scss';
 
+
+export class SharingPopup extends Component {
+
+	show(autoHide) {
+		this.refs['sharing-popup'].show(autoHide);
+	}
+
+	render() {
+		return (
+			<Popup ref="sharing-popup" className="blue">
+				<div className="popup-icon"></div>
+				<div className="popup-content">
+					<div className="popup-title">You got +10 points!</div>
+					<div className="popup-text">Thank you for sharing</div>
+				</div>
+			</Popup>
+		);
+	}
+}
+
 class Popup extends Component {
 
 	static propTypes = {

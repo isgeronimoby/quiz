@@ -1,0 +1,42 @@
+@import '../variables.scss';
+@import '../QuizBet/bet.scss';
+.draw-content {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.draw-details {
+  display: flex;
+  align-items: stretch;
+}
+
+.draw-details-content {
+  flex-grow: 1;
+
+  .countdown {
+    margin-top: 15px;
+  }
+  .list-title {
+    margin: 5px 0 0;
+  }
+  .list-meta {
+    font-size: 1.4rem;
+  }
+}
+
+$image-sz: 10rem;
+.draw-details-image {
+  width: $image-sz;
+  height: $image-sz;
+  margin: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #fff;
+  img {
+    width: $image-sz;
+  }
+}

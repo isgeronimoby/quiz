@@ -80,7 +80,7 @@ class ScreenSwiper extends Component {
 
 const HeaderOverlay = ({ title, onBackClick}) => {
 	return (
-		<div className="header-overlay">
+		<div className="header header-overlay">
 			<div className="header-title">
 				<h2>{ title }</h2>
 			</div>

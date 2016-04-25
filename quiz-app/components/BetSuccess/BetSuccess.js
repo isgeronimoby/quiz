@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import './bet-success.scss';
+import './BetSuccess.scss';
 
-const SHOW_TIME = 1000;
+const SHOW_TIME = 3000;
 
 
-class QuizBetSuccess extends Component {
+class BetSuccess extends Component {
 
 	static propTypes = {
 		onDismiss: PropTypes.func.isRequired
@@ -23,11 +23,11 @@ class QuizBetSuccess extends Component {
 					<img src={ require('./images/icon-success.svg') }/>
 				</div>
 
-				<div className="success-subtitle">Bet is accepted</div>
+				<div className="success-subtitle">Accepted</div>
 				<div className="success-text">Thank you</div>
 			</div>
 		);
 	}
 }
 
-export default QuizBetSuccess;
+export default BetSuccess;

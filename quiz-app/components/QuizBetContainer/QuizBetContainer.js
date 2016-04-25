@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import QuizBet from '../QuizBet';
-import QuizBetSuccess from '../QuizBetSuccess';
+import BetSuccess from '../BetSuccess';
 import QuizBetExit from '../QuizBetExit';
 import '../QuizContainer/quiz.scss';
 
@@ -40,7 +40,7 @@ class QuizBetContainer extends Component {
 			View = <QuizBet points={points} odds={odds} onSubmit={() => this.submitBet() }/>;
 		}
 		else if (view === 'success') {
-			View = <QuizBetSuccess onDismiss={() => this.nextView('exit') }/>;
+			View = <BetSuccess onDismiss={() => this.nextView('exit') }/>;
 		}
 		else if (view === 'exit') {
 			View = <QuizBetExit />

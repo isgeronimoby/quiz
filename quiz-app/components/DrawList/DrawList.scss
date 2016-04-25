@@ -1,74 +1,56 @@
 @import '../variables.scss';
-
-.fixture-list {
-
+.draw-list {
 }
-
-.fixture-item {
+.draw-item {
   display: flex;
   flex-direction: column;
-}
+  border-bottom: 1px solid $color-grey-opaque;
 
-/*TODO - section-header*/
-.fixture-item-header {
-  background: $color-grey;
-  color: $color-grey-lite;
-  height: $section-header-h;
-  padding: 0 1.5rem;
-  display: flex;
-  align-items: center;
-  font-size: 1.1rem;
-  font-weight: bold;
-  &.is-collapsed {
-    height: 0.1rem;
+  &:last-child {
+    border-bottom: 0;
   }
 }
-
-.fixture-item-body {
+.draw-item-body {
   display: flex;
   height: 8rem;
   color: #fff;
   text-decoration: none;
+
   &.completed {
     background: $color-selection;
     pointer-events: none;
   }
 
-  .fixture-item-team-icons {
-    width: 7.6rem;
-    padding-left: 1.5rem;
-    margin-right: 0.8rem;
+  .draw-item-aside {
+    padding-left: 15px;
+    margin-right: 10px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
   }
-  .fixture-item-team {
-    width: 4rem;
+
+  $image-sz: 5.5rem;
+  .draw-item-image {
+    width: $image-sz;
+    height: $image-sz;
     background: #fff;
-    height: 4rem;
     border-radius: 50%;
-    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.15);
     display: flex;
     align-items: center;
     justify-content: center;
-    &:first-child {
-      position: relative;
-    }
+    overflow: hidden;
     img {
-      width: 3rem;
+      width: $image-sz;
     }
   }
-  .fixture-item-team-overlap {
-    margin-left: -0.8rem;
-  }
-  .fixture-item-content {
+  .draw-item-content {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
   }
-  .fixture-item-arrow {
+  .draw-item-arrow {
     width: 3.6rem;
     align-items: center;
     display: flex;
@@ -78,13 +60,11 @@
     }
   }
 }
-
 .list-title {
   font-size: 1.4rem;
   margin-bottom: 0.6rem;
   color: $color-grey-dark;
 }
-
 .list-meta {
   font-size: 1rem;
   color: $color-grey;
