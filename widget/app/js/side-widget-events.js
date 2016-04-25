@@ -17,9 +17,9 @@ DGW.side.methods.initEvents = function(){
 
     resizerBtn.addEventListener('click', function(){
         if (DGW.helpers.hasClass(wBody, 'dg-side-widget-expanded')) {
-            DGW.helpers.removeClass(wBody, 'dg-side-widget-expanded');
+            DGW.helpers.zeroTimeout(function(){DGW.helpers.removeClass(wBody, 'dg-side-widget-expanded');});
         } else {
-            DGW.helpers.addClass(wBody, 'dg-side-widget-expanded');
+            DGW.helpers.zeroTimeout(function(){DGW.helpers.addClass(wBody, 'dg-side-widget-expanded')});
         }
     });
 

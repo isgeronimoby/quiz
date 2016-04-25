@@ -524,6 +524,7 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             endpoint = 'draw/getsharelinks?drawid=' + requestBody;
             break;
         default:
+            DGW.helpers.console.log('Api default occured');
     }
     DGW.global.api.rpc.apiTunnel({
             apiKey: DGW.global.api.apiKey,
@@ -1406,6 +1407,10 @@ DGW.helpers.insertAfter = function (newNode, referenceNode, _fallbackNode) {
         if (_fallbackNode) _fallbackNode.appendChild(newNode);
     }
 };
+
+DGW.helpers.zeroTimeout = function(callback){
+    window.setTimeout(callback, 0);
+};
 DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body">' +
                                         '<div class="dg-side-widget-content dg-o-w-authorized">' +
@@ -1679,7 +1684,7 @@ DGW.main.elements.activitiesSliderParent = DGW.main.elements.pages.activitiesMai
 
 // Main widget global methods
 DGW.main.methods.showWidget = function(){
-    DGW.main.shown = true;
+    DGW.helpers.zeroTimeout(function(){ DGW.main.shown = true; }); // Fixing IE button click
     DGW.helpers.removeClass(DGW.main.elements.widget, 'hiding');
     DGW.global.elements.documentBody.appendChild(DGW.main.elements.widget);
     if (DGW.main.currentState === '') {
@@ -1687,7 +1692,7 @@ DGW.main.methods.showWidget = function(){
     }
 };
 DGW.main.methods.hideWidget = function(){
-    DGW.main.shown = false;
+    DGW.helpers.zeroTimeout(function(){ DGW.main.shown = false; });
     DGW.helpers.addClass(DGW.main.elements.widget, 'hiding');
     setTimeout(function(){
         DGW.global.elements.documentBody.removeChild(DGW.main.elements.widget);
@@ -1805,9 +1810,9 @@ DGW.side.methods.initEvents = function(){
 
     resizerBtn.addEventListener('click', function(){
         if (DGW.helpers.hasClass(wBody, 'dg-side-widget-expanded')) {
-            DGW.helpers.removeClass(wBody, 'dg-side-widget-expanded');
+            DGW.helpers.zeroTimeout(function(){DGW.helpers.removeClass(wBody, 'dg-side-widget-expanded');});
         } else {
-            DGW.helpers.addClass(wBody, 'dg-side-widget-expanded');
+            DGW.helpers.zeroTimeout(function(){DGW.helpers.addClass(wBody, 'dg-side-widget-expanded')});
         }
     });
 
@@ -1861,7 +1866,7 @@ DGW.main.methods.checkSectionHeight = function() {
 };
 
 DGW.main.methods.changeMainState = function(state){
-    for (item in DGW.main.elements.menuItems) {
+    for (var item in DGW.main.elements.menuItems) {
         DGW.helpers.removeClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');
         DGW.helpers.removeClass(DGW.main.elements.menuItems['profile'].parentNode, 'dg-o-w-active');
         if (item === state) {
@@ -1946,7 +1951,7 @@ DGW.main.methods.initEvents = function () {
     DGW.main.elements.widget.querySelector('.dg-o-w-close').addEventListener('click', DGW.main.methods.hideWidget);
 
     // main widget, main menu clicks
-    for (item in DGW.main.elements.menuItems) {
+    for (var item in DGW.main.elements.menuItems) {
         DGW.main.elements.menuItems[item].addEventListener('click', function(item){
             return function(){
                 if (item == 'profileRegistered') item = 'profile';
@@ -2015,14 +2020,21 @@ DGW.main.methods.initEvents = function () {
 
 //Activities page
     DGW.main.elements.pages.activitiesMain.querySelector('.toggle-section-height').addEventListener('click', function () {
-        if (DGW.helpers.hasClass(this, 'collapsed')) {
-            DGW.helpers.removeClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
-            DGW.helpers.removeClass(this, 'collapsed');
+        var that = this;
+        if (DGW.helpers.hasClass(that, 'collapsed')) {
+            DGW.helpers.zeroTimeout(function(){
+                DGW.helpers.removeClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
+                DGW.helpers.removeClass(that, 'collapsed');
+                DGW.main.methods.checkSectionHeight();
+            });
         } else {
-            DGW.helpers.addClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
-            DGW.helpers.addClass(this, 'collapsed');
+            DGW.helpers.zeroTimeout(function(){
+                DGW.helpers.addClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
+                DGW.helpers.addClass(that, 'collapsed');
+                DGW.main.methods.checkSectionHeight();
+            });
         }
-        DGW.main.methods.checkSectionHeight();
+
     });
 
     DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').addEventListener('change', function(){
@@ -3068,8 +3080,7 @@ widgetStyles.href = DGW.global.widgetPathName + 'style.min.css';
 var lastLinkElement = document.head.getElementsByTagName('link')[document.head.getElementsByTagName('link').length - 1];
 
 
-if (window.innerWidth > 1024)
-    DGW.helpers.insertAfter(widgetStyles, lastLinkElement, document.head);
+if (window.innerWidth > 1024) DGW.helpers.insertAfter(widgetStyles, lastLinkElement, document.head);
 else DGW.helpers.console.info('Widget: Mobile screen size, no widget allowed');
 
 window.dgwActivateDebugMode = function(){

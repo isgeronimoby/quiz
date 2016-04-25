@@ -266,3 +266,7 @@ DGW.helpers.insertAfter = function (newNode, referenceNode, _fallbackNode) {
         if (_fallbackNode) _fallbackNode.appendChild(newNode);
     }
 };
+
+DGW.helpers.zeroTimeout = function(callback){
+    window.setTimeout(callback, 0);
+};

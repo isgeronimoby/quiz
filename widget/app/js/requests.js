@@ -116,6 +116,7 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             endpoint = 'draw/getsharelinks?drawid=' + requestBody;
             break;
         default:
+            DGW.helpers.console.log('Api default occured');
     }
     DGW.global.api.rpc.apiTunnel({
             apiKey: DGW.global.api.apiKey,

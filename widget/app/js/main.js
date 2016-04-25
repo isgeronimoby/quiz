@@ -51,7 +51,7 @@ DGW.main.elements.activitiesSliderParent = DGW.main.elements.pages.activitiesMai
 
 // Main widget global methods
 DGW.main.methods.showWidget = function(){
-    DGW.main.shown = true;
+    DGW.helpers.zeroTimeout(function(){ DGW.main.shown = true; }); // Fixing IE button click
     DGW.helpers.removeClass(DGW.main.elements.widget, 'hiding');
     DGW.global.elements.documentBody.appendChild(DGW.main.elements.widget);
     if (DGW.main.currentState === '') {
@@ -59,7 +59,7 @@ DGW.main.methods.showWidget = function(){
     }
 };
 DGW.main.methods.hideWidget = function(){
-    DGW.main.shown = false;
+    DGW.helpers.zeroTimeout(function(){ DGW.main.shown = false; });
     DGW.helpers.addClass(DGW.main.elements.widget, 'hiding');
     setTimeout(function(){
         DGW.global.elements.documentBody.removeChild(DGW.main.elements.widget);

@@ -13,7 +13,7 @@ DGW.main.methods.checkSectionHeight = function() {
 };
 
 DGW.main.methods.changeMainState = function(state){
-    for (item in DGW.main.elements.menuItems) {
+    for (var item in DGW.main.elements.menuItems) {
         DGW.helpers.removeClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');
         DGW.helpers.removeClass(DGW.main.elements.menuItems['profile'].parentNode, 'dg-o-w-active');
         if (item === state) {
@@ -98,7 +98,7 @@ DGW.main.methods.initEvents = function () {
     DGW.main.elements.widget.querySelector('.dg-o-w-close').addEventListener('click', DGW.main.methods.hideWidget);
 
     // main widget, main menu clicks
-    for (item in DGW.main.elements.menuItems) {
+    for (var item in DGW.main.elements.menuItems) {
         DGW.main.elements.menuItems[item].addEventListener('click', function(item){
             return function(){
                 if (item == 'profileRegistered') item = 'profile';
@@ -167,14 +167,21 @@ DGW.main.methods.initEvents = function () {
 
 //Activities page
     DGW.main.elements.pages.activitiesMain.querySelector('.toggle-section-height').addEventListener('click', function () {
-        if (DGW.helpers.hasClass(this, 'collapsed')) {
-            DGW.helpers.removeClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
-            DGW.helpers.removeClass(this, 'collapsed');
+        var that = this;
+        if (DGW.helpers.hasClass(that, 'collapsed')) {
+            DGW.helpers.zeroTimeout(function(){
+                DGW.helpers.removeClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
+                DGW.helpers.removeClass(that, 'collapsed');
+                DGW.main.methods.checkSectionHeight();
+            });
         } else {
-            DGW.helpers.addClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
-            DGW.helpers.addClass(this, 'collapsed');
+            DGW.helpers.zeroTimeout(function(){
+                DGW.helpers.addClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
+                DGW.helpers.addClass(that, 'collapsed');
+                DGW.main.methods.checkSectionHeight();
+            });
         }
-        DGW.main.methods.checkSectionHeight();
+
     });
 
     DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').addEventListener('change', function(){
