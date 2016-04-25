@@ -21,6 +21,7 @@
   font-weight: bold;
   &.is-collapsed {
     height: 0.1rem;
+    background: $color-grey-opaque;
   }
 }
 

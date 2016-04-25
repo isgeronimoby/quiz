@@ -88,7 +88,7 @@ class QuizSummary extends Component {
 				</ul>
 
 				<Link className="big-btn money-btn" to="/bet" state={{id: 1}}>
-					Bet Points
+					Bet points
 				</Link>
 
 				<Button className="big-btn share-btn" onClick={ () => this.showPopup() }>

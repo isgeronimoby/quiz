@@ -19,9 +19,7 @@ h4 {
 body {
   color: $text-color;
   font-family: $font-family-roboto;
-  background-color: $body-bg;
-  background-image: url('../../static/images/bg.svg');
-  background-repeat: no-repeat;
+  background: $body-bg url('../../static/images/bg.svg') no-repeat;
   background-position: left bottom;
   background-size: 100%;
   background-attachment: fixed;

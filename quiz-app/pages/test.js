@@ -4,13 +4,13 @@ import Link from '../components/Link';
 class Test extends Component {
 
 	static contextTypes = {
-		toggleAuthPopup: React.PropTypes.func
+		openAuthPopup: React.PropTypes.func,
 	};
 
 	static title = 'Test';
 
 	render() {
-		const { toggleAuthPopup } = this.context;
+		const onPopupClick = () => this.context.openAuthPopup();
 
 		return (
 			<div>
@@ -22,7 +22,7 @@ class Test extends Component {
 						<Link to="./quiz" state={{id: 1}}>Quiz 1 (1 step)</Link>
 					</li>
 					<li >
-						<a href="#" onClick={ () => toggleAuthPopup(true) }>Toggle Auth</a>
+						<a href="#" onClick={ onPopupClick }>Toggle Auth</a>
 					</li>
 
 				</ul>

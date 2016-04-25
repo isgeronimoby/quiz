@@ -21,7 +21,7 @@ class DrawContainer extends Component {
 	};
 
 	static contextTypes = {
-		toggleAuthPopup: React.PropTypes.func
+		openAuthPopup: React.PropTypes.func
 	};
 
 	state = {
@@ -34,8 +34,8 @@ class DrawContainer extends Component {
 	}
 
 	submitBet(betValue) {
-		this.context.toggleAuthPopup(true, () => {
-			this.nextView('success');
+		this.context.openAuthPopup((result) => {
+			result && this.nextView('success');
 		});
 	}
 

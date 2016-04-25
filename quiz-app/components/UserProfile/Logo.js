@@ -14,8 +14,7 @@ class Logo extends Component {
 		let medalImg;
 		if (rank) {
 			const medal = ['gold', 'silver', 'bronze'][rank - 1];
-			const medalSrc = require(`../../static/images/rank-${medal}.png`);
-			medalImg = <img className="user-medal" src={medalSrc} alt="User rank"/>;
+			medalImg = <div className={`user-medal ${medal}`}>{ rank }</div>;
 		}
 		return (
 			<div className="user-logo-cont">

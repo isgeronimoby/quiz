@@ -33,10 +33,26 @@ $logo-sz: 55px;
   height: $logo-sz;
   margin-bottom: 5px;
 
+  $medal-sz: 28px;
   .user-medal {
     position: absolute;
     bottom: -2px;
     right: 1px;
+    width: $medal-sz;
+    height: $medal-sz;
+    line-height: 2.8;
+    text-align: center;
+    font-size: 1.2rem;
+
+    &.gold {
+      background-image: url('./images/rank-gold.svg');
+    }
+    &.silver {
+      background-image: url('./images/rank-silver.svg');
+    }
+    &.bronze {
+      background-image: url('./images/rank-bronze.svg');
+    }
   }
 }
 .user-name {

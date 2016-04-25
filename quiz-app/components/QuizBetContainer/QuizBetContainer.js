@@ -12,21 +12,20 @@ class QuizBetContainer extends Component {
 	};
 
 	static contextTypes = {
-		toggleAuthPopup: React.PropTypes.func
+		openAuthPopup: React.PropTypes.func
 	};
 
 	state = {
 		view: 'bet'
 	};
 
-
 	nextView(view) {
 		this.setState({ view });
 	}
 
 	submitBet(betValue) {
-		this.context.toggleAuthPopup(true, () => {
-			this.nextView('success');
+		this.context.openAuthPopup((result) => {
+			result && this.nextView('success');
 		});
 	}
 
