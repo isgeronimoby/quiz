@@ -461,11 +461,13 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                     });
                     playersInDraw.appendChild(playerImgsHolder);
 
-                    if (result.TotalCount > 3) {
-                        var p = document.createElement('p');
-                        p.innerHTML = result.TotalCount + ' users have done this';
-                        playersInDraw.appendChild(p);
+                    var p = document.createElement('p');
+                    if (result.TotalCount == 1) {
+                        p.innerHTML = '1 user has done this';
+                    } else {
+                        p.innerHTML = result.TotalCount + ' user has done this';
                     }
+                    playersInDraw.appendChild(p);
 
                     el.querySelector('.dg-o-w-draw-bet-info').appendChild(playersInDraw);
                 }
