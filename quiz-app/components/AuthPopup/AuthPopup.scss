@@ -7,18 +7,16 @@
   font-size: 1.9rem;
   color: $color-grey-dark;
   background-color: rgba(58, 58, 58, .9);
-  transform: translateX(0);
-  transition: background-color .4s ease;
-  pointer-events: all;
   z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 1;
+  transition: opacity .4s ease;
 
   &.is-hidden {
+    opacity: 0;
     pointer-events: none;
-    background: rgba(0, 0, 0, 0);
-    transform: translateX(-100%);
   }
 }
 /*
@@ -86,7 +84,7 @@ Form
       input {
         border-bottom: 2px solid $color-error;
         &::placeholder {
-          color: $color-error;
+          color: $color-error-opaque;
         }
       }
     }
@@ -123,6 +121,8 @@ Form
 
 .input-error {
   font-size: 1rem;
+  line-height: 1rem;
+  margin-top: 4px;
   color: $color-error;
 }
 
@@ -133,6 +133,8 @@ Form
 .link-small-x {
   position: absolute;
   font-size: 1rem;
+  line-height: 1rem;
+  margin-top: 4px;
 }
 
 /*

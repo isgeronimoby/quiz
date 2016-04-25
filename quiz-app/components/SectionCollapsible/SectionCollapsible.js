@@ -27,7 +27,9 @@ class SectionCollapsible extends Component {
 			<div className={"section-collapsible " + expandedClass} >
 				<div className="collapsible-content">{ children }</div>
 				<div className="collapsible-gripper" onClick={ onClick }>
-					<img className="icon-gripper" src={iconSrc} alt="gripper"/>
+					<div className="icon-gripper">
+						<img src={iconSrc} alt="gripper"/>
+					</div>
 				</div>
 			</div>
 		);

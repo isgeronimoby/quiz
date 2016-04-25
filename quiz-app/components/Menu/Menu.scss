@@ -5,7 +5,7 @@
   left: 0; right: 0;
   background: rgba(0, 0, 0, .4);
   transition: background .3s ease;
-  pointer-events: all;
+  pointer-events: auto;
   z-index: 2;
 
   &.is-hidden {
@@ -29,8 +29,7 @@
 
   .menu-header {
     height: 10rem;
-    background-color: $brand-color-lite;
-    background-image: url('./images/menu-bg.svg');
+    background-color: $brand-color-darkest;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
@@ -71,8 +70,7 @@
 }
 .user-info {
 }
-.user-name {
-  color: $color-grey-dark;
+.menu-user-name {
   font-size: 1.4rem;
   margin-bottom: 1rem;
 }
@@ -83,7 +81,6 @@
   display: flex;
 }
 .user-stats-points {
-  color: #000;
 }
 .user-stats-pending {
   color: $color-grey; /*rgba(214, 231, 221, .5);*/

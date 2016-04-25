@@ -43,7 +43,9 @@ class DrawBet extends Component {
 					</div>
 				</div>
 
-				<SectionCollapsible>{ description }</SectionCollapsible>
+				<SectionCollapsible>
+					<div className="bet-description">{ description }</div>
+				</SectionCollapsible>
 
 				<div className="bet-subtitle">How many points<br/> you want to place?</div>
 
