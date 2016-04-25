@@ -10,7 +10,15 @@
 	};
 	var interval;
 
+	var console = {
+		panel: $(parent.document.body).append('<div>'),
+		log: function(m){
+			this.panel.prepend('<div>' + m + '</div>');
+		}
+	};
+
 	var apiTunnel = function (request, onSuccess, onFailure) {
+		console.log('Api tunnel was launched');
 		try {
 			var options = {
 				type: request.method,
@@ -23,6 +31,7 @@
 				}
 			};
 			options.complete = function (xhr) {
+				console.log('Complete method was launched');
 				var response = {};
 				response.status = xhr.status;
 
@@ -37,6 +46,7 @@
 			$.ajax(options);
 		}
 		catch (ex) {
+			console.log('Exception occurred');
 			onFailure(ex.message);
 		}
 	};
