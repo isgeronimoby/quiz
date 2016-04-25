@@ -49,11 +49,7 @@ class AuthPopup extends Component {
 
 	static propTypes = {
 		show: PropTypes.bool.isRequired,
-		onClick: PropTypes.func,
-	};
-
-	static contextTypes = {
-		toggleAuthPopup: React.PropTypes.func
+		onClose: PropTypes.func.isRequired,
 	};
 
 	state = {
@@ -71,6 +67,8 @@ class AuthPopup extends Component {
 	}
 
 	handleSubmit(url, data) {
+		const { onClose } = this.props;
+
 		this.setState({
 			error: undefined,
 			loading: true
@@ -82,26 +80,25 @@ class AuthPopup extends Component {
 				loading: false
 			}, () => {
 				if (!error) {
-					this.closePopup();
+					onClose(true);
 				}
 			});
 		});
 	}
 
-	closePopup(e) {
-		if (e.target === this.refs['auth-shadow']) {
-			this.context.toggleAuthPopup(false)
-		}
-	}
-
 	render() {
-		const { show } = this.props;
+		const { show, onClose } = this.props;
 		const { view, ...rest } = this.state;
 		const hiddenClass = !show ? 'is-hidden' : '';
 		const [Component, url] = view2comp[view];
+		const onClick = (e) => {
+			if (e.target === this.refs['auth-shadow']) {
+				onClose(false);
+			}
+		};
 
 		return (
-			<div ref="auth-shadow" className={"auth-screen " + hiddenClass } onClick={(e) => this.closePopup(e) }>
+			<div ref="auth-shadow" className={"auth-screen " + hiddenClass } onClick={ onClick }>
 				<Component
 					onNavigate={ (view) => this.navigateTo(view) }
 					onSubmit={ (data) => this.handleSubmit(url, data) }

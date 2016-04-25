@@ -14,12 +14,12 @@ class Layout extends Component {
 	};
 
 	static childContextTypes = {
-		toggleAuthPopup: React.PropTypes.func,
+		openAuthPopup: React.PropTypes.func,
 	};
 
 	getChildContext() {
 		return {
-			toggleAuthPopup: this.toggleAuthPopup.bind(this)
+			openAuthPopup: this.openAuthPopup.bind(this)
 		};
 	}
 
@@ -36,16 +36,20 @@ class Layout extends Component {
 		});
 	}
 
-	toggleAuthPopup(on, callback) {
+	openAuthPopup(callback) {
 		if (callback) {
 			this._authCb = callback;
 		}
 
+		this.setState({ showAuthPopup: true });
+	}
+
+	closeAuthPopup(result) {
 		this.setState({
-			showAuthPopup: on
+			showAuthPopup: false
 		}, () => {
-			if (this._authCb && !this.state.showAuthPopup) {
-				this._authCb();
+			if (this._authCb) {
+				this._authCb(result);
 				this._authCb = null;
 			}
 		});
@@ -54,6 +58,7 @@ class Layout extends Component {
 	render() {
 		const {title, path, children} = this.props;
 		const { showMenu, showAuthPopup } = this.state;
+		const onCloseAuthPopup = (result) => this.closeAuthPopup(result);
 
 		return (
 			<div className="layout">
@@ -66,7 +71,7 @@ class Layout extends Component {
 					show={ showMenu }
 					onClick={ () => this.toggleMenu(false) }/>
 
-				<AuthPopup show={ showAuthPopup }/>
+				<AuthPopup show={ showAuthPopup } onClose={ onCloseAuthPopup }/>
 
 				<div className="content">
 					{ children }
