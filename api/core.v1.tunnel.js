@@ -11,9 +11,8 @@
 	var interval;
 
 	var console = {
-		panel: $(parent.document.body).append('<div>'),
 		log: function(m){
-			this.panel.prepend('<div>' + m + '</div>');
+			$('body').append('<div>' + m + '</div>');
 		}
 	};
 
