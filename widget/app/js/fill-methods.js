@@ -466,6 +466,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                         p.innerHTML = '1 user has done this';
                     } else {
                         p.innerHTML = result.TotalCount + ' user has done this';
+                        p.className = ((result.RecentPlayers.length == 2) ? 'dg-o-w-two-images' : 'dg-o-w-three-images');
                     }
                     playersInDraw.appendChild(p);
 
