@@ -3068,8 +3068,9 @@ widgetStyles.href = DGW.global.widgetPathName + 'style.min.css';
 var lastLinkElement = document.head.getElementsByTagName('link')[document.head.getElementsByTagName('link').length - 1];
 
 
-
-DGW.helpers.insertAfter(widgetStyles, lastLinkElement, document.head);
+if (window.innerWidth > 1024)
+    DGW.helpers.insertAfter(widgetStyles, lastLinkElement, document.head);
+else DGW.helpers.console.info('Widget: Mobile screen size, no widget allowed');
 
 window.dgwActivateDebugMode = function(){
     DGW.global.debug = true;
