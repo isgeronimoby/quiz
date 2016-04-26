@@ -1,30 +1,6 @@
-const top3 = [
+const users = [
 	{
 		name: 'John Millson',
-		answers: '1200',
-		picture: require("../../static/images/user-picture.jpg"),
-		points: 100,
-		rank: 1
-	},
-	{
-		name: 'Henry Smith',
-		answers: '5123',
-		picture: null,
-		points: 10,
-		rank: 2
-	},
-	{
-		name: 'Andy rocket',
-		answers: '6700',
-		picture: null,
-		points: 1000,
-		rank: 3
-	}
-];
-
-const rest = [
-	{
-		name: 'John Millson Jr',
 		answers: '1200',
 		picture: require("../../static/images/user-picture.jpg"),
 		points: 99,
@@ -36,19 +12,61 @@ const rest = [
 		points: 999,
 	},
 	{
-		name: 'Andy rocket Jr',
+		name: 'Andy rocket',
 		answers: '1200',
 		picture: null,
 		points: 9999,
 	}
 ];
 
+const groups = [
+	{
+		name: 'Everton Fan Club',
+		members: 210,
+		picture: require("../../static/images/group-picture.jpg"),
+	},
+	{
+		name: 'My Own Group',
+		members: 10,
+		picture: require("../../static/images/group-picture2.jpg"),
+		isMine: true,
+	},
+	{
+		name: 'Ireland Group',
+		members: 2100,
+		picture: null,
+	}
+];
+
 export default {
-	top3: top3,
-	rest: rest.concat(rest, rest, rest).map((u, i) => ({
-		...u,
-		rank: 55 + i,
-		myself: i === 1,
-		points: (i === 1 ? 220 : u.points)
-	}))
+	users: {
+		top3: users.slice(0, 3).map((u, i) => ({
+			...u,
+			rank: i + 1,
+		})),
+		all: users.concat(users, users, users).map((u, i) => ({
+			...u,
+			rank: 55 + i,
+		})),
+		friends: users.map((u, i) => ({
+			...u,
+			rank: Math.floor(Math.random() * 100),
+		}))
+	},
+
+	groups: {
+		top3: groups.slice(0, 3).map((g, i) => ({
+			...g,
+			rank: i + 1,
+		})),
+		all: groups.concat(groups, groups).map((g, i) => ({
+			...g,
+			rank: 9 + i,
+		})),
+	},
+
+	profile: {
+		rank: 56,
+		points: 220,
+	},
 };
