@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Hammer from 'react-hammerjs';
 import Logo from '../UserProfile/Logo.js';
-import Tabs from './Tabs.js';
+import Tabs from '../Tabs';
 import './EarnContainer.scss';
 
 const DIRECTION_LEFT = 2; //from Hammer

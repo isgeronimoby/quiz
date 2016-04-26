@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import './Tabs.scss';
+
 
 class Tabs extends Component {
 
@@ -15,7 +17,7 @@ class Tabs extends Component {
 			const onClick = () => onSelect(tabId);
 
 			return (
-				<div key={`tab-${i}`} className={"tab-item " + selectedClass} onClick={ (onClick)}>
+				<div key={`tab-${i}`} className={"tab-item " + selectedClass} onClick={ onClick }>
 					{ label }
 				</div>
 			);
