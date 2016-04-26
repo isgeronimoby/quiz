@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import Hammer from 'react-hammerjs';
 import LeaderBoard from '../LeaderBoard';
 import UserProfile from '../UserProfile';
 import ScreenSwiper from '../ScreenSwiper';

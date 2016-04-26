@@ -1,11 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import Hammer from 'react-hammerjs';
-import Logo from '../UserProfile/Logo.js';
+import ScreenSwiper from '../ScreenSwiper';
 import Tabs from '../Tabs';
 import './EarnContainer.scss';
 
-const DIRECTION_LEFT = 2; //from Hammer
-const DIRECTION_RIGHT = 4; //from Hammer
 
 const tabs = [
 	{
@@ -83,39 +80,39 @@ class EarnContainer extends Component {
 	};
 
 	state = {
-		currentStep: 0
+		currentScreenIdx: 0
 	};
 
-	nextStep() {
+	nextScreen() {
+		const { currentScreenIdx: idx } = this.state;
 		const totalSteps = tabs.length;
-		const step = this.state.currentStep;
-		if (step < totalSteps) {
+		if (idx + 1 < totalSteps) {
 			this.setState({
-				currentStep: step + 1
+				currentScreenIdx: idx + 1
 			})
 		}
 	}
 
-	prevStep() {
-		const step = this.state.currentStep;
-		if (step > 0) {
+	prevScreen() {
+		const { currentScreenIdx: idx } = this.state;
+		if (idx > 0) {
 			this.setState({
-				currentStep: step - 1
+				currentScreenIdx: idx - 1
 			});
 		}
 	}
 
-	selectStep(tabId) {
+	selectScreen(tabId) {
 		const tab = tabs.find((t) => t.tabId === tabId);
 		this.setState({
-			currentStep: tabs.indexOf(tab)
+			currentScreenIdx: tabs.indexOf(tab)
 		});
 	}
 
 	render() {
 		const { data } = this.props;
-		const { currentStep: step } = this.state;
-		const { tabId  } = tabs[step];
+		const { currentScreenIdx: idx } = this.state;
+		const { tabId  } = tabs[idx];
 		const screens = tabs
 			.map(({ filter }, i) => {
 				const earnItems = data.filter(filter);
@@ -123,33 +120,17 @@ class EarnContainer extends Component {
 					<Screen key={`screen-${i}`} list={ earnItems }/>
 				);
 			});
-
-		const totalSteps = tabs.length;
-		const width = 100 * totalSteps;
-		const scrollX = -100 * step / totalSteps;
-		const containerStyle = {
-			width: `${width}%`,
-			transform: `translateX(${scrollX}%)`
-		};
-		const onSwipe = (e) => {
-			if (e.direction === DIRECTION_LEFT) {
-				this.nextStep();
-			}
-			if (e.direction === DIRECTION_RIGHT) {
-				this.prevStep();
-			}
-		};
-		const onTabSelect = (tabId) => this.selectStep(tabId);
+		const onTabSelect = (tabId) => this.selectScreen(tabId);
+		const onPrev = () => this.prevScreen();
+		const onNext = () => this.nextScreen();
 
 		return (
 			<div className="screen">
 				<Tabs items={ tabs } selectedItemId={ tabId } onSelect={ onTabSelect }/>
 
-				<Hammer onSwipe={onSwipe}>
-					<div className="screen-swiper" style={ containerStyle }>
-						{ screens }
-					</div>
-				</Hammer>
+				<ScreenSwiper currentScreenIdx={idx} onPrevScreen={onPrev} onNextScreen={onNext}>
+					{ screens }
+				</ScreenSwiper>
 			</div>
 		);
 	}

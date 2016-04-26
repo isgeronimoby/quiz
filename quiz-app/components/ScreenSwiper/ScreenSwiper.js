@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Hammer from 'react-hammerjs';
 
 const DIRECTION_LEFT = 2; //from Hammer
 const DIRECTION_RIGHT = 4; //from Hammer
