@@ -24,10 +24,10 @@ class ScreenSwiper extends Component {
 		};
 		const onSwipe = (e) => {
 			if (e.direction === DIRECTION_LEFT) {
-				onPrevScreen();
+				onNextScreen();
 			}
 			if (e.direction === DIRECTION_RIGHT) {
-				onNextScreen();
+				onPrevScreen();
 			}
 		};
 

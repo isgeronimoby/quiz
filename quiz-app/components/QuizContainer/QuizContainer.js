@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Hammer from 'react-hammerjs';
+import ScreenSwiper from '../ScreenSwiper';
 import ProgressBar from '../ProgressBar';
 import QuizTypeWinOrDraw from '../QuizTypeWinOrDraw';
 import QuizTypeScore from '../QuizTypeScore';
@@ -7,11 +7,8 @@ import QuizTypeFirstGoal from '../QuizTypeFirstGoal';
 import QuizSummary from '../QuizSummary';
 import './quiz.scss'
 
-const DIRECTION_LEFT = 2; //from Hammer
-const DIRECTION_RIGHT = 4; //from Hammer
 
 const STATS_SHOW_DELAY = 1000;
-
 const type2componet = {
 	'win-or-draw': QuizTypeWinOrDraw,
 	'score': QuizTypeScore,
@@ -26,25 +23,28 @@ class QuizContainer extends Component {
 	};
 
 	state = {
-		currentStep: 1,
+		currentScreenIdx: 0,
 		statsShown: {},
 	};
 
-	nextStep() {
-		const totalSteps = this.props.data.length + 1;
-		const step = this.state.currentStep;
-		if (step < totalSteps) {
+	totalSteps() {
+		return this.props.data.length + 1; // + Summary
+	}
+
+	nextScreen() {
+		const { currentScreenIdx: idx } = this.state;
+		if (idx + 1 < this.totalSteps()) {
 			this.setState({
-				currentStep: step + 1
+				currentScreenIdx: idx + 1
 			})
 		}
 	}
 
-	prevStep() {
-		const step = this.state.currentStep;
-		if (step > 1) {
+	prevScreen() {
+		const { currentScreenIdx: idx } = this.state;
+		if (idx > 0) {
 			this.setState({
-				currentStep: step - 1
+				currentScreenIdx: idx - 1
 			})
 		}
 	}
@@ -59,45 +59,32 @@ class QuizContainer extends Component {
 				[quizId]: true
 			}
 		}, () => {
-			setTimeout(() => this.nextStep(), STATS_SHOW_DELAY);
+			setTimeout(() => this.nextScreen(), STATS_SHOW_DELAY);
 		});
 	}
 
 	render() {
 		const { data } = this.props;
-		const quizSteps = data.map(({ type, ...rest }, i) => {
+		const { currentScreenIdx: idx } = this.state;
+		const total = this.totalSteps();
+		const onPrev = () => this.prevScreen();
+		const onNext = () => this.nextScreen();
+		const quizScreens = data.map(({ type, ...rest }, i) => {
 			const Quiz = type2componet[type];
 			return (
 				<Quiz key={ `type-${i}` } {...rest} onStatsShown={ (quizId) => this.onStatsShown(quizId) }/>
 			);
-		});
-
-		const step = this.state.currentStep;
-		const totalSteps = data.length + 1;
-		const width = 100 * totalSteps;
-		const scrollX = -100 * (step - 1) / totalSteps;
-		const containerStyle = {
-			width: `${width}%`,
-			transform: `translateX(${scrollX}%)`
-		};
-		const onSwipe = (e) => {
-			if (e.direction === DIRECTION_LEFT) {
-				this.nextStep();
-			}
-			if (e.direction === DIRECTION_RIGHT) {
-				this.prevStep();
-			}
-		};
+		}).concat(
+			<QuizSummary key='summary' />
+		);
 
 		return (
-			<div className="quiz">
-				<ProgressBar total={ totalSteps } current={ this.state.currentStep }/>
-				<Hammer onSwipe={onSwipe}>
-					<div className="quiz-swiper" style={ containerStyle }>
-						{ quizSteps }
-						<QuizSummary />
-					</div>
-				</Hammer>
+			<div className="screen">
+				<ProgressBar total={ total } current={ idx }/>
+
+				<ScreenSwiper currentScreenIdx={idx} onPrevScreen={onPrev} onNextScreen={onNext}>
+					{ quizScreens }
+				</ScreenSwiper>
 			</div>
 		);
 	}

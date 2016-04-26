@@ -9,7 +9,7 @@ class ProgressBar extends Component {
 	};
 
 	getProgressBarInfo() {
-		let percentage = this.props.current / this.props.total;
+		let percentage = (this.props.current + 1) / this.props.total;
 		let style = {
 			transform: `scaleX(${percentage})`
 		};
