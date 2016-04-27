@@ -1,81 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import Hammer from 'react-hammerjs';
 import LeaderBoard from '../LeaderBoard';
 import UserProfile from '../UserProfile';
+import ScreenSwiper from '../ScreenSwiper';
 import Section from '../LeaderBoard/Section.js';
-
-// TODO - to utils
-const DIRECTION_LEFT = 2; //from Hammer
-const DIRECTION_RIGHT = 4; //from Hammer
-
-
-class ScreenSwiper extends Component {
-
-	static propTypes = {
-		isNextAllowed: PropTypes.func,
-		menuOverlay: PropTypes.element,
-		showOverlay: PropTypes.func
-	};
-
-	state = {
-		currentScreen: 1,
-	};
-
-	nextScreen() {
-		const { children, isNextAllowed } = this.props;
-		const total = children.length;
-		const step = this.state.currentScreen;
-		if (step < total && isNextAllowed()) {
-			this.setState({
-				currentScreen: step + 1
-			})
-		}
-	}
-
-	prevScreen() {
-		const step = this.state.currentScreen;
-		if (step > 1) {
-			this.setState({
-				currentScreen: step - 1
-			})
-		}
-	}
-
-	render() {
-		const { children, menuOverlay, showOverlay } = this.props;
-		const total = children.length;
-		const { currentScreen: step } = this.state;
-		const width = 100 * total;
-		const scrollX = -100 * (step - 1) / total;
-		const containerStyle = {
-			width: `${width}%`,
-			transform: `translateX(${scrollX}%)`
-		};
-		const onSwipe = (e) => {
-			if (e.direction === DIRECTION_LEFT) {
-				this.nextScreen();
-			}
-			if (e.direction === DIRECTION_RIGHT) {
-				this.prevScreen();
-			}
-		};
-		let overlay;
-		if (menuOverlay && showOverlay(step)) {
-			overlay = menuOverlay;
-		}
-
-		return (
-			<div className="screen">
-				{ overlay }
-				<Hammer onSwipe={onSwipe}>
-					<div className="screen-swiper" style={ containerStyle }>
-						{ children }
-					</div>
-				</Hammer>
-			</div>
-		);
-	}
-}
 
 
 const HeaderOverlay = ({ title, onBackClick}) => {
@@ -99,6 +26,7 @@ class LeaderBoardContainer extends Component {
 	};
 
 	state = {
+		currentScreenIdx: 0,
 		selectedUser: undefined
 	};
 
@@ -109,31 +37,49 @@ class LeaderBoardContainer extends Component {
 	}
 
 	nextScreen() {
-		this.refs['swiper'].nextScreen();
+		const { currentScreenIdx: idx, selectedUser } = this.state;
+		if (idx < 1 && !!selectedUser) {
+			this.setState({
+				currentScreenIdx: idx + 1
+			});
+		}
 	}
 
 	prevScreen() {
-		this.refs['swiper'].prevScreen();
+		const { currentScreenIdx: idx } = this.state;
+		if (idx > 0) {
+			this.setState({
+				currentScreenIdx: idx - 1
+			});
+		}
 	}
 
 	render() {
 		const { data } = this.props;
-		const { selectedUser } = this.state;
-		const profileMaybe = selectedUser ? <UserProfile user={selectedUser}/> : <div></div>;
-		const isNextAllowed = () => !!selectedUser;
-		const menuOverlay = (
-			<HeaderOverlay title="Profile" onBackClick={() => this.prevScreen() }/>
-		);
-		const showOverlay = (currentScreen) => currentScreen === 2;
+		const { selectedUser, currentScreenIdx: idx } = this.state;
+		const showOverlay = (idx === 1);
+		const onProfileBackClick = () => this.prevScreen();
+		const onPrev = () => this.prevScreen();
+		const onNext = () => this.nextScreen();
+
+		let profileMaybe = <div className="forbidden"></div>;
+		if (selectedUser) {
+			profileMaybe = <UserProfile user={ selectedUser }/>;
+		}
+
+		let overlayMaybe = <div className="forbidden"></div>;
+		if (showOverlay) {
+			overlayMaybe = <HeaderOverlay title="Profile" onBackClick={ onProfileBackClick }/>;
+		}
 
 		return (
-			<ScreenSwiper ref="swiper" isNextAllowed={ isNextAllowed }
-				menuOverlay={ menuOverlay }
-				showOverlay={ showOverlay }>
-
-				<LeaderBoard users={ data } onSelect={ (user) => this.selectUser(user) }/>
-				{ profileMaybe }
-			</ScreenSwiper>
+			<div className="screen">
+				{ overlayMaybe }
+				<ScreenSwiper currentScreenIdx={idx} onPrevScreen={onPrev} onNextScreen={onNext}>
+					<LeaderBoard users={ data } onSelect={ (user) => this.selectUser(user) }/>
+					{ profileMaybe }
+				</ScreenSwiper>
+			</div>
 		);
 	}
 }

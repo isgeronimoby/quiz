@@ -6,9 +6,8 @@ import './UserProfile.scss';
 class UserProfile extends Component {
 
 	static propTypes = {
-		user: PropTypes.object.isRequired
+		user: PropTypes.object.isRequired,
 	};
-
 
 	render() {
 		let { user: {name, picture, points} } = this.props;

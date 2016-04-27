@@ -1,0 +1,27 @@
+@import '../variables.scss';
+$tabs-h: 4.2rem;
+.tabs {
+  height: $tabs-h;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  background: $brand-color-dark;
+  color: $brand-color-lite;
+  font-size: 1.2rem;
+  box-shadow: inset 0 0 1px 0 rgba(0, 0, 0, .33);
+
+  .tab-item {
+    box-sizing: border-box;
+    height: calc($tabs-h - 1px); /*to show bottom shadow*/
+    padding: 13px 3px;
+
+    &.selected {
+      color: $color-grey-lite;
+      border-bottom: 3px solid $color-grey-lite;
+    }
+  }
+
+  & + .screen-swiper {
+    top: $tabs-h;
+  }
+}
