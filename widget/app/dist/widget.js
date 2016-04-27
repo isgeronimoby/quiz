@@ -2915,7 +2915,8 @@ DGW.main.methods.offersConstructor = function(offers) {
 
     //lists.categories.push('All');
 
-    offers.Offers.forEach(function(offer){
+    lists.offers.forEach(function(offer){
+        offer = offer.Offer;
         if (lists.sponsors.filter(function(sponsor){return sponsor === offer.Sponsor.Name;}).length == 0) {
             lists.sponsors.push(offer.Sponsor.Name);
         }
@@ -2961,6 +2962,7 @@ DGW.main.methods.offersConstructor = function(offers) {
 
     function filterOffers(){
         return lists.offers.filter(function(offer){
+            offer = offer.Offer;
             if (currentSponsor == sponsorsAllString &&
                 currentCategory == categoriesAllString) {
                 return true;
@@ -2978,8 +2980,12 @@ DGW.main.methods.offersConstructor = function(offers) {
         offersHolder.innerHTML = '';
 
         filteredOffers.forEach(function (offer) {
-            var li = document.createElement('li');
+            var recentCompleters = offer.RecentCompleters,
+                completersCount = offer.TotalCompletersCount;
 
+            offer = offer.Offer;
+
+            var li = document.createElement('li');
             li.innerHTML =
                 '<a href="" target="_blank"><div class="dg-o-w-offer">' +
                     '<div class="dg-o-w-offer-left">' +
@@ -2989,14 +2995,7 @@ DGW.main.methods.offersConstructor = function(offers) {
                     '<div class="dg-o-w-offer-right">' +
                         '<h4>' + offer.Title + '</h4>' +
                         '<h5>' + offer.Description + '</h5>' +
-                        '<div class="dg-o-w-users-done">' +
-                            '<div>' +
-                                '<img src="http://lorempixel.com/70/70/people/1" />' +
-                                '<img src="http://lorempixel.com/70/70/people/2" />' +
-                                '<img src="http://lorempixel.com/70/70/people/3" />' +
-                            '</div>' +
-                            '<p>10 users have done this</p>' +
-                        '</div>' +
+                        '<div class="dg-o-w-users-done"></div>' +
                     '</div>' +
                 '</div></a>';
             if (offer.Type.Name == 'DownloadMobileApp' || offer.Type.Name == 'DownloadToolbar') {
@@ -3021,6 +3020,31 @@ DGW.main.methods.offersConstructor = function(offers) {
                     DGW.main.methods.changeMainState('profile');
                 }
             });
+
+
+            if (recentCompleters.length > 0) {
+                var usersCompletedDiv = li.querySelector('.dg-o-w-users-done');
+                var playerImgsHolder = document.createElement('div');
+                recentCompleters.forEach(function(user, ind){
+                    if (ind > 2) return;
+                    var img = document.createElement('img');
+                    img.src = user.ImageUrl;
+
+                    playerImgsHolder.appendChild(img);
+                });
+                usersCompletedDiv.appendChild(playerImgsHolder);
+
+                var p = document.createElement('p');
+                if (completersCount == 1) {
+                    p.innerHTML = '1 user has done this';
+                } else {
+                    p.innerHTML = completersCount + ' users have done this';
+                    p.className = ((recentCompleters.length == 2) ? 'dg-o-w-two-images' : 'dg-o-w-three-images');
+                }
+                usersCompletedDiv.appendChild(p);
+            }
+
+
             offersHolder.appendChild(li);
         });
     }
