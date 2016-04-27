@@ -17,7 +17,7 @@ class DrawBet extends Component {
 	};
 
 	state = {
-		betValue: 20
+		betValue: undefined
 	};
 
 	handelBetValueChange(betValue) {
@@ -26,7 +26,7 @@ class DrawBet extends Component {
 
 	render() {
 		const { data: {name, picture, description, endDateTime}, points, onSubmit } = this.props;
-		const { betValue } = this.state;
+		const { betValue = points } = this.state;
 		const dateFormatted = moment(endDateTime).format('YYYY/MM');
 		const onChange = (v) => this.handelBetValueChange(v);
 
