@@ -1,36 +1,31 @@
 import React, { Component, PropTypes } from 'react';
-
 import './Header.scss';
 
-const data = {
-	pts: 220,
-};
 
 class Header extends Component {
 
 	static propTypes = {
 		title: PropTypes.string.isRequired,
-		onMenuBtnClick: PropTypes.func.isRequired
+		points: PropTypes.number.isRequired,
+		onMenuBtnClick: PropTypes.func.isRequired,
 	};
 
 	render() {
-		const { pts } = data;
+		const { title, points, onMenuBtnClick} = this.props;
 
 		return (
 			<div className="header">
 				<div className="header-title">
-					<h2>{ this.props.title }</h2>
+					<h2>{ title }</h2>
 				</div>
 
-				<div
-					className="nav-button"
-					onClick={ () => this.props.onMenuBtnClick() }>
-					<img className="icon-menu" src={require('./images/icon-menu.svg')} />
+				<div className="nav-button" onClick={ onMenuBtnClick }>
+					<img className="icon-menu" src={require('./images/icon-menu.svg')}/>
 				</div>
 
 				<div className="header-points">
-					<img className="icon-points" src={require('../../static/images/icon-cup.svg')} />
-					{ pts }
+					<img className="icon-points" src={require('../../static/images/icon-cup.svg')}/>
+					{ points }
 				</div>
 			</div>
 		);
