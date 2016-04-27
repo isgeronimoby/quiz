@@ -1,9 +1,14 @@
 import 'babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducers from './flux/reducers';
 import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
 import Location from './lib/Location';
 import Layout from './components/Layout';
+
+let store = createStore(reducers);
 
 const routes = {}; // Auto-generated on build. See tools/lib/routes-loader.js
 
@@ -26,10 +31,15 @@ function run() {
 		const path = pathname.slice(pathname.lastIndexOf('/'));
 
 		route(path, state, async (component) => {
-			ReactDOM.render(component, container, () => {
-				// Track the page view event via Google Analytics
-				//window.ga('send', 'pageview');
-			});
+			ReactDOM.render(
+				<Provider store={store}>
+					{ component }
+				</Provider>,
+				container,
+				() => {
+					// Track the page view event via Google Analytics
+					//window.ga('send', 'pageview');
+				});
 		});
 	});
 }
