@@ -121,6 +121,7 @@ DGW.global.methods.init = function(){
     DGW.main.elements.widgetWrapper.appendChild(DGW.main.elements.pages.notificationHolder);
 
     // filling user default data
+    DGW.global.userStats.userId = '';
     DGW.global.userStats.imageUrl = DGW.helpers.checkImagesForSrc();
     DGW.global.userStats.name = 'Guest';
     DGW.global.userStats.facebookId = null;

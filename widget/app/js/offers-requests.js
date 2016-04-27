@@ -4,11 +4,13 @@ DGW.global.offers.requests.shareOfferFb = function(offerId){
         DGW.global.api.requests.getUserOffers();
     });
 };
-
-DGW.global.offers.requests.shareOfferTw = function(offerId, offerShareUrl){
+//
+DGW.global.offers.requests.shareOfferTw = function(offerId, url, text, hashtags){
     DGW.global.api.requests.trackOffer(offerId);
 
-    DGW.helpers.centerWindowPopup('https://twitter.com/intent/tweet?text=Some+offer+text&url=' + encodeURIComponent(offerShareUrl), 'twWindow', 460, 340, function(){
+    DGW.helpers.centerWindowPopup('https://twitter.com/intent/tweet?text=' + text +
+    '&url=' + encodeURIComponent(url) + '&hashtags=' + hashtags,
+        'twWindow', 460, 340, function(){
         DGW.global.api.requests.completeOffer(offerId,
             function onSuccess(){
                 DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Sharing on Twitter');

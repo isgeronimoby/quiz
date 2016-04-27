@@ -59,6 +59,8 @@ DGW.main.methods.profileSetData = function(data) {
 
     var fbAddText = pr.querySelector('#dg-o-w-login-fb-text');
 
+    DGW.global.userStats.userId = data.UserId;
+
     profileImageHolders.forEach(function(image){
         image.src = data.ImageUrl || DGW.helpers.checkImagesForSrc(image.getAttribute('src'));
     });
@@ -753,8 +755,13 @@ DGW.main.methods.offersConstructor = function(offers) {
                         '<div class="dg-o-w-users-done"></div>' +
                     '</div>' +
                 '</div></a>';
-            if (offer.Type.Name == 'DownloadMobileApp' || offer.Type.Name == 'DownloadToolbar') {
-                li.querySelector('a').href = offer.CustomData;
+            if (offer.Type.Name == 'DownloadMobileApp') {
+                li.querySelector('a').href = offer.CustomData.Url;
+            }
+            if (offer.Type.Name == 'DownloadToolbar') {
+                li.querySelector('a').href = offer.CustomData.Url
+                    .replace(/\{0}/, offer.Id)
+                    .replace(/\{1}/, DGW.global.userStats.userId);
             }
             li.querySelector('a').addEventListener('click', function(ev){
                 if (DGW.global.authorized) {
@@ -764,9 +771,9 @@ DGW.main.methods.offersConstructor = function(offers) {
                     if (offer.Type.Name == 'FacebookShare') {
                         DGW.global.offers.requests.shareOfferFb(offer.Id);
                     } else if (offer.Type.Name == 'TwitterShare'){
-                        DGW.global.offers.requests.shareOfferTw(offer.Id, offer.CustomData);
+                        DGW.global.offers.requests.shareOfferTw(offer.Id, offer.CustomData.Url, offer.CustomData.TweetText, offer.CustomData.Hashtags);
                     } else if (offer.Type.Name == 'WatchVideo'){
-                        DGW.global.offers.requests.watchVideo(offer.Id, offer.CustomData);
+                        DGW.global.offers.requests.watchVideo(offer.Id, offer.CustomData.Url);
                     } else if (offer.Type.Name == 'DownloadToolbar') {
                         DGW.global.api.requests.trackOffer(offer.Id);
                     }

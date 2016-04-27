@@ -1002,11 +1002,13 @@ DGW.global.offers.requests.shareOfferFb = function(offerId){
         DGW.global.api.requests.getUserOffers();
     });
 };
-
-DGW.global.offers.requests.shareOfferTw = function(offerId, offerShareUrl){
+//
+DGW.global.offers.requests.shareOfferTw = function(offerId, url, text, hashtags){
     DGW.global.api.requests.trackOffer(offerId);
 
-    DGW.helpers.centerWindowPopup('https://twitter.com/intent/tweet?text=Some+offer+text&url=' + encodeURIComponent(offerShareUrl), 'twWindow', 460, 340, function(){
+    DGW.helpers.centerWindowPopup('https://twitter.com/intent/tweet?text=' + text +
+    '&url=' + encodeURIComponent(url) + '&hashtags=' + hashtags,
+        'twWindow', 460, 340, function(){
         DGW.global.api.requests.completeOffer(offerId,
             function onSuccess(){
                 DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Sharing on Twitter');
@@ -1754,6 +1756,7 @@ DGW.global.methods.init = function(){
     DGW.main.elements.widgetWrapper.appendChild(DGW.main.elements.pages.notificationHolder);
 
     // filling user default data
+    DGW.global.userStats.userId = '';
     DGW.global.userStats.imageUrl = DGW.helpers.checkImagesForSrc();
     DGW.global.userStats.name = 'Guest';
     DGW.global.userStats.facebookId = null;
@@ -2303,6 +2306,8 @@ DGW.main.methods.profileSetData = function(data) {
         };
 
     var fbAddText = pr.querySelector('#dg-o-w-login-fb-text');
+
+    DGW.global.userStats.userId = data.UserId;
 
     profileImageHolders.forEach(function(image){
         image.src = data.ImageUrl || DGW.helpers.checkImagesForSrc(image.getAttribute('src'));
@@ -2998,8 +3003,13 @@ DGW.main.methods.offersConstructor = function(offers) {
                         '<div class="dg-o-w-users-done"></div>' +
                     '</div>' +
                 '</div></a>';
-            if (offer.Type.Name == 'DownloadMobileApp' || offer.Type.Name == 'DownloadToolbar') {
-                li.querySelector('a').href = offer.CustomData;
+            if (offer.Type.Name == 'DownloadMobileApp') {
+                li.querySelector('a').href = offer.CustomData.Url;
+            }
+            if (offer.Type.Name == 'DownloadToolbar') {
+                li.querySelector('a').href = offer.CustomData.Url
+                    .replace(/\{0}/, offer.Id)
+                    .replace(/\{1}/, DGW.global.userStats.userId);
             }
             li.querySelector('a').addEventListener('click', function(ev){
                 if (DGW.global.authorized) {
@@ -3009,9 +3019,9 @@ DGW.main.methods.offersConstructor = function(offers) {
                     if (offer.Type.Name == 'FacebookShare') {
                         DGW.global.offers.requests.shareOfferFb(offer.Id);
                     } else if (offer.Type.Name == 'TwitterShare'){
-                        DGW.global.offers.requests.shareOfferTw(offer.Id, offer.CustomData);
+                        DGW.global.offers.requests.shareOfferTw(offer.Id, offer.CustomData.Url, offer.CustomData.TweetText, offer.CustomData.Hashtags);
                     } else if (offer.Type.Name == 'WatchVideo'){
-                        DGW.global.offers.requests.watchVideo(offer.Id, offer.CustomData);
+                        DGW.global.offers.requests.watchVideo(offer.Id, offer.CustomData.Url);
                     } else if (offer.Type.Name == 'DownloadToolbar') {
                         DGW.global.api.requests.trackOffer(offer.Id);
                     }
