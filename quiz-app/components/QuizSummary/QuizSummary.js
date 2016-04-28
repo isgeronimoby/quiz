@@ -87,7 +87,7 @@ class QuizSummary extends Component {
 					{ choiceItems }
 				</ul>
 
-				<Link className="big-btn money-btn" to="/bet" state={{id: 1}}>
+				<Link className="big-btn money-btn" to="./bet" state={{id: 1}}>
 					Bet points
 				</Link>
 

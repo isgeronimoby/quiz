@@ -1,6 +1,21 @@
 import React, { Component, PropTypes } from 'react';
+import Link from '../Link';
 import Logo from './Logo.js';
 import './UserProfile.scss';
+
+
+const HeaderOverlay = ({ title }) => {
+	return (
+		<div className="header header-overlay">
+			<div className="header-title with-btn">
+				<h2>{ title }</h2>
+			</div>
+			<Link className="nav-button" goBack={true} >
+				<img src={ require('../../static/images/arrow-left-white.svg') } alt="Back"/> Back
+			</Link>
+		</div>
+	);
+};
 
 
 class UserProfile extends Component {
@@ -10,10 +25,13 @@ class UserProfile extends Component {
 	};
 
 	render() {
-		let { user: {name, picture, points} } = this.props;
+		const { user: {name, picture, points} } = this.props;
+		const overlayTitle = 'Profile'; // TODO: user shortName
 
 		return (
 			<div className="user-profile">
+				<HeaderOverlay title={ overlayTitle }/>
+
 				<div className="profile-summary">
 					<div className="summary-aside">
 						<img className="aside-icon" src={require('./images/icon-badge-sm.svg')} alt=""/>

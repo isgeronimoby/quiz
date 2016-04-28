@@ -24,7 +24,11 @@ class Index extends Component {
 
 	visitFirstQuiz() {
 		const [{ quizId }] = this.props.data;
-		Location.pushState({id: quizId}, './quiz');
+
+		Location.push({
+			pathname: './quiz',
+			state: {id: quizId}
+		});
 	}
 
 	render() {
