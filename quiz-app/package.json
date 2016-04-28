@@ -41,6 +41,8 @@
     "react-transform-hmr": "^1.0.1",
     "redbox-react": "^1.1.1",
     "redux": "^3.5.2",
+    "redux-logger": "^2.6.1",
+    "redux-thunk": "^2.0.1",
     "style-loader": "^0.12.4",
     "through2": "^2.0.0",
     "url-loader": "^0.5.6",

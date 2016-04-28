@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import Hammer from 'react-hammerjs';
 import Link from '../Link';
 import './Menu.scss';
@@ -25,16 +26,41 @@ const MenuItem = (props) => {
 	)
 };
 
+
+const MenuHeader = ({ profile }) => {
+	const { picture, name, points, pendingPoints, userId } = profile;
+
+
+	return (
+		<Link className="menu-header" to="./profile" state={{ userId }}>
+			<div className="user-picture">
+				<img src={picture}/>
+			</div>
+			<div className="user-info">
+				<div className="menu-user-name">{ name }</div>
+				<div className="user-stats">
+					<div className="user-stats-points">{ points } Points</div>
+					<div className="separator">|</div>
+					<div className="user-stats-pending">{ pendingPoints } pending</div>
+				</div>
+			</div>
+		</Link>
+	);
+};
+
+
 class Menu extends Component {
 
 	static propTypes = {
 		activePath: PropTypes.string,
 		show: PropTypes.bool.isRequired,
 		onClick: PropTypes.func.isRequired,
+		// from store
+		profile: PropTypes.object.isRequired,
 	};
 
 	render() {
-		const { activePath, show, ...others} = this.props;
+		const { activePath, show, profile, ...others} = this.props;
 		const hiddenClass = !show ? 'is-hidden' : '';
 		const onSwipe = (e) => {
 			if (e.direction === DIRECTION_LEFT) {
@@ -48,19 +74,7 @@ class Menu extends Component {
 				<div className={"menu " + hiddenClass } {...others} >
 					<div className="menu-panel">
 
-						<div className="menu-header">
-							<div className="user-picture">
-								<img src={require("../../static/images/user-picture.jpg")}/>
-							</div>
-							<div className="user-info">
-								<div className="menu-user-name">Edward Snowden</div>
-								<div className="user-stats">
-									<div className="user-stats-points">210 Points</div>
-									<div className="separator">|</div>
-									<div className="user-stats-pending">110 pending</div>
-								</div>
-							</div>
-						</div>
+						<MenuHeader profile={profile} />
 
 						<MenuItem label="Fixtures" path='fixtures' active={ isActiveItem('fixtures') } />
 
@@ -74,7 +88,20 @@ class Menu extends Component {
 			</Hammer>
 		);
 	}
-
 }
 
-export default Menu;
+
+// Connect to store
+//
+const mapStateToProps = (state) => {
+	return {
+		profile: state.profile
+	};
+};
+
+const MenuSmart = connect(
+	mapStateToProps
+)(Menu);
+
+
+export default MenuSmart;
