@@ -1,10 +1,10 @@
 import userData from '../../components/LeaderBoardContainer/data.js'; // fake response data
 
 export const ADD_POINTS = 'ADD_POINTS';
-export const SELECT_PROFILE = 'SELECT_PROFILE';
-export const REQUEST_PROFILE = 'REQUEST_PROFILE';
-export const RECEIVE_PROFILE = 'RECEIVE_PROFILE';
-export const INVALIDATE_PROFILE = 'INVALIDATE_PROFILE'; // TODO
+export const SELECT_USER = 'SELECT_USER';
+export const REQUEST_USER = 'REQUEST_USER';
+export const RECEIVE_USER = 'RECEIVE_USER';
+export const INVALIDATE_USER = 'INVALIDATE_USER'; // TODO
 
 
 const DELAY = 100;
@@ -17,54 +17,60 @@ export function addPoints(points) {
 	};
 }
 
-
 /*
- User profiles
+ Users
  */
 
-export function selectProfile(userId) {
+export function selectUser(userId) {
 	return {
-		type: SELECT_PROFILE,
+		type: SELECT_USER,
 		userId
 	};
 }
 
-function requestProfile(userId) {
+export function invalidateUser(userId) {
 	return {
-		type: REQUEST_PROFILE,
+		type: INVALIDATE_USER,
+		userId
+	};
+}
+
+function requestUser(userId) {
+	return {
+		type: REQUEST_USER,
 		userId
 	};
 }
 
 
-function receiveProfile(userId, json) {
+function receiveUser(userId, json) {
 	return {
-		type: RECEIVE_PROFILE,
+		type: RECEIVE_USER,
 		userId,
 		payload: json,
 		receivedAt: Date.now()
 	};
 }
 
-function fetchProfile(userId) {
+function fetchUser(userId) {
 	return (dispatch) => {
-		dispatch(requestProfile(userId));
+		dispatch(requestUser(userId));
 
-		console.log('>>TODO: fetch /profile[%s]', userId);
-		//fetch(`/profile/${iserId}`).then(response => response.json())
+		console.log('>>TODO: fetch /user[%s]', userId);
+		//fetch(`/user/${iserId}`).then(response => response.json())
 
 		const response = userData.users.all.find(u => u.userId === userId);
 
 		return new Promise((resolve, reject) => {
 			setTimeout(() => resolve(response), DELAY);
 		}).then((json) => {
-			dispatch(receiveProfile(userId, json));
+			dispatch(receiveUser(userId, json));
 		});
 	};
 }
 
-function shouldFetchProfile(state, userId) {
-	const profile = state.profiles[userId];
+function shouldFetchUser(state, userId) {
+	const profile = state.users[userId];
 	if (!profile) {
 		return true;
 	} else if (profile.isFetching) {
@@ -74,10 +80,10 @@ function shouldFetchProfile(state, userId) {
 	}
 }
 
-export function fetchProfileIfNeeded(userId) {
+export function fetchUserIfNeeded(userId) {
 	return (dispatch, getState) => {
-		if (shouldFetchProfile(getState(), userId)) {
-			return dispatch(fetchProfile(userId));
+		if (shouldFetchUser(getState(), userId)) {
+			return dispatch(fetchUser(userId));
 		} else {
 			return Promise.resolve();
 		}

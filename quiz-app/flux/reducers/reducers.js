@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import {
 	ADD_POINTS,
-	SELECT_PROFILE,
-	INVALIDATE_PROFILE,
-	REQUEST_PROFILE,
-	RECEIVE_PROFILE
+	SELECT_USER,
+	INVALIDATE_USER,
+	REQUEST_USER,
+	RECEIVE_USER
 } from '../actions';
 
 /*Own Profile*/
@@ -27,36 +27,37 @@ function profile(state = {
 	}
 }
 
-/*Other profiles*/
+/*
+ Users
+ */
 
-
-function selectedProfile(state = null, action) {
+function selectedUser(state = null, action) {
 	switch (action.type) {
-		case SELECT_PROFILE:
+		case SELECT_USER:
 			return action.userId;
 		default:
 			return state;
 	}
 }
 
-function profileByUserId(state = {
+function userById(state = {
 	isFetching: false,
 	didInvalidate: false,
 	data: {}
 }, action) {
 	switch (action.type) {
-		case INVALIDATE_PROFILE:
+		case INVALIDATE_USER:
 			return {
 				...state,
 				didInvalidate: true,
 			};
-		case REQUEST_PROFILE:
+		case REQUEST_USER:
 			return {
 				...state,
 				isFetching: true,
 				didInvalidate: true,
 			};
-		case RECEIVE_PROFILE:
+		case RECEIVE_USER:
 			return {
 				isFetching: false,
 				didInvalidate: false,
@@ -68,14 +69,14 @@ function profileByUserId(state = {
 	}
 }
 
-function profiles(state = {}, action) {
+function users(state = {}, action) {
 	switch (action.type) {
-		case INVALIDATE_PROFILE:
-		case REQUEST_PROFILE:
-		case RECEIVE_PROFILE:
+		case INVALIDATE_USER:
+		case REQUEST_USER:
+		case RECEIVE_USER:
 			return {
 				...state,
-				[action.userId]: profileByUserId(state[action.userId], action)
+				[action.userId]: userById(state[action.userId], action)
 			};
 		default:
 			return state;
@@ -84,8 +85,8 @@ function profiles(state = {}, action) {
 
 const rootReducer = combineReducers({
 	profile,
-	profiles,
-	selectedProfile
+	users,
+	selectedUser
 });
 
 export default rootReducer;
