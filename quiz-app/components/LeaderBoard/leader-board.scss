@@ -1,4 +1,5 @@
 @import '../variables.scss';
+@import '../utils.scss';
 .content-section {
 }
 .section-header {
@@ -14,10 +15,12 @@
 .user-cols-3 {
   display: flex;
   justify-content: space-around;
+  padding: 15px 10px;
 
   .col {
-    padding: 15px 0;
     text-align: center;
+    max-width: calc(100% / 3);
+    min-width: calc(100% / 3);
   }
 }
 $logo-sz: 55px;
@@ -56,6 +59,7 @@ $logo-sz: 55px;
   }
 }
 .user-name {
+  @mixin ellipsis;
   margin-bottom: 0;
   font-size: 1.4rem;
   line-height: 1.4;
