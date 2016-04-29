@@ -129,6 +129,7 @@ DGW.global.methods.init = function(){
     DGW.global.userStats.pointsP = 0;
     DGW.global.userStats.creditsC = 0;
     DGW.global.userStats.creditsP = 0;
+    DGW.global.userStats.earnToday = null;
     DGW.global.userStats.badges = {
         all: {},
         earned: {}

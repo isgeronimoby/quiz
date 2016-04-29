@@ -75,10 +75,11 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                     '<section></section>' +
                                                     '<footer class="dg-o-w-footer-login">' +
                                                         '<div class="footer-section footer-section-step-1">' +
-                                                            '<div class="inline-part"><h3>Log in with Facebook and get +<span id="dg-o-w-login-fb-reward" class="dg-o-w-rewarded-action">30</span> points</h3></div>' +
-                                                            '<div class="inline-part"><a href="#" id="dg-o-w-footer-fb-connect" class="btn-radius btn-large btn-brand">Facebook</a></div>' +
+                                                            '<div class="inline-part dg-o-w-text-left"><p>Get started now and earn first <span id="dg-o-w-login-fb-reward" class="dg-o-w-rewarded-action dg-o-w-points">30</span></p>' +
+                                                            '<h5 class="dg-o-w-color-grey">We\'ll never send you any spam.</h5></div>' +
+                                                            '<div class="inline-part"><a href="#" id="dg-o-w-footer-fb-connect" class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large">Facebook</a></div>' +
                                                             '<div class="inline-part"><p>or</p></div>' +
-                                                            '<div class="inline-part"><a id="dg-o-w-footer-email-login" href="#" class="btn-radius btn-large btn-white">Sign up with email</a></div>' +
+                                                            '<div class="inline-part"><a id="dg-o-w-footer-email-login" href="#" class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large">Sign up with email</a></div>' +
                                                         '</div>' +
                                                         '<div class="footer-section footer-section-step-2">' +
                                                             '<div>' +
@@ -107,7 +108,7 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                 '<div class="sk-circle7 sk-circle"></div><div class="sk-circle8 sk-circle"></div><div class="sk-circle9 sk-circle"></div>' +
                                                 '<div class="sk-circle10 sk-circle"></div><div class="sk-circle11 sk-circle"></div><div class="sk-circle12 sk-circle"></div>' +
                                             '</div>' +
-                                        '</div>' +
+                                        '<footer class="dg-o-w-main-footer">Powered by Loyalty Rewarded, 2016</footer></div>' +
                                     '</div>' +
                                 '</div>';
 
@@ -140,79 +141,73 @@ DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
                             '<div class="dg-o-w-draws-no-in-draws"><h2>Seems like you don\'t playing any current draw :(</h2></div>' +
                         '</div>';
 
-DGW.templates.profileMain = '<div class="dg-o-w-profile">' +
-                                '<div class="dg-o-w-left-side">' +
+DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' +
+
+                                '<div class="dg-o-w-profile-stats">' +
                                     '<div class="dg-o-w-image-holder"><img id="profileImage" class="avatar" src="" /></div>' +
-                                    // TODO: hide until we have invite friends functionality
-                                    /*
-                                    '<p><span id="profileFriendsAmount">15</span> friends</p>' +
-                                    */
+                                    '<div class="dg-o-w-profile-stats-holder">' +
+                                        '<h3 class="dg-o-w-profile-name" id="profileName">Captain Deadpool</h3>' +
+                                        '<div class="dg-o-w-profile-stats-holder-rest">' +
+                                            //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p>19</p></div></div>' +
+                                            //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p>3</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon"></div><div><h3>520</h3><p>points</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon"></div><div><h3>40</h3><p>credits</p></div></div>' +
+                                        '</div>' +
+                                    '</div>' +
                                 '</div>' +
-                                '<div class="dg-o-w-right-side">' +
-                                    '<div class="dg-o-w-profile-top">' +
-                                        '<div class="dg-o-w-float-left"><h3 id="profileName">Captain Deadpool</h3><h5><span id="dg-o-w-badges-earned-amount"></span> badges</h5></div>' +
-                                        '<div class="dg-o-w-float-right">' +
-                                            '<div class="dg-o-w-profile-points"><h3>115</h3><h5>20</h5></div>' +
-                                            '<div class="dg-o-w-profile-credits"><h3>215.20</h3><h5>25.15</h5></div>' +
-                                        '</div>' +
-                                    '</div>' +
-                                    '<div class="dg-o-w-profile-earnings-info">' +
-                                        '<p class="color-brand-light">Today earned: <span>15</span> pts | left: <span>5</span>pts</p>' +
-                                        '<p id="dg-o-w-login-fb-text">Get +<span class="dg-o-w-rewarded-action" id="dg-o-w-login-fb-reward">50</span> additional points by adding your other accounts from ' +
-                                            '<a href="#" class="dg-o-w-fb-connect"></a></p>' +
-                                    '</div>' +
-                                    '<div class="dg-o-w-profile-progress"><div style="width:35%;"></div></div>' +
-                                    '<div class="dg-o-w-profile-bottom">' +
-                                        '<div class="dg-o-w-profile-invite dg-o-w-float-left">' +
-                                            // TODO: hide until we have invite friends functionality
-                                            /*
-                                            '<p class="color-brand-light"><a href="#" class="btn-dg-o-w-outline">Invite more friends</a>' +
-                                            ' and get +<span class="dg-o-w-rewarded-action" id="dg-o-w-friends-sign-up-reward">50</span> points for each friend</p>' +
-                                            */
-                                        '</div>' +
-                                        '<div class="dg-o-w-profile-signout dg-o-w-float-right">' +
-                                            '<p class="color-brand-light"><a id="dg-o-w-sign-out-btn" href="#">Sign out</a></p>' +
-                                        '</div>' +
-                                    '</div>' +
+
+                                '<div class="dg-o-w-profile-text-block">' +
+                                    '<p id="dg-o-w-login-fb-text">Get +<span class="dg-o-w-rewarded-action" id="dg-o-w-login-fb-reward">50</span> additional points by adding your other accounts from ' +
+                                        '<a href="#" class="dg-o-w-fb-connect"></a></p>' +
+                                '</div>' +
+
+                                '<div class="dg-o-w-profile-text-block">' +
+                                    '<p id="dg-o-w-profile-earn-today">&nbsp;</p>' +
+                                '</div>' +
+
+                                '<div class="dg-o-w-profile-progress"><div style="width:35%;"></div></div>' +
+
+                                '<div class="dg-o-w-profile-signout dg-o-w-float-right">' +
+                                    '<p class="dg-o-w-color-grey-light"><a id="dg-o-w-sign-out-btn" href="#">Sign out</a></p>' +
                                 '</div>' +
                             '</div>' +
-                            '<div class="dg-o-w-section-content content-static">' +
-                                '<h3>Badges</h3>' +
+                            '<div class="dg-o-w-section-content content-static dg-o-w-white-section dg-o-w-blocks-margin">' +
                                 '<div class="dg-o-w-badges-holder"><ul></ul></div>' +
                             '</div>';
 
 
 DGW.templates.loginMain = '<div class="dg-o-w-login">' +
-                                '<div class="dg-o-w-left-side"><div class="dg-o-w-image-holder"><div class="dg-o-w-brand-player-image"></div></div></div>' +
-                                '<div class="dg-o-w-right-side">' +
+                                '<div class="dg-o-w-login-holder"><div class="dg-o-w-login-holder-content">' +
                                     '<h1>Win exclusive prizes handling simple tasks</h1>' +
-                                    '<div class="dg-o-w-login-winners">' +
-                                        '<img class="avatar" src="" />' +
-                                        '<div><h4><span></span> has won a signed t-shirt!</h4><h5>Sign up and get your own prize now</h5></div>' +
-                                    '</div>' +
-                                '</div>' +
+                                    '<h4>Become a part of the team</h4>' +
+                                '</div></div>' +
+                                '<h4 class="dg-o-w-login-prize-title" id="dg-o-w-login-prize-title"></h4>' +
                             '</div>';
 
-DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul><li class="toggle-section-height"><div></div></li><li class="dg-o-w-active">Leaderboard</li></ul></div>' +
-                                '<div class="dg-o-w-activities">' +
-                                    '<div class="dg-o-w-activity-slider-holder">' +
-                                        '<div class="dg-o-w-activity-slider-controls">' +
-                                            '<div class="dg-o-w-activity-slider-prev dg-o-w-arrow dg-o-w-arrow-left"></div><div class="dg-o-w-activity-slider-next dg-o-w-arrow dg-o-w-arrow-right"></div>' +
+DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul>' +
+                                    //'<li class="toggle-section-height"><div></div></li>' +
+                                    '<li class="dg-o-w-active">Leaderboard</li></ul></div>' +
+                                '<div class="dg-o-w-section-scroller">' +
+                                    '<div class="dg-o-w-activities dg-o-w-white-section">' +
+                                        '<div class="dg-o-w-activity-slider-holder">' +
+                                            '<div class="dg-o-w-activity-slider-controls">' +
+                                                '<div class="dg-o-w-activity-slider-prev dg-o-w-arrow dg-o-w-arrow-left"></div><div class="dg-o-w-activity-slider-next dg-o-w-arrow dg-o-w-arrow-right"></div>' +
+                                            '</div>' +
+                                            '<div class="dg-o-w-activity-slider"><ul></ul></div>' +
                                         '</div>' +
-                                        '<div class="dg-o-w-activity-slider"><ul></ul></div>' +
                                     '</div>' +
-                                '</div>' +
-                                '<div class="dg-o-w-section-content">' +
-                                    '<div class="dg-o-w-activities-header">' +
-                                        '<p class="dg-o-w-float-left">Activities for today</p>' +
-                                        // TODO: don't show until we have invite friends functionality
-                                        // '<p class="dg-o-w-floating-link"><a href="#">Invite more friends</a> and get +<span id="dg-o-w-friends-sign-up-reward" class="dg-o-w-rewarded-action">50</span> points for each</p>' +
-                                        '<select id="dg-o-w-activities-filter" class="dg-o-w-float-right">' +
-                                            '<option value="all-activities">All activities</option>' +
-                                            '<option value="my-activities">My Activities</option>' +
-                                        '</select>' +
+                                    '<div class="dg-o-w-section-content content-static dg-o-w-white-section">' +
+                                        '<div class="dg-o-w-activities-header">' +
+                                            '<p class="dg-o-w-float-left">Activities for today</p>' +
+                                            // TODO: don't show until we have invite friends functionality
+                                            // '<p class="dg-o-w-floating-link"><a href="#">Invite more friends</a> and get +<span id="dg-o-w-friends-sign-up-reward" class="dg-o-w-rewarded-action">50</span> points for each</p>' +
+                                            '<select id="dg-o-w-activities-filter" class="dg-o-w-float-right">' +
+                                                '<option value="all-activities">All activities</option>' +
+                                                '<option value="my-activities">My Activities</option>' +
+                                            '</select>' +
+                                        '</div>' +
+                                        '<div class="dg-o-w-activities-holder"><ul></ul></div>' +
                                     '</div>' +
-                                    '<div class="dg-o-w-activities-holder"><ul></ul></div>' +
                                 '</div>';
 
 DGW.templates.videoHolder = '<div class="dg-o-w-video-holder"><div id="dg-o-w-video-playing"></div><div class="dg-o-w-video-text"><span></span></div></div>';

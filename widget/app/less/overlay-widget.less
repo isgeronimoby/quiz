@@ -68,15 +68,27 @@
 			display: inline;
 		}
 
-		h3 {
+		h1 {
 			font-size: 22px;
 			line-height: 26px;
+		}
+
+		h2 {
+			font-size: 20px;
+			line-height: 22px;
+		}
+
+		h3 {
+			font-size: 16px;
+			line-height: 20px;
 			font-weight: 400;
 		}
 
+
+
 		h5 {
-			font-size: 12px;
-			line-height: 16px;
+			font-size: 10px;
+			line-height: 14px;
 			font-weight: 100;
 		}
 
@@ -87,9 +99,41 @@
 		}
 
 		p {
-			font-size: 14px;
-			line-height: 18px;
+			font-size: 13px;
+			line-height: 16px;
 			font-weight: 400;
+		}
+
+		.dg-o-w-points {
+			background-color: @color-green;
+			color: @color-white;
+			border-radius: 10px;
+			font-size: 10px;
+			display: inline-block;
+			vertical-align: middle;
+			line-height: 20px;
+			padding: 0 8px;
+
+			&:before {
+				content: '+';
+			}
+
+			&:after {
+				content: ' pts';
+			}
+		}
+
+		.dg-o-w-points-bet {
+			background-color: #9ec64e;
+			line-height: 30px;
+			border-radius: 15px;
+			padding: 0 10px;
+			color: #fff;
+			text-align: center;
+
+			p {
+				line-height: 30px;
+			}
 		}
 
 		.color-brand-light {
@@ -171,7 +215,7 @@
 			display: inline-block;
 			width: 32px;
 			height: 32px;
-			border: 2px solid @color-white;
+			border: 2px solid @color-brand;
 			border-radius: 50%;
 			position: relative;
 			transition: background-color 0.3s ease;
@@ -202,6 +246,37 @@
 			}
 		}
 
+		.dg-o-w-color-green {
+			color: @color-green;
+		}
+		.dg-o-w-color-brand {
+			color: @color-brand;
+		}
+		.dg-o-w-color-grey {
+			color: @color-grey-dark;
+		}
+		.dg-o-w-color-grey-light {
+			color: @color-grey-light;
+		}
+
+		.dg-o-w-text-left {
+			text-align: left;
+		}
+		.dg-o-w-text-center {
+			text-align: center;
+		}
+		.dg-o-w-text-right {
+			text-align: right;
+		}
+
+		.dg-o-w-side-padding {
+			padding: 0 25px;
+		}
+
+		.dg-o-w-blocks-margin {
+			margin: 25px;
+		}
+
 		.dg-o-w-overlay {
 			position: fixed;
 			left: 0;
@@ -220,10 +295,18 @@
 				//Dimensions
 				width: 90%;
 				max-width: 850px;
-				box-shadow: 0 0 12px rgba(0,0,0,0.5);
 				height: @dg-widget-overlay-widget-height;
 
-				background-color: @color-white;
+				background-color: @color-grey-light;
+
+				.dg-o-w-main-footer {
+					background-color: @color-grey-light;
+					line-height: 25px;
+					text-align: center;
+					font-size: 10px;
+					font-weight: 400;
+					border-top: 1px solid @color-white;
+				}
 
 				.dg-o-w-body-wrapper {
 					position: relative;
@@ -235,7 +318,7 @@
 				.dg-o-w-header {
 					height: @dg-widget-overlay-header-height;
 					position: relative;
-					background: @color-white;
+					background: @color-brand;
 					width: 100%;
 					text-align: center;
 
@@ -245,7 +328,7 @@
 
 					.dg-o-w-logo {
 						height: @dg-widget-overlay-header-height;
-						width: 200px;
+						width: 160px;
 						float: left;
 						position: relative;
 						background: url('./imgs/everton-logo.jpg') no-repeat;
@@ -270,23 +353,22 @@
 
 						li {
 							display: table-cell;
-							color: @color-brand;
+							color: @color-white;
 							height: @dg-widget-overlay-header-height;
-							line-height: @dg-widget-overlay-header-height - 4;
+							line-height: @dg-widget-overlay-header-height;
 							padding: 0 20px;
 							margin: 0 25px;
-							border-bottom: 6px solid transparent;
-							transition: border 0.4s ease;
+							transition: color 0.3s ease;
 							cursor: pointer;
 							font-weight: 400;
 							font-size: 18px;
 
 							&:hover {
-								border-bottom: 6px solid @color-green;
+								color: @color-green;
 							}
 
 							&.dg-o-w-active {
-								border-bottom: 6px solid @color-green;
+								color: @color-green;
 							}
 						}
 					}
@@ -315,15 +397,15 @@
 							line-height: 1rem;
 
 							h4 {
-								color: @color-brand;
-								font-size: 16px;
+								color: @color-brand-light;
+								font-size: 14px;
 								font-weight: 400;
 								margin-bottom: 0;
 							}
 
 							p, .dg-o-w-login-dropdown a {
-								font-size: 13px;
-								color: @color-grey-dark;
+								font-size: 14px;
+								color: @color-white;
 								font-weight: 400;
 
 								#dg-o-w-points:after {
@@ -528,17 +610,22 @@
 								}
 							}
 						}
+
+						.dg-o-w-section-scroller {
+							height: @dg-widget-overlay-widget-height - @dg-widget-overlay-header-height - @dg-widget-overlay-submenu-height;
+						}
 					}
 				}
 
 				&.profile-anon {
 					.dg-o-w-content {
 						.dg-o-w-section {
+							position: relative;
+							padding: 0 25px;
+
 							.dg-o-w-footer-login {
-								background-color: @color-brand;
-								border-top: 1px solid @color-brand;
-								box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);
-								color: @color-white;
+								left: 25px;
+								right: 25px;
 
 
 								.footer-section {
@@ -776,7 +863,7 @@
 				width: 30px;
 				height: 30px;
 				position: absolute;
-				bottom: -40px;
+				bottom: -65px;
 				left: 0;
 				opacity: 0;
 				transition: opacity 0.3s ease 0.1s;
@@ -885,26 +972,37 @@
 				}
 			}
 
-			.btn-radius {
+			.btn-dg-o-w {
 				display: inline-block;
 				vertical-align: middle;
-				padding: 6px 16px;
+				height: 33px;
+				line-height: 33px;
+				padding: 0 20px;
 				border-radius: 4px;
-				font-size: 14px;
 				color: @color-white;
-				font-weight: 100;
+				font-size: 12px;
 				background-color: @color-default; // Default color
 
-				&.btn-large {
-					padding: 16px 30px;
-					border-radius: 4px;
+				&.btn-dg-o-w-large {
+					font-size: 14px;
+					height: 45px;
+					line-height: 45px;
+					padding: 0 40px;
 				}
 
-				&.btn-brand {
+				&.btn-dg-o-w-brand {
 					background-color: @color-brand;
 
 					&:hover {
-						box-shadow: 0 0 6px @color-brand-light;
+						background-color: @color-brand-lighter;
+					}
+				}
+
+				&.btn-dg-o-w-brand-l {
+					background-color: @color-brand-light;
+
+					&:hover {
+						opacity: 0.9;
 					}
 				}
 
@@ -922,6 +1020,19 @@
 						box-shadow: 0 0 6px @color-brand-light;
 					}
 				}
+			}
+
+			.dg-o-w-section-scroller {
+				overflow: auto;
+				height: @dg-widget-overlay-widget-height - @dg-widget-overlay-header-height -
+						@dg-widget-overlay-submenu-height - @dg-widget-overlay-footer-height;
+				padding: 0 25px 20px;
+			}
+
+			.dg-o-w-white-section {
+				background-color: @color-white;
+				margin-top: 20px;
+				box-shadow: 1px 0 3px rgba(0,0,0,.1);
 			}
 
 			.dg-o-w-content {
@@ -965,8 +1076,8 @@
 					.dg-o-w-submenu {
 						width: 100%;
 						height: @dg-widget-overlay-submenu-height;
-						background-color: @color-brand;
-						.club-logo-bg-image;
+						background-color: @color-white;
+						box-shadow: 1px 0 3px rgba(0,0,0,.1);
 						text-align: right;
 						overflow: hidden;
 						position: relative;
@@ -976,7 +1087,7 @@
 						ul {
 							position: absolute;
 							top: 50%;
-							left: 30px;
+							left: 25px;
 							transform: translateY(-50%);
 
 							li {
@@ -984,22 +1095,19 @@
 								vertical-align: middle;
 								margin: 0 5px;
 								padding: 0 20px;
-								height: 30px;
-								line-height: 30px;
-								color: @color-white;
-								border-radius: 20px;
-								transition: color 0.2s ease,
-											background-color 0.3s ease;
+								height: @dg-widget-overlay-submenu-height;
+								line-height: @dg-widget-overlay-submenu-height;
+								color: @color-brand;
+								border-bottom: 4px solid transparent;
+								transition: border 0.2s ease;
 								cursor: pointer;
 
 								&:hover {
-									color: @color-brand;
-									background-color: rgba(255,255,255,0.4);
+									border-bottom: 4px solid @color-brand;
 								}
 
 								&.dg-o-w-active {
-									color: @color-brand;
-									background-color: @color-white;
+									border-bottom: 4px solid @color-brand;
 								}
 
 								&.toggle-section-height {
@@ -1034,8 +1142,7 @@
 							position: absolute;
 							transform: translateY(-50%);
 							top: 50%;
-							right: 30px;
-							color: @color-brand-light;
+							right: 25px;
 							font-size: 13px;
 						}
 
@@ -1145,15 +1252,17 @@
 
 					.dg-o-w-footer-login {
 						height: @dg-widget-overlay-footer-height;
-						width: 100%;
 						position: absolute;
 						bottom: 0;
+						left: 0;
+						right: 0;
 						background: @color-white;
 						border-top: 1px solid #cecece;
 						box-shadow: 0 -2px 3px rgba(0, 0, 0, 0.2);
 						text-align: center;
 						white-space: nowrap;
 						overflow: hidden;
+						padding-left: 25px;
 
 						&.email-sign-up {
 							.footer-section {
@@ -1184,7 +1293,7 @@
 							transition: transform 0.3s ease;
 
 							& > div {
-								padding: 8px 20px;
+//								padding: 8px 20px;
 							}
 
 							&.footer-section-step-1 {
@@ -1253,9 +1362,8 @@
 					}
 
 					.dg-o-w-section-content {
-						padding: 20px 30px 20px;
+						padding: 25px;
 						overflow: auto;
-
 						position: absolute;
 						left: 0;
 						right: 0;
@@ -1264,13 +1372,12 @@
 						transition: top 0.3s ease, bottom 0.3s ease;
 
 						&.content-static {
-							position: relative;
+							position: static;
+							top: 0;
 						}
 
 						h3 {
 							margin-bottom: 20px;
-							font-size: 20px;
-							font-weight: 100;
 						}
 
 						.dg-o-w-users-done {
@@ -1283,10 +1390,10 @@
 
 							div {
 								img {
-									width: 40px;
-									height: 40px;
+									width: 30px;
+									height: 30px;
 									border-radius: 100%;
-									border: 2px solid @color-white;
+									border: 1px solid @color-white;
 									display: inline-block;
 									vertical-align: middle;
 
@@ -1300,15 +1407,13 @@
 							}
 
 							p {
-								font-size: 14px;
-								line-height: 16px;
 								margin-left: 0;
 
 								&.dg-o-w-two-images {
-									margin-left: -20px;
+									margin-left: -10px;
 								}
 								&.dg-o-w-three-images {
-									margin-left: -40px;
+									margin-left: -20px;
 								}
 							}
 						}
@@ -1446,15 +1551,16 @@
 
 						.dg-o-w-list-item-frame {
 							border: 1px solid @color-grey-light;
-							box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+							background-color: @color-white;
+							box-shadow: 1px 0 2px rgba(0, 0, 0, 0.05);
 							display: inline-block;
 							vertical-align: middle;
-							padding: 20px;
+							padding: 10px;
 							transition: box-shadow 0.2s ease,
 										transform 0.3s ease,
 										border-color 0.2s ease;
 							&:hover {
-								box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.3);
+								box-shadow: 1px 0 1px rgba(0, 0, 0, 0.3);
 								transform: translateY(2px);
 								border-color: @color-brand;
 							}
@@ -1476,7 +1582,7 @@
 							li {
 								.dg-o-w-list-item-frame;
 								font-size: 1rem;
-								height: 150px;
+								height: 120px;
 								width: 49%;
 								margin: 0.5%;
 								transform: translateZ(0);
@@ -1514,18 +1620,14 @@
 										text-align: center;
 
 
-										img {
+										.dg-o-w-offer-image {
 											display: inline-block;
+											max-width: 80%;
 										}
 
-										span {
-											display: inline-block;
-											background-color: @color-brand;
-											border-radius: 16px;
-											color: @color-white;
+										.dg-o-w-color-green {
 											padding: 5px 6px;
 											margin-top: 10px;
-											font-size: 14px;
 
 											&:before {
 												content: "+";
@@ -1542,19 +1644,14 @@
 										padding-left: 20px;
 
 										h4 {
-											font-size: 18px;
-											font-weight: 400;
-											line-height: 24px;
+											color: @color-brand;
 											margin-bottom: 4px;
 											transition: color 0.3s ease;
 										}
 
-										h5 {
-											font-size: 14px;
-											line-height: 16px;
+										& > p {
 											color: @color-default;
-											margin-bottom: 12px;
-											font-weight: 100;
+											margin-bottom: 10px;
 										}
 									}
 								}
@@ -1575,10 +1672,12 @@
 								font-size: 1rem;
 //								height: 350px;
 								width: 32%;
+								max-height: 310px;
 								margin: 0.5%;
 								text-align: center;
 								position: relative;
 								cursor: pointer;
+								padding: 20px;
 
 								.dg-o-w-draw-image-holder {
 									position: relative;
@@ -1600,34 +1699,40 @@
 
 								.dg-o-w-draw-text {
 									h2 {
-										font-weight: 400;
 										margin-bottom: 10px;
 										color: @color-brand;
-										font-size: initial;
 									}
 
 									p {
-										font-size: 14px;
 										height: 56px;
 										overflow: hidden;
 									}
 								}
 
-								.floating {
-									position: absolute;
-									left: 0;
-									.btn-radius
-								}
-
 								.dg-o-w-draw-bet {
-									.floating;
-									top: 0;
+									position: absolute;
+									top: 10px;
+									left: 10px;
 									background-color: @color-green;
+									line-height: 30px;
+									border-radius: 15px;
+									padding: 0 10px;
+									color: @color-white;
+									text-align: center;
+
+									p {
+										line-height: 30px;
+									}
+
+									&.dg-o-w-draw-bet-second {
+										top: 50px;
+									}
 								}
 
 								.dg-o-w-draw-connections {
-									.floating;
+									position: absolute;
 									top: 30px;
+									left: 10px;
 									background-color: @color-brand;
 								}
 
@@ -1643,7 +1748,6 @@
 
 									.dg-o-w-draw-text {
 										h2 {
-											font-size: 18px;
 											color: @color-grey-darkest;
 										}
 									}
@@ -1672,6 +1776,28 @@
 										}
 									}
 								}
+
+								.dg-o-w-draw-list-winner {
+									position: absolute;
+									top: 10px;
+									left: 10px;
+									background-color: @color-grey-light;
+									line-height: 30px;
+									border-radius: 15px;
+									padding-right: 10px;
+									color: @color-grey-darkest;
+
+									img {
+										max-width: 30px;
+										display: inline-block;
+										border-radius: 50%;
+										margin-right: 4px;
+									}
+
+									p {
+										display: inline-block;
+									}
+								}
 							}
 						}
 
@@ -1679,6 +1805,7 @@
 							font-size: 0;
 							height: 100%;
 							position: relative;
+							background-color: @color-white;
 
 							.dg-o-w-draw-left-side,
 							.dg-o-w-draw-right-side {
@@ -1694,13 +1821,13 @@
 
 								.prize-image {
 									max-width: 100%;
-									width: 100%;
-									height: 100%;
+									width: 90%;
+									height: 90%;
 
-									.dg-o-w-list-item-frame;
 									position: absolute;
 									top: 50%;
-									transform: translateY(-50%);
+									left: 50%;
+									transform: translate(-50%, -50%);
 									div {
 										max-height: 400px;
 										overflow: hidden;
@@ -1709,18 +1836,14 @@
 										height: 100%;
 
 										img {
-											height: 100%;
-											width: auto;
+											height: auto;
+											width: 100%;
 											max-width: none;
 											position: absolute;
-											top: 0;
+											top: 50%;
 											left: 50%;
-											transform: translateX(-50%);
+											transform: translate(-50%, -50%);
 										}
-									}
-
-									&:hover {
-										transform: translateY(-50%);
 									}
 								}
 							}
@@ -1730,24 +1853,16 @@
 								padding: 10px 0 30px 20px;
 
 								h2 {
-									color: @color-brand;
-									font-size: 36px;
-									font-weight: 400;
-									line-height: 40px;
-									margin-bottom: 25px;
+									margin-bottom: 20px;
 								}
 
-								h5 {
-									font-size: 16px;
+								h3 {
 									color: @color-brand;
 									margin-bottom: 20px;
-									font-weight: 400;
 								}
 
 								& > p {
-									font-size: 16px;
-									font-weight: 400;
-									margin-bottom: 30px;
+									margin-bottom: 20px;
 								}
 
 								&.won {
@@ -1760,8 +1875,9 @@
 									margin-bottom: 40px;
 
 									.dg-o-w-your-bet {
-										.btn-radius;
 										margin-right: 10px;
+										display: inline-block;
+										vertical-align: middle;
 									}
 								}
 
@@ -1774,19 +1890,22 @@
 								}
 
 								.dg-o-w-draw-winner {
-									margin-bottom: 20px;
+									display: inline-block;
+									background-color: @color-grey-light;
+									line-height: 30px;
+									border-radius: 15px;
+									padding-right: 10px;
+									color: @color-grey-darkest;
 
 									img {
-										max-width: 65px;
-										border-radius: 50%;
+										max-width: 30px;
 										display: inline-block;
-										vertical-align: middle;
-										margin-right: 20px;
+										border-radius: 50%;
+										margin-right: 4px;
 									}
 
-									h4 {
+									p {
 										display: inline-block;
-										vertical-align: middle;
 									}
 								}
 							}
@@ -1815,6 +1934,10 @@
 									display: block;
 								}
 							}
+
+							.dg-o-w-draw-share {
+								margin-top: 20px;
+							}
 						}
 
 						.dg-o-w-badges-holder {
@@ -1828,7 +1951,7 @@
 								li {
 									font-size: 1rem;
 									display: inline-block;
-									width: 80px;
+									width: 60px;
 									text-align: center;
 									margin: 0 20px;
 									vertical-align: top;
@@ -1846,7 +1969,7 @@
 											font-size: 12px;
 											line-height: 20px;
 											position: absolute;
-											top: 68px;
+											top: 48px;
 											left: 50%;
 											transform: translateX(-50%);
 											width: 18px;
@@ -1927,110 +2050,71 @@
 					}
 
 					.dg-o-w-profile {
-						background-color: @color-brand;
-						.club-logo-bg-image;
-						padding: 40px 30px;
-						font-size: 0;
-						color: @color-white;
-						font-weight: 100;
+						padding: 20px 25px;
 						position: relative;
+						margin: 0 25px;
+						overflow: hidden;
 
-						.dg-o-w-left-side, .dg-o-w-right-side {
+						.dg-o-w-profile-name {
+							margin-bottom: 10px;
+						}
+
+						.dg-o-w-image-holder {
+							display: inline-block;
+							position: relative;
+							margin-right: 20px;
+
+							.avatar {
+								max-width: 96px;
+								border-radius: 50%;
+							}
+						}
+
+						.dg-o-w-profile-stats-holder {
+							display: inline-block;
+							width: 75%;
+							font-size: 0;
+						}
+
+						.dg-o-w-profile-text-block {
+							margin: 10px 0;
+						}
+
+						.dg-o-w-profile-stats-inner {
 							font-size: 1rem;
 							display: inline-block;
-							vertical-align: top;
-						}
-
-						.dg-o-w-left-side {
-							width: 23%;
-							padding-right: 30px;
-							text-align: center;
-							font-size: 14px;
-							line-height: 16px;
-
-							.dg-o-w-image-holder {
-								margin-bottom: 10px;
-
-								img {
-									border-radius: 50%;
-								}
-							}
-						}
-
-						.dg-o-w-right-side {
-							width: 77%;
+							vertical-align: middle;
+							margin-right: 20px;
 
 							& > div {
-								overflow: hidden;
-							}
-
-							.dg-o-w-profile-top {
-								overflow: hidden;
-								margin-bottom: 40px;
-
-								.dg-o-w-float-right > div {
-									display: inline-block;
-									vertical-align: top;
-									text-align: right;
-
-									&:last-child {
-										margin-left: 30px;
-									}
-
-									h5:after {
-										content: " pending";
-									}
-
-									&.dg-o-w-profile-points {
-										h3:after {
-											content: " points";
-										}
-									}
-									&.dg-o-w-profile-credits {
-										color: @color-green;
-										h3:after {
-											content: " credits";
-										}
-									}
-								}
-							}
-
-							.social-btns {
 								display: inline-block;
-								background-image: url('./imgs/social.png');
-								background-repeat: no-repeat;
-								width: 24px;
-								height: 24px;
-								background-size: 384px 48px;
-								margin: 0 4px;
+								vertical-align: middle;
 							}
 
-							.dg-o-w-fb-connect {
-								.social-btns;
-								background-position: 0 0;
-
-								&:hover {
-									background-position: 0 -24px;
-								}
+							.dg-o-w-profile-stats-icon {
+								width: 38px;
+								height: 38px;
+								background-color: @color-brand;
+								margin-right: 6px;
 							}
+						}
 
-							.dg-o-w-tw-connect {
-								.social-btns;
-								background-position: -24px 0;
+						.social-btns {
+							display: inline-block;
+							background-image: url('./imgs/social.png');
+							background-repeat: no-repeat;
+							width: 24px;
+							height: 24px;
+							background-size: 384px 48px;
+							margin: 0 4px;
+						}
 
-								&:hover {
-									background-position: -24px -24px;
-								}
-							}
+						.dg-o-w-fb-connect {
+							.social-btns;
+							background-position: 0 0;
 
-							.btn-dg-o-w-outline {
-								border-color: @color-white;
-								color: @color-white;
-
-								&:hover {
-									background-color: @color-white;
-									color: @color-brand;
-								}
+							&:hover {
+								background-position: 0 -24px;
 							}
 						}
 
@@ -2038,8 +2122,8 @@
 							width: 100%;
 							height: 7px;
 							border-radius: 5px;
-							background-color: @color-brand-dark;
-							margin: 20px 0;
+							background-color: @color-grey-light;
+							margin: 10px 0 20px;
 
 							& > div {
 								height: 100%;
@@ -2055,91 +2139,42 @@
 					}
 
 					.dg-o-w-login {
-						.club-logo-bg-image;
-						background-color: @color-brand;
-						padding: 40px 30px @dg-widget-overlay-footer-height 0;
-						font-size: 0;
-						color: @color-white;
-						font-weight: 100;
+						background-color: @color-white;
 						position: relative;
-						height: @dg-widget-overlay-widget-height - @dg-widget-overlay-header-height;
+						height: @dg-widget-overlay-widget-height -
+								@dg-widget-overlay-header-height - @dg-widget-overlay-footer-height - 10;
 						z-index: 0;
 
-						.dg-o-w-left-side, .dg-o-w-right-side {
-							font-size: 1rem;
-							display: inline-block;
-							vertical-align: top;
+						.dg-o-w-login-holder {
+							background-color: @color-brand;
+							height: 72%;
+							padding: 30px 40px 0;
 							position: relative;
-							z-index: 1;
-						}
-
-						.dg-o-w-left-side {
-							width: 30%;
-							height: 100%;
-
-							.dg-o-w-image-holder {
-								position: absolute;
-								bottom: -5px;
-								left: 0;
-								width: 100%;
-								height: 100%;
-
-								.dg-o-w-brand-player-image {
-									width: 100%;
-									height: 100%;
-									background: url('./imgs/kevin-mirallas.png') no-repeat;
-									background-position: center bottom;
-									background-size: cover;
-								}
-							}
-						}
-						.dg-o-w-right-side {
-							width: 70%;
-							padding-left: 40px;
+							color: @color-white;
+							font-weight: 100;
 
 							h1 {
-								color: @color-brand-light;
-								font-weight: 100;
-								font-size: 36px;
-								margin-bottom: 20px;
+								font-size: 32px;
+								line-height: 60px;
 							}
 
-							& > a {
-								margin-bottom: 30px;
+							.dg-o-w-login-holder-content {
+								position: absolute;
+								top: 50%;
+								transform: translateY(-50%);
 							}
+						}
 
-							.dg-o-w-login-winners {
-								& > * {
-									display: inline-block;
-									vertical-align: middle;
-								}
-
-								img {
-									max-width: 60px;
-									border-radius: 50%;
-									margin-right: 30px;
-								}
-
-								h4 {
-									font-weight: 100;
-									font-size: 22px;
-									line-height: 26px;
-								}
-
-								h5 {
-									font-weight: 900;
-								}
-							}
+						.dg-o-w-login-prize-title {
+							line-height: 90px;
+							padding-left: 40px;
 						}
 					}
 
 					.dg-o-w-activities {
-						background-color: @color-brand;
-						.club-logo-bg-image;
-						background-position: top -92px left -90px;
-						padding: 20px 30px;
+						background-color: @color-white;
+						padding: 20px 15px;
 						color: @color-white;
-						font-weight: 100;
 						position: relative;
 						border-top: 1px solid rgba(255,255,255,0.1);
 						height: @dg-widget-overlay-activities-slider-height;
@@ -2169,6 +2204,7 @@
 									top: 0;
 									right: 0;
 									transition: all 0.6s ease;
+									color: @color-grey-darkest;
 
 									li {
 										float: left;
@@ -2181,34 +2217,18 @@
 											margin-bottom: -10px;
 
 											img {
-												max-width: 75px;
+												max-width: 60px;
 												height: auto;
 												border-radius: 50%;
+												border: 1px solid @color-grey-light;
 												display: block;
 												margin: 0 auto;
 											}
-
-											span {
-												color: @color-brand;
-												display: inline-block;
-												background: @color-white;
-												font-size: 12px;
-												padding: 3px 10px;
-												border-radius: 12px;
-												border: 1px solid @color-brand;
-												transform: translateY(-60%);
-
-												&:after {
-													content: " pts";
-												}
-											}
 										}
+									}
 
-										h4 {
-											font-size: 13px;
-											color: @color-white;
-											font-weight: 100;
-										}
+									p {
+										margin-top: 8px;
 									}
 								}
 							}
@@ -2242,7 +2262,7 @@
 						left: 0;
 						right: 0;
 						height: auto;
-						background: @color-white;
+						background: @color-grey-light;
 						overflow: hidden;
 						z-index: 5;
 
@@ -2271,6 +2291,13 @@
 						}
 
 						.dg-o-w-badge-single {
+							position: relative;
+							width: 94%;
+							height: @dg-widget-overlay-widget-height - 50 -
+									@dg-widget-overlay-header-height - @dg-widget-overlay-submenu-height;
+							margin: 25px auto 0;
+							overflow: hidden;
+
 							li {
 								position: absolute;
 								display: block;
@@ -2278,13 +2305,18 @@
 								left: 0;
 								width: 100%;
 								height: 100%;
-								background: @color-white;
-								transform: translateX(-100%);
+								transform: translateX(-110%);
 								transition: transform 0.3s ease;
-								opacity: 0.7;
+								opacity: 1;
+
+								img {
+									opacity: 0.5;
+								}
 
 								&.dg-o-w-earned {
-									opacity: 1;
+									img {
+										opacity: 1;
+									}
 								}
 
 								&.dg-o-w-active {
@@ -2304,7 +2336,6 @@
 									}
 
 									h3 {
-										color: @color-brand;
 										margin-bottom: 10px;
 									}
 

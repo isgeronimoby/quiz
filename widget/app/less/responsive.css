@@ -1,9 +1,9 @@
 @media screen and (max-height: 700px) {
   #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body {
-    height: 500px;
+    height: 410px;
   }
   #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-content .dg-o-w-section .dg-o-w-login {
-    height: 420px;
+    height: 330px;
     padding: 20px 30px 100px 0;
   }
   #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-content .dg-o-w-section .dg-o-w-login .dg-o-w-left-side .dg-o-w-image-holder .dg-o-w-brand-player-image {

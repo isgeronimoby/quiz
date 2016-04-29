@@ -89,7 +89,7 @@
   position: relative;
   width: 90px;
   height: 140px;
-  background-color: #00369c;
+  background-color: #00309b;
   border-bottom-left-radius: 4px;
   border-top-left-radius: 4px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
@@ -103,7 +103,7 @@
   left: 0;
   width: 22px;
   height: 22px;
-  background-color: #00369c;
+  background-color: #00309b;
   color: #ffffff;
   border-radius: 50%;
   border: 2px solid #ffffff;
@@ -172,7 +172,7 @@
 }
 #dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-widget-content .dg-side-cta {
   display: block;
-  background-color: #7cdb40;
+  background-color: #9ec64e;
   text-align: center;
   color: #ffffff;
   line-height: 30px;

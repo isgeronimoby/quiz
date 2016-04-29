@@ -166,23 +166,25 @@ DGW.main.methods.initEvents = function () {
     });
 
 //Activities page
-    DGW.main.elements.pages.activitiesMain.querySelector('.toggle-section-height').addEventListener('click', function () {
-        var that = this;
-        if (DGW.helpers.hasClass(that, 'collapsed')) {
-            DGW.helpers.zeroTimeout(function(){
-                DGW.helpers.removeClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
-                DGW.helpers.removeClass(that, 'collapsed');
-                DGW.main.methods.checkSectionHeight();
-            });
-        } else {
-            DGW.helpers.zeroTimeout(function(){
-                DGW.helpers.addClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
-                DGW.helpers.addClass(that, 'collapsed');
-                DGW.main.methods.checkSectionHeight();
-            });
-        }
+    /*if (DGW.main.elements.pages.activitiesMain.querySelector('.toggle-section-height')) {
+        DGW.main.elements.pages.activitiesMain.querySelector('.toggle-section-height').addEventListener('click', function () {
+            var that = this;
+            if (DGW.helpers.hasClass(that, 'collapsed')) {
+                DGW.helpers.zeroTimeout(function () {
+                    DGW.helpers.removeClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
+                    DGW.helpers.removeClass(that, 'collapsed');
+                    DGW.main.methods.checkSectionHeight();
+                });
+            } else {
+                DGW.helpers.zeroTimeout(function () {
+                    DGW.helpers.addClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
+                    DGW.helpers.addClass(that, 'collapsed');
+                    DGW.main.methods.checkSectionHeight();
+                });
+            }
 
-    });
+        });
+    }*/
 
     DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').addEventListener('change', function(){
         if (this.value === 'all-activities') {
@@ -371,11 +373,10 @@ DGW.main.methods.resetStates = function(){
 DGW.main.methods.fillDefaultValues = function(){
 
     var hiddenDrawsChkBox = DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired');
-    getWinnerInterval = setInterval(function(){
-        if (DGW.global.cache.last.winner) {
-            var l = DGW.main.elements.pages.loginMain.querySelector('.dg-o-w-login-winners');
-            l.querySelector('img').src = DGW.global.cache.last.winner.ImageUrl;
-            l.querySelector('h4 span').innerHTML = DGW.global.cache.last.winner.UserName;
+    var getWinnerInterval = setInterval(function(){
+        if (DGW.global.cache.last.prize) {
+            var l = DGW.main.elements.pages.loginMain.querySelector('#dg-o-w-login-prize-title');
+            if (l) l.innerHTML = 'Today you can win ' + DGW.global.cache.last.prize.Title;
             clearInterval(getWinnerInterval);
         }
     }, 50);
