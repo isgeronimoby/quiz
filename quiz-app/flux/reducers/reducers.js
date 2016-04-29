@@ -1,26 +1,50 @@
 import { combineReducers } from 'redux';
 import {
+	FETCH_PROFILE,
+	FETCH_PROFILE_SUCCESS,
+	FETCH_PROFILE_ERROR,
+
 	ADD_POINTS,
+
 	SELECT_USER,
+	FETCH_USER,
+	FETCH_USER_SUCCESS,
 	INVALIDATE_USER,
-	REQUEST_USER,
-	RECEIVE_USER
 } from '../actions';
 
-/*Own Profile*/
+/*
+ Profile
+ */
 
-function profile(state = {
+const tmp = {
 	userId: 0,
 	name: 'Edward Snowden',
 	picture: require("../../static/images/user-picture.jpg"),
 	points: 220,
 	pendingPoints: 110,
+};
+
+function profile(state = {
+	isLoggedIn: false,
+	points: 0,
+	pendingPoints: 0,
 }, action) {
 	switch (action.type) {
+		case FETCH_PROFILE_SUCCESS:
+			return {
+				...action.payload,
+				isLoggedIn: true,
+				lastUpdated: action.receivedAt,
+			};
+		case FETCH_PROFILE_ERROR:
+			return {
+				...state,
+				isLoggedIn: false,
+			};
 		case ADD_POINTS:
 			return {
 				...state,
-				points: state.points + action.points,
+				points: state.points + action.points
 			};
 		default:
 			return state;
@@ -43,7 +67,7 @@ function selectedUser(state = null, action) {
 function userById(state = {
 	isFetching: false,
 	didInvalidate: false,
-	data: {}
+	payload: {}
 }, action) {
 	switch (action.type) {
 		case INVALIDATE_USER:
@@ -51,13 +75,13 @@ function userById(state = {
 				...state,
 				didInvalidate: true,
 			};
-		case REQUEST_USER:
+		case FETCH_USER:
 			return {
 				...state,
 				isFetching: true,
 				didInvalidate: true,
 			};
-		case RECEIVE_USER:
+		case FETCH_USER_SUCCESS:
 			return {
 				isFetching: false,
 				didInvalidate: false,
@@ -72,8 +96,8 @@ function userById(state = {
 function users(state = {}, action) {
 	switch (action.type) {
 		case INVALIDATE_USER:
-		case REQUEST_USER:
-		case RECEIVE_USER:
+		case FETCH_USER:
+		case FETCH_USER_SUCCESS:
 			return {
 				...state,
 				[action.userId]: userById(state[action.userId], action)

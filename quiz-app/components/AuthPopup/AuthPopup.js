@@ -50,6 +50,7 @@ class AuthPopup extends Component {
 	static propTypes = {
 		show: PropTypes.bool.isRequired,
 		onClose: PropTypes.func.isRequired,
+		view: PropTypes.string,
 	};
 
 	state = {
@@ -57,6 +58,12 @@ class AuthPopup extends Component {
 		error: undefined,
 		loading: false,
 	};
+
+	componentWillReceiveProps({view}) {
+		if (!view) { return; }
+
+		this.setState({ view });
+	}
 
 	navigateTo(view) {
 		this.setState({

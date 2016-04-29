@@ -1,14 +1,57 @@
 import userData from '../../components/LeaderBoardContainer/data.js'; // fake response data
 
+export const FETCH_PROFILE = 'FETCH_PROFILE';
+export const FETCH_PROFILE_SUCCESS = 'FETCH_PROFILE_SUCCESS';
+export const FETCH_PROFILE_ERROR = 'FETCH_PROFILE_ERROR';
 export const ADD_POINTS = 'ADD_POINTS';
+
 export const SELECT_USER = 'SELECT_USER';
-export const REQUEST_USER = 'REQUEST_USER';
-export const RECEIVE_USER = 'RECEIVE_USER';
+export const FETCH_USER = 'FETCH_USER';
+export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
+export const FETCH_USER_ERROR = 'FETCH_USER_ERROR'; // TODO
 export const INVALIDATE_USER = 'INVALIDATE_USER'; // TODO
 
 
 const DELAY = 100;
 
+/*
+ Profile
+ */
+
+function fetchProfileStart() {
+	return {
+		type: FETCH_PROFILE
+	};
+}
+
+function fetchProfileSuccess(json) {
+	return {
+		type: FETCH_PROFILE_SUCCESS,
+		payload: json,
+		receivedAt: Date.now()
+	};
+}
+
+function fetchProfileError() {
+	return {
+		type: FETCH_PROFILE_ERROR
+	};
+}
+
+export function fetchProfile() {
+	return (dispatch) => {
+		dispatch(fetchProfileStart());
+
+		return new Promise((resolve, reject) => {
+			//setTimeout(() => resolve(response), DELAY);
+			setTimeout(() => reject(), DELAY); // emul not-authenticated
+		}).then((json) => {
+			dispatch(fetchProfileSuccess(json));
+		}).catch(() => {
+			dispatch(fetchProfileError());
+		});
+	};
+}
 
 export function addPoints(points) {
 	return {
@@ -35,17 +78,17 @@ export function invalidateUser(userId) {
 	};
 }
 
-function requestUser(userId) {
+function fetchUserStart(userId) {
 	return {
-		type: REQUEST_USER,
+		type: FETCH_USER,
 		userId
 	};
 }
 
 
-function receiveUser(userId, json) {
+function fetchUserSuccess(userId, json) {
 	return {
-		type: RECEIVE_USER,
+		type: FETCH_USER_SUCCESS,
 		userId,
 		payload: json,
 		receivedAt: Date.now()
@@ -54,7 +97,7 @@ function receiveUser(userId, json) {
 
 function fetchUser(userId) {
 	return (dispatch) => {
-		dispatch(requestUser(userId));
+		dispatch(fetchUserStart(userId));
 
 		console.log('>>TODO: fetch /user[%s]', userId);
 		//fetch(`/user/${iserId}`).then(response => response.json())
@@ -64,7 +107,7 @@ function fetchUser(userId) {
 		return new Promise((resolve, reject) => {
 			setTimeout(() => resolve(response), DELAY);
 		}).then((json) => {
-			dispatch(receiveUser(userId, json));
+			dispatch(fetchUserSuccess(userId, json));
 		});
 	};
 }

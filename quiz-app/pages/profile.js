@@ -34,7 +34,8 @@ class Profile extends Component {
 	}
 }
 
-
+// Connect to store
+//
 const mapStateToProps = (state) => {
 	return {
 		user: state.users[state.selectedUser] || {isFetching: true}
@@ -48,10 +49,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-const ProfileSmart = connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(Profile);
-
-
-export default ProfileSmart;
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
