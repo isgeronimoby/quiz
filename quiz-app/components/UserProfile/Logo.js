@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import '../LeaderBoard/leader-board.scss'; // TODO
 
 
 class Logo extends Component {

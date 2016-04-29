@@ -25,7 +25,8 @@ class Layout extends Component {
 
 	state = {
 		showMenu: false,
-		showAuthPopup: false
+		showAuthPopup: false,
+		authPopupView: undefined,
 	};
 
 	_authCb = null; // hack
@@ -36,12 +37,15 @@ class Layout extends Component {
 		});
 	}
 
-	openAuthPopup(callback) {
+	openAuthPopup(callback, view = 'signup') {
 		if (callback) {
 			this._authCb = callback;
 		}
 
-		this.setState({ showAuthPopup: true });
+		this.setState({
+			showAuthPopup: true,
+			authPopupView: view
+		});
 	}
 
 	closeAuthPopup(result) {
@@ -57,7 +61,7 @@ class Layout extends Component {
 
 	render() {
 		const {title, path, children} = this.props;
-		const { showMenu, showAuthPopup } = this.state;
+		const { showMenu, showAuthPopup, authPopupView } = this.state;
 		const onCloseAuthPopup = (result) => this.closeAuthPopup(result);
 
 		return (
@@ -71,7 +75,9 @@ class Layout extends Component {
 					show={ showMenu }
 					onClick={ () => this.toggleMenu(false) }/>
 
-				<AuthPopup show={ showAuthPopup } onClose={ onCloseAuthPopup }/>
+				<AuthPopup show={ showAuthPopup }
+					view={ authPopupView }
+					onClose={ onCloseAuthPopup }/>
 
 				<div className="content">
 					{ children }

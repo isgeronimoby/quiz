@@ -91,3 +91,16 @@
   padding: 0 0.3rem;
   color: $color-grey; /*rgba(214, 231, 221, .25);*/
 }
+
+
+/*Not logged in*/
+.menu-login {
+  padding: 0 15px;
+
+  .or-small {
+    flex-grow: 1;
+    font-size: 1rem;
+    color: $color-grey-opaque;
+    text-align: center;
+  }
+}

@@ -13,14 +13,19 @@ function isModifiedEvent(event) {
 
 class Link extends Component {
 
+	static defaultProps = {
+		goBack: false,
+	};
+
 	static propTypes = {
-		to: PropTypes.string.isRequired,
-		children: PropTypes.any.isRequired,
+		goBack: PropTypes.bool,
+		to: PropTypes.string,
 		state: PropTypes.object,
+		children: PropTypes.any.isRequired,
 		onClick: PropTypes.func,
 	};
 
-	handleClick (event) {
+	handleClick(event) {
 		let allowTransition = true;
 		let clickResult;
 
@@ -38,21 +43,25 @@ class Link extends Component {
 
 		event.preventDefault();
 
-		if (allowTransition) {
+		if (!allowTransition) { return; }
+
+		if (this.props.goBack) {
+			Location.goBack();
+		}
+		else {
 			const link = event.currentTarget;
 			const state = this.props && this.props.state || null;
-			const path = this.props && this.props.to || (link.pathname + link.search);
+			const pathname = this.props && this.props.to || (link.pathname + link.search);
 
-			Location.pushState(state, path);
+			Location.push({pathname, state});
 		}
-	};
+	}
 
 	render() {
 		const { to, children, ...props } = this.props;
-		const href = '.' + to; // relative path!
 		const onClick = (e) => this.handleClick(e);
 
-		return <a href={href} onClick={onClick} {...props}>{children}</a>;
+		return <a href={to} onClick={onClick} {...props}>{ children }</a>;
 	}
 
 }

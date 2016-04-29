@@ -14,7 +14,7 @@ class QuizBet extends Component {
 	};
 
 	state = {
-		betValue: 20
+		betValue: undefined
 	};
 
 	showPopup() {
@@ -27,7 +27,7 @@ class QuizBet extends Component {
 
 	render() {
 		const { points, odds, onSubmit } = this.props;
-		const { betValue } = this.state;
+		const { betValue = points } = this.state;
 		const winValue = odds[0] * betValue;
 		const onChange = (v) => this.handelBetValueChange(v);
 

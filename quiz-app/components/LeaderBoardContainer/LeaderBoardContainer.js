@@ -1,22 +1,25 @@
 import React, { Component, PropTypes } from 'react';
 import LeaderBoard from '../LeaderBoard';
+import { LeaderBoardGroup } from '../LeaderBoard';
+import Tabs from '../Tabs';
 import UserProfile from '../UserProfile';
 import ScreenSwiper from '../ScreenSwiper';
 import Section from '../LeaderBoard/Section.js';
 
-
-const HeaderOverlay = ({ title, onBackClick}) => {
-	return (
-		<div className="header header-overlay">
-			<div className="header-title with-btn">
-				<h2>{ title }</h2>
-			</div>
-			<div className="nav-button" onClick={ () => onBackClick() }>
-				<img src={ require('../../static/images/arrow-left-white.svg') } alt="Back"/> Back
-			</div>
-		</div>
-	);
-};
+const tabs = [
+	{
+		tabId: 'all',
+		label: 'Overall',
+	},
+	{
+		tabId: 'friends',
+		label: 'Friends',
+	},
+	{
+		tabId: 'groups',
+		label: 'Groups',
+	}
+];
 
 
 class LeaderBoardContainer extends Component {
@@ -27,18 +30,11 @@ class LeaderBoardContainer extends Component {
 
 	state = {
 		currentScreenIdx: 0,
-		selectedUser: undefined
 	};
 
-	selectUser(user) {
-		this.setState({
-			selectedUser: user
-		}, () => this.nextScreen());
-	}
-
 	nextScreen() {
-		const { currentScreenIdx: idx, selectedUser } = this.state;
-		if (idx < 1 && !!selectedUser) {
+		const { currentScreenIdx: idx } = this.state;
+		if (idx < 2) {
 			this.setState({
 				currentScreenIdx: idx + 1
 			});
@@ -54,30 +50,33 @@ class LeaderBoardContainer extends Component {
 		}
 	}
 
+	selectScreen(tabId) {
+		const tab = tabs.find((t) => t.tabId === tabId);
+		this.setState({
+			currentScreenIdx: tabs.indexOf(tab)
+		});
+	}
+
 	render() {
-		const { data } = this.props;
-		const { selectedUser, currentScreenIdx: idx } = this.state;
-		const showOverlay = (idx === 1);
-		const onProfileBackClick = () => this.prevScreen();
+		const {
+			users: { top3, all, friends},
+			groups: {top3: top3Groups, all: allGroups},
+			profile
+			} = this.props.data;
+		const { currentScreenIdx: idx } = this.state;
+		const { tabId  } = tabs[idx] || {};
 		const onPrev = () => this.prevScreen();
 		const onNext = () => this.nextScreen();
-
-		let profileMaybe = <div className="forbidden"></div>;
-		if (selectedUser) {
-			profileMaybe = <UserProfile user={ selectedUser }/>;
-		}
-
-		let overlayMaybe = <div className="forbidden"></div>;
-		if (showOverlay) {
-			overlayMaybe = <HeaderOverlay title="Profile" onBackClick={ onProfileBackClick }/>;
-		}
+		const onSelectTab = (tabId) => this.selectScreen(tabId);
 
 		return (
 			<div className="screen">
-				{ overlayMaybe }
+				<Tabs items={ tabs } selectedItemId={ tabId } onSelect={ onSelectTab }/>
+
 				<ScreenSwiper currentScreenIdx={idx} onPrevScreen={onPrev} onNextScreen={onNext}>
-					<LeaderBoard users={ data } onSelect={ (user) => this.selectUser(user) }/>
-					{ profileMaybe }
+					<LeaderBoard top3={ top3 } users={ all } profile={ profile }/>
+					<LeaderBoard top3={ top3 } users={ friends } profile={ profile }/>
+					<LeaderBoardGroup top3={ top3Groups } groups={ allGroups }/>
 				</ScreenSwiper>
 			</div>
 		);

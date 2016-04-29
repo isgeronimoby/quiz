@@ -30,4 +30,15 @@
   font-size: 1.4rem;
   color: $brand-color-lite
 }
+.hollow-btn {
+  font-size: 1.4rem;
+  padding: 15px 25px;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 2px;
 
+  &.lite {
+    color: $brand-color-lite;
+    border: 1px solid $brand-color-lite;
+  }
+}
