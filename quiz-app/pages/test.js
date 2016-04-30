@@ -5,12 +5,14 @@ class Test extends Component {
 
 	static contextTypes = {
 		openAuthPopup: React.PropTypes.func,
+		openWelcomePopup: React.PropTypes.func,
 	};
 
 	static title = 'Test';
 
 	render() {
-		const onPopupClick = () => this.context.openAuthPopup();
+		const onAuthPopupClick = () => this.context.openAuthPopup();
+		const onWelcomePopupClick = () => this.context.openWelcomePopup();
 
 		return (
 			<div>
@@ -22,9 +24,11 @@ class Test extends Component {
 						<Link to="./quiz" state={{id: 1}}>Quiz 1 (1 step)</Link>
 					</li>
 					<li >
-						<a href="#" onClick={ onPopupClick }>Toggle Auth</a>
+						<a href="#" onClick={ onAuthPopupClick }>Toggle Auth</a>
 					</li>
-
+					<li >
+						<a href="#" onClick={ onWelcomePopupClick }>Toggle Welcome</a>
+					</li>
 				</ul>
 			</div>
 		);
