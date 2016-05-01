@@ -15,10 +15,10 @@ class QuizBetExit extends Component {
 					Amazing illustration here
 				</div>
 
-				<a className="big-btn money-btn" href="//google.com" target="_blank">
-					Sign Up to our betting partner<br/>
-					<span className="btn-text-sm">and earn +500 more points</span>
-				</a>
+				<Link className="big-btn money-btn" to="./partners">
+					SignUp to our betting partners<br/>
+					<span className="btn-text-sm">and earn a lot of points</span>
+				</Link>
 				<div className="text-regular">earn 5 points for each pound you bet</div>
 
 				<Link className="big-btn share-btn" to="./fixtures">

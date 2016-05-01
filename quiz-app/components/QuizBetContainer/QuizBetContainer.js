@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import QuizBet from '../QuizBet';
 import BetSuccess from '../BetSuccess';
-import QuizBetExit from '../QuizBetExit';
+import Location from '../../lib/Location';
+
 import '../QuizContainer/quiz.scss';
 
 
@@ -29,6 +30,11 @@ class QuizBetContainer extends Component {
 		});
 	}
 
+	goToExitPage() {
+		Location.push({
+			pathname: './exit',
+		});
+	}
 
 	render() {
 		const points = 220;
@@ -39,10 +45,7 @@ class QuizBetContainer extends Component {
 			View = <QuizBet points={points} odds={odds} onSubmit={() => this.submitBet() }/>;
 		}
 		else if (view === 'success') {
-			View = <BetSuccess onDismiss={() => this.nextView('exit') }/>;
-		}
-		else if (view === 'exit') {
-			View = <QuizBetExit />
+			View = <BetSuccess onDismiss={() => this.goToExitPage() }/>;
 		}
 
 		return (
