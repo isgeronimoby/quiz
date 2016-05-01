@@ -26,11 +26,18 @@ Columns
     transition: transform .4s ease;
   }
 }
+/*
+Text utils
+*/
 .text-brand {
   color: $brand-color;
 }
 .text-center {
   text-align: center;
+}
+.link-normal {
+  color: $color-twitter;
+  text-decoration: underline;
 }
 /*
 Placeholders

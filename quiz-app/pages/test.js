@@ -29,6 +29,9 @@ class Test extends Component {
 					<li >
 						<a href="#" onClick={ onWelcomePopupClick }>Toggle Welcome</a>
 					</li>
+					<li>
+						<Link to="./partners">Partners</Link>
+					</li>
 				</ul>
 			</div>
 		);
