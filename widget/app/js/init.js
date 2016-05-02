@@ -23,7 +23,7 @@ window.DGW = function () {
                 }
             } else {
                 // No parameter - use production path
-                tunnelPath = 'https://api.rewarded.club/tunnel.html';
+                tunnelPath = 'https://api.rewarded.club/core/v1/xdm/tunnel';
                 envPath = tunnelPath.substring(DGW.global.tunnelPath.lastIndexOf('/xdm/') + 1, 0);
             }
 

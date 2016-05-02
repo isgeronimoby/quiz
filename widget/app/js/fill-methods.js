@@ -42,7 +42,7 @@ DGW.main.methods.profileSetData = function(data) {
     var points = {
             confirmed: [
                 wb.querySelector('#dg-o-w-points'),
-                pr.querySelector('.dg-o-w-profile-stats-points h3'),
+                pr.querySelector('#dg-o-w-profile-p-c'),
                 sb.querySelector('#dg-side-points'),
                 sb.querySelector('#dg-side-points-collapsed')
             ],
@@ -51,7 +51,7 @@ DGW.main.methods.profileSetData = function(data) {
         credits = {
             confirmed: [
                 wb.querySelector('#dg-o-w-credits'),
-                pr.querySelector('.dg-o-w-profile-stats-credits h3'),
+                pr.querySelector('#dg-o-w-profile-c-c'),
                 sb.querySelector('#dg-side-credits')
             ],
             pending: [pr.querySelector('.dg-o-w-profile-credits h5')]

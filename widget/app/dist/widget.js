@@ -24,7 +24,7 @@ window.DGW = function () {
                 }
             } else {
                 // No parameter - use production path
-                tunnelPath = 'https://api.rewarded.club/tunnel.html';
+                tunnelPath = 'https://api.rewarded.club/core/v1/xdm/tunnel';
                 envPath = tunnelPath.substring(DGW.global.tunnelPath.lastIndexOf('/xdm/') + 1, 0);
             }
 
@@ -446,11 +446,6 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             endpoint = 'auth/forgotpassword';
             requestBody = JSON.stringify(requestBody);
             break;
-        case 'facebookLogIn':
-            method = 'POST';
-            endpoint = 'auth/facebookconnect';
-            requestBody = JSON.stringify(requestBody);
-            break;
         case 'getUser':
             endpoint = 'user/getuser';
             break;
@@ -620,6 +615,13 @@ DGW.global.api.requests.readServerCookie = function(cookieName, _callback){
     });
 };
 
+DGW.global.api.requests.connectFB = function(onSuccess, onError){
+    DGW.helpers.centerWindowPopup(DGW.global.envPath +
+    'auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340, function(){
+        if(onSuccess) onSuccess();
+    });
+};
+
 DGW.global.api.requests.signUp = function(userObj, onSuccess, onError){
     DGW.global.api.generic('signUp', function(result){
         if (result.status == 200) {
@@ -783,13 +785,6 @@ DGW.global.api.requests.claimPrize = function(drawId, address, onSuccess, onErro
     });
 };
 
-DGW.global.api.requests.connectFB = function(onSuccess, onError){
-    DGW.helpers.centerWindowPopup(DGW.global.envPath +
-    'auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340, function(){
-        if(onSuccess) onSuccess();
-    });
-};
-
 DGW.global.api.requests.getAllActivities = function(onSuccess, onError){
     DGW.global.api.generic('getAllActivities', function(result){
         if (result.status == 200) {
@@ -834,6 +829,7 @@ DGW.global.api.requests.getUserOffers = function(onSuccess, onError){
         if (result.status == 200) {
             DGW.helpers.console.info('getUserOffers ', result.data);
             DGW.main.methods.offersConstructor(result.data);
+            DGW.global.userStats.earnToday = result.data.TotalPointsReward;
             if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getUserOffers ', result.error);
@@ -1255,8 +1251,18 @@ DGW.helpers.checkImagesForSrc = function(src) {
     if (src) {
         return src;
     } else {
-        return DGW.global.widgetPathName + 'imgs/avatar-placeholder.png'
+        return DGW.global.widgetPathName + 'imgs/avatar-placeholder.png';
     }
+};
+
+DGW.helpers.imagesResponsivePaths = function(imgsCollection) {
+    if (arguments.length == 0) return;
+    var array = Array.prototype.slice.call(imgsCollection);
+    array.forEach(function(img){
+        if (img.getAttribute('data-image') != null) {
+            img.src = DGW.global.widgetPathName + 'imgs/' + img.getAttribute('data-image');
+        }
+    });
 };
 
 DGW.helpers.centerWindowPopup = function(url, title, w, h, _callback, _win){
@@ -1413,46 +1419,27 @@ DGW.helpers.insertAfter = function (newNode, referenceNode, _fallbackNode) {
 DGW.helpers.zeroTimeout = function(callback){
     window.setTimeout(callback, 0);
 };
-/*DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
-                                    '<div class="dg-side-widget-body">' +
-                                        '<div class="dg-side-widget-content dg-o-w-authorized">' +
-                                            '<div class="dg-side-widget-content-inner">' +
-                                                '<div class="dg-side-section"><div class="dg-side-img-holder no-border"><img id="dg-side-widget-userpic" class="avatar" src="" /></div>' +
-                                                    '<div class="dg-side-expanded">' +
-                                                        '<h4 id="dg-side-widget-name">Name Surname Whatever</h4>' +
-                                                        '<h6><span id="dg-side-points">00</span> | <span id="dg-side-credits">00</span></h6>' +
-                                                    '</div>' +
-                                                '</div>' +
-                                                '<div class="dg-side-collapsed"><p><span id="dg-side-points-collapsed"></span> pts</p></div>' +
-                                                '<div class="dg-side-expanded"><p>Earned: <span>15</span> pts | left: <span>5</span>pts</p></div>' +
-                                            '</div>' +
-                                        '</div>' +
-                                        '<div class="dg-side-widget-content dg-o-w-anonymous">' +
-                                            '<div class="dg-side-widget-content-inner">' +
-                                                '<div class="dg-side-section">' +
-                                                    '<div class="dg-side-img-holder"><img class="dg-side-prize" src="" alt="Prize" /></div>' +
-                                                    '<div class="dg-side-expanded"><p id="dg-side-widget-prize-desc"></p></div>' +
-                                                '</div>' +
-                                                '<div class="dg-side-collapsed"><div class="dg-side-cta">Get it</div></div>' +
-                                                '<div class="dg-side-expanded"><div class="dg-side-cta">Get the prize</div></div>' +
-                                            '</div>' +
-                                        '</div>' +
-                                        '<div class="dg-side-widget-resizer"></div>' +
-                                    '</div>' +
-                               '</div>';*/
-
 DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body">' +
 
                                         '<div class="dg-side-widget-content dg-o-w-authorized">' +
-                                            '<div data-page="earn" class="dg-side-cta">Open Widget</div>' +
+                                            '<div class="dg-side-widget-content-inner">' +
+                                                '<div class="dg-side-section">' +
+                                                    '<div class="dg-side-user-img-holder"><img class="dg-o-w-side-image-floating" id="dg-side-widget-userpic" src=""/></div>' +
+                                                    '<div class="dg-side-collapsed dg-side-floating-text"><p><span class="dg-o-w-points-text" id="dg-side-points-collapsed">00</span></p><h5>Earn more</h5></div>' +
+                                                    '<div class="dg-side-content">' +
+                                                        '<h4 id="dg-side-widget-name">Name Surname Whatever</h4>' +
+                                                        '<h6><span class="dg-o-w-points-text" id="dg-side-points">00</span><br/><span class="dg-o-w-credits-text" id="dg-side-credits">00</span></h6>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<div data-page="earn" class="dg-side-cta-floating"><span class="dg-side-collapsed">&rarr;</span><span class="dg-side-expanded">Earn more points</span></div>' +
+                                            '</div>' +
                                         '</div>' +
 
                                         '<div class="dg-side-widget-content dg-o-w-anonymous">' +
                                             '<div class="dg-side-widget-content-inner">' +
                                                 '<div class="dg-side-section">' +
-                                                    '<div class="dg-side-img-holder"><img class="dg-o-w-side-image-floating" src="./dist/imgs/trophey-clean.svg"/></div>' +
-                                                    //'<div class="dg-side-expanded"><p id="dg-side-widget-prize-desc"></p></div>' +
+                                                    '<div class="dg-side-img-holder"><img data-image="trophey-clean.svg" class="dg-o-w-side-image-floating" src=""/></div>' +
                                                     '<div class="dg-side-content">Sign up & get +10 points</div>' +
                                                 '</div>' +
                                                 '<div class="dg-side-collapsed"><div data-page="profile" class="dg-side-cta">Sign Up</div></div>' +
@@ -1460,6 +1447,7 @@ DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                             '</div>' +
                                         '</div>' +
                                         '<div class="dg-side-widget-resizer"></div>' +
+                                        '<div data-page="earn" class="dg-side-click-holder"></div>' +
                                     '</div>' +
                                '</div>';
 
@@ -1592,8 +1580,8 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' 
                                         '<div class="dg-o-w-profile-stats-holder-rest">' +
                                             //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p>19</p></div></div>' +
                                             //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p>3</p></div></div>' +
-                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3>520</h3><p>points</p></div></div>' +
-                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3>40</h3><p>credits</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 id="dg-o-w-profile-p-c">520</h3><p>points</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 id="dg-o-w-profile-c-c">40</h3><p>credits</p></div></div>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +
@@ -1830,35 +1818,39 @@ DGW.side.methods.initEvents = function(){
     var initInterval;
     var wBody = DGW.side.elements.widgetBody;
     var resizerBtn = wBody.querySelector('.dg-side-widget-resizer');
-    var ctas = Array.prototype.slice.call(wBody.querySelectorAll('.dg-side-cta'));
-    var registeredArea = wBody.querySelector('.dg-side-widget-content.dg-o-w-authorized .dg-side-section');
+    var ctas = Array.prototype.slice.call(wBody.querySelectorAll('.dg-side-cta, .dg-side-cta-floating'));
+    var registeredArea = wBody.querySelector('.dg-side-click-holder');
     ctas.push(registeredArea);
 
     wBody.removeEventListener('click', DGW.global.api.requests.safariFix);
 
-    resizerBtn.addEventListener('click', function(){
-        if (DGW.helpers.hasClass(wBody, 'dg-side-widget-expanded')) {
-            DGW.helpers.zeroTimeout(function(){DGW.helpers.removeClass(wBody, 'dg-side-widget-expanded');});
-        } else {
-            DGW.helpers.zeroTimeout(function(){DGW.helpers.addClass(wBody, 'dg-side-widget-expanded')});
-        }
-    });
+    var sideWidgetCollapse = function(){
+        DGW.helpers.zeroTimeout(function(){DGW.helpers.removeClass(wBody, 'dg-side-widget-expanded');});
+    };
+    var sideWidgetExpand = function(){
+        DGW.helpers.zeroTimeout(function(){DGW.helpers.addClass(wBody, 'dg-side-widget-expanded')});
+    };
+
+    resizerBtn.addEventListener('click', sideWidgetCollapse);
 
     ctas.forEach(function(cta){
         if (cta) {
             cta.addEventListener('click', function () {
+                if (cta.getAttribute('data-page') != null) {
+                    DGW.main.currentState = cta.getAttribute('data-page');
+                }
                 if (!DGW.main.shown) {
-                    if (cta.getAttribute('data-page') != null) {
-                        DGW.main.currentState = cta.getAttribute('data-page');
-                    }
                     DGW.main.methods.showWidget();
+                    sideWidgetExpand();
                 } else {
-                    DGW.main.methods.hideWidget();
+                    DGW.main.methods.changeMainState(DGW.main.currentState);
+                    sideWidgetExpand();
                 }
             });
         }
     });
 
+    DGW.helpers.imagesResponsivePaths(wBody.querySelectorAll('[data-image]'));
 
     initInterval = window.setInterval(function(){
         if (DGW.global.cache.last.prize) {
@@ -2314,7 +2306,7 @@ DGW.main.methods.profileSetData = function(data) {
     var points = {
             confirmed: [
                 wb.querySelector('#dg-o-w-points'),
-                pr.querySelector('.dg-o-w-profile-stats-points h3'),
+                pr.querySelector('#dg-o-w-profile-p-c'),
                 sb.querySelector('#dg-side-points'),
                 sb.querySelector('#dg-side-points-collapsed')
             ],
@@ -2323,7 +2315,7 @@ DGW.main.methods.profileSetData = function(data) {
         credits = {
             confirmed: [
                 wb.querySelector('#dg-o-w-credits'),
-                pr.querySelector('.dg-o-w-profile-stats-credits h3'),
+                pr.querySelector('#dg-o-w-profile-c-c'),
                 sb.querySelector('#dg-side-credits')
             ],
             pending: [pr.querySelector('.dg-o-w-profile-credits h5')]

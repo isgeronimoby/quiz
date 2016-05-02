@@ -38,11 +38,6 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             endpoint = 'auth/forgotpassword';
             requestBody = JSON.stringify(requestBody);
             break;
-        case 'facebookLogIn':
-            method = 'POST';
-            endpoint = 'auth/facebookconnect';
-            requestBody = JSON.stringify(requestBody);
-            break;
         case 'getUser':
             endpoint = 'user/getuser';
             break;
@@ -212,6 +207,13 @@ DGW.global.api.requests.readServerCookie = function(cookieName, _callback){
     });
 };
 
+DGW.global.api.requests.connectFB = function(onSuccess, onError){
+    DGW.helpers.centerWindowPopup(DGW.global.envPath +
+    'auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340, function(){
+        if(onSuccess) onSuccess();
+    });
+};
+
 DGW.global.api.requests.signUp = function(userObj, onSuccess, onError){
     DGW.global.api.generic('signUp', function(result){
         if (result.status == 200) {
@@ -375,13 +377,6 @@ DGW.global.api.requests.claimPrize = function(drawId, address, onSuccess, onErro
     });
 };
 
-DGW.global.api.requests.connectFB = function(onSuccess, onError){
-    DGW.helpers.centerWindowPopup(DGW.global.envPath +
-    'auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340, function(){
-        if(onSuccess) onSuccess();
-    });
-};
-
 DGW.global.api.requests.getAllActivities = function(onSuccess, onError){
     DGW.global.api.generic('getAllActivities', function(result){
         if (result.status == 200) {
@@ -426,6 +421,7 @@ DGW.global.api.requests.getUserOffers = function(onSuccess, onError){
         if (result.status == 200) {
             DGW.helpers.console.info('getUserOffers ', result.data);
             DGW.main.methods.offersConstructor(result.data);
+            DGW.global.userStats.earnToday = result.data.TotalPointsReward;
             if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getUserOffers ', result.error);

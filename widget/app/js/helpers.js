@@ -112,8 +112,18 @@ DGW.helpers.checkImagesForSrc = function(src) {
     if (src) {
         return src;
     } else {
-        return DGW.global.widgetPathName + 'imgs/avatar-placeholder.png'
+        return DGW.global.widgetPathName + 'imgs/avatar-placeholder.png';
     }
+};
+
+DGW.helpers.imagesResponsivePaths = function(imgsCollection) {
+    if (arguments.length == 0) return;
+    var array = Array.prototype.slice.call(imgsCollection);
+    array.forEach(function(img){
+        if (img.getAttribute('data-image') != null) {
+            img.src = DGW.global.widgetPathName + 'imgs/' + img.getAttribute('data-image');
+        }
+    });
 };
 
 DGW.helpers.centerWindowPopup = function(url, title, w, h, _callback, _win){

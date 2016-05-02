@@ -62,6 +62,7 @@
 			min-height: initial;
 			visibility: visible;
 			opacity: 1;
+			-webkit-font-smoothing: subpixel-antialiased;
 		}
 
 		span, a, b, i {
@@ -84,7 +85,10 @@
 			font-weight: 400;
 		}
 
-
+		h4 {
+			font-size: 16px;
+			line-height: 19px;
+		}
 
 		h5 {
 			font-size: 10px;
@@ -1765,7 +1769,7 @@
 										right: 10px;
 										width: 40px;
 										height: 40px;
-										background-image: url('../dist/imgs/trophey.svg');
+										background-image: url('./imgs/trophey.svg');
 										background-repeat: no-repeat;
 										background-size: cover;
 									}
@@ -1774,7 +1778,7 @@
 										opacity: 1;
 
 										&:after {
-											background-image: url('../dist/imgs/trophey-claim.svg');
+											background-image: url('./imgs/trophey-claim.svg');
 											top: 0;
 											right: 0;
 											width: 60px;
@@ -2106,10 +2110,10 @@
 								margin-right: 8px;
 
 								&.dg-o-w-points-icon {
-									background-image: url('../dist/imgs/points.svg');
+									background-image: url('./imgs/points.svg');
 								}
 								&.dg-o-w-credits-icon {
-									background-image: url('../dist/imgs/credits.svg');
+									background-image: url('./imgs/credits.svg');
 								}
 							}
 						}
@@ -2196,7 +2200,7 @@
 								left: 10px;
 								width: 100px;
 								height: 100px;
-								background: url('../dist/imgs/trophey-clean.svg') no-repeat;
+								background: url('./imgs/trophey-clean.svg') no-repeat;
 								background-size: cover;
 								background-position: center;
 							}
@@ -2255,6 +2259,12 @@
 												border: 1px solid @color-grey-light;
 												display: block;
 												margin: 0 auto;
+											}
+
+											p {
+												&:after {
+													content: ' points';
+												}
 											}
 										}
 									}

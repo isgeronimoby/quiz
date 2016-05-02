@@ -1,43 +1,24 @@
-/*DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
-                                    '<div class="dg-side-widget-body">' +
-                                        '<div class="dg-side-widget-content dg-o-w-authorized">' +
-                                            '<div class="dg-side-widget-content-inner">' +
-                                                '<div class="dg-side-section"><div class="dg-side-img-holder no-border"><img id="dg-side-widget-userpic" class="avatar" src="" /></div>' +
-                                                    '<div class="dg-side-expanded">' +
-                                                        '<h4 id="dg-side-widget-name">Name Surname Whatever</h4>' +
-                                                        '<h6><span id="dg-side-points">00</span> | <span id="dg-side-credits">00</span></h6>' +
-                                                    '</div>' +
-                                                '</div>' +
-                                                '<div class="dg-side-collapsed"><p><span id="dg-side-points-collapsed"></span> pts</p></div>' +
-                                                '<div class="dg-side-expanded"><p>Earned: <span>15</span> pts | left: <span>5</span>pts</p></div>' +
-                                            '</div>' +
-                                        '</div>' +
-                                        '<div class="dg-side-widget-content dg-o-w-anonymous">' +
-                                            '<div class="dg-side-widget-content-inner">' +
-                                                '<div class="dg-side-section">' +
-                                                    '<div class="dg-side-img-holder"><img class="dg-side-prize" src="" alt="Prize" /></div>' +
-                                                    '<div class="dg-side-expanded"><p id="dg-side-widget-prize-desc"></p></div>' +
-                                                '</div>' +
-                                                '<div class="dg-side-collapsed"><div class="dg-side-cta">Get it</div></div>' +
-                                                '<div class="dg-side-expanded"><div class="dg-side-cta">Get the prize</div></div>' +
-                                            '</div>' +
-                                        '</div>' +
-                                        '<div class="dg-side-widget-resizer"></div>' +
-                                    '</div>' +
-                               '</div>';*/
-
 DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body">' +
 
                                         '<div class="dg-side-widget-content dg-o-w-authorized">' +
-                                            '<div data-page="earn" class="dg-side-cta">Open Widget</div>' +
+                                            '<div class="dg-side-widget-content-inner">' +
+                                                '<div class="dg-side-section">' +
+                                                    '<div class="dg-side-user-img-holder"><img class="dg-o-w-side-image-floating" id="dg-side-widget-userpic" src=""/></div>' +
+                                                    '<div class="dg-side-collapsed dg-side-floating-text"><p><span class="dg-o-w-points-text" id="dg-side-points-collapsed">00</span></p><h5>Earn more</h5></div>' +
+                                                    '<div class="dg-side-content">' +
+                                                        '<h4 id="dg-side-widget-name">Name Surname Whatever</h4>' +
+                                                        '<h6><span class="dg-o-w-points-text" id="dg-side-points">00</span><br/><span class="dg-o-w-credits-text" id="dg-side-credits">00</span></h6>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<div data-page="earn" class="dg-side-cta-floating"><span class="dg-side-collapsed">&rarr;</span><span class="dg-side-expanded">Earn more points</span></div>' +
+                                            '</div>' +
                                         '</div>' +
 
                                         '<div class="dg-side-widget-content dg-o-w-anonymous">' +
                                             '<div class="dg-side-widget-content-inner">' +
                                                 '<div class="dg-side-section">' +
-                                                    '<div class="dg-side-img-holder"><img class="dg-o-w-side-image-floating" src="./dist/imgs/trophey-clean.svg"/></div>' +
-                                                    //'<div class="dg-side-expanded"><p id="dg-side-widget-prize-desc"></p></div>' +
+                                                    '<div class="dg-side-img-holder"><img data-image="trophey-clean.svg" class="dg-o-w-side-image-floating" src=""/></div>' +
                                                     '<div class="dg-side-content">Sign up & get +10 points</div>' +
                                                 '</div>' +
                                                 '<div class="dg-side-collapsed"><div data-page="profile" class="dg-side-cta">Sign Up</div></div>' +
@@ -45,6 +26,7 @@ DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                             '</div>' +
                                         '</div>' +
                                         '<div class="dg-side-widget-resizer"></div>' +
+                                        '<div data-page="earn" class="dg-side-click-holder"></div>' +
                                     '</div>' +
                                '</div>';
 
@@ -177,8 +159,8 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' 
                                         '<div class="dg-o-w-profile-stats-holder-rest">' +
                                             //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p>19</p></div></div>' +
                                             //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p>3</p></div></div>' +
-                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3>520</h3><p>points</p></div></div>' +
-                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3>40</h3><p>credits</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 id="dg-o-w-profile-p-c">520</h3><p>points</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 id="dg-o-w-profile-c-c">40</h3><p>credits</p></div></div>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +

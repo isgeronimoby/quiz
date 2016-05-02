@@ -11,11 +11,15 @@
 
 						.dg-o-w-section {
 							.dg-o-w-login {
-								height: @dg-widget-overlay-widget-height - 100 - @dg-widget-overlay-header-height;
-								padding: 20px 30px 100px 0;
+								height: @dg-widget-overlay-widget-height - 200 - @dg-widget-overlay-header-height;
 
-								.dg-o-w-left-side .dg-o-w-image-holder .dg-o-w-brand-player-image {
-									background-size: 80%;
+								.dg-o-w-login-prize-title {
+									line-height: 65px;
+
+									&:after {
+										width: 80px;
+										height: 80px;
+									}
 								}
 							}
 
@@ -23,24 +27,55 @@
 
 								padding: 10px 30px;
 
-								.dg-o-w-left-side {
-									img {
-										max-width: 80%;
-									}
+								.dg-o-w-image-holder .avatar {
+									max-width: 70px;
 								}
-								.dg-o-w-right-side {
-									.dg-o-w-profile-top {
-										margin-bottom: 10px;
-									}
+							}
+
+							.dg-o-w-section-content {
+								padding: 10px 25px;
+							}
+
+							.dg-o-w-badge-single-page .dg-o-w-badge-single {
+								height: @dg-widget-overlay-widget-height - 200 - @dg-widget-overlay-header-height;
+							}
+
+						}
+					}
+
+					&.profile-anon {
+						.dg-o-w-content {
+							.dg-o-w-section {
+								.dg-o-w-footer-login {
+									bottom: 99px;
 								}
 							}
 						}
 					}
+
+					.dg-o-w-header .dg-o-w-menu-profile .profile-menu-item>* .dg-o-w-login-dropdown.shown .dg-o-w-email-login-form {
+						top: 25px;
+						padding: 10px 25px;
+
+						form .btn-dg-o-w {
+							margin: 15px 0;
+						}
+
+						.dg-o-w-header-form-close {
+							font-size: 26px;
+							top: 5px;
+							right: 5px;
+						}
+					}
+				}
+				.dg-o-w-white-section {
+					margin-top: 5px;
 				}
 			}
 		}
 	}
 }
+
 
 @media screen and (max-width: 1024px) {
 	#dg-o-w, #dg-side-widget {

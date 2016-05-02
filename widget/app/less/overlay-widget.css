@@ -83,6 +83,7 @@
   min-height: initial;
   visibility: visible;
   opacity: 1;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 #dg-o-w #dg-o-w-wrapper span,
 #dg-o-w #dg-o-w-wrapper a,
@@ -102,6 +103,10 @@
   font-size: 16px;
   line-height: 20px;
   font-weight: 400;
+}
+#dg-o-w #dg-o-w-wrapper h4 {
+  font-size: 16px;
+  line-height: 19px;
 }
 #dg-o-w #dg-o-w-wrapper h5 {
   font-size: 10px;
@@ -313,7 +318,7 @@
   width: 160px;
   float: left;
   position: relative;
-  background-image: url('../dist/imgs/everton-crest-white.svg');
+  background-image: url('imgs/everton-crest-white.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 80%;
@@ -779,7 +784,7 @@
   cursor: pointer;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .club-logo-bg-image {
-  background-image: url('../dist/imgs/everton-crest.png');
+  background-image: url('imgs/everton-crest.png');
   background-size: 440px;
   background-position: top -40px left -90px;
   background-repeat: no-repeat;
@@ -1724,7 +1729,7 @@
   right: 10px;
   width: 40px;
   height: 40px;
-  background-image: url('../dist/imgs/trophey.svg');
+  background-image: url('imgs/trophey.svg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -1733,7 +1738,7 @@
   opacity: 1;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li.expired.winner.claim-prize:after {
-  background-image: url('../dist/imgs/trophey-claim.svg');
+  background-image: url('imgs/trophey-claim.svg');
   top: 0;
   right: 0;
   width: 60px;
@@ -2002,10 +2007,10 @@
   margin-right: 8px;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-profile .dg-o-w-profile-stats-inner .dg-o-w-profile-stats-icon.dg-o-w-points-icon {
-  background-image: url('../dist/imgs/points.svg');
+  background-image: url('imgs/points.svg');
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-profile .dg-o-w-profile-stats-inner .dg-o-w-profile-stats-icon.dg-o-w-credits-icon {
-  background-image: url('../dist/imgs/credits.svg');
+  background-image: url('imgs/credits.svg');
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-profile .social-btns {
   display: inline-block;
@@ -2054,7 +2059,7 @@
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-login .dg-o-w-login-holder {
   background-color: #00309b;
-  background-image: url('../dist/imgs/landing_bg.png');
+  background-image: url('imgs/landing_bg.png');
   background-repeat: no-repeat;
   background-position: 50% 15%;
   height: 72%;
@@ -2086,7 +2091,7 @@
   left: 10px;
   width: 100px;
   height: 100px;
-  background: url('../dist/imgs/trophey-clean.svg') no-repeat;
+  background: url('imgs/trophey-clean.svg') no-repeat;
   background-size: cover;
   background-position: center;
 }
@@ -2143,6 +2148,9 @@
   border: 1px solid #ededed;
   display: block;
   margin: 0 auto;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-activities .dg-o-w-activity-slider-holder .dg-o-w-activity-slider ul li > div p:after {
+  content: ' points';
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-activities .dg-o-w-activity-slider-holder .dg-o-w-activity-slider ul p {
   margin-top: 8px;
