@@ -1,24 +1,44 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import Cookies from 'js-cookie';
 import { fetchProfile } from '../flux/actions';
 import Location from '../lib/Location';
 
 const DELAY = 3000;
+const WELCOME_COOKIE_KEY = 'quiz-everton-onboarded';
+const WELCOME_COOKIE_EXPIRES = 365; //days
 
 
 class Index extends Component {
 
 	static title = 'Match Quiz';
 
+	static contextTypes = {
+		openWelcomePopup: React.PropTypes.func
+	};
+
 	static PropTypes = {
 		// from store
 		fetchProfile: PropTypes.func.isRequired,
 	};
 
-	componentDidMount() {
-		this.props.fetchProfile()
-			.then(() => this.visitFirstQuiz())
-			.catch(() => this.visitFirstQuiz());
+	async componentDidMount() {
+		await this.showWelcomeIfNeeded();
+		await this.props.fetchProfile();
+		this.visitFirstQuiz();
+	}
+
+	async showWelcomeIfNeeded() {
+		if (!Cookies.get(WELCOME_COOKIE_KEY)) {
+			return new Promise((resolve, reject) => {
+				this.context.openWelcomePopup(() => {
+					Cookies.set(WELCOME_COOKIE_KEY, 'true', {expires: WELCOME_COOKIE_EXPIRES});
+					resolve();
+				})
+			});
+		} else {
+			return Promise.resolve();
+		}
 	}
 
 	visitFirstQuiz() {
@@ -30,7 +50,7 @@ class Index extends Component {
 				pathname: './quiz',
 				state: {id: quizId}
 			});
-		},  DELAY);
+		}, DELAY);
 	}
 
 	render() {
