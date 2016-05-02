@@ -35,25 +35,35 @@ Popup
     bottom: $footer-h;
   }
 }
-
 .welcome-content {
-  padding: 45px 20px 25px;
+  padding: 20px 20px 50px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 }
-
-.welcome-title {
-  font-size: 2.4rem;
-  margin: 0 0 20px;
+.welcome-figure {
+  flex-grow: 1;
+  img {
+    width: 100%;
+    border-radius: 50%;
+  }
 }
 .welcome-text {
-  font-size: 1.2rem;
-  line-height: calc(16/12);
-  color: $brand-color-lite;
-}
+  min-height: 30%;
+  text-align: center;
 
+  .welcome-title {
+    font-size: 2.4rem;
+    margin: 0 0 15px;
+  }
+  p {
+    font-size: 1.4rem;
+    line-height: calc(20 / 14);
+    color: #fff;
+    margin: 0;
+  }
+}
 /*
 Footer
 */
@@ -66,12 +76,10 @@ Footer
   background: rgba(255, 255, 255, .15);
   font-size: 1.9rem;
   text-transform: uppercase;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .welcome-footer-link {
   padding: 0 20px;
   min-width: 100px;
@@ -89,7 +97,6 @@ Footer
     transform: rotate(180deg);
   }
 }
-
 $bullet-sz: 10px;
 .welcome-bullets {
   width: 40px;
