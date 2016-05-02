@@ -7,6 +7,7 @@
   bottom: 100px;
   right: 0;
   z-index: 12000;
+  color: #00309b;
 }
 #dg-side-widget #dg-side-widget-wrapper a,
 #dg-side-widget #dg-side-widget-wrapper p,
@@ -91,7 +92,7 @@
 }
 #dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body {
   position: relative;
-  width: 90px;
+  width: 80px;
   height: 140px;
   background-color: #ededed;
   border-bottom-left-radius: 3px;
@@ -128,21 +129,21 @@
 #dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-expanded {
   display: none;
 }
-#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-widget-content {
-  padding: 10px 8px 0;
-  text-align: center;
-  color: #ffffff;
-}
-#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-widget-content .dg-side-section {
+#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-section {
   overflow: hidden;
 }
-#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-widget-content .dg-side-section h6 span:nth-child(1):after {
-  content: ' pts';
+#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-section .dg-o-w-points-text:after {
+  content: ' points';
 }
-#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-widget-content .dg-side-section h6 span:nth-child(2):after {
-  content: ' cts';
+#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-section .dg-o-w-credits-text:after {
+  content: ' credits';
 }
-#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-widget-content .dg-side-section .dg-side-img-holder {
+#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-section .dg-o-w-side-image-floating {
+  height: 100%;
+  width: auto;
+  max-width: none;
+}
+#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-section .dg-side-img-holder {
   position: absolute;
   right: -16px;
   bottom: 0;
@@ -153,17 +154,24 @@
   -webkit-transition: right 0.3s ease;
   transition: right 0.3s ease;
 }
-#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-widget-content .dg-side-section .dg-side-img-holder .dg-o-w-side-image-floating {
-  height: 100%;
-  width: auto;
-  max-width: none;
+#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-section .dg-side-user-img-holder {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 80px;
+  height: 80px;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  overflow: hidden;
+  -webkit-transition: left 0.3s ease, top 0.3s ease, border-radius 0.3s ease;
+  transition: left 0.3s ease, top 0.3s ease, border-radius 0.3s ease;
 }
-#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-widget-content .dg-side-section .dg-side-content {
+#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-section .dg-side-content {
   max-width: 95px;
   float: right;
-  margin-top: 12px;
+  margin-top: 30px;
+  padding-right: 10px;
   font-size: 15px;
-  color: #00309b;
   -webkit-transform: translateX(-200%);
           transform: translateX(-200%);
   -webkit-transition: -webkit-transform 0.3s ease;
@@ -171,7 +179,7 @@
   transition: transform 0.3s ease;
   transition: transform 0.3s ease, -webkit-transform 0.3s ease;
 }
-#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-widget-content .dg-side-cta {
+#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-cta {
   position: absolute;
   bottom: 5px;
   left: 5px;
@@ -192,8 +200,8 @@
 #dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-o-w-anonymous {
   display: block;
 }
-#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body.dg-o-w-authorized .dg-side-widget-content.dg-o-w-authorized .dg-side-section {
-  cursor: pointer;
+#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body.dg-o-w-authorized .dg-side-widget-content {
+  padding: 0;
 }
 #dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body.dg-o-w-authorized .dg-o-w-authorized {
   display: block;
@@ -213,6 +221,11 @@
 #dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body.dg-side-widget-expanded .dg-side-widget-content .dg-side-section .dg-side-content {
   -webkit-transform: translateX(0);
           transform: translateX(0);
+}
+#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body.dg-side-widget-expanded .dg-side-widget-content .dg-side-section .dg-side-user-img-holder {
+  left: 10px;
+  top: 10px;
+  border-radius: 50%;
 }
 #dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body.dg-side-widget-expanded .dg-side-collapsed {
   display: none;
@@ -532,7 +545,7 @@
   width: 160px;
   float: left;
   position: relative;
-  background-image: url('../dist/imgs/everton-crest-white.svg');
+  background-image: url('imgs/everton-crest-white.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 80%;
@@ -998,7 +1011,7 @@
   cursor: pointer;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .club-logo-bg-image {
-  background-image: url('../dist/imgs/everton-crest.png');
+  background-image: url('imgs/everton-crest.png');
   background-size: 440px;
   background-position: top -40px left -90px;
   background-repeat: no-repeat;
@@ -1943,7 +1956,7 @@
   right: 10px;
   width: 40px;
   height: 40px;
-  background-image: url('../dist/imgs/trophey.svg');
+  background-image: url('imgs/trophey.svg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -1952,7 +1965,7 @@
   opacity: 1;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-list-draws li.expired.winner.claim-prize:after {
-  background-image: url('../dist/imgs/trophey-claim.svg');
+  background-image: url('imgs/trophey-claim.svg');
   top: 0;
   right: 0;
   width: 60px;
@@ -2221,10 +2234,10 @@
   margin-right: 8px;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-profile .dg-o-w-profile-stats-inner .dg-o-w-profile-stats-icon.dg-o-w-points-icon {
-  background-image: url('../dist/imgs/points.svg');
+  background-image: url('imgs/points.svg');
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-profile .dg-o-w-profile-stats-inner .dg-o-w-profile-stats-icon.dg-o-w-credits-icon {
-  background-image: url('../dist/imgs/credits.svg');
+  background-image: url('imgs/credits.svg');
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-profile .social-btns {
   display: inline-block;
@@ -2273,7 +2286,7 @@
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-login .dg-o-w-login-holder {
   background-color: #00309b;
-  background-image: url('../dist/imgs/landing_bg.png');
+  background-image: url('imgs/landing_bg.png');
   background-repeat: no-repeat;
   background-position: 50% 15%;
   height: 72%;
@@ -2305,7 +2318,7 @@
   left: 10px;
   width: 100px;
   height: 100px;
-  background: url('../dist/imgs/trophey-clean.svg') no-repeat;
+  background: url('imgs/trophey-clean.svg') no-repeat;
   background-size: cover;
   background-position: center;
 }
