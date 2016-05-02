@@ -24,21 +24,28 @@ DGW.side.methods.initEvents = function(){
     });
 
     ctas.forEach(function(cta){
-        cta.addEventListener('click', function(){
-            if (!DGW.main.shown) {
-                DGW.main.methods.showWidget();
-            } else {
-                DGW.main.methods.hideWidget();
-            }
-        });
+        if (cta) {
+            cta.addEventListener('click', function () {
+                if (!DGW.main.shown) {
+                    if (cta.getAttribute('data-page') != null) {
+                        DGW.main.currentState = cta.getAttribute('data-page');
+                    }
+                    DGW.main.methods.showWidget();
+                } else {
+                    DGW.main.methods.hideWidget();
+                }
+            });
+        }
     });
 
 
     initInterval = window.setInterval(function(){
         if (DGW.global.cache.last.prize) {
             window.clearInterval(initInterval);
-            wBody.querySelector('.dg-side-prize').src = DGW.global.cache.last.prize.ImageUrl;
-            wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
+            if (wBody.querySelector('.dg-side-prize'))
+                wBody.querySelector('.dg-side-prize').src = DGW.global.cache.last.prize.ImageUrl;
+            if (wBody.querySelector('#dg-side-widget-prize-desc'))
+                wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
         }
     }, 100);
 };

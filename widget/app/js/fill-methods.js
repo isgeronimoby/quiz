@@ -62,13 +62,15 @@ DGW.main.methods.profileSetData = function(data) {
     DGW.global.userStats.userId = data.UserId;
 
     profileImageHolders.forEach(function(image){
-        image.src = data.ImageUrl || DGW.helpers.checkImagesForSrc(image.getAttribute('src'));
+        if (image)
+            image.src = data.ImageUrl || DGW.helpers.checkImagesForSrc(image.getAttribute('src'));
     });
 
     DGW.global.userStats.imageUrl = data.ImageUrl || DGW.global.userStats.imageUrl;
 
     profileNames.forEach(function(name){
-        name.innerHTML = data.UserName;
+        if (name)
+            name.innerHTML = data.UserName;
     });
 
     DGW.global.userStats.name = data.UserName || DGW.global.userStats.name;
@@ -120,17 +122,17 @@ DGW.main.methods.updateUserInfoBet = function(draw, user){
     var betPoints = DGW.main.elements.widgetContent.querySelector('.dg-o-w-your-bet span');
 
     points.confirmed.forEach(function(point){
-        if (point) point.innerHTML = data.Wallet.PointsConfirmed;
+        if (point) point.innerHTML = user.Wallet.PointsConfirmed;
     });
     points.pending.forEach(function(point){
-        if (point) point.innerHTML = data.Wallet.PointsPending;
+        if (point) point.innerHTML = user.Wallet.PointsPending;
     });
 
     credits.confirmed.forEach(function(credit){
-        if (credit) credit.innerHTML = data.Wallet.CreditsConfirmed;
+        if (credit) credit.innerHTML = user.Wallet.CreditsConfirmed;
     });
     credits.pending.forEach(function(credit){
-        if (credit) credit.innerHTML = data.Wallet.CreditsPending;
+        if (credit) credit.innerHTML = user.Wallet.CreditsPending;
     });
 
     DGW.global.userStats.pointsC = user.Wallet.PointsConfirmed;
@@ -261,8 +263,8 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
     if (cacheObj) {
         cacheObj.drawsList.forEach(function (draw) {
             var li = document.createElement('li');
-            li.id = draw.DrawId;
-            li.setAttribute('data-end-date', draw.EndDate);
+            //li.id = draw.DrawId;
+            //li.setAttribute('data-end-date', draw.EndDate);
             var drawEntry = cacheObj.drawsEntries.filter(function(de){
                 return de.DrawId == draw.DrawId;
             })[0];
@@ -394,9 +396,9 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                                     '<h5>How much do you want to bet?</h5>' +
                                     '<form id="bet-form" class="dg-o-w-one-field-form">' +
                                         '<input type="number" min="1" max="1000" placeholder="50"/>' +
-                                        '<input type="submit" value="Bet points" />' +
+                                        '<input class="btn-dg-o-w btn-dg-o-w-brand" type="submit" value="Bet points" />' +
                                     '</form>' +
-                                    '<div id="dg-o-w-get-points-btn" class="btn-dg-o-w-outline">Get additional points</div>' +
+                                    '<div id="dg-o-w-get-points-btn" class="btn-dg-o-w btn-dg-o-w-brand-l">Get additional points</div>' +
                                 '</div>' +
                                     ((draw.Winner !== null) ?
                                         '<div class="dg-o-w-draw-winner"><img src="' + (draw.Winner.ImageUrl || DGW.helpers.checkImagesForSrc()) + '" /><p>' + draw.Winner.UserName + ' has won this draw. Our congratulations!</p></div>' :
@@ -415,19 +417,18 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                 '<div class="dg-o-w-single-draw">' +
                     prizeSect +
                     '<div class="dg-o-w-draw-right-side won">' +
-                        '<h2>Congrats, you\'ve won!!!</h2>' +
-                        '<h3>' + draw.Prize.Title + '</h3>' +
+                        '<h2>Congratulations, you\'ve won ' + draw.Prize.Title + '!</h2>' +
                         '<p>' + draw.Prize.Description + '</p>' +
                     '<div>' +
                     '<h2 class="show-claimed">You\'ve already claimed your prize!</h2>' +
-                    '<h5 class="hide-claimed">Put your address to get the prize</h5>' +
+                    '<p class="hide-claimed">Put your address to get the prize</p>' +
                     '<form id="claim-prize" class="dg-o-w-form hide-claimed">' +
                         //'<select><option disabled>Select your country</option><option>UK</option><option>Ireland</option></select>' +
                         '<input type="text" name="Address1" placeholder="Address line 1" />' +
                         '<input type="text" name="Address2" placeholder="Address line 2" />' +
                         '<input type="text" name="County" placeholder="County" />' +
                         '<input type="text" name="Postcode" placeholder="Postcode" />' +
-                        '<input type="submit" value="Submit " />' +
+                        '<input class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large" type="submit" value="Submit " />' +
                     '</form>' +
                 '</div>' +
                 shareSect +
@@ -495,12 +496,14 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
     if (el.querySelector('#bet-form')) {
         el.querySelector('#bet-form').addEventListener('submit', function (ev) {
             ev.preventDefault();
-            var betBtn = this.querySelector('input[type=submit]');
-            var pointsToBet = +this.querySelector('input[type=number]').value;
+            var that = this;
+            var betBtn = that.querySelector('input[type=submit]');
+            var pointsToBet = +that.querySelector('input[type=number]').value;
 
             DGW.global.api.requests.drawBet(drawId, pointsToBet, function onSuccess(){
                 betBtn.disabled = false;
                 DGW.main.methods.notificationConstructor('We\'ve received your ' + pointsToBet + ' points. Bet more!');
+                that.querySelector('input[type=number]').value = '';
             }, function onError(result){
                 betBtn.disabled = false;
                 DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
@@ -751,11 +754,11 @@ DGW.main.methods.offersConstructor = function(offers) {
             li.innerHTML =
                 '<a href="" target="_blank"><div class="dg-o-w-offer">' +
                     '<div class="dg-o-w-offer-left">' +
-                        '<img class="dg-o-w-offer-image" src="' + (offer.ImageUrl || 'http://lorempixel.com/100/100/sports') + '" />' +
+                        '<img class="dg-o-w-offer-image" src="' + (offer.ImageUrl || offer.Type.ImageUrl) + '" />' +
                         '<p class="dg-o-w-color-green">' + offer.PointsReward + '</p>' +
                     '</div>' +
                     '<div class="dg-o-w-offer-right">' +
-                        '<h4>' + offer.Title + '</h4>' +
+                        '<h4>' + '<img class="dg-o-w-offer-group" src="' + offer.Type.Group.ImageUrl + '"/>' + offer.Title + '</h4>' +
                         '<p>' + offer.Description + '</p>' +
                         '<div class="dg-o-w-users-done"></div>' +
                     '</div>' +

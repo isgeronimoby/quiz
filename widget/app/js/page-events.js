@@ -108,21 +108,33 @@ DGW.main.methods.initEvents = function () {
     }
 
     // login dropdown menu
-    DGW.main.elements.loginMenuButton.addEventListener('click', function (e) {
-        e.preventDefault();
-        var that = this;
-        var form = that.parentNode.querySelector('.dg-o-w-email-login-form');
-        if (DGW.helpers.hasClass(that.parentNode, 'shown')) {
-            DGW.helpers.removeClass(that.parentNode, 'shown');
-            setTimeout(function () {
-                DGW.helpers.removeClass(form, 'visible');
-            }, 310);
-        } else {
-            DGW.helpers.addClass(form, 'visible');
-            setTimeout(function () {
-                DGW.helpers.addClass(that.parentNode, 'shown');
-            }, 0);
+    (function headerLoginFormTriggers(){
+        var link = DGW.main.elements.loginMenuButton;
+        var linkP = link.parentNode;
+        var form = linkP.querySelector('.dg-o-w-email-login-form');
+        var formClose = form.querySelector('#dg-o-w-header-form-close');
+
+        function triggerLoginForm(){
+            if (DGW.helpers.hasClass(linkP, 'shown')) {
+                DGW.helpers.removeClass(linkP, 'shown');
+                setTimeout(function () {
+                    DGW.helpers.removeClass(form, 'visible');
+                }, 310);
+            } else {
+                DGW.helpers.addClass(form, 'visible');
+                setTimeout(function () {
+                    DGW.helpers.addClass(linkP, 'shown');
+                }, 0);
+            }
         }
+
+        link.addEventListener('click', triggerLoginForm);
+        formClose.addEventListener('click', triggerLoginForm);
+    })();
+
+    DGW.main.elements.widget.querySelector('#dg-o-w-header-fb-connect').addEventListener('click', function(ev){
+        ev.preventDefault();
+        DGW.global.api.requests.connectFB();
     });
 
     // login form submit
@@ -154,7 +166,7 @@ DGW.main.methods.initEvents = function () {
                 DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
             });
     });
-    topLoginForm.querySelector('a').addEventListener('click', function(ev){
+    topLoginForm.querySelector('#dg-o-w-header-forgot-pass').addEventListener('click', function(ev){
         ev.preventDefault();
         DGW.helpers.removeClass(topLoginForm, 'shown');
         DGW.helpers.addClass(topForgotForm, 'shown');
@@ -166,26 +178,6 @@ DGW.main.methods.initEvents = function () {
     });
 
 //Activities page
-    /*if (DGW.main.elements.pages.activitiesMain.querySelector('.toggle-section-height')) {
-        DGW.main.elements.pages.activitiesMain.querySelector('.toggle-section-height').addEventListener('click', function () {
-            var that = this;
-            if (DGW.helpers.hasClass(that, 'collapsed')) {
-                DGW.helpers.zeroTimeout(function () {
-                    DGW.helpers.removeClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
-                    DGW.helpers.removeClass(that, 'collapsed');
-                    DGW.main.methods.checkSectionHeight();
-                });
-            } else {
-                DGW.helpers.zeroTimeout(function () {
-                    DGW.helpers.addClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
-                    DGW.helpers.addClass(that, 'collapsed');
-                    DGW.main.methods.checkSectionHeight();
-                });
-            }
-
-        });
-    }*/
-
     DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').addEventListener('change', function(){
         if (this.value === 'all-activities') {
             DGW.global.api.requests.getAllActivities();
@@ -241,7 +233,6 @@ DGW.main.methods.initEvents = function () {
     })();
     DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-fb-connect').addEventListener('click', function(ev){
         ev.preventDefault();
-
         DGW.global.api.requests.connectFB();
     });
 

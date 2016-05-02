@@ -23,7 +23,7 @@ DGW.main.elements.widgetWrapper = DGW.main.elements.widget.querySelector('.dg-o-
 
 DGW.main.elements.loginFooter = DGW.main.elements.widget.querySelector('.dg-o-w-footer-login');
 
-DGW.main.elements.loginMenuButton = DGW.main.elements.widget.querySelector('.dg-o-w-login-dropdown a');
+DGW.main.elements.loginMenuButton = DGW.main.elements.widget.querySelector('#dg-o-w-login-trigger');
 
 
 DGW.main.elements.pages.earnMain = document.createElement('div');
@@ -56,6 +56,8 @@ DGW.main.methods.showWidget = function(){
     DGW.global.elements.documentBody.appendChild(DGW.main.elements.widget);
     if (DGW.main.currentState === '') {
         DGW.main.methods.changeMainState('earn');
+    } else {
+        DGW.main.methods.changeMainState(DGW.main.currentState);
     }
 };
 DGW.main.methods.hideWidget = function(){

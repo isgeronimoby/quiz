@@ -1413,7 +1413,7 @@ DGW.helpers.insertAfter = function (newNode, referenceNode, _fallbackNode) {
 DGW.helpers.zeroTimeout = function(callback){
     window.setTimeout(callback, 0);
 };
-DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
+/*DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body">' +
                                         '<div class="dg-side-widget-content dg-o-w-authorized">' +
                                             '<div class="dg-side-widget-content-inner">' +
@@ -1439,6 +1439,28 @@ DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                         '</div>' +
                                         '<div class="dg-side-widget-resizer"></div>' +
                                     '</div>' +
+                               '</div>';*/
+
+DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
+                                    '<div class="dg-side-widget-body">' +
+
+                                        '<div class="dg-side-widget-content dg-o-w-authorized">' +
+                                            '<div data-page="earn" class="dg-side-cta">Open Widget</div>' +
+                                        '</div>' +
+
+                                        '<div class="dg-side-widget-content dg-o-w-anonymous">' +
+                                            '<div class="dg-side-widget-content-inner">' +
+                                                '<div class="dg-side-section">' +
+                                                    '<div class="dg-side-img-holder"><img class="dg-o-w-side-image-floating" src="./dist/imgs/trophey-clean.svg"/></div>' +
+                                                    //'<div class="dg-side-expanded"><p id="dg-side-widget-prize-desc"></p></div>' +
+                                                    '<div class="dg-side-content">Sign up & get +10 points</div>' +
+                                                '</div>' +
+                                                '<div class="dg-side-collapsed"><div data-page="profile" class="dg-side-cta">Sign Up</div></div>' +
+                                                '<div class="dg-side-expanded"><div data-page="profile" class="dg-side-cta">Sign up & get +10 points</div></div>' +
+                                            '</div>' +
+                                        '</div>' +
+                                        '<div class="dg-side-widget-resizer"></div>' +
+                                    '</div>' +
                                '</div>';
 
 DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
@@ -1459,20 +1481,24 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                                 '<div>' +
                                                                     '<h4>Hello, guest!</h4>' +
                                                                     '<div class="dg-o-w-login-dropdown">' +
-                                                                        '<a href="#">Log in by email</a>' +
+                                                                        '<a href="#" id="dg-o-w-login-trigger">Log in & get started</a>' +
                                                                         '<div class="dg-o-w-email-login-form">' +
                                                                             '<form class="shown" id="dg-o-w-form-login-top">' +
-                                                                                '<label>Email <input type="email" placeholder="mail@mail.com" /></label>' +
-                                                                                '<label>Password <input type="password" /></label>' +
-                                                                                '<input type="submit" value="Sign In" />' +
-                                                                                '<a href="#" class="">Forgot your password?</a>' +
+                                                                                '<h2>Welcome back!</h2>' +
+                                                                                '<div id="dg-o-w-header-fb-connect" class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large">Connect with Facebook</div>' +
+                                                                                '<label><input type="email" placeholder="Email" /></label>' +
+                                                                                '<label><input type="password" placeholder="Password"/></label>' +
+                                                                                '<input class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large" type="submit" value="Sign in with email" />' +
+                                                                                '<a href="#" id="dg-o-w-header-forgot-pass" class="">Forgot your password?</a>' +
                                                                             '</form>' +
                                                                             '<form id="dg-o-w-form-forgot-top">' +
-                                                                                '<div><label>Email <input type="email" placeholder="mail@mail.com" /></label>' +
-                                                                                '<input type="submit" value="Request new password" />' +
+                                                                                '<h2>Forgot password?</h2>' +
+                                                                                '<div><label><input type="email" placeholder="Email" /></label>' +
+                                                                                '<input class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large" type="submit" value="Request new password" />' +
                                                                                 '<a href="#" class="">&larr; Back</a></div>' +
                                                                                 '<p class="success-message">Email was sent</p>' +
                                                                             '</form>' +
+                                                                            '<div class="dg-o-w-header-form-close" id="dg-o-w-header-form-close">&times;</div>' +
                                                                         '</div>' +
                                                                     '</div>' +
                                                                 '</div>' +
@@ -1490,26 +1516,27 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                     '<section></section>' +
                                                     '<footer class="dg-o-w-footer-login">' +
                                                         '<div class="footer-section footer-section-step-1">' +
-                                                            '<div class="inline-part dg-o-w-text-left"><p>Get started now and earn first <span id="dg-o-w-login-fb-reward" class="dg-o-w-rewarded-action dg-o-w-points">30</span></p>' +
+                                                            '<div class="inline-part inline-table dg-o-w-text-left"><p>Get started now and earn first <span id="dg-o-w-login-fb-reward" class="dg-o-w-rewarded-action dg-o-w-points">30</span></p>' +
                                                             '<h5 class="dg-o-w-color-grey">We\'ll never send you any spam.</h5></div>' +
-                                                            '<div class="inline-part"><a href="#" id="dg-o-w-footer-fb-connect" class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large">Facebook</a></div>' +
-                                                            '<div class="inline-part"><p>or</p></div>' +
-                                                            '<div class="inline-part"><a id="dg-o-w-footer-email-login" href="#" class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large">Sign up with email</a></div>' +
+                                                            '<div class="inline-part inline-table"><a href="#" id="dg-o-w-footer-fb-connect" class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large">Connect with Facebook</a></div>' +
+                                                            '<div class="inline-part inline-table"><p>or</p></div>' +
+                                                            '<div class="inline-part inline-table"><a id="dg-o-w-footer-email-login" href="#" class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large">Sign up with email</a></div>' +
                                                         '</div>' +
                                                         '<div class="footer-section footer-section-step-2">' +
                                                             '<div>' +
-                                                                '<a id="dg-o-w-footer-login-select" href="#" class="btn-back-footer">&larr; Back</a><form id="dg-o-w-footer-signup-email">' +
-                                                                    '<div class="inline-part"><label>Name <input type="text" placeholder="First Name" /></label></div>' +
-                                                                    '<div class="inline-part"><label>Email <input type="email" placeholder="mail@mail.com" /></label></div>' +
-                                                                    '<div class="inline-part"><label>&nbsp; <input class="btn-dg-o-w-outline" type="submit" value="Submit" /></label></div>' +
+                                                                '<a id="dg-o-w-footer-login-select" href="#" class="btn-back-footer">&larr; Back</a><form class="dg-o-w-footer-form" id="dg-o-w-footer-signup-email">' +
+                                                                    '<div class="inline-part"><label><input type="text" placeholder="Name" /></label></div>' +
+                                                                    '<div class="inline-part"><label><input type="email" placeholder="Email" /></label></div>' +
+                                                                    '<div class="inline-part"><label><input class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large" type="submit" value="Submit" /></label></div>' +
                                                                 '</form>' +
                                                             '</div>' +
                                                         '</div>' +
                                                         '<div class="footer-section footer-section-step-3">' +
                                                             '<div>' +
-                                                                '<a id="dg-o-w-footer-login-select-2" href="#" class="btn-back-footer">&larr; Back</a><form id="dg-o-w-footer-signup-pass">' +
-                                                                    '<div class="inline-part"><label>Password <input type="password" /></label></div>' +
-                                                                    '<div class="inline-part"><label>&nbsp; <input class="btn-dg-o-w-outline" type="submit" value="Sign Up" /></label></div>' +
+                                                                '<a id="dg-o-w-footer-login-select-2" href="#" class="btn-back-footer">&larr; Back</a><form class="dg-o-w-footer-form" id="dg-o-w-footer-signup-pass">' +
+                                                                    '<div class="inline-part"><label><input type="password" placeholder="Password" /></label></div>' +
+                                                                    '<div class="inline-part"><label><input class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large" type="submit" value="Sign Up" /></label></div>' +
+                                                                    '<div class="inline-part"><p class="dg-o-w-text-left">By signing up, you agree<br/>with <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></p></div>' +
                                                                 '</form>' +
                                                             '</div>' +
                                                         '</div>' +
@@ -1565,8 +1592,8 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' 
                                         '<div class="dg-o-w-profile-stats-holder-rest">' +
                                             //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p>19</p></div></div>' +
                                             //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p>3</p></div></div>' +
-                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon"></div><div><h3>520</h3><p>points</p></div></div>' +
-                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon"></div><div><h3>40</h3><p>credits</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3>520</h3><p>points</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3>40</h3><p>credits</p></div></div>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +
@@ -1583,7 +1610,7 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' 
                                 '<div class="dg-o-w-profile-progress"><div style="width:35%;"></div></div>' +
 
                                 '<div class="dg-o-w-profile-signout dg-o-w-float-right">' +
-                                    '<p class="dg-o-w-color-grey-light"><a id="dg-o-w-sign-out-btn" href="#">Sign out</a></p>' +
+                                    '<p class="dg-o-w-color-brand-light"><a id="dg-o-w-sign-out-btn" href="#">Sign out</a></p>' +
                                 '</div>' +
                             '</div>' +
                             '<div class="dg-o-w-section-content content-static dg-o-w-white-section dg-o-w-blocks-margin">' +
@@ -1653,7 +1680,7 @@ DGW.main.elements.widgetWrapper = DGW.main.elements.widget.querySelector('.dg-o-
 
 DGW.main.elements.loginFooter = DGW.main.elements.widget.querySelector('.dg-o-w-footer-login');
 
-DGW.main.elements.loginMenuButton = DGW.main.elements.widget.querySelector('.dg-o-w-login-dropdown a');
+DGW.main.elements.loginMenuButton = DGW.main.elements.widget.querySelector('#dg-o-w-login-trigger');
 
 
 DGW.main.elements.pages.earnMain = document.createElement('div');
@@ -1686,6 +1713,8 @@ DGW.main.methods.showWidget = function(){
     DGW.global.elements.documentBody.appendChild(DGW.main.elements.widget);
     if (DGW.main.currentState === '') {
         DGW.main.methods.changeMainState('earn');
+    } else {
+        DGW.main.methods.changeMainState(DGW.main.currentState);
     }
 };
 DGW.main.methods.hideWidget = function(){
@@ -1816,21 +1845,28 @@ DGW.side.methods.initEvents = function(){
     });
 
     ctas.forEach(function(cta){
-        cta.addEventListener('click', function(){
-            if (!DGW.main.shown) {
-                DGW.main.methods.showWidget();
-            } else {
-                DGW.main.methods.hideWidget();
-            }
-        });
+        if (cta) {
+            cta.addEventListener('click', function () {
+                if (!DGW.main.shown) {
+                    if (cta.getAttribute('data-page') != null) {
+                        DGW.main.currentState = cta.getAttribute('data-page');
+                    }
+                    DGW.main.methods.showWidget();
+                } else {
+                    DGW.main.methods.hideWidget();
+                }
+            });
+        }
     });
 
 
     initInterval = window.setInterval(function(){
         if (DGW.global.cache.last.prize) {
             window.clearInterval(initInterval);
-            wBody.querySelector('.dg-side-prize').src = DGW.global.cache.last.prize.ImageUrl;
-            wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
+            if (wBody.querySelector('.dg-side-prize'))
+                wBody.querySelector('.dg-side-prize').src = DGW.global.cache.last.prize.ImageUrl;
+            if (wBody.querySelector('#dg-side-widget-prize-desc'))
+                wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
         }
     }, 100);
 };
@@ -1960,21 +1996,33 @@ DGW.main.methods.initEvents = function () {
     }
 
     // login dropdown menu
-    DGW.main.elements.loginMenuButton.addEventListener('click', function (e) {
-        e.preventDefault();
-        var that = this;
-        var form = that.parentNode.querySelector('.dg-o-w-email-login-form');
-        if (DGW.helpers.hasClass(that.parentNode, 'shown')) {
-            DGW.helpers.removeClass(that.parentNode, 'shown');
-            setTimeout(function () {
-                DGW.helpers.removeClass(form, 'visible');
-            }, 310);
-        } else {
-            DGW.helpers.addClass(form, 'visible');
-            setTimeout(function () {
-                DGW.helpers.addClass(that.parentNode, 'shown');
-            }, 0);
+    (function headerLoginFormTriggers(){
+        var link = DGW.main.elements.loginMenuButton;
+        var linkP = link.parentNode;
+        var form = linkP.querySelector('.dg-o-w-email-login-form');
+        var formClose = form.querySelector('#dg-o-w-header-form-close');
+
+        function triggerLoginForm(){
+            if (DGW.helpers.hasClass(linkP, 'shown')) {
+                DGW.helpers.removeClass(linkP, 'shown');
+                setTimeout(function () {
+                    DGW.helpers.removeClass(form, 'visible');
+                }, 310);
+            } else {
+                DGW.helpers.addClass(form, 'visible');
+                setTimeout(function () {
+                    DGW.helpers.addClass(linkP, 'shown');
+                }, 0);
+            }
         }
+
+        link.addEventListener('click', triggerLoginForm);
+        formClose.addEventListener('click', triggerLoginForm);
+    })();
+
+    DGW.main.elements.widget.querySelector('#dg-o-w-header-fb-connect').addEventListener('click', function(ev){
+        ev.preventDefault();
+        DGW.global.api.requests.connectFB();
     });
 
     // login form submit
@@ -2006,7 +2054,7 @@ DGW.main.methods.initEvents = function () {
                 DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
             });
     });
-    topLoginForm.querySelector('a').addEventListener('click', function(ev){
+    topLoginForm.querySelector('#dg-o-w-header-forgot-pass').addEventListener('click', function(ev){
         ev.preventDefault();
         DGW.helpers.removeClass(topLoginForm, 'shown');
         DGW.helpers.addClass(topForgotForm, 'shown');
@@ -2018,26 +2066,6 @@ DGW.main.methods.initEvents = function () {
     });
 
 //Activities page
-    /*if (DGW.main.elements.pages.activitiesMain.querySelector('.toggle-section-height')) {
-        DGW.main.elements.pages.activitiesMain.querySelector('.toggle-section-height').addEventListener('click', function () {
-            var that = this;
-            if (DGW.helpers.hasClass(that, 'collapsed')) {
-                DGW.helpers.zeroTimeout(function () {
-                    DGW.helpers.removeClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
-                    DGW.helpers.removeClass(that, 'collapsed');
-                    DGW.main.methods.checkSectionHeight();
-                });
-            } else {
-                DGW.helpers.zeroTimeout(function () {
-                    DGW.helpers.addClass(DGW.main.elements.activitiesSliderParent, 'collapsed');
-                    DGW.helpers.addClass(that, 'collapsed');
-                    DGW.main.methods.checkSectionHeight();
-                });
-            }
-
-        });
-    }*/
-
     DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').addEventListener('change', function(){
         if (this.value === 'all-activities') {
             DGW.global.api.requests.getAllActivities();
@@ -2093,7 +2121,6 @@ DGW.main.methods.initEvents = function () {
     })();
     DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-fb-connect').addEventListener('click', function(ev){
         ev.preventDefault();
-
         DGW.global.api.requests.connectFB();
     });
 
@@ -2307,13 +2334,15 @@ DGW.main.methods.profileSetData = function(data) {
     DGW.global.userStats.userId = data.UserId;
 
     profileImageHolders.forEach(function(image){
-        image.src = data.ImageUrl || DGW.helpers.checkImagesForSrc(image.getAttribute('src'));
+        if (image)
+            image.src = data.ImageUrl || DGW.helpers.checkImagesForSrc(image.getAttribute('src'));
     });
 
     DGW.global.userStats.imageUrl = data.ImageUrl || DGW.global.userStats.imageUrl;
 
     profileNames.forEach(function(name){
-        name.innerHTML = data.UserName;
+        if (name)
+            name.innerHTML = data.UserName;
     });
 
     DGW.global.userStats.name = data.UserName || DGW.global.userStats.name;
@@ -2365,17 +2394,17 @@ DGW.main.methods.updateUserInfoBet = function(draw, user){
     var betPoints = DGW.main.elements.widgetContent.querySelector('.dg-o-w-your-bet span');
 
     points.confirmed.forEach(function(point){
-        if (point) point.innerHTML = data.Wallet.PointsConfirmed;
+        if (point) point.innerHTML = user.Wallet.PointsConfirmed;
     });
     points.pending.forEach(function(point){
-        if (point) point.innerHTML = data.Wallet.PointsPending;
+        if (point) point.innerHTML = user.Wallet.PointsPending;
     });
 
     credits.confirmed.forEach(function(credit){
-        if (credit) credit.innerHTML = data.Wallet.CreditsConfirmed;
+        if (credit) credit.innerHTML = user.Wallet.CreditsConfirmed;
     });
     credits.pending.forEach(function(credit){
-        if (credit) credit.innerHTML = data.Wallet.CreditsPending;
+        if (credit) credit.innerHTML = user.Wallet.CreditsPending;
     });
 
     DGW.global.userStats.pointsC = user.Wallet.PointsConfirmed;
@@ -2506,8 +2535,8 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
     if (cacheObj) {
         cacheObj.drawsList.forEach(function (draw) {
             var li = document.createElement('li');
-            li.id = draw.DrawId;
-            li.setAttribute('data-end-date', draw.EndDate);
+            //li.id = draw.DrawId;
+            //li.setAttribute('data-end-date', draw.EndDate);
             var drawEntry = cacheObj.drawsEntries.filter(function(de){
                 return de.DrawId == draw.DrawId;
             })[0];
@@ -2639,9 +2668,9 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                                     '<h5>How much do you want to bet?</h5>' +
                                     '<form id="bet-form" class="dg-o-w-one-field-form">' +
                                         '<input type="number" min="1" max="1000" placeholder="50"/>' +
-                                        '<input type="submit" value="Bet points" />' +
+                                        '<input class="btn-dg-o-w btn-dg-o-w-brand" type="submit" value="Bet points" />' +
                                     '</form>' +
-                                    '<div id="dg-o-w-get-points-btn" class="btn-dg-o-w-outline">Get additional points</div>' +
+                                    '<div id="dg-o-w-get-points-btn" class="btn-dg-o-w btn-dg-o-w-brand-l">Get additional points</div>' +
                                 '</div>' +
                                     ((draw.Winner !== null) ?
                                         '<div class="dg-o-w-draw-winner"><img src="' + (draw.Winner.ImageUrl || DGW.helpers.checkImagesForSrc()) + '" /><p>' + draw.Winner.UserName + ' has won this draw. Our congratulations!</p></div>' :
@@ -2660,19 +2689,18 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                 '<div class="dg-o-w-single-draw">' +
                     prizeSect +
                     '<div class="dg-o-w-draw-right-side won">' +
-                        '<h2>Congrats, you\'ve won!!!</h2>' +
-                        '<h3>' + draw.Prize.Title + '</h3>' +
+                        '<h2>Congratulations, you\'ve won ' + draw.Prize.Title + '!</h2>' +
                         '<p>' + draw.Prize.Description + '</p>' +
                     '<div>' +
                     '<h2 class="show-claimed">You\'ve already claimed your prize!</h2>' +
-                    '<h5 class="hide-claimed">Put your address to get the prize</h5>' +
+                    '<p class="hide-claimed">Put your address to get the prize</p>' +
                     '<form id="claim-prize" class="dg-o-w-form hide-claimed">' +
                         //'<select><option disabled>Select your country</option><option>UK</option><option>Ireland</option></select>' +
                         '<input type="text" name="Address1" placeholder="Address line 1" />' +
                         '<input type="text" name="Address2" placeholder="Address line 2" />' +
                         '<input type="text" name="County" placeholder="County" />' +
                         '<input type="text" name="Postcode" placeholder="Postcode" />' +
-                        '<input type="submit" value="Submit " />' +
+                        '<input class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large" type="submit" value="Submit " />' +
                     '</form>' +
                 '</div>' +
                 shareSect +
@@ -2740,12 +2768,14 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
     if (el.querySelector('#bet-form')) {
         el.querySelector('#bet-form').addEventListener('submit', function (ev) {
             ev.preventDefault();
-            var betBtn = this.querySelector('input[type=submit]');
-            var pointsToBet = +this.querySelector('input[type=number]').value;
+            var that = this;
+            var betBtn = that.querySelector('input[type=submit]');
+            var pointsToBet = +that.querySelector('input[type=number]').value;
 
             DGW.global.api.requests.drawBet(drawId, pointsToBet, function onSuccess(){
                 betBtn.disabled = false;
                 DGW.main.methods.notificationConstructor('We\'ve received your ' + pointsToBet + ' points. Bet more!');
+                that.querySelector('input[type=number]').value = '';
             }, function onError(result){
                 betBtn.disabled = false;
                 DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
@@ -2996,11 +3026,11 @@ DGW.main.methods.offersConstructor = function(offers) {
             li.innerHTML =
                 '<a href="" target="_blank"><div class="dg-o-w-offer">' +
                     '<div class="dg-o-w-offer-left">' +
-                        '<img class="dg-o-w-offer-image" src="' + (offer.ImageUrl || 'http://lorempixel.com/100/100/sports') + '" />' +
+                        '<img class="dg-o-w-offer-image" src="' + (offer.ImageUrl || offer.Type.ImageUrl) + '" />' +
                         '<p class="dg-o-w-color-green">' + offer.PointsReward + '</p>' +
                     '</div>' +
                     '<div class="dg-o-w-offer-right">' +
-                        '<h4>' + offer.Title + '</h4>' +
+                        '<h4>' + '<img class="dg-o-w-offer-group" src="' + offer.Type.Group.ImageUrl + '"/>' + offer.Title + '</h4>' +
                         '<p>' + offer.Description + '</p>' +
                         '<div class="dg-o-w-users-done"></div>' +
                     '</div>' +
