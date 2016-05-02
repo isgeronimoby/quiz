@@ -41,6 +41,10 @@ class Input extends Component {
 		this.setState({ error: undefined });
 	}
 
+	isValid() {
+		return undefined; //override in children
+	}
+
 	isEmpty() {
 		const { value } = this.state;
 		return value === '';
@@ -73,6 +77,37 @@ class Input extends Component {
 	render() {
 		return (
 			<div className="virtual"></div>
+		);
+	}
+}
+
+
+export class TextInput extends Input {
+	static propTypes = {
+		name: PropTypes.string.isRequired,
+		label: PropTypes.string.isRequired,
+	};
+
+	render() {
+		const { defaultValue = '', name, label } = this.props;
+		const { value, error } = this.state;
+		const onChange = (e) => this.handleChange(e.target.value);
+		const errorClass = error ? `has-error` : '';
+		const errorStyle = (type) => {
+			return {
+				visibility: (type === error) ? 'visible' : 'hidden'
+			};
+		};
+
+		return (
+			<div className={"input-group " + errorClass}>
+				<input type="text" name={ name } placeholder={ label }
+					ref={(c) => this._input = c}
+					defaultValue={ defaultValue }
+					value={ value }
+					onChange={ onChange } />
+				<div className="input-error" style={ errorStyle('required') } >{ label } is required</div>
+			</div>
 		);
 	}
 }

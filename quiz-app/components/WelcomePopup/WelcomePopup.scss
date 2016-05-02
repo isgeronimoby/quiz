@@ -1,0 +1,110 @@
+@import '../variables.scss';
+$footer-h: 45px;
+.popup-screen {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  background-color: rgba(58, 58, 58, .9);
+  z-index: 4;
+  opacity: 1;
+  transition: opacity .4s ease;
+
+  &.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+.welcome-screen {
+}
+/*
+Popup
+*/
+.welcome-popup {
+  position: relative;
+  height: calc(100% - 30px);
+  margin: 15px;
+  background: $brand-color;
+  border-radius: 16px;
+  overflow: hidden;
+
+  & > .screen-swiper {
+    bottom: $footer-h;
+  }
+}
+
+.welcome-content {
+  padding: 45px 20px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.welcome-title {
+  font-size: 2.4rem;
+  margin: 0 0 20px;
+}
+.welcome-text {
+  font-size: 1.2rem;
+  line-height: calc(16/12);
+  color: $brand-color-lite;
+}
+
+/*
+Footer
+*/
+.welcome-footer {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 0;
+  height: calc($footer-h - 1px);
+  border-top: 1px solid $brand-color-lite;
+  background: rgba(255, 255, 255, .15);
+  font-size: 1.9rem;
+  text-transform: uppercase;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.welcome-footer-link {
+  padding: 0 20px;
+  min-width: 100px;
+
+  &.left {
+    color: $brand-color-dark;
+  }
+  &.right {
+    text-align: right;
+  }
+
+  .icon-next {
+    width: 14px;
+    height: 14px;
+    transform: rotate(180deg);
+  }
+}
+
+$bullet-sz: 10px;
+.welcome-bullets {
+  width: 40px;
+  height: $bullet-sz;
+  display: flex;
+  justify-content: space-between;
+
+  .bullet {
+    width: $bullet-sz;
+    height: $bullet-sz;
+    border-radius: 50%;
+    background: $brand-color-dark;
+
+    &.active {
+      background: $brand-color-lite;
+    }
+  }
+}

@@ -3,13 +3,17 @@ import {
 	FETCH_PROFILE,
 	FETCH_PROFILE_SUCCESS,
 	FETCH_PROFILE_ERROR,
-
 	ADD_POINTS,
 
 	SELECT_USER,
 	FETCH_USER,
 	FETCH_USER_SUCCESS,
 	INVALIDATE_USER,
+
+	FETCH_PARTNERS,
+	FETCH_PARTNERS_SUCCESS,
+	FETCH_PARTNERS_ERROR,
+	INVALIDATE_PARTNERS,
 } from '../actions';
 
 /*
@@ -107,10 +111,46 @@ function users(state = {}, action) {
 	}
 }
 
+
+/*
+ Users
+ */
+
+function partners(state = {
+	isFetching: false,
+	didInvalidate: false,
+	payload: []
+}, action) {
+	switch (action.type) {
+		case INVALIDATE_PARTNERS:
+			return {
+				...state,
+				didInvalidate: true,
+			};
+		case FETCH_PARTNERS:
+			return {
+				...state,
+				isFetching: true,
+				didInvalidate: true,
+			};
+		case FETCH_PARTNERS_SUCCESS:
+			return {
+				isFetching: false,
+				didInvalidate: false,
+				payload: action.payload,
+				lastUpdated: action.receivedAt,
+			};
+		default:
+			return state;
+	}
+}
+
+
 const rootReducer = combineReducers({
 	profile,
 	users,
-	selectedUser
+	selectedUser,
+	partners
 });
 
 export default rootReducer;

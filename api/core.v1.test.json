@@ -1,0 +1,524 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Loyalty Rewarded Core API (TEST)",
+        "description": "This API is used for accessing Loyalty Rewarded Ltd gamification functionality. API supports javascript clients, using EasyXDM library http://easyxdm.net/wp/",
+        "version": "1.0",
+        "contact": {
+            "name": "Vitali Tomashevich",
+            "url": "http://loylaty-rewarded.com",
+            "email": "vitali@loyalty-rewarded.com"
+        }
+    },
+    "host": "spr-api-test.cloudapp.net",
+    "schemes": [
+        "http"
+    ],
+    "basePath": "/core/v1",
+    "consumes": [
+        "application/json",
+        "application/xml"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml"
+    ],
+    "securityDefinitions": {
+        "ClientId": {
+            "name": "X-Api-Key",
+            "in": "header",
+            "type": "apiKey",
+            "description": "Client application API key issued by Loyalty Rewarded Ltd."
+        },
+        "SessionId": {
+            "name": ".ASPXAUTH",
+            "in": "header",
+            "type": "apiKey",
+            "description": "User authentication cookie."
+        }
+    },
+    "paths": {
+        "/xdm/tunnel": {
+            "get": {
+                "summary": "Returns XDM tunnel file for accessing API through easyXDM interface.",
+                "description": "This page could be used as a tunnel for accessing all API endpoints from javascript client application.\n",
+                "parameters": [
+                    {
+                        "name": "X-Api-Key",
+                        "in": "query",
+                        "type": "string",
+                        "description": "Client application api key.",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Xdm"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "EasyXDM tunnel page."
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error500"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/signup": {
+            "post": {
+                "summary": "Signs up and log in as new user.",
+                "description": "The signup endpoint used to register new user and set authentication\ncookie. It returns profile information about created user. In case if\nregistration was unsuccessful returns error description.\n",
+                "parameters": [
+                    {
+                        "name": "Sign up model",
+                        "in": "body",
+                        "description": "Signup information.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SignupModel"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "ClientId": []
+                    }
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User profile information",
+                        "schema": {
+                            "$ref": "#/definitions/CurrentUser"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "$ref": "#/definitions/Error400"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error500"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "summary": "Logs in as existing user using email and password.",
+                "description": "The login endpoint used to set authentication\ncookie. It returns profile information about created user. In case if\nlogin was unsuccessful returns error description.\n",
+                "parameters": [
+                    {
+                        "name": "Login model",
+                        "in": "body",
+                        "description": "Login information.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LoginModel"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "ClientId": []
+                    }
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User profile information",
+                        "schema": {
+                            "$ref": "#/definitions/CurrentUser"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "$ref": "#/definitions/Error400"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error500"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/facebook": {
+            "get": {
+                "summary": "Displays Facebook connect dialog page for specified API client app and related foundation.",
+                "description": "Facebook connect/link endpoint for server side login flow. It is used in case if there is no possibility to use client-side facebook authentication (i.e. 3-rd party js applications as widgets). This endpoint is supposed to be opened in a separate browser window as a facebook login dialog.\n",
+                "parameters": [
+                    {
+                        "name": "X-Api-Key",
+                        "in": "query",
+                        "type": "string",
+                        "description": "Client application api key.",
+                        "required": true
+                    }
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Facebook connect dialog page"
+                    },
+                    "400": {
+                        "description": "Page with connect/login errors description"
+                    },
+                    "500": {
+                        "description": "Response with a script that closes current window"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Facebook connect/link endpoint for client side login flow.",
+                "description": "This endpoint used to connect user with Facebook or create new account and set authentication information.It returns profile information about created user. In case if connect was unsuccessful returns error description.\n",
+                "parameters": [
+                    {
+                        "name": "Facebook client auth model",
+                        "in": "body",
+                        "description": "Facebook client auth information.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/FacebookClientAuthModel"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "ClientId": []
+                    }
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User profile information",
+                        "schema": {
+                            "$ref": "#/definitions/CurrentUser"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "$ref": "#/definitions/Error400"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error500"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/forgotpassword": {
+            "post": {
+                "summary": "Creates forgot password request and sends reset link to user email.",
+                "description": "The forgotpassword endpoint used to send email with reset password link.\nIt returns success response in case if email was sent to user.\n",
+                "parameters": [
+                    {
+                        "name": "Forgot password model",
+                        "in": "body",
+                        "description": "Forgot password information.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ForgotPasswordModel"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "ClientId": []
+                    }
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "$ref": "#/definitions/Error400"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error500"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "summary": "Cleans up user authentication cookies.",
+                "description": "The logout endpoint used to cleanup user authentication cookies.\n",
+                "security": [
+                    {
+                        "ClientId": []
+                    }
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error500"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/getuser": {
+            "get": {
+                "summary": "Returns user information.",
+                "description": "The getuser endpoint used to retrieve current user profile information.\n",
+                "security": [
+                    {
+                        "ClientId": []
+                    },
+                    {
+                        "SessionId": []
+                    }
+                ],
+                "tags": [
+                    "User"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User profile information",
+                        "schema": {
+                            "$ref": "#/definitions/CurrentUser"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized request",
+                        "schema": {
+                            "$ref": "#/definitions/Error401"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error500"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "SignupModel": {
+            "type": "object",
+            "properties": {
+                "UserName": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 20,
+                    "description": "User name."
+                },
+                "Email": {
+                    "type": "string",
+                    "description": "Registration email address."
+                },
+                "Password": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 16,
+                    "format": "password",
+                    "description": "User password."
+                }
+            },
+            "required": [
+                "UserName",
+                "Email",
+                "Password"
+            ]
+        },
+        "LoginModel": {
+            "type": "object",
+            "properties": {
+                "Email": {
+                    "type": "string",
+                    "description": "Registration email address."
+                },
+                "Password": {
+                    "type": "string",
+                    "format": "password",
+                    "description": "User password."
+                }
+            },
+            "required": [
+                "Email",
+                "Password"
+            ]
+        },
+        "FacebookClientAuthModel": {
+            "type": "object",
+            "properties": {
+                "AccessToken": {
+                    "type": "string",
+                    "description": "Facebook OAuth token."
+                },
+                "ExpiresIn": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Facebook token Expires in, seconds."
+                }
+            },
+            "required": [
+                "AccessToken",
+                "ExpiresIn"
+            ]
+        },
+        "ForgotPasswordModel": {
+            "type": "object",
+            "properties": {
+                "Email": {
+                    "type": "string",
+                    "description": "Registration email address."
+                }
+            },
+            "required": [
+                "Email"
+            ]
+        },
+        "CurrentUser": {
+            "type": "object",
+            "properties": {
+                "UserId": {
+                    "type": "string",
+                    "description": "User identifier."
+                },
+                "UserName": {
+                    "type": "string",
+                    "description": "User name."
+                },
+                "ImageUrl": {
+                    "type": "string",
+                    "description": "User profile image url."
+                },
+                "FacebookId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "User facebook id."
+                },
+                "Wallet": {
+                    "$ref": "#/definitions/WalletModel"
+                }
+            },
+            "required": [
+                "UserId",
+                "UserName",
+                "ImageUrl",
+                "Wallet"
+            ]
+        },
+        "WalletModel": {
+            "type": "object",
+            "properties": {
+                "CreditsPending": {
+                    "type": "number",
+                    "format": "decimal",
+                    "description": "Pending credits amount."
+                },
+                "CreditsConfirmed": {
+                    "type": "number",
+                    "format": "decimal",
+                    "description": "Confirmed credits amount."
+                },
+                "PointsPending": {
+                    "type": "number",
+                    "format": "decimal",
+                    "description": "Pending points amount."
+                },
+                "PointsConfirmed": {
+                    "type": "number",
+                    "format": "decimal",
+                    "description": "Confirmed points amount."
+                }
+            },
+            "required": [
+                "CreditsPending",
+                "CreditsConfirmed",
+                "PointsPending",
+                "PointsConfirmed"
+            ]
+        },
+        "Error400": {
+            "type": "object",
+            "properties": {
+                "Message": {
+                    "type": "string",
+                    "description": "Error message."
+                },
+                "ModelState": {
+                    "type": "string",
+                    "description": "Validation errors description."
+                }
+            },
+            "required": [
+                "Message"
+            ]
+        },
+        "Error401": {
+            "type": "object",
+            "properties": {
+                "Message": {
+                    "type": "string"
+                },
+                "ExceptionMessage": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "Message"
+            ],
+            "example": {
+                "Message": "Authorization has been denied for this request.",
+                "ExceptionMessage": "Api key is not present."
+            }
+        },
+        "Error500": {
+            "type": "object",
+            "properties": {
+                "Message": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "Message"
+            ],
+            "example": {
+                "Message": "Something went wrong."
+            }
+        }
+    }
+}

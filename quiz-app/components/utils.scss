@@ -1,4 +1,7 @@
 @import './variables.scss';
+/*
+Columns
+*/
 .cols-3 {
   display: flex;
   justify-content: center;
@@ -23,28 +26,38 @@
     transition: transform .4s ease;
   }
 }
-
+/*
+Text utils
+*/
 .text-brand {
   color: $brand-color;
 }
 .text-center {
   text-align: center;
 }
-
-/*Placeholders*/
+.link-normal {
+  color: $color-twitter;
+  text-decoration: underline;
+}
+/*
+Placeholders
+*/
 ::placeholder {
   font-size: 1.9rem;
   color: $brand-color-opaque;
 }
-
-/*Mixins*/
+/*
+Mixins
+*/
 @define-mixin ellipsis {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
-/*Lists*/
+/*
+Lists
+*/
 .list-title {
   font-size: 1.4rem;
   margin-bottom: 0.6rem;

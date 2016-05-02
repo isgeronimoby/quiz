@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Header from '../Header';
 import Menu from '../Menu';
 import AuthPopup from '../AuthPopup';
+import WelcomePopup from '../WelcomePopup';
 import './Layout.scss';
 
 
@@ -15,11 +16,13 @@ class Layout extends Component {
 
 	static childContextTypes = {
 		openAuthPopup: React.PropTypes.func,
+		openWelcomePopup: React.PropTypes.func,
 	};
 
 	getChildContext() {
 		return {
-			openAuthPopup: this.openAuthPopup.bind(this)
+			openAuthPopup: this.openAuthPopup.bind(this),
+			openWelcomePopup: () => this.toggleWelcomePopup(true)
 		};
 	}
 
@@ -27,6 +30,7 @@ class Layout extends Component {
 		showMenu: false,
 		showAuthPopup: false,
 		authPopupView: undefined,
+		showWelcomePopup: false,
 	};
 
 	_authCb = null; // hack
@@ -59,10 +63,17 @@ class Layout extends Component {
 		});
 	}
 
+	toggleWelcomePopup(on) {
+		this.setState({
+			showWelcomePopup: on
+		});
+	}
+
 	render() {
 		const {title, path, children} = this.props;
-		const { showMenu, showAuthPopup, authPopupView } = this.state;
+		const { showMenu, showAuthPopup, authPopupView, showWelcomePopup } = this.state;
 		const onCloseAuthPopup = (result) => this.closeAuthPopup(result);
+		const onCloseWelcomePopup = () => this.toggleWelcomePopup(false);
 
 		return (
 			<div className="layout">
@@ -78,6 +89,9 @@ class Layout extends Component {
 				<AuthPopup show={ showAuthPopup }
 					view={ authPopupView }
 					onClose={ onCloseAuthPopup }/>
+
+				<WelcomePopup show={ showWelcomePopup }
+					onClose={ onCloseWelcomePopup }/>
 
 				<div className="content">
 					{ children }

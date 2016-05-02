@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Button from '../Button';
-import { SeparatorOrError, EmailInput, PasswordInput } from './Controls.js';
+import { SeparatorOrError, TextInput, EmailInput, PasswordInput } from './Controls.js';
 
 
 class FormSignIn extends Component {
@@ -17,18 +17,24 @@ class FormSignIn extends Component {
 	};
 
 	handleSubmit() {
+		const nameEl = this.refs['name-input'];
+		if (!nameEl.validate()) {
+			nameEl.focus();
+			return;
+		}
 		const emailEl = this.refs['email-input'];
-		const pwdEl = this.refs['pwd-input'];
 		if (!emailEl.validate()) {
 			emailEl.focus();
 			return;
 		}
+		const pwdEl = this.refs['pwd-input'];
 		if (!pwdEl.validate()) {
 			pwdEl.focus();
 			return;
 		}
 
 		const data = {
+			name: nameEl.value(),
 			email: emailEl.value(),
 			password: pwdEl.value(),
 		};
@@ -54,6 +60,7 @@ class FormSignIn extends Component {
 				<SeparatorOrError error={error} />
 
 				<form className="auth-form">
+					<TextInput ref="name-input" required={true} name="name" label="Full Name"/>
 					<EmailInput ref="email-input" required={true}/>
 					<PasswordInput ref="pwd-input" required={true}/>
 
