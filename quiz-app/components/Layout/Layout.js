@@ -22,7 +22,7 @@ class Layout extends Component {
 	getChildContext() {
 		return {
 			openAuthPopup: this.openAuthPopup.bind(this),
-			openWelcomePopup: () => this.toggleWelcomePopup(true)
+			openWelcomePopup: this.openWelcomePopup.bind(this),
 		};
 	}
 
@@ -33,7 +33,8 @@ class Layout extends Component {
 		showWelcomePopup: false,
 	};
 
-	_authCb = null; // hack
+	_authCb = null;
+	_welcomeCb = null;
 
 	toggleMenu(on) {
 		this.setState({
@@ -63,9 +64,24 @@ class Layout extends Component {
 		});
 	}
 
-	toggleWelcomePopup(on) {
+	openWelcomePopup(callback) {
+		if (callback) {
+			this._welcomeCb = callback;
+		}
+
 		this.setState({
-			showWelcomePopup: on
+			showWelcomePopup: true
+		});
+	}
+
+	closeWelcomePopup() {
+		this.setState({
+			showWelcomePopup: false
+		}, () => {
+			if (this._welcomeCb) {
+				this._welcomeCb();
+				this._welcomeCb = null;
+			}
 		});
 	}
 
@@ -73,7 +89,7 @@ class Layout extends Component {
 		const {title, path, children} = this.props;
 		const { showMenu, showAuthPopup, authPopupView, showWelcomePopup } = this.state;
 		const onCloseAuthPopup = (result) => this.closeAuthPopup(result);
-		const onCloseWelcomePopup = () => this.toggleWelcomePopup(false);
+		const onCloseWelcomePopup = () => this.closeWelcomePopup();
 
 		return (
 			<div className="layout">

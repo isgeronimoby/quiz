@@ -160,7 +160,7 @@ function fetchPartnersSuccess(json) {
 	};
 }
 
-function fetchPartners(userId) {
+function fetchPartners() {
 	return (dispatch) => {
 		dispatch(fetchPartnersStart());
 

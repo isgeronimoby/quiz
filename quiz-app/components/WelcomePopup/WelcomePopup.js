@@ -3,12 +3,21 @@ import ScreenSwiper from '../ScreenSwiper';
 import './WelcomePopup.scss';
 
 
-const WelcomeScreen = ({ icon, title, text }) => {
+const WelcomeScreen = ({ figure, title, lines }) => {
+	const linesStyled = lines.map((text, i) => {
+		const opacity = .8 - .2 * i;
+		return <p key={`p-${i}`} style={{ opacity }}>{ text }</p>;
+	});
+
 	return (
 		<div className="welcome-content">
-			<div className="welcome-icon"></div>
-			<h2 className="welcome-title">{ title }</h2>
-			<div className="welcome-text">{ text }</div>
+			<div className="welcome-figure">
+				<img src={figure}/>
+			</div>
+			<div className="welcome-text">
+				<h2 className="welcome-title">{ title }</h2>
+				{ linesStyled }
+			</div>
 		</div>
 	);
 };
@@ -78,8 +87,6 @@ class WelcomePopup extends Component {
 		const { show, onClose } = this.props;
 		const { currentScreenIdx: idx } = this.state;
 		const hiddenClass = !show ? 'is-hidden' : '';
-		const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
-			"am vulputate faucibus luctus. Nulla scelerisque lectus at faucibus vestibulum.";
 		const onPrev = () => this.prevScreen();
 		const onNext = () => this.nextScreen();
 		const onSkip = () => onClose();
@@ -88,9 +95,12 @@ class WelcomePopup extends Component {
 			<div className={"popup-screen welcome-screen " + hiddenClass }>
 				<div className="popup welcome-popup">
 					<ScreenSwiper currentScreenIdx={ idx } onPrevScreen={onPrev} onNextScreen={onNext}>
-						<WelcomeScreen icon="" title="Play games" text={ text }/>
-						<WelcomeScreen icon="" title="Earn points" text={ text }/>
-						<WelcomeScreen icon="" title="Win prizes" text={ text }/>
+						<WelcomeScreen figure={ require('./images/fig-play.svg') } title="Play games"
+							lines={ ['predict scores', 'beat your mates', 'rank highest in Leaderboards'] }/>
+						<WelcomeScreen figure={ require('./images/fig-earn.svg') } title="Earn points"
+							lines={ ['predicting match outcomes', 'downloading apps', 'sharing & more'] }/>
+						<WelcomeScreen figure={ require('./images/fig-win.svg') } title="Win prizes"
+							lines={ ['exclusive merchandise', 'money can’t buy experiences'] }/>
 					</ScreenSwiper>
 
 					<WelcomeFooter stepIdx={ idx } onNext={ onNext } onSkip={ onSkip }/>

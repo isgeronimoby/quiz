@@ -3,12 +3,12 @@ import Link from '../components/Link';
 
 class Test extends Component {
 
+	static title = 'Test';
+
 	static contextTypes = {
 		openAuthPopup: React.PropTypes.func,
 		openWelcomePopup: React.PropTypes.func,
 	};
-
-	static title = 'Test';
 
 	render() {
 		const onAuthPopupClick = () => this.context.openAuthPopup();
@@ -31,6 +31,9 @@ class Test extends Component {
 					</li>
 					<li>
 						<Link to="./partners">Partners</Link>
+					</li>
+					<li>
+						<Link to="./">Index</Link>
 					</li>
 				</ul>
 			</div>
