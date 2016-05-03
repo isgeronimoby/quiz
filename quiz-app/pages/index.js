@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import { fetchProfile } from '../flux/actions';
 import Location from '../lib/Location';
 
-const DELAY = 3000;
+const MIN_DELAY = 2000;
 const WELCOME_COOKIE_KEY = 'quiz-everton-onboarded';
 const WELCOME_COOKIE_EXPIRES = 365; //days
 
@@ -50,7 +50,7 @@ class Index extends Component {
 				pathname: './quiz',
 				state: {id: quizId}
 			});
-		}, DELAY);
+		}, MIN_DELAY);
 	}
 
 	render() {

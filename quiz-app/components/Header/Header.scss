@@ -42,6 +42,10 @@ $title-pad: 6.8rem;
   align-items: center;
   justify-content: center;
   padding-right: 1rem;
+
+  &.is-hidden {
+    visibility: hidden;
+  }
 }
 
 .icon-menu {

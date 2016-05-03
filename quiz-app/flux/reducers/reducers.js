@@ -30,6 +30,9 @@ const tmp = {
 
 function profile(state = {
 	isLoggedIn: false,
+	userId: null,
+	name: '',
+	imageUrl: null,
 	points: 0,
 	pendingPoints: 0,
 }, action) {

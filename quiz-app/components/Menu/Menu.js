@@ -29,13 +29,13 @@ const MenuItem = (props) => {
 
 
 const ProfileHeader = ({ profile }) => {
-	const { picture, name, points, pendingPoints, userId } = profile;
+	const { userId, name, imageUrl, points, pendingPoints } = profile;
 
 
 	return (
 		<Link className="menu-header" to="./profile" state={{ userId }}>
 			<div className="user-picture">
-				<img src={picture}/>
+				<img src={imageUrl}/>
 			</div>
 			<div className="user-info">
 				<div className="menu-user-name">{ name }</div>
