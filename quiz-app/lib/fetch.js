@@ -1,7 +1,7 @@
 import { iframeSrc, apiKey } from './config.js';
 //require("imports?window=>{},this=>window!exports?window.easyXDM!./easyXDM.debug.js"); // TODO
 
-// Loaded in index.html
+// from index.html
 const rpc = new easyXDM.Rpc({
 	remote: iframeSrc
 }, {
