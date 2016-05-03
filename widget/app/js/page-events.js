@@ -15,17 +15,15 @@ DGW.main.methods.checkSectionHeight = function() {
 DGW.main.methods.changeMainState = function(state){
     for (var item in DGW.main.elements.menuItems) {
         DGW.helpers.removeClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');
-        DGW.helpers.removeClass(DGW.main.elements.menuItems['profile'].parentNode.parentNode, 'dg-o-w-active');
-
-        if (item === state) {
-            if (state === 'profile') {
-                console.log(12312312312312312312)
-                DGW.helpers.addClass(DGW.main.elements.menuItems['profile'].parentNode.parentNode, 'dg-o-w-active');
-            } else {
-                DGW.helpers.addClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');
-            }
-        }
     }
+    DGW.helpers.removeClass(DGW.main.elements.menuItems['profile'].parentNode.parentNode, 'dg-o-w-active');
+
+    if (state === 'profile') {
+        DGW.helpers.addClass(DGW.main.elements.menuItems['profile'].parentNode.parentNode, 'dg-o-w-active');
+    } else {
+        DGW.helpers.addClass(DGW.main.elements.menuItems[state], 'dg-o-w-active');
+    }
+
     if (DGW.main.elements.widgetContent.children.length > 0) {
         Array.prototype.slice.call(DGW.main.elements.widgetContent.children).forEach(function(ch){
             DGW.main.elements.widgetContent.removeChild(ch);
