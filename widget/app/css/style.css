@@ -695,6 +695,8 @@
   font-size: 0;
   line-height: 80px;
   text-align: left;
+  -webkit-transition: background-color 0.25s ease;
+  transition: background-color 0.25s ease;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-header .dg-o-w-menu-profile:hover {
   background-color: rgba(255, 255, 255, 0.15);
