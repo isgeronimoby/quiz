@@ -1,5 +1,6 @@
 import userData from '../../components/LeaderBoardContainer/data.js'; // fake response data
 import partnersData from '../../components/PartnersContainer/data.js'; // fake response data
+import fetch from '../../lib/fetch.js';
 
 // Profile
 export const FETCH_PROFILE = 'FETCH_PROFILE';
@@ -31,10 +32,24 @@ function fetchProfileStart() {
 	};
 }
 
-function fetchProfileSuccess(json) {
+function fetchProfileSuccess({
+	UserId: userId,
+	UserName: name,
+	ImageUrl: imageUrl,
+	Wallet: {
+		PointsConfirmed: points,
+		PointsPending: pendingPoints
+		}
+	}) {
 	return {
 		type: FETCH_PROFILE_SUCCESS,
-		payload: json,
+		payload: {
+			userId,
+			name,
+			imageUrl,
+			points,
+			pendingPoints,
+		},
 		receivedAt: Date.now()
 	};
 }
@@ -49,9 +64,8 @@ export function fetchProfile() {
 	return (dispatch) => {
 		dispatch(fetchProfileStart());
 
-		return new Promise((resolve, reject) => {
-			//setTimeout(() => resolve(response), DELAY);
-			setTimeout(() => reject(), DELAY); // emul not-authenticated
+		return fetch({
+			endpoint: 'user/getuser'
 		}).then((json) => {
 			dispatch(fetchProfileSuccess(json));
 		}).catch(() => {

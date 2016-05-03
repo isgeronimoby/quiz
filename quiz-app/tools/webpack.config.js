@@ -95,6 +95,10 @@ const common = {
 				loaders: ['style-loader', 'css-loader', 'postcss-loader'],
 			},
 		],
+		noParse: [
+			//path.join(__dirname, './lib/easyXDM.debug.js'),
+			//path.join(__dirname, './lib/easyXDM.min.js'),
+		]
 	},
 	postcss: function plugins() {
 		return [
