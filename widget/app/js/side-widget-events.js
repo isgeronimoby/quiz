@@ -64,8 +64,10 @@ DGW.side.methods.initSafariFixEvents = function(){
     initInterval = window.setInterval(function(){
         if (DGW.global.cache.last.prize) {
             window.clearInterval(initInterval);
-            wBody.querySelector('.dg-side-prize').src = DGW.global.cache.last.prize.ImageUrl;
-            wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
+            if (wBody.querySelector('.dg-side-prize'))
+                wBody.querySelector('.dg-side-prize').src = DGW.global.cache.last.prize.ImageUrl;
+            if (wBody.querySelector('#dg-side-widget-prize-desc'))
+                wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
         }
     }, 100);
 };
