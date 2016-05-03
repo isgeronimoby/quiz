@@ -529,6 +529,9 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         },
         function onSuccess(response) {
             result = response;
+            if (result.error && result.status == 401) {
+                DGW.global.methods.unAuthorize();
+            }
             if(callback) callback(response);
             DGW.main.methods.loadingFinished();
         },
@@ -627,12 +630,10 @@ DGW.global.api.requests.signUp = function(userObj, onSuccess, onError){
     DGW.global.api.generic('signUp', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('signUp: ', result.data);
-            DGW.global.authorized = true;
             DGW.global.methods.authorize();
             DGW.main.methods.profileSetData(result.data);
             if (onSuccess) onSuccess(result.data);
         } else {
-            DGW.global.authorized = false;
             DGW.helpers.console.error('signUp ', result.error);
             if (onError) onError(result.error);
         }
@@ -649,10 +650,8 @@ DGW.global.api.requests.signIn = function(userObj, onSuccess, onError){
             DGW.helpers.console.info('signIn ', result.data);
             DGW.global.methods.authorize();
             DGW.main.methods.profileSetData(result.data);
-            DGW.global.authorized = true;
             if (onSuccess) onSuccess(result.data);
         } else {
-            DGW.global.authorized = false;
             DGW.helpers.console.error('signIn ', result.error);
             if (onError) onError(result.error);
         }
@@ -666,7 +665,6 @@ DGW.global.api.requests.signOut = function(){
     DGW.global.api.generic('signOut', function(){
         //TODO: review it later, maybe
         DGW.helpers.console.info('Signed out');
-        DGW.global.authorized = false;
         DGW.global.methods.unAuthorize();
     });
 };
@@ -689,14 +687,12 @@ DGW.global.api.requests.getUser = function(onSuccess, onError){
     DGW.global.api.generic('getUser', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getUser success ', result.data);
-            if (DGW.global.authorized === false) {
-                DGW.global.authorized = true;
+            if (!DGW.global.authorized) {
                 DGW.global.methods.authorize();
             }
             DGW.main.methods.profileSetData(result.data);
             if (onSuccess) onSuccess(result.data);
         } else {
-            DGW.global.authorized = false;
             DGW.global.methods.unAuthorize();
             DGW.helpers.console.error('getUser anon ', result);
             if (onError) onError(result.error);
@@ -713,7 +709,7 @@ DGW.global.api.requests.getDraws = function(onSuccess, onError){
             DGW.global.cache.last.winner = DGW.main.cache.drawsList.filter(function(draw){return draw.Winner !== null})[0].Winner;
             DGW.global.cache.last.prize = DGW.main.cache.drawsList[0].Prize;
 
-            if (DGW.global.authorized == true) {
+            if (DGW.global.authorized) {
                 DGW.global.api.requests.getDrawEntries();
             } else {
                 DGW.main.methods.drawsConstructor(DGW.main.cache);

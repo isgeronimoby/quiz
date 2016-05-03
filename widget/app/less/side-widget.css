@@ -209,6 +209,8 @@
 }
 #dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-section .dg-side-content h4 {
   margin-bottom: 5px;
+  max-height: 40px;
+  overflow: hidden;
 }
 #dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-click-holder {
   position: absolute;
