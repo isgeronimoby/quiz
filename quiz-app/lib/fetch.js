@@ -23,11 +23,11 @@ function fetch(options) {
 				params: body ? JSON.stringify(body) : ''
 			},
 			function onSuccess(response) {
-				console.log('>>success:', response);
+				//console.log('>>success:', response);
 				resolve(response.data);
 			},
 			function onError(error) {
-				console.log('>>error:', error);
+				//console.log('>>error:', error);
 				reject(error.message);
 			});
 	});
