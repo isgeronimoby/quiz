@@ -3,7 +3,6 @@ import {
 	FETCH_PROFILE,
 	FETCH_PROFILE_SUCCESS,
 	FETCH_PROFILE_ERROR,
-	ADD_POINTS,
 
 	SELECT_USER,
 	FETCH_USER,
@@ -19,14 +18,6 @@ import {
 /*
  Profile
  */
-
-const tmp = {
-	userId: 0,
-	name: 'Edward Snowden',
-	picture: require("../../static/images/user-picture.jpg"),
-	points: 220,
-	pendingPoints: 110,
-};
 
 function profile(state = {
 	isLoggedIn: false,
@@ -47,11 +38,6 @@ function profile(state = {
 			return {
 				...state,
 				isLoggedIn: false,
-			};
-		case ADD_POINTS:
-			return {
-				...state,
-				points: state.points + action.points
 			};
 		default:
 			return state;
