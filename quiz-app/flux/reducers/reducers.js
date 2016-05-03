@@ -4,10 +4,9 @@ import {
 	FETCH_PROFILE_SUCCESS,
 	FETCH_PROFILE_ERROR,
 
-	SELECT_USER,
-	FETCH_USER,
-	FETCH_USER_SUCCESS,
-	INVALIDATE_USER,
+	FETCH_USER_PROFILE,
+	FETCH_USER_PROFILE_SUCCESS,
+	SELECT_USER_PROFILE,
 
 	FETCH_PARTNERS,
 	FETCH_PARTNERS_SUCCESS,
@@ -54,9 +53,9 @@ function profile(state = {
  Users
  */
 
-function selectedUser(state = null, action) {
+function selectedUserProfile(state = null, action) {
 	switch (action.type) {
-		case SELECT_USER:
+		case SELECT_USER_PROFILE:
 			return action.userId;
 		default:
 			return state;
@@ -65,25 +64,17 @@ function selectedUser(state = null, action) {
 
 function userById(state = {
 	isFetching: false,
-	didInvalidate: false,
 	payload: {}
 }, action) {
 	switch (action.type) {
-		case INVALIDATE_USER:
-			return {
-				...state,
-				didInvalidate: true,
-			};
-		case FETCH_USER:
+		case FETCH_USER_PROFILE:
 			return {
 				...state,
 				isFetching: true,
-				didInvalidate: true,
 			};
-		case FETCH_USER_SUCCESS:
+		case FETCH_USER_PROFILE_SUCCESS:
 			return {
 				isFetching: false,
-				didInvalidate: false,
 				payload: action.payload,
 				lastUpdated: action.receivedAt,
 			};
@@ -92,11 +83,10 @@ function userById(state = {
 	}
 }
 
-function users(state = {}, action) {
+function userProfiles(state = {}, action) {
 	switch (action.type) {
-		case INVALIDATE_USER:
-		case FETCH_USER:
-		case FETCH_USER_SUCCESS:
+		case FETCH_USER_PROFILE:
+		case FETCH_USER_PROFILE_SUCCESS:
 			return {
 				...state,
 				[action.userId]: userById(state[action.userId], action)
@@ -168,8 +158,8 @@ function fixtures(state= {
 const rootReducer = combineReducers({
 	profile,
 	fixtures,
-	users,
-	selectedUser,
+	userProfiles,
+	selectedUserProfile,
 	partners
 });
 

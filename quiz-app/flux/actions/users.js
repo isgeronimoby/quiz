@@ -1,49 +1,45 @@
 import userData from '../../components/LeaderBoardContainer/data.js'; // fake response data
 // import fetch from '../../lib/fetch.js'; TODO - use api
 
-export const SELECT_USER = 'SELECT_USER';
-export const FETCH_USER = 'FETCH_USER';
-export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
-export const FETCH_USER_ERROR = 'FETCH_USER_ERROR'; // TODO
-export const INVALIDATE_USER = 'INVALIDATE_USER'; // TODO
+export const SELECT_USER_PROFILE = 'SELECT_USER_PROFILE';
+export const FETCH_USER_PROFILE = 'FETCH_USER_PROFILE';
+export const FETCH_USER_PROFILE_SUCCESS = 'FETCH_USER_PROFILE_SUCCESS';
 
 const DELAY = 100;
 
+// Leadeboard
+/
 
-export function selectUser(userId) {
+
+// User Profiles
+//
+export function selectUserProfile(userId) {
 	return {
-		type: SELECT_USER,
+		type: SELECT_USER_PROFILE,
 		userId
 	};
 }
 
-export function invalidateUser(userId) {
+function fetchUserProfileStart(userId) {
 	return {
-		type: INVALIDATE_USER,
-		userId
-	};
-}
-
-function fetchUserStart(userId) {
-	return {
-		type: FETCH_USER,
+		type: FETCH_USER_PROFILE,
 		userId
 	};
 }
 
 
-function fetchUserSuccess(userId, json) {
+function fetchUserProfileSuccess(userId, json) {
 	return {
-		type: FETCH_USER_SUCCESS,
+		type: FETCH_USER_PROFILE_SUCCESS,
 		userId,
 		payload: json,
 		receivedAt: Date.now()
 	};
 }
 
-function fetchUser(userId) {
+function fetchUserProfile(userId) {
 	return (dispatch) => {
-		dispatch(fetchUserStart(userId));
+		dispatch(fetchUserProfileStart(userId));
 
 		console.log('>>TODO: fetch /user[%s]', userId);
 		//fetch(`/user/${iserId}`).then(response => response.json())
@@ -53,13 +49,13 @@ function fetchUser(userId) {
 		return new Promise((resolve, reject) => {
 			setTimeout(() => resolve(response), DELAY);
 		}).then((json) => {
-			dispatch(fetchUserSuccess(userId, json));
+			dispatch(fetchUserProfileSuccess(userId, json));
 		});
 	};
 }
 
-function shouldFetchUser(state, userId) {
-	const profile = state.users[userId];
+function shouldFetchUserProfile(state, userId) {
+	const profile = state.userProfiles[userId];
 	if (!profile) {
 		return true;
 	} else if (profile.isFetching) {
@@ -69,10 +65,10 @@ function shouldFetchUser(state, userId) {
 	}
 }
 
-export function fetchUserIfNeeded(userId) {
+export function fetchUserProfileIfNeeded(userId) {
 	return (dispatch, getState) => {
-		if (shouldFetchUser(getState(), userId)) {
-			return dispatch(fetchUser(userId));
+		if (shouldFetchUserProfile(getState(), userId)) {
+			return dispatch(fetchUserProfile(userId));
 		} else {
 			return Promise.resolve();
 		}
