@@ -160,7 +160,7 @@ DGW.helpers.createCenteredWindow = function(title, w, h){
     var left = ((width / 2) - (w / 2)) + dualScreenLeft;
     var top = ((height / 2) - (h / 2)) + dualScreenTop;
 
-    return window.open('', title, 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+    return window.open('', title, 'menubar=no,location=no,resizable=no,scrollbars=yes,status=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
 };
 
 DGW.helpers.getDateFromNow = (function(undefined){
@@ -291,7 +291,6 @@ DGW.helpers.openDataLinks = function(elems){
     array.forEach(function(link){
         var url = DGW.global.widgetPathName + 'pages/' + link.getAttribute('data-link') + '.html';
         if (link) {
-            console.log(link.innerHTML)
             link.addEventListener('click', function(ev){
                 ev.preventDefault();
                 DGW.helpers.centerWindowPopup(url, link.getAttribute('data-link'),

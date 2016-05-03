@@ -994,7 +994,6 @@ DGW.global.offers.requests.shareOfferFb = function(offerId){
     DGW.helpers.centerWindowPopup(DGW.global.envPath +
     'offer/facebookshare?api_key=' + DGW.global.api.apiKey + '&offerid=' + offerId, 'fbWindow', 460, 340, function(){
         DGW.global.api.requests.getUserOffers();
-        DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Sharing on Facebook');
     });
 };
 //
@@ -1019,7 +1018,6 @@ DGW.global.actions.requests.shareFb = function(drawId, _winner){
             'fbWindow2', 460, 340, function(){
                 DGW.global.api.requests.getUser();
                 DGW.global.api.requests.getUserActions();
-                DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Sharing on Facebook');
         }, win);
     });
 };
@@ -1299,7 +1297,7 @@ DGW.helpers.createCenteredWindow = function(title, w, h){
     var left = ((width / 2) - (w / 2)) + dualScreenLeft;
     var top = ((height / 2) - (h / 2)) + dualScreenTop;
 
-    return window.open('', title, 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+    return window.open('', title, 'menubar=no,location=no,resizable=no,scrollbars=yes,status=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
 };
 
 DGW.helpers.getDateFromNow = (function(undefined){
@@ -1430,7 +1428,6 @@ DGW.helpers.openDataLinks = function(elems){
     array.forEach(function(link){
         var url = DGW.global.widgetPathName + 'pages/' + link.getAttribute('data-link') + '.html';
         if (link) {
-            console.log(link.innerHTML)
             link.addEventListener('click', function(ev){
                 ev.preventDefault();
                 DGW.helpers.centerWindowPopup(url, link.getAttribute('data-link'),
@@ -1922,10 +1919,12 @@ DGW.main.methods.checkSectionHeight = function() {
 DGW.main.methods.changeMainState = function(state){
     for (var item in DGW.main.elements.menuItems) {
         DGW.helpers.removeClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');
-        DGW.helpers.removeClass(DGW.main.elements.menuItems['profile'].parentNode, 'dg-o-w-active');
+        DGW.helpers.removeClass(DGW.main.elements.menuItems['profile'].parentNode.parentNode, 'dg-o-w-active');
+
         if (item === state) {
             if (state === 'profile') {
-                DGW.helpers.addClass(DGW.main.elements.menuItems[item].parentNode, 'dg-o-w-active');
+                console.log(12312312312312312312)
+                DGW.helpers.addClass(DGW.main.elements.menuItems['profile'].parentNode.parentNode, 'dg-o-w-active');
             } else {
                 DGW.helpers.addClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');
             }

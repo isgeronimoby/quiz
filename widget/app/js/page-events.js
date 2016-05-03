@@ -15,10 +15,12 @@ DGW.main.methods.checkSectionHeight = function() {
 DGW.main.methods.changeMainState = function(state){
     for (var item in DGW.main.elements.menuItems) {
         DGW.helpers.removeClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');
-        DGW.helpers.removeClass(DGW.main.elements.menuItems['profile'].parentNode, 'dg-o-w-active');
+        DGW.helpers.removeClass(DGW.main.elements.menuItems['profile'].parentNode.parentNode, 'dg-o-w-active');
+
         if (item === state) {
             if (state === 'profile') {
-                DGW.helpers.addClass(DGW.main.elements.menuItems[item].parentNode, 'dg-o-w-active');
+                console.log(12312312312312312312)
+                DGW.helpers.addClass(DGW.main.elements.menuItems['profile'].parentNode.parentNode, 'dg-o-w-active');
             } else {
                 DGW.helpers.addClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');
             }
