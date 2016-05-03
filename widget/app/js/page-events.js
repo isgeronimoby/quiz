@@ -114,22 +114,34 @@ DGW.main.methods.initEvents = function () {
         var form = linkP.querySelector('.dg-o-w-email-login-form');
         var formClose = form.querySelector('#dg-o-w-header-form-close');
 
+        DGW.main.methods.headerLoginShow = function(){
+            DGW.helpers.addClass(form, 'visible');
+            setTimeout(function () {
+                DGW.helpers.addClass(linkP, 'shown');
+            }, 0);
+        };
+        DGW.main.methods.headerLoginHide = function(){
+            DGW.helpers.removeClass(linkP, 'shown');
+            setTimeout(function () {
+                DGW.helpers.removeClass(form, 'visible');
+                Array.prototype.slice.call(form.querySelectorAll(':not([type=submit])'))
+                    .forEach(function(input){
+                        input.value = '';
+                    });
+            }, 310);
+        };
+
         function triggerLoginForm(){
             if (DGW.helpers.hasClass(linkP, 'shown')) {
-                DGW.helpers.removeClass(linkP, 'shown');
-                setTimeout(function () {
-                    DGW.helpers.removeClass(form, 'visible');
-                }, 310);
+                DGW.main.methods.headerLoginHide();
             } else {
-                DGW.helpers.addClass(form, 'visible');
-                setTimeout(function () {
-                    DGW.helpers.addClass(linkP, 'shown');
-                }, 0);
+                DGW.main.methods.headerLoginShow();
             }
         }
 
+
         link.addEventListener('click', triggerLoginForm);
-        formClose.addEventListener('click', triggerLoginForm);
+        formClose.addEventListener('click', DGW.main.methods.headerLoginHide);
     })();
 
     DGW.main.elements.widget.querySelector('#dg-o-w-header-fb-connect').addEventListener('click', function(ev){
@@ -355,6 +367,7 @@ DGW.main.methods.resetStates = function(){
     DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').value = 'all-activities';
     DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'email-sign-up');
     DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'password');
+    DGW.main.methods.headerLoginHide();
     DGW.main.methods.fillDefaultValues();
 
     // clearing private cache

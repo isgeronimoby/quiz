@@ -288,6 +288,7 @@ DGW.global.api.requests.getUser = function(onSuccess, onError){
             if (onSuccess) onSuccess(result.data);
         } else {
             DGW.global.authorized = false;
+            DGW.global.methods.unAuthorize();
             DGW.helpers.console.error('getUser anon ', result);
             if (onError) onError(result.error);
         }
