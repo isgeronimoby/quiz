@@ -147,7 +147,6 @@ DGW.helpers.centerWindowPopup = function(url, title, w, h, _callback, _win){
             clearInterval(windowCheckCloseInterval);
             fbWindow = null;
             if (_callback) _callback();
-            DGW.global.api.requests.getUser();
         }
     }, 50);
 };
@@ -279,4 +278,26 @@ DGW.helpers.insertAfter = function (newNode, referenceNode, _fallbackNode) {
 
 DGW.helpers.zeroTimeout = function(callback){
     window.setTimeout(callback, 0);
+};
+
+DGW.helpers.openDataLinks = function(elems){
+    var array = [];
+    if (!DGW.helpers.isArray(elems)) {
+        array.push(elems);
+    } else {
+        array = elems;
+    }
+
+    array.forEach(function(link){
+        var url = DGW.global.widgetPathName + 'pages/' + link.getAttribute('data-link') + '.html';
+        if (link) {
+            console.log(link.innerHTML)
+            link.addEventListener('click', function(ev){
+                ev.preventDefault();
+                DGW.helpers.centerWindowPopup(url, link.getAttribute('data-link'),
+                    DGW.main.elements.widgetBody.clientWidth - 100, DGW.main.elements.widgetBody.clientHeight - 100);
+            });
+        }
+    });
+
 };

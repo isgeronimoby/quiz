@@ -110,19 +110,10 @@ DGW.global.methods.unAuthorize = function(){
         DGW.main.methods.changeMainState('profile');
     }
     DGW.main.methods.resetStates();
+    DGW.global.methods.userStatsReset();
 };
 
-
-DGW.global.methods.init = function(){
-
-    // initialising widget events
-    DGW.side.methods.initEvents();
-    DGW.main.methods.initEvents();
-
-    // adding notification panel to the DOM (hidden)
-    DGW.main.elements.widgetWrapper.appendChild(DGW.main.elements.pages.notificationHolder);
-
-    // filling user default data
+DGW.global.methods.userStatsReset = function(){
     DGW.global.userStats.userId = '';
     DGW.global.userStats.imageUrl = DGW.helpers.checkImagesForSrc();
     DGW.global.userStats.name = 'Guest';
@@ -136,6 +127,19 @@ DGW.global.methods.init = function(){
         all: {},
         earned: {}
     };
+};
+
+DGW.global.methods.init = function(){
+
+    // initialising widget events
+    DGW.side.methods.initEvents();
+    DGW.main.methods.initEvents();
+
+    // adding notification panel to the DOM (hidden)
+    DGW.main.elements.widgetWrapper.appendChild(DGW.main.elements.pages.notificationHolder);
+
+    // filling user default data
+    DGW.global.methods.userStatsReset();
 
     // requesting basic apis to get some cached data
     DGW.global.api.requests.getDraws();

@@ -618,6 +618,7 @@ DGW.global.api.requests.readServerCookie = function(cookieName, _callback){
 DGW.global.api.requests.connectFB = function(onSuccess, onError){
     DGW.helpers.centerWindowPopup(DGW.global.envPath +
     'auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340, function(){
+        DGW.global.api.requests.getUser();
         if(onSuccess) onSuccess();
     });
 };
@@ -997,6 +998,7 @@ DGW.global.offers.requests.shareOfferFb = function(offerId){
     DGW.helpers.centerWindowPopup(DGW.global.envPath +
     'offer/facebookshare?api_key=' + DGW.global.api.apiKey + '&offerid=' + offerId, 'fbWindow', 460, 340, function(){
         DGW.global.api.requests.getUserOffers();
+        DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Sharing on Facebook');
     });
 };
 //
@@ -1021,6 +1023,7 @@ DGW.global.actions.requests.shareFb = function(drawId, _winner){
             'fbWindow2', 460, 340, function(){
                 DGW.global.api.requests.getUser();
                 DGW.global.api.requests.getUserActions();
+                DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Sharing on Facebook');
         }, win);
     });
 };
@@ -1287,7 +1290,6 @@ DGW.helpers.centerWindowPopup = function(url, title, w, h, _callback, _win){
             clearInterval(windowCheckCloseInterval);
             fbWindow = null;
             if (_callback) _callback();
-            DGW.global.api.requests.getUser();
         }
     }, 50);
 };
@@ -1420,6 +1422,28 @@ DGW.helpers.insertAfter = function (newNode, referenceNode, _fallbackNode) {
 DGW.helpers.zeroTimeout = function(callback){
     window.setTimeout(callback, 0);
 };
+
+DGW.helpers.openDataLinks = function(elems){
+    var array = [];
+    if (!DGW.helpers.isArray(elems)) {
+        array.push(elems);
+    } else {
+        array = elems;
+    }
+
+    array.forEach(function(link){
+        var url = DGW.global.widgetPathName + 'pages/' + link.getAttribute('data-link') + '.html';
+        if (link) {
+            console.log(link.innerHTML)
+            link.addEventListener('click', function(ev){
+                ev.preventDefault();
+                DGW.helpers.centerWindowPopup(url, link.getAttribute('data-link'),
+                    DGW.main.elements.widgetBody.clientWidth - 100, DGW.main.elements.widgetBody.clientHeight - 100);
+            });
+        }
+    });
+
+};
 DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body">' +
 
@@ -1525,7 +1549,7 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                                 '<a id="dg-o-w-footer-login-select-2" href="#" class="btn-back-footer">&larr; Back</a><form class="dg-o-w-footer-form" id="dg-o-w-footer-signup-pass">' +
                                                                     '<div class="inline-part"><label><input type="password" placeholder="Password" /></label></div>' +
                                                                     '<div class="inline-part"><label><input class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large" type="submit" value="Sign Up" /></label></div>' +
-                                                                    '<div class="inline-part"><p class="dg-o-w-text-left">By signing up, you agree<br/>with <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></p></div>' +
+                                                                    '<div class="inline-part"><p class="dg-o-w-text-left">By signing up, you agree<br/>with <a data-link="terms" href="#">Terms & Conditions</a> and <a data-link="privacy" href="#">Privacy Policy</a></p></div>' +
                                                                 '</form>' +
                                                             '</div>' +
                                                         '</div>' +
@@ -1539,7 +1563,7 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                 '<div class="sk-circle7 sk-circle"></div><div class="sk-circle8 sk-circle"></div><div class="sk-circle9 sk-circle"></div>' +
                                                 '<div class="sk-circle10 sk-circle"></div><div class="sk-circle11 sk-circle"></div><div class="sk-circle12 sk-circle"></div>' +
                                             '</div>' +
-                                        '<footer class="dg-o-w-main-footer">Powered by Loyalty Rewarded, 2016</footer></div>' +
+                                        '<footer class="dg-o-w-main-footer">Powered by Loyalty Rewarded, 2016 &nbsp;&nbsp;-&nbsp;&nbsp; <a data-link="faq" href="#">FAQ</a></footer></div>' +
                                     '</div>' +
                                 '</div>';
 
@@ -1756,19 +1780,10 @@ DGW.global.methods.unAuthorize = function(){
         DGW.main.methods.changeMainState('profile');
     }
     DGW.main.methods.resetStates();
+    DGW.global.methods.userStatsReset();
 };
 
-
-DGW.global.methods.init = function(){
-
-    // initialising widget events
-    DGW.side.methods.initEvents();
-    DGW.main.methods.initEvents();
-
-    // adding notification panel to the DOM (hidden)
-    DGW.main.elements.widgetWrapper.appendChild(DGW.main.elements.pages.notificationHolder);
-
-    // filling user default data
+DGW.global.methods.userStatsReset = function(){
     DGW.global.userStats.userId = '';
     DGW.global.userStats.imageUrl = DGW.helpers.checkImagesForSrc();
     DGW.global.userStats.name = 'Guest';
@@ -1782,6 +1797,19 @@ DGW.global.methods.init = function(){
         all: {},
         earned: {}
     };
+};
+
+DGW.global.methods.init = function(){
+
+    // initialising widget events
+    DGW.side.methods.initEvents();
+    DGW.main.methods.initEvents();
+
+    // adding notification panel to the DOM (hidden)
+    DGW.main.elements.widgetWrapper.appendChild(DGW.main.elements.pages.notificationHolder);
+
+    // filling user default data
+    DGW.global.methods.userStatsReset();
 
     // requesting basic apis to get some cached data
     DGW.global.api.requests.getDraws();
@@ -2125,11 +2153,16 @@ DGW.main.methods.initEvents = function () {
                         DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
                     });
         });
+
+
     })();
     DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-fb-connect').addEventListener('click', function(ev){
         ev.preventDefault();
         DGW.global.api.requests.connectFB();
     });
+
+// widget internal links
+    DGW.helpers.openDataLinks(Array.prototype.slice.call(DGW.main.elements.widgetBody.querySelectorAll('[data-link]')));
 
 
 //Draws page clicks
@@ -2230,9 +2263,7 @@ DGW.main.methods.initEvents = function () {
 
 //Profile page clicks
     DGW.main.elements.pages.profileMain.querySelector('#dg-o-w-login-fb-text').addEventListener('click', function(){
-        DGW.global.api.requests.connectFB(function onSuccess(){
-            DGW.global.api.requests.getUser();
-        });
+        DGW.global.api.requests.connectFB();
     });
     DGW.main.elements.pages.profileMain.querySelector('#dg-o-w-sign-out-btn').addEventListener('click', function (ev) {
         ev.preventDefault();

@@ -210,6 +210,7 @@ DGW.global.api.requests.readServerCookie = function(cookieName, _callback){
 DGW.global.api.requests.connectFB = function(onSuccess, onError){
     DGW.helpers.centerWindowPopup(DGW.global.envPath +
     'auth/facebook?api_key=' + DGW.global.api.apiKey, 'fbWindow', 460, 340, function(){
+        DGW.global.api.requests.getUser();
         if(onSuccess) onSuccess();
     });
 };

@@ -242,11 +242,16 @@ DGW.main.methods.initEvents = function () {
                         DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
                     });
         });
+
+
     })();
     DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-fb-connect').addEventListener('click', function(ev){
         ev.preventDefault();
         DGW.global.api.requests.connectFB();
     });
+
+// widget internal links
+    DGW.helpers.openDataLinks(Array.prototype.slice.call(DGW.main.elements.widgetBody.querySelectorAll('[data-link]')));
 
 
 //Draws page clicks
@@ -347,9 +352,7 @@ DGW.main.methods.initEvents = function () {
 
 //Profile page clicks
     DGW.main.elements.pages.profileMain.querySelector('#dg-o-w-login-fb-text').addEventListener('click', function(){
-        DGW.global.api.requests.connectFB(function onSuccess(){
-            DGW.global.api.requests.getUser();
-        });
+        DGW.global.api.requests.connectFB();
     });
     DGW.main.elements.pages.profileMain.querySelector('#dg-o-w-sign-out-btn').addEventListener('click', function (ev) {
         ev.preventDefault();

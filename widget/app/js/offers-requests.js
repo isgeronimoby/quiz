@@ -2,6 +2,7 @@ DGW.global.offers.requests.shareOfferFb = function(offerId){
     DGW.helpers.centerWindowPopup(DGW.global.envPath +
     'offer/facebookshare?api_key=' + DGW.global.api.apiKey + '&offerid=' + offerId, 'fbWindow', 460, 340, function(){
         DGW.global.api.requests.getUserOffers();
+        DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Sharing on Facebook');
     });
 };
 //
@@ -26,6 +27,7 @@ DGW.global.actions.requests.shareFb = function(drawId, _winner){
             'fbWindow2', 460, 340, function(){
                 DGW.global.api.requests.getUser();
                 DGW.global.api.requests.getUserActions();
+                DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Sharing on Facebook');
         }, win);
     });
 };

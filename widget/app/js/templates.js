@@ -103,7 +103,7 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                                 '<a id="dg-o-w-footer-login-select-2" href="#" class="btn-back-footer">&larr; Back</a><form class="dg-o-w-footer-form" id="dg-o-w-footer-signup-pass">' +
                                                                     '<div class="inline-part"><label><input type="password" placeholder="Password" /></label></div>' +
                                                                     '<div class="inline-part"><label><input class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large" type="submit" value="Sign Up" /></label></div>' +
-                                                                    '<div class="inline-part"><p class="dg-o-w-text-left">By signing up, you agree<br/>with <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></p></div>' +
+                                                                    '<div class="inline-part"><p class="dg-o-w-text-left">By signing up, you agree<br/>with <a data-link="terms" href="#">Terms & Conditions</a> and <a data-link="privacy" href="#">Privacy Policy</a></p></div>' +
                                                                 '</form>' +
                                                             '</div>' +
                                                         '</div>' +
@@ -117,7 +117,7 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                 '<div class="sk-circle7 sk-circle"></div><div class="sk-circle8 sk-circle"></div><div class="sk-circle9 sk-circle"></div>' +
                                                 '<div class="sk-circle10 sk-circle"></div><div class="sk-circle11 sk-circle"></div><div class="sk-circle12 sk-circle"></div>' +
                                             '</div>' +
-                                        '<footer class="dg-o-w-main-footer">Powered by Loyalty Rewarded, 2016</footer></div>' +
+                                        '<footer class="dg-o-w-main-footer">Powered by Loyalty Rewarded, 2016 &nbsp;&nbsp;-&nbsp;&nbsp; <a data-link="faq" href="#">FAQ</a></footer></div>' +
                                     '</div>' +
                                 '</div>';
 
