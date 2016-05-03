@@ -13,7 +13,13 @@ import {
 	FETCH_PARTNERS_SUCCESS,
 	FETCH_PARTNERS_ERROR,
 	INVALIDATE_PARTNERS,
+
+	FETCH_FIXTURES,
+	FETCH_FIXTURES_SUCCESS,
+	FETCH_FIXTURES_ERROR,
+
 } from '../actions';
+
 
 /*
  Profile
@@ -100,9 +106,8 @@ function users(state = {}, action) {
 	}
 }
 
-
 /*
- Users
+ Partners
  */
 
 function partners(state = {
@@ -135,8 +140,34 @@ function partners(state = {
 }
 
 
+/*
+ Fixtures
+ */
+function fixtures(state= {
+	isFetching: false,
+	list: []
+}, action) {
+	switch (action.type) {
+		case FETCH_FIXTURES:
+			return {
+				...state,
+				isFetching: true
+			};
+		case FETCH_FIXTURES_SUCCESS:
+			return {
+				isFetching: false,
+				list: action.payload,
+				lastUpdated: action.receivedAt,
+			};
+		default:
+			return state;
+	}
+}
+
+
 const rootReducer = combineReducers({
 	profile,
+	fixtures,
 	users,
 	selectedUser,
 	partners

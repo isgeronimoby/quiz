@@ -5,7 +5,7 @@ import './DrawList.scss';
 
 
 function dateFormat(str) {
-	const formatted = moment(str).fromNow();
+	const formatted = moment.utc(str).fromNow();
 	const ended = formatted.indexOf('ago') > -1;
 	const prefix = ended ? 'ended' : 'ends';
 	return `${prefix} ${formatted}`;

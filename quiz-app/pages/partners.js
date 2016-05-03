@@ -35,7 +35,6 @@ const mapStateToProps = (state) => {
 		partners: state.partners
 	};
 };
-
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchPartners: () => dispatch(fetchPartnersIfNeeded())

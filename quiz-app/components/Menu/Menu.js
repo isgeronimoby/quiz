@@ -122,9 +122,4 @@ const mapStateToProps = (state) => {
 	};
 };
 
-const MenuSmart = connect(
-	mapStateToProps
-)(Menu);
-
-
-export default MenuSmart;
+export default connect(mapStateToProps)(Menu);

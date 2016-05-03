@@ -1,29 +1,43 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { fetchFixtures } from '../flux/actions';
 import FixtureList from '../components/FixtureList';
-import withFetch from '../components/withFetch';
-import items from '../components/FixtureList/data.js';
 
-const DELAY = 100;
-
-
-async function fetch() {
-
-	console.log('>>TODO: fetch /fixtures');
-
-	return new Promise((resolve, reject) => {
-		setTimeout(() => resolve(items),  DELAY);
-	});
-}
 
 class Fixtures extends Component {
 
 	static title = 'Fixtures';
 
+	static propTypes = {
+		fixtures: PropTypes.object.isRequired,
+		fetchFixtures: PropTypes.func.isRequired,
+	};
+
+	componentDidMount() {
+		this.props.fetchFixtures();
+	}
+
 	render() {
-		return (
-			<FixtureList {...this.props} />
-		);
+		const { fixtures: { isFetching, list } } = this.props;
+
+		if (isFetching) {
+			return <div/>; // TODO: spinner
+		}
+		return <FixtureList list={ list }/>;
 	}
 }
 
-export default withFetch(Fixtures, fetch);
+// Connect to store
+//
+const mapStateToProps = (state) => {
+	return {
+		fixtures: state.fixtures
+	};
+};
+const mapDispatchToProps = (dispatch) => {
+	return {
+		fetchFixtures: () => dispatch(fetchFixtures())
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Fixtures);

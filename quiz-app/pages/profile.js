@@ -41,7 +41,6 @@ const mapStateToProps = (state) => {
 		user: state.users[state.selectedUser] || {isFetching: true}
 	};
 };
-
 const mapDispatchToProps = (dispatch) => {
 	return {
 		selectUser: (userId) => dispatch(selectUser(userId)),
