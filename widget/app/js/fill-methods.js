@@ -787,7 +787,7 @@ DGW.main.methods.offersConstructor = function(offers) {
                     }
                 } else {
                     ev.preventDefault();
-                    DGW.main.methods.changeMainState('profile');
+                    DGW.main.methods.headerLoginShow('Enter to earn points');
                 }
             });
 

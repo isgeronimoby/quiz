@@ -312,6 +312,7 @@ DGW.helpers.showFramedSrc = function(src){
     };
     iframe.src = src;
 
+    DGW.main.methods.hideNotificationBar();
     ih.appendChild(iframe);
     wb.appendChild(h);
 };

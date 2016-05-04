@@ -87,6 +87,7 @@ DGW.side.methods.hideWidget = function(){
 
 
 DGW.global.methods.authorize = function(){
+    DGW.main.methods.resetStates();
     DGW.helpers.addClass(DGW.main.elements.widgetBody, 'authorized');
     DGW.global.authorized = true;
     DGW.helpers.addClass(DGW.side.elements.widgetBody, 'dg-o-w-authorized');

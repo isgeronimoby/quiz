@@ -147,7 +147,6 @@
 		.dg-o-w-forms {
 			width: 100%;
 			display: block;
-//			text-align: center;
 
 			label {
 				display: block;
@@ -156,6 +155,7 @@
 				font-size: 12px;
 				margin-bottom: 4px;
 				font-weight: 400;
+				animation: dg-widget-fade-in 0.5s ease forwards 1;
 			}
 
 			input:not([type=submit]) {
@@ -180,14 +180,18 @@
 				}
 
 				&:first-child {
-					margin-top: 30px;
+					margin-top: 15px;
 				}
+			}
+
+			.dg-o-w-hidden {
+				display: none;
 			}
 
 			.btn-dg-o-w {
 				display: block;
 				width: 100%;
-				margin: 30px 0;
+				margin: 20px 0 10px;
 			}
 
 			a {
@@ -491,21 +495,21 @@
 									}
 
 									.dg-o-w-email-login-form {
-										top: 40px;
+										top: 36px;
 										opacity: 1;
 									}
 								}
 
 								.dg-o-w-email-login-form {
 									position: absolute;
-									top: 20px;
+									top: 0;
 									right: 0;
 									opacity: 0;
 									background-color: @color-white;
 									.dg-o-w-element-shadow;
 									border: 1px solid @color-grey-light;
-									padding: 35px 25px;
-									z-index: 120;
+									padding: 15px 20px 20px;
+									z-index: 220;
 									display: none;
 									transition: top 0.3s ease,
 												opacity 0.3s ease;
@@ -527,11 +531,6 @@
 										display: block;
 									}
 
-									.btn-dg-o-w {
-										display: block;
-										width: 100%;
-										margin: 30px 0 20px;
-									}
 
 									form {
 										.dg-o-w-forms;
@@ -697,6 +696,7 @@
 							.dg-o-w-footer-login {
 								left: 25px;
 								right: 25px;
+								display: block;
 
 
 								.footer-section {
@@ -782,16 +782,13 @@
 					.dg-o-w-section {
 						.dg-o-w-section-content {
 							top: @dg-widget-overlay-header-height;
-							bottom: @dg-widget-overlay-footer-height;
 
 							&.dg-o-w-submenu-only {
 								top: @dg-widget-overlay-header-height + @dg-widget-overlay-submenu-height;
-								bottom: @dg-widget-overlay-footer-height;
 							}
 
 							&.dg-o-w-submenu-activities {
 								top: @dg-widget-overlay-header-height + @dg-widget-overlay-submenu-height + @dg-widget-overlay-activities-slider-height;
-								bottom: @dg-widget-overlay-footer-height;
 							}
 						}
 					}
@@ -1086,7 +1083,7 @@
 			.dg-o-w-section-scroller {
 				overflow: auto;
 				height: @dg-widget-overlay-widget-height - @dg-widget-overlay-header-height -
-						@dg-widget-overlay-submenu-height - @dg-widget-overlay-footer-height;
+						@dg-widget-overlay-submenu-height;
 				padding: 0 25px 20px;
 			}
 
@@ -1103,14 +1100,9 @@
 					height: 100%;
 					overflow: hidden;
 					margin-right: 0;
-//					position: relative;
 
 					section {
 						height: 100%;
-
-						& > div {
-//							height: 100%;
-						}
 					}
 
 					select {
@@ -1292,25 +1284,6 @@
 
 					}
 
-					.btn-dg-o-w-outline {
-						display: inline-block;
-						vertical-align: middle;
-						font-size: 14px;
-						border: 1px solid @color-brand;
-						color: @color-brand;
-						height: 34px;
-						line-height: 34px;
-						padding: 0 20px;
-						cursor: pointer;
-						transition: border 0.3s ease,
-						color 0.3s ease;
-
-						&:hover {
-							background-color: @color-brand;
-							color: @color-white;
-						}
-					}
-
 					.dg-o-w-footer-login {
 						height: @dg-widget-overlay-footer-height;
 						position: absolute;
@@ -1323,89 +1296,20 @@
 						white-space: nowrap;
 						overflow: hidden;
 						padding-left: 25px;
-
-						&.email-sign-up {
-							.footer-section {
-								&.footer-section-step-1 {
-									transform: translateX(-100%);
-								}
-								&.footer-section-step-2 {
-									transform: translateX(0);
-								}
-							}
-
-							&.password {
-								.footer-section {
-									&.footer-section-step-2 {
-										transform: translateX(-100%);
-									}
-									&.footer-section-step-3 {
-										transform: translateX(0);
-									}
-								}
-							}
-						}
+						display: none;
 
 						.footer-section {
-							display: block;
+							display: table;
 							height: 100%;
 							width: 100%;
 							transition: transform 0.3s ease;
 							position: relative;
-							text-align: left;
-
-							&.footer-section-step-1 {
-								transform: translateX(0);
-							}
-							&.footer-section-step-2 {
-								transform: translateX(100%);
-								margin-top: -@dg-widget-overlay-footer-height;
-							}
-							&.footer-section-step-3 {
-								transform: translateX(100%);
-								margin-top: -@dg-widget-overlay-footer-height;
-							}
-
-							.dg-o-w-footer-form {
-								padding: 30px 20px 0 0;
-								text-align: center;
-
-								.dg-o-w-forms;
-
-								input:not([type=submit]) {
-									min-width: 240px;
-
-									&:first-child {
-										margin-top: 0;
-									}
-								}
-
-								label {
-									margin: 0 10px;
-								}
-
-								.btn-dg-o-w {
-									margin: -10px 0 0;
-								}
-							}
-
-							.btn-back-footer {
-								position: absolute;
-								top: 10px;
-								left: 0;
-								font-size: 12px;
-								color: @color-brand;
-							}
+							text-align: center;
 
 							.inline-part {
-								display: inline-block;
+								display: table-cell;
 								vertical-align: middle;
 								margin: 0 10px;
-
-								&.inline-table {
-									transform: translateY(28px);
-									margin: 0 15px;
-								}
 
 								h3 {
 									font-weight: 400;

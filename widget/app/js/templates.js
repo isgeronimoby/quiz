@@ -48,14 +48,15 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                                 '<div>' +
                                                                     '<h4>Hello, guest!</h4>' +
                                                                     '<div class="dg-o-w-login-dropdown">' +
-                                                                        '<a href="#" id="dg-o-w-login-trigger">Log in & get started</a>' +
+                                                                        '<a href="#" id="dg-o-w-login-trigger">Enter & get started</a>' +
                                                                         '<div class="dg-o-w-email-login-form">' +
                                                                             '<form class="shown" id="dg-o-w-form-login-top">' +
-                                                                                '<h2>Welcome!</h2>' +
+                                                                                '<h2 id="dg-o-w-login-heading">Welcome!</h2>' +
                                                                                 '<div id="dg-o-w-header-fb-connect" class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large">Connect with Facebook</div>' +
                                                                                 '<label><input type="email" placeholder="Email" /></label>' +
                                                                                 '<label><input type="password" placeholder="Password"/></label>' +
-                                                                                '<input class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large" type="submit" value="Sign in with email" />' +
+                                                                                '<label class="dg-o-w-hidden"><input type="text" placeholder="Hello, what\'s your name?"/></label>' +
+                                                                                '<input class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large" type="submit" value="Enter with email" />' +
                                                                                 '<a href="#" id="dg-o-w-header-forgot-pass" class="">Forgot your password?</a>' +
                                                                             '</form>' +
                                                                             '<form id="dg-o-w-form-forgot-top">' +
@@ -82,30 +83,12 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                 '<div class="dg-o-w-content"><div class="dg-o-w-section">' +
                                                     '<section></section>' +
                                                     '<footer class="dg-o-w-footer-login">' +
-                                                        '<div class="footer-section footer-section-step-1">' +
+                                                        '<div class="footer-section">' +
                                                             '<div class="inline-part inline-table dg-o-w-text-left"><p>Get started now and earn first <span id="dg-o-w-login-fb-reward" class="dg-o-w-rewarded-action dg-o-w-points">30</span></p>' +
                                                             '<h5 class="dg-o-w-color-grey">We\'ll never send you any spam.</h5></div>' +
                                                             '<div class="inline-part inline-table"><a href="#" id="dg-o-w-footer-fb-connect" class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large">Connect with Facebook</a></div>' +
                                                             '<div class="inline-part inline-table"><p>or</p></div>' +
-                                                            '<div class="inline-part inline-table"><a id="dg-o-w-footer-email-login" href="#" class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large">Sign up with email</a></div>' +
-                                                        '</div>' +
-                                                        '<div class="footer-section footer-section-step-2">' +
-                                                            '<div>' +
-                                                                '<a id="dg-o-w-footer-login-select" href="#" class="btn-back-footer">&larr; Back</a><form class="dg-o-w-footer-form" id="dg-o-w-footer-signup-email">' +
-                                                                    '<div class="inline-part"><label><input type="text" placeholder="Name" /></label></div>' +
-                                                                    '<div class="inline-part"><label><input type="email" placeholder="Email" /></label></div>' +
-                                                                    '<div class="inline-part"><label><input class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large" type="submit" value="Submit" /></label></div>' +
-                                                                '</form>' +
-                                                            '</div>' +
-                                                        '</div>' +
-                                                        '<div class="footer-section footer-section-step-3">' +
-                                                            '<div>' +
-                                                                '<a id="dg-o-w-footer-login-select-2" href="#" class="btn-back-footer">&larr; Back</a><form class="dg-o-w-footer-form" id="dg-o-w-footer-signup-pass">' +
-                                                                    '<div class="inline-part"><label><input type="password" placeholder="Password" /></label></div>' +
-                                                                    '<div class="inline-part"><label><input class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large" type="submit" value="Sign Up" /></label></div>' +
-                                                                    '<div class="inline-part"><p class="dg-o-w-text-left">By signing up, you agree<br/>with <a data-link="terms" href="#">Terms & Conditions</a> and <a data-link="privacy" href="#">Privacy Policy</a></p></div>' +
-                                                                '</form>' +
-                                                            '</div>' +
+                                                            '<div class="inline-part inline-table"><a id="dg-o-w-footer-email-login" href="#" class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large">Enter with email</a></div>' +
                                                         '</div>' +
                                                     '</footer>' +
                                                 '</div></div>' +
