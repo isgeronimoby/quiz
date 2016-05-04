@@ -18,7 +18,8 @@ class Profile extends Component {
 
 	componentDidMount() {
 		const { params: { userId }, fetchUserProfile, selectUserProfile } = this.props;
-		
+
+		// TODO - my vs others profiles
 
 		fetchUserProfile(userId).then(() => {
 			selectUserProfile(userId);

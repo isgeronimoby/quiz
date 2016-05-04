@@ -1,29 +1,46 @@
 import React, { Component, PropTypes } from 'react';
-import withFetch from '../components/withFetch';
+import { connect } from 'react-redux';
+import { fetchUserList } from '../flux/actions';
 import LeaderBoardContainer from '../components/LeaderBoardContainer';
-import data from '../components/LeaderBoardContainer/data.js';
 
-const DELAY = 100;
-
-async function fetch() {
-
-	console.log('>>TODO: fetch /leaderboard');
-
-	return new Promise((resolve, reject) => {
-		setTimeout(() => resolve(data), DELAY);
-	});
-}
 
 class Leaders extends Component {
 
 	static title = 'Leaderboard';
 
+	static propTypes = {
+		userList: PropTypes.object.isRequired,
+		fetchUserList: PropTypes.func.isRequired,
+	};
+
+	componentDidMount() {
+		this.props.fetchUserList();
+	}
+
 	render() {
+		const { userList: { isFetching, list } } = this.props;
+
+		if (isFetching) {
+			return <div/>; // TODO: spinner
+		}
 		return (
-			<LeaderBoardContainer {...this.props} />
+			<LeaderBoardContainer list={ list }/>
 		);
 	}
 
 }
 
-export default withFetch(Leaders, fetch);
+// Connect to store
+//
+const mapStateToProps = (state) => {
+	return {
+		userList: state.userList
+	};
+};
+const mapDispatchToProps = (dispatch) => {
+	return {
+		fetchUserList: () => dispatch(fetchUserList())
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Leaders);

@@ -4,6 +4,14 @@ import {
 	FETCH_PROFILE_SUCCESS,
 	FETCH_PROFILE_ERROR,
 
+	FETCH_FIXTURES,
+	FETCH_FIXTURES_SUCCESS,
+	//FETCH_FIXTURES_ERROR,
+
+	FETCH_USER_LIST,
+	FETCH_USER_LIST_SUCCESS,
+	//FETCH_USER_LIST_ERROR - TODO
+
 	FETCH_USER_PROFILE,
 	FETCH_USER_PROFILE_SUCCESS,
 	SELECT_USER_PROFILE,
@@ -12,10 +20,6 @@ import {
 	FETCH_PARTNERS_SUCCESS,
 	FETCH_PARTNERS_ERROR,
 	INVALIDATE_PARTNERS,
-
-	FETCH_FIXTURES,
-	FETCH_FIXTURES_SUCCESS,
-	FETCH_FIXTURES_ERROR,
 
 } from '../actions';
 
@@ -50,7 +54,55 @@ function profile(state = {
 }
 
 /*
- Users
+ Fixtures
+ */
+function fixtures(state = {
+	isFetching: false,
+	list: []
+}, action) {
+	switch (action.type) {
+		case FETCH_FIXTURES:
+			return {
+				...state,
+				isFetching: true
+			};
+		case FETCH_FIXTURES_SUCCESS:
+			return {
+				isFetching: false,
+				list: action.payload,
+				lastUpdated: action.receivedAt,
+			};
+		default:
+			return state;
+	}
+}
+
+/*
+ User List
+ */
+function userList(state = {
+	isFetching: false,
+	list: []
+}, action) {
+	switch (action.type) {
+		case FETCH_USER_LIST:
+			return {
+				...state,
+				isFetching: true
+			};
+		case FETCH_USER_LIST_SUCCESS:
+			return {
+				isFetching: false,
+				list: action.payload,
+				lastUpdated: action.receivedAt,
+			};
+		default:
+			return state;
+	}
+}
+
+/*
+ User Profiles
  */
 
 function selectedUserProfile(state = null, action) {
@@ -130,34 +182,10 @@ function partners(state = {
 }
 
 
-/*
- Fixtures
- */
-function fixtures(state= {
-	isFetching: false,
-	list: []
-}, action) {
-	switch (action.type) {
-		case FETCH_FIXTURES:
-			return {
-				...state,
-				isFetching: true
-			};
-		case FETCH_FIXTURES_SUCCESS:
-			return {
-				isFetching: false,
-				list: action.payload,
-				lastUpdated: action.receivedAt,
-			};
-		default:
-			return state;
-	}
-}
-
-
 const rootReducer = combineReducers({
 	profile,
 	fixtures,
+	userList,
 	userProfiles,
 	selectedUserProfile,
 	partners

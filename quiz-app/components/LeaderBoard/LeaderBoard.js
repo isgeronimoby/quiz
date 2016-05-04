@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import Section from './Section.js';
 import Link from '../Link';
 import Logo from '../UserProfile/Logo.js';
@@ -10,36 +11,36 @@ class LeaderBoard extends Component {
 	static propTypes = {
 		top3: PropTypes.array.isRequired,
 		users: PropTypes.array.isRequired,
+		//from store
 		profile: PropTypes.object.isRequired,
 	};
 
 	render() {
-		const { top3, users, profile: {rank: myRank} } = this.props;
+		const { top3, users, profile: {rank: myRank = 0} } = this.props;
 		const rankTitle = `You are ranked ${myRank}`;
 		const top3cols = top3.map((user, i) => {
-			const {userId, picture, name, answers, rank} = user;
+			const {userId, imageUrl, name, answers } = user;
 
 			return (
-				<Link key={`top-user-${i}`} className="col" to="./profile" state={ {userId} }>
-					<Logo src={ picture } rank={ rank }/>
+				<div key={`top-user-${i}`} className="col">
+					<Logo src={ imageUrl } rank={ i + 1 }/>
 					<div className="user-name">{ name }</div>
 					<div className="user-answers">{ answers } answers</div>
-				</Link>
+				</div>
 			);
 		});
 		const playerItems = users.map((user, i) => {
-			const {userId, picture, name, answers, rank} = user;
-			const myselfClass = (rank === myRank) ? 'myself' : '';
+			const { userId, imageUrl, name, answers} = user;
 
 			return (
-				<Link key={`user-${i}`} className={"user-list-item " + myselfClass} to="./profile" state={ {userId} }>
-					<div className="user-rank">{ rank }</div>
-					<Logo src={picture}/>
+				<div key={`user-${i}`} className={"user-list-item"}>
+					<div className="user-rank">{ i + 1 }</div>
+					<Logo src={imageUrl}/>
 					<div className="user-details">
 						<div className="user-name large">{ name }</div>
 						<div className="user-answers large">{ answers } answers</div>
 					</div>
-				</Link>
+				</div>
 			);
 		});
 
@@ -61,59 +62,13 @@ class LeaderBoard extends Component {
 	}
 }
 
-
-export class LeaderBoardGroup extends Component {
-
-	static propTypes = {
-		top3: PropTypes.array.isRequired,
-		groups: PropTypes.array.isRequired
+// Connect to store
+//
+const mapStateToProps = (state) => {
+	return {
+		profile: state.profile
 	};
+};
 
-	render() {
-		const { top3, groups } = this.props;
-		const rankTitle = `You are in 4 groups`;
-		const top3cols = top3.map((group, i) => {
-			const {picture, name, members, rank} = group;
+export default connect(mapStateToProps)(LeaderBoard);
 
-			return (
-				<div key={`top-group-${i}`} className="col">
-					<Logo src={ picture } rank={ rank }/>
-					<div className="user-name">{ name }</div>
-					<div className="user-answers">{ members } members</div>
-				</div>
-			);
-		});
-		const groupItems = groups.map((user, i) => {
-			const {picture, name, members, rank} = user;
-
-			return (
-				<div key={`group-${i}`} className={"user-list-item"}>
-					<div className="user-rank">{ rank }</div>
-					<Logo src={picture}/>
-					<div className="user-details">
-						<div className="user-name large">{ name }</div>
-						<div className="user-answers large">{ members } members</div>
-					</div>
-				</div>
-			);
-		});
-
-		return (
-			<div className="screen-content">
-				<Section title="TOP groups">
-					<div className="user-cols-3">
-						{ top3cols }
-					</div>
-				</Section>
-
-				<Section title={ rankTitle }>
-					<ul className="user-list">
-						{ groupItems }
-					</ul>
-				</Section>
-			</div>
-		);
-	}
-}
-
-export default LeaderBoard;

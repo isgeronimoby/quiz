@@ -1,5 +1,8 @@
-import userData from '../../components/LeaderBoardContainer/data.js'; // fake response data
-// import fetch from '../../lib/fetch.js'; TODO - use api
+import userData from '../../components/LeaderBoardContainer/data.js'; // fake profiles response data
+import fetch from '../../lib/fetch.js';
+
+export const FETCH_USER_LIST = 'FETCH_USER_LIST';
+export const FETCH_USER_LIST_SUCCESS = 'FETCH_USER_LIST_SUCCESS';
 
 export const SELECT_USER_PROFILE = 'SELECT_USER_PROFILE';
 export const FETCH_USER_PROFILE = 'FETCH_USER_PROFILE';
@@ -7,9 +10,47 @@ export const FETCH_USER_PROFILE_SUCCESS = 'FETCH_USER_PROFILE_SUCCESS';
 
 const DELAY = 100;
 
-// Leadeboard
-/
+// Leader-board
+//
 
+function fetchUserListStart() {
+	return {
+		type: FETCH_USER_LIST
+	};
+}
+
+
+function fetchUserListSuccess(json) {
+	return {
+		type: FETCH_USER_LIST_SUCCESS,
+		payload: json.Earners.map(({
+			UserId: userId,
+			UserName: name,
+			ImageUrl: imageUrl,
+			Amount: answers,
+			}) => {
+			return {
+				userId,
+				name,
+				imageUrl,
+				answers
+			};
+		}),
+		receivedAt: Date.now()
+	};
+}
+
+export function fetchUserList() {
+	return (dispatch) => {
+		dispatch(fetchUserListStart());
+
+		return fetch({
+			endpoint: 'leaderboard/gettopearners'
+		}).then((json) => {
+			dispatch(fetchUserListSuccess(json));
+		});
+	};
+}
 
 // User Profiles
 //
