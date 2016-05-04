@@ -418,6 +418,12 @@
   line-height: 80px;
   text-align: left;
 }
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-header .dg-o-w-menu-profile [data-userstats-points-c]:after {
+  content: ' pts';
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-header .dg-o-w-menu-profile [data-userstats-credits-c]:after {
+  content: ' cts';
+}
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-header .dg-o-w-menu-profile img {
   width: 40px;
   height: 40px;

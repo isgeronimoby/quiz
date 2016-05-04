@@ -37,7 +37,11 @@ var DGW = function () {
                 widgetType = widgetScript.getAttribute('data-type');
             }
             return {
-                templates: {},
+                templates: {
+                    side: {
+
+                    }
+                },
                 main: {
                     methods: {},
                     elements: {

@@ -1,35 +1,3 @@
-DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
-                                    '<div class="dg-side-widget-body">' +
-
-                                        '<div class="dg-side-widget-content dg-o-w-authorized">' +
-                                            '<div class="dg-side-widget-content-inner">' +
-                                                '<div class="dg-side-section">' +
-                                                    '<div class="dg-side-user-img-holder"><img data-userstats-userimage class="dg-o-w-side-image-floating" id="dg-side-widget-userpic" src=""/></div>' +
-                                                    '<div class="dg-side-collapsed dg-side-floating-text"><p><span data-userstats-points-c class="dg-o-w-points-text" id="dg-side-points-collapsed">00</span></p><h5>Earn more</h5></div>' +
-                                                    '<div class="dg-side-content">' +
-                                                        '<h4 data-userstats-username id="dg-side-widget-name">Name Surname Whatever</h4>' +
-                                                        '<h6><span data-userstats-points-c class="dg-o-w-points-text" id="dg-side-points">00</span><br/><span data-userstats-credits-c class="dg-o-w-credits-text" id="dg-side-credits">00</span></h6>' +
-                                                    '</div>' +
-                                                '</div>' +
-                                                '<div data-page="earn" class="dg-side-cta-floating"><span class="dg-side-collapsed">&rarr;</span><span class="dg-side-expanded">Earn more points</span></div>' +
-                                            '</div>' +
-                                        '</div>' +
-
-                                        '<div class="dg-side-widget-content dg-o-w-anonymous">' +
-                                            '<div class="dg-side-widget-content-inner">' +
-                                                '<div class="dg-side-section">' +
-                                                    '<div class="dg-side-img-holder"><img data-image="trophey-clean.svg" class="dg-o-w-side-image-floating" src=""/></div>' +
-                                                    '<div class="dg-side-content">Sign up & get +10 points</div>' +
-                                                '</div>' +
-                                                '<div class="dg-side-collapsed"><div data-page="profile" class="dg-side-cta">Sign Up</div></div>' +
-                                                '<div class="dg-side-expanded"><div data-page="profile" class="dg-side-cta">Sign up & get +10 points</div></div>' +
-                                            '</div>' +
-                                        '</div>' +
-                                        '<div class="dg-side-widget-resizer"></div>' +
-                                        '<div data-page="earn" class="dg-side-click-holder"></div>' +
-                                    '</div>' +
-                               '</div>';
-
 DGW.templates.spinner = '<div class="dg-o-w-spinner">' +
                             '<div class="sk-circle1 sk-circle"></div><div class="sk-circle2 sk-circle"></div><div class="sk-circle3 sk-circle"></div>' +
                             '<div class="sk-circle4 sk-circle"></div><div class="sk-circle5 sk-circle"></div><div class="sk-circle6 sk-circle"></div>' +
@@ -87,7 +55,7 @@ DGW.templates.header = '<div class="dg-o-w-header">' +
                                     '<div class="profile-menu-authorized">' +
                                         '<div>' +
                                             '<h4 data-userstats-username>Hello, Paul!</h4>' +
-                                            '<p><span data-userstats-points-c id="dg-o-w-points">25</span> | <span data-userstats-credits-c id="dg-o-w-credits">115.25</span></p>' +
+                                            '<p><span data-userstats-points-c>25</span> | <span data-userstats-credits-c>115.25</span></p>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +
@@ -142,14 +110,14 @@ DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
 DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' +
 
                                 '<div class="dg-o-w-profile-stats">' +
-                                    '<div class="dg-o-w-image-holder"><img data-userstats-userimage id="profileImage" class="avatar" src="" /></div>' +
+                                    '<div class="dg-o-w-image-holder"><img data-userstats-userimage class="avatar" src="" /></div>' +
                                     '<div class="dg-o-w-profile-stats-holder">' +
-                                        '<h3 data-userstats-username class="dg-o-w-profile-name" id="profileName">Captain Deadpool</h3>' +
+                                        '<h3 data-userstats-username class="dg-o-w-profile-name">Captain Deadpool</h3>' +
                                         '<div class="dg-o-w-profile-stats-holder-rest">' +
                                             //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p>19</p></div></div>' +
                                             //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p>3</p></div></div>' +
-                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 data-userstats-points-c id="dg-o-w-profile-p-c">520</h3><p>points</p></div></div>' +
-                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 data-userstats-credits-c id="dg-o-w-profile-c-c">40</h3><p>credits</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 data-userstats-points-c>520</h3><p>points</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 data-userstats-credits-c>40</h3><p>credits</p></div></div>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +
@@ -183,7 +151,6 @@ DGW.templates.loginMain = '<div class="dg-o-w-login">' +
                             '</div>';
 
 DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul>' +
-                                    //'<li class="toggle-section-height"><div></div></li>' +
                                     '<li class="dg-o-w-active">Leaderboard</li></ul></div>' +
                                 '<div class="dg-o-w-section-scroller">' +
                                     '<div class="dg-o-w-activities dg-o-w-white-section">' +

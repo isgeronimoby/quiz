@@ -49,6 +49,8 @@ DGW.global.methods.authorize = function(){
         DGW.global.api.requests.getUserOffers();
     }
 
+    DGW.side.methods.changeSideWidgetState('profile');
+
     DGW.global.api.requests.getUserActions();
 };
 
@@ -61,6 +63,8 @@ DGW.global.methods.unAuthorize = function(){
     }
     DGW.main.methods.resetStates();
     DGW.global.methods.userStatsReset();
+
+    DGW.side.methods.changeSideWidgetState();
 };
 
 DGW.global.methods.userStatsReset = function(){
@@ -81,8 +85,9 @@ DGW.global.methods.userStatsReset = function(){
 
 DGW.global.methods.init = function(){
 
+
     // initialising widget events
-    DGW.side.methods.initEvents();
+    //DGW.side.methods.initEvents();
     DGW.main.methods.initEvents();
 
     // adding notification panel to the DOM (hidden)

@@ -38,7 +38,11 @@ var DGW = function () {
                 widgetType = widgetScript.getAttribute('data-type');
             }
             return {
-                templates: {},
+                templates: {
+                    side: {
+
+                    }
+                },
                 main: {
                     methods: {},
                     elements: {
@@ -1329,38 +1333,31 @@ DGW.helpers.getElementsFromAllPlaces = function(selector){
 
     return elements;
 };
+DGW.templates.side.profileInfo ='<div class="dg-side-section">' +
+                                    '<div class="dg-side-user-img-holder"><img data-userstats-userimage class="dg-o-w-side-image-floating" src=""/></div>' +
+                                    '<div class="dg-side-collapsed dg-side-floating-text"><p><span data-userstats-points-c class="dg-o-w-points-text">00</span></p><h5>Earn more</h5></div>' +
+                                    '<div class="dg-side-content">' +
+                                        '<h4 data-userstats-username>Name Surname Whatever</h4>' +
+                                        '<h6><span data-userstats-points-c class="dg-o-w-points-text">00</span><br/><span data-userstats-credits-c class="dg-o-w-credits-text">00</span></h6>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div data-page="earn" class="dg-side-cta-floating"><span class="dg-side-collapsed">&rarr;</span><span class="dg-side-expanded">Earn more points</span></div>';
+
+DGW.templates.side.prizeGeneric =   '<div class="dg-side-section">' +
+                                        '<div class="dg-side-img-holder"><img data-image="trophey-clean.svg" class="dg-o-w-side-image-floating" src=""/></div>' +
+                                        '<div class="dg-side-content">Sign up & get +10 points</div>' +
+                                    '</div>' +
+                                    '<div class="dg-side-collapsed"><div data-page="profile" class="dg-side-cta">Sign Up</div></div>' +
+                                    '<div class="dg-side-expanded"><div data-page="profile" class="dg-side-cta">Sign up & get +10 points</div></div>';
+
+DGW.templates.side.clickCatcher = '<div data-page="earn" class="dg-side-click-holder"></div>';
+
 DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body">' +
-
-                                        '<div class="dg-side-widget-content dg-o-w-authorized">' +
-                                            '<div class="dg-side-widget-content-inner">' +
-                                                '<div class="dg-side-section">' +
-                                                    '<div class="dg-side-user-img-holder"><img data-userstats-userimage class="dg-o-w-side-image-floating" id="dg-side-widget-userpic" src=""/></div>' +
-                                                    '<div class="dg-side-collapsed dg-side-floating-text"><p><span data-userstats-points-c class="dg-o-w-points-text" id="dg-side-points-collapsed">00</span></p><h5>Earn more</h5></div>' +
-                                                    '<div class="dg-side-content">' +
-                                                        '<h4 data-userstats-username id="dg-side-widget-name">Name Surname Whatever</h4>' +
-                                                        '<h6><span data-userstats-points-c class="dg-o-w-points-text" id="dg-side-points">00</span><br/><span data-userstats-credits-c class="dg-o-w-credits-text" id="dg-side-credits">00</span></h6>' +
-                                                    '</div>' +
-                                                '</div>' +
-                                                '<div data-page="earn" class="dg-side-cta-floating"><span class="dg-side-collapsed">&rarr;</span><span class="dg-side-expanded">Earn more points</span></div>' +
-                                            '</div>' +
-                                        '</div>' +
-
-                                        '<div class="dg-side-widget-content dg-o-w-anonymous">' +
-                                            '<div class="dg-side-widget-content-inner">' +
-                                                '<div class="dg-side-section">' +
-                                                    '<div class="dg-side-img-holder"><img data-image="trophey-clean.svg" class="dg-o-w-side-image-floating" src=""/></div>' +
-                                                    '<div class="dg-side-content">Sign up & get +10 points</div>' +
-                                                '</div>' +
-                                                '<div class="dg-side-collapsed"><div data-page="profile" class="dg-side-cta">Sign Up</div></div>' +
-                                                '<div class="dg-side-expanded"><div data-page="profile" class="dg-side-cta">Sign up & get +10 points</div></div>' +
-                                            '</div>' +
-                                        '</div>' +
+                                        '<div class="dg-side-widget-content"></div>' +
                                         '<div class="dg-side-widget-resizer"></div>' +
-                                        '<div data-page="earn" class="dg-side-click-holder"></div>' +
                                     '</div>' +
-                               '</div>';
-
+                                '</div>';
 DGW.templates.spinner = '<div class="dg-o-w-spinner">' +
                             '<div class="sk-circle1 sk-circle"></div><div class="sk-circle2 sk-circle"></div><div class="sk-circle3 sk-circle"></div>' +
                             '<div class="sk-circle4 sk-circle"></div><div class="sk-circle5 sk-circle"></div><div class="sk-circle6 sk-circle"></div>' +
@@ -1418,7 +1415,7 @@ DGW.templates.header = '<div class="dg-o-w-header">' +
                                     '<div class="profile-menu-authorized">' +
                                         '<div>' +
                                             '<h4 data-userstats-username>Hello, Paul!</h4>' +
-                                            '<p><span data-userstats-points-c id="dg-o-w-points">25</span> | <span data-userstats-credits-c id="dg-o-w-credits">115.25</span></p>' +
+                                            '<p><span data-userstats-points-c>25</span> | <span data-userstats-credits-c>115.25</span></p>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +
@@ -1473,14 +1470,14 @@ DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
 DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' +
 
                                 '<div class="dg-o-w-profile-stats">' +
-                                    '<div class="dg-o-w-image-holder"><img data-userstats-userimage id="profileImage" class="avatar" src="" /></div>' +
+                                    '<div class="dg-o-w-image-holder"><img data-userstats-userimage class="avatar" src="" /></div>' +
                                     '<div class="dg-o-w-profile-stats-holder">' +
-                                        '<h3 data-userstats-username class="dg-o-w-profile-name" id="profileName">Captain Deadpool</h3>' +
+                                        '<h3 data-userstats-username class="dg-o-w-profile-name">Captain Deadpool</h3>' +
                                         '<div class="dg-o-w-profile-stats-holder-rest">' +
                                             //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p>19</p></div></div>' +
                                             //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p>3</p></div></div>' +
-                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 data-userstats-points-c id="dg-o-w-profile-p-c">520</h3><p>points</p></div></div>' +
-                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 data-userstats-credits-c id="dg-o-w-profile-c-c">40</h3><p>credits</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 data-userstats-points-c>520</h3><p>points</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 data-userstats-credits-c>40</h3><p>credits</p></div></div>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +
@@ -1514,7 +1511,6 @@ DGW.templates.loginMain = '<div class="dg-o-w-login">' +
                             '</div>';
 
 DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul>' +
-                                    //'<li class="toggle-section-height"><div></div></li>' +
                                     '<li class="dg-o-w-active">Leaderboard</li></ul></div>' +
                                 '<div class="dg-o-w-section-scroller">' +
                                     '<div class="dg-o-w-activities dg-o-w-white-section">' +
@@ -1542,12 +1538,16 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul>' +
 DGW.templates.videoHolder = '<div class="dg-o-w-video-holder"><div id="dg-o-w-video-playing"></div><div class="dg-o-w-video-text"><span></span></div></div>';
 
 DGW.templates.notificationHolder = '<div class="dg-o-w-notification-holder"><ul></ul><div class="dg-o-w-notification-close">&times;</div></div>';
-DGW.global.elements.documentBody = document.body;
-
 DGW.side.elements.widget = document.createElement('div');
 DGW.side.elements.widget.id = 'dg-side-widget';
 DGW.side.elements.widget.innerHTML = DGW.templates.sideWidgetCore;
 DGW.side.elements.widgetBody = DGW.side.elements.widget.querySelector('.dg-side-widget-body');
+DGW.side.elements.widgetContent = DGW.side.elements.widgetBody.querySelector('.dg-side-widget-content');
+DGW.side.elements.widgetInner = null;
+
+DGW.side.elements.clickCatcher = document.createElement('div');
+DGW.side.elements.clickCatcher.className = 'dg-side-click-holder';
+DGW.global.elements.documentBody = document.body;
 
 DGW.main.elements.widget = document.createElement('div');
 DGW.main.elements.widget.id = 'dg-o-w';
@@ -1653,6 +1653,8 @@ DGW.global.methods.authorize = function(){
         DGW.global.api.requests.getUserOffers();
     }
 
+    DGW.side.methods.changeSideWidgetState('profile');
+
     DGW.global.api.requests.getUserActions();
 };
 
@@ -1665,6 +1667,8 @@ DGW.global.methods.unAuthorize = function(){
     }
     DGW.main.methods.resetStates();
     DGW.global.methods.userStatsReset();
+
+    DGW.side.methods.changeSideWidgetState();
 };
 
 DGW.global.methods.userStatsReset = function(){
@@ -1685,8 +1689,9 @@ DGW.global.methods.userStatsReset = function(){
 
 DGW.global.methods.init = function(){
 
+
     // initialising widget events
-    DGW.side.methods.initEvents();
+    //DGW.side.methods.initEvents();
     DGW.main.methods.initEvents();
 
     // adding notification panel to the DOM (hidden)
@@ -1866,7 +1871,6 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
     }
 };
 DGW.side.methods.initEvents = function(){
-
     if (!DGW.global.launched) {
         // Showing side widget
         DGW.side.methods.showWidget();
@@ -1937,6 +1941,31 @@ DGW.side.methods.initSafariFixEvents = function(){
                 wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
         }
     }, 100);
+};
+
+DGW.side.methods.changeSideWidgetState = function(state) {
+    var swc = DGW.side.elements.widgetContent;
+    var wb = DGW.side.elements.widgetBody;
+
+    DGW.side.elements.widgetInner = null;
+    DGW.side.elements.widgetInner = document.createElement('div');
+    DGW.side.elements.widgetInner.className = 'dg-side-widget-content-inner';
+    swc.innerHTML = '';
+    if (wb.children.length > 2) wb.removeChild(DGW.side.elements.clickCatcher);
+    switch(state){
+        case 'profile':
+            DGW.side.elements.widgetInner.innerHTML = DGW.templates.side.profileInfo;
+            DGW.side.elements.clickCatcher.setAttribute('data-page', 'earn');
+            wb.appendChild(DGW.side.elements.clickCatcher);
+            swc.appendChild(DGW.side.elements.widgetInner);
+            DGW.global.api.requests.getUser();
+            break;
+        default:
+            DGW.side.elements.widgetInner.innerHTML = DGW.templates.side.prizeGeneric;
+            swc.appendChild(DGW.side.elements.widgetInner);
+    }
+
+    DGW.side.methods.initEvents();
 };
 DGW.main.methods.checkSectionHeight = function() {
     var section = DGW.main.elements.widgetBody.querySelector('.dg-o-w-section');
@@ -2464,9 +2493,6 @@ DGW.main.methods.updateBadgesInfo = function(){
     var wc = DGW.main.elements.widgetContent;
     var ul = pr.querySelector('.dg-o-w-badges-holder ul');
 
-    //pr.querySelector('#dg-o-w-badges-earned-amount').innerHTML = be.length;
-
-
     ul.innerHTML = '';
     ba.forEach(function(b){
         var li = document.createElement('li');
@@ -2594,7 +2620,7 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
                             ((draw.Winner) ?
                                 '<div class="dg-o-w-draw-list-winner"><img src="' + draw.Winner.ImageUrl + '" /><p>' + draw.Winner.UserName + ' has won</p></div>' : '') +
                             ((drawEntry != undefined) ?
-                                '<div class="dg-o-w-draw-bet ' + ((draw.Winner) ? 'dg-o-w-draw-bet-second' : '') + '"><p>You\'ve bet: <span>' + ticketsInDraw + '</span> points</p></div>' : '') +
+                                '<div class="dg-o-w-draw-bet ' + ((draw.Winner) ? 'dg-o-w-draw-bet-second' : '') + '"><p>You\'ve placed: <span>' + ticketsInDraw + '</span> points</p></div>' : '') +
                                 //'<div class="dg-o-w-draw-connections"><span>2</span> of your friends</div>' +
                             '</div>';
             if (!DGW.helpers.drawsTimer.push({dt:draw.EndDate, elem:li.querySelector('.dg-o-w-draw-countdown')})) {
@@ -2658,7 +2684,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                     '</div>';
     var submenu = '<div class="dg-o-w-submenu">' +
                         '<ul><li class="dg-o-w-back-draws">&larr; Back</li></ul><div class="right-side">' +
-        (!(drawEntry != undefined && drawEntry.IsWinner) ? /*'Minimum bet is 10'*/ '' : 'You\'ve spent ' + drawEntry.TicketsAmount + ' points and won!') +
+        (!(drawEntry != undefined && drawEntry.IsWinner) ? /*'Minimum bet is 10'*/ '' : 'You\'ve placed ' + drawEntry.TicketsAmount + ' points and won!') +
                             '</div>' +
                     '</div>';
 
@@ -2698,15 +2724,15 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                                 '<h3>' + draw.Prize.Title + '</h3>' +
                                 '<p>' + draw.Prize.Description + '</p>' +
                                 '<div class="dg-o-w-draw-bet-info dg-o-w-draw-auth-show">' +
-                                    '<div class="dg-o-w-your-bet dg-o-w-points-bet"><p>You\'ve bet <span data-draw-betpoints>' + ((drawEntry) ? drawEntry.TicketsAmount : 0 ) + '</span> points</p></div>' +
+                                    '<div class="dg-o-w-your-bet dg-o-w-points-bet"><p>You\'ve placed <span data-draw-betpoints>' + ((drawEntry) ? drawEntry.TicketsAmount : 0 ) + '</span> points</p></div>' +
                                     // playersInDraw +
                                 '</div>' +
-                                ((DGW.helpers.dateDiff(draw.EndDate) > 0) ? '<h2 class="dg-o-w-draw-login-show">Please, log in to bet</h2>' : '') +
+                                ((DGW.helpers.dateDiff(draw.EndDate) > 0) ? '<h2 class="dg-o-w-draw-login-show">Please, log in to play the draw</h2>' : '') +
                                 '<div class="dg-o-w-draw-bet-action dg-o-w-draw-auth-show">' +
-                                    '<h5>How much do you want to bet?</h5>' +
+                                    '<h5>How much do you want to place?</h5>' +
                                     '<form id="bet-form" class="dg-o-w-one-field-form">' +
                                         '<input type="number" min="1" max="1000" placeholder="50"/>' +
-                                        '<input class="btn-dg-o-w btn-dg-o-w-brand" type="submit" value="Bet points" />' +
+                                        '<input class="btn-dg-o-w btn-dg-o-w-brand" type="submit" value="Place points" />' +
                                     '</form>' +
                                     '<div id="dg-o-w-get-points-btn" class="btn-dg-o-w btn-dg-o-w-brand-l">Get additional points</div>' +
                                 '</div>' +

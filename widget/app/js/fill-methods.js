@@ -99,9 +99,6 @@ DGW.main.methods.updateBadgesInfo = function(){
     var wc = DGW.main.elements.widgetContent;
     var ul = pr.querySelector('.dg-o-w-badges-holder ul');
 
-    //pr.querySelector('#dg-o-w-badges-earned-amount').innerHTML = be.length;
-
-
     ul.innerHTML = '';
     ba.forEach(function(b){
         var li = document.createElement('li');
@@ -229,7 +226,7 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
                             ((draw.Winner) ?
                                 '<div class="dg-o-w-draw-list-winner"><img src="' + draw.Winner.ImageUrl + '" /><p>' + draw.Winner.UserName + ' has won</p></div>' : '') +
                             ((drawEntry != undefined) ?
-                                '<div class="dg-o-w-draw-bet ' + ((draw.Winner) ? 'dg-o-w-draw-bet-second' : '') + '"><p>You\'ve bet: <span>' + ticketsInDraw + '</span> points</p></div>' : '') +
+                                '<div class="dg-o-w-draw-bet ' + ((draw.Winner) ? 'dg-o-w-draw-bet-second' : '') + '"><p>You\'ve placed: <span>' + ticketsInDraw + '</span> points</p></div>' : '') +
                                 //'<div class="dg-o-w-draw-connections"><span>2</span> of your friends</div>' +
                             '</div>';
             if (!DGW.helpers.drawsTimer.push({dt:draw.EndDate, elem:li.querySelector('.dg-o-w-draw-countdown')})) {
@@ -293,7 +290,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                     '</div>';
     var submenu = '<div class="dg-o-w-submenu">' +
                         '<ul><li class="dg-o-w-back-draws">&larr; Back</li></ul><div class="right-side">' +
-        (!(drawEntry != undefined && drawEntry.IsWinner) ? /*'Minimum bet is 10'*/ '' : 'You\'ve spent ' + drawEntry.TicketsAmount + ' points and won!') +
+        (!(drawEntry != undefined && drawEntry.IsWinner) ? /*'Minimum bet is 10'*/ '' : 'You\'ve placed ' + drawEntry.TicketsAmount + ' points and won!') +
                             '</div>' +
                     '</div>';
 
@@ -333,15 +330,15 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                                 '<h3>' + draw.Prize.Title + '</h3>' +
                                 '<p>' + draw.Prize.Description + '</p>' +
                                 '<div class="dg-o-w-draw-bet-info dg-o-w-draw-auth-show">' +
-                                    '<div class="dg-o-w-your-bet dg-o-w-points-bet"><p>You\'ve bet <span data-draw-betpoints>' + ((drawEntry) ? drawEntry.TicketsAmount : 0 ) + '</span> points</p></div>' +
+                                    '<div class="dg-o-w-your-bet dg-o-w-points-bet"><p>You\'ve placed <span data-draw-betpoints>' + ((drawEntry) ? drawEntry.TicketsAmount : 0 ) + '</span> points</p></div>' +
                                     // playersInDraw +
                                 '</div>' +
-                                ((DGW.helpers.dateDiff(draw.EndDate) > 0) ? '<h2 class="dg-o-w-draw-login-show">Please, log in to bet</h2>' : '') +
+                                ((DGW.helpers.dateDiff(draw.EndDate) > 0) ? '<h2 class="dg-o-w-draw-login-show">Please, log in to play the draw</h2>' : '') +
                                 '<div class="dg-o-w-draw-bet-action dg-o-w-draw-auth-show">' +
-                                    '<h5>How much do you want to bet?</h5>' +
+                                    '<h5>How much do you want to place?</h5>' +
                                     '<form id="bet-form" class="dg-o-w-one-field-form">' +
                                         '<input type="number" min="1" max="1000" placeholder="50"/>' +
-                                        '<input class="btn-dg-o-w btn-dg-o-w-brand" type="submit" value="Bet points" />' +
+                                        '<input class="btn-dg-o-w btn-dg-o-w-brand" type="submit" value="Place points" />' +
                                     '</form>' +
                                     '<div id="dg-o-w-get-points-btn" class="btn-dg-o-w btn-dg-o-w-brand-l">Get additional points</div>' +
                                 '</div>' +

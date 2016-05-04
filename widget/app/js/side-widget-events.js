@@ -1,5 +1,4 @@
 DGW.side.methods.initEvents = function(){
-
     if (!DGW.global.launched) {
         // Showing side widget
         DGW.side.methods.showWidget();
@@ -70,4 +69,29 @@ DGW.side.methods.initSafariFixEvents = function(){
                 wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
         }
     }, 100);
+};
+
+DGW.side.methods.changeSideWidgetState = function(state) {
+    var swc = DGW.side.elements.widgetContent;
+    var wb = DGW.side.elements.widgetBody;
+
+    DGW.side.elements.widgetInner = null;
+    DGW.side.elements.widgetInner = document.createElement('div');
+    DGW.side.elements.widgetInner.className = 'dg-side-widget-content-inner';
+    swc.innerHTML = '';
+    if (wb.children.length > 2) wb.removeChild(DGW.side.elements.clickCatcher);
+    switch(state){
+        case 'profile':
+            DGW.side.elements.widgetInner.innerHTML = DGW.templates.side.profileInfo;
+            DGW.side.elements.clickCatcher.setAttribute('data-page', 'earn');
+            wb.appendChild(DGW.side.elements.clickCatcher);
+            swc.appendChild(DGW.side.elements.widgetInner);
+            DGW.global.api.requests.getUser();
+            break;
+        default:
+            DGW.side.elements.widgetInner.innerHTML = DGW.templates.side.prizeGeneric;
+            swc.appendChild(DGW.side.elements.widgetInner);
+    }
+
+    DGW.side.methods.initEvents();
 };

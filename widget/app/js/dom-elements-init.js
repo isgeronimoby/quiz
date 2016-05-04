@@ -1,10 +1,5 @@
 DGW.global.elements.documentBody = document.body;
 
-DGW.side.elements.widget = document.createElement('div');
-DGW.side.elements.widget.id = 'dg-side-widget';
-DGW.side.elements.widget.innerHTML = DGW.templates.sideWidgetCore;
-DGW.side.elements.widgetBody = DGW.side.elements.widget.querySelector('.dg-side-widget-body');
-
 DGW.main.elements.widget = document.createElement('div');
 DGW.main.elements.widget.id = 'dg-o-w';
 DGW.main.elements.widget.innerHTML = DGW.templates.mainWidgetCore;
