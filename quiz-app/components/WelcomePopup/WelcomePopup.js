@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { toggleWelcome } from '../../flux/actions';
 import ScreenSwiper from '../ScreenSwiper';
 import './WelcomePopup.scss';
 
@@ -57,6 +59,7 @@ class WelcomePopup extends Component {
 
 	static propTypes = {
 		show: PropTypes.bool.isRequired,
+		//from store
 		onClose: PropTypes.func.isRequired,
 	};
 
@@ -110,4 +113,12 @@ class WelcomePopup extends Component {
 	}
 }
 
-export default WelcomePopup;
+// Connect to store
+//
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onClose: () => dispatch(toggleWelcome(false)),
+	};
+};
+
+export default connect(null, mapDispatchToProps)(WelcomePopup);

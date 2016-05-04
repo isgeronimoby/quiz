@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
 import {
+	TOGGLE_WELCOME,
+
 	REQUEST_AUTH,
 	AUTH_CANCEL,
 	AUTH_SUCCESS,
@@ -28,6 +30,21 @@ import {
 	//FETCH_PARTNERS_ERROR,
 
 } from '../actions';
+
+
+/*
+ Welcome
+ */
+
+function showWelcomePopup(state = false, action) {
+	switch (action.type) {
+		case TOGGLE_WELCOME:
+			return action.show;
+		default:
+			return state;
+	}
+}
+
 
 /*
  Auth
@@ -223,6 +240,7 @@ function partners(state = {
 
 
 const rootReducer = combineReducers({
+	showWelcomePopup,
 	auth,
 	profile,
 	fixtures,

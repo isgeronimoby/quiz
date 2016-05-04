@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { requestAuth } from '../flux/actions';
+import { requestAuth, toggleWelcome } from '../flux/actions';
 import Link from '../components/Link';
 
 class Test extends Component {
@@ -9,12 +9,12 @@ class Test extends Component {
 
 	static propTypes = {
 		openAuthPopup: PropTypes.func,
-		//openWelcomePopup: PropTypes.func,
+		openWelcomePopup: PropTypes.func,
 	};
 
 	render() {
 		const onAuthPopupClick = () => this.props.openAuthPopup();
-		const onWelcomePopupClick = () => {}; //this.props.openWelcomePopup();
+		const onWelcomePopupClick = () => this.props.openWelcomePopup();
 
 		return (
 			<div>
@@ -49,7 +49,7 @@ class Test extends Component {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		openAuthPopup: () => dispatch(requestAuth()),
-		//openWelcomePopup: () => dispatch(fetchFixtures()),
+		openWelcomePopup: () => dispatch(toggleWelcome(true)),
 	};
 };
 
