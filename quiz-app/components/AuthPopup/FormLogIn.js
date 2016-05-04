@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { postLogin } from '../../flux/actions';
 import Button from '../Button';
 import { SeparatorOrError, EmailInput, PasswordInput } from './Controls.js';
 
@@ -6,14 +8,10 @@ import { SeparatorOrError, EmailInput, PasswordInput } from './Controls.js';
 class FormLogIn extends Component {
 	static propTypes = {
 		onNavigate: PropTypes.func.isRequired,
-		onSubmit: PropTypes.func.isRequired,
-		error: PropTypes.string,
-		loading: PropTypes.bool,
-	};
-
-	static defaultProps = {
-		error: '',
-		loading: false,
+		// from store
+		error: PropTypes.string.isRequired,
+		isFetching: PropTypes.bool.isRequired,
+		postLogin: PropTypes.func.isRequired,
 	};
 
 	handleSubmit() {
@@ -32,7 +30,8 @@ class FormLogIn extends Component {
 			email: emailEl.value(),
 			password: pwdEl.value(),
 		};
-		this.props.onSubmit(data);
+
+		this.props.postLogin(data);
 	}
 
 	render() {
@@ -70,4 +69,21 @@ class FormLogIn extends Component {
 	}
 }
 
-export default FormLogIn;
+
+// Connect to store
+//
+const mapStateToProps = (state) => {
+	const { isFetching, errors } = state.auth;
+	return {
+		error: errors.login || '',
+		isFetching: isFetching.login || false,
+	};
+};
+const mapDispatchToProps = (dispatch) => {
+	return {
+		postLogin: (data) => dispatch(postLogin(data)),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormLogIn);
+

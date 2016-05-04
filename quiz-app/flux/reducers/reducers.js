@@ -4,6 +4,9 @@ import {
 
 	REQUEST_AUTH,
 	AUTH_CANCEL,
+	POST_LOGIN,
+	POST_LOGIN_ERROR,
+
 	AUTH_SUCCESS,
 	AUTH_ERROR,
 	LOGOUT_SUCCESS,
@@ -53,14 +56,17 @@ function showWelcomePopup(state = false, action) {
 function auth(state = {
 	isLoggedIn: false,
 	showAuthPopup: false,
-	authPopupView: 'login'
+	authPopupView: 'login',
+	errors: {},
+	isFetching: {}
 }, action) {
 	switch (action.type) {
 		case REQUEST_AUTH:
 			return {
 				...state,
 				showAuthPopup: true,
-				authPopupView: action.authPopupView
+				authPopupView: action.authPopupView,
+				errors: {},
 			};
 		case AUTH_CANCEL:
 			return {
@@ -72,6 +78,24 @@ function auth(state = {
 				...state,
 				isLoggedIn: true,
 				showAuthPopup: false,
+				errors: {},
+				isFetching: {}
+			};
+		case POST_LOGIN:
+			return {
+				...state,
+				errors: {},
+				isFetching: {
+					login: true
+				}
+			};
+		case POST_LOGIN_ERROR:
+			return {
+				...state,
+				errors: {
+					login: action.error
+				},
+				isFetching: {}
 			};
 		case LOGOUT_SUCCESS:
 			return {

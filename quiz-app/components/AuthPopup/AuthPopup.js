@@ -15,38 +15,6 @@ const view2comp = {
 };
 
 
-async function post(url, data) {
-	console.log('>>TODO: post %s %s', url, JSON.stringify(data));
-
-	const err = {
-		message: 'Email or password is incorrect. Please try again'
-	};
-	const randomFail = (Math.random() > .5);
-
-	return new Promise((resolve, reject) => {
-		setTimeout(() => {
-			if (randomFail) {
-				reject(err);
-			} else {
-				resolve('ok');
-			}
-		}, DELAY);
-	});
-}
-
-async function doPost(url, data) {
-	let error, res;
-	try {
-		res = await post(url, data); // TODO - use res?
-	}
-	catch (err) {
-		error = err.message;
-	}
-
-	return {error, res};
-}
-
-
 class AuthPopup extends Component {
 
 	static propTypes = {
@@ -58,8 +26,6 @@ class AuthPopup extends Component {
 
 	state = {
 		view: 'signup',
-		error: undefined,
-		loading: false,
 	};
 
 	componentWillReceiveProps({view}) {
@@ -70,29 +36,7 @@ class AuthPopup extends Component {
 
 	navigateTo(view) {
 		this.setState({
-			view,
-			error: undefined,
-			loading: false
-		});
-	}
-
-	handleSubmit(url, data) {
-		const { onCancel } = this.props;
-
-		this.setState({
-			error: undefined,
-			loading: true
-		}, async () => {
-			const {error, res} = await doPost(url, data);
-
-			this.setState({
-				error,
-				loading: false
-			}, () => {
-				if (!error) {
-					onCancel();
-				}
-			});
+			view
 		});
 	}
 
@@ -111,7 +55,6 @@ class AuthPopup extends Component {
 			<div ref="auth-shadow" className={"auth-screen " + hiddenClass } onClick={ onClick }>
 				<Component
 					onNavigate={ (view) => this.navigateTo(view) }
-					onSubmit={ (data) => this.handleSubmit(url, data) }
 					{ ...rest }
 				/>
 			</div>

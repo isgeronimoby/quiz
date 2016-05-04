@@ -18,7 +18,7 @@ function fetchProfileStart() {
 	};
 }
 
-function fetchProfileSuccess({
+export function fetchProfileSuccess({
 	UserId: userId,
 	UserName: name,
 	ImageUrl: imageUrl,
