@@ -332,6 +332,74 @@
                     }
                 }
             }
+        },
+        "/leaderboard/gettopearners": {
+            "get": {
+                "summary": "Gets the top point earners list.",
+                "description": "The gettopearners endpoint used to retrieve list of users earned the most amount of points.\n",
+                "security": [
+                    {
+                        "ClientId": []
+                    }
+                ],
+                "tags": [
+                    "Leaderboard"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of users earned the most.",
+                        "schema": {
+                            "$ref": "#/definitions/TopEarnersList"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized request",
+                        "schema": {
+                            "$ref": "#/definitions/Error401"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error500"
+                        }
+                    }
+                }
+            }
+        },
+        "/matchquiz/getfixtures": {
+            "get": {
+                "summary": "Returns list of fixtures for current app's foundation.",
+                "description": "Returns list of fixtures for current app's foundation.\n",
+                "security": [
+                    {
+                        "ClientId": []
+                    }
+                ],
+                "tags": [
+                    "MatchQuiz"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of fixtures.",
+                        "schema": {
+                            "$ref": "#/definitions/FixtureList"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized request",
+                        "schema": {
+                            "$ref": "#/definitions/Error401"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error500"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -470,6 +538,116 @@
                 "CreditsConfirmed",
                 "PointsPending",
                 "PointsConfirmed"
+            ]
+        },
+        "UserModel": {
+            "type": "object",
+            "properties": {
+                "UserId": {
+                    "type": "string",
+                    "description": "User identifier."
+                },
+                "UserName": {
+                    "type": "string",
+                    "description": "User name."
+                },
+                "ImageUrl": {
+                    "type": "string",
+                    "description": "User profile image url."
+                }
+            },
+            "required": [
+                "UserId",
+                "UserName",
+                "ImageUrl"
+            ]
+        },
+        "EarnerModel": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/UserModel"
+                }
+            ],
+            "properties": {
+                "Amount": {
+                    "type": "number",
+                    "format": "decimal",
+                    "description": "Earned points amount."
+                }
+            },
+            "required": [
+                "Amount"
+            ]
+        },
+        "TopEarnersList": {
+            "type": "object",
+            "properties": {
+                "Earners": {
+                    "description": "List of top earners.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EarnerModel"
+                    }
+                },
+                "Count": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Top earners count."
+                }
+            },
+            "required": [
+                "Count",
+                "Earners"
+            ]
+        },
+        "FixtureModel": {
+            "type": "object",
+            "properties": {
+                "MatchId": {
+                    "type": "string",
+                    "description": "Match event unique identifier."
+                },
+                "StartDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Match event start date."
+                },
+                "HomeTeam": {
+                    "type": "string",
+                    "description": "Home football team."
+                },
+                "AwayTeam": {
+                    "type": "string",
+                    "description": "Away football team."
+                }
+            },
+            "required": [
+                "MatchId",
+                "StartDate",
+                "HomeTeam",
+                "AwayTeam"
+            ]
+        },
+        "FixtureList": {
+            "type": "object",
+            "properties": {
+                "Fixtures": {
+                    "description": "List of fixtures.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FixtureModel"
+                    }
+                },
+                "Count": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Fixtures count."
+                }
+            },
+            "required": [
+                "Fixtures",
+                "Count"
             ]
         },
         "Error400": {
