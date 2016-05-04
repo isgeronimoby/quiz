@@ -3,13 +3,13 @@ import { fetchProfileSuccess } from './profile.js'
 
 export const REQUEST_AUTH = 'REQUEST_AUTH';
 export const AUTH_CANCEL = 'AUTH_CANCEL';
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 
 export const POST_LOGIN = 'POST_LOGIN';
-//export const POST_LOGIN_SUCCESS = 'POST_LOGIN_SUCCESS';
 export const POST_LOGIN_ERROR = 'POST_LOGIN_ERROR';
+export const POST_SIGNUP = 'POST_SIGNUP';
+export const POST_SIGNUP_ERROR = 'POST_SIGNUP_ERROR';
 
-export const AUTH_SUCCESS = 'AUTH_SUCCESS';
-export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 
@@ -61,10 +61,49 @@ export function postLogin({email, password}) {
 				Password: password,
 			}
 		}).then((json) => {
-			//dispatch(fetchProfileSuccess(json));
+			//dispatch(fetchProfileSuccess(json)); TODO if safe
 			dispatch(successAuth());
 		}).catch((error) => {
 			dispatch(postLoginError(error));
+		});
+	};
+}
+
+
+/*
+ Signup
+ */
+
+function postSignupStart() {
+	return {
+		type: POST_SIGNUP
+	};
+}
+
+function postSignupError(error) {
+	return {
+		type: POST_SIGNUP_ERROR,
+		error
+	};
+}
+
+export function postSignup({name, email, password}) {
+	return (dispatch) => {
+		dispatch(postSignupStart());
+
+		return fetch({
+			method: 'POST',
+			endpoint: 'auth/signup',
+			data: {
+				UserName: name,
+				Email: email,
+				Password: password,
+			}
+		}).then((json) => {
+			//dispatch(fetchProfileSuccess(json)); TODO if safe
+			dispatch(successAuth());
+		}).catch((error) => {
+			dispatch(postSignupError(error));
 		});
 	};
 }

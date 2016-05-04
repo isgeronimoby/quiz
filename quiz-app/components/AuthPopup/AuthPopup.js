@@ -6,12 +6,11 @@ import FormLogIn from './FormLogIn.js';
 import FormForgotPwd from './FormForgotPwd.js';
 import './AuthPopup.scss';
 
-const DELAY = 100;
 
 const view2comp = {
-	'signup': [FormSignUp, '/signUp'],
-	'login': [FormLogIn, './logIn'],
-	'forgot': [FormForgotPwd, './restorePwd'],
+	'signup': FormSignUp,
+	'login': FormLogIn,
+	'forgot': FormForgotPwd,
 };
 
 
@@ -30,7 +29,6 @@ class AuthPopup extends Component {
 
 	componentWillReceiveProps({view}) {
 		if (!view) { return; }
-
 		this.setState({view});
 	}
 
@@ -44,7 +42,7 @@ class AuthPopup extends Component {
 		const { show, onCancel } = this.props;
 		const { view, ...rest } = this.state;
 		const hiddenClass = !show ? 'is-hidden' : '';
-		const [Component, url] = view2comp[view];
+		const Component = view2comp[view];
 		const onClick = (e) => {
 			if (e.target === this.refs['auth-shadow']) {
 				onCancel();

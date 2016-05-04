@@ -4,11 +4,11 @@ import {
 
 	REQUEST_AUTH,
 	AUTH_CANCEL,
+	AUTH_SUCCESS,
 	POST_LOGIN,
 	POST_LOGIN_ERROR,
-
-	AUTH_SUCCESS,
-	AUTH_ERROR,
+	POST_SIGNUP,
+	POST_SIGNUP_ERROR,
 	LOGOUT_SUCCESS,
 
 	FETCH_PROFILE,
@@ -94,6 +94,22 @@ function auth(state = {
 				...state,
 				errors: {
 					login: action.error
+				},
+				isFetching: {}
+			};
+		case POST_SIGNUP:
+			return {
+				...state,
+				errors: {},
+				isFetching: {
+					signup: true
+				}
+			};
+		case POST_SIGNUP_ERROR:
+			return {
+				...state,
+				errors: {
+					signup: action.error
 				},
 				isFetching: {}
 			};
