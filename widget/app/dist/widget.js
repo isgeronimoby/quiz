@@ -1519,7 +1519,7 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                                                         '<a href="#" id="dg-o-w-login-trigger">Log in & get started</a>' +
                                                                         '<div class="dg-o-w-email-login-form">' +
                                                                             '<form class="shown" id="dg-o-w-form-login-top">' +
-                                                                                '<h2>Welcome back!</h2>' +
+                                                                                '<h2>Welcome!</h2>' +
                                                                                 '<div id="dg-o-w-header-fb-connect" class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large">Connect with Facebook</div>' +
                                                                                 '<label><input type="email" placeholder="Email" /></label>' +
                                                                                 '<label><input type="password" placeholder="Password"/></label>' +
