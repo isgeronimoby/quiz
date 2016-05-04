@@ -1,57 +1,122 @@
 import { combineReducers } from 'redux';
 import {
+	TOGGLE_WELCOME,
+
+	REQUEST_AUTH,
+	AUTH_CANCEL,
+	AUTH_SUCCESS,
+	POST_LOGIN,
+	POST_LOGIN_ERROR,
+	POST_SIGNUP,
+	POST_SIGNUP_ERROR,
+	LOGOUT_SUCCESS,
+
 	FETCH_PROFILE,
 	FETCH_PROFILE_SUCCESS,
 	FETCH_PROFILE_ERROR,
-	ADD_POINTS,
+	INVALIDATE_PROFILE,
 
-	SELECT_USER,
-	FETCH_USER,
-	FETCH_USER_SUCCESS,
-	INVALIDATE_USER,
+	FETCH_FIXTURES,
+	FETCH_FIXTURES_SUCCESS,
+	//FETCH_FIXTURES_ERROR,
+
+	FETCH_USER_LIST,
+	FETCH_USER_LIST_SUCCESS,
+	//FETCH_USER_LIST_ERROR - TODO
+
+	FETCH_USER_PROFILE,
+	FETCH_USER_PROFILE_SUCCESS,
+	SELECT_USER_PROFILE,
 
 	FETCH_PARTNERS,
 	FETCH_PARTNERS_SUCCESS,
-	FETCH_PARTNERS_ERROR,
-	INVALIDATE_PARTNERS,
+	//FETCH_PARTNERS_ERROR,
+
 } from '../actions';
 
+
 /*
- Profile
+ Welcome
  */
 
-const tmp = {
-	userId: 0,
-	name: 'Edward Snowden',
-	picture: require("../../static/images/user-picture.jpg"),
-	points: 220,
-	pendingPoints: 110,
-};
+function showWelcomePopup(state = false, action) {
+	switch (action.type) {
+		case TOGGLE_WELCOME:
+			return action.show;
+		default:
+			return state;
+	}
+}
 
-function profile(state = {
+
+/*
+ Auth
+ */
+
+function auth(state = {
 	isLoggedIn: false,
-	userId: null,
-	name: '',
-	imageUrl: null,
-	points: 0,
-	pendingPoints: 0,
+	showAuthPopup: false,
+	authPopupView: 'login',
+	errors: {},
+	isFetching: {}
 }, action) {
 	switch (action.type) {
-		case FETCH_PROFILE_SUCCESS:
+		case REQUEST_AUTH:
 			return {
-				...action.payload,
+				...state,
+				showAuthPopup: true,
+				authPopupView: action.authPopupView,
+				errors: {},
+			};
+		case AUTH_CANCEL:
+			return {
+				...state,
+				showAuthPopup: false,
+			};
+		case AUTH_SUCCESS:
+			return {
+				...state,
 				isLoggedIn: true,
-				lastUpdated: action.receivedAt,
+				showAuthPopup: false,
+				errors: {},
+				isFetching: {}
 			};
-		case FETCH_PROFILE_ERROR:
+		case POST_LOGIN:
 			return {
 				...state,
-				isLoggedIn: false,
+				errors: {},
+				isFetching: {
+					login: true
+				}
 			};
-		case ADD_POINTS:
+		case POST_LOGIN_ERROR:
 			return {
 				...state,
-				points: state.points + action.points
+				errors: {
+					login: action.error
+				},
+				isFetching: {}
+			};
+		case POST_SIGNUP:
+			return {
+				...state,
+				errors: {},
+				isFetching: {
+					signup: true
+				}
+			};
+		case POST_SIGNUP_ERROR:
+			return {
+				...state,
+				errors: {
+					signup: action.error
+				},
+				isFetching: {}
+			};
+		case LOGOUT_SUCCESS:
+			return {
+				...state,
+				isLoggedIn: false
 			};
 		default:
 			return state;
@@ -59,12 +124,95 @@ function profile(state = {
 }
 
 /*
- Users
+ Profile
  */
 
-function selectedUser(state = null, action) {
+function profile(state = {
+	didInvalidate: false,
+	userId: null,
+	name: '',
+	imageUrl: null,
+	points: 0,
+	pendingPoints: 0,
+}, action) {
 	switch (action.type) {
-		case SELECT_USER:
+		case INVALIDATE_PROFILE:
+		case FETCH_PROFILE:
+			return {
+				...state,
+				didInvalidate: true,
+			};
+		case FETCH_PROFILE_SUCCESS:
+			return {
+				...action.payload,
+				didInvalidate: false,
+				lastUpdated: action.receivedAt,
+			};
+		case FETCH_PROFILE_ERROR:
+			return {
+				...state,
+				didInvalidate: true,
+			};
+		default:
+			return state;
+	}
+}
+
+/*
+ Fixtures
+ */
+function fixtures(state = {
+	isFetching: false,
+	list: []
+}, action) {
+	switch (action.type) {
+		case FETCH_FIXTURES:
+			return {
+				...state,
+				isFetching: true
+			};
+		case FETCH_FIXTURES_SUCCESS:
+			return {
+				isFetching: false,
+				list: action.payload,
+				lastUpdated: action.receivedAt,
+			};
+		default:
+			return state;
+	}
+}
+
+/*
+ User List
+ */
+function userList(state = {
+	isFetching: false,
+	list: []
+}, action) {
+	switch (action.type) {
+		case FETCH_USER_LIST:
+			return {
+				...state,
+				isFetching: true
+			};
+		case FETCH_USER_LIST_SUCCESS:
+			return {
+				isFetching: false,
+				list: action.payload,
+				lastUpdated: action.receivedAt,
+			};
+		default:
+			return state;
+	}
+}
+
+/*
+ User Profiles
+ */
+
+function selectedUserProfile(state = null, action) {
+	switch (action.type) {
+		case SELECT_USER_PROFILE:
 			return action.userId;
 		default:
 			return state;
@@ -73,26 +221,18 @@ function selectedUser(state = null, action) {
 
 function userById(state = {
 	isFetching: false,
-	didInvalidate: false,
-	payload: {}
+	user: {}
 }, action) {
 	switch (action.type) {
-		case INVALIDATE_USER:
-			return {
-				...state,
-				didInvalidate: true,
-			};
-		case FETCH_USER:
+		case FETCH_USER_PROFILE:
 			return {
 				...state,
 				isFetching: true,
-				didInvalidate: true,
 			};
-		case FETCH_USER_SUCCESS:
+		case FETCH_USER_PROFILE_SUCCESS:
 			return {
 				isFetching: false,
-				didInvalidate: false,
-				payload: action.payload,
+				user: action.payload,
 				lastUpdated: action.receivedAt,
 			};
 		default:
@@ -100,11 +240,10 @@ function userById(state = {
 	}
 }
 
-function users(state = {}, action) {
+function userProfiles(state = {}, action) {
 	switch (action.type) {
-		case INVALIDATE_USER:
-		case FETCH_USER:
-		case FETCH_USER_SUCCESS:
+		case FETCH_USER_PROFILE:
+		case FETCH_USER_PROFILE_SUCCESS:
 			return {
 				...state,
 				[action.userId]: userById(state[action.userId], action)
@@ -114,33 +253,24 @@ function users(state = {}, action) {
 	}
 }
 
-
 /*
- Users
+ Partners
  */
 
 function partners(state = {
 	isFetching: false,
-	didInvalidate: false,
-	payload: []
+	list: []
 }, action) {
 	switch (action.type) {
-		case INVALIDATE_PARTNERS:
-			return {
-				...state,
-				didInvalidate: true,
-			};
 		case FETCH_PARTNERS:
 			return {
 				...state,
 				isFetching: true,
-				didInvalidate: true,
 			};
 		case FETCH_PARTNERS_SUCCESS:
 			return {
 				isFetching: false,
-				didInvalidate: false,
-				payload: action.payload,
+				list: action.payload,
 				lastUpdated: action.receivedAt,
 			};
 		default:
@@ -150,9 +280,13 @@ function partners(state = {
 
 
 const rootReducer = combineReducers({
+	showWelcomePopup,
+	auth,
 	profile,
-	users,
-	selectedUser,
+	fixtures,
+	userList,
+	userProfiles,
+	selectedUserProfile,
 	partners
 });
 

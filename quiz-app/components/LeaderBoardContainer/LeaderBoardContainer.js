@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+//import Tabs from '../Tabs';
+//import ScreenSwiper from '../ScreenSwiper';
+//import LeaderBoardGroup from '../LeaderBoard/LeaderBoardGroup.js';
 import LeaderBoard from '../LeaderBoard';
-import { LeaderBoardGroup } from '../LeaderBoard';
-import Tabs from '../Tabs';
-import UserProfile from '../UserProfile';
-import ScreenSwiper from '../ScreenSwiper';
-import Section from '../LeaderBoard/Section.js';
+
 
 const tabs = [
 	{
@@ -25,7 +24,7 @@ const tabs = [
 class LeaderBoardContainer extends Component {
 
 	static propTypes = {
-		data: PropTypes.object.isRequired,
+		list: PropTypes.array.isRequired,
 	};
 
 	state = {
@@ -58,26 +57,30 @@ class LeaderBoardContainer extends Component {
 	}
 
 	render() {
-		const {
-			users: { top3, all, friends},
-			groups: {top3: top3Groups, all: allGroups},
-			profile
-			} = this.props.data;
+		const { list: all } = this.props;
+		const top3 = all.slice(0, 3);
+
+		/*
+		 const {groups: {top3: top3Groups, all: allGroups}} = this.props.data;
 		const { currentScreenIdx: idx } = this.state;
 		const { tabId  } = tabs[idx] || {};
 		const onPrev = () => this.prevScreen();
 		const onNext = () => this.nextScreen();
-		const onSelectTab = (tabId) => this.selectScreen(tabId);
+		const onSelectTab = (tabId) => this.selectScreen(tabId);*/
 
 		return (
 			<div className="screen">
-				<Tabs items={ tabs } selectedItemId={ tabId } onSelect={ onSelectTab }/>
+				<LeaderBoard top3={ top3 } users={ all }/>
 
-				<ScreenSwiper currentScreenIdx={idx} onPrevScreen={onPrev} onNextScreen={onNext}>
-					<LeaderBoard top3={ top3 } users={ all } profile={ profile }/>
-					<LeaderBoard top3={ top3 } users={ friends } profile={ profile }/>
-					<LeaderBoardGroup top3={ top3Groups } groups={ allGroups }/>
-				</ScreenSwiper>
+				{/*
+				 <Tabs items={ tabs } selectedItemId={ tabId } onSelect={ onSelectTab }/>
+
+				 <ScreenSwiper currentScreenIdx={idx} onPrevScreen={onPrev} onNextScreen={onNext}>
+					 <LeaderBoard top3={ top3 } users={ all } profile={ profile }/>
+					 <LeaderBoard top3={ top3 } users={ friends } profile={ profile }/>
+					 <LeaderBoardGroup top3={ top3Groups } groups={ allGroups }/>
+				 </ScreenSwiper>
+				*/}
 			</div>
 		);
 	}

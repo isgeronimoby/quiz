@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { requestAuth } from '../../flux/actions';
 import QuizBet from '../QuizBet';
 import BetSuccess from '../BetSuccess';
 import Location from '../../lib/Location';
@@ -10,24 +12,33 @@ class QuizBetContainer extends Component {
 
 	static propTypes = {
 		data: PropTypes.array.isRequired,
-	};
-
-	static contextTypes = {
-		openAuthPopup: React.PropTypes.func
+		// from store
+		isLoggedIn: PropTypes.bool.isRequired,
+		openAuthPopup: PropTypes.func.isRequired,
 	};
 
 	state = {
 		view: 'bet'
 	};
 
+	componentWillReceiveProps({isLoggedIn}) {
+		const authorized = !this.props.isLoggedIn && isLoggedIn;
+		if (authorized) {
+			this.nextView('success');
+		}
+	}
+
 	nextView(view) {
 		this.setState({ view });
 	}
 
 	submitBet(betValue) {
-		this.context.openAuthPopup((result) => {
-			result && this.nextView('success');
-		});
+		const { isLoggedIn, openAuthPopup } = this.props;
+		if (!isLoggedIn) {
+			openAuthPopup();
+		} else {
+			//TODO - post betValue & go next
+		}
 	}
 
 	goToExitPage() {
@@ -56,4 +67,18 @@ class QuizBetContainer extends Component {
 	}
 }
 
-export default QuizBetContainer;
+
+// Connect to store
+//
+const mapStateToProps = (state) => {
+	return {
+		isLoggedIn: state.auth.isLoggedIn
+	};
+};
+const mapDispatchToProps = (dispatch) => {
+	return {
+		openAuthPopup: () => dispatch(requestAuth()),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuizBetContainer);

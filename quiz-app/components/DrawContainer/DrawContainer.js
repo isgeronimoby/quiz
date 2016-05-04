@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { requestAuth } from '../../flux/actions';
 import DrawBet from '../DrawBet';
 import BetSuccess from '../BetSuccess'; // TODO - rename
 import DrawBetExit from '../DrawBetExit';
@@ -18,25 +20,33 @@ class DrawContainer extends Component {
 
 	static propTypes = {
 		data: PropTypes.object.isRequired,
-	};
-
-	static contextTypes = {
-		openAuthPopup: React.PropTypes.func
+		// from store
+		isLoggedIn: PropTypes.bool.isRequired,
+		openAuthPopup: PropTypes.func.isRequired,
 	};
 
 	state = {
 		view: 'bet'
 	};
 
+	componentWillReceiveProps({isLoggedIn}) {
+		const authorized = !this.props.isLoggedIn && isLoggedIn;
+		if (authorized) {
+			this.nextView('success');
+		}
+	}
 
 	nextView(view) {
-		this.setState({ view });
+		this.setState({view});
 	}
 
 	submitBet(betValue) {
-		this.context.openAuthPopup((result) => {
-			result && this.nextView('success');
-		});
+		const { isLoggedIn, openAuthPopup } = this.props;
+		if (!isLoggedIn) {
+			openAuthPopup();
+		} else {
+			//TODO - post betValue
+		}
 	}
 
 
@@ -66,4 +76,18 @@ class DrawContainer extends Component {
 	}
 }
 
-export default DrawContainer;
+
+// Connect to store
+//
+const mapStateToProps = (state) => {
+	return {
+		isLoggedIn: state.auth.isLoggedIn
+	};
+};
+const mapDispatchToProps = (dispatch) => {
+	return {
+		openAuthPopup: () => dispatch(requestAuth()),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DrawContainer);

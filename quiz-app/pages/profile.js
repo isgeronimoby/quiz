@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { selectUser, fetchUserIfNeeded } from '../flux/actions';
+import { selectUserProfile, fetchUserProfileIfNeeded } from '../flux/actions';
 import UserProfile from '../components/UserProfile';
 
 
@@ -11,26 +11,28 @@ class Profile extends Component {
 	static propTypes = {
 		params: PropTypes.object.isRequired,
 		// from store
-		fetchUser: PropTypes.func.isRequired,
-		selectUser: PropTypes.func.isRequired,
-		user: PropTypes.object.isRequired,
+		fetchUserProfile: PropTypes.func.isRequired,
+		selectUserProfile: PropTypes.func.isRequired,
+		userProfile: PropTypes.object.isRequired,
 	};
 
 	componentDidMount() {
-		const { params: { userId }, fetchUser, selectUser } = this.props;
+		const { params: { userId }, fetchUserProfile, selectUserProfile } = this.props;
 
-		fetchUser(userId).then(() => {
-			selectUser(userId);
+		// TODO - my vs others profiles
+
+		fetchUserProfile(userId).then(() => {
+			selectUserProfile(userId);
 		});
 	}
 
 	render() {
-		const { user: { isFetching, payload } } = this.props;
+		const { user: { isFetching, user } } = this.props;
 
 		if (isFetching) {
 			return <div/>; // TODO: spinner
 		}
-		return <UserProfile user={ payload }/>;
+		return <UserProfile user={ user }/>;
 	}
 }
 
@@ -38,14 +40,13 @@ class Profile extends Component {
 //
 const mapStateToProps = (state) => {
 	return {
-		user: state.users[state.selectedUser] || {isFetching: true}
+		userProfile: state.userProfiles[state.selectedUserProfile] || {isFetching: true}
 	};
 };
-
 const mapDispatchToProps = (dispatch) => {
 	return {
-		selectUser: (userId) => dispatch(selectUser(userId)),
-		fetchUser: (userId) => dispatch(fetchUserIfNeeded(userId))
+		selectUserProfile: (userId) => dispatch(selectUserProfile(userId)),
+		fetchUserProfile: (userId) => dispatch(fetchUserProfileIfNeeded(userId))
 	};
 };
 

@@ -30,6 +30,11 @@
   height: 8rem;
   color: #fff;
   text-decoration: none;
+
+  .fixture-item:last-child & {
+    border-bottom: 1px solid $color-grey-opaque;
+  }
+
   &.completed {
     background: $color-selection;
     pointer-events: none;

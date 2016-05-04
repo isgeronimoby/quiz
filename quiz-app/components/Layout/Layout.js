@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import Header from '../Header';
 import Menu from '../Menu';
 import AuthPopup from '../AuthPopup';
@@ -11,30 +12,15 @@ class Layout extends Component {
 	static propTypes = {
 		title: PropTypes.string.isRequired,
 		path: PropTypes.string.isRequired,
+		showAuthPopup: PropTypes.bool.isRequired,
+		authPopupView: PropTypes.string.isRequired,
+		showWelcomePopup: PropTypes.bool.isRequired,
 		children: PropTypes.element.isRequired,
 	};
 
-	static childContextTypes = {
-		openAuthPopup: React.PropTypes.func,
-		openWelcomePopup: React.PropTypes.func,
-	};
-
-	getChildContext() {
-		return {
-			openAuthPopup: this.openAuthPopup.bind(this),
-			openWelcomePopup: this.openWelcomePopup.bind(this),
-		};
-	}
-
 	state = {
 		showMenu: false,
-		showAuthPopup: false,
-		authPopupView: undefined,
-		showWelcomePopup: false,
 	};
-
-	_authCb = null;
-	_welcomeCb = null;
 
 	toggleMenu(on) {
 		this.setState({
@@ -42,54 +28,9 @@ class Layout extends Component {
 		});
 	}
 
-	openAuthPopup(callback, view = 'signup') {
-		if (callback) {
-			this._authCb = callback;
-		}
-
-		this.setState({
-			showAuthPopup: true,
-			authPopupView: view
-		});
-	}
-
-	closeAuthPopup(result) {
-		this.setState({
-			showAuthPopup: false
-		}, () => {
-			if (this._authCb) {
-				this._authCb(result);
-				this._authCb = null;
-			}
-		});
-	}
-
-	openWelcomePopup(callback) {
-		if (callback) {
-			this._welcomeCb = callback;
-		}
-
-		this.setState({
-			showWelcomePopup: true
-		});
-	}
-
-	closeWelcomePopup() {
-		this.setState({
-			showWelcomePopup: false
-		}, () => {
-			if (this._welcomeCb) {
-				this._welcomeCb();
-				this._welcomeCb = null;
-			}
-		});
-	}
-
 	render() {
-		const {title, path, children} = this.props;
-		const { showMenu, showAuthPopup, authPopupView, showWelcomePopup } = this.state;
-		const onCloseAuthPopup = (result) => this.closeAuthPopup(result);
-		const onCloseWelcomePopup = () => this.closeWelcomePopup();
+		const {title, path, showAuthPopup, authPopupView, showWelcomePopup, children} = this.props;
+		const { showMenu } = this.state;
 
 		return (
 			<div className="layout">
@@ -103,11 +44,9 @@ class Layout extends Component {
 					onClick={ () => this.toggleMenu(false) }/>
 
 				<AuthPopup show={ showAuthPopup }
-					view={ authPopupView }
-					onClose={ onCloseAuthPopup }/>
+					view={ authPopupView }/>
 
-				<WelcomePopup show={ showWelcomePopup }
-					onClose={ onCloseWelcomePopup }/>
+				<WelcomePopup show={ showWelcomePopup } />
 
 				<div className="content">
 					{ children }
@@ -118,4 +57,16 @@ class Layout extends Component {
 
 }
 
-export default Layout;
+
+// Connect to store
+//
+const mapStateToProps = (state) => {
+	const { auth, showWelcomePopup } = state;
+	return {
+		showAuthPopup: auth.showAuthPopup,
+		authPopupView: auth.authPopupView,
+		showWelcomePopup
+	};
+};
+
+export default connect(mapStateToProps)(Layout);

@@ -7,15 +7,14 @@ import './Header.scss';
 class Header extends Component {
 
 	static propTypes = {
-		isLoggedIn: PropTypes.bool.isRequired,
 		title: PropTypes.string.isRequired,
-		points: PropTypes.number.isRequired,
+		points: PropTypes.number,
 		onMenuBtnClick: PropTypes.func.isRequired,
 	};
 
 	render() {
-		const { isLoggedIn, title, points, onMenuBtnClick} = this.props;
-		const pointsClass = isLoggedIn ? '' : 'is-hidden';
+		const { title, points, onMenuBtnClick} = this.props;
+		const pointsClass = (points === null) ? 'is-hidden' : '';
 
 		return (
 			<div className="header">
@@ -40,10 +39,9 @@ class Header extends Component {
 // Connect to store
 //
 const mapStateToProps = (state) => {
-	const { points, isLoggedIn } = state.profile;
+	const { profile, auth } = state;
 	return {
-		points,
-		isLoggedIn
+		points: auth.isLoggedIn ? profile.points : null
 	};
 };
 
