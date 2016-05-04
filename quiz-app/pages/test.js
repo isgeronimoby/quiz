@@ -1,18 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { requestAuth } from '../flux/actions';
 import Link from '../components/Link';
 
 class Test extends Component {
 
 	static title = 'Test';
 
-	static contextTypes = {
-		openAuthPopup: React.PropTypes.func,
-		openWelcomePopup: React.PropTypes.func,
+	static propTypes = {
+		openAuthPopup: PropTypes.func,
+		//openWelcomePopup: PropTypes.func,
 	};
 
 	render() {
-		const onAuthPopupClick = () => this.context.openAuthPopup();
-		const onWelcomePopupClick = () => this.context.openWelcomePopup();
+		const onAuthPopupClick = () => this.props.openAuthPopup();
+		const onWelcomePopupClick = () => {}; //this.props.openWelcomePopup();
 
 		return (
 			<div>
@@ -41,4 +43,14 @@ class Test extends Component {
 	}
 }
 
-export default Test;
+
+// Connect to store
+//
+const mapDispatchToProps = (dispatch) => {
+	return {
+		openAuthPopup: () => dispatch(requestAuth()),
+		//openWelcomePopup: () => dispatch(fetchFixtures()),
+	};
+};
+
+export default connect(null, mapDispatchToProps)(Test);

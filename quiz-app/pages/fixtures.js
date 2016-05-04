@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchFixtures } from '../flux/actions';
+import { fetchFixtures, fetchProfileIfNeeded } from '../flux/actions';
 import FixtureList from '../components/FixtureList';
 
 
@@ -10,10 +10,12 @@ class Fixtures extends Component {
 
 	static propTypes = {
 		fixtures: PropTypes.object.isRequired,
+		fetchProfile: PropTypes.func.isRequired,
 		fetchFixtures: PropTypes.func.isRequired,
 	};
 
 	componentDidMount() {
+		this.props.fetchProfile();
 		this.props.fetchFixtures();
 	}
 
@@ -36,7 +38,8 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchFixtures: () => dispatch(fetchFixtures())
+		fetchProfile: () => dispatch(fetchProfileIfNeeded()), // top-level page needs profile
+		fetchFixtures: () => dispatch(fetchFixtures()),
 	};
 };
 

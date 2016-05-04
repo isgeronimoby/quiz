@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchPartnersIfNeeded } from '../flux/actions';
+import { fetchPartners } from '../flux/actions';
 import PartnersContainer from '../components/PartnersContainer';
 
 
@@ -19,12 +19,12 @@ class Partners extends Component {
 	}
 
 	render() {
-		const { partners: { isFetching, payload } } = this.props;
+		const { partners: { isFetching, list } } = this.props;
 
 		if (isFetching) {
 			return <div/>; // TODO: spinner
 		}
-		return <PartnersContainer partnersList={ payload }/>;
+		return <PartnersContainer partnersList={ list }/>;
 	}
 }
 
@@ -37,7 +37,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchPartners: () => dispatch(fetchPartnersIfNeeded())
+		fetchPartners: () => dispatch(fetchPartners())
 	};
 };
 

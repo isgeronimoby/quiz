@@ -3,7 +3,14 @@ import fetch from '../../lib/fetch.js';
 export const FETCH_PROFILE = 'FETCH_PROFILE';
 export const FETCH_PROFILE_SUCCESS = 'FETCH_PROFILE_SUCCESS';
 export const FETCH_PROFILE_ERROR = 'FETCH_PROFILE_ERROR';
+export const INVALIDATE_PROFILE = 'INVALIDATE_PROFILE';
 
+
+export function invalidateProfile() {
+    return {
+		type: INVALIDATE_PROFILE
+	}
+}
 
 function fetchProfileStart() {
 	return {
@@ -39,7 +46,7 @@ function fetchProfileError() {
 	};
 }
 
-export function fetchProfile() {
+function fetchProfile() {
 	return (dispatch) => {
 		dispatch(fetchProfileStart());
 
@@ -50,5 +57,26 @@ export function fetchProfile() {
 		}).catch(() => {
 			dispatch(fetchProfileError()); // TODO
 		});
+	};
+}
+
+function shouldFetchProfile(state) {
+	const { profile, auth } = state;
+	if (!auth.isLoggedIn) {
+		return true;
+	} else if (profile.isFetching) {
+		return false;
+	} else {
+		return profile.didInvalidate;
+	}
+}
+
+export function fetchProfileIfNeeded() {
+	return (dispatch, getState) => {
+		if (shouldFetchProfile(getState())) {
+			return dispatch(fetchProfile());
+		} else {
+			return Promise.resolve();
+		}
 	};
 }

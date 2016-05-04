@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { requestAuth } from '../../flux/actions';
 import Hammer from 'react-hammerjs';
 import Link from '../Link';
 import Button from '../Button';
@@ -68,16 +69,12 @@ class Menu extends Component {
 		show: PropTypes.bool.isRequired,
 		onClick: PropTypes.func.isRequired,
 		// from store
-		profile: PropTypes.object.isRequired,
-	};
-
-	static contextTypes = {
-		openAuthPopup: React.PropTypes.func
+		profile: PropTypes.object,
+		openAuthPopup: PropTypes.func.isRequired
 	};
 
 	render() {
-		const { activePath, show, profile, ...others} = this.props;
-		const { isLoggedIn } = profile;
+		const { activePath, show, profile, openAuthPopup, ...others} = this.props;
 		const hiddenClass = !show ? 'is-hidden' : '';
 		const onSwipe = (e) => {
 			if (e.direction === DIRECTION_LEFT) {
@@ -85,10 +82,10 @@ class Menu extends Component {
 			}
 		};
 		const isActiveItem = (path) => (activePath === `/${path}`);
-		const onAuthClick = (view) => this.context.openAuthPopup(undefined, view);
+		const onAuthClick = (view) => openAuthPopup(view);
 
 		let profileHeaderMaybe = <AuthHeader onClick={ onAuthClick }/>;
-		if (isLoggedIn) {
+		if (profile !== null) {
 			profileHeaderMaybe = <ProfileHeader profile={profile}/>;
 		}
 
@@ -117,9 +114,15 @@ class Menu extends Component {
 // Connect to store
 //
 const mapStateToProps = (state) => {
+	const { profile, auth } = state;
 	return {
-		profile: state.profile
+		profile: auth.isLoggedIn ? profile : null
+	};
+};
+const mapDispatchToProps = (dispatch) => {
+	return {
+		openAuthPopup: (view) => dispatch(requestAuth(view)),
 	};
 };
 
-export default connect(mapStateToProps)(Menu);
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

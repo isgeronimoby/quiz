@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Cookies from 'js-cookie';
-import { fetchProfile } from '../flux/actions';
+import { fetchProfileIfNeeded } from '../flux/actions';
 import Location from '../lib/Location';
 
 const MIN_DELAY = 2000;
@@ -14,10 +14,10 @@ class Index extends Component {
 	static title = 'Match Quiz';
 
 	static contextTypes = {
-		openWelcomePopup: React.PropTypes.func
+		openWelcomePopup: PropTypes.func
 	};
 
-	static PropTypes = {
+	static propTypes = {
 		// from store
 		fetchProfile: PropTypes.func.isRequired,
 	};
@@ -66,7 +66,7 @@ class Index extends Component {
 //
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchProfile: () => dispatch(fetchProfile())
+		fetchProfile: () => dispatch(fetchProfileIfNeeded())
 	};
 };
 

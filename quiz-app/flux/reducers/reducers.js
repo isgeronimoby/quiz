@@ -1,8 +1,15 @@
 import { combineReducers } from 'redux';
 import {
+	REQUEST_AUTH,
+	AUTH_CANCEL,
+	AUTH_SUCCESS,
+	AUTH_ERROR,
+	LOGOUT_SUCCESS,
+
 	FETCH_PROFILE,
 	FETCH_PROFILE_SUCCESS,
 	FETCH_PROFILE_ERROR,
+	INVALIDATE_PROFILE,
 
 	FETCH_FIXTURES,
 	FETCH_FIXTURES_SUCCESS,
@@ -18,18 +25,53 @@ import {
 
 	FETCH_PARTNERS,
 	FETCH_PARTNERS_SUCCESS,
-	FETCH_PARTNERS_ERROR,
-	INVALIDATE_PARTNERS,
+	//FETCH_PARTNERS_ERROR,
 
 } from '../actions';
 
+/*
+ Auth
+ */
+
+function auth(state = {
+	isLoggedIn: false,
+	showAuthPopup: false,
+	authPopupView: 'login'
+}, action) {
+	switch (action.type) {
+		case REQUEST_AUTH:
+			return {
+				...state,
+				showAuthPopup: true,
+				authPopupView: action.authPopupView
+			};
+		case AUTH_CANCEL:
+			return {
+				...state,
+				showAuthPopup: false,
+			};
+		case AUTH_SUCCESS:
+			return {
+				...state,
+				isLoggedIn: true,
+				showAuthPopup: false,
+			};
+		case LOGOUT_SUCCESS:
+			return {
+				...state,
+				isLoggedIn: false
+			};
+		default:
+			return state;
+	}
+}
 
 /*
  Profile
  */
 
 function profile(state = {
-	isLoggedIn: false,
+	didInvalidate: false,
 	userId: null,
 	name: '',
 	imageUrl: null,
@@ -37,16 +79,22 @@ function profile(state = {
 	pendingPoints: 0,
 }, action) {
 	switch (action.type) {
+		case INVALIDATE_PROFILE:
+		case FETCH_PROFILE:
+			return {
+				...state,
+				didInvalidate: true,
+			};
 		case FETCH_PROFILE_SUCCESS:
 			return {
 				...action.payload,
-				isLoggedIn: true,
+				didInvalidate: false,
 				lastUpdated: action.receivedAt,
 			};
 		case FETCH_PROFILE_ERROR:
 			return {
 				...state,
-				isLoggedIn: false,
+				didInvalidate: true,
 			};
 		default:
 			return state;
@@ -116,7 +164,7 @@ function selectedUserProfile(state = null, action) {
 
 function userById(state = {
 	isFetching: false,
-	payload: {}
+	user: {}
 }, action) {
 	switch (action.type) {
 		case FETCH_USER_PROFILE:
@@ -127,7 +175,7 @@ function userById(state = {
 		case FETCH_USER_PROFILE_SUCCESS:
 			return {
 				isFetching: false,
-				payload: action.payload,
+				user: action.payload,
 				lastUpdated: action.receivedAt,
 			};
 		default:
@@ -154,26 +202,18 @@ function userProfiles(state = {}, action) {
 
 function partners(state = {
 	isFetching: false,
-	didInvalidate: false,
-	payload: []
+	list: []
 }, action) {
 	switch (action.type) {
-		case INVALIDATE_PARTNERS:
-			return {
-				...state,
-				didInvalidate: true,
-			};
 		case FETCH_PARTNERS:
 			return {
 				...state,
 				isFetching: true,
-				didInvalidate: true,
 			};
 		case FETCH_PARTNERS_SUCCESS:
 			return {
 				isFetching: false,
-				didInvalidate: false,
-				payload: action.payload,
+				list: action.payload,
 				lastUpdated: action.receivedAt,
 			};
 		default:
@@ -183,6 +223,7 @@ function partners(state = {
 
 
 const rootReducer = combineReducers({
+	auth,
 	profile,
 	fixtures,
 	userList,

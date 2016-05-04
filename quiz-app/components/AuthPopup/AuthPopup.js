@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { cancelAuth } from '../../flux/actions';
 import FormSignUp from './FormSignUp.js';
 import FormLogIn from './FormLogIn.js';
 import FormForgotPwd from './FormForgotPwd.js';
@@ -28,7 +30,7 @@ async function post(url, data) {
 			} else {
 				resolve('ok');
 			}
-		},  DELAY);
+		}, DELAY);
 	});
 }
 
@@ -49,8 +51,9 @@ class AuthPopup extends Component {
 
 	static propTypes = {
 		show: PropTypes.bool.isRequired,
-		onClose: PropTypes.func.isRequired,
 		view: PropTypes.string,
+		//from store
+		onCancel: PropTypes.func.isRequired,
 	};
 
 	state = {
@@ -62,7 +65,7 @@ class AuthPopup extends Component {
 	componentWillReceiveProps({view}) {
 		if (!view) { return; }
 
-		this.setState({ view });
+		this.setState({view});
 	}
 
 	navigateTo(view) {
@@ -74,7 +77,7 @@ class AuthPopup extends Component {
 	}
 
 	handleSubmit(url, data) {
-		const { onClose } = this.props;
+		const { onCancel } = this.props;
 
 		this.setState({
 			error: undefined,
@@ -87,20 +90,20 @@ class AuthPopup extends Component {
 				loading: false
 			}, () => {
 				if (!error) {
-					onClose(true);
+					onCancel();
 				}
 			});
 		});
 	}
 
 	render() {
-		const { show, onClose } = this.props;
+		const { show, onCancel } = this.props;
 		const { view, ...rest } = this.state;
 		const hiddenClass = !show ? 'is-hidden' : '';
 		const [Component, url] = view2comp[view];
 		const onClick = (e) => {
 			if (e.target === this.refs['auth-shadow']) {
-				onClose(false);
+				onCancel();
 			}
 		};
 
@@ -116,4 +119,13 @@ class AuthPopup extends Component {
 	}
 }
 
-export default AuthPopup;
+
+// Connect to store
+//
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onCancel: () => dispatch(cancelAuth()),
+	};
+};
+
+export default connect(null, mapDispatchToProps)(AuthPopup);

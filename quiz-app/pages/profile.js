@@ -27,12 +27,12 @@ class Profile extends Component {
 	}
 
 	render() {
-		const { user: { isFetching, payload } } = this.props;
+		const { user: { isFetching, user } } = this.props;
 
 		if (isFetching) {
 			return <div/>; // TODO: spinner
 		}
-		return <UserProfile user={ payload }/>;
+		return <UserProfile user={ user }/>;
 	}
 }
 
