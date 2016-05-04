@@ -163,7 +163,7 @@
                 "description": "Facebook connect/link endpoint for server side login flow. It is used in case if there is no possibility to use client-side facebook authentication (i.e. 3-rd party js applications as widgets). This endpoint is supposed to be opened in a separate browser window as a facebook login dialog.\n",
                 "parameters": [
                     {
-                        "name": "X-Api-Key",
+                        "name": "api_key",
                         "in": "query",
                         "type": "string",
                         "description": "Client application api key.",
@@ -400,6 +400,146 @@
                     }
                 }
             }
+        },
+        "/matchquiz/getmatchquizevent": {
+            "get": {
+                "summary": "Returns list of questions and possible answers for specfied match.",
+                "description": "Returns list of questions and possible answers for specfied match.\n",
+                "security": [
+                    {
+                        "ClientId": []
+                    }
+                ],
+                "tags": [
+                    "MatchQuiz"
+                ],
+                "parameters": [
+                    {
+                        "name": "MatchId",
+                        "in": "query",
+                        "type": "string",
+                        "description": "Match event identifier.",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of questions.",
+                        "schema": {
+                            "$ref": "#/definitions/MatchQuestionList"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request or match fixture event is not found.",
+                        "schema": {
+                            "$ref": "#/definitions/Error400"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized request",
+                        "schema": {
+                            "$ref": "#/definitions/Error401"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error500"
+                        }
+                    }
+                }
+            }
+        },
+        "/matchquiz/getmatchquizentries": {
+            "get": {
+                "summary": "Returns user progress across all fixtures he took a part in.",
+                "description": "Returns list of fixtures answers and bets.\n",
+                "security": [
+                    {
+                        "ClientId": []
+                    },
+                    {
+                        "SessionId": []
+                    }
+                ],
+                "tags": [
+                    "MatchQuiz"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of user match quiz entries.",
+                        "schema": {
+                            "$ref": "#/definitions/MatchQuizEntryList"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized request",
+                        "schema": {
+                            "$ref": "#/definitions/Error401"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error500"
+                        }
+                    }
+                }
+            }
+        },
+        "/matchquiz/bet": {
+            "post": {
+                "summary": "Submit match quiz results with smount of points to bet.",
+                "description": "Returns result of the bet.\n",
+                "security": [
+                    {
+                        "ClientId": []
+                    },
+                    {
+                        "SessionId": []
+                    }
+                ],
+                "tags": [
+                    "MatchQuiz"
+                ],
+                "parameters": [
+                    {
+                        "name": "Bet model",
+                        "in": "body",
+                        "description": "Bet information.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MatchQuizBetModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of user match quiz entries.",
+                        "schema": {
+                            "$ref": "#/definitions/MatchQuizBetResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "$ref": "#/definitions/Error400"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized request",
+                        "schema": {
+                            "$ref": "#/definitions/Error401"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error500"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -439,6 +579,8 @@
                 },
                 "Password": {
                     "type": "string",
+                    "minLength": 8,
+                    "maxLength": 16,
                     "format": "password",
                     "description": "User password."
                 }
@@ -648,6 +790,247 @@
             "required": [
                 "Fixtures",
                 "Count"
+            ]
+        },
+        "MatchQuestionModel": {
+            "type": "object",
+            "properties": {
+                "QuestionId": {
+                    "type": "string",
+                    "description": "Match question unique identifier."
+                },
+                "Type": {
+                    "type": "string",
+                    "description": "Match question type name."
+                },
+                "Outcomes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MatchQuestionOutcomeModel"
+                    },
+                    "description": "List of quiz question outcomes."
+                },
+                "TotalAnswersCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Count of total user answers for this question."
+                }
+            },
+            "required": [
+                "QuestionId",
+                "Type",
+                "Outcomes",
+                "TotalAnswersCount"
+            ]
+        },
+        "MatchQuestionOutcomeModel": {
+            "type": "object",
+            "discriminator": "OutcomeId",
+            "properties": {
+                "OutcomeId": {
+                    "type": "string",
+                    "description": "Match question outcome unique identifier."
+                },
+                "AnswersCount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Count of users choosen this outcome."
+                }
+            },
+            "required": [
+                "OutcomeId",
+                "AnswersCount"
+            ]
+        },
+        "MatchQuestionOutcomeFirstScorerModel": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MatchQuestionOutcomeModel"
+                },
+                {
+                    "type": "object"
+                }
+            ],
+            "properties": {
+                "FirstScorer": {
+                    "type": "string",
+                    "description": "The first scorer."
+                },
+                "ScorerTeam": {
+                    "type": "string",
+                    "description": "The score player team."
+                }
+            },
+            "required": [
+                "FirstScorer",
+                "ScorerTeam"
+            ]
+        },
+        "MatchQuestionOutcomeCorrectScoreModel": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MatchQuestionOutcomeModel"
+                },
+                {
+                    "type": "object"
+                }
+            ],
+            "properties": {
+                "Team": {
+                    "type": "string",
+                    "description": "The score team."
+                },
+                "Score": {
+                    "type": "string",
+                    "description": "The score."
+                }
+            },
+            "required": [
+                "Team",
+                "Score"
+            ]
+        },
+        "MatchQuestionOutcomeFirstHalfResultModel": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MatchQuestionOutcomeModel"
+                },
+                {
+                    "type": "object"
+                }
+            ],
+            "properties": {
+                "Team": {
+                    "type": "string",
+                    "description": "The score team."
+                }
+            },
+            "required": [
+                "Team"
+            ]
+        },
+        "MatchQuestionList": {
+            "type": "object",
+            "properties": {
+                "Questions": {
+                    "description": "List of match quiz questions.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MatchQuestionModel"
+                    }
+                }
+            },
+            "required": [
+                "Questions"
+            ]
+        },
+        "MatchQuizEntryList": {
+            "type": "object",
+            "properties": {
+                "MatchQuizEntries": {
+                    "description": "List of user match quiz entries",
+                    "items": {
+                        "$ref": "#/definitions/MatchQuizEntryModel"
+                    }
+                },
+                "Count": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Total count of entries."
+                }
+            },
+            "required": [
+                "MatchQuizEntries",
+                "Count"
+            ]
+        },
+        "MatchQuizEntryModel": {
+            "type": "object",
+            "properties": {
+                "Answers": {
+                    "description": "User answers for this quiz.",
+                    "items": {
+                        "$ref": "#/definitions/AnswerResponseModel"
+                    }
+                },
+                "MatchId": {
+                    "type": "string",
+                    "description": "Match event unique identifier."
+                },
+                "BetAmount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Total amount of points bet."
+                },
+                "IsWinner": {
+                    "type": "boolean",
+                    "description": "Has user won this quiz."
+                }
+            },
+            "required": [
+                "Answers",
+                "MatchId",
+                "BetAmount",
+                "IsWinner"
+            ]
+        },
+        "AnswerResponseModel": {
+            "type": "object",
+            "properties": {
+                "QuestionId": {
+                    "type": "string",
+                    "description": "Match quiz question unique identifier."
+                },
+                "OutcomeId": {
+                    "type": "string",
+                    "description": "Match quiz outcome unique identifier."
+                }
+            },
+            "required": [
+                "QuestionId",
+                "OutcomeId"
+            ]
+        },
+        "MatchQuizBetModel": {
+            "type": "object",
+            "properties": {
+                "PointsAmount": {
+                    "type": "integer",
+                    "format": "int32",
+                    "minimum": 1,
+                    "description": "Points to bet."
+                },
+                "MatchId": {
+                    "type": "string",
+                    "description": "Match event unique identifier."
+                },
+                "OutcomeAnswers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Arary of outcome unique identifiers."
+                }
+            },
+            "required": [
+                "PointsAmount",
+                "MatchId",
+                "OutcomeAnswers"
+            ]
+        },
+        "MatchQuizBetResponse": {
+            "type": "object",
+            "properties": {
+                "MatchQuizEntry": {
+                    "$ref": "#/definitions/AnswerResponseModel"
+                },
+                "User": {
+                    "$ref": "#/definitions/CurrentUser"
+                }
+            },
+            "required": [
+                "MatchQuizEntry",
+                "User"
             ]
         },
         "Error400": {
