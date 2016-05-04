@@ -1,5 +1,5 @@
 window.addEventListener('load', function(){
-window.DGW = function () {
+var DGW = function () {
     if (document.getElementById('dgl-gamified-widget')) {
         var widgetScript = document.getElementById('dgl-gamified-widget');
         var widgetPathName = widgetScript.src;
@@ -3214,9 +3214,9 @@ var lastLinkElement = document.head.getElementsByTagName('link')[document.head.g
 if (window.innerWidth > 1024) DGW.helpers.insertAfter(widgetStyles, lastLinkElement, document.head);
 else DGW.helpers.console.info('Widget: Mobile screen size, no widget allowed');
 
+if (DGW.global.debug) window.DGW = DGW;
+
 window.dgwActivateDebugMode = function(){
     DGW.global.debug = true;
 };
-
-
 });

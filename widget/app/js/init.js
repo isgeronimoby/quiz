@@ -1,4 +1,4 @@
-window.DGW = function () {
+var DGW = function () {
     if (document.getElementById('dgl-gamified-widget')) {
         var widgetScript = document.getElementById('dgl-gamified-widget');
         var widgetPathName = widgetScript.src;
