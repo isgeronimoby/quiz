@@ -649,7 +649,7 @@
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-frame-holder .dg-o-w-submenu {
   position: relative;
   height: 50px;
-  line-height: 50px;
+  line-height: 46px;
   background-color: #ffffff;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
   padding-left: 25px;
@@ -657,12 +657,13 @@
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-frame-holder .dg-o-w-submenu .dg-o-w-back-btn {
   display: inline-block;
   cursor: pointer;
-  -webkit-transition: color 0.3s ease;
-  transition: color 0.3s ease;
+  -webkit-transition: border-bottom-color 0.3s ease;
+  transition: border-bottom-color 0.3s ease;
   color: #00309b;
+  border-bottom: 4px solid transparent;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-frame-holder .dg-o-w-submenu .dg-o-w-back-btn:hover {
-  color: #323232;
+  border-bottom-color: #00309b;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-frame-holder .dg-o-w-iframe-holder {
   height: 100%;

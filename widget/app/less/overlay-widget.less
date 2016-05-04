@@ -330,7 +330,7 @@
 					.dg-o-w-submenu {
 						position: relative;
 						height: @dg-widget-overlay-submenu-height;
-						line-height: @dg-widget-overlay-submenu-height;
+						line-height: @dg-widget-overlay-submenu-height - 4;
 						background-color: @color-white;
 						box-shadow: 0 2px 3px rgba(0,0,0,.2);
 						padding-left: 25px;
@@ -338,11 +338,12 @@
 						.dg-o-w-back-btn {
 							display: inline-block;
 							cursor: pointer;
-							transition: color 0.3s ease;
+							transition: border-bottom-color 0.3s ease;
 							color: @color-brand;
+							border-bottom: 4px solid transparent;
 
 							&:hover {
-								color: @color-grey-darkest;
+								border-bottom-color: @color-brand;
 							}
 						}
 					}
