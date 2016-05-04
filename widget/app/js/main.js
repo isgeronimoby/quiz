@@ -9,6 +9,7 @@ DGW.main.elements.widget = document.createElement('div');
     DGW.main.elements.widget.id = 'dg-o-w';
     DGW.main.elements.widget.innerHTML = DGW.templates.mainWidgetCore;
 DGW.main.elements.widgetBody = DGW.main.elements.widget.querySelector('.dg-o-w-body');
+DGW.main.elements.widgetBodyWrapper = DGW.main.elements.widgetBody.querySelector('.dg-o-w-body-wrapper');
 
 DGW.main.elements.menuItems = {
     earn: DGW.main.elements.widget.querySelector('.dg-o-w-menu .earn-menu-item'),

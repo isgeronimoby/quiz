@@ -1430,13 +1430,42 @@ DGW.helpers.openDataLinks = function(elems){
         if (link) {
             link.addEventListener('click', function(ev){
                 ev.preventDefault();
-                DGW.helpers.centerWindowPopup(url, link.getAttribute('data-link'),
-                    DGW.main.elements.widgetBody.clientWidth - 100, DGW.main.elements.widgetBody.clientHeight - 100);
+                DGW.helpers.showFramedSrc(url);
             });
         }
     });
 
 };
+
+DGW.helpers.showFramedSrc = function(src){
+    var h = DGW.main.elements.frameHolder,
+        ih = h.querySelector('.dg-o-w-iframe-holder'),
+        wb = DGW.main.elements.widgetBodyWrapper;
+    ih.innerHTML = '';
+    var iframe = document.createElement('iframe');
+    DGW.main.methods.loadingStarted();
+    iframe.onload = function(){
+        DGW.main.methods.loadingFinished();
+    };
+    iframe.src = src;
+
+    ih.appendChild(iframe);
+    wb.appendChild(h);
+};
+DGW.main.elements.frameHolder = document.createElement('div');
+DGW.main.elements.frameHolder.className = 'dg-o-w-frame-holder';
+DGW.main.elements.frameHolder.innerHTML = '<div class="dg-o-w-submenu"><div class="dg-o-w-back-btn">&larr; Back</div></div>' +
+                                          '<div class="dg-o-w-iframe-holder"></div>';
+DGW.main.elements.frameHolder.querySelector('.dg-o-w-back-btn').addEventListener('click', function(){
+    var fh = DGW.main.elements.frameHolder,
+        wb = DGW.main.elements.widgetBodyWrapper;
+    DGW.helpers.addClass(fh, 'dg-o-w-hidden');
+    setTimeout(function(){
+        fh.querySelector('.dg-o-w-iframe-holder').innerHTML = '';
+        DGW.helpers.removeClass(fh, 'dg-o-w-hidden');
+        wb.removeChild(fh);
+    }, 300);
+});
 DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body">' +
 
@@ -1672,6 +1701,7 @@ DGW.main.elements.widget = document.createElement('div');
     DGW.main.elements.widget.id = 'dg-o-w';
     DGW.main.elements.widget.innerHTML = DGW.templates.mainWidgetCore;
 DGW.main.elements.widgetBody = DGW.main.elements.widget.querySelector('.dg-o-w-body');
+DGW.main.elements.widgetBodyWrapper = DGW.main.elements.widgetBody.querySelector('.dg-o-w-body-wrapper');
 
 DGW.main.elements.menuItems = {
     earn: DGW.main.elements.widget.querySelector('.dg-o-w-menu .earn-menu-item'),

@@ -293,10 +293,25 @@ DGW.helpers.openDataLinks = function(elems){
         if (link) {
             link.addEventListener('click', function(ev){
                 ev.preventDefault();
-                DGW.helpers.centerWindowPopup(url, link.getAttribute('data-link'),
-                    DGW.main.elements.widgetBody.clientWidth - 100, DGW.main.elements.widgetBody.clientHeight - 100);
+                DGW.helpers.showFramedSrc(url);
             });
         }
     });
 
+};
+
+DGW.helpers.showFramedSrc = function(src){
+    var h = DGW.main.elements.frameHolder,
+        ih = h.querySelector('.dg-o-w-iframe-holder'),
+        wb = DGW.main.elements.widgetBodyWrapper;
+    ih.innerHTML = '';
+    var iframe = document.createElement('iframe');
+    DGW.main.methods.loadingStarted();
+    iframe.onload = function(){
+        DGW.main.methods.loadingFinished();
+    };
+    iframe.src = src;
+
+    ih.appendChild(iframe);
+    wb.appendChild(h);
 };

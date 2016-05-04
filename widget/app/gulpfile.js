@@ -12,6 +12,7 @@ var scripts = [
     'js/init.js', 'js/easyXDM.min.js',
     'js/vanilla-slider.js', 'js/requests.js',
     'js/offers-requests.js', 'js/helpers.js',
+    'js/template-partials.js', 'js/template-partial-events.js',
     'js/templates.js', 'js/main.js',
     'js/side-widget-events.js', 'js/page-events.js',
     'js/fill-methods.js', 'js/launch.js'
