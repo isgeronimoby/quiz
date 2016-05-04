@@ -37,9 +37,14 @@ DGW.main.methods.changeMainState = function(state){
     switch (state) {
         case 'earn':
             if (DGW.global.authorized) {
-                DGW.global.api.requests.getUserOffers();
+                DGW.global.api.requests.getUserOffers(function(response){
+                    DGW.main.methods.offersConstructor(response);
+                    DGW.global.userStats.earnToday = response.TotalPointsReward;
+                });
             } else {
-                DGW.global.api.requests.getOffers();
+                DGW.global.api.requests.getOffers(function(response){
+                    DGW.main.methods.offersConstructor(response);
+                });
             }
             DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.earnMain);
             break;
@@ -53,18 +58,30 @@ DGW.main.methods.changeMainState = function(state){
             break;
         case 'activities':
             if (DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').value === 'all-activities') {
-                DGW.global.api.requests.getAllActivities();
+                DGW.global.api.requests.getAllActivities(function(response){
+                    DGW.main.methods.activitiesConstructor(response.Activities);
+                });
             } else {
-                DGW.global.api.requests.getUserActivities();
+                DGW.global.api.requests.getUserActivities(function(response){
+                    DGW.main.methods.activitiesConstructor(response.Activities);
+                });
             }
-            DGW.global.api.requests.getLeaderboard();
+            DGW.global.api.requests.getLeaderboard(function(response){
+                DGW.main.methods.leaderboardConstructor(response.Earners);
+            });
             DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.activitiesMain);
             break;
         case 'profile':
             if ( DGW.global.authorized ) {
                 DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.profileMain);
                 DGW.global.api.requests.getUser();
-                DGW.global.api.requests.getAllBadges();
+                DGW.global.api.requests.getAllBadges(function(response){
+                    DGW.global.userStats.badges.all = response.Badges;
+                    DGW.global.api.requests.getEarnedBadges(function(response){
+                        DGW.global.userStats.badges.earned = response.EarnedBadges;
+                        DGW.main.methods.updateBadgesInfo();
+                    });
+                });
             } else {
                 DGW.helpers.addClass(DGW.main.elements.widgetBody, 'profile-anon');
                 DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.loginMain);
@@ -237,9 +254,13 @@ DGW.main.methods.initEvents = function () {
 //Activities page
     DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').addEventListener('change', function(){
         if (this.value === 'all-activities') {
-            DGW.global.api.requests.getAllActivities();
+            DGW.global.api.requests.getAllActivities(function(response){
+                DGW.main.methods.activitiesConstructor(response.Activities);
+            });
         } else {
-            DGW.global.api.requests.getUserActivities();
+            DGW.global.api.requests.getUserActivities(function(response){
+                DGW.main.methods.activitiesConstructor(response.Activities);
+            });
         }
     });
 

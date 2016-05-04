@@ -28,6 +28,10 @@ DGW.helpers.isArray = function(o){
     return Object.prototype.toString.call(o) === '[object Array]';
 };
 
+DGW.helpers.isObject = function(o){
+    return Object.prototype.toString.call(o) === '[object Object]';
+};
+
 DGW.helpers.drawsTimerConstr = function(params){
     var draws;
     var _second = 1000;
@@ -315,4 +319,34 @@ DGW.helpers.showFramedSrc = function(src){
     DGW.main.methods.hideNotificationBar();
     ih.appendChild(iframe);
     wb.appendChild(h);
+};
+
+DGW.helpers.getElementsFromAllPlaces = function(selector){
+    if (!selector) return;
+
+    var places = [
+        DGW.main.elements.widgetBody,
+        DGW.side.elements.widgetBody,
+        DGW.main.elements.pages
+    ];
+    var placesArr = [];
+    var elements = [];
+
+    places.forEach(function(place){
+        if (DGW.helpers.isObject(place)) {
+            for (var pl in place) {
+                placesArr.push(place[pl]);
+            }
+        } else {
+            placesArr.push(place);
+        }
+    });
+
+    placesArr.forEach(function(place){
+        Array.prototype.slice.call(place.querySelectorAll(selector)).forEach(function(elem){
+            elements.push(elem);
+        });
+    });
+
+    return elements;
 };

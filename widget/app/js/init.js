@@ -24,7 +24,7 @@ var DGW = function () {
             } else {
                 // No parameter - use production path
                 tunnelPath = 'https://api.rewarded.club/core/v1/xdm/tunnel';
-                envPath = tunnelPath.substring(DGW.global.tunnelPath.lastIndexOf('/xdm/') + 1, 0);
+                envPath = tunnelPath.substring(tunnelPath.lastIndexOf('/xdm/') + 1, 0);
             }
 
             // checking for debug mode

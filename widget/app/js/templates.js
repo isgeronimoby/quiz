@@ -4,11 +4,11 @@ DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                         '<div class="dg-side-widget-content dg-o-w-authorized">' +
                                             '<div class="dg-side-widget-content-inner">' +
                                                 '<div class="dg-side-section">' +
-                                                    '<div class="dg-side-user-img-holder"><img class="dg-o-w-side-image-floating" id="dg-side-widget-userpic" src=""/></div>' +
-                                                    '<div class="dg-side-collapsed dg-side-floating-text"><p><span class="dg-o-w-points-text" id="dg-side-points-collapsed">00</span></p><h5>Earn more</h5></div>' +
+                                                    '<div class="dg-side-user-img-holder"><img data-userstats-userimage class="dg-o-w-side-image-floating" id="dg-side-widget-userpic" src=""/></div>' +
+                                                    '<div class="dg-side-collapsed dg-side-floating-text"><p><span data-userstats-points-c class="dg-o-w-points-text" id="dg-side-points-collapsed">00</span></p><h5>Earn more</h5></div>' +
                                                     '<div class="dg-side-content">' +
-                                                        '<h4 id="dg-side-widget-name">Name Surname Whatever</h4>' +
-                                                        '<h6><span class="dg-o-w-points-text" id="dg-side-points">00</span><br/><span class="dg-o-w-credits-text" id="dg-side-credits">00</span></h6>' +
+                                                        '<h4 data-userstats-username id="dg-side-widget-name">Name Surname Whatever</h4>' +
+                                                        '<h6><span data-userstats-points-c class="dg-o-w-points-text" id="dg-side-points">00</span><br/><span data-userstats-credits-c class="dg-o-w-credits-text" id="dg-side-credits">00</span></h6>' +
                                                     '</div>' +
                                                 '</div>' +
                                                 '<div data-page="earn" class="dg-side-cta-floating"><span class="dg-side-collapsed">&rarr;</span><span class="dg-side-expanded">Earn more points</span></div>' +
@@ -30,76 +30,82 @@ DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '</div>' +
                                '</div>';
 
+DGW.templates.spinner = '<div class="dg-o-w-spinner">' +
+                            '<div class="sk-circle1 sk-circle"></div><div class="sk-circle2 sk-circle"></div><div class="sk-circle3 sk-circle"></div>' +
+                            '<div class="sk-circle4 sk-circle"></div><div class="sk-circle5 sk-circle"></div><div class="sk-circle6 sk-circle"></div>' +
+                            '<div class="sk-circle7 sk-circle"></div><div class="sk-circle8 sk-circle"></div><div class="sk-circle9 sk-circle"></div>' +
+                            '<div class="sk-circle10 sk-circle"></div><div class="sk-circle11 sk-circle"></div><div class="sk-circle12 sk-circle"></div>' +
+                        '</div>';
+
+DGW.templates.loginFooter = '<footer class="dg-o-w-footer-login">' +
+                                '<div class="footer-section">' +
+                                    '<div class="inline-part inline-table dg-o-w-text-left"><p>Get started now and earn first <span id="dg-o-w-login-fb-reward" class="dg-o-w-rewarded-action dg-o-w-points">30</span></p>' +
+                                    '<h5 class="dg-o-w-color-grey">We\'ll never send you any spam.</h5></div>' +
+                                    '<div class="inline-part inline-table"><a href="#" id="dg-o-w-footer-fb-connect" class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large">Connect with Facebook</a></div>' +
+                                    '<div class="inline-part inline-table"><p>or</p></div>' +
+                                    '<div class="inline-part inline-table"><a id="dg-o-w-footer-email-login" href="#" class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large">Enter with email</a></div>' +
+                                '</div>' +
+                            '</footer>';
+
+DGW.templates.header = '<div class="dg-o-w-header">' +
+                            '<div class="dg-o-w-logo"></div>' +
+                            '<div class="dg-o-w-menu">' +
+                            '<ul><li class="earn-menu-item">Earn</li>' +
+                                '<li class="draws-menu-item">Draws & Games</li>' +
+                                '<li class="activities-menu-item">Activities</li></ul>' +
+                            '</div>' +
+                            '<div class="dg-o-w-menu-profile">' +
+                                '<div class="profile-menu-item">' +
+                                    '<img data-userstats-userimage class="avatar" src="" />' +
+                                    '<div class="profile-menu-unauthorized">' +
+                                        '<div>' +
+                                            '<h4>Hello, guest!</h4>' +
+                                            '<div class="dg-o-w-login-dropdown">' +
+                                                '<a href="#" id="dg-o-w-login-trigger">Enter & get started</a>' +
+                                                '<div class="dg-o-w-email-login-form">' +
+                                                    '<form class="shown" id="dg-o-w-form-login-top">' +
+                                                        '<h2 id="dg-o-w-login-heading">Welcome!</h2>' +
+                                                        '<div id="dg-o-w-header-fb-connect" class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large">Connect with Facebook</div>' +
+                                                        '<label><input type="email" placeholder="Email" /></label>' +
+                                                        '<label><input type="password" placeholder="Password"/></label>' +
+                                                        '<label class="dg-o-w-hidden"><input type="text" placeholder="Hello, what\'s your name?"/></label>' +
+                                                        '<input class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large" type="submit" value="Enter with email" />' +
+                                                        '<a href="#" id="dg-o-w-header-forgot-pass" class="">Forgot your password?</a>' +
+                                                    '</form>' +
+                                                    '<form id="dg-o-w-form-forgot-top">' +
+                                                        '<h2>Forgot password?</h2>' +
+                                                        '<div><label><input type="email" placeholder="Email" /></label>' +
+                                                        '<input class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large" type="submit" value="Request new password" />' +
+                                                        '<a href="#" class="">&larr; Back</a></div>' +
+                                                        '<p class="success-message">Email was sent</p>' +
+                                                    '</form>' +
+                                                    '<div class="dg-o-w-header-form-close" id="dg-o-w-header-form-close">&times;</div>' +
+                                                '</div>' +
+                                            '</div>' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="profile-menu-authorized">' +
+                                        '<div>' +
+                                            '<h4 data-userstats-username>Hello, Paul!</h4>' +
+                                            '<p><span data-userstats-points-c id="dg-o-w-points">25</span> | <span data-userstats-credits-c id="dg-o-w-credits">115.25</span></p>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>';
+
 DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                     '<div class="dg-o-w-overlay">' +
                                         '<div class="dg-o-w-body">' +
                                             '<div class="dg-o-w-body-wrapper">' +
-                                                '<div class="dg-o-w-header">' +
-                                                    '<div class="dg-o-w-logo"></div>' +
-                                                    '<div class="dg-o-w-menu">' +
-                                                        '<ul><li class="earn-menu-item">Earn</li>' +
-                                                        '<li class="draws-menu-item">Draws & Games</li>' +
-                                                        '<li class="activities-menu-item">Activities</li></ul>' +
-                                                    '</div>' +
-                                                    '<div class="dg-o-w-menu-profile">' +
-                                                        '<div class="profile-menu-item">' +
-                                                            '<img class="avatar" src="" />' +
-                                                            '<div class="profile-menu-unauthorized">' +
-                                                                '<div>' +
-                                                                    '<h4>Hello, guest!</h4>' +
-                                                                    '<div class="dg-o-w-login-dropdown">' +
-                                                                        '<a href="#" id="dg-o-w-login-trigger">Enter & get started</a>' +
-                                                                        '<div class="dg-o-w-email-login-form">' +
-                                                                            '<form class="shown" id="dg-o-w-form-login-top">' +
-                                                                                '<h2 id="dg-o-w-login-heading">Welcome!</h2>' +
-                                                                                '<div id="dg-o-w-header-fb-connect" class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large">Connect with Facebook</div>' +
-                                                                                '<label><input type="email" placeholder="Email" /></label>' +
-                                                                                '<label><input type="password" placeholder="Password"/></label>' +
-                                                                                '<label class="dg-o-w-hidden"><input type="text" placeholder="Hello, what\'s your name?"/></label>' +
-                                                                                '<input class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large" type="submit" value="Enter with email" />' +
-                                                                                '<a href="#" id="dg-o-w-header-forgot-pass" class="">Forgot your password?</a>' +
-                                                                            '</form>' +
-                                                                            '<form id="dg-o-w-form-forgot-top">' +
-                                                                                '<h2>Forgot password?</h2>' +
-                                                                                '<div><label><input type="email" placeholder="Email" /></label>' +
-                                                                                '<input class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large" type="submit" value="Request new password" />' +
-                                                                                '<a href="#" class="">&larr; Back</a></div>' +
-                                                                                '<p class="success-message">Email was sent</p>' +
-                                                                            '</form>' +
-                                                                            '<div class="dg-o-w-header-form-close" id="dg-o-w-header-form-close">&times;</div>' +
-                                                                        '</div>' +
-                                                                    '</div>' +
-                                                                '</div>' +
-                                                            '</div>' +
-                                                            '<div class="profile-menu-authorized">' +
-                                                                '<div>' +
-                                                                    '<h4>Hello, Paul!</h4>' +
-                                                                    '<p><span id="dg-o-w-points">25</span> | <span id="dg-o-w-credits">115.25</span></p>' +
-                                                                '</div>' +
-                                                            '</div>' +
-                                                        '</div>' +
-                                                    '</div>' +
-                                                '</div>' +
+                                                DGW.templates.header +
                                                 '<div class="dg-o-w-content"><div class="dg-o-w-section">' +
                                                     '<section></section>' +
-                                                    '<footer class="dg-o-w-footer-login">' +
-                                                        '<div class="footer-section">' +
-                                                            '<div class="inline-part inline-table dg-o-w-text-left"><p>Get started now and earn first <span id="dg-o-w-login-fb-reward" class="dg-o-w-rewarded-action dg-o-w-points">30</span></p>' +
-                                                            '<h5 class="dg-o-w-color-grey">We\'ll never send you any spam.</h5></div>' +
-                                                            '<div class="inline-part inline-table"><a href="#" id="dg-o-w-footer-fb-connect" class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large">Connect with Facebook</a></div>' +
-                                                            '<div class="inline-part inline-table"><p>or</p></div>' +
-                                                            '<div class="inline-part inline-table"><a id="dg-o-w-footer-email-login" href="#" class="btn-dg-o-w btn-dg-o-w-brand-l btn-dg-o-w-large">Enter with email</a></div>' +
-                                                        '</div>' +
-                                                    '</footer>' +
+                                                    DGW.templates.loginFooter +
                                                 '</div></div>' +
                                             '</div>' +
                                             '<div class="dg-o-w-close">&times;</div>' +
-                                            '<div class="dg-o-w-spinner">' +
-                                                '<div class="sk-circle1 sk-circle"></div><div class="sk-circle2 sk-circle"></div><div class="sk-circle3 sk-circle"></div>' +
-                                                '<div class="sk-circle4 sk-circle"></div><div class="sk-circle5 sk-circle"></div><div class="sk-circle6 sk-circle"></div>' +
-                                                '<div class="sk-circle7 sk-circle"></div><div class="sk-circle8 sk-circle"></div><div class="sk-circle9 sk-circle"></div>' +
-                                                '<div class="sk-circle10 sk-circle"></div><div class="sk-circle11 sk-circle"></div><div class="sk-circle12 sk-circle"></div>' +
-                                            '</div>' +
+                                            DGW.templates.spinner +
                                         '<footer class="dg-o-w-main-footer">Powered by Loyalty Rewarded, 2016 &nbsp;&nbsp;-&nbsp;&nbsp; <a data-link="faq" href="#">FAQ</a></footer></div>' +
                                     '</div>' +
                                 '</div>';
@@ -136,14 +142,14 @@ DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
 DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' +
 
                                 '<div class="dg-o-w-profile-stats">' +
-                                    '<div class="dg-o-w-image-holder"><img id="profileImage" class="avatar" src="" /></div>' +
+                                    '<div class="dg-o-w-image-holder"><img data-userstats-userimage id="profileImage" class="avatar" src="" /></div>' +
                                     '<div class="dg-o-w-profile-stats-holder">' +
-                                        '<h3 class="dg-o-w-profile-name" id="profileName">Captain Deadpool</h3>' +
+                                        '<h3 data-userstats-username class="dg-o-w-profile-name" id="profileName">Captain Deadpool</h3>' +
                                         '<div class="dg-o-w-profile-stats-holder-rest">' +
                                             //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p>19</p></div></div>' +
                                             //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p>3</p></div></div>' +
-                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 id="dg-o-w-profile-p-c">520</h3><p>points</p></div></div>' +
-                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 id="dg-o-w-profile-c-c">40</h3><p>credits</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 data-userstats-points-c id="dg-o-w-profile-p-c">520</h3><p>points</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 data-userstats-credits-c id="dg-o-w-profile-c-c">40</h3><p>credits</p></div></div>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +

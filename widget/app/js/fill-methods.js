@@ -23,37 +23,20 @@ DGW.main.methods.setRewardedActions = function(w, a){
     }
 };
 
-DGW.main.methods.profileSetData = function(data) {
+DGW.main.methods.profileSetData = function(data, draw) {
     var pr = DGW.main.elements.pages.profileMain;
     var wb = DGW.main.elements.widgetBody;
     var sb = DGW.side.elements.widgetBody;
-    var profileImageHolders = [
-            wb.querySelector('.dg-o-w-menu-profile .profile-menu-item img'),
-            pr.querySelector('#profileImage'),
-            sb.querySelector('#dg-side-widget-userpic')
-        ],
-        profileNames = [
-            wb.querySelector('.dg-o-w-menu-profile .profile-menu-authorized h4'),
-            pr.querySelector('#profileName'),
-            sb.querySelector('#dg-side-widget-name')
-        ],
+    var profileImageHolders = DGW.helpers.getElementsFromAllPlaces('[data-userstats-userimage]'),
+        profileNames = DGW.helpers.getElementsFromAllPlaces('[data-userstats-username]'),
         friendsNumber = pr.querySelector('#profileFriendsAmount');
 
     var points = {
-            confirmed: [
-                wb.querySelector('#dg-o-w-points'),
-                pr.querySelector('#dg-o-w-profile-p-c'),
-                sb.querySelector('#dg-side-points'),
-                sb.querySelector('#dg-side-points-collapsed')
-            ],
+            confirmed: DGW.helpers.getElementsFromAllPlaces('[data-userstats-points-c]'),
             pending: [pr.querySelector('.dg-o-w-profile-points h5')]
         },
         credits = {
-            confirmed: [
-                wb.querySelector('#dg-o-w-credits'),
-                pr.querySelector('#dg-o-w-profile-c-c'),
-                sb.querySelector('#dg-side-credits')
-            ],
+            confirmed: DGW.helpers.getElementsFromAllPlaces('[data-userstats-credits-c]'),
             pending: [pr.querySelector('.dg-o-w-profile-credits h5')]
         };
 
@@ -62,15 +45,13 @@ DGW.main.methods.profileSetData = function(data) {
     DGW.global.userStats.userId = data.UserId;
 
     profileImageHolders.forEach(function(image){
-        if (image)
-            image.src = data.ImageUrl || DGW.helpers.checkImagesForSrc(image.getAttribute('src'));
+        if (image) image.src = data.ImageUrl || DGW.helpers.checkImagesForSrc(image.getAttribute('src'));
     });
 
     DGW.global.userStats.imageUrl = data.ImageUrl || DGW.global.userStats.imageUrl;
 
     profileNames.forEach(function(name){
-        if (name)
-            name.innerHTML = data.UserName;
+        if (name) name.innerHTML = data.UserName;
     });
 
     DGW.global.userStats.name = data.UserName || DGW.global.userStats.name;
@@ -101,51 +82,15 @@ DGW.main.methods.profileSetData = function(data) {
 
     if (DGW.global.userStats.earnToday && pr.querySelector('#dg-o-w-profile-earn-today'))
         pr.querySelector('#dg-o-w-profile-earn-today').innerHTML = 'You can <span class="dg-o-w-color-brand">earn +' + DGW.global.userStats.earnToday + ' points</span> more';
-};
 
-DGW.main.methods.updateUserInfoBet = function(draw, user){
-    var points = {
-            confirmed: [
-                DGW.main.elements.widgetBody.querySelector('#dg-o-w-points'),
-                DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-stats-points h3')
-            ],
-            pending: [DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-points h5')]
-        },
-        credits = {
-            confirmed: [
-                DGW.main.elements.widgetBody.querySelector('#dg-o-w-credits'),
-                DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-stats-credits h3')
-            ],
-            pending: [DGW.main.elements.pages.profileMain.querySelector('.dg-o-w-profile-credits h5')]
-        };
-
-    var betPoints = DGW.main.elements.widgetContent.querySelector('.dg-o-w-your-bet span');
-
-    points.confirmed.forEach(function(point){
-        if (point) point.innerHTML = user.Wallet.PointsConfirmed;
-    });
-    points.pending.forEach(function(point){
-        if (point) point.innerHTML = user.Wallet.PointsPending;
-    });
-
-    credits.confirmed.forEach(function(credit){
-        if (credit) credit.innerHTML = user.Wallet.CreditsConfirmed;
-    });
-    credits.pending.forEach(function(credit){
-        if (credit) credit.innerHTML = user.Wallet.CreditsPending;
-    });
-
-    DGW.global.userStats.pointsC = user.Wallet.PointsConfirmed;
-    DGW.global.userStats.pointsP = user.Wallet.PointsPending;
-    DGW.global.userStats.creditsC = user.Wallet.CreditsConfirmed;
-    DGW.global.userStats.creditsP = user.Wallet.CreditsPending;
-
-    if (betPoints) {
-        betPoints.innerHTML = draw.TicketsAmount || 0;
-    } else {
-
+    if (draw) {
+        var betPoints = DGW.main.elements.pages.singleDraw.querySelector('[data-draw-betpoints]');
+        if (betPoints) {
+            betPoints.innerHTML = draw.TicketsAmount || 0;
+        }
     }
 };
+
 
 DGW.main.methods.updateBadgesInfo = function(){
     var ba = DGW.global.userStats.badges.all,
@@ -388,7 +333,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                                 '<h3>' + draw.Prize.Title + '</h3>' +
                                 '<p>' + draw.Prize.Description + '</p>' +
                                 '<div class="dg-o-w-draw-bet-info dg-o-w-draw-auth-show">' +
-                                    '<div class="dg-o-w-your-bet dg-o-w-points-bet"><p>You\'ve bet <span>' + ((drawEntry) ? drawEntry.TicketsAmount : 0 ) + '</span> points</p></div>' +
+                                    '<div class="dg-o-w-your-bet dg-o-w-points-bet"><p>You\'ve bet <span data-draw-betpoints>' + ((drawEntry) ? drawEntry.TicketsAmount : 0 ) + '</span> points</p></div>' +
                                     // playersInDraw +
                                 '</div>' +
                                 ((DGW.helpers.dateDiff(draw.EndDate) > 0) ? '<h2 class="dg-o-w-draw-login-show">Please, log in to bet</h2>' : '') +
@@ -500,14 +445,17 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
             var betBtn = that.querySelector('input[type=submit]');
             var pointsToBet = +that.querySelector('input[type=number]').value;
 
-            DGW.global.api.requests.drawBet(drawId, pointsToBet, function onSuccess(){
-                betBtn.disabled = false;
-                DGW.main.methods.notificationConstructor('We\'ve received your ' + pointsToBet + ' points. Bet more!');
-                that.querySelector('input[type=number]').value = '';
-            }, function onError(result){
-                betBtn.disabled = false;
-                DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
-            });
+            DGW.global.api.requests.drawBet(drawId, pointsToBet,
+                function onSuccess(result){
+                    betBtn.disabled = false;
+                    DGW.main.methods.notificationConstructor('We\'ve received your ' + pointsToBet + ' points. Bet more!');
+                    that.querySelector('input[type=number]').value = '';
+                    DGW.global.api.requests.getDrawEntries();
+                    DGW.main.methods.profileSetData(result.User, result.DrawEntry);
+                }, function onError(result){
+                    betBtn.disabled = false;
+                    DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
+                });
             betBtn.disabled = true;
         });
     }

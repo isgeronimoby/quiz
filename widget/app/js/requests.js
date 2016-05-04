@@ -319,7 +319,6 @@ DGW.global.api.requests.getDrawEntries = function(onSuccess, onError){
         if (result.status == 200) {
             DGW.helpers.console.info('getDrawEntries ', result.data);
             DGW.main.cache.drawsEntries = result.data.DrawEntries;
-
             DGW.main.methods.drawsConstructor(DGW.main.cache);
             if (onSuccess) onSuccess(result.data);
         } else {
@@ -333,8 +332,6 @@ DGW.global.api.requests.drawBet = function(drawId, pointsAmount, onSuccess, onEr
     DGW.global.api.generic('drawBet', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('drawBet ', result);
-            DGW.global.api.requests.getDrawEntries();
-            DGW.main.methods.updateUserInfoBet(result.data.DrawEntry, result.data.User);
             if (onSuccess) onSuccess(result.data);
         } else {
             if (onError) onError(result.error);
@@ -379,7 +376,6 @@ DGW.global.api.requests.getAllActivities = function(onSuccess, onError){
     DGW.global.api.generic('getAllActivities', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getAllActivities ', result.data);
-            DGW.main.methods.activitiesConstructor(result.data.Activities);
             if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getAllActivities ', result.error);
@@ -392,7 +388,6 @@ DGW.global.api.requests.getUserActivities = function(onSuccess, onError){
     DGW.global.api.generic('getUserActivities', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getUserActivities ', result.data);
-            DGW.main.methods.activitiesConstructor(result.data.Activities);
             if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getUserActivities ', result.error);
@@ -405,7 +400,6 @@ DGW.global.api.requests.getOffers = function(onSuccess, onError){
     DGW.global.api.generic('getOffers', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getOffers ', result.data);
-            DGW.main.methods.offersConstructor(result.data);
             if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getOffers ', result.error);
@@ -418,8 +412,6 @@ DGW.global.api.requests.getUserOffers = function(onSuccess, onError){
     DGW.global.api.generic('getUserOffers', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getUserOffers ', result.data);
-            DGW.main.methods.offersConstructor(result.data);
-            DGW.global.userStats.earnToday = result.data.TotalPointsReward;
             if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getUserOffers ', result.error);
@@ -534,7 +526,6 @@ DGW.global.api.requests.getLeaderboard = function(onSuccess, onError){
     DGW.global.api.generic('getLeaderboard', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getLeaderboard ', result.data);
-            DGW.main.methods.leaderboardConstructor(result.data.Earners);
             if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getLeaderboard ', result.error);
@@ -547,8 +538,6 @@ DGW.global.api.requests.getAllBadges = function(onSuccess, onError){
     DGW.global.api.generic('getBadges', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getBadges ', result.data);
-            DGW.global.userStats.badges.all = result.data.Badges;
-            DGW.global.api.requests.getEarnedBadges();
             if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getBadges ', result.error);
@@ -561,8 +550,6 @@ DGW.global.api.requests.getEarnedBadges = function(onSuccess, onError){
     DGW.global.api.generic('getEarnedBadges', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('getEarnedBadges ', result.data);
-            DGW.global.userStats.badges.earned = result.data.EarnedBadges;
-            DGW.main.methods.updateBadgesInfo();
             if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getEarnedBadges ', result.error);

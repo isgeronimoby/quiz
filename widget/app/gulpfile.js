@@ -9,13 +9,20 @@ var gulp = require('gulp'),
 
 
 var scripts = [
-    'js/init.js', 'js/easyXDM.min.js',
-    'js/vanilla-slider.js', 'js/requests.js',
-    'js/offers-requests.js', 'js/helpers.js',
-    'js/template-partials.js', 'js/template-partial-events.js',
-    'js/templates.js', 'js/main.js',
-    'js/side-widget-events.js', 'js/page-events.js',
-    'js/fill-methods.js', 'js/launch.js'
+    'js/init.js',
+    'js/easyXDM.min.js',
+    'js/vanilla-slider.js',
+    'js/requests.js',
+    'js/helpers.js',
+    'js/templates.js',
+    'js/dom-elements-init.js',
+    'js/dom-elements-events.js',
+    'js/general-methods.js',
+    'js/offers-requests.js',
+    'js/side-widget-events.js',
+    'js/page-events.js',
+    'js/fill-methods.js',
+    'js/launch.js'
 ];
 
 gulp.task('scripts-min', function(){
