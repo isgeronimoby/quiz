@@ -75,21 +75,16 @@ class QuizContainer extends Component {
 		const onNext = () => this.nextScreen();
 		const onQuestionStatsShown = (questionId) => this.onQuestionStatsShown(questionId);
 
-		/*const quizScreens = questionList.map(({ Type, ...data }, i) => {
+		const quizScreens = questionList.map(({ Type, ...data }, i) => {
 			const Quiz = type2componet[Type];
 			return (
-				<Quiz key={ `type-${i}` } onStatsShown={ onQuestionStatsShown } info={info} data={data}/>
+				<Quiz key={ `type-${i}` } info={info} teamNames={teamNames} data={data}
+					onStatsShown={ onQuestionStatsShown } />
 			);
-		}).concat(
+		})/*.concat(
 			<QuizSummary key='summary' />
 		)*/;
 
-		const { ...data } = questionList.find(({ Type }) => Type === 'FirstGoalScorer');
-		const quizScreens = [
-			<QuizTypeFirstGoal key="xxx" onStatsShown={ onQuestionStatsShown } info={info} teamNames={teamNames} data={data}/>,
-			<div key="yy"></div>,
-			<div key="zz"></div>
-		];
 
 		return (
 			<div className="screen">

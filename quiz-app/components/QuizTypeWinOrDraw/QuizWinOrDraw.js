@@ -4,7 +4,7 @@ import QuizStats from './QuizWinOrDrawStats';
 import './draw.scss';
 
 
-function parseData(data) {
+function parseData(data, outcomeId) {
 	const {
 		TotalAnswersCount: total,
 		QuestionId: questionId,
@@ -21,21 +21,25 @@ function parseData(data) {
 			OutcomeId: id3
 			}]
 		} = data;
+	const calcStat = (count, id) => {
+		const selectedCount = (id === outcomeId) ? count + 1 : count;
+		return Math.floor(selectedCount / (total + 1) * 100)
+	};
 
 	return {
 		questionId,
 		teamHome,
 		teamAway,
-		stats: {
-			[teamHome]: 10, //Math.floor(count1 / TotalAnswersCount * 100), TODO
-			[teamAway]: 20, //Math.floor(count2 / TotalAnswersCount * 100),
-			'-': 30 //Math.floor(count3 / TotalAnswersCount * 100),
-		},
 		outcomes: [
 			{name: teamHome, id: id1},
 			{name: teamAway, id: id2},
 			{name: 'Draw', id: id3}
-		]
+		],
+		stats: {
+			[teamHome]: calcStat(count1, id1),
+			[teamAway]: calcStat(count2, id2),
+			'-': calcStat(count3, id3),
+		}
 	};
 }
 
@@ -71,14 +75,14 @@ class QuizWinOrDraw extends Component {
 
 	render() {
 		const { info, data } = this.props; //'23 March, 19:00, 3rd tour, London';
+		const { outcomeId, showStats } = this.state;
 		const {
 			questionId,
 			teamHome,
 			teamAway,
 			stats,
 			outcomes
-			} = parseData(data);
-		const { outcomeId, showStats } = this.state;
+			} = parseData(data, outcomeId);
 		const onSubmit = (outcomeId) => this.handleSubmit(questionId, outcomeId);
 		const onDismiss = () => this.hideStats();
 
@@ -90,10 +94,10 @@ class QuizWinOrDraw extends Component {
 					outcomeId={outcomeId}
 					onSubmit={ onSubmit }/>
 				<QuizStats
-					order={ [ teamHome, '-', teamAway ] }
 					hidden={ !showStats }
-					outcomeId={ showStats ? outcomeId : null }
-					stats={stats}
+					order={ [ teamHome, '-', teamAway ] }
+					outcomeId={ outcomeId }
+					stats={ stats }
 					onDismiss={ onDismiss }/>
 			</div>
 		);

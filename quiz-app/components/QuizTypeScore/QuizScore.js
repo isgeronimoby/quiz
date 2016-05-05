@@ -12,8 +12,8 @@ function parseData(data, scores = []) {
 		Outcomes: outcomes
 		} = data;
 	const score = (scoreHome >= scoreAway) ? `${scoreHome}-${scoreAway}` : `${scoreAway}-${scoreHome}`;
-	const { OutcomeId: outcomeId, AnswersCount = 0} = outcomes.find(({ Score }) => Score === score) || {};
-	const chance = total ? Math.floor(AnswersCount / total * 100) : 100;
+	const { OutcomeId: outcomeId, AnswersCount: count = 0} = outcomes.find(({ Score }) => Score === score) || {};
+	const chance = Math.floor((count + 1) / (total + 1) * 100);
 
 	return {
 		questionId,

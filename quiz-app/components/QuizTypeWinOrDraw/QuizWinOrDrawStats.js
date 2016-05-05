@@ -4,26 +4,27 @@ import './draw.scss';
 
 const DIRECTION_UP = 8; // from Hammer
 
+
 class QuizWinOrDrawStats extends Component {
 
 	static propTypes = {
 		hidden: PropTypes.bool.isRequired,
 		order: PropTypes.array.isRequired,
 		choice: PropTypes.string,
-		stats: PropTypes.object,
+		stats: PropTypes.object.isRequired,
 		onDismiss: PropTypes.func.isRequired,
 	};
-
 
 	render() {
 		const { hidden, order, choice, stats, onDismiss } = this.props;
 		const classes = !hidden ? 'reveal' : '';
 		const bottomPercent = 84; // by trial
 		const columns = order
-			.map(name => [name, stats ? stats[name] : 0])
-			.map(([name, percent]) => [name, percent, !stats ? 100 : bottomPercent - bottomPercent*percent/100])
-			.map(([name, percent, sz], i) => {
+			.map((name, i) => {
+				const percent = !hidden ? stats[name] : 0;
+				const sz = !hidden ? bottomPercent - bottomPercent * percent / 100 : 100;
 				const winnerClass = (choice === name ? 'winner' : '');
+
 				return (
 					<div key={`score-${i}`} className="col" style={{transform: `translateY(${sz}%)`}}>
 						<div className={ "stats-bar " + winnerClass }>{ percent }%</div>

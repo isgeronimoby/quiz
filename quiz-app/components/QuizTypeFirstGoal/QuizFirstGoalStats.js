@@ -22,18 +22,12 @@ class QuizFirstGoalStats extends Component {
 		const [fromX, toX] = [25, 90];
 
 		const listItems = stats
-			.map(s => {
-				const isSelected = s.outcomeId === selectedOutcomeId;
-				const percent = s.percent ||(isSelected ? 100 : 0);
-				return [
-					percent,
-					isSelected,
-					hidden ? 100 : 0,
-					fromX + (toX - fromX) * (100 - percent) / 100
-				];
-			})
-			.map(([percent, isSelected, statPos, rowPos], i) => {
+			.map(({ outcomeId, percent }, i) => {
+				const isSelected = (outcomeId === selectedOutcomeId);
+				const statPos = hidden ? 100 : 0;
+				const rowPos = fromX + (toX - fromX) * (100 - percent) / 100;
 				const selectedClass = (isSelected ? 'selected' : '');
+
 				return (
 					<li key={`stats-${i}`} className={"stats-item " + selectedClass}
 						style={{transform: `translateX(${statPos}%)`}}>

@@ -4,7 +4,7 @@ import QuizStats from './QuizFirstGoalStats';
 import './players.scss';
 
 
-function parseData(data) {
+function parseData(data, selectedOutcomeId) {
 	const {
 		QuestionId: questionId,
 		TotalAnswersCount: total,
@@ -14,14 +14,16 @@ function parseData(data) {
 		OutcomeId: outcomeId,
 		FirstScorer: name,
 		ScorerTeam: position,
-		AnswersCount
+		AnswersCount: count
 		}, i) => {
+		const countSelected = (selectedOutcomeId === outcomeId) ? count + 1 : count;
+
 		return {
 			outcomeId,
 			number: i + 1,
 			name,
 			position,
-			percent: total ? Math.floor(AnswersCount / total * 100) : 0,
+			percent: Math.floor(countSelected / (total + 1) * 100),
 		};
 	});
 
@@ -63,8 +65,8 @@ class QuizFirstGoal extends Component {
 
 	render() {
 		const { info, data } = this.props;
-		const { questionId, players } = parseData(data);
 		const { showStats, outcomeId } = this.state;
+		const { questionId, players } = parseData(data, outcomeId);
 		const stats = players.map(({ outcomeId, percent }) => {
 			return {
 				outcomeId,
