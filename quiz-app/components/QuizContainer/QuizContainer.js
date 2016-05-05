@@ -26,7 +26,8 @@ class QuizContainer extends Component {
 
 	state = {
 		currentScreenIdx: 0,
-		statsShown: {},
+		summary: {},
+		outcomes: {},
 	};
 
 	totalSteps() {
@@ -51,40 +52,49 @@ class QuizContainer extends Component {
 		}
 	}
 
-	onQuestionStatsShown(questionId) {
-		const {statsShown} = this.state;
-		if (statsShown[questionId]) { return; }
+	handleAnswerSubmit(questionId, outcomeId, summaryData) {
+		const { summary, outcomes } = this.state;
+		const questionSummary = summary[questionId];
+		const isStatsShown = questionSummary && questionSummary.isStatsShown;
 
 		this.setState({
-			statsShown: {
-				...statsShown,
-				[questionId]: true
+			outcomes: {
+				...outcomes,
+				[questionId]: {
+					outcomeId,
+					isStatsShown: true,
+				}
+			},
+			summary: {
+				...summary,
+				...summaryData
 			}
 		}, () => {
-			setTimeout(() => this.nextScreen(), STATS_SHOW_DELAY);
+			if (!isStatsShown) {
+				setTimeout(() => this.nextScreen(), STATS_SHOW_DELAY);
+			}
 		});
 	}
 
 	render() {
 		const { questionList, fixtureItem: { startDate, teamHome, teamAway } } = this.props;
 		const info = moment.utc(startDate).format('D MMMM, HH:mm');
-		const { currentScreenIdx: idx } = this.state;
+		const { currentScreenIdx: idx, summary } = this.state;
 		const total = this.totalSteps();
 		const teamNames = [teamHome, teamAway];
 		const onPrev = () => this.prevScreen();
 		const onNext = () => this.nextScreen();
-		const onQuestionStatsShown = (questionId) => this.onQuestionStatsShown(questionId);
+		const onAnswerSubmit = this.handleAnswerSubmit.bind(this);
 
 		const quizScreens = questionList.map(({ Type, ...data }, i) => {
 			const Quiz = type2componet[Type];
 			return (
 				<Quiz key={ `type-${i}` } info={info} teamNames={teamNames} data={data}
-					onStatsShown={ onQuestionStatsShown } />
+					onAnswerSubmit={ onAnswerSubmit }/>
 			);
-		})/*.concat(
-			<QuizSummary key='summary' />
-		)*/;
-
+		}).concat(
+			<QuizSummary key="summary" info={ info } teamNames={ teamNames } summary={ summary }/>
+		);
 
 		return (
 			<div className="screen">

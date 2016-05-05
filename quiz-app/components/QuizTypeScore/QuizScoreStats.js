@@ -9,7 +9,7 @@ class QuizScoreStats extends Component {
 
 	static propTypes = {
 		hidden: PropTypes.bool.isRequired,
-		percent: PropTypes.number.isRequired,
+		percent: PropTypes.number,
 		onDismiss: PropTypes.func.isRequired,
 	};
 

@@ -16,7 +16,8 @@ function parseData(data, selectedOutcomeId) {
 		ScorerTeam: position,
 		AnswersCount: count
 		}, i) => {
-		const countSelected = (selectedOutcomeId === outcomeId) ? count + 1 : count;
+		const isSelected = (selectedOutcomeId === outcomeId);
+		const countSelected = isSelected ? count + 1 : count;
 
 		return {
 			outcomeId,
@@ -24,6 +25,7 @@ function parseData(data, selectedOutcomeId) {
 			name,
 			position,
 			percent: Math.floor(countSelected / (total + 1) * 100),
+			isSelected,
 		};
 	});
 
@@ -37,8 +39,9 @@ class QuizFirstGoal extends Component {
 
 	static propTypes = {
 		info: PropTypes.string.isRequired,
+		teamNames: PropTypes.array.isRequired,
 		data: PropTypes.object.isRequired,
-		onStatsShown: PropTypes.func.isRequired,
+		onAnswerSubmit: PropTypes.func.isRequired,
 	};
 
 	state = {
@@ -47,13 +50,23 @@ class QuizFirstGoal extends Component {
 	};
 
 	handleSubmit(questionId, outcomeId) {
-		const { onStatsShown } = this.props;
+		const { data, teamNames: [teamHome, teamAway], onAnswerSubmit } = this.props;
+		const { players } = parseData(data, outcomeId);
+		const { name, position } = players.find(p => p.isSelected);
+
+		const summary = {
+			firstGoalScorer: {
+				name: name,
+				isHome: position === teamHome,
+				isAway: position === teamAway
+			}
+		};
 
 		this.setState({
 			outcomeId,
 			showStats: true,
 		}, () => {
-			onStatsShown(questionId)
+			onAnswerSubmit(questionId, outcomeId, summary);
 		});
 	}
 

@@ -29,7 +29,7 @@ class QuizScore extends Component {
 		info: PropTypes.string.isRequired,
 		data: PropTypes.object.isRequired,
 		teamNames: PropTypes.array.isRequired,
-		onStatsShown: PropTypes.func.isRequired,
+		onAnswerSubmit: PropTypes.func.isRequired,
 	};
 
 	state = {
@@ -37,14 +37,23 @@ class QuizScore extends Component {
 		scores: undefined
 	};
 
-	handleSubmit(questionId, scores) {
-		const { onStatsShown } = this.props;
+	handleSubmit(questionId, outcomeId, scores) {
+		const { onAnswerSubmit } = this.props;
+		const [scoreHome, scoreAway] = scores;
+		const summary = {
+			scoreHome,
+			scoreAway,
+			winner: {
+				isHome: scoreHome > scoreAway,
+				isAway: scoreHome < scoreAway,
+			}
+		};
 
 		this.setState({
 			showStats: true,
 			scores: scores
 		}, () => {
-			onStatsShown(questionId);
+			onAnswerSubmit(questionId, outcomeId, summary);
 		});
 	}
 
@@ -58,8 +67,8 @@ class QuizScore extends Component {
 	render() {
 		const { info, data, teamNames } = this.props;
 		const { showStats, scores } = this.state;
-		const { questionId, stats } = parseData(data, scores);
-		const onSubmit = (scores) => this.handleSubmit(questionId, scores);
+		const { questionId, outcomeId, stats } = parseData(data, scores);
+		const onSubmit = (scores) => this.handleSubmit(questionId, outcomeId, scores);
 		const onDismiss = () => this.hideStats();
 
 		return (

@@ -48,7 +48,7 @@ class QuizWinOrDraw extends Component {
 	static propTypes = {
 		info: PropTypes.string.isRequired,
 		data: PropTypes.object.isRequired,
-		onStatsShown: PropTypes.func.isRequired,
+		onAnswerSubmit: PropTypes.func.isRequired,
 	};
 
 	state = {
@@ -57,13 +57,20 @@ class QuizWinOrDraw extends Component {
 	};
 
 	handleSubmit(questionId, outcomeId) {
-		const {onStatsShown} = this.props;
+		const {onAnswerSubmit, data} = this.props;
+		const { outcomes } = parseData(data, outcomeId);
+		const summary = {
+			halfTimeWinner: {
+				isHome: outcomes[0].id === outcomeId,
+				isAway: outcomes[1].id === outcomeId
+			}
+		};
 
 		this.setState({
 			outcomeId,
 			showStats: true,
 		}, () => {
-			onStatsShown(questionId);
+			onAnswerSubmit(questionId, outcomeId, summary);
 		});
 	}
 
