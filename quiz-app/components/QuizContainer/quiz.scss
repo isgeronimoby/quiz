@@ -50,10 +50,11 @@ $icon-sz: 54px;
   top: 0; bottom: 0;
   left: 0; right: 0;
   overflow: hidden;
-  transform: translateY(-100%);
+  pointer-events: none;
   transition: background-color .4s ease;
 
   &.reveal {
+    pointer-events: auto;
     background-color: rgba(0, 0, 0, .3);
     transform: translateY(0%);
   }

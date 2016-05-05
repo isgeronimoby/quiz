@@ -66,10 +66,11 @@ class QuizContainer extends Component {
 	}
 
 	render() {
-		const { questionList, fixtureItem: { startDate } } = this.props;
+		const { questionList, fixtureItem: { startDate, teamHome, teamAway } } = this.props;
 		const info = moment.utc(startDate).format('D MMMM, HH:mm');
 		const { currentScreenIdx: idx } = this.state;
 		const total = this.totalSteps();
+		const teamNames = [teamHome, teamAway];
 		const onPrev = () => this.prevScreen();
 		const onNext = () => this.nextScreen();
 		const onQuestionStatsShown = (questionId) => this.onQuestionStatsShown(questionId);
@@ -79,14 +80,13 @@ class QuizContainer extends Component {
 			return (
 				<Quiz key={ `type-${i}` } onStatsShown={ onQuestionStatsShown } info={info} data={data}/>
 			);
-		}).slice(0, 1);*/
-		/*.concat(
+		}).concat(
 			<QuizSummary key='summary' />
 		)*/;
 
-		const { ...data } = questionList.find(({ Type }) => Type === 'FirstHalfResult');
+		const { ...data } = questionList.find(({ Type }) => Type === 'CorrectScore');
 		const quizScreens = [
-			<QuizTypeWinOrDraw key="xxx" onStatsShown={ onQuestionStatsShown } info={info} data={data}/>,
+			<QuizTypeScore key="xxx" onStatsShown={ onQuestionStatsShown } info={info} teamNames={teamNames} data={data}/>,
 			<div key="yy"></div>,
 			<div key="zz"></div>
 		];

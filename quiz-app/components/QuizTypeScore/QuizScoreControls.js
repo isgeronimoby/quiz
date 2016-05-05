@@ -6,12 +6,12 @@ class QuizScoreControls extends Component {
 
 	static propTypes = {
 		info: PropTypes.string.isRequired,
-		teams: PropTypes.array.isRequired,
+		teamNames: PropTypes.array.isRequired,
 		onSubmit: PropTypes.func.isRequired,
 	};
 
 	state = {
-		currentTeam: this.props.choices[0],
+		currentTeam: this.props.teamNames[0],
 		scores: {}
 	};
 
@@ -22,7 +22,7 @@ class QuizScoreControls extends Component {
 	}
 
 	selectScore(num) {
-		const { teams, onSubmit } = this.props;
+		const { teamNames, onSubmit } = this.props;
 
 		this.setState({
 			scores: {
@@ -31,7 +31,7 @@ class QuizScoreControls extends Component {
 			}
 		}, () => {
 			const {scores, currentTeam} = this.state;
-			const nextTeam = teams.reduce((acc, name) => {
+			const nextTeam = teamNames.reduce((acc, name) => {
 				return scores[name] === undefined ? name : acc;
 			}, currentTeam);
 
@@ -40,19 +40,20 @@ class QuizScoreControls extends Component {
 			}, () => {
 				const {scores} = this.state;
 				const complete = Object.keys(scores).length === 2;
+				const scoresArr = teamNames.reduce((acc, name) => [...acc, scores[name]], []);
 
 				if (complete) {
-					onSubmit(scores);
+					onSubmit(scoresArr);
 				}
 			});
 		});
 	}
 
 	render() {
-		const { info, teams } = this.props;
+		const { info, teamNames } = this.props;
 		const { currentTeam } = this.state;
 		const title = <span>Select a score<br/>for {currentTeam}</span>;
-		const [ teamBtn1, teamBtn2 ] = teams.map((name, i) => {
+		const [ teamBtn1, teamBtn2 ] = teamNames.map((name, i) => {
 			const score = this.state.scores[name];
 			const scoreLabel = (score === undefined) ? '?' : score;
 			const touchedClass = (name === currentTeam) ? 'touched' : '';

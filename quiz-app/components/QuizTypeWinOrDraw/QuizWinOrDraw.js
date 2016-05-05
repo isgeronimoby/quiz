@@ -3,18 +3,10 @@ import QuizControls from './QuizWinOrDrawControls';
 import QuizStats from './QuizWinOrDrawStats';
 import './draw.scss';
 
-const dataStats = {
-	'chelsea': 55,
-	'everton': 30,
-	'-': 15
-};
-
 
 function parseData(data) {
-	console.log('>>data', data);
-
 	const {
-		TotalAnswersCount,
+		TotalAnswersCount: total,
 		QuestionId: questionId,
 		Outcomes: [{
 			AnswersCount: count1,
@@ -31,10 +23,11 @@ function parseData(data) {
 		} = data;
 
 	return {
+		questionId,
 		teamHome,
 		teamAway,
 		stats: {
-			[teamHome]: 10, //Math.floor(count1 / TotalAnswersCount * 100),
+			[teamHome]: 10, //Math.floor(count1 / TotalAnswersCount * 100), TODO
 			[teamAway]: 20, //Math.floor(count2 / TotalAnswersCount * 100),
 			'-': 30 //Math.floor(count3 / TotalAnswersCount * 100),
 		},
@@ -59,8 +52,8 @@ class QuizWinOrDraw extends Component {
 		showStats: false
 	};
 
-	handleSubmit(outcomeId) {
-		const {data: {QuestionId: questionId}, onStatsShown} = this.props;
+	handleSubmit(questionId, outcomeId) {
+		const {onStatsShown} = this.props;
 
 		this.setState({
 			outcomeId,
@@ -80,6 +73,7 @@ class QuizWinOrDraw extends Component {
 		const title = <span>Who will be winning<br/>at half-time?</span>;
 		const { info, data } = this.props; //'23 March, 19:00, 3rd tour, London';
 		const {
+			questionId,
 			teamHome,
 			teamAway,
 			stats,
@@ -87,7 +81,7 @@ class QuizWinOrDraw extends Component {
 			} = parseData(data);
 		const { outcomeId, showStats } = this.state;
 		const controlParams = {info, title, outcomes, outcomeId};
-		const onSubmit = (outcomeId) => this.handleSubmit(outcomeId);
+		const onSubmit = (outcomeId) => this.handleSubmit(questionId, outcomeId);
 		const onDismiss = () => this.hideStats();
 
 		return (
