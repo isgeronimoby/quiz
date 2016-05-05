@@ -19,18 +19,18 @@ class LeaderBoard extends Component {
 		const { top3, users, profile: {rank: myRank = 0} } = this.props;
 		const rankTitle = `You are ranked ${myRank}`;
 		const top3cols = top3.map((user, i) => {
-			const {userId, imageUrl, name, answers } = user;
+			const {userId, imageUrl, name, points } = user;
 
 			return (
 				<div key={`top-user-${i}`} className="col">
 					<Logo src={ imageUrl } rank={ i + 1 }/>
 					<div className="user-name">{ name }</div>
-					<div className="user-answers">{ answers } answers</div>
+					<div className="user-points">{ points } points</div>
 				</div>
 			);
 		});
 		const playerItems = users.map((user, i) => {
-			const { userId, imageUrl, name, answers} = user;
+			const { userId, imageUrl, name, points} = user;
 
 			return (
 				<div key={`user-${i}`} className={"user-list-item"}>
@@ -38,7 +38,7 @@ class LeaderBoard extends Component {
 					<Logo src={imageUrl}/>
 					<div className="user-details">
 						<div className="user-name large">{ name }</div>
-						<div className="user-answers large">{ answers } answers</div>
+						<div className="user-points large">{ points } points</div>
 					</div>
 				</div>
 			);

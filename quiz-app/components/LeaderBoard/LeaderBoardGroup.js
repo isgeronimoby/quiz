@@ -22,7 +22,7 @@ class LeaderBoardGroup extends Component {
 				<div key={`top-group-${i}`} className="col">
 					<Logo src={ picture } rank={ rank }/>
 					<div className="user-name">{ name }</div>
-					<div className="user-answers">{ members } members</div>
+					<div className="user-points">{ members } members</div>
 				</div>
 			);
 		});
@@ -35,7 +35,7 @@ class LeaderBoardGroup extends Component {
 					<Logo src={picture}/>
 					<div className="user-details">
 						<div className="user-name large">{ name }</div>
-						<div className="user-answers large">{ members } members</div>
+						<div className="user-points large">{ members } members</div>
 					</div>
 				</div>
 			);
