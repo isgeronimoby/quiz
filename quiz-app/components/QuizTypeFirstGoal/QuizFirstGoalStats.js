@@ -8,25 +8,32 @@ class QuizFirstGoalStats extends Component {
 
 	static propTypes = {
 		hidden: PropTypes.bool.isRequired,
-		order: PropTypes.array.isRequired,
-		choice: PropTypes.number,
-		stats: PropTypes.object,
+		outcomeId: PropTypes.string,
+		stats: PropTypes.array.isRequired,
 		onDismiss: PropTypes.func.isRequired,
 		offsetHeight: PropTypes.number,
 	};
 
 
 	render() {
-		const { hidden, order, choice, stats, onDismiss, offsetHeight } = this.props;
+		const { hidden, outcomeId: selectedOutcomeId, stats, onDismiss, offsetHeight } = this.props;
 		const classes = !hidden ? 'reveal' : '';
-		const bottom = 139 + order.length * 81 - offsetHeight;
+		const bottom = 139 + stats.length * 81 - offsetHeight; // TODO - hack
 		const [fromX, toX] = [25, 90];
 
-		const listItems = order
-			.map(number => [number, stats ? stats[number] : 0])
-			.map(([number, percent]) => [number, percent, !stats ? 100 : 0, fromX + (toX - fromX) * (100 - percent) / 100])
-			.map(([number, percent, statPos, rowPos], i) => {
-				const selectedClass = (number === choice ? 'selected' : '');
+		const listItems = stats
+			.map(s => {
+				const isSelected = s.outcomeId === selectedOutcomeId;
+				const percent = s.percent ||(isSelected ? 100 : 0);
+				return [
+					percent,
+					isSelected,
+					hidden ? 100 : 0,
+					fromX + (toX - fromX) * (100 - percent) / 100
+				];
+			})
+			.map(([percent, isSelected, statPos, rowPos], i) => {
+				const selectedClass = (isSelected ? 'selected' : '');
 				return (
 					<li key={`stats-${i}`} className={"stats-item " + selectedClass}
 						style={{transform: `translateX(${statPos}%)`}}>

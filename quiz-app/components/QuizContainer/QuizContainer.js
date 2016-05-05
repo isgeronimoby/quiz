@@ -84,9 +84,9 @@ class QuizContainer extends Component {
 			<QuizSummary key='summary' />
 		)*/;
 
-		const { ...data } = questionList.find(({ Type }) => Type === 'CorrectScore');
+		const { ...data } = questionList.find(({ Type }) => Type === 'FirstGoalScorer');
 		const quizScreens = [
-			<QuizTypeScore key="xxx" onStatsShown={ onQuestionStatsShown } info={info} teamNames={teamNames} data={data}/>,
+			<QuizTypeFirstGoal key="xxx" onStatsShown={ onQuestionStatsShown } info={info} teamNames={teamNames} data={data}/>,
 			<div key="yy"></div>,
 			<div key="zz"></div>
 		];

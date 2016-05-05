@@ -4,82 +4,88 @@ import QuizStats from './QuizFirstGoalStats';
 import './players.scss';
 
 
-const DELAY = 300;
-const playerNumbers = [...Array(10).keys()].map(n => n+1);
-const players = playerNumbers.map((n) => ({
-	number: n,
-	name: 'Aaron Lennon',
-	position: 'Everton, Middle Forward',
-}));
-const dataStats = playerNumbers.reduce((acc, number) => {
-	return {
-		...acc,
-		[number]: Math.round(Math.random()*90)
-	};
-}, {});
-
-async function post(id, data) {
-
-	console.log('>>TODO: post /quiz/[%s]/result: %s', id, JSON.stringify(data));
-
-	return new Promise((resolve, reject) => {
-		setTimeout(() => resolve(dataStats), DELAY);
+function parseData(data) {
+	const {
+		QuestionId: questionId,
+		TotalAnswersCount: total,
+		Outcomes: outcomes
+		} = data;
+	const players = outcomes.map(({
+		OutcomeId: outcomeId,
+		FirstScorer: name,
+		ScorerTeam: position,
+		AnswersCount
+		}, i) => {
+		return {
+			outcomeId,
+			number: i + 1,
+			name,
+			position,
+			percent: total ? Math.floor(AnswersCount / total * 100) : 0,
+		};
 	});
+
+	return {
+		questionId,
+		players
+	};
 }
 
 class QuizFirstGoal extends Component {
 
 	static propTypes = {
-		quizId: PropTypes.number.isRequired,
+		info: PropTypes.string.isRequired,
+		data: PropTypes.object.isRequired,
 		onStatsShown: PropTypes.func.isRequired,
 	};
 
 	state = {
 		showStats: false,
-		stats: null,
-		choice: null,
+		outcomeId: null,
 	};
 
-	handleSubmit(choice) {
-		const {quizId, onStatsShown} = this.props;
+	handleSubmit(questionId, outcomeId) {
+		const { onStatsShown } = this.props;
 
 		this.setState({
-			choice,
+			outcomeId,
 			showStats: true,
 		}, () => {
-			post(quizId, {choice}).then((stats) => {
-				this.setState({ stats }, () => onStatsShown(quizId));
-			});
+			onStatsShown(questionId)
 		});
 	}
 
 	hideStats() {
 		this.setState({
-			showStats: false,
-			stats: null
+			showStats: false
 		});
 	}
 
 	render() {
-		const info = '23 March, 18:00, 2nd tour, London';
-		const { showStats, choice, stats } = this.state;
-		const controlParams = { info, players, choice };
+		const { info, data } = this.props;
+		const { questionId, players } = parseData(data);
+		const { showStats, outcomeId } = this.state;
+		const stats = players.map(({ outcomeId, percent }) => {
+			return {
+				outcomeId,
+				percent
+			};
+		});
 
 		const container = this.refs['container'];
-		const offsetHeight = container ? container.offsetHeight: 0;
-		const onSubmit = (choice) => this.handleSubmit(choice);
+		const offsetHeight = container ? container.offsetHeight : 0;
+		const onSubmit = (outcomeId) => this.handleSubmit(questionId, outcomeId);
 		const onDismiss = () => this.hideStats();
 
 		return (
 			<div ref="container" className="quiz-content">
-				<QuizControls {...controlParams} onSubmit={ onSubmit }>
+				<QuizControls info={info} players={players} onSubmit={ onSubmit }>
 					<QuizStats
 						hidden={ !showStats }
-						order={ playerNumbers }
-						stats={ showStats ? stats : null}
-						choice={choice}
+						stats={ stats }
+						outcomeId={ outcomeId }
 						offsetHeight={ offsetHeight }
-						onDismiss={ onDismiss } />
+						onDismiss={ onDismiss }/>
 				</QuizControls>
 			</div>
 		);

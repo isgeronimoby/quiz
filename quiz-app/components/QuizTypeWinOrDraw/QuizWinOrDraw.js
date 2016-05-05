@@ -70,7 +70,6 @@ class QuizWinOrDraw extends Component {
 	}
 
 	render() {
-		const title = <span>Who will be winning<br/>at half-time?</span>;
 		const { info, data } = this.props; //'23 March, 19:00, 3rd tour, London';
 		const {
 			questionId,
@@ -80,13 +79,16 @@ class QuizWinOrDraw extends Component {
 			outcomes
 			} = parseData(data);
 		const { outcomeId, showStats } = this.state;
-		const controlParams = {info, title, outcomes, outcomeId};
 		const onSubmit = (outcomeId) => this.handleSubmit(questionId, outcomeId);
 		const onDismiss = () => this.hideStats();
 
 		return (
 			<div className="quiz-content">
-				<QuizControls {...controlParams} onSubmit={ onSubmit }/>
+				<QuizControls
+					info={info}
+					outcomes={outcomes}
+					outcomeId={outcomeId}
+					onSubmit={ onSubmit }/>
 				<QuizStats
 					order={ [ teamHome, '-', teamAway ] }
 					hidden={ !showStats }

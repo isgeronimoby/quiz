@@ -16,10 +16,10 @@ class QuizFirstGoalControls extends Component {
 		const title = <span>Who will score<br/>the first goal?</span>;
 		const selectedClass = (number) => (number === choice ? 'selected' : '');
 
-		let playerItems = players.map(({number, name, position}, i) => {
+		let playerItems = players.map(({outcomeId, number, name, position}, i) => {
 			return (
 				<li key={`player-${i}`} className={"player-item " + selectedClass(number)}
-					onClick={ () => onSubmit(number) }>
+					onClick={ () => onSubmit(outcomeId) }>
 					<div className="player-number">{ number }</div>
 					<div className="player-info">
 						<div className="player-name">{ name }</div>
