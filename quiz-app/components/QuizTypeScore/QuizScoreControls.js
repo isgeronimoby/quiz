@@ -11,7 +11,7 @@ class QuizScoreControls extends Component {
 	};
 
 	state = {
-		currentTeam: this.props.teams[0],
+		currentTeam: this.props.choices[0],
 		scores: {}
 	};
 

@@ -32,6 +32,11 @@ import {
 	FETCH_PARTNERS_SUCCESS,
 	//FETCH_PARTNERS_ERROR,
 
+	SELECT_QUIZ,
+	FETCH_QUIZ,
+	FETCH_QUIZ_SUCCESS,
+	FETCH_QUIZ_ERROR,
+
 } from '../actions';
 
 
@@ -183,6 +188,53 @@ function fixtures(state = {
 }
 
 /*
+Quiz Match
+*/
+
+function selectedQuiz(state = null, action) {
+	switch (action.type) {
+		case SELECT_QUIZ:
+			return action.matchId;
+		default:
+			return state;
+	}
+}
+
+function quizDataById(state = {
+	isFetching: false,
+	questionList: {}
+}, action) {
+	switch (action.type) {
+		case FETCH_QUIZ:
+			return {
+				...state,
+				isFetching: true,
+			};
+		case FETCH_QUIZ_SUCCESS:
+			return {
+				isFetching: false,
+				questionList: action.payload,
+				lastUpdated: action.receivedAt,
+			};
+		default:
+			return state;
+	}
+}
+
+function quizes(state = {}, action) {
+	switch (action.type) {
+		case FETCH_QUIZ:
+		case FETCH_QUIZ_SUCCESS:
+			return {
+				...state,
+				[action.matchId]: quizDataById(state[action.matchId], action)
+			};
+		default:
+			return state;
+	}
+}
+
+/*
  User List
  */
 function userList(state = {
@@ -287,7 +339,9 @@ const rootReducer = combineReducers({
 	userList,
 	userProfiles,
 	selectedUserProfile,
-	partners
+	partners,
+	quizes,
+	selectedQuiz,
 });
 
 export default rootReducer;

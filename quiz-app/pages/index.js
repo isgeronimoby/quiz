@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { toggleWelcome, fetchProfileIfNeeded,  } from '../flux/actions';
+import { toggleWelcome, fetchProfileIfNeeded, fetchFixtures } from '../flux/actions';
 import Cookies from 'js-cookie';
 import Location from '../lib/Location';
 
@@ -16,16 +16,16 @@ class Index extends Component {
 	static propTypes = {
 		// from store
 		showWelcomePopup: PropTypes.bool.isRequired,
-		fetchProfile: PropTypes.func.isRequired,
 		openWelcomePopup: PropTypes.func.isRequired,
+		fetchProfile: PropTypes.func.isRequired,
+		fetchFixtures: PropTypes.func.isRequired,
 	};
 
-	componentDidMount() {
+	async componentDidMount() {
 		this.showWelcomeIfNeeded();
-		this.props.fetchProfile().then(
-			() => this.visitFirstQuiz(),
-			() => this.visitFirstQuiz()
-		);
+		this.props.fetchProfile();
+		await this.props.fetchFixtures();
+		this.visitFirstQuiz()
 	}
 
 	componentWillReceiveProps({showWelcomePopup}) {
@@ -35,7 +35,7 @@ class Index extends Component {
 		}
 	}
 
-	async showWelcomeIfNeeded() {
+	showWelcomeIfNeeded() {
 		if (!Cookies.get(WELCOME_COOKIE_KEY)) {
 			this.props.openWelcomePopup();
 		}
@@ -43,12 +43,12 @@ class Index extends Component {
 
 	visitFirstQuiz() {
 		//const [{ quizId }] = this.props.data; // TODO: first quiz's id
-		const quizId = 1;
+		const matchId = '0f465529-f5d5-4dd0-8581-728693287d50';
 
 		setTimeout(() => {
 			Location.push({
 				pathname: './quiz',
-				state: {id: quizId}
+				state: {matchId}
 			});
 		}, MIN_DELAY);
 	}
@@ -72,6 +72,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchProfile: () => dispatch(fetchProfileIfNeeded()),
+		fetchFixtures: () => dispatch(fetchFixtures()),
 		openWelcomePopup: () => dispatch(toggleWelcome(true)),
 	};
 };

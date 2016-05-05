@@ -10,21 +10,22 @@ class FixtureListItem extends Component {
 		match: PropTypes.object.isRequired,
 	};
 
+
 	render() {
 		const { matchId, teamHome, teamAway, startDate } = this.props.match;
 		const { header } = this.props;
 		const headerClass = !header ? 'is-collapsed' : '';
 		const title = `${teamHome} vs ${teamAway}`;
 		const subTitle = moment.utc(startDate).format('HH:mm');
-		const teamHomeIcon = require('../../static/images/team-chelsea.svg'); // TODO
-		const teamAwayIcon = require('../../static/images/team-chelsea.svg'); // TODO
+		const teamHomeIcon = require(`../../static/images/team-${teamHome}.svg`);
+		const teamAwayIcon = require(`../../static/images/team-${teamAway}.svg`);
 
 		return (
 			<li className="fixture-item">
 				<div className={ "fixture-item-header " + headerClass }>
 					<h5>{ header }</h5>
 				</div>
-				<Link className="fixture-item-body" to="./quiz" state={{id: matchId}}>
+				<Link className="fixture-item-body" to="./quiz" state={ {matchId} }>
 					<div className="fixture-item-team-icons">
 						<div className="fixture-item-team">
 							<img src={ teamHomeIcon }/>

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import moment from 'moment';
 import ScreenSwiper from '../ScreenSwiper';
 import ProgressBar from '../ProgressBar';
 import QuizTypeWinOrDraw from '../QuizTypeWinOrDraw';
@@ -10,16 +11,17 @@ import './quiz.scss'
 
 const STATS_SHOW_DELAY = 1000;
 const type2componet = {
-	'win-or-draw': QuizTypeWinOrDraw,
-	'score': QuizTypeScore,
-	'first-goal': QuizTypeFirstGoal
+	'FirstHalfResult': QuizTypeWinOrDraw,
+	'CorrectScore': QuizTypeScore,
+	'FirstGoalScorer': QuizTypeFirstGoal
 };
 
 
 class QuizContainer extends Component {
 
 	static propTypes = {
-		data: PropTypes.array.isRequired,
+		questionList: PropTypes.array.isRequired,
+		fixtureItem: PropTypes.object.isRequired,
 	};
 
 	state = {
@@ -28,7 +30,7 @@ class QuizContainer extends Component {
 	};
 
 	totalSteps() {
-		return this.props.data.length + 1; // + Summary
+		return this.props.questionList.length + 1; // + Summary
 	}
 
 	nextScreen() {
@@ -49,14 +51,14 @@ class QuizContainer extends Component {
 		}
 	}
 
-	onStatsShown(quizId) {
+	onQuestionStatsShown(questionId) {
 		const {statsShown} = this.state;
-		if (statsShown[quizId]) { return; }
+		if (statsShown[questionId]) { return; }
 
 		this.setState({
 			statsShown: {
 				...statsShown,
-				[quizId]: true
+				[questionId]: true
 			}
 		}, () => {
 			setTimeout(() => this.nextScreen(), STATS_SHOW_DELAY);
@@ -64,19 +66,30 @@ class QuizContainer extends Component {
 	}
 
 	render() {
-		const { data } = this.props;
+		const { questionList, fixtureItem: { startDate } } = this.props;
+		const info = moment.utc(startDate).format('D MMMM, HH:mm');
 		const { currentScreenIdx: idx } = this.state;
 		const total = this.totalSteps();
 		const onPrev = () => this.prevScreen();
 		const onNext = () => this.nextScreen();
-		const quizScreens = data.map(({ type, ...rest }, i) => {
-			const Quiz = type2componet[type];
+		const onQuestionStatsShown = (questionId) => this.onQuestionStatsShown(questionId);
+
+		/*const quizScreens = questionList.map(({ Type, ...data }, i) => {
+			const Quiz = type2componet[Type];
 			return (
-				<Quiz key={ `type-${i}` } {...rest} onStatsShown={ (quizId) => this.onStatsShown(quizId) }/>
+				<Quiz key={ `type-${i}` } onStatsShown={ onQuestionStatsShown } info={info} data={data}/>
 			);
-		}).concat(
+		}).slice(0, 1);*/
+		/*.concat(
 			<QuizSummary key='summary' />
-		);
+		)*/;
+
+		const { ...data } = questionList.find(({ Type }) => Type === 'FirstHalfResult');
+		const quizScreens = [
+			<QuizTypeWinOrDraw key="xxx" onStatsShown={ onQuestionStatsShown } info={info} data={data}/>,
+			<div key="yy"></div>,
+			<div key="zz"></div>
+		];
 
 		return (
 			<div className="screen">

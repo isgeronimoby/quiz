@@ -20,7 +20,7 @@ function fetch(options) {
 				apiKey,
 				method,
 				endpoint,
-				params: data ? JSON.stringify(data) : ''
+				params: data || ''
 			},
 			function onSuccess(response) {
 				console.log('>>success:', response);

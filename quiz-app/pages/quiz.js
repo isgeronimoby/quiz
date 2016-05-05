@@ -1,42 +1,57 @@
 import React, { Component, PropTypes } from 'react';
-import withFetch from '../components/withFetch';
+import { connect } from 'react-redux';
+import { fetchQuiz, selectQuiz } from '../flux/actions';
 import QuizContainer from '../components/QuizContainer';
-import items from '../components/QuizContainer/data.js';
 
-const DELAY = 100;
-
-async function fetch({ id }) {
-
-	console.log('>>TODO: fetch /quiz/[%s]', id);
-
-	return new Promise((resolve, reject) => {
-		setTimeout(() => resolve(items), DELAY);
-	}).then((items) => {
-		// Emulate different order of Quiz steps in quizes
-
-		if (id === 1) {
-			return [items[0], items[1], items[2]];
-		}
-		else {
-			return [items[0], items[2], items[1]];
-		}
-	});
-}
 
 class Quiz extends Component {
 
 	static title = 'Match Quiz';
 
 	static propTypes = {
-		params: PropTypes.object.isRequired
+		params: PropTypes.object.isRequired,
+		// from store
+		fetchQuiz: PropTypes.func.isRequired,
+		selectQuiz: PropTypes.func.isRequired,
+		quiz: PropTypes.object.isRequired,
+		fixtureItem: PropTypes.object.isRequired,
 	};
 
+	componentDidMount() {
+		const { params: { matchId }, fetchQuiz, selectQuiz  } = this.props;
+
+		fetchQuiz(matchId).then(() => {
+			selectQuiz(matchId);
+		});
+	}
+
 	render() {
+		const { quiz: { isFetching, questionList }, fixtureItem } = this.props;
+
+		if (isFetching) {
+			return <div/>; // TODO: spinner
+		}
+
 		return (
-			<QuizContainer {...this.props} />
+			<QuizContainer questionList={ questionList } fixtureItem={ fixtureItem }/>
 		);
 	}
 
 }
 
-export default withFetch(Quiz, fetch);
+// Connect to store
+//
+const mapStateToProps = (state) => {
+	return {
+		quiz: state.quizes[state.selectedQuiz] || {isFetching: true},
+		fixtureItem: state.fixtures.list.find(({ matchId }) => matchId === state.selectedQuiz) || {},
+	};
+};
+const mapDispatchToProps = (dispatch) => {
+	return {
+		fetchQuiz: (matchId) => dispatch(fetchQuiz(matchId)),
+		selectQuiz: (matchId) => dispatch(selectQuiz(matchId))
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Quiz);

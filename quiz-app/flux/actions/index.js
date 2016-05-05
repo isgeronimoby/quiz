@@ -3,6 +3,7 @@ export * from './profile.js';
 export * from './users.js';
 export * from './partners.js';
 export * from './fixtures.js';
+export * from './quiz.js';
 
 export const TOGGLE_WELCOME = 'TOGGLE_WELCOME';
 
