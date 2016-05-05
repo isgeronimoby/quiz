@@ -20,10 +20,12 @@ class Index extends Component {
 		openWelcomePopup: PropTypes.func.isRequired,
 	};
 
-	async componentDidMount() {
+	componentDidMount() {
 		this.showWelcomeIfNeeded();
-		await this.props.fetchProfile();
-		this.visitFirstQuiz();
+		this.props.fetchProfile().then(
+			() => this.visitFirstQuiz(),
+			() => this.visitFirstQuiz()
+		);
 	}
 
 	componentWillReceiveProps({showWelcomePopup}) {
