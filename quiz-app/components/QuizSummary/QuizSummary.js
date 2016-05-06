@@ -70,7 +70,7 @@ class QuizSummary extends Component {
 		);
 		if (!hasInvalids) {
 			btnOrError = (
-				<Link className="big-btn money-btn" to="./bet" state={{matchId}}>Bet points</Link>
+				<Link className="big-btn money-btn" to="./bet" state={{matchId}}>Submit Prediction</Link>
 			);
 		}
 
