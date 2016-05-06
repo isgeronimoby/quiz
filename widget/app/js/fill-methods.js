@@ -535,6 +535,8 @@ DGW.main.methods.activitiesConstructor = function(activities){
             if (activity.GameOrder.GameType === 'Draw') {
                 message += ' playing the draw';
                 message += (' to win ' + activity.GameOrder.PrizeTitle);
+            } else if (activity.GameOrder.GameType === 'MatchQuiz') {
+                message += ' placing a bet in ' + DGW.global.club.name + ' Match Quiz';
             }
         }
 

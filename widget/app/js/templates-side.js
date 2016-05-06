@@ -9,7 +9,7 @@ DGW.templates.side.profileInfo ='<div class="dg-side-section">' +
                                 '<div data-page="earn" class="dg-side-cta-floating"><span class="dg-side-collapsed">&rarr;</span><span class="dg-side-expanded">Earn more points</span></div>';
 
 DGW.templates.side.prizeGeneric =   '<div class="dg-side-section">' +
-                                        '<div class="dg-side-img-holder"><img data-image="trophey-clean.svg" class="dg-o-w-side-image-floating" src=""/></div>' +
+                                        '<div class="dg-side-img-holder"><img data-image="everton-crest-full.png" class="dg-o-w-side-image-floating" src=""/></div>' +
                                         '<div class="dg-side-content">Sign up & get +10 points</div>' +
                                     '</div>' +
                                     '<div class="dg-side-collapsed"><div data-page="profile" class="dg-side-cta">Sign Up</div></div>' +

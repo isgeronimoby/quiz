@@ -19,8 +19,8 @@ DGW.templates.header = '<div class="dg-o-w-header">' +
                             '<div class="dg-o-w-logo"></div>' +
                             '<div class="dg-o-w-menu">' +
                             '<ul><li class="earn-menu-item">Earn</li>' +
-                                '<li class="draws-menu-item">Draws & Games</li>' +
-                                '<li class="activities-menu-item">Activities</li></ul>' +
+                                '<li class="draws-menu-item">Enter & Play</li>' +
+                                '<li class="activities-menu-item">Leaderboards</li></ul>' +
                             '</div>' +
                             '<div class="dg-o-w-menu-profile">' +
                                 '<div class="profile-menu-item">' +
@@ -96,9 +96,9 @@ DGW.templates.earnMain = '<div class="dg-o-w-submenu">' +
                         '</div>';
 
 DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
-                            '<ul><li class="dg-o-w-active" id="dg-o-w-show-all-draws">All draws</li><li id="dg-o-w-show-finished-soon">Finished soon</li>' +
+                            '<ul><li class="dg-o-w-active" id="dg-o-w-show-all-draws">All draws</li><li id="dg-o-w-show-finished-soon">Finishing soon</li>' +
                                 '<li id="dg-o-w-show-my-draws">My draws</li><li id="dg-o-w-show-games">Games</li></ul>' +
-                            '<label class="checkbox-slider">Show finished draws <input id="dg-o-w-show-expired" type="checkbox" class="ios-switch bigswitch" /><div><div></div></div></label>' +
+                            '<label class="checkbox-slider">Show completed draws <input id="dg-o-w-show-expired" type="checkbox" class="ios-switch bigswitch" /><div><div></div></div></label>' +
                         '</div>' +
                         '<div class="dg-o-w-section-content">' +
                             '<div class="dg-o-w-draws-active">' +
@@ -144,10 +144,10 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' 
 
 DGW.templates.loginMain = '<div class="dg-o-w-login">' +
                                 '<div class="dg-o-w-login-holder"><div class="dg-o-w-login-holder-content">' +
-                                    '<h1>Win exclusive prizes handling simple tasks</h1>' +
+                                    '<h1>Earn points & enter exclusive prize draws</h1>' +
                                     '<h4>Become a part of the team</h4>' +
                                 '</div></div>' +
-                                '<h4 class="dg-o-w-login-prize-title" id="dg-o-w-login-prize-title"></h4>' +
+                                '<h4 class="dg-o-w-login-prize-title" id="dg-o-w-login-prize-title"></h4>' + //TODO: do a prize title using data-attribute
                             '</div>';
 
 DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul>' +
