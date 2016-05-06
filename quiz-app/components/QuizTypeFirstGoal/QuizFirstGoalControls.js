@@ -7,23 +7,28 @@ class QuizFirstGoalControls extends Component {
 	static propTypes = {
 		info: PropTypes.string.isRequired,
 		players: PropTypes.array.isRequired,
+		outcomeId: PropTypes.string,
 		onSubmit: PropTypes.func.isRequired,
-		choice: PropTypes.number
 	};
 
 	render() {
-		const { info, players, onSubmit, choice, children } = this.props;
+		const { info, players, onSubmit, outcomeId: selectedOutcomeId, children } = this.props;
 		const title = <span>Who will score<br/>the first goal?</span>;
-		const selectedClass = (number) => (number === choice ? 'selected' : '');
+		const selectedClass = (outcomeId) => (outcomeId === selectedOutcomeId ? 'selected' : '');
 
-		let playerItems = players.map(({outcomeId, number, name, position}, i) => {
+		let playerItems = players.map(({outcomeId, name, team}, i) => {
+			const icon =  team ? require(`../../static/images/team-${team}.svg`) :
+				require(`../../static/images/icon-friendship.svg`);
+
 			return (
-				<li key={`player-${i}`} className={"player-item " + selectedClass(number)}
+				<li key={`player-${i}`} className={"player-item " + selectedClass(outcomeId)}
 					onClick={ () => onSubmit(outcomeId) }>
-					<div className="player-number">{ number }</div>
+					<div className="player-icon">
+						<img src={ icon }/>
+					</div>
 					<div className="player-info">
 						<div className="player-name">{ name }</div>
-						<div className="player-position">{ position }</div>
+						<div className="player-position">{ team }</div>
 					</div>
 				</li>
 			);

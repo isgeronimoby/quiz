@@ -13,25 +13,35 @@ function parseData(data, selectedOutcomeId) {
 	const players = outcomes.map(({
 		OutcomeId: outcomeId,
 		FirstScorer: name,
-		ScorerTeam: position,
+		ScorerTeam: team,
 		AnswersCount: count
-		}, i) => {
+		}) => {
 		const isSelected = (selectedOutcomeId === outcomeId);
 		const countSelected = isSelected ? count + 1 : count;
+		const percent = Math.floor(countSelected / (total + 1) * 100);
 
 		return {
 			outcomeId,
-			number: i + 1,
 			name,
-			position,
-			percent: Math.floor(countSelected / (total + 1) * 100),
+			team,
+			percent,
 			isSelected,
 		};
 	});
+	const noGoalPlayer = players.find(p => p.name === 'No Goalscorer');
+	const noGoalPlayerIdx = players.indexOf(noGoalPlayer);
+	const adjustedPlayers = [
+		{
+			...noGoalPlayer,
+			team: ''
+		},
+		...players.slice(0, noGoalPlayerIdx),
+		...players.slice(noGoalPlayerIdx + 1)
+	];
 
 	return {
 		questionId,
-		players
+		players: adjustedPlayers
 	};
 }
 
@@ -52,15 +62,15 @@ class QuizFirstGoal extends Component {
 	handleSubmit(questionId, outcomeId) {
 		const { data, teamNames: [teamHome, teamAway], onAnswerSubmit } = this.props;
 		const { players } = parseData(data, outcomeId);
-		const { name, position } = players.find(p => p.isSelected);
+		const { name, team } = players.find(p => p.isSelected);
 
 		const summary = {
 			firstGoalScorer: {
 				questionId,
 				outcomeId,
 				name: name,
-				isHome: position === teamHome,
-				isAway: position === teamAway,
+				isHome: team === teamHome,
+				isAway: team === teamAway,
 			}
 		};
 
@@ -96,7 +106,7 @@ class QuizFirstGoal extends Component {
 
 		return (
 			<div ref="container" className="quiz-content">
-				<QuizControls info={info} players={players} onSubmit={ onSubmit }>
+				<QuizControls info={info} players={players} outcomeId={outcomeId} onSubmit={ onSubmit }>
 					<QuizStats
 						hidden={ !showStats }
 						stats={ stats }

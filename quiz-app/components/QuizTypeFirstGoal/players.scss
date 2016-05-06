@@ -13,7 +13,7 @@
     }
   }
 }
-.player-number {
+.player-icon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,6 +23,9 @@
   font-size: 2.4rem;
   color: $brand-color;
   background: #fff;
+  img {
+    width: 40px;
+  }
 }
 .player-info {
   flex-grow: 1;
