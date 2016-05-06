@@ -43,20 +43,22 @@ const PartnerSection = ({ partner }) => {
 				<div className="partner-text">{ text }</div>
 				<a className="partner-privacy-link link-normal" href={ privacyLink }>Privacy Policy</a>
 
-				<div className="partner-share-links">
-					<a className="share-link link-facebook" href={ facebookLink }>
-						<img src={ require('./images/icon-facebook.svg') } />
-						Facebook
-					</a>
-					<a className="share-link link-email" href={ mailtoLink }>
-						<img src={ require('./images/icon-email.svg') } />
-						Email
-					</a>
-					<a className="share-link link-sms" href={ smsLink }>
-						<img src={ require('./images/icon-sms.svg') } />
-						SMS
-					</a>
-				</div>
+				{/*
+				 <div className="partner-share-links">
+				 <a className="share-link link-facebook" href={ facebookLink }>
+				 <img src={ require('./images/icon-facebook.svg') } />
+				 Facebook
+				 </a>
+				 <a className="share-link link-email" href={ mailtoLink }>
+				 <img src={ require('./images/icon-email.svg') } />
+				 Email
+				 </a>
+				 <a className="share-link link-sms" href={ smsLink }>
+				 <img src={ require('./images/icon-sms.svg') } />
+				 SMS
+				 </a>
+				 </div>
+				*/}
 			</SectionCollapsible>
 		</div>
 	);
