@@ -81,16 +81,17 @@ function fetchUserProfileSuccess(userId, json) {
 }
 
 function fetchUserProfile(userId) {
-	return (dispatch) => {
+	return (dispatch, getState) => {
 		dispatch(fetchUserProfileStart(userId));
 
 		console.log('>>TODO: fetch /user[%s]', userId);
 		//fetch(`/user/${iserId}`).then(response => response.json())
+		//const response = userData.users.all.find(u => u.userId === userId);
 
-		const response = userData.users.all.find(u => u.userId === userId);
+		const myProfile = getState().profile; // TODO - separate elsewere
 
 		return new Promise((resolve, reject) => {
-			setTimeout(() => resolve(response), DELAY);
+			setTimeout(() => resolve(myProfile), 0);
 		}).then((json) => {
 			dispatch(fetchUserProfileSuccess(userId, json));
 		});

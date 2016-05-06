@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { selectUserProfile, fetchUserProfileIfNeeded } from '../flux/actions';
+import Location from '../lib/Location.js';
+import { fetchProfileIfNeeded, postLogout } from '../flux/actions';
 import UserProfile from '../components/UserProfile';
 
 
@@ -11,28 +12,33 @@ class Profile extends Component {
 	static propTypes = {
 		params: PropTypes.object.isRequired,
 		// from store
-		fetchUserProfile: PropTypes.func.isRequired,
-		selectUserProfile: PropTypes.func.isRequired,
-		userProfile: PropTypes.object.isRequired,
+		profile: PropTypes.object.isRequired,
+		fetchProfile: PropTypes.func.isRequired,
+		postLogout: PropTypes.func.isRequired,
 	};
 
 	componentDidMount() {
-		const { params: { userId }, fetchUserProfile, selectUserProfile } = this.props;
+		const { params: { userId }, fetchProfile } = this.props;
 
-		// TODO - my vs others profiles
+		// TODO - others profiles
 
-		fetchUserProfile(userId).then(() => {
-			selectUserProfile(userId);
+		fetchProfile();
+	}
+
+	handleLogout() {
+		this.props.postLogout().then(() => {
+			Location.goBack();
 		});
 	}
 
 	render() {
-		const { user: { isFetching, user } } = this.props;
+		const { profile: { isFetching, ...rest } } = this.props;
+		const onLogout = () => this.handleLogout();
 
 		if (isFetching) {
 			return <div/>; // TODO: spinner
 		}
-		return <UserProfile user={ user }/>;
+		return <UserProfile user={ rest } onLogout={ onLogout }/>;
 	}
 }
 
@@ -40,13 +46,13 @@ class Profile extends Component {
 //
 const mapStateToProps = (state) => {
 	return {
-		userProfile: state.userProfiles[state.selectedUserProfile] || {isFetching: true}
+		profile: state.profile
 	};
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
-		selectUserProfile: (userId) => dispatch(selectUserProfile(userId)),
-		fetchUserProfile: (userId) => dispatch(fetchUserProfileIfNeeded(userId))
+		fetchProfile: () => dispatch(fetchProfileIfNeeded()),
+		postLogout: () => dispatch(postLogout()),
 	};
 };
 

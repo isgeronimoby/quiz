@@ -4,15 +4,18 @@ import Logo from './Logo.js';
 import './UserProfile.scss';
 
 
-const HeaderOverlay = ({ title }) => {
+const HeaderOverlay = ({ title, onLogout }) => {
 	return (
 		<div className="header header-overlay">
 			<div className="header-title with-btn">
 				<h2>{ title }</h2>
 			</div>
-			<Link className="nav-button" goBack={true} >
+			<Link className="nav-button" goBack={true}>
 				<img src={ require('../../static/images/arrow-left-white.svg') } alt="Back"/> Back
 			</Link>
+			<div className="nav-button right" onClick={ onLogout }>
+				Logout
+			</div>
 		</div>
 	);
 };
@@ -22,15 +25,16 @@ class UserProfile extends Component {
 
 	static propTypes = {
 		user: PropTypes.object.isRequired,
+		onLogout: PropTypes.func.isRequired
 	};
 
 	render() {
-		const { user: {name, picture, points} } = this.props;
+		const { user: { name, imageUrl, points, pendingPoints }, onLogout } = this.props;
 		const overlayTitle = 'Profile'; // TODO: user shortName
 
 		return (
 			<div className="user-profile">
-				<HeaderOverlay title={ overlayTitle }/>
+				<HeaderOverlay title={ overlayTitle } onLogout={ onLogout }/>
 
 				<div className="profile-summary">
 					<div className="summary-aside">
@@ -40,14 +44,14 @@ class UserProfile extends Component {
 					</div>
 
 					<div className="summary-center">
-						<Logo src={picture} />
+						<Logo src={imageUrl}/>
 						<div className="user-name">{ name }</div>
 					</div>
 
 					<div className="summary-aside">
 						<img className="aside-icon" src={require('./images/icon-points-sm.svg')} alt=""/>
 						<h4 className="aside-title">{ points } points</h4>
-						<h5 className="aside-text">+50 pending</h5>
+						<h5 className="aside-text">+{ pendingPoints } pending</h5>
 					</div>
 				</div>
 

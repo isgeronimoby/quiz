@@ -107,3 +107,26 @@ export function postSignup({name, email, password}) {
 		});
 	};
 }
+
+
+/*
+ Logout
+ */
+
+function postLogoutSuccess() {
+	return {
+		type: LOGOUT_SUCCESS,
+	};
+}
+
+export function postLogout() {
+	return (dispatch) => {
+		return fetch({
+			method: 'POST',
+			endpoint: 'auth/logout',
+			data: {}
+		}).then((json) => {
+			dispatch(postLogoutSuccess());
+		})
+	};
+}

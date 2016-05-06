@@ -83,5 +83,10 @@ Header overlay - somewhat hacky way to change title/menu btn
     img {
       margin-right: 5px;
     }
+
+    &.right {
+      margin-right: -7rem;
+      color: $brand-color-dark;
+    }
   }
 }

@@ -140,6 +140,7 @@ function auth(state = {
  */
 
 function profile(state = {
+	isFetching: false,
 	didInvalidate: false,
 	userId: null,
 	name: '',
@@ -149,20 +150,27 @@ function profile(state = {
 }, action) {
 	switch (action.type) {
 		case INVALIDATE_PROFILE:
+			return {
+				...state,
+				didInvalidate: true,
+			};
 		case FETCH_PROFILE:
 			return {
 				...state,
+				isFetching: true,
 				didInvalidate: true,
 			};
 		case FETCH_PROFILE_SUCCESS:
 			return {
 				...action.payload,
+				isFetching: false,
 				didInvalidate: false,
 				lastUpdated: action.receivedAt,
 			};
 		case FETCH_PROFILE_ERROR:
 			return {
 				...state,
+				isFetching: false,
 				didInvalidate: true,
 			};
 		default:
@@ -336,7 +344,7 @@ function selectedUserProfile(state = null, action) {
 	}
 }
 
-function userById(state = {
+function userProfileById(state = {
 	isFetching: false,
 	user: {}
 }, action) {
@@ -363,7 +371,7 @@ function userProfiles(state = {}, action) {
 		case FETCH_USER_PROFILE_SUCCESS:
 			return {
 				...state,
-				[action.userId]: userById(state[action.userId], action)
+				[action.userId]: userProfileById(state[action.userId], action)
 			};
 		default:
 			return state;
