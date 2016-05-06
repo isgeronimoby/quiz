@@ -96,7 +96,7 @@ class WelcomePopup extends Component {
 
 		return (
 			<div className={"popup-screen welcome-screen " + hiddenClass }>
-				<div className="popup welcome-popup">
+				<div className="welcome-popup">
 					<ScreenSwiper currentScreenIdx={ idx } onPrevScreen={onPrev} onNextScreen={onNext}>
 						<WelcomeScreen figure={ require('./images/fig-play.svg') } title="Play games"
 							lines={ ['predict scores', 'beat your mates', 'rank highest in Leaderboards'] }/>

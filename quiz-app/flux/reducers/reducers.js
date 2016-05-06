@@ -162,6 +162,7 @@ function profile(state = {
 			};
 		case FETCH_PROFILE_SUCCESS:
 			return {
+				...state,
 				...action.payload,
 				isFetching: false,
 				didInvalidate: false,
@@ -193,6 +194,7 @@ function fixtures(state = {
 			};
 		case FETCH_FIXTURES_SUCCESS:
 			return {
+				...state,
 				isFetching: false,
 				list: action.payload,
 				lastUpdated: action.receivedAt,

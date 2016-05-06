@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { toggleWelcome, fetchProfileIfNeeded, fetchFixtures } from '../flux/actions';
+import { toggleWelcome, fetchFixtures } from '../flux/actions';
 import Cookies from 'js-cookie';
 import Location from '../lib/Location';
 
@@ -17,19 +17,20 @@ class Index extends Component {
 		// from store
 		showWelcomePopup: PropTypes.bool.isRequired,
 		openWelcomePopup: PropTypes.func.isRequired,
-		fetchProfile: PropTypes.func.isRequired,
+		fixtureList: PropTypes.array.isRequired,
 		fetchFixtures: PropTypes.func.isRequired,
 	};
 
 	async componentDidMount() {
 		this.showWelcomeIfNeeded();
-		this.props.fetchProfile();
 		await this.props.fetchFixtures();
 		this.visitFirstQuiz()
 	}
 
 	componentWillReceiveProps({showWelcomePopup}) {
 		const welcomeClosed = this.props.showWelcomePopup && !showWelcomePopup;
+		//console.log('>>welcomeClosed %s -> %s', this.props.showWelcomePopup, showWelcomePopup);
+
 		if (welcomeClosed) {
 			Cookies.set(WELCOME_COOKIE_KEY, 'true', {expires: WELCOME_COOKIE_EXPIRES});
 		}
@@ -42,8 +43,7 @@ class Index extends Component {
 	}
 
 	visitFirstQuiz() {
-		//const [{ quizId }] = this.props.data; // TODO: first quiz's id
-		const matchId = '0f465529-f5d5-4dd0-8581-728693287d50';
+		const { matchId } = this.props.fixtureList[0];
 
 		setTimeout(() => {
 			Location.push({
@@ -66,12 +66,12 @@ class Index extends Component {
 //
 const mapStateToProps = (state) => {
 	return {
-		showWelcomePopup: state.showWelcomePopup
+		showWelcomePopup: state.showWelcomePopup,
+		fixtureList: state.fixtures.list,
 	};
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchProfile: () => dispatch(fetchProfileIfNeeded()),
 		fetchFixtures: () => dispatch(fetchFixtures()),
 		openWelcomePopup: () => dispatch(toggleWelcome(true)),
 	};
