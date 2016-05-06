@@ -98,12 +98,12 @@ class WelcomePopup extends Component {
 			<div className={"popup-screen welcome-screen " + hiddenClass }>
 				<div className="welcome-popup">
 					<ScreenSwiper currentScreenIdx={ idx } onPrevScreen={onPrev} onNextScreen={onNext}>
-						<WelcomeScreen figure={ require('./images/fig-play.svg') } title="Play games"
-							lines={ ['predict scores', 'beat your mates', 'rank highest in Leaderboards'] }/>
-						<WelcomeScreen figure={ require('./images/fig-earn.svg') } title="Earn points"
-							lines={ ['predicting match outcomes', 'downloading apps', 'sharing & more'] }/>
-						<WelcomeScreen figure={ require('./images/fig-win.svg') } title="Win prizes"
+						<WelcomeScreen figure={ require('./images/fig-win.svg') } title="Win Everton Prizes"
 							lines={ ['exclusive merchandise', 'money can’t buy experiences'] }/>
+						<WelcomeScreen figure={ require('./images/fig-earn.svg') } title="Earn Everton Points"
+							lines={ ['predicting match outcomes', 'downloading apps', 'sharing & more'] }/>
+						<WelcomeScreen figure={ require('./images/fig-predict.svg') } title="Predict Match Scores"
+							lines={ ['beat your mates', 'rank highest in Leaderboards'] }/>
 					</ScreenSwiper>
 
 					<WelcomeFooter stepIdx={ idx } onNext={ onNext } onSkip={ onSkip }/>

@@ -43,6 +43,7 @@ Popup
   align-items: center;
 }
 .welcome-figure {
+  width: 100%;
   flex-grow: 1;
   img {
     width: 100%;
@@ -50,7 +51,7 @@ Popup
   }
 }
 .welcome-text {
-  min-height: 30%;
+  min-height: 120px;
   text-align: center;
 
   .welcome-title {
