@@ -53,10 +53,11 @@ const ProfileHeader = ({ profile }) => {
 
 const AuthHeader = ({ onClick }) => {
 	return (
-		<div className="menu-header menu-login">
-			<Button className="hollow-btn" onClick={ () => onClick('login') }>LogIn</Button>
-			<div className="or-small">or</div>
-			<Button className="hollow-btn lite" onClick={ () => onClick('signup') }>SignUp</Button>
+		<div className="menu-header menu-login" onClick={ onClick }>
+			<div className="icon-menu-item">
+				<img src={ require('./images/icon-not-loggedin.svg') }/>
+			</div>
+			<h3 className="">LogIn</h3>
 		</div>
 	);
 };
@@ -82,7 +83,7 @@ class Menu extends Component {
 			}
 		};
 		const isActiveItem = (path) => (activePath === `/${path}`);
-		const onAuthClick = (view) => openAuthPopup(view);
+		const onAuthClick = () => openAuthPopup('login');
 
 		let profileHeaderMaybe = <AuthHeader onClick={ onAuthClick }/>;
 		if (profile !== null) {
