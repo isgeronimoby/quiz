@@ -581,10 +581,10 @@ DGW.global.api.requests.initMainFlow = function(){
     if (isSafari && !DGW.global.safariFix) {
         DGW.global.api.requests.readServerCookie('safarifix', function (response) {
             if (!response) {
-                DGW.global.api.requests.checkServerAvailability();
+                DGW.side.methods.changeSideWidgetState();
             } else {
                 DGW.global.safariFix = true;
-                DGW.global.api.requests.checkServerAvailability();
+                DGW.global.api.requests.initMainFlow();
             }
         });
     } else {
