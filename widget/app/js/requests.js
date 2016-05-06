@@ -169,7 +169,7 @@ DGW.global.api.requests.initMainFlow = function(){
     if (isSafari && !DGW.global.safariFix) {
         DGW.global.api.requests.readServerCookie('safarifix', function (response) {
             if (!response) {
-                DGW.global.methods.safariFixInit();
+                DGW.global.api.requests.checkServerAvailability();
             } else {
                 DGW.global.safariFix = true;
                 DGW.global.api.requests.checkServerAvailability();

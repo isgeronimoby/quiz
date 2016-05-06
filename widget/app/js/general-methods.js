@@ -108,10 +108,6 @@ DGW.global.methods.init = function(){
     }
 };
 
-DGW.global.methods.safariFixInit = function(){
-    DGW.side.methods.initSafariFixEvents();
-};
-
 DGW.main.methods.showNotificationBar = function(type){
     if (!type) type = 'success';
     DGW.helpers.addClass(DGW.main.elements.pages.notificationHolder, type);

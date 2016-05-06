@@ -581,7 +581,7 @@ DGW.global.api.requests.initMainFlow = function(){
     if (isSafari && !DGW.global.safariFix) {
         DGW.global.api.requests.readServerCookie('safarifix', function (response) {
             if (!response) {
-                DGW.global.methods.safariFixInit();
+                DGW.global.api.requests.checkServerAvailability();
             } else {
                 DGW.global.safariFix = true;
                 DGW.global.api.requests.checkServerAvailability();
@@ -1712,10 +1712,6 @@ DGW.global.methods.init = function(){
     }
 };
 
-DGW.global.methods.safariFixInit = function(){
-    DGW.side.methods.initSafariFixEvents();
-};
-
 DGW.main.methods.showNotificationBar = function(type){
     if (!type) type = 'success';
     DGW.helpers.addClass(DGW.main.elements.pages.notificationHolder, type);
@@ -1914,6 +1910,7 @@ DGW.side.methods.initEvents = function(){
 
     DGW.helpers.imagesResponsivePaths(wBody.querySelectorAll('[data-image]'));
 
+    // TODO: remove intervals usage, redundant
     initInterval = window.setInterval(function(){
         if (DGW.global.cache.last.prize) {
             window.clearInterval(initInterval);
@@ -1932,6 +1929,9 @@ DGW.side.methods.initSafariFixEvents = function(){
 
     wBody.addEventListener('click', DGW.global.api.requests.safariFix);
 
+    DGW.helpers.imagesResponsivePaths(wBody.querySelectorAll('[data-image]'));
+
+    // TODO: remove intervals usage, redundant
     initInterval = window.setInterval(function(){
         if (DGW.global.cache.last.prize) {
             window.clearInterval(initInterval);
@@ -1946,6 +1946,8 @@ DGW.side.methods.initSafariFixEvents = function(){
 DGW.side.methods.changeSideWidgetState = function(state) {
     var swc = DGW.side.elements.widgetContent;
     var wb = DGW.side.elements.widgetBody;
+
+    var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
 
     DGW.side.elements.widgetInner = null;
     DGW.side.elements.widgetInner = document.createElement('div');
@@ -1965,7 +1967,12 @@ DGW.side.methods.changeSideWidgetState = function(state) {
             swc.appendChild(DGW.side.elements.widgetInner);
     }
 
-    DGW.side.methods.initEvents();
+    if (isSafari && !DGW.global.safariFix) {
+        DGW.side.methods.initSafariFixEvents();
+    } else {
+        DGW.side.methods.initEvents();
+    }
+
 };
 DGW.main.methods.checkSectionHeight = function() {
     var section = DGW.main.elements.widgetBody.querySelector('.dg-o-w-section');
