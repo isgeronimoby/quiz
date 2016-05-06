@@ -56,9 +56,11 @@ class QuizFirstGoal extends Component {
 
 		const summary = {
 			firstGoalScorer: {
+				questionId,
+				outcomeId,
 				name: name,
 				isHome: position === teamHome,
-				isAway: position === teamAway
+				isAway: position === teamAway,
 			}
 		};
 

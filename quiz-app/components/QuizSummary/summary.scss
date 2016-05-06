@@ -74,4 +74,25 @@
       background-position: 4px 4px;
     }
   }
+
+  &.invalid {
+    .choice-text {
+      border-bottom: 1px solid $color-error;
+    }
+    .choice-check.selected {
+      background-color: $color-error;
+      border-color: $color-error;
+    }
+  }
+}
+
+.error-text {
+  font-size: 1.4rem;
+  color: $color-grey-dark;
+  text-align: center;
+  .strong {
+    margin-bottom: 5px;
+    font-size: 1.9rem;
+    color: $color-error;
+  }
 }

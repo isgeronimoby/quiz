@@ -40,9 +40,10 @@ export function fetchProfileSuccess({
 	};
 }
 
-function fetchProfileError() {
+function fetchProfileError(error) {
 	return {
-		type: FETCH_PROFILE_ERROR
+		type: FETCH_PROFILE_ERROR,
+		error
 	};
 }
 
@@ -54,8 +55,8 @@ function fetchProfile() {
 			endpoint: 'user/getuser'
 		}).then((json) => {
 			dispatch(fetchProfileSuccess(json));
-		}).catch(() => {
-			dispatch(fetchProfileError()); // TODO
+		}).catch(({ Message: error = 'Invalid'}) => {
+			dispatch(fetchProfileError(error)); // TODO
 		});
 	};
 }

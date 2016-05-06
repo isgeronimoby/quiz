@@ -31,9 +31,10 @@ function fetchFixturesSuccess(json) {
 	};
 }
 
-function fetchFixturesError() {
+function fetchFixturesError(error) {
 	return {
-		type: FETCH_FIXTURES_ERROR
+		type: FETCH_FIXTURES_ERROR,
+		error
 	};
 }
 
@@ -45,8 +46,8 @@ export function fetchFixtures() {
 			endpoint: 'matchquiz/getfixtures'
 		}).then((json) => {
 			dispatch(fetchFixturesSuccess(json));
-		}).catch(() => {
-			dispatch(fetchFixturesError()); // TODO
+		}).catch(({ Message: error = 'Invalid'}) => {
+			dispatch(fetchFixturesError(error)); // TODO
 		});
 	};
 }

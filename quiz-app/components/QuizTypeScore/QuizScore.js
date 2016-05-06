@@ -11,8 +11,8 @@ function parseData(data, scores = []) {
 		QuestionId: questionId,
 		Outcomes: outcomes
 		} = data;
-	const score = (scoreHome >= scoreAway) ? `${scoreHome}-${scoreAway}` : `${scoreAway}-${scoreHome}`;
-	const { OutcomeId: outcomeId, AnswersCount: count = 0} = outcomes.find(({ Score }) => Score === score) || {};
+	const scorePair = (scoreHome >= scoreAway) ? `${scoreHome}-${scoreAway}` : `${scoreAway}-${scoreHome}`;
+	const { OutcomeId: outcomeId, AnswersCount: count = 0} = outcomes.find(({ Score }) => Score === scorePair) || {};
 	const chance = Math.floor((count + 1) / (total + 1) * 100);
 
 	return {
@@ -37,13 +37,20 @@ class QuizScore extends Component {
 		scores: undefined
 	};
 
-	handleSubmit(questionId, outcomeId, scores) {
-		const { onAnswerSubmit } = this.props;
+	handleSubmit(questionId, scores) {
+		const { onAnswerSubmit, data } = this.props;
+		const { outcomeId } = parseData(data, scores);
 		const [scoreHome, scoreAway] = scores;
 		const summary = {
-			scoreHome,
-			scoreAway,
+			score: {
+				questionId,
+				outcomeId,
+				scoreHome,
+				scoreAway,
+			},
 			winner: {
+				questionId,
+				outcomeId,
 				isHome: scoreHome > scoreAway,
 				isAway: scoreHome < scoreAway,
 			}
@@ -68,7 +75,7 @@ class QuizScore extends Component {
 		const { info, data, teamNames } = this.props;
 		const { showStats, scores } = this.state;
 		const { questionId, outcomeId, stats } = parseData(data, scores);
-		const onSubmit = (scores) => this.handleSubmit(questionId, outcomeId, scores);
+		const onSubmit = (scores) => this.handleSubmit(questionId, scores);
 		const onDismiss = () => this.hideStats();
 
 		return (

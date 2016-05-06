@@ -63,7 +63,7 @@ export function postLogin({email, password}) {
 		}).then((json) => {
 			//dispatch(fetchProfileSuccess(json)); TODO if safe
 			dispatch(successAuth());
-		}).catch((error) => {
+		}).catch(({ Message: error = 'Invalid'}) => {
 			dispatch(postLoginError(error));
 		});
 	};
@@ -102,7 +102,7 @@ export function postSignup({name, email, password}) {
 		}).then((json) => {
 			//dispatch(fetchProfileSuccess(json)); TODO if safe
 			dispatch(successAuth());
-		}).catch((error) => {
+		}).catch(({ Message: error = 'Invalid'}) => {
 			dispatch(postSignupError(error));
 		});
 	};

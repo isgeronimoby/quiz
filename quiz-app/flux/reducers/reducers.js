@@ -36,6 +36,9 @@ import {
 	FETCH_QUIZ,
 	FETCH_QUIZ_SUCCESS,
 	FETCH_QUIZ_ERROR,
+	FETCH_ODDS,
+	FETCH_ODDS_SUCCESS,
+	FETCH_ODDS_ERROR,
 
 } from '../actions';
 
@@ -188,8 +191,8 @@ function fixtures(state = {
 }
 
 /*
-Quiz Match
-*/
+ Quiz Match
+ */
 
 function selectedQuiz(state = null, action) {
 	switch (action.type) {
@@ -202,7 +205,11 @@ function selectedQuiz(state = null, action) {
 
 function quizDataById(state = {
 	isFetching: false,
-	questionList: {}
+	questionList: {},
+
+	isValidating: false,
+	odds: 0,
+	invalidOutcomes: []
 }, action) {
 	switch (action.type) {
 		case FETCH_QUIZ:
@@ -216,6 +223,26 @@ function quizDataById(state = {
 				questionList: action.payload,
 				lastUpdated: action.receivedAt,
 			};
+		case FETCH_ODDS:
+			return {
+				...state,
+				isValidating: true,
+			};
+		case FETCH_ODDS_SUCCESS:
+			return {
+				...state,
+				isValidating: false,
+				odds: action.odds,
+				invalidOutcomes: [],
+				lastUpdated: action.receivedAt,
+			};
+		case FETCH_ODDS_ERROR:
+			return {
+				...state,
+				isValidating: false,
+				odds: 0,
+				invalidOutcomes: action.invalidOutcomes,
+			};
 		default:
 			return state;
 	}
@@ -225,6 +252,9 @@ function quizes(state = {}, action) {
 	switch (action.type) {
 		case FETCH_QUIZ:
 		case FETCH_QUIZ_SUCCESS:
+		case FETCH_ODDS:
+		case FETCH_ODDS_SUCCESS:
+		case FETCH_ODDS_ERROR:
 			return {
 				...state,
 				[action.matchId]: quizDataById(state[action.matchId], action)

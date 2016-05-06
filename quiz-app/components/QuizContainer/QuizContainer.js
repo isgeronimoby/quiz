@@ -20,8 +20,14 @@ const type2componet = {
 class QuizContainer extends Component {
 
 	static propTypes = {
+		matchId: PropTypes.string.isRequired,
 		questionList: PropTypes.array.isRequired,
 		fixtureItem: PropTypes.object.isRequired,
+
+		isValidating: PropTypes.bool.isRequired,
+		odds: PropTypes.number.isRequired,
+		invalidOutcomes: PropTypes.array.isRequired,
+		fetchOdds: PropTypes.func.isRequired,
 	};
 
 	state = {
@@ -36,10 +42,18 @@ class QuizContainer extends Component {
 
 	nextScreen() {
 		const { currentScreenIdx: idx } = this.state;
-		if (idx + 1 < this.totalSteps()) {
+		const totalSteps = this.totalSteps();
+
+		if (idx + 1 < totalSteps) {
 			this.setState({
 				currentScreenIdx: idx + 1
-			})
+			}, () => {
+				const { currentScreenIdx: idx } = this.state;
+				const isSummaryScreen = (idx + 1 === totalSteps);
+				if (isSummaryScreen) {
+					this.submitAnswers();
+				}
+			});
 		}
 	}
 
@@ -48,8 +62,32 @@ class QuizContainer extends Component {
 		if (idx > 0) {
 			this.setState({
 				currentScreenIdx: idx - 1
-			})
+			});
 		}
+	}
+
+	showScreenByQuestionId(questionId) {
+		const { questionList } = this.props;
+		const questionIds = questionList.map(({ QuestionId: questionId }) => questionId);
+		const idx = questionIds.indexOf(questionId);
+
+		this.setState({
+			currentScreenIdx: idx
+		});
+	}
+
+	submitAnswers() {
+		const { outcomes } = this.state;
+		const answers = this.props.questionList
+			.map(({ QuestionId: questionId }) => questionId)
+			.reduce((acc, questionId) => {
+				return [
+					...acc,
+					outcomes[questionId].outcomeId
+				];
+			}, []);
+
+		this.props.fetchOdds(answers);
 	}
 
 	handleAnswerSubmit(questionId, outcomeId, summaryData) {
@@ -77,7 +115,11 @@ class QuizContainer extends Component {
 	}
 
 	render() {
-		const { questionList, fixtureItem: { startDate, teamHome, teamAway } } = this.props;
+		const { matchId,
+			questionList,
+			fixtureItem: { startDate, teamHome, teamAway },
+			isValidating,
+			invalidOutcomes } = this.props;
 		const info = moment.utc(startDate).format('D MMMM, HH:mm');
 		const { currentScreenIdx: idx, summary } = this.state;
 		const total = this.totalSteps();
@@ -85,6 +127,7 @@ class QuizContainer extends Component {
 		const onPrev = () => this.prevScreen();
 		const onNext = () => this.nextScreen();
 		const onAnswerSubmit = this.handleAnswerSubmit.bind(this);
+		const onShowScreen = (questionId) => this.showScreenByQuestionId(questionId);
 
 		const quizScreens = questionList.map(({ Type, ...data }, i) => {
 			const Quiz = type2componet[Type];
@@ -93,7 +136,15 @@ class QuizContainer extends Component {
 					onAnswerSubmit={ onAnswerSubmit }/>
 			);
 		}).concat(
-			<QuizSummary key="summary" info={ info } teamNames={ teamNames } summary={ summary }/>
+			isValidating ? <div key="summary"/> :
+				<QuizSummary key="summary"
+					matchId={ matchId }
+					info={ info }
+					teamNames={ teamNames }
+					summary={ summary }
+					invalidOutcomes={ invalidOutcomes }
+					onShowScreen={ onShowScreen }
+				/>
 		);
 
 		return (

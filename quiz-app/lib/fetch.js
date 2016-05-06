@@ -14,13 +14,14 @@ const rpc = new easyXDM.Rpc({
 
 function fetch(options) {
 	const { method = 'GET', endpoint, data } = options;
+	const params = method === 'GET' ? (data || '') : JSON.stringify(data);
 
 	return new Promise((resolve, reject) => {
 		rpc.apiTunnel({
 				apiKey,
 				method,
 				endpoint,
-				params: data || ''
+				params
 			},
 			function onSuccess(response) {
 				console.log('>>success:', response);
@@ -29,12 +30,12 @@ function fetch(options) {
 					resolve(response.data);
 				}
 				else {
-					reject(JSON.parse(response.error).Message);
+					reject(JSON.parse(response.error));
 				}
 			},
-			function onError(error) {
-				console.log('>>error:', error);
-				reject(error.Message);
+			function onError(response) {
+				console.log('>>error:', response);
+				reject(JSON.parse(response.error));
 			});
 	});
 }

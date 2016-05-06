@@ -61,6 +61,8 @@ class QuizWinOrDraw extends Component {
 		const { outcomes } = parseData(data, outcomeId);
 		const summary = {
 			halfTimeWinner: {
+				questionId,
+				outcomeId,
 				isHome: outcomes[0].id === outcomeId,
 				isAway: outcomes[1].id === outcomeId
 			}

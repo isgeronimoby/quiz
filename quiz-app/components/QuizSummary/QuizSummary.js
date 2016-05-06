@@ -8,9 +8,12 @@ import './summary.scss';
 class QuizSummary extends Component {
 
 	static propTypes = {
+		matchId: PropTypes.string.isRequired,
 		info: PropTypes.string.isRequired,
 		teamNames: PropTypes.array.isRequired,
-		summary: PropTypes.object.isRequired
+		summary: PropTypes.object.isRequired,
+		invalidOutcomes: PropTypes.array.isRequired,
+		onShowScreen: PropTypes.func.isRequired,
 	};
 
 	state = {};
@@ -20,15 +23,16 @@ class QuizSummary extends Component {
 	}
 
 	render() {
-		const { info, teamNames, summary: {
-			scoreHome = '?',
-			scoreAway = '?',
+		const { matchId, info, teamNames, invalidOutcomes, onShowScreen, summary: {
+			score,
 			winner,
 			halfTimeWinner,
-			firstGoalScorer = {}
+			firstGoalScorer = {},
 			} } = this.props;
 		const [teamHome, teamAway] = teamNames;
-		const scoresStr = `${scoreHome}:${scoreAway}`;
+		const {scoreHome = '?', scoreAway = '?', questionId} = score;
+		const scoreStr = `${scoreHome}:${scoreAway}`;
+		const showScoreScreen = () => onShowScreen(questionId);
 		const choiceData = [
 			{
 				title: 'Winner of the match',
@@ -43,17 +47,32 @@ class QuizSummary extends Component {
 				sides: {...firstGoalScorer}
 			}
 		];
-		const choiceItems = choiceData.map(({ title, sides: {isHome, isAway} }, i) => {
+		const choiceItems = choiceData.map(({ title, sides: {isHome, isAway, outcomeId, questionId} }, i) => {
+			const isInvalid = invalidOutcomes.indexOf(outcomeId) >= 0;
 			const classHome = isHome ? 'selected' : '';
 			const classAway = isAway ? 'selected' : '';
+			const invalidClass = isInvalid ? 'invalid' : '';
+			const onClick = () => onShowScreen(questionId);
 			return (
-				<li key={`choice-${i}`} className="summary-choice">
+				<li key={`choice-${i}`} className={"summary-choice " + invalidClass} onClick={ onClick }>
 					<div className={ "choice-check left " + classHome }></div>
 					<div className="choice-text text-small">{ title }</div>
 					<div className={ "choice-check right " + classAway }></div>
 				</li>
 			);
 		});
+		const hasInvalids = invalidOutcomes.length > 0;
+		let btnOrError = (
+			<div className="error-text">
+				<h3 className="strong">Answers that marked in red contradict each other.</h3>
+				Please change your answers
+			</div>
+		);
+		if (!hasInvalids) {
+			btnOrError = (
+				<Link className="big-btn money-btn" to="./bet" state={{matchId}}>Bet points</Link>
+			);
+		}
 
 		return (
 			<div className="quiz-content">
@@ -61,14 +80,14 @@ class QuizSummary extends Component {
 
 				<div className="quiz-info">{ info }</div>
 
-				<div className="summary-banner">
+				<div className="summary-banner" onClick={ showScoreScreen }>
 					<div className="team-logo-small left">
 						<img src={require(`../../static/images/team-${teamHome}.svg`)}/>
 					</div>
 					<div className="text-small">{ teamHome }</div>
 
 					<div className="team-score-container">
-						<div className="team-score">{ scoresStr }</div>
+						<div className="team-score">{ scoreStr }</div>
 					</div>
 
 					<div className="text-small">{ teamAway }</div>
@@ -81,13 +100,13 @@ class QuizSummary extends Component {
 					{ choiceItems }
 				</ul>
 
-				<Link className="big-btn money-btn" to="./bet" state={{id: 1}}>
-					Bet points
-				</Link>
+				{ btnOrError }
 
-				<Button className="big-btn share-btn" onClick={ () => this.showPopup() }>
-					Share and get +10 points
-				</Button>
+				{/*
+				 <Button className="big-btn share-btn" onClick={ () => this.showPopup() }>
+				 Share and get +10 points
+				 </Button>
+				 */}
 			</div>
 		);
 	}

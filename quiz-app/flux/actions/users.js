@@ -49,6 +49,8 @@ export function fetchUserList() {
 		}).then((json) => {
 			dispatch(fetchUserListSuccess(json));
 		});
+
+		//TODO - errors
 	};
 }
 
