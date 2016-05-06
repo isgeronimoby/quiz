@@ -26,7 +26,7 @@ export function cancelAuth() {
 	};
 }
 
-function successAuth() {
+export function successAuth() {
 	return {
 		type: AUTH_SUCCESS
 	};
@@ -61,7 +61,7 @@ export function postLogin({email, password}) {
 				Password: password,
 			}
 		}).then((json) => {
-			//dispatch(fetchProfileSuccess(json)); TODO if safe
+			dispatch(fetchProfileSuccess(json));
 			dispatch(successAuth());
 		}).catch(({ Message: error = 'Invalid'}) => {
 			dispatch(postLoginError(error));
@@ -100,7 +100,7 @@ export function postSignup({name, email, password}) {
 				Password: password,
 			}
 		}).then((json) => {
-			//dispatch(fetchProfileSuccess(json)); TODO if safe
+			dispatch(fetchProfileSuccess(json));
 			dispatch(successAuth());
 		}).catch(({ Message: error = 'Invalid'}) => {
 			dispatch(postSignupError(error));

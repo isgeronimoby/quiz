@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { requestAuth } from '../../flux/actions';
+import { requestAuth, postBet } from '../../flux/actions';
 import QuizBet from '../QuizBet';
 import BetSuccess from '../BetSuccess';
 import Location from '../../lib/Location';
@@ -11,33 +11,36 @@ import '../QuizContainer/quiz.scss';
 class QuizBetContainer extends Component {
 
 	static propTypes = {
-		data: PropTypes.array.isRequired,
+		params: PropTypes.object.isRequired,
 		// from store
 		isLoggedIn: PropTypes.bool.isRequired,
+		maxPoints: PropTypes.number.isRequired,
+		odds: PropTypes.number.isRequired,
+		answers: PropTypes.array.isRequired,
+		isBetting: PropTypes.bool.isRequired,
+		betSuccess: PropTypes.bool.isRequired,
+		betError: PropTypes.string.isRequired,
 		openAuthPopup: PropTypes.func.isRequired,
+		postBet: PropTypes.func.isRequired,
 	};
 
 	state = {
 		view: 'bet'
 	};
 
-	componentWillReceiveProps({isLoggedIn}) {
-		const authorized = !this.props.isLoggedIn && isLoggedIn;
-		if (authorized) {
-			this.nextView('success');
-		}
-	}
-
 	nextView(view) {
-		this.setState({ view });
+		this.setState({view});
 	}
 
-	submitBet(betValue) {
-		const { isLoggedIn, openAuthPopup } = this.props;
+	submitBet(betPoints) {
+		const { params: {matchId},  isLoggedIn, answers, openAuthPopup, postBet } = this.props;
+
 		if (!isLoggedIn) {
 			openAuthPopup();
 		} else {
-			//TODO - post betValue & go next
+			postBet(matchId, betPoints, answers).then(() => {
+				this.nextView('success');
+			});
 		}
 	}
 
@@ -48,12 +51,14 @@ class QuizBetContainer extends Component {
 	}
 
 	render() {
-		const points = 220;
-		const odds = [10, 1];
+		const { maxPoints, odds } = this.props;
+		const oddsList = [odds, 1];
 		const { view } = this.state;
+		const onSubmit = (betPoints) => this.submitBet(betPoints);
+
 		let View;
 		if (view === 'bet') {
-			View = <QuizBet points={points} odds={odds} onSubmit={() => this.submitBet() }/>;
+			View = <QuizBet points={maxPoints} odds={oddsList} onSubmit={ onSubmit }/>;
 		}
 		else if (view === 'success') {
 			View = <BetSuccess onDismiss={() => this.goToExitPage() }/>;
@@ -70,14 +75,25 @@ class QuizBetContainer extends Component {
 
 // Connect to store
 //
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+	const matchId = state.selectedQuiz;
+	const quiz = state.quizes[matchId];
+	const { answers, odds, isBetting, betSuccess, betError } = quiz || {};
+
 	return {
-		isLoggedIn: state.auth.isLoggedIn
+		isLoggedIn: state.auth.isLoggedIn,
+		maxPoints: state.profile.points,
+		answers,
+		odds,
+		isBetting,
+		betSuccess,
+		betError,
 	};
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
 		openAuthPopup: () => dispatch(requestAuth()),
+		postBet: (matchId, points, answers) => dispatch(postBet(matchId, points, answers)),
 	};
 };
 

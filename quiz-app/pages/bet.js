@@ -2,18 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import withFetch from '../components/withFetch';
 import QuizBetContainer from '../components/QuizBetContainer';
 
-const DELAY = 100;
 
-async function fetch({ id }) {
-
-	console.log('>>TODO: fetch /bet/[%s]', id);
-
-	return new Promise((resolve, reject) => {
-		setTimeout(() => resolve([]), DELAY);
-	});
-}
-
-class Quiz extends Component {
+class Bet extends Component {
 
 	static title = 'Match Quiz';
 
@@ -23,10 +13,10 @@ class Quiz extends Component {
 
 	render() {
 		return (
-			<QuizBetContainer {...this.props} />
+			<QuizBetContainer params={ this.props.params } />
 		);
 	}
 
 }
 
-export default withFetch(Quiz, fetch);
+export default Bet;

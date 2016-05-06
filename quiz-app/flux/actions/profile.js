@@ -1,4 +1,5 @@
 import fetch from '../../lib/fetch.js';
+import { successAuth } from './auth.js';
 
 export const FETCH_PROFILE = 'FETCH_PROFILE';
 export const FETCH_PROFILE_SUCCESS = 'FETCH_PROFILE_SUCCESS';
@@ -55,6 +56,7 @@ function fetchProfile() {
 			endpoint: 'user/getuser'
 		}).then((json) => {
 			dispatch(fetchProfileSuccess(json));
+			dispatch(successAuth());
 		}).catch(({ Message: error = 'Invalid'}) => {
 			dispatch(fetchProfileError(error)); // TODO
 		});

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchFixtures, fetchQuiz, selectQuiz, fetchOdds } from '../flux/actions';
+import { fetchProfileIfNeeded, fetchFixtures, fetchQuiz, selectQuiz, fetchOdds } from '../flux/actions';
 import QuizContainer from '../components/QuizContainer';
 
 
@@ -18,6 +18,7 @@ class Quiz extends Component {
 		odds: PropTypes.number.isRequired,
 		invalidOutcomes: PropTypes.array.isRequired,
 
+		fetchProfile: PropTypes.func.isRequired,
 		fetchFixtures: PropTypes.func.isRequired,
 		fetchQuiz: PropTypes.func.isRequired,
 		selectQuiz: PropTypes.func.isRequired,
@@ -25,8 +26,9 @@ class Quiz extends Component {
 	};
 
 	async componentDidMount() {
-		const { params: { matchId }, fetchFixtures, fetchQuiz, selectQuiz } = this.props;
+		const { params: { matchId }, fetchProfile, fetchFixtures, fetchQuiz, selectQuiz } = this.props;
 
+		fetchProfile(); // need points for bet
 		await fetchFixtures(); // need data from list
 		await fetchQuiz(matchId);
 		selectQuiz(matchId);
@@ -82,6 +84,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
+		fetchProfile: () => dispatch(fetchProfileIfNeeded()),
 		fetchFixtures: () => dispatch(fetchFixtures()),
 		fetchQuiz: (matchId) => dispatch(fetchQuiz(matchId)),
 		selectQuiz: (matchId) => dispatch(selectQuiz(matchId)),

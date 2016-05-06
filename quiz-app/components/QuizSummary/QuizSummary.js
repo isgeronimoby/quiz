@@ -24,9 +24,9 @@ class QuizSummary extends Component {
 
 	render() {
 		const { matchId, info, teamNames, invalidOutcomes, onShowScreen, summary: {
-			score,
-			winner,
-			halfTimeWinner,
+			score = {},
+			winner = {},
+			halfTimeWinner = {},
 			firstGoalScorer = {},
 			} } = this.props;
 		const [teamHome, teamAway] = teamNames;
