@@ -1,5 +1,5 @@
-import fetch from '../../lib/fetch.js';
-import { fetchProfileSuccess } from './profile.js'
+import fetch, { apiPrefix, apiKey } from '../../lib/fetch.js';
+import { fetchProfileIfNeeded, fetchProfileSuccess } from './profile.js'
 
 export const REQUEST_AUTH = 'REQUEST_AUTH';
 export const AUTH_CANCEL = 'AUTH_CANCEL';
@@ -128,5 +128,37 @@ export function postLogout() {
 		}).then((json) => {
 			dispatch(postLogoutSuccess());
 		})
+	};
+}
+
+/*
+ Facebook
+ */
+
+let windowRef = null;
+let windowTimer = null;
+function openPopup(url, onClose) {
+    if (windowRef == null || windowRef.closed) {
+		windowRef = window.open(url, 'Facebook', 'resizable=yes,scrollbars=yes,status=yes');
+		windowRef.focus();
+		windowTimer = setInterval(() => {
+			if(windowRef.closed) {
+				clearInterval(windowTimer);
+				windowRef = null;
+				onClose();
+			}
+		}, 500);
+	} else {
+		windowRef.focus();
+	}
+}
+
+export function authWithFacebook() {
+	return (dispatch) => {
+		const windowUrl = `${apiPrefix}auth/facebook?api_key=${apiKey}`;
+
+		openPopup(windowUrl, () => {
+			dispatch(fetchProfileIfNeeded());
+		});
 	};
 }

@@ -1,4 +1,5 @@
 import { iframeSrc, apiKey } from './config.js';
+export { apiPrefix, apiKey } from './config.js';
 //require("imports?window=>{},this=>window!exports?window.easyXDM!./easyXDM.debug.js"); // TODO
 
 // from index.html

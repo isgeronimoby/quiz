@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { postSignup } from '../../flux/actions';
+import { postSignup, authWithFacebook } from '../../flux/actions';
 import Button from '../Button';
 import { SeparatorOrError, TextInput, EmailInput, PasswordInput } from './Controls.js';
 
@@ -12,6 +12,7 @@ class FormSignIn extends Component {
 		error: PropTypes.string.isRequired,
 		isFetching: PropTypes.bool.isRequired,
 		postSignup: PropTypes.func.isRequired,
+		authWithFacebook: PropTypes.func.isRequired,
 	};
 
 	handleSubmit() {
@@ -40,7 +41,7 @@ class FormSignIn extends Component {
 	}
 
 	render() {
-		const { onNavigate, error } = this.props;
+		const { onNavigate, error, authWithFacebook } = this.props;
 		const toSignup = () => onNavigate('login');
 		const onSubmit = () => this.handleSubmit();
 
@@ -50,7 +51,7 @@ class FormSignIn extends Component {
 					<img src={ require('./images/icon-ball-lg.svg') }/>
 				</div>
 
-				<a className="big-btn facebook-btn" href="//facebook.com" target="_blank">SignUp with Facebook</a>
+				<div className="big-btn facebook-btn" onClick={ authWithFacebook }>SignUp with Facebook</div>
 				<div className="auth-p">
 					<div className="auth-text">and get <span className="text-brand">+10 points</span></div>
 				</div>
@@ -88,6 +89,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		postSignup: (data) => dispatch(postSignup(data)),
+		authWithFacebook: () => dispatch(authWithFacebook()),
 	};
 };
 

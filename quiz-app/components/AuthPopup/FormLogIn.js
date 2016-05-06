@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { postLogin } from '../../flux/actions';
+import { postLogin, authWithFacebook } from '../../flux/actions';
 import Button from '../Button';
 import { SeparatorOrError, EmailInput, PasswordInput } from './Controls.js';
 
@@ -12,6 +12,7 @@ class FormLogIn extends Component {
 		error: PropTypes.string.isRequired,
 		isFetching: PropTypes.bool.isRequired,
 		postLogin: PropTypes.func.isRequired,
+		authWithFacebook: PropTypes.func.isRequired,
 	};
 
 	handleSubmit() {
@@ -35,7 +36,7 @@ class FormLogIn extends Component {
 	}
 
 	render() {
-		const { onNavigate, error } = this.props;
+		const { onNavigate, error, authWithFacebook } = this.props;
 		const toForgot = () => onNavigate('forgot');
 		const toSignup = () => onNavigate('signup');
 		const onSubmit = () => this.handleSubmit();
@@ -46,7 +47,7 @@ class FormLogIn extends Component {
 					<img src={ require('./images/icon-ball-lg.svg') } />
 				</div>
 
-				<a className="big-btn facebook-btn" href="//facebook.com" target="_blank">LogIn with Facebook</a>
+				<div className="big-btn facebook-btn" onClick={ authWithFacebook }>LogIn with Facebook</div>
 
 				<SeparatorOrError error={error} />
 
@@ -82,6 +83,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		postLogin: (data) => dispatch(postLogin(data)),
+		authWithFacebook: () => dispatch(authWithFacebook()),
 	};
 };
 
