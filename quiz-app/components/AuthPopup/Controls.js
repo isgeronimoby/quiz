@@ -149,8 +149,9 @@ export class EmailInput extends Input {
 export class PasswordInput extends Input {
 
 	isValid() {
-		const { value } = this.state;
-		return (value.length < 6 ? 'password' : undefined);
+		const { value: {length} } = this.state;
+		const isValid = (8 <= length && length <= 16);
+		return (!isValid ? 'password' : undefined);
 	}
 
 	render() {
@@ -172,7 +173,7 @@ export class PasswordInput extends Input {
 					onChange={ onChange } />
 				{ !error ? children : undefined }
 				<div className="input-error" style={ errorStyle('required') } >Password is required</div>
-				<div className="input-error" style={ errorStyle('password') }>Password is too short (6 characters at least)</div>
+				<div className="input-error" style={ errorStyle('password') }>Password should have from 8 to 16 characters</div>
 			</div>
 		);
 	}
