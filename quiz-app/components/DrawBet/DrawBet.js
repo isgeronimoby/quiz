@@ -63,7 +63,7 @@ class DrawBet extends Component {
 					Place points
 				</Button>
 
-				<Link className="big-btn share-btn" to="./draws" >Earn more points</Link>
+				<Link className="big-btn share-btn" to="./earn" >Earn more points</Link>
 			</div>
 		);
 	}
