@@ -90,7 +90,7 @@ class QuizSummary extends Component {
 						<div className="team-score">{ scoreStr }</div>
 					</div>
 
-					<div className="text-small">{ teamAway }</div>
+					<div className="text-small text-right">{ teamAway }</div>
 					<div className="team-logo-small right">
 						<img src={require(`../../static/images/team-${teamAway}.svg`)}/>
 					</div>
