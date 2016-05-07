@@ -13,6 +13,10 @@
   background: $brand-color;
   color: $text-color;
   box-shadow: 0 2px 3px -1px rgba(0, 0, 0, .4);
+
+  &.disabled {
+    background: $brand-color-opaque;
+  }
 }
 .share-btn {
   font-size: 2rem;

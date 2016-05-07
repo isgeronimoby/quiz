@@ -27,8 +27,11 @@ class DrawBet extends Component {
 	render() {
 		const { data: {name, picture, description, endDateTime}, points, onSubmit } = this.props;
 		const { betValue = points } = this.state;
+		const disabledBet = (betValue === 0);
+		const disabledBtnClass = disabledBet ? 'disabled' : '';
 		const dateFormatted = moment.utc(endDateTime).format('YYYY/MM');
 		const onChange = (v) => this.handelBetValueChange(v);
+		const onBtnClick = () => !disabledBet && onSubmit(betValue);
 
 		return (
 			<div className="draw-content">
@@ -56,7 +59,9 @@ class DrawBet extends Component {
 
 				<Slider max={ points } value={ betValue } step={ 1 } onChange={ onChange } />
 
-				<Button className="big-btn money-btn" onClick={() => onSubmit(betValue)} >Place points</Button>
+				<Button className={"big-btn money-btn " + disabledBtnClass} onClick={onBtnClick} >
+					Place points
+				</Button>
 
 				<Link className="big-btn share-btn" to="./draws" >Earn more points</Link>
 			</div>
