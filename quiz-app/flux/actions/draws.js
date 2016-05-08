@@ -195,7 +195,8 @@ export function postDrawBet(drawId, points) {
 			dispatch(postDrawBetSuccess(drawId));
 			dispatch(fetchProfileSuccess(json.User));
 		}).catch(({ Message: error = 'Invalid' }) => {
-			dispatch(postDrawBetError(drawId, error)); // TODO
+			dispatch(postDrawBetError(drawId, error));
+			throw error;
 		});
 	};
 }

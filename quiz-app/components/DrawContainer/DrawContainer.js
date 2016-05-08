@@ -25,6 +25,7 @@ class DrawContainer extends Component {
 		isLoggedIn: PropTypes.bool.isRequired,
 		openAuthPopup: PropTypes.func.isRequired,
 		postDrawBet: PropTypes.func.isRequired,
+		betError: PropTypes.string,
 	};
 
 	state = {
@@ -48,22 +49,24 @@ class DrawContainer extends Component {
 		if (!isLoggedIn) {
 			openAuthPopup();
 		} else {
-			postDrawBet(drawId, betPoints).then(() => {
-				this.nextView('success');
-			});
+			postDrawBet(drawId, betPoints)
+				.then(() => {
+					this.nextView('success');
+				})
+				.catch(() => {});
 		}
 	}
 
 
 	render() {
-		const { points, drawItem } = this.props;
+		const { points, drawItem, betError } = this.props;
 		const { view } = this.state;
 		const onBetSubmit = (betPoints) => this.submitBet(betPoints);
 		const onSuccessDissmiss = () => this.nextView('exit');
 
 		let View;
 		if (view === 'bet') {
-			View = <DrawBet points={ points } drawItem={ drawItem } onSubmit={ onBetSubmit }/>;
+			View = <DrawBet points={ points } drawItem={ drawItem } betError={ betError } onSubmit={ onBetSubmit }/>;
 		}
 		else if (view === 'success') {
 			View = <BetSuccess onDismiss={ onSuccessDissmiss }/>;
@@ -86,7 +89,8 @@ class DrawContainer extends Component {
 //
 const mapStateToProps = (state) => {
 	return {
-		isLoggedIn: state.auth.isLoggedIn
+		isLoggedIn: state.auth.isLoggedIn,
+		betError: state.draws.betError,
 	};
 };
 const mapDispatchToProps = (dispatch) => {

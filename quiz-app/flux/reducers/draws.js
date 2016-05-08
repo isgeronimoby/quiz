@@ -8,6 +8,10 @@ import {
 	FETCH_PLAYED_DRAWS,
 	FETCH_PLAYED_DRAWS_SUCCESS,
 	FETCH_PLAYED_DRAWS_ERROR,
+
+	POST_DRAW_BET,
+	POST_DRAW_BET_SUCCESS,
+	POST_DRAW_BET_ERROR,
 } from '../actions';
 
 
@@ -23,7 +27,10 @@ export function selectedDraw(state = null, action) {
 export function draws(state = {
 	isFetching: false,
 	didInvalidate: false,
-	list: []
+	list: [],
+
+	isBetting: false,
+	betError: undefined
 }, action) {
 	switch (action.type) {
 		// TODO - case INVALIDATE_DRAWS:
@@ -67,6 +74,26 @@ export function draws(state = {
 						...rest
 					};
 				})
+			};
+		// Betting
+		case POST_DRAW_BET:
+			return {
+				...state,
+				isBetting: true,
+				betError: undefined,
+			};
+		case SELECT_DRAW: // Select clears errors
+		case POST_DRAW_BET_SUCCESS:
+			return {
+				...state,
+				isBetting: false,
+				betError: undefined,
+			};
+		case POST_DRAW_BET_ERROR:
+			return {
+				...state,
+				isBetting: false,
+				betError: action.error,
 			};
 		default:
 			return state;

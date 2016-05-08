@@ -11,9 +11,10 @@ import './DrawBet.scss';
 class DrawBet extends Component {
 
 	static propTypes = {
-		drawItem: PropTypes.object.isRequired,
 		points: PropTypes.number.isRequired,
+		drawItem: PropTypes.object.isRequired,
 		onSubmit: PropTypes.func.isRequired,
+		betError: PropTypes.string,
 	};
 
 	state = {
@@ -21,15 +22,21 @@ class DrawBet extends Component {
 	};
 
 	handelBetValueChange(betValue) {
-		this.setState({ betValue });
+		this.setState({betValue});
 	}
 
 	render() {
-		const { drawItem: {prizeTitle, prizeImageUrl, prizeDescription, endDate}, points, onSubmit } = this.props;
+		const {
+			points,
+			drawItem: {prizeTitle, prizeImageUrl, prizeDescription, endDate},
+			onSubmit,
+			betError = ''
+			} = this.props;
 		const { betValue = points } = this.state;
 		const disabledBet = (betValue === 0);
 		const disabledBtnClass = disabledBet ? 'disabled' : '';
 		const dateFormatted = moment.utc(endDate).format('YYYY/MM');
+		const errorClass = betError ? 'reveal' : '';
 		const onChange = (v) => this.handelBetValueChange(v);
 		const onBtnClick = () => !disabledBet && onSubmit(betValue);
 
@@ -37,10 +44,10 @@ class DrawBet extends Component {
 			<div className="draw-content">
 				<div className="draw-details">
 					<div className="draw-details-image">
-						<img src={ prizeImageUrl } />
+						<img src={ prizeImageUrl }/>
 					</div>
 					<div className="draw-details-content">
-						<Countdown dateStr={ endDate } />
+						<Countdown dateStr={ endDate }/>
 						<h3 className="list-title">{ prizeTitle }</h3>
 						<h5 className="list-meta">{ dateFormatted }</h5>
 					</div>
@@ -57,13 +64,15 @@ class DrawBet extends Component {
 					<span> points</span>
 				</div>
 
-				<Slider max={ points } value={ betValue } step={ 1 } onChange={ onChange } />
+				<Slider max={ points } value={ betValue } step={ 1 } onChange={ onChange }/>
 
-				<Button className={"big-btn money-btn " + disabledBtnClass} onClick={onBtnClick} >
+				<div className={"bet-error " + errorClass}>{ betError }</div>
+
+				<Button className={"big-btn money-btn " + disabledBtnClass} onClick={onBtnClick}>
 					Place points
 				</Button>
 
-				<Link className="big-btn share-btn" to="./earn" >Earn more points</Link>
+				<Link className="big-btn share-btn" to="./earn">Earn more points</Link>
 			</div>
 		);
 	}
