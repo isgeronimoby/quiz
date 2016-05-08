@@ -6,9 +6,9 @@ import {
 	FETCH_ODDS,
 	FETCH_ODDS_SUCCESS,
 	FETCH_ODDS_ERROR,
-	POST_BET,
-	POST_BET_SUCCESS,
-	POST_BET_ERROR,
+	POST_QUIZ_BET,
+	POST_QUIZ_BET_SUCCESS,
+	POST_QUIZ_BET_ERROR,
 } from '../actions';
 
 
@@ -68,21 +68,21 @@ function quizDataById(state = {
 				odds: 0,
 				invalidOutcomes: action.invalidOutcomes,
 			};
-		case POST_BET:
+		case POST_QUIZ_BET:
 			return {
 				...state,
 				isBetting: true,
 				betSuccess: false,
 				betError: '',
 			};
-		case POST_BET_SUCCESS:
+		case POST_QUIZ_BET_SUCCESS:
 			return {
 				...state,
 				isBetting: false,
 				betSuccess: true,
 				betError: '',
 			};
-		case POST_BET_ERROR:
+		case POST_QUIZ_BET_ERROR:
 			return {
 				...state,
 				isBetting: false,
@@ -101,9 +101,9 @@ export function quizes(state = {}, action) {
 		case FETCH_ODDS:
 		case FETCH_ODDS_SUCCESS:
 		case FETCH_ODDS_ERROR:
-		case POST_BET:
-		case POST_BET_SUCCESS:
-		case POST_BET_ERROR:
+		case POST_QUIZ_BET:
+		case POST_QUIZ_BET_SUCCESS:
+		case POST_QUIZ_BET_ERROR:
 			return {
 				...state,
 				[action.matchId]: quizDataById(state[action.matchId], action)

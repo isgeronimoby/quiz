@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { requestAuth } from '../../flux/actions';
+import { requestAuth, postDrawBet } from '../../flux/actions';
 import DrawBet from '../DrawBet';
 import BetSuccess from '../BetSuccess'; // TODO - rename
 import DrawBetExit from '../DrawBetExit';
@@ -19,10 +19,12 @@ const HeaderOverlay = ({ title }) => {
 class DrawContainer extends Component {
 
 	static propTypes = {
-		data: PropTypes.object.isRequired,
+		points: PropTypes.number.isRequired,
+		drawItem: PropTypes.object.isRequired,
 		// from store
 		isLoggedIn: PropTypes.bool.isRequired,
 		openAuthPopup: PropTypes.func.isRequired,
+		postDrawBet: PropTypes.func.isRequired,
 	};
 
 	state = {
@@ -40,28 +42,31 @@ class DrawContainer extends Component {
 		this.setState({view});
 	}
 
-	submitBet(betValue) {
-		const { isLoggedIn, openAuthPopup } = this.props;
+	submitBet(betPoints) {
+		const { drawItem: { drawId }, isLoggedIn, openAuthPopup, postDrawBet } = this.props;
+
 		if (!isLoggedIn) {
 			openAuthPopup();
 		} else {
-			//TODO - post betValue
+			postDrawBet(drawId, betPoints).then(() => {
+				this.nextView('success');
+			});
 		}
 	}
 
 
 	render() {
-		const points = 220;
-		const { data } = this.props;
+		const { points, drawItem } = this.props;
 		const { view } = this.state;
-		const onSubmit = () => this.submitBet();
+		const onBetSubmit = (betPoints) => this.submitBet(betPoints);
+		const onSuccessDissmiss = () => this.nextView('exit');
 
 		let View;
 		if (view === 'bet') {
-			View = <DrawBet points={points} data={data} onSubmit={onSubmit }/>;
+			View = <DrawBet points={ points } drawItem={ drawItem } onSubmit={ onBetSubmit }/>;
 		}
 		else if (view === 'success') {
-			View = <BetSuccess onDismiss={() => this.nextView('exit') }/>;
+			View = <BetSuccess onDismiss={ onSuccessDissmiss }/>;
 		}
 		else if (view === 'exit') {
 			View = <DrawBetExit />
@@ -69,7 +74,7 @@ class DrawContainer extends Component {
 
 		return (
 			<div className="screen">
-				<HeaderOverlay title={ data.name }/>
+				<HeaderOverlay title={ drawItem.prizeTitle }/>
 				{ View }
 			</div>
 		);
@@ -87,6 +92,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		openAuthPopup: () => dispatch(requestAuth()),
+		postDrawBet: (drawId, points) => dispatch(postDrawBet(drawId, points)),
 	};
 };
 

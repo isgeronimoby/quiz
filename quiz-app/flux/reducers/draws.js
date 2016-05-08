@@ -1,4 +1,6 @@
 import {
+	SELECT_DRAW,
+
 	FETCH_DRAWS,
 	FETCH_DRAWS_SUCCESS,
 	FETCH_DRAWS_ERROR,
@@ -8,9 +10,16 @@ import {
 	FETCH_PLAYED_DRAWS_ERROR,
 } from '../actions';
 
-/*
- All Draws
- */
+
+export function selectedDraw(state = null, action) {
+	switch (action.type) {
+		case SELECT_DRAW:
+			return action.drawId;
+		default:
+			return state;
+	}
+}
+
 export function draws(state = {
 	isFetching: false,
 	didInvalidate: false,
@@ -35,7 +44,7 @@ export function draws(state = {
 		case FETCH_PLAYED_DRAWS_SUCCESS:
 			return {
 				...state,
-				// Adding betAmount, isWinner, ...
+				// Adding ticketsAmount, isWinner, ...
 				list: state.list.map((item) => {
 					const playedItem = action.payload.find(({ drawId }) => item.drawId === drawId);
 					if (playedItem) {

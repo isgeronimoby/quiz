@@ -62,7 +62,7 @@ class DrawBetExit extends Component {
 					Tweet & get + 10 pts
 				</SocialLink>
 
-				<Link className="big-btn share-btn" to="./draws">
+				<Link className="big-btn share-btn" to="./earn">
 					Earn more points
 				</Link>
 			</div>

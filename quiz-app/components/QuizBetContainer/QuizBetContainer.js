@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { requestAuth, postBet } from '../../flux/actions';
+import { requestAuth, postQuizBet } from '../../flux/actions';
 import QuizBet from '../QuizBet';
 import BetSuccess from '../BetSuccess';
 import Location from '../../lib/Location';
@@ -21,7 +21,7 @@ class QuizBetContainer extends Component {
 		betSuccess: PropTypes.bool.isRequired,
 		betError: PropTypes.string.isRequired,
 		openAuthPopup: PropTypes.func.isRequired,
-		postBet: PropTypes.func.isRequired,
+		postQuizBet: PropTypes.func.isRequired,
 	};
 
 	state = {
@@ -33,12 +33,12 @@ class QuizBetContainer extends Component {
 	}
 
 	submitBet(betPoints) {
-		const { params: {matchId},  isLoggedIn, answers, openAuthPopup, postBet } = this.props;
+		const { params: {matchId}, isLoggedIn, answers, openAuthPopup, postQuizBet } = this.props;
 
 		if (!isLoggedIn) {
 			openAuthPopup();
 		} else {
-			postBet(matchId, betPoints, answers).then(() => {
+			postQuizBet(matchId, betPoints, answers).then(() => {
 				this.nextView('success');
 			});
 		}
@@ -93,7 +93,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		openAuthPopup: () => dispatch(requestAuth()),
-		postBet: (matchId, points, answers) => dispatch(postBet(matchId, points, answers)),
+		postQuizBet: (matchId, points, answers) => dispatch(postQuizBet(matchId, points, answers)),
 	};
 };
 

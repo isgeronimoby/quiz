@@ -8,9 +8,9 @@ export const FETCH_QUIZ_ERROR = 'FETCH_QUIZ_ERROR';
 export const FETCH_ODDS = 'FETCH_ODDS';
 export const FETCH_ODDS_SUCCESS = 'FETCH_ODDS_SUCCESS';
 export const FETCH_ODDS_ERROR = 'FETCH_ODDS_ERROR';
-export const POST_BET = 'POST_BET';
-export const POST_BET_SUCCESS = 'POST_BET_SUCCESS';
-export const POST_BET_ERROR = 'POST_BET_ERROR';
+export const POST_QUIZ_BET = 'POST_QUIZ_BET';
+export const POST_QUIZ_BET_SUCCESS = 'POST_QUIZ_BET_SUCCESS';
+export const POST_QUIZ_BET_ERROR = 'POST_QUIZ_BET_ERROR';
 
 
 export function selectQuiz(matchId) {
@@ -116,32 +116,32 @@ export function fetchOdds(matchId, answers) {
 /*
  Bet
  */
-function postBetStart(matchId) {
+function postQuizBetStart(matchId) {
 	return {
-		type: POST_BET,
+		type: POST_QUIZ_BET,
 		matchId
 	};
 }
 
-function postBetSuccess(matchId) {
+function postQuizBetSuccess(matchId) {
 	return {
-		type: POST_BET_SUCCESS,
+		type: POST_QUIZ_BET_SUCCESS,
 		matchId,
 		receivedAt: Date.now()
 	};
 }
 
-function postBetError(matchId, error) {
+function postQuizBetError(matchId, error) {
 	return {
-		type: POST_BET_ERROR,
+		type: POST_QUIZ_BET_ERROR,
 		matchId,
 		error,
 	};
 }
 
-export function postBet(matchId, points, answers) {
+export function postQuizBet(matchId, points, answers) {
 	return (dispatch) => {
-		dispatch(postBetStart(matchId));
+		dispatch(postQuizBetStart(matchId));
 
 		const data = {
 			'MatchId': matchId,
@@ -155,9 +155,9 @@ export function postBet(matchId, points, answers) {
 			data
 		}).then((json) => {
 			dispatch(fetchProfileSuccess(json.User));
-			dispatch(postBetSuccess(matchId));
+			dispatch(postQuizBetSuccess(matchId));
 		}).catch(({ Message: error = 'Invalid' }) => {
-			dispatch(postBetError(matchId, error)); // TODO
+			dispatch(postQuizBetError(matchId, error)); // TODO
 		});
 	};
 }

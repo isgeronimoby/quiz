@@ -11,8 +11,8 @@ import './DrawBet.scss';
 class DrawBet extends Component {
 
 	static propTypes = {
+		drawItem: PropTypes.object.isRequired,
 		points: PropTypes.number.isRequired,
-		data: PropTypes.object.isRequired,
 		onSubmit: PropTypes.func.isRequired,
 	};
 
@@ -25,11 +25,11 @@ class DrawBet extends Component {
 	}
 
 	render() {
-		const { data: {name, picture, description, endDateTime}, points, onSubmit } = this.props;
+		const { drawItem: {prizeTitle, prizeImageUrl, prizeDescription, endDate}, points, onSubmit } = this.props;
 		const { betValue = points } = this.state;
 		const disabledBet = (betValue === 0);
 		const disabledBtnClass = disabledBet ? 'disabled' : '';
-		const dateFormatted = moment.utc(endDateTime).format('YYYY/MM');
+		const dateFormatted = moment.utc(endDate).format('YYYY/MM');
 		const onChange = (v) => this.handelBetValueChange(v);
 		const onBtnClick = () => !disabledBet && onSubmit(betValue);
 
@@ -37,17 +37,17 @@ class DrawBet extends Component {
 			<div className="draw-content">
 				<div className="draw-details">
 					<div className="draw-details-image">
-						<img src={ require(picture) } />
+						<img src={ prizeImageUrl } />
 					</div>
 					<div className="draw-details-content">
-						<Countdown dateStr={ endDateTime } />
-						<h3 className="list-title">{ name }</h3>
+						<Countdown dateStr={ endDate } />
+						<h3 className="list-title">{ prizeTitle }</h3>
 						<h5 className="list-meta">{ dateFormatted }</h5>
 					</div>
 				</div>
 
 				<SectionCollapsible>
-					<div className="bet-description">{ description }</div>
+					<div className="bet-description">{ prizeDescription }</div>
 				</SectionCollapsible>
 
 				<div className="bet-subtitle">How many points<br/> you want to place?</div>
