@@ -5,6 +5,7 @@ import { fixtures } from './fixtures.js';
 import { quizes, selectedQuiz } from './quiz.js';
 import { partners } from './partners.js';
 import { userList, userProfiles, selectedUserProfile } from './users.js';
+import { draws, selectedDraw } from './draws.js';
 
 
 const rootReducer = combineReducers({
@@ -14,6 +15,8 @@ const rootReducer = combineReducers({
 	fixtures,
 	quizes,
 	selectedQuiz,
+	draws,
+	selectedDraw,
 
 	// Somewhat shaky:
 	partners,

@@ -9,7 +9,7 @@ export const FETCH_PLAYED_DRAWS_SUCCESS = 'FETCH_PLAYED_DRAWS_SUCCESS';
 export const FETCH_PLAYED_DRAWS_ERROR = 'FETCH_PLAYED_DRAWS_ERROR';
 
 /*
- All fixtures
+ All draws
  */
 function fetchDrawsStart() {
 	return {
@@ -88,7 +88,7 @@ export function fetchDrawsIfNeeded() {
 }
 
 /*
- User completed fixtures
+ User completed draws
  */
 function fetchPlayedDrawsStart() {
 	return {
