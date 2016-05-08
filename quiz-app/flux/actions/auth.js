@@ -1,6 +1,8 @@
 import fetch, { apiPrefix, apiKey } from '../../lib/fetch.js';
 import { fetchProfileIfNeeded, fetchProfileSuccess } from './profile.js'
 
+export const TOGGLE_WELCOME = 'TOGGLE_WELCOME';
+
 export const REQUEST_AUTH = 'REQUEST_AUTH';
 export const AUTH_CANCEL = 'AUTH_CANCEL';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
@@ -13,6 +15,19 @@ export const POST_SIGNUP_ERROR = 'POST_SIGNUP_ERROR';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 
+/*
+ Welcome popup
+ */
+export function toggleWelcome(show) {
+	return {
+		type: TOGGLE_WELCOME,
+		show
+	}
+}
+
+/*
+ Common Auth
+ */
 export function requestAuth(authPopupView = 'signup') {
 	return {
 		type: REQUEST_AUTH,
@@ -35,7 +50,6 @@ export function successAuth() {
 /*
  Login
  */
-
 function postLoginStart() {
 	return {
 		type: POST_LOGIN
@@ -73,7 +87,6 @@ export function postLogin({email, password}) {
 /*
  Signup
  */
-
 function postSignupStart() {
 	return {
 		type: POST_SIGNUP
@@ -108,11 +121,9 @@ export function postSignup({name, email, password}) {
 	};
 }
 
-
 /*
  Logout
  */
-
 function postLogoutSuccess() {
 	return {
 		type: LOGOUT_SUCCESS,
@@ -134,15 +145,14 @@ export function postLogout() {
 /*
  Facebook
  */
-
 let windowRef = null;
 let windowTimer = null;
 function openPopup(url, onClose) {
-    if (windowRef == null || windowRef.closed) {
+	if (windowRef == null || windowRef.closed) {
 		windowRef = window.open(url, 'Facebook', 'resizable=yes,scrollbars=yes,status=yes');
 		windowRef.focus();
 		windowTimer = setInterval(() => {
-			if(windowRef.closed) {
+			if (windowRef.closed) {
 				clearInterval(windowTimer);
 				windowRef = null;
 				onClose();

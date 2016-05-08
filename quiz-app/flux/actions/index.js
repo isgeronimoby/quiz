@@ -4,12 +4,4 @@ export * from './users.js';
 export * from './partners.js';
 export * from './fixtures.js';
 export * from './quiz.js';
-
-export const TOGGLE_WELCOME = 'TOGGLE_WELCOME';
-
-export function toggleWelcome(show) {
-	return {
-		type: TOGGLE_WELCOME,
-		show
-	}
-}
+export * from './draws.js';
