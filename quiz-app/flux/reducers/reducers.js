@@ -19,6 +19,8 @@ import {
 	FETCH_FIXTURES,
 	FETCH_FIXTURES_SUCCESS,
 	//FETCH_FIXTURES_ERROR,
+	FETCH_PLAYED_FIXTURES_SUCCESS,
+	FETCH_PLAYED_FIXTURES_ERROR,
 
 	FETCH_USER_LIST,
 	FETCH_USER_LIST_SUCCESS,
@@ -58,7 +60,6 @@ function showWelcomePopup(state = false, action) {
 			return state;
 	}
 }
-
 
 /*
  Auth
@@ -184,21 +185,54 @@ function profile(state = {
  */
 function fixtures(state = {
 	isFetching: false,
+	didInvalidate: false,
 	list: []
 }, action) {
 	switch (action.type) {
+		// TODO - case INVALIDATE_FIXTURES:
 		case FETCH_FIXTURES:
 			return {
 				...state,
-				isFetching: true
+				isFetching: true,
+				didInvalidate: true,
 			};
 		case FETCH_FIXTURES_SUCCESS:
 			return {
 				...state,
 				isFetching: false,
+				didInvalidate: false,
 				list: action.payload,
 				lastUpdated: action.receivedAt,
 			};
+		case FETCH_PLAYED_FIXTURES_SUCCESS: {
+			return {
+				...state,
+				// Adding betAmount, isWinner, ...
+				list: state.list.map((item) => {
+					const playedItem = action.payload.find(({ matchId }) => item.matchId === matchId);
+					if (playedItem) {
+						return {
+							...item,
+							...playedItem
+						};
+					} else {
+						return item;
+					}
+				}),
+				lastUpdated: action.receivedAt,
+			};
+		}
+		case FETCH_PLAYED_FIXTURES_ERROR: {
+			return {
+				...state,
+				// Removing betAmount, isWinner
+				list: state.list.map(({ betAmount, isWinner, ...rest }) => {
+					return {
+						...rest
+					};
+				})
+			};
+		}
 		default:
 			return state;
 	}

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchProfileIfNeeded, fetchFixtures, fetchQuiz, selectQuiz, fetchOdds } from '../flux/actions';
+import { fetchProfileIfNeeded, fetchFixturesIfNeeded, fetchQuiz, selectQuiz, fetchOdds } from '../flux/actions';
 import QuizContainer from '../components/QuizContainer';
 
 
@@ -85,7 +85,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchProfile: () => dispatch(fetchProfileIfNeeded()),
-		fetchFixtures: () => dispatch(fetchFixtures()),
+		fetchFixtures: () => dispatch(fetchFixturesIfNeeded()),
 		fetchQuiz: (matchId) => dispatch(fetchQuiz(matchId)),
 		selectQuiz: (matchId) => dispatch(selectQuiz(matchId)),
 		fetchOdds: (matchId, answer) => dispatch(fetchOdds(matchId, answer)),

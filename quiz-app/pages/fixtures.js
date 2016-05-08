@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { fetchFixtures, fetchProfileIfNeeded } from '../flux/actions';
+import { fetchFixturesIfNeeded, fetchProfileIfNeeded, fetchPlayedFixtures } from '../flux/actions';
 import FixtureList from '../components/FixtureList';
 
 
@@ -10,13 +10,23 @@ class Fixtures extends Component {
 
 	static propTypes = {
 		fixtures: PropTypes.object.isRequired,
+		isLoggedIn: PropTypes.bool.isRequired,
 		fetchProfile: PropTypes.func.isRequired,
 		fetchFixtures: PropTypes.func.isRequired,
+		fetchPlayedFixtures: PropTypes.func.isRequired,
 	};
 
-	componentDidMount() {
-		this.props.fetchProfile();
+	async componentDidMount() {
 		this.props.fetchFixtures();
+		await this.props.fetchProfile();
+		this.props.fetchPlayedFixtures();
+	}
+
+	componentWillReceiveProps({isLoggedIn}) {
+		const authorized = !this.props.isLoggedIn && isLoggedIn;
+		if (authorized) {
+			this.props.fetchPlayedFixtures();
+		}
 	}
 
 	render() {
@@ -33,13 +43,15 @@ class Fixtures extends Component {
 //
 const mapStateToProps = (state) => {
 	return {
-		fixtures: state.fixtures
+		fixtures: state.fixtures,
+		isLoggedIn: state.auth.isLoggedIn,
 	};
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchProfile: () => dispatch(fetchProfileIfNeeded()), // top-level page needs profile
-		fetchFixtures: () => dispatch(fetchFixtures()),
+		fetchFixtures: () => dispatch(fetchFixturesIfNeeded()),
+		fetchPlayedFixtures: () => dispatch(fetchPlayedFixtures()),
 	};
 };
 

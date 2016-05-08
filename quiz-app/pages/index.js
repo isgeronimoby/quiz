@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { toggleWelcome, fetchFixtures } from '../flux/actions';
+import { toggleWelcome, fetchFixturesIfNeeded } from '../flux/actions';
 import Cookies from 'js-cookie';
 import Location from '../lib/Location';
 
@@ -72,7 +72,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchFixtures: () => dispatch(fetchFixtures()),
+		fetchFixtures: () => dispatch(fetchFixturesIfNeeded()),
 		openWelcomePopup: () => dispatch(toggleWelcome(true)),
 	};
 };
