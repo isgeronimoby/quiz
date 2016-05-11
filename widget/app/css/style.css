@@ -163,9 +163,9 @@
   font-size: 16px;
   line-height: 18px;
 }
-#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-section .dg-o-w-credits-text:after {
-  font-size: 12px;
-  content: ' credits';
+#dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-section .dg-o-w-credits-text:before {
+  font-weight: 400;
+  content: '£ ';
 }
 #dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-section .dg-o-w-side-image-floating {
   height: 100%;
@@ -188,11 +188,10 @@
   top: 0;
   width: 80px;
   height: 80px;
-  -webkit-transform: translateZ(0);
-          transform: translateZ(0);
   overflow: hidden;
   -webkit-transition: left 0.3s ease, top 0.3s ease, border-radius 0.3s ease;
   transition: left 0.3s ease, top 0.3s ease, border-radius 0.3s ease;
+  z-index: -1;
 }
 #dg-side-widget #dg-side-widget-wrapper .dg-side-widget-body .dg-side-section .dg-side-content {
   max-width: 95px;
@@ -329,6 +328,9 @@
   border-radius: 3px;
   -webkit-transform: translate(0, 0);
           transform: translate(0, 0);
+}
+.dg-o-w-body-fixed {
+  overflow: hidden !important;
 }
 #dg-o-w {
   opacity: 0;
@@ -1063,7 +1065,7 @@
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-content .dg-o-w-section .dg-o-w-section-content.dg-o-w-submenu-activities {
   top: 275px;
 }
-#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-draws-no-active {
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-draws-empty {
   position: absolute;
   width: 100%;
   top: 50%;
@@ -1072,10 +1074,10 @@
           transform: translate(-50%, -50%);
   text-align: center;
 }
-#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-draws-no-active h2 {
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-draws-empty h2 {
   margin-bottom: 10px;
 }
-#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-draws-no-active .dg-o-w-draws-refresh {
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-draws-empty .dg-o-w-draws-refresh {
   display: inline-block;
   background: url('imgs/refresh-icon.svg') no-repeat;
   background-size: cover;

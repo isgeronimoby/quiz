@@ -55,7 +55,10 @@ var DGW = function () {
                     },
                     shown: false,
                     settings: {
-                        hiddenDrawsShow: true
+                        draws: {
+                            showExpired: true,
+                            currentSubMenu: 'dg-o-w-show-all-draws'
+                        }
                     }
                 },
                 side: {

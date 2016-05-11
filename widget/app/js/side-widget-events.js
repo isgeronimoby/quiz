@@ -5,7 +5,6 @@ DGW.side.methods.initEvents = function(){
         DGW.global.launched = true;
     }
 
-    var initInterval;
     var wBody = DGW.side.elements.widgetBody;
     var resizerBtn = wBody.querySelector('.dg-side-widget-resizer');
     var ctas = Array.prototype.slice.call(wBody.querySelectorAll('.dg-side-cta, .dg-side-cta-floating'));
@@ -41,38 +40,15 @@ DGW.side.methods.initEvents = function(){
     });
 
     DGW.helpers.imagesResponsivePaths(wBody.querySelectorAll('[data-image]'));
-
-    // TODO: remove intervals usage, redundant
-    initInterval = window.setInterval(function(){
-        if (DGW.global.cache.last.prize) {
-            window.clearInterval(initInterval);
-            if (wBody.querySelector('.dg-side-prize'))
-                wBody.querySelector('.dg-side-prize').src = DGW.global.cache.last.prize.ImageUrl;
-            if (wBody.querySelector('#dg-side-widget-prize-desc'))
-                wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
-        }
-    }, 100);
 };
 
 DGW.side.methods.initSafariFixEvents = function(){
-    var initInterval;
     var wBody = DGW.side.elements.widgetBody;
     DGW.side.methods.showWidget();
 
     wBody.addEventListener('click', DGW.global.api.requests.safariFix);
 
     DGW.helpers.imagesResponsivePaths(wBody.querySelectorAll('[data-image]'));
-
-    // TODO: remove intervals usage, redundant
-    initInterval = window.setInterval(function(){
-        if (DGW.global.cache.last.prize) {
-            window.clearInterval(initInterval);
-            if (wBody.querySelector('.dg-side-prize'))
-                wBody.querySelector('.dg-side-prize').src = DGW.global.cache.last.prize.ImageUrl;
-            if (wBody.querySelector('#dg-side-widget-prize-desc'))
-                wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
-        }
-    }, 100);
 };
 
 DGW.side.methods.changeSideWidgetState = function(state) {

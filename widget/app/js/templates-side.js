@@ -3,7 +3,7 @@ DGW.templates.side.profileInfo ='<div class="dg-side-section">' +
                                     '<div class="dg-side-collapsed dg-side-floating-text"><p><span data-userstats-points-c class="dg-o-w-points-text">00</span></p><h5>Earn more</h5></div>' +
                                     '<div class="dg-side-content">' +
                                         '<h4 data-userstats-username>Name Surname Whatever</h4>' +
-                                        '<h6><span data-userstats-points-c class="dg-o-w-points-text">00</span><br/><span data-userstats-credits-c class="dg-o-w-credits-text">00</span></h6>' +
+                                        '<h6><span data-userstats-points-c class="dg-o-w-points-text">00</span><br/><span data-userstats-credits-c data-round="2" class="dg-o-w-credits-text">00</span></h6>' +
                                     '</div>' +
                                 '</div>' +
                                 '<div data-page="earn" class="dg-side-cta-floating"><span class="dg-side-collapsed">&rarr;</span><span class="dg-side-expanded">Earn more points</span></div>';

@@ -301,11 +301,6 @@ DGW.global.api.requests.getDraws = function(onSuccess, onError){
             DGW.global.cache.last.winner = DGW.main.cache.drawsList.filter(function(draw){return draw.Winner !== null})[0].Winner;
             DGW.global.cache.last.prize = DGW.main.cache.drawsList[0].Prize;
 
-            if (DGW.global.authorized) {
-                DGW.global.api.requests.getDrawEntries();
-            } else {
-                DGW.main.methods.drawsConstructor(DGW.main.cache);
-            }
             if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getDraws ', result.error);
@@ -319,7 +314,7 @@ DGW.global.api.requests.getDrawEntries = function(onSuccess, onError){
         if (result.status == 200) {
             DGW.helpers.console.info('getDrawEntries ', result.data);
             DGW.main.cache.drawsEntries = result.data.DrawEntries;
-            DGW.main.methods.drawsConstructor(DGW.main.cache);
+            //DGW.main.methods.drawsConstructor(DGW.main.cache);
             if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getDrawEntries ', result.error);

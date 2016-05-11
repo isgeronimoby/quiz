@@ -99,7 +99,7 @@ DGW.helpers.drawsTimerConstr = function(params){
 
     this.start = function(){
         updateTime();
-        timer = window.setInterval(updateTime, 1000);
+        timer = window.setInterval(updateTime, 100);
     };
 
     this.stop = function(){
@@ -111,6 +111,10 @@ DGW.helpers.drawsTimerConstr = function(params){
 };
 
 DGW.helpers.drawsTimer = new DGW.helpers.drawsTimerConstr([]);
+
+DGW.helpers.drawIsFinished = function (draw) {
+    return DGW.helpers.dateDiff(draw.EndDate) <= 0;
+};
 
 DGW.helpers.checkImagesForSrc = function(src) {
     if (src) {

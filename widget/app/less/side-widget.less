@@ -152,9 +152,9 @@
 				.dg-o-w-credits-text {
 					font-size: 16px;
 					line-height: 18px;
-					&:after {
-						font-size: 12px;
-						content: ' credits';
+					&:before {
+						font-weight: 400;
+						content: '£ ';
 					}
 				}
 
@@ -180,11 +180,12 @@
 					top: 0;
 					width: @dg-side-widget-collapsed-width;
 					height: @dg-side-widget-collapsed-width;
-					transform: translateZ(0);
 					overflow: hidden;
 					transition: left 0.3s ease,
-					top 0.3s ease,
-					border-radius 0.3s ease;
+								top 0.3s ease,
+								border-radius 0.3s ease;
+					z-index: -1;
+
 				}
 
 				.dg-side-content {

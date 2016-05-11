@@ -1,7 +1,10 @@
 DGW.global.offers.requests.shareOfferFb = function(offerId){
     DGW.helpers.centerWindowPopup(DGW.global.envPath +
     'offer/facebookshare?api_key=' + DGW.global.api.apiKey + '&offerid=' + offerId, 'fbWindow', 460, 340, function(){
-        DGW.global.api.requests.getUserOffers();
+        DGW.global.api.requests.getUserOffers(function(response){
+            DGW.main.methods.offersConstructor(response);
+            DGW.global.userStats.earnToday = response.TotalPointsReward;
+        });
     });
 };
 //
@@ -13,6 +16,10 @@ DGW.global.offers.requests.shareOfferTw = function(offerId, url, text, hashtags)
         'twWindow', 460, 340, function(){
         DGW.global.api.requests.completeOffer(offerId,
             function onSuccess(){
+                DGW.global.api.requests.getUserOffers(function(response){
+                    DGW.main.methods.offersConstructor(response);
+                    DGW.global.userStats.earnToday = response.TotalPointsReward;
+                });
                 DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Sharing on Twitter');
             });
     });
@@ -142,4 +149,8 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
             }
         }, 50);
     }
+};
+
+DGW.global.offers.requests.openExternalLink = function(src){
+    DGW.helpers.showFramedSrc(src);
 };

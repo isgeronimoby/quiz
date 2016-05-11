@@ -101,10 +101,9 @@ DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
                             '<label class="checkbox-slider">Show completed draws <input id="dg-o-w-show-expired" type="checkbox" class="ios-switch bigswitch" /><div><div></div></div></label>' +
                         '</div>' +
                         '<div class="dg-o-w-section-content">' +
-                            '<div class="dg-o-w-draws-active">' +
-                            '<ul class="dg-o-w-list-draws"></ul></div>' +
-                            '<div class="dg-o-w-draws-no-active"><h2>Sorry, but there are no draws running at the moment.</h2><br/><div class="dg-o-w-draws-refresh"></div></div>' +
-                            '<div class="dg-o-w-draws-no-in-draws"><h2>Seems like you don\'t playing any current draw :(</h2></div>' +
+                            '<div class="dg-o-w-draws-active"><ul class="dg-o-w-list-draws"></ul></div>' +
+                            /*'<div class="dg-o-w-draws-no-active"><h2>Sorry, but there are no draws running at the moment.</h2><br/><div class="dg-o-w-draws-refresh"></div></div>' +
+                            '<div class="dg-o-w-draws-no-in-draws"><h2>Seems like you don\'t playing any current draw :(</h2></div>' +*/
                         '</div>';
 
 DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' +

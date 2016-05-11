@@ -56,7 +56,10 @@ var DGW = function () {
                     },
                     shown: false,
                     settings: {
-                        hiddenDrawsShow: true
+                        draws: {
+                            showExpired: true,
+                            currentSubMenu: 'dg-o-w-show-all-draws'
+                        }
                     }
                 },
                 side: {
@@ -713,11 +716,6 @@ DGW.global.api.requests.getDraws = function(onSuccess, onError){
             DGW.global.cache.last.winner = DGW.main.cache.drawsList.filter(function(draw){return draw.Winner !== null})[0].Winner;
             DGW.global.cache.last.prize = DGW.main.cache.drawsList[0].Prize;
 
-            if (DGW.global.authorized) {
-                DGW.global.api.requests.getDrawEntries();
-            } else {
-                DGW.main.methods.drawsConstructor(DGW.main.cache);
-            }
             if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getDraws ', result.error);
@@ -731,7 +729,7 @@ DGW.global.api.requests.getDrawEntries = function(onSuccess, onError){
         if (result.status == 200) {
             DGW.helpers.console.info('getDrawEntries ', result.data);
             DGW.main.cache.drawsEntries = result.data.DrawEntries;
-            DGW.main.methods.drawsConstructor(DGW.main.cache);
+            //DGW.main.methods.drawsConstructor(DGW.main.cache);
             if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getDrawEntries ', result.error);
@@ -1082,7 +1080,7 @@ DGW.helpers.drawsTimerConstr = function(params){
 
     this.start = function(){
         updateTime();
-        timer = window.setInterval(updateTime, 1000);
+        timer = window.setInterval(updateTime, 100);
     };
 
     this.stop = function(){
@@ -1094,6 +1092,10 @@ DGW.helpers.drawsTimerConstr = function(params){
 };
 
 DGW.helpers.drawsTimer = new DGW.helpers.drawsTimerConstr([]);
+
+DGW.helpers.drawIsFinished = function (draw) {
+    return DGW.helpers.dateDiff(draw.EndDate) <= 0;
+};
 
 DGW.helpers.checkImagesForSrc = function(src) {
     if (src) {
@@ -1338,7 +1340,7 @@ DGW.templates.side.profileInfo ='<div class="dg-side-section">' +
                                     '<div class="dg-side-collapsed dg-side-floating-text"><p><span data-userstats-points-c class="dg-o-w-points-text">00</span></p><h5>Earn more</h5></div>' +
                                     '<div class="dg-side-content">' +
                                         '<h4 data-userstats-username>Name Surname Whatever</h4>' +
-                                        '<h6><span data-userstats-points-c class="dg-o-w-points-text">00</span><br/><span data-userstats-credits-c class="dg-o-w-credits-text">00</span></h6>' +
+                                        '<h6><span data-userstats-points-c class="dg-o-w-points-text">00</span><br/><span data-userstats-credits-c data-round="2" class="dg-o-w-credits-text">00</span></h6>' +
                                     '</div>' +
                                 '</div>' +
                                 '<div data-page="earn" class="dg-side-cta-floating"><span class="dg-side-collapsed">&rarr;</span><span class="dg-side-expanded">Earn more points</span></div>';
@@ -1461,10 +1463,9 @@ DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
                             '<label class="checkbox-slider">Show completed draws <input id="dg-o-w-show-expired" type="checkbox" class="ios-switch bigswitch" /><div><div></div></div></label>' +
                         '</div>' +
                         '<div class="dg-o-w-section-content">' +
-                            '<div class="dg-o-w-draws-active">' +
-                            '<ul class="dg-o-w-list-draws"></ul></div>' +
-                            '<div class="dg-o-w-draws-no-active"><h2>Sorry, but there are no draws running at the moment.</h2><br/><div class="dg-o-w-draws-refresh"></div></div>' +
-                            '<div class="dg-o-w-draws-no-in-draws"><h2>Seems like you don\'t playing any current draw :(</h2></div>' +
+                            '<div class="dg-o-w-draws-active"><ul class="dg-o-w-list-draws"></ul></div>' +
+                            /*'<div class="dg-o-w-draws-no-active"><h2>Sorry, but there are no draws running at the moment.</h2><br/><div class="dg-o-w-draws-refresh"></div></div>' +
+                            '<div class="dg-o-w-draws-no-in-draws"><h2>Seems like you don\'t playing any current draw :(</h2></div>' +*/
                         '</div>';
 
 DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' +
@@ -1606,6 +1607,7 @@ DGW.main.elements.frameHolder.querySelector('.dg-o-w-back-btn').addEventListener
 DGW.main.methods.showWidget = function(){
     DGW.helpers.zeroTimeout(function(){ DGW.main.shown = true; }); // Fixing IE button click
     DGW.helpers.removeClass(DGW.main.elements.widget, 'hiding');
+    DGW.helpers.addClass(DGW.global.elements.documentBody, 'dg-o-w-body-fixed');
     DGW.global.elements.documentBody.appendChild(DGW.main.elements.widget);
     if (DGW.main.currentState === '') {
         DGW.main.methods.changeMainState('earn');
@@ -1618,6 +1620,7 @@ DGW.main.methods.hideWidget = function(){
     DGW.helpers.addClass(DGW.main.elements.widget, 'hiding');
     setTimeout(function(){
         DGW.global.elements.documentBody.removeChild(DGW.main.elements.widget);
+        DGW.helpers.removeClass(DGW.global.elements.documentBody, 'dg-o-w-body-fixed');
     }, 310);
 };
 
@@ -1648,7 +1651,11 @@ DGW.global.methods.authorize = function(){
         DGW.main.methods.changeMainState('profile');
         // ********
     } else if (DGW.main.currentState === 'draws') {
-        DGW.global.api.requests.getDraws();
+        DGW.global.api.requests.getDraws(function(){
+            DGW.global.api.requests.getDrawEntries(function(){
+                DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+            });
+        });
     } else if (DGW.main.currentState === 'earn') {
         DGW.global.api.requests.getUserOffers();
     }
@@ -1701,7 +1708,15 @@ DGW.global.methods.init = function(){
     DGW.global.methods.userStatsReset();
 
     // requesting basic apis to get some cached data
-    DGW.global.api.requests.getDraws();
+    DGW.global.api.requests.getDraws(function(){
+        if (DGW.global.authorized) {
+            DGW.global.api.requests.getDrawEntries(function(){
+                DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+            });
+        } else {
+            DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+        }
+    });
     DGW.global.api.requests.getActions();
 
     //Initializing or checking user
@@ -1724,7 +1739,10 @@ DGW.main.methods.hideNotificationBar = function(){
 DGW.global.offers.requests.shareOfferFb = function(offerId){
     DGW.helpers.centerWindowPopup(DGW.global.envPath +
     'offer/facebookshare?api_key=' + DGW.global.api.apiKey + '&offerid=' + offerId, 'fbWindow', 460, 340, function(){
-        DGW.global.api.requests.getUserOffers();
+        DGW.global.api.requests.getUserOffers(function(response){
+            DGW.main.methods.offersConstructor(response);
+            DGW.global.userStats.earnToday = response.TotalPointsReward;
+        });
     });
 };
 //
@@ -1736,6 +1754,10 @@ DGW.global.offers.requests.shareOfferTw = function(offerId, url, text, hashtags)
         'twWindow', 460, 340, function(){
         DGW.global.api.requests.completeOffer(offerId,
             function onSuccess(){
+                DGW.global.api.requests.getUserOffers(function(response){
+                    DGW.main.methods.offersConstructor(response);
+                    DGW.global.userStats.earnToday = response.TotalPointsReward;
+                });
                 DGW.main.methods.notificationConstructor('Cool, you\'ve just earned more points for Sharing on Twitter');
             });
     });
@@ -1866,6 +1888,10 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
         }, 50);
     }
 };
+
+DGW.global.offers.requests.openExternalLink = function(src){
+    DGW.helpers.showFramedSrc(src);
+};
 DGW.side.methods.initEvents = function(){
     if (!DGW.global.launched) {
         // Showing side widget
@@ -1873,7 +1899,6 @@ DGW.side.methods.initEvents = function(){
         DGW.global.launched = true;
     }
 
-    var initInterval;
     var wBody = DGW.side.elements.widgetBody;
     var resizerBtn = wBody.querySelector('.dg-side-widget-resizer');
     var ctas = Array.prototype.slice.call(wBody.querySelectorAll('.dg-side-cta, .dg-side-cta-floating'));
@@ -1909,38 +1934,15 @@ DGW.side.methods.initEvents = function(){
     });
 
     DGW.helpers.imagesResponsivePaths(wBody.querySelectorAll('[data-image]'));
-
-    // TODO: remove intervals usage, redundant
-    initInterval = window.setInterval(function(){
-        if (DGW.global.cache.last.prize) {
-            window.clearInterval(initInterval);
-            if (wBody.querySelector('.dg-side-prize'))
-                wBody.querySelector('.dg-side-prize').src = DGW.global.cache.last.prize.ImageUrl;
-            if (wBody.querySelector('#dg-side-widget-prize-desc'))
-                wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
-        }
-    }, 100);
 };
 
 DGW.side.methods.initSafariFixEvents = function(){
-    var initInterval;
     var wBody = DGW.side.elements.widgetBody;
     DGW.side.methods.showWidget();
 
     wBody.addEventListener('click', DGW.global.api.requests.safariFix);
 
     DGW.helpers.imagesResponsivePaths(wBody.querySelectorAll('[data-image]'));
-
-    // TODO: remove intervals usage, redundant
-    initInterval = window.setInterval(function(){
-        if (DGW.global.cache.last.prize) {
-            window.clearInterval(initInterval);
-            if (wBody.querySelector('.dg-side-prize'))
-                wBody.querySelector('.dg-side-prize').src = DGW.global.cache.last.prize.ImageUrl;
-            if (wBody.querySelector('#dg-side-widget-prize-desc'))
-                wBody.querySelector('#dg-side-widget-prize-desc').innerHTML = DGW.global.cache.last.prize.Title;
-        }
-    }, 100);
 };
 
 DGW.side.methods.changeSideWidgetState = function(state) {
@@ -2027,7 +2029,15 @@ DGW.main.methods.changeMainState = function(state){
         case 'draws':
             //TODO: work on this further
             if (DGW.main.currentState !== 'draws') {
-                DGW.global.api.requests.getDraws();
+                DGW.global.api.requests.getDraws(function(){
+                    if (DGW.global.authorized) {
+                        DGW.global.api.requests.getDrawEntries(function(){
+                            DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+                        });
+                    } else {
+                        DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+                    }
+                });
                 DGW.main.methods.drawSubmenuReset();
             }
             DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.drawsMain);
@@ -2257,17 +2267,8 @@ DGW.main.methods.initEvents = function () {
 
 //Draws page clicks
     DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired').addEventListener('change', function (ev) {
-        if (this.checked) {
-            DGW.helpers.addClass(DGW.main.elements.widgetBody, 'draws-expired');
-            DGW.main.settings.hiddenDrawsShow = true;
-        } else {
-            DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'draws-expired');
-            DGW.main.settings.hiddenDrawsShow = false;
-        }
-    });
-
-    DGW.main.elements.pages.drawsMain.querySelector('.dg-o-w-draws-refresh').addEventListener('click', function(){
-        DGW.global.api.requests.getDraws();
+        DGW.main.settings.draws.showExpired = this.checked;
+        DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
     });
 
 //Draw filters
@@ -2286,17 +2287,24 @@ DGW.main.methods.initEvents = function () {
             hiddenDrawsChkBox.parentNode.style.display = 'none';
         }
         function showFinishedDraws(){
-            if (DGW.main.settings.hiddenDrawsShow) {
+            if (DGW.main.settings.draws.showExpired) {
                 hiddenDrawsChkBox.checked = true;
                 DGW.helpers.addClass(DGW.main.elements.widgetBody, 'draws-expired');
             }
             hiddenDrawsChkBox.parentNode.style.display = 'block';
         }
 
+        DGW.main.methods.changeDrawsSubmenu = function(state){
+            submenuItems.filter(function(item){
+                return item.id == state;
+            })[0].click();
+        };
+
         submenuItems.forEach(function(item){
             item.addEventListener('click', function(){
                 removeActive();
                 DGW.helpers.addClass(this, 'dg-o-w-active');
+                DGW.main.settings.draws.currentSubMenu = this.id;
                 switch (this.id) {
                     case 'dg-o-w-show-all-draws':
                         DGW.main.cache.drawsList.sort(function(a,b){
@@ -2389,7 +2397,7 @@ DGW.main.methods.fillDefaultValues = function(){
         }
     }, 50);
 
-    if (DGW.main.settings.hiddenDrawsShow) {
+    if (DGW.main.settings.draws.showExpired) {
         hiddenDrawsChkBox.checked = true;
         DGW.helpers.addClass(DGW.main.elements.widgetBody, 'draws-expired');
     } else {
@@ -2459,14 +2467,20 @@ DGW.main.methods.profileSetData = function(data, draw) {
     DGW.global.userStats.facebookId = data.FacebookId;
 
     points.confirmed.forEach(function(point){
-        if (point) point.innerHTML = data.Wallet.PointsConfirmed;
+        if (point) {
+            point.innerHTML = data.Wallet.PointsConfirmed;
+        }
     });
     points.pending.forEach(function(point){
         if (point) point.innerHTML = data.Wallet.PointsPending;
     });
 
     credits.confirmed.forEach(function(credit){
-        if (credit) credit.innerHTML = data.Wallet.CreditsConfirmed;
+        if (credit) {
+            if (credit.getAttribute('data-round'))
+                credit.innerHTML = data.Wallet.PointsConfirmed.toFixed(credit.getAttribute('data-round'));
+            else credit.innerHTML = data.Wallet.PointsConfirmed;
+        }
     });
     credits.pending.forEach(function(credit){
         if (credit) credit.innerHTML = data.Wallet.CreditsPending;
@@ -2589,82 +2603,136 @@ DGW.main.methods.updateBadgesInfo = function(){
 };
 
 DGW.main.methods.gamesConstructor = function(){
-    var gamesList = DGW.main.elements.pages.drawsMain.querySelector('.dg-o-w-list-draws');
+    var dp = DGW.main.elements.pages.drawsMain;
+    var dpCont = dp.querySelector('.dg-o-w-section-content');
+    var gamesList = dp.querySelector('.dg-o-w-list-draws');
     gamesList.innerHTML = '';
-    var li = document.createElement('li');
-    li.innerHTML = '<h2>Sorry, but there are currently no games</h2>';
-    gamesList.appendChild(li);
 
-    DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'no-active-draws');
-    DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'no-in-current-draws');
+    var emptyMessageEl = document.createElement('div');
+    DGW.helpers.addClass(emptyMessageEl, 'dg-o-w-draws-empty');
+
+    if (dpCont.children.length > 1) dpCont.removeChild(dpCont.childNodes[1]);
+
+    emptyMessageEl.innerHTML = '<h2>Hi, we are glad to see you here, games will be available very soon!</h2></div>';
+    dpCont.appendChild(emptyMessageEl);
 };
 
 DGW.main.methods.drawsConstructor = function(cacheObj, _context){
-    var drawsList = DGW.main.elements.pages.drawsMain.querySelector('.dg-o-w-list-draws');
+    var dp = DGW.main.elements.pages.drawsMain;
+    var dpCont = dp.querySelector('.dg-o-w-section-content');
+    var drawsList = dp.querySelector('.dg-o-w-list-draws');
     drawsList.innerHTML = '';
     DGW.global.activeDrawsExist = false;
+    var showExpiredDraws = DGW.main.settings.draws.showExpired;
+    var draws = [];
+
+    var emptyMessage = '';
+    var emptyMessageEl = document.createElement('div');
+    DGW.helpers.addClass(emptyMessageEl, 'dg-o-w-draws-empty');
+
+    if (dpCont.children.length > 1) dpCont.removeChild(dpCont.childNodes[1]);
+
+
+    function filterDrawsByChkBox(showActiveOnly){
+        if (!showExpiredDraws || showActiveOnly) {
+            draws = cacheObj.drawsList.filter(function (draw) {
+                return !DGW.helpers.drawIsFinished(draw);
+            });
+        } else {
+            draws = cacheObj.drawsList;
+        }
+    }
+
     if (cacheObj) {
-        cacheObj.drawsList.forEach(function (draw) {
+        if (!_context || _context == 'my-draws') filterDrawsByChkBox();
+        else filterDrawsByChkBox(true);
+
+        if (draws.length == 0) {
+            if (!_context) {
+                emptyMessage = 'Sorry, but there are no draws running at the moment.';
+            } else {
+                if (_context == 'close-to-finish') {
+                    emptyMessage = 'Sorry, but seems like there are no draws that will be completed soon.';
+                }
+                if (_context == 'my-draws') {
+                    emptyMessage = 'Hey, seems like you are not taking a part in any of running draws';
+                }
+            }
+            emptyMessageEl.innerHTML = '<h2>' + emptyMessage + '</h2><br/><div class="dg-o-w-draws-refresh"></div>';
+            emptyMessageEl.querySelector('.dg-o-w-draws-refresh').addEventListener('click', function(){
+                DGW.global.api.requests.getDraws(function(){
+                    if (DGW.global.authorized) {
+                        DGW.global.api.requests.getDrawEntries(function(){
+                            DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+                        });
+                    } else {
+                        DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+                    }
+                });
+            });
+
+            dpCont.appendChild(emptyMessageEl);
+        }
+
+
+        draws.forEach(function (draw) {
+
             var li = document.createElement('li');
-            //li.id = draw.DrawId;
-            //li.setAttribute('data-end-date', draw.EndDate);
-            var drawEntry = cacheObj.drawsEntries.filter(function(de){
-                return de.DrawId == draw.DrawId;
-            })[0];
+            var drawEntry = cacheObj.drawsEntries.filter(function (de) {
+                    return de.DrawId == draw.DrawId;
+                })[0] || null;
+            var winnerExist = draw.Winner;
+            var winnerHtml = '',
+                drawEntryHtml = '',
+                countdownHtml = '&nbsp;';
+            var activeDraw = false;
+
             if (drawEntry) {
                 var ticketsInDraw = drawEntry.TicketsAmount;
+                var secondLineClass = (winnerExist ? ' dg-o-w-draw-bet-second' : '');
+                drawEntryHtml = '<div class="dg-o-w-draw-bet' + secondLineClass + '"><p>You\'ve placed: <span>' + ticketsInDraw + '</span> points</p></div>';
+                if (drawEntry.IsWinner) {
+                    DGW.helpers.addClass(li, 'winner');
+                    if (drawEntry.NeedToClaimPrize) {
+                        DGW.helpers.addClass(li, 'claim-prize');
+                    }
+                }
             }
-            //DGW.helpers.console.log(drawEntry);
+
+            if (winnerExist) {
+                winnerHtml = '<div class="dg-o-w-draw-list-winner"><img src="' + draw.Winner.ImageUrl + '" />' +
+                '<p>' + draw.Winner.UserName + ' has won</p></div>';
+            }
+
+            if (DGW.helpers.drawIsFinished(draw)) {
+                DGW.helpers.addClass(li, 'expired');
+                countdownHtml = 'Finished ' + DGW.helpers.getDateFromNow(draw.EndDate);
+            } else {
+                activeDraw = true;
+            }
+
             li.innerHTML = '<div class="dg-o-w-draw">' +
                                 '<div class="dg-o-w-draw-image-holder">' +
                                     '<img src="' + draw.Prize.ImageUrl + '" />' +
                                 '</div>' +
                                 '<div class="dg-o-w-draw-text">' +
-                                    //'<h2>' + draw.Prize.Title + '</h2>' +
-                                    '<h2 class="dg-o-w-draw-countdown">' + '&nbsp;' + '</h2>' +
+                                    '<h2 class="dg-o-w-draw-countdown">' + countdownHtml + '</h2>' +
                                     '<p>' + draw.Prize.Description + '</p>' +
                                 '</div>' +
-                            ((draw.Winner) ?
-                                '<div class="dg-o-w-draw-list-winner"><img src="' + draw.Winner.ImageUrl + '" /><p>' + draw.Winner.UserName + ' has won</p></div>' : '') +
-                            ((drawEntry != undefined) ?
-                                '<div class="dg-o-w-draw-bet ' + ((draw.Winner) ? 'dg-o-w-draw-bet-second' : '') + '"><p>You\'ve placed: <span>' + ticketsInDraw + '</span> points</p></div>' : '') +
-                                //'<div class="dg-o-w-draw-connections"><span>2</span> of your friends</div>' +
+                                winnerHtml + drawEntryHtml +
                             '</div>';
-            if (!DGW.helpers.drawsTimer.push({dt:draw.EndDate, elem:li.querySelector('.dg-o-w-draw-countdown')})) {
-                DGW.helpers.addClass(li, 'expired');
-                li.querySelector('.dg-o-w-draw-countdown').innerHTML = 'Finished ' + DGW.helpers.getDateFromNow(draw.EndDate);
-            } else {
-                DGW.global.activeDrawsExist = true;
-            }
-            if (drawEntry && drawEntry.IsWinner) {
-                DGW.helpers.addClass(li, 'winner');
-                if (drawEntry.NeedToClaimPrize) {
-                    DGW.helpers.addClass(li, 'claim-prize');
-                }
-            }
-            li.addEventListener('click', function(){
+
+            if (activeDraw) DGW.helpers.drawsTimer.push({
+                dt: draw.EndDate,
+                elem: li.querySelector('.dg-o-w-draw-countdown')
+            });
+
+            li.addEventListener('click', function () {
                 DGW.main.methods.singleDrawConstructor(draw.DrawId);
             });
+
             drawsList.appendChild(li);
         });
-        DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'no-active-draws');
-        DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'no-in-current-draws');
-        DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'close-to-finish');
-        if (DGW.global.activeDrawsExist) {
-            if (_context && _context == 'close-to-finish') {
-                DGW.helpers.addClass(DGW.main.elements.widgetBody, 'close-to-finish');
-            }
-        } else {
-            if (_context && _context == 'my-draws') {
-                DGW.helpers.addClass(DGW.main.elements.widgetBody, 'no-in-current-draws');
-                //DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'no-active-draws');
-            } else if (_context && _context == 'close-to-finish') {
-                DGW.helpers.addClass(DGW.main.elements.widgetBody, 'close-to-finish');
-            } else {
-                //DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'no-in-current-draws');
-                DGW.helpers.addClass(DGW.main.elements.widgetBody, 'no-active-draws');
-            }
-        }
     }
 
     DGW.main.methods.setRewardedActions();
@@ -2679,8 +2747,6 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
         return draws.DrawId === drawId;
     })[0];
 
-    var drawState = 'active';
-
     var el = DGW.main.elements.pages.singleDraw;
     var prizeSect = '<div class="dg-o-w-draw-left-side">' +
                         '<div class="prize-image"><div><img src="' + draw.Prize.ImageUrl + '" /></div></div>' +
@@ -2694,6 +2760,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
         (!(drawEntry != undefined && drawEntry.IsWinner) ? /*'Minimum bet is 10'*/ '' : 'You\'ve placed ' + drawEntry.TicketsAmount + ' points and won!') +
                             '</div>' +
                     '</div>';
+    var drawnState = '';
 
     var playersInDraw = document.createElement('div');
         playersInDraw.className = 'dg-o-w-users-done';
@@ -2709,15 +2776,17 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
         // Draw is finished
         if (draw.IsDrawn == false) {
             // Draw has been finished and not drawn
-            drawState = 'not-drawn';
+            drawnState = '<p>Winner will be announced very soon!</p>';
             DGW.helpers.console.info('isdrawn: ', draw.IsDrawn);
         } else {
             // Draw has been finished and drawn
-            drawState = 'drawn';
             DGW.helpers.console.info(draw.IsDrawn);
             if (draw.Winner == null) {
                 // No one has participated in the draw
-                drawState = 'drawn-no-players';
+                drawnState = '<p>Unfortunately, no one has participated in this Draw</p>';
+            } else {
+                drawnState = '<div class="dg-o-w-draw-winner"><img src="' + (draw.Winner.ImageUrl || DGW.helpers.checkImagesForSrc()) + '" />' +
+                            '<p>' + draw.Winner.UserName + ' has won this draw. Our congratulations!</p></div>';
             }
         }
     }
@@ -2732,69 +2801,49 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                                 '<p>' + draw.Prize.Description + '</p>' +
                                 '<div class="dg-o-w-draw-bet-info dg-o-w-draw-auth-show">' +
                                     '<div class="dg-o-w-your-bet dg-o-w-points-bet"><p>You\'ve placed <span data-draw-betpoints>' + ((drawEntry) ? drawEntry.TicketsAmount : 0 ) + '</span> points</p></div>' +
-                                    // playersInDraw +
                                 '</div>' +
                                 ((DGW.helpers.dateDiff(draw.EndDate) > 0) ? '<h2 class="dg-o-w-draw-login-show">Please, log in to play the draw</h2>' : '') +
                                 '<div class="dg-o-w-draw-bet-action dg-o-w-draw-auth-show">' +
-                                    '<h5>How much do you want to place?</h5>' +
+                                    '<h4>How much do you want to place?</h4>' +
                                     '<form id="bet-form" class="dg-o-w-one-field-form">' +
                                         '<input type="number" min="1" max="1000" placeholder="50"/>' +
                                         '<input class="btn-dg-o-w btn-dg-o-w-brand" type="submit" value="Place points" />' +
                                     '</form>' +
                                     '<div id="dg-o-w-get-points-btn" class="btn-dg-o-w btn-dg-o-w-brand-l">Get additional points</div>' +
                                 '</div>' +
-                                    ((draw.Winner !== null) ?
-                                        '<div class="dg-o-w-draw-winner"><img src="' + (draw.Winner.ImageUrl || DGW.helpers.checkImagesForSrc()) + '" /><p>' + draw.Winner.UserName + ' has won this draw. Our congratulations!</p></div>' :
-                                    '') +
-                                    ((drawState == 'not-drawn') ? '<p>Winner will be announced very soon!</p>' : '') +
-                                    ((drawState == 'drawn-no-players') ? '<p>Unfortunately, no one has participated in this Draw</p>' : '') +
+                                    drawnState +
                                 shareSect +
                             '</div>' +
                         '</div>' +
                     '</div>';
 
     if (drawEntry && drawEntry.IsWinner) {
+        var claimPrizeHtml = '';
         if (drawEntry.NeedToClaimPrize == true) {
-            el.innerHTML = submenu +
-            '<div class="dg-o-w-section-content">' +
-                '<div class="dg-o-w-single-draw">' +
-                    prizeSect +
-                    '<div class="dg-o-w-draw-right-side won">' +
-                        '<h2>Congratulations, you\'ve won ' + draw.Prize.Title + '!</h2>' +
-                        '<p>' + draw.Prize.Description + '</p>' +
-                    '<div>' +
-                    '<h2 class="show-claimed">You\'ve already claimed your prize!</h2>' +
-                    '<p class="hide-claimed">Put your address to get the prize</p>' +
-                    '<form id="claim-prize" class="dg-o-w-form hide-claimed">' +
-                        //'<select><option disabled>Select your country</option><option>UK</option><option>Ireland</option></select>' +
-                        '<input type="text" name="Address1" placeholder="Address line 1" />' +
-                        '<input type="text" name="Address2" placeholder="Address line 2" />' +
-                        '<input type="text" name="County" placeholder="County" />' +
-                        '<input type="text" name="Postcode" placeholder="Postcode" />' +
-                        '<input class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large" type="submit" value="Submit " />' +
-                    '</form>' +
-                '</div>' +
-                shareSect +
-            '</div>' +
-        '</div>' +
-    '</div>';
+            claimPrizeHtml ='<p class="hide-claimed">Put your address to get the prize</p>' +
+                            '<form id="claim-prize" class="dg-o-w-form hide-claimed">' +
+                                '<input type="text" name="Address1" placeholder="Address line 1" />' +
+                                '<input type="text" name="Address2" placeholder="Address line 2" />' +
+                                '<input type="text" name="County" placeholder="County" />' +
+                                '<input type="text" name="Postcode" placeholder="Postcode" />' +
+                                '<input class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large" type="submit" value="Submit " />' +
+                            '</form>';
         } else {
-            el.innerHTML = submenu +
-            '<div class="dg-o-w-section-content">' +
-                '<div class="dg-o-w-single-draw">' +
-                    prizeSect +
-                    '<div class="dg-o-w-draw-right-side won">' +
+            claimPrizeHtml ='<h2>You\'ve already claimed your prize!</h2>';
+        }
+        el.innerHTML = submenu +
+        '<div class="dg-o-w-section-content">' +
+            '<div class="dg-o-w-single-draw">' +
+                prizeSect +
+                '<div class="dg-o-w-draw-right-side won">' +
                     '<h2>Congrats, you\'ve won!!!</h2>' +
                     '<h3>' + draw.Prize.Title + '</h3>' +
                     '<p>' + draw.Prize.Description + '</p>' +
-                    '<div>' +
-                        '<h2>You\'ve already claimed your prize!</h2>' +
-                    '</div>' +
+                    '<div>' + claimPrizeHtml + '</div>' +
                     shareSect +
-                    '</div>' +
                 '</div>' +
-            '</div>';
-        }
+            '</div>' +
+        '</div>';
     }
 
     if (el.querySelector('.dg-o-w-draw-bet-info')) {
@@ -2848,7 +2897,12 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                     betBtn.disabled = false;
                     DGW.main.methods.notificationConstructor('We\'ve received your ' + pointsToBet + ' points. Bet more!');
                     that.querySelector('input[type=number]').value = '';
-                    DGW.global.api.requests.getDrawEntries();
+
+                    DGW.main.cache.drawsEntries.forEach(function(de){
+                        if (de.DrawId == result.DrawEntry.DrawId) de.TicketsAmount = result.DrawEntry.TicketsAmount;
+                    });
+                    DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+
                     DGW.main.methods.profileSetData(result.User, result.DrawEntry);
                 }, function onError(result){
                     betBtn.disabled = false;
@@ -3025,8 +3079,6 @@ DGW.main.methods.offersConstructor = function(offers) {
     DGW.global.userStats.earnToday = offers.TotalPointsReward;
     offersSubmenu.innerHTML = '';
     offersSponsors.innerHTML = '';
-
-    //lists.categories.push('All');
 
     lists.offers.forEach(function(offer){
         offer = offer.Offer;

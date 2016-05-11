@@ -51,7 +51,15 @@ DGW.main.methods.changeMainState = function(state){
         case 'draws':
             //TODO: work on this further
             if (DGW.main.currentState !== 'draws') {
-                DGW.global.api.requests.getDraws();
+                DGW.global.api.requests.getDraws(function(){
+                    if (DGW.global.authorized) {
+                        DGW.global.api.requests.getDrawEntries(function(){
+                            DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+                        });
+                    } else {
+                        DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+                    }
+                });
                 DGW.main.methods.drawSubmenuReset();
             }
             DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.drawsMain);
@@ -281,17 +289,8 @@ DGW.main.methods.initEvents = function () {
 
 //Draws page clicks
     DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired').addEventListener('change', function (ev) {
-        if (this.checked) {
-            DGW.helpers.addClass(DGW.main.elements.widgetBody, 'draws-expired');
-            DGW.main.settings.hiddenDrawsShow = true;
-        } else {
-            DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'draws-expired');
-            DGW.main.settings.hiddenDrawsShow = false;
-        }
-    });
-
-    DGW.main.elements.pages.drawsMain.querySelector('.dg-o-w-draws-refresh').addEventListener('click', function(){
-        DGW.global.api.requests.getDraws();
+        DGW.main.settings.draws.showExpired = this.checked;
+        DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
     });
 
 //Draw filters
@@ -310,17 +309,24 @@ DGW.main.methods.initEvents = function () {
             hiddenDrawsChkBox.parentNode.style.display = 'none';
         }
         function showFinishedDraws(){
-            if (DGW.main.settings.hiddenDrawsShow) {
+            if (DGW.main.settings.draws.showExpired) {
                 hiddenDrawsChkBox.checked = true;
                 DGW.helpers.addClass(DGW.main.elements.widgetBody, 'draws-expired');
             }
             hiddenDrawsChkBox.parentNode.style.display = 'block';
         }
 
+        DGW.main.methods.changeDrawsSubmenu = function(state){
+            submenuItems.filter(function(item){
+                return item.id == state;
+            })[0].click();
+        };
+
         submenuItems.forEach(function(item){
             item.addEventListener('click', function(){
                 removeActive();
                 DGW.helpers.addClass(this, 'dg-o-w-active');
+                DGW.main.settings.draws.currentSubMenu = this.id;
                 switch (this.id) {
                     case 'dg-o-w-show-all-draws':
                         DGW.main.cache.drawsList.sort(function(a,b){
@@ -413,7 +419,7 @@ DGW.main.methods.fillDefaultValues = function(){
         }
     }, 50);
 
-    if (DGW.main.settings.hiddenDrawsShow) {
+    if (DGW.main.settings.draws.showExpired) {
         hiddenDrawsChkBox.checked = true;
         DGW.helpers.addClass(DGW.main.elements.widgetBody, 'draws-expired');
     } else {

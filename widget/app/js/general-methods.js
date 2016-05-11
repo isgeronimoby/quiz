@@ -2,6 +2,7 @@
 DGW.main.methods.showWidget = function(){
     DGW.helpers.zeroTimeout(function(){ DGW.main.shown = true; }); // Fixing IE button click
     DGW.helpers.removeClass(DGW.main.elements.widget, 'hiding');
+    DGW.helpers.addClass(DGW.global.elements.documentBody, 'dg-o-w-body-fixed');
     DGW.global.elements.documentBody.appendChild(DGW.main.elements.widget);
     if (DGW.main.currentState === '') {
         DGW.main.methods.changeMainState('earn');
@@ -14,6 +15,7 @@ DGW.main.methods.hideWidget = function(){
     DGW.helpers.addClass(DGW.main.elements.widget, 'hiding');
     setTimeout(function(){
         DGW.global.elements.documentBody.removeChild(DGW.main.elements.widget);
+        DGW.helpers.removeClass(DGW.global.elements.documentBody, 'dg-o-w-body-fixed');
     }, 310);
 };
 
@@ -44,7 +46,11 @@ DGW.global.methods.authorize = function(){
         DGW.main.methods.changeMainState('profile');
         // ********
     } else if (DGW.main.currentState === 'draws') {
-        DGW.global.api.requests.getDraws();
+        DGW.global.api.requests.getDraws(function(){
+            DGW.global.api.requests.getDrawEntries(function(){
+                DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+            });
+        });
     } else if (DGW.main.currentState === 'earn') {
         DGW.global.api.requests.getUserOffers();
     }
@@ -97,7 +103,15 @@ DGW.global.methods.init = function(){
     DGW.global.methods.userStatsReset();
 
     // requesting basic apis to get some cached data
-    DGW.global.api.requests.getDraws();
+    DGW.global.api.requests.getDraws(function(){
+        if (DGW.global.authorized) {
+            DGW.global.api.requests.getDrawEntries(function(){
+                DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+            });
+        } else {
+            DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+        }
+    });
     DGW.global.api.requests.getActions();
 
     //Initializing or checking user
