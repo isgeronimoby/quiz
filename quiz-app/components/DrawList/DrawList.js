@@ -3,19 +3,14 @@ import DrawListItem from './DrawListItem.js';
 import './DrawList.scss';
 
 
-function sortItems(a, b) {
-	return 0; // TODO - need?
-}
-
 class DrawList extends Component {
 
 	static propTypes = {
-		data: PropTypes.array.isRequired
+		list: PropTypes.array.isRequired
 	};
 
 	render() {
-		const items = this.props.data
-			.sort(sortItems)
+		const items = this.props.list
 			.map((data, i) => {
 				return (
 					<DrawListItem key={'draw-' + i} data={data}/>

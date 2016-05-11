@@ -29,7 +29,10 @@ class QuizBet extends Component {
 		const { points, odds, onSubmit } = this.props;
 		const { betValue = points } = this.state;
 		const winValue = odds[0] * betValue;
+		const disabledBet = (betValue === 0);
+		const disabledBtnClass = disabledBet ? 'disabled' : '';
 		const onChange = (v) => this.handelBetValueChange(v);
+		const onBtnClick = () => !disabledBet && onSubmit(betValue);
 
 		return (
 			<div className="quiz-content">
@@ -50,7 +53,9 @@ class QuizBet extends Component {
 					<span className="text-sm"> points</span>
 				</div>
 
-				<Button className="big-btn money-btn" onClick={() => onSubmit(betValue)} >Bet points</Button>
+				<Button className={"big-btn money-btn " + disabledBtnClass} onClick={onBtnClick} >
+					Bet points
+				</Button>
 
 				{/*
 				 <Button className="big-btn share-btn" onClick={ () => this.showPopup() }>

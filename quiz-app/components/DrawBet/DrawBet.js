@@ -12,8 +12,9 @@ class DrawBet extends Component {
 
 	static propTypes = {
 		points: PropTypes.number.isRequired,
-		data: PropTypes.object.isRequired,
+		drawItem: PropTypes.object.isRequired,
 		onSubmit: PropTypes.func.isRequired,
+		betError: PropTypes.string,
 	};
 
 	state = {
@@ -21,30 +22,39 @@ class DrawBet extends Component {
 	};
 
 	handelBetValueChange(betValue) {
-		this.setState({ betValue });
+		this.setState({betValue});
 	}
 
 	render() {
-		const { data: {name, picture, description, endDateTime}, points, onSubmit } = this.props;
+		const {
+			points,
+			drawItem: {prizeTitle, prizeImageUrl, prizeDescription, endDate},
+			onSubmit,
+			betError = ''
+			} = this.props;
 		const { betValue = points } = this.state;
-		const dateFormatted = moment.utc(endDateTime).format('YYYY/MM');
+		const disabledBet = (betValue === 0);
+		const disabledBtnClass = disabledBet ? 'disabled' : '';
+		const dateFormatted = moment.utc(endDate).format('YYYY/MM');
+		const errorClass = betError ? 'reveal' : '';
 		const onChange = (v) => this.handelBetValueChange(v);
+		const onBtnClick = () => !disabledBet && onSubmit(betValue);
 
 		return (
 			<div className="draw-content">
 				<div className="draw-details">
 					<div className="draw-details-image">
-						<img src={ require(picture) } />
+						<img src={ prizeImageUrl }/>
 					</div>
 					<div className="draw-details-content">
-						<Countdown dateStr={ endDateTime } />
-						<h3 className="list-title">{ name }</h3>
+						<Countdown dateStr={ endDate }/>
+						<h3 className="list-title">{ prizeTitle }</h3>
 						<h5 className="list-meta">{ dateFormatted }</h5>
 					</div>
 				</div>
 
 				<SectionCollapsible>
-					<div className="bet-description">{ description }</div>
+					<div className="bet-description">{ prizeDescription }</div>
 				</SectionCollapsible>
 
 				<div className="bet-subtitle">How many points<br/> you want to place?</div>
@@ -54,11 +64,15 @@ class DrawBet extends Component {
 					<span> points</span>
 				</div>
 
-				<Slider max={ points } value={ betValue } step={ 1 } onChange={ onChange } />
+				<Slider max={ points } value={ betValue } step={ 1 } onChange={ onChange }/>
 
-				<Button className="big-btn money-btn" onClick={() => onSubmit(betValue)} >Place points</Button>
+				<div className={"bet-error " + errorClass}>{ betError }</div>
 
-				<Link className="big-btn share-btn" to="./draws" >Earn more points</Link>
+				<Button className={"big-btn money-btn " + disabledBtnClass} onClick={onBtnClick}>
+					Place points
+				</Button>
+
+				<Link className="big-btn share-btn" to="./earn">Earn more points</Link>
 			</div>
 		);
 	}

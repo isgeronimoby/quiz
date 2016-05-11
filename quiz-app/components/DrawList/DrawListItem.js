@@ -18,20 +18,20 @@ class DrawListItem extends Component {
     };
 
     render() {
-        const { drawId, name, picture, endDateTime, friends, completed } = this.props.data;
-        const subTitle = dateFormat(endDateTime);
+        const { drawId, endDate, prizeTitle, prizeImageUrl, completed } = this.props.data;
+        const subTitle = dateFormat(endDate);
 		const completedClass = (completed ? "completed" : "");
 
         return (
             <li className="draw-item">
-                <Link className={"draw-item-body " + completedClass} to="./draw" state={{id: drawId}}>
+                <Link className={"draw-item-body " + completedClass} to="./draw" state={ {drawId} }>
                     <div className="draw-item-aside">
                         <div className="draw-item-image">
-                            <img src={ require(picture) } />
+                            <img src={ prizeImageUrl } />
                         </div>
                     </div>
                     <div className="draw-item-content">
-                        <h3 className="list-title">{ name }</h3>
+                        <h3 className="list-title">{ prizeTitle }</h3>
                         <h5 className="list-meta">{ subTitle }</h5>
                     </div>
                     <div className="list-item-arrow">

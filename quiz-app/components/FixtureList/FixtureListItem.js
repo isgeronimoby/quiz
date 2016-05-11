@@ -12,13 +12,21 @@ class FixtureListItem extends Component {
 
 
 	render() {
-		const { matchId, teamHome, teamAway, startDate } = this.props.match;
+		const { matchId, teamHome, teamAway, startDate, betAmount } = this.props.match;
 		const { header } = this.props;
 		const headerClass = !header ? 'is-collapsed' : '';
 		const title = `${teamHome} vs ${teamAway}`;
 		const subTitle = moment.utc(startDate).format('HH:mm');
 		const teamHomeIcon = require(`../../static/images/team-${teamHome}.svg`);
 		const teamAwayIcon = require(`../../static/images/team-${teamAway}.svg`);
+		const betLabelText = `You bet ${betAmount} point${betAmount > 1 ? 's' : ''}`;
+
+		let betLabel = '';
+		if (betAmount) {
+			betLabel = (
+				<div className="list-label green">{ betLabelText }</div>
+			)
+		}
 
 		return (
 			<li className="fixture-item">
@@ -37,6 +45,7 @@ class FixtureListItem extends Component {
 					<div className="fixture-item-content">
 						<h3 className="list-title">{ title }</h3>
 						<h5 className="list-meta">{ subTitle }</h5>
+						{ betLabel }
 					</div>
 					<div className="list-item-arrow">
 						<img src={require('../../static/images/arrow-right-grey.svg')}/>

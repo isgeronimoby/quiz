@@ -35,6 +35,12 @@ Text utils
 .text-center {
   text-align: center;
 }
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
 .link-normal {
   color: $color-twitter;
   text-decoration: underline;
@@ -60,13 +66,23 @@ Lists
 */
 .list-title {
   font-size: 1.4rem;
-  margin-bottom: 5px;
   color: $color-grey-dark;
 }
 .list-meta {
   font-size: 1rem;
+  line-height: 1.7; /* 17/10 */
   color: $color-grey;
   text-transform: uppercase;
+}
+.list-label {
+  font-size: 1rem;
+  line-height: 1.7; /* 17/10 */
+  padding: 0 7px;
+  color: #fff;
+  border-radius: 8px;
+  &.green {
+    background: $brand-color;
+  }
 }
 .list-item-arrow {
   width: 3.6rem;

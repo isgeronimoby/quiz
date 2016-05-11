@@ -1,5 +1,6 @@
 @import '../variables.scss';
 .summary-banner {
+  position: relative;
   display: flex;
   align-items: center;
   height: 4rem;
@@ -11,10 +12,20 @@
     background: #fff;
   }
 
-  .team-score-container {
+  .text-small {
     flex-grow: 1;
+  }
+
+  $cont-sz: 8rem;
+  .team-score-container {
+    position: absolute;
+    width: $cont-sz; height: $cont-sz;
+    top: -20px; left: 50%;
+    margin-left: calc(-$cont-sz / 2);
     display: flex;
     justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle, #fff, rgba(255, 255, 255, 0.2));
   }
 }
 .team-logo-small {
@@ -85,7 +96,6 @@
     }
   }
 }
-
 .error-text {
   font-size: 1.4rem;
   color: $color-grey-dark;

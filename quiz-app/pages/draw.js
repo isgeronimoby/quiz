@@ -1,35 +1,62 @@
 import React, { Component, PropTypes } from 'react';
-import withFetch from '../components/withFetch';
+import { connect } from 'react-redux';
+import { fetchProfileIfNeeded, fetchDrawsIfNeeded, selectDraw } from '../flux/actions';
 import DrawContainer from '../components/DrawContainer';
-import data from '../components/DrawList/data.js';
 
-const DELAY = 100;
-
-async function fetch({ id }) {
-
-	console.log('>>TODO: fetch /draw/[%s]', id);
-
-	const item = data.find(({ drawId }) => drawId === id);
-
-	return new Promise((resolve, reject) => {
-		setTimeout(() => resolve(item), DELAY);
-	});
-}
 
 class Draw extends Component {
 
 	static title = ' '; // set dynamically to draw title
 
 	static propTypes = {
-		params: PropTypes.object.isRequired
+		params: PropTypes.object.isRequired,
+		// from store
+		maxPoints: PropTypes.number.isRequired,
+		drawItem: PropTypes.object.isRequired,
+		isBetting: PropTypes.bool.isRequired,
+
+		fetchProfile: PropTypes.func.isRequired,
+		fetchDraws: PropTypes.func.isRequired,
+		selectDraw: PropTypes.func.isRequired,
 	};
 
+	async componentDidMount() {
+		const { params: { drawId }, fetchProfile, fetchDraws, selectDraw } = this.props;
+
+		fetchProfile(); // need points for bet
+		await fetchDraws(); // have data in list only
+		selectDraw(drawId);
+	}
+
 	render() {
+		const { params: { drawId }, maxPoints, drawItem } = this.props;
+
+		if (drawItem.isFetching) {
+			return <div/>; // TODO: spinner
+		}
+
 		return (
-			<DrawContainer {...this.props} />
+			<DrawContainer points={ maxPoints } drawItem={ drawItem } />
 		);
 	}
 
 }
 
-export default withFetch(Draw, fetch);
+// Connect to store
+//
+const mapStateToProps = (state) => {
+	return {
+		maxPoints: state.profile.points,
+		drawItem: state.draws.list.find(({ drawId }) => drawId === state.selectedDraw) || { isFetching: true },
+		isBetting: false, // TODO
+	};
+};
+const mapDispatchToProps = (dispatch) => {
+	return {
+		fetchProfile: () => dispatch(fetchProfileIfNeeded()),
+		fetchDraws: () => dispatch(fetchDrawsIfNeeded()),
+		selectDraw: (matchId) => dispatch(selectDraw(matchId)),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Draw);
