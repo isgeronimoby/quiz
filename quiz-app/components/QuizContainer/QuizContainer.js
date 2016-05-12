@@ -21,8 +21,9 @@ class QuizContainer extends Component {
 
 	static propTypes = {
 		matchId: PropTypes.string.isRequired,
+		startDate: PropTypes.string.isRequired,
+		teamNames: PropTypes.array.isRequired,
 		questionList: PropTypes.array.isRequired,
-		fixtureItem: PropTypes.object.isRequired,
 
 		isValidating: PropTypes.bool.isRequired,
 		odds: PropTypes.number.isRequired,
@@ -116,14 +117,14 @@ class QuizContainer extends Component {
 
 	render() {
 		const { matchId,
+			startDate,
+			teamNames,
 			questionList,
-			fixtureItem: { startDate, teamHome, teamAway },
 			isValidating,
 			invalidOutcomes } = this.props;
 		const info = moment.utc(startDate).format('D MMMM, HH:mm');
 		const { currentScreenIdx: idx, summary } = this.state;
 		const total = this.totalSteps();
-		const teamNames = [teamHome, teamAway];
 		const onPrev = () => this.prevScreen();
 		const onNext = () => this.nextScreen();
 		const onAnswerSubmit = this.handleAnswerSubmit.bind(this);
