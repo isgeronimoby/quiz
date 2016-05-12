@@ -30,7 +30,7 @@ class Slider extends Component {
 
 	render() {
 		const { max, value, step = 10, onChange } = this.props;
-		const posPercent = value / max * 100;
+		const posPercent = max ? value / max * 100 : 0;
 		const onPlusClick = () => onChange(this.getValueByDiff(step));
 		const onMinusClick = () => onChange(this.getValueByDiff(-step));
 		const onLineClick = (e) => onChange(this.getValueByOffset(e.pageX));

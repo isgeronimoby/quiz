@@ -14,7 +14,7 @@ class QuizBetContainer extends Component {
 		params: PropTypes.object.isRequired,
 		// from store
 		isLoggedIn: PropTypes.bool.isRequired,
-		maxPoints: PropTypes.number.isRequired,
+		points: PropTypes.number.isRequired,
 		odds: PropTypes.number.isRequired,
 		answers: PropTypes.array.isRequired,
 		isBetting: PropTypes.bool.isRequired,
@@ -51,14 +51,15 @@ class QuizBetContainer extends Component {
 	}
 
 	render() {
-		const { maxPoints, odds } = this.props;
+		const { isLoggedIn, points, odds } = this.props;
+		const demoPoints = !isLoggedIn ? 5 : 0;
 		const oddsList = [odds, 1];
 		const { view } = this.state;
 		const onSubmit = (betPoints) => this.submitBet(betPoints);
 
 		let View;
 		if (view === 'bet') {
-			View = <QuizBet points={maxPoints} odds={oddsList} onSubmit={ onSubmit }/>;
+			View = <QuizBet points={points} demoPoints={demoPoints} odds={oddsList} onSubmit={ onSubmit }/>;
 		}
 		else if (view === 'success') {
 			View = <BetSuccess onDismiss={() => this.goToExitPage() }/>;
@@ -75,14 +76,14 @@ class QuizBetContainer extends Component {
 
 // Connect to store
 //
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
 	const matchId = state.selectedQuiz;
 	const quiz = state.quizes[matchId];
 	const { answers, odds, isBetting, betSuccess, betError } = quiz || {};
 
 	return {
 		isLoggedIn: state.auth.isLoggedIn,
-		maxPoints: state.profile.points,
+		points: state.profile.points,
 		answers,
 		odds,
 		isBetting,

@@ -26,8 +26,11 @@ class QuizBet extends Component {
 	}
 
 	render() {
-		const { points, odds, onSubmit } = this.props;
-		const { betValue = points } = this.state;
+		const { points, demoPoints, odds, onSubmit } = this.props;
+		const maxPoints = (demoPoints || points);
+		let { betValue = maxPoints } = this.state;
+		betValue = Math.min(maxPoints, betValue); // after login user can got points < demoPoints
+
 		const winValue = odds[0] * betValue;
 		const disabledBet = (betValue === 0);
 		const disabledBtnClass = disabledBet ? 'disabled' : '';
@@ -45,7 +48,7 @@ class QuizBet extends Component {
 					<span> points</span>
 				</div>
 
-				<Slider max={ points } value={ betValue } step={ 1 } onChange={ onChange } />
+				<Slider max={ maxPoints } value={ betValue } step={ 1 } onChange={ onChange } />
 
 				<div className="bet-subtitle">
 					Odds: <span className="text-lg">{ odds.join('-') }</span>
