@@ -77,12 +77,13 @@
     height: 2.2rem;
     margin-bottom: 5px;
     border-radius: 50%;
-    border: 2px solid #fff;
+    border: 1px solid $brand-color;
     &.selected {
-      background-color: #fff;
+      background-color: $brand-color;
       background-image: url('./images/icon-checkbox.svg');
       background-repeat: no-repeat;
       background-position: 4px 4px;
+      background-size: 14px 14px;
     }
   }
 
@@ -90,9 +91,12 @@
     .choice-text {
       border-bottom: 1px solid $color-error;
     }
-    .choice-check.selected {
-      background-color: $color-error;
-      border-color: $color-error;
+    .choice-check {
+      border-color: #fff;
+      &.selected {
+        background-color: $color-error;
+        border-color: $color-error;
+      }
     }
   }
 }
