@@ -10,20 +10,20 @@ class QuizWinOrDrawStats extends Component {
 	static propTypes = {
 		hidden: PropTypes.bool.isRequired,
 		order: PropTypes.array.isRequired,
-		choice: PropTypes.string,
-		stats: PropTypes.object.isRequired,
+		outcomeId: PropTypes.string,
+		outcomes: PropTypes.object.isRequired,
 		onDismiss: PropTypes.func.isRequired,
 	};
 
 	render() {
-		const { hidden, order, choice, stats, onDismiss } = this.props;
+		const { hidden, order, outcomeId, outcomes, onDismiss } = this.props;
 		const classes = !hidden ? 'reveal' : '';
 		const bottomPercent = 84; // by trial
 		const columns = order
-			.map((name, i) => {
-				const percent = !hidden ? stats[name] : 0;
+			.map((key, i) => {
+				const percent = !hidden ? outcomes[key].percent : 0;
 				const sz = !hidden ? bottomPercent - bottomPercent * percent / 100 : 100;
-				const winnerClass = (choice === name ? 'winner' : '');
+				const winnerClass = (outcomeId === outcomes[key].id ? 'winner' : '');
 
 				return (
 					<div key={`score-${i}`} className="col" style={{transform: `translateY(${sz}%)`}}>

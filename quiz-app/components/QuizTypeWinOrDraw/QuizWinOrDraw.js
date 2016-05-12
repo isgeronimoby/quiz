@@ -8,18 +8,6 @@ function parseData(data, [teamHome, teamAway], outcomeId) {
 	const {
 		TotalAnswersCount: total,
 		QuestionId: questionId,
-		Outcomes: [{
-			AnswersCount: count1,
-			OutcomeId: id1,
-			Team: team1
-			}, {
-			AnswersCount: count2,
-			OutcomeId: id2,
-			Team: team2
-			}, {
-			AnswersCount: count3,
-			OutcomeId: id3
-			}]
 		} = data;
 	const calcStat = (count, id) => {
 		const selectedCount = (id === outcomeId) ? count + 1 : count;
@@ -28,21 +16,17 @@ function parseData(data, [teamHome, teamAway], outcomeId) {
 
 	return {
 		questionId,
-		outcomes: data.Outcomes.reduce((acc, { OutcomeId: id, Team: name }) => {
+		outcomes: data.Outcomes.reduce((acc, { OutcomeId: id, Team: name, AnswersCount: count }) => {
+			const percent = calcStat(count, id);
 			switch (name) {
 				case teamHome:
-					return {...acc, home: {id, name}};
+					return {...acc, home: {id, name, percent}};
 				case teamAway:
-					return {...acc, away: {id, name}};
+					return {...acc, away: {id, name, percent}};
 				default:
-					return {...acc, draw: {id}};
+					return {...acc, draw: {id, name, percent}};
 			}
-		}, {}),
-		stats: {
-			[team1]: calcStat(count1, id1),
-			[team2]: calcStat(count2, id2),
-			'-': calcStat(count3, id3),
-		}
+		}, {})
 	};
 }
 
@@ -91,8 +75,7 @@ class QuizWinOrDraw extends Component {
 		const { outcomeId, showStats } = this.state;
 		const {
 			questionId,
-			outcomes,
-			stats,
+			outcomes
 			} = parseData(data, teamNames, outcomeId);
 		const [teamHome, teamAway] = teamNames;
 		const onSubmit = (outcomeId) => this.handleSubmit(questionId, outcomeId);
@@ -107,9 +90,9 @@ class QuizWinOrDraw extends Component {
 					onSubmit={ onSubmit }/>
 				<QuizStats
 					hidden={ !showStats }
-					order={ [ teamHome, '-', teamAway ] }
+					order={ [ 'home', 'draw', 'away' ] }
 					outcomeId={ outcomeId }
-					stats={ stats }
+					outcomes={ outcomes }
 					onDismiss={ onDismiss }/>
 			</div>
 		);
