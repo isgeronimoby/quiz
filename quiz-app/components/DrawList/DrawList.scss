@@ -41,6 +41,7 @@
     overflow: hidden;
     img {
       height: $image-sz;
+      width: auto;
     }
   }
   .draw-item-content {

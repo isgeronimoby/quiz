@@ -39,6 +39,7 @@ $image-sz: 10rem;
   background: #fff;
   img {
     height: $image-sz;
+    width: auto;
   }
 }
 .bet-description {
