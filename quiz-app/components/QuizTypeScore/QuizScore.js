@@ -4,7 +4,7 @@ import QuizStats from './QuizScoreStats';
 import './score.scss';
 
 
-function parseData(data, teamNames, scores = []) {
+function parseData(data, [teamHome, teamAway], scores = []) {
 	const [scoreHome, scoreAway] = scores;
 	const {
 		TotalAnswersCount: total,
@@ -12,7 +12,8 @@ function parseData(data, teamNames, scores = []) {
 		Outcomes: outcomes
 		} = data;
 	const scorePair = (scoreHome >= scoreAway) ? `${scoreHome}-${scoreAway}` : `${scoreAway}-${scoreHome}`;
-	const winningTeam = (scoreHome >= scoreAway) ? teamNames[0] : teamNames[1];
+	const winningTeam = (scoreHome > scoreAway) ? teamHome :
+		(scoreHome < scoreAway) ? teamAway : 'Draw';
 	const { OutcomeId: outcomeId, AnswersCount: count = 0} = outcomes.find(({ Score, Team }) => {
 		return (Score === scorePair && winningTeam === Team);
 	}) || {};

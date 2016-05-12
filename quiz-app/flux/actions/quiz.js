@@ -93,11 +93,12 @@ function fetchOddsSuccess(matchId, { Odds: odds }) {
 	};
 }
 
-function fetchOddsError(matchId, { InvalidAnswers: invalidOutcomes }) {
+function fetchOddsError(matchId, { InvalidAnswers: invalidOutcomes = [], Message: validationError }) {
 	return {
 		type: FETCH_ODDS_ERROR,
 		matchId,
 		invalidOutcomes,
+		validationError, // Unused
 	};
 }
 

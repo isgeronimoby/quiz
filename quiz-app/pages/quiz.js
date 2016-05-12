@@ -56,7 +56,7 @@ class Quiz extends Component {
 				questionList={ questionList }
 				isValidating={ isValidating }
 				odds={ odds }
-				invalidOutcomes={ invalidOutcomes}
+				invalidOutcomes={ invalidOutcomes }
 				fetchOdds={ _fetchOdds }
 			/>
 		);
