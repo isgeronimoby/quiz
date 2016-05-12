@@ -48,7 +48,7 @@ function fetchProfileError(error) {
 	};
 }
 
-function fetchProfile() {
+export function fetchProfile() {
 	return (dispatch) => {
 		dispatch(fetchProfileStart());
 

@@ -4,47 +4,17 @@ import { SharingPopup } from '../Popup';
 import './DrawBetExit.scss';
 
 
-const SocialLink = ({name, disabled, onClick, children}) => {
-	const classDisabled = disabled ? 'disabled' : '';
-	const onClickMaybe = () => (!disabled && onClick(name));
-
-	return (
-		<div className={ `social-link ${name} ${classDisabled}` } onClick={ onClickMaybe }>
-			<img src={ require(`./images/icon-${name}.svg`) } alt="facebook"/>
-			{ children }
-		</div>
-	)
-};
-
-
 class DrawBetExit extends Component {
 
 	static propTypes = {
 	};
 
-	state = {
-		facebook: false,
-		twitter: false,
-	};
-
-	handleClick(name) {
-		if (!this.state[name]) {
-			this.showPopup();
-		}
-
-		this.setState({
-			[name]: true
-		});
-	}
-
 	showPopup() {
+		// TODO
 		this.refs['sharing-popup'].show(3000);
 	}
 
 	render() {
-		const { facebook, twitter} = this.state;
-		const onClick = this.handleClick.bind(this);
-
 
 		return (
 			<div className="draw-exit" >
@@ -53,17 +23,6 @@ class DrawBetExit extends Component {
 				<div className="big-image">
 					Amazing illustration here
 				</div>
-
-				{
-					/* TODO - deferred
-					<SocialLink name="facebook" disabled={facebook} onClick={ onClick }>
-					 Share & get + 10 pts
-					 </SocialLink>
-
-					 <SocialLink name="twitter" disabled={twitter} onClick={ onClick }>
-					 Tweet & get + 10 pts
-					 </SocialLink>*/
-				}
 
 				<Link className="big-btn share-btn" to="./earn">
 					Earn more points
