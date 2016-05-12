@@ -53,6 +53,13 @@ $loader-sz: 210px;
   background: url('../../static/images/loader2.gif') no-repeat;
 }
 
+/*Progress*/
+.fetching {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
 
 /*Screens*/
 $progress-h: 4px; /*TODO - to vars*/

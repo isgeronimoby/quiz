@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Location from '../lib/Location.js';
 import { fetchProfileIfNeeded, postLogout } from '../flux/actions';
+import { Fetching } from '../components/Layout';
 import UserProfile from '../components/UserProfile';
 
 
@@ -36,8 +37,9 @@ class Profile extends Component {
 		const onLogout = () => this.handleLogout();
 
 		if (isFetching) {
-			return <div/>; // TODO: spinner
+			return <Fetching/>;
 		}
+
 		return <UserProfile user={ rest } onLogout={ onLogout }/>;
 	}
 }

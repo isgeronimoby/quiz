@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fetchUserList } from '../flux/actions';
+import { Fetching } from '../components/Layout';
 import LeaderBoardContainer from '../components/LeaderBoardContainer';
 
 
@@ -21,7 +22,7 @@ class Leaders extends Component {
 		const { userList: { isFetching, list } } = this.props;
 
 		if (isFetching) {
-			return <div/>; // TODO: spinner
+			return <Fetching/>;
 		}
 		return (
 			<LeaderBoardContainer list={ list }/>

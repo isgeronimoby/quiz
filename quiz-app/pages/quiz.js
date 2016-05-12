@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fetchProfileIfNeeded, fetchQuiz, selectQuiz, fetchOdds } from '../flux/actions';
+import { Fetching } from '../components/Layout';
 import QuizContainer from '../components/QuizContainer';
 
 
@@ -44,7 +45,7 @@ class Quiz extends Component {
 		const _fetchOdds = (answers) => fetchOdds(matchId, answers);
 
 		if (isFetching) {
-			return <div/>; // TODO: spinner
+			return <Fetching/>;
 		}
 
 		return (

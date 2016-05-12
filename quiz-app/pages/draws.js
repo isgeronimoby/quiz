@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fetchDrawsIfNeeded, fetchProfileIfNeeded, fetchPlayedDraws } from '../flux/actions';
+import { Fetching } from '../components/Layout';
 import DrawList from '../components/DrawList';
 
 
@@ -34,7 +35,7 @@ class Draws extends Component {
 		const { draws: { isFetching, list } } = this.props;
 
 		if (isFetching) {
-			return <div/>; // TODO: spinner
+			return <Fetching/>;
 		}
 		return <DrawList list={ list }/>;
 	}

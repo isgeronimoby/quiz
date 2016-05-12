@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fetchProfileIfNeeded, fetchDrawsIfNeeded, selectDraw } from '../flux/actions';
+import { Fetching } from '../components/Layout';
 import DrawContainer from '../components/DrawContainer';
 
 
@@ -32,11 +33,11 @@ class Draw extends Component {
 		const { params: { drawId }, maxPoints, drawItem } = this.props;
 
 		if (drawItem.isFetching) {
-			return <div/>; // TODO: spinner
+			return <Fetching/>;
 		}
 
 		return (
-			<DrawContainer points={ maxPoints } drawItem={ drawItem } />
+			<DrawContainer points={ maxPoints } drawItem={ drawItem }/>
 		);
 	}
 
@@ -47,7 +48,7 @@ class Draw extends Component {
 const mapStateToProps = (state) => {
 	return {
 		maxPoints: state.profile.points,
-		drawItem: state.draws.list.find(({ drawId }) => drawId === state.selectedDraw) || { isFetching: true },
+		drawItem: state.draws.list.find(({ drawId }) => drawId === state.selectedDraw) || {isFetching: true},
 		isBetting: false, // TODO
 	};
 };
