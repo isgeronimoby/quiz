@@ -21,24 +21,11 @@ class QuizBetContainer extends Component {
 		betError: PropTypes.string.isRequired,
 		openAuthPopup: PropTypes.func.isRequired,
 		postQuizBet: PropTypes.func.isRequired,
-		fetchRewards: PropTypes.func.isRequired,
-		startSharingFacebook: PropTypes.func.isRequired,
-		startSharingTwitter: PropTypes.func.isRequired,
-
 	};
 
 	state = {
 		view: 'bet'
 	};
-
-	componentDidMount() {
-		this.props.fetchRewards();
-	}
-
-	componentWillReceiveProps({points}) {
-		const pointsDiff = points - this.props.points;
-		// TODO -show popup if we got new points
-	}
 
 	nextView(view) {
 		this.setState({view});
@@ -56,16 +43,6 @@ class QuizBetContainer extends Component {
 		}
 	}
 
-	submitShare(name) {
-		const {startSharingFacebook, startSharingTwitter} = this.props;
-
-		if (name === 'facebook') {
-			startSharingFacebook();
-		} else if (name === 'twitter') {
-			startSharingTwitter();
-		}
-	}
-
 	goToExitPage() {
 		Location.push({
 			pathname: './exit',
@@ -73,22 +50,20 @@ class QuizBetContainer extends Component {
 	}
 
 	render() {
-		const { isLoggedIn, points, odds, rewards } = this.props;
+		const { isLoggedIn, points, odds } = this.props;
 		const demoPoints = !isLoggedIn ? 10 : 0;
 		const oddsList = [odds, 1];
 		const { view } = this.state;
 		const onSubmitBet = (betPoints) => this.submitBet(betPoints);
-		const onSubmitShare = (name) => this.submitShare(name);
 
 		let View;
 		if (view === 'bet') {
 			View = <QuizBet
+				isLoggedIn={ isLoggedIn }
 				points={ points }
 				demoPoints={ demoPoints }
 				odds={ oddsList }
-				rewards={ rewards }
-				onSubmitBet={ onSubmitBet }
-				onSubmitShare={ onSubmitShare }/>;
+				onSubmitBet={ onSubmitBet }/>;
 		}
 		else if (view === 'success') {
 			View = <BetSuccess onDismiss={() => this.goToExitPage() }/>;
@@ -118,16 +93,12 @@ const mapStateToProps = (state) => {
 		isBetting,
 		betSuccess,
 		betError,
-		rewards: state.rewards.map
 	};
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
 		openAuthPopup: () => dispatch(requestAuth()),
 		postQuizBet: (matchId, points, answers) => dispatch(postQuizBet(matchId, points, answers)),
-		fetchRewards: () => dispatch(fetchRewards()),
-		startSharingFacebook: () => dispatch(startSharingFacebook()),
-		startSharingTwitter: () => dispatch(startSharingTwitter()),
 	};
 };
 

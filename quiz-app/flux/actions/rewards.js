@@ -70,7 +70,7 @@ export function fetchRewards() {
 			dispatch(fetchRewardsSuccess(json));
 		}).catch(({ Message: error = 'Invalid'}) => {
 			dispatch(fetchRewardsError(error)); // TODO
-			throw error;
+			//throw error;
 		});
 	};
 }
@@ -87,6 +87,19 @@ function postTrackRewards(typeId) {
 			dispatch(fetchRewards()).then(() => {
 				dispatch(fetchProfileSuccess(json.User));
 			});
+		}).catch(() => {
+			//TODO
+			/*dispatch(fetchRewards()).then(() => {
+				dispatch(fetchProfileSuccess({
+					UserId: '123',
+					UserName: 'XXX',
+					ImageUrl: 'http://spr-static-test.cloudapp.net/content/main/assets/images/default-profile.png',
+					Wallet: {
+						PointsConfirmed: 150,
+						PointsPending: 0
+					}
+				}));
+			})*/
 		});
 	};
 }

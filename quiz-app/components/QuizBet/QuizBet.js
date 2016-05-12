@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { SharingPopup } from '../Popup';
 import Button from '../Button';
 import Slider from '../Slider';
-import SocialLink from '../SocialLink';
+import SharingControls from '../SharingControls';
 import './bet.scss';
 
 
@@ -12,18 +11,12 @@ class QuizBet extends Component {
 		points: PropTypes.number.isRequired,
 		demoPoints: PropTypes.number.isRequired,
 		odds: PropTypes.array.isRequired,
-		rewards: PropTypes.object.isRequired,
 		onSubmitBet: PropTypes.func.isRequired,
-		onSubmitShare: PropTypes.func.isRequired,
 	};
 
 	state = {
 		betValue: undefined
 	};
-
-	showPopup() {
-		this.refs['sharing-popup'].show(3000);
-	}
 
 	handelBetValueChange(betValue) {
 		this.setState({betValue});
@@ -34,9 +27,7 @@ class QuizBet extends Component {
 			points,
 			demoPoints,
 			odds,
-			rewards,
 			onSubmitBet,
-			onSubmitShare
 			} = this.props;
 		const maxPoints = (demoPoints || points);
 		let { betValue = maxPoints } = this.state;
@@ -45,17 +36,11 @@ class QuizBet extends Component {
 		const winValue = odds[0] * betValue;
 		const disabledBet = (betValue === 0);
 		const disabledBtnClass = disabledBet ? 'disabled' : '';
-		const {
-			facebookShare: {rewardPoints: facebookSharePoints} = {},
-			twitterShare: {rewardPoints: twitterSharePoints} = {},
-			} = rewards;
 		const onChange = (v) => this.handelBetValueChange(v);
 		const onBetClick = () => !disabledBet && onSubmitBet(betValue);
-		const onShareClick = (name) => onSubmitShare(name);
 
 		return (
 			<div className="quiz-content">
-				<SharingPopup ref="sharing-popup"/>
 
 				<div className="bet-subtitle">How much you want to bet?</div>
 
@@ -76,8 +61,7 @@ class QuizBet extends Component {
 					Bet points
 				</Button>
 
-				<SocialLink name="facebook" points={facebookSharePoints} onClick={ onShareClick }/>
-				<SocialLink name="twitter" points={twitterSharePoints} onClick={ onShareClick }/>
+				<SharingControls />
 			</div>
 		);
 	}
