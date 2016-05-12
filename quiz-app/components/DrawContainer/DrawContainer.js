@@ -19,10 +19,10 @@ const HeaderOverlay = ({ title }) => {
 class DrawContainer extends Component {
 
 	static propTypes = {
-		points: PropTypes.number.isRequired,
 		drawItem: PropTypes.object.isRequired,
 		// from store
 		isLoggedIn: PropTypes.bool.isRequired,
+		points: PropTypes.number.isRequired,
 		openAuthPopup: PropTypes.func.isRequired,
 		postDrawBet: PropTypes.func.isRequired,
 		betError: PropTypes.string,
@@ -31,13 +31,6 @@ class DrawContainer extends Component {
 	state = {
 		view: 'bet'
 	};
-
-	componentWillReceiveProps({isLoggedIn}) {
-		const authorized = !this.props.isLoggedIn && isLoggedIn;
-		if (authorized) {
-			this.nextView('success');
-		}
-	}
 
 	nextView(view) {
 		this.setState({view});
@@ -59,14 +52,15 @@ class DrawContainer extends Component {
 
 
 	render() {
-		const { points, drawItem, betError } = this.props;
+		const { isLoggedIn, points, drawItem, betError } = this.props;
+		const demoPoints = !isLoggedIn ? 10 : 0;
 		const { view } = this.state;
 		const onBetSubmit = (betPoints) => this.submitBet(betPoints);
 		const onSuccessDissmiss = () => this.nextView('exit');
 
 		let View;
 		if (view === 'bet') {
-			View = <DrawBet points={ points } drawItem={ drawItem } betError={ betError } onSubmit={ onBetSubmit }/>;
+			View = <DrawBet points={ points } demoPoints={ demoPoints } drawItem={ drawItem } betError={ betError } onSubmit={ onBetSubmit }/>;
 		}
 		else if (view === 'success') {
 			View = <BetSuccess onDismiss={ onSuccessDissmiss }/>;
@@ -90,6 +84,7 @@ class DrawContainer extends Component {
 const mapStateToProps = (state) => {
 	return {
 		isLoggedIn: state.auth.isLoggedIn,
+		points: state.profile.points,
 		betError: state.draws.betError,
 	};
 };

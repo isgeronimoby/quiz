@@ -12,10 +12,7 @@ class Draw extends Component {
 	static propTypes = {
 		params: PropTypes.object.isRequired,
 		// from store
-		maxPoints: PropTypes.number.isRequired,
 		drawItem: PropTypes.object.isRequired,
-		isBetting: PropTypes.bool.isRequired,
-
 		fetchProfile: PropTypes.func.isRequired,
 		fetchDraws: PropTypes.func.isRequired,
 		selectDraw: PropTypes.func.isRequired,
@@ -30,14 +27,14 @@ class Draw extends Component {
 	}
 
 	render() {
-		const { params: { drawId }, maxPoints, drawItem } = this.props;
+		const { drawItem } = this.props;
 
 		if (drawItem.isFetching) {
 			return <Fetching/>;
 		}
 
 		return (
-			<DrawContainer points={ maxPoints } drawItem={ drawItem }/>
+			<DrawContainer drawItem={ drawItem }/>
 		);
 	}
 
@@ -47,9 +44,7 @@ class Draw extends Component {
 //
 const mapStateToProps = (state) => {
 	return {
-		maxPoints: state.profile.points,
-		drawItem: state.draws.list.find(({ drawId }) => drawId === state.selectedDraw) || {isFetching: true},
-		isBetting: false, // TODO
+		drawItem: state.draws.list.find(({ drawId }) => drawId === state.selectedDraw) || {isFetching: true}
 	};
 };
 const mapDispatchToProps = (dispatch) => {

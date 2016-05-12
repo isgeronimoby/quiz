@@ -52,7 +52,7 @@ class QuizBetContainer extends Component {
 
 	render() {
 		const { isLoggedIn, points, odds } = this.props;
-		const demoPoints = !isLoggedIn ? 5 : 0;
+		const demoPoints = !isLoggedIn ? 10 : 0;
 		const oddsList = [odds, 1];
 		const { view } = this.state;
 		const onSubmit = (betPoints) => this.submitBet(betPoints);

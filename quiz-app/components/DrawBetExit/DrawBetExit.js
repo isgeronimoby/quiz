@@ -54,13 +54,16 @@ class DrawBetExit extends Component {
 					Amazing illustration here
 				</div>
 
-				<SocialLink name="facebook" disabled={facebook} onClick={ onClick }>
-					Share & get + 10 pts
-				</SocialLink>
+				{
+					/* TODO - deferred
+					<SocialLink name="facebook" disabled={facebook} onClick={ onClick }>
+					 Share & get + 10 pts
+					 </SocialLink>
 
-				<SocialLink name="twitter" disabled={twitter} onClick={ onClick }>
-					Tweet & get + 10 pts
-				</SocialLink>
+					 <SocialLink name="twitter" disabled={twitter} onClick={ onClick }>
+					 Tweet & get + 10 pts
+					 </SocialLink>*/
+				}
 
 				<Link className="big-btn share-btn" to="./earn">
 					Earn more points
