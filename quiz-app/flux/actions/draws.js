@@ -15,6 +15,10 @@ export const POST_DRAW_BET = 'POST_DRAW_BET';
 export const POST_DRAW_BET_SUCCESS = 'POST_DRAW_BET_SUCCESS';
 export const POST_DRAW_BET_ERROR = 'POST_DRAW_BET_ERROR';
 
+export const POST_DRAW_CLAIM = 'POST_DRAW_CLAIM';
+export const POST_DRAW_CLAIM_SUCCESS = 'POST_DRAW_CLAIM_SUCCESS';
+export const POST_DRAW_CLAIM_ERROR = 'POST_DRAW_CLAIM_ERROR';
+
 
 export function selectDraw(drawId) {
 	return {
@@ -116,11 +120,13 @@ function fetchPlayedDrawsSuccess(json) {
 			DrawId: drawId,
 			TicketsAmount: betAmount,
 			IsWinner: isWinner,
+			NeedToClaimPrize: needToClaim,
 			}) => {
 			return {
 				drawId,
 				betAmount,
 				isWinner,
+				needToClaim
 			}
 		}),
 		receivedAt: Date.now()
@@ -191,6 +197,59 @@ export function postDrawBet(drawId, points) {
 			dispatch(fetchProfileSuccess(json.User));
 		}).catch(({ Message: error = 'Invalid' }) => {
 			dispatch(postDrawBetError(drawId, error));
+			throw error;
+		});
+	};
+}
+
+/*Claim*/
+
+function postDrawClaimStart(drawId) {
+	return {
+		type: POST_DRAW_CLAIM,
+		drawId
+	};
+}
+
+function postDrawClaimSuccess(drawId) {
+	return {
+		type: POST_DRAW_CLAIM_SUCCESS,
+		drawId,
+		receivedAt: Date.now()
+	};
+}
+
+function postDrawClaimError(drawId, error) {
+	return {
+		type: POST_DRAW_CLAIM_ERROR,
+		drawId,
+		error,
+	};
+}
+
+export function postDrawClaim(drawId, {city, address, county, postcode}) {
+	return (dispatch) => {
+		dispatch(postDrawClaimStart(drawId));
+
+		const data = {
+			'DrawId': drawId,
+			'Address1': city,
+			'Address2': address,
+			'County': county,
+			'Postcode': postcode,
+		};
+
+		return fetch({
+			method: 'POST',
+			endpoint: 'Draw/ClaimPrize',
+			data
+		}).then((json) => {
+			dispatch(postDrawClaimSuccess(drawId));
+			dispatch(fetchPlayedDrawsSuccess({
+				DrawEntries: [json] // update single item
+			}));
+		}).catch(({ Message: error = 'Invalid' }) => {
+			dispatch(postDrawClaimError(drawId, error));
 			throw error;
 		});
 	};

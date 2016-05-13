@@ -23,6 +23,7 @@
 
   &.has-finished {
     background: $color-grey-opaque;
+    border-bottom: 1px solid rgba(182, 182, 182, .4);
     &.waiting-winner {
       pointer-events: none; /* TODO - enable when details design is available*/
     }

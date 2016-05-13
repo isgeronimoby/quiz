@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { requestAuth, postDrawBet } from '../../flux/actions';
+import { requestAuth, postDrawBet, postDrawClaim } from '../../flux/actions';
 import DrawWinner from '../DrawWinner';
+import DrawClaimPrize from '../DrawClaimPrize';
 import DrawBet from '../DrawBet';
 import BetSuccess from '../BetSuccess'; // TODO - rename
 import DrawBetExit from '../DrawBetExit';
@@ -27,6 +28,7 @@ class DrawContainer extends Component {
 		points: PropTypes.number.isRequired,
 		openAuthPopup: PropTypes.func.isRequired,
 		postDrawBet: PropTypes.func.isRequired,
+		postDrawClaim: PropTypes.func.isRequired,
 		betError: PropTypes.string,
 	};
 
@@ -48,30 +50,34 @@ class DrawContainer extends Component {
 				.then(() => {
 					this.nextView('success');
 				})
-				.catch(() => {
-				});
+				.catch(() => {});
 		}
 	}
 
+	submitClaim(formData) {
+		const { drawItem: { drawId }, postDrawClaim } = this.props;
+
+		postDrawClaim(drawId, formData)
+			.then(() => {
+				this.nextView('success');
+			})
+			.catch(() => {});
+	}
 
 	render() {
 		const { isLoggedIn, points, drawItem, betError } = this.props;
 		const { view } = this.state;
-		const { prizeTitle, endDate } = drawItem;
-		const isFinished = moment.utc(endDate).fromNow().indexOf('ago') >= 0;
-		console.log(">> isFinished", isFinished, moment.utc(endDate).fromNow());
+		const { prizeTitle, isDrawn, isWinner } = drawItem;
+		console.log('>>isDrawn=%s, isWinner=%s', isDrawn, isWinner);
 
 		const demoPoints = !isLoggedIn ? 10 : 0;
 		const onBetSubmit = (betPoints) => this.submitBet(betPoints);
+		const onClaimSubmit = (formData) => this.submitClaim(formData);
 		const onSuccessDismiss = () => this.nextView('exit');
 
 		let View;
 		if (view === 'bet') {
-			if (isFinished) {
-				View = (
-					<DrawWinner drawItem={ drawItem }/>
-				);
-			} else {
+			if (!isDrawn) {
 				View = (
 					<DrawBet
 						points={ points }
@@ -80,6 +86,12 @@ class DrawContainer extends Component {
 						betError={ betError }
 						onSubmit={ onBetSubmit }/>
 				);
+			} else {
+				if (isWinner) {
+					View = <DrawClaimPrize drawItem={ drawItem } onSubmit={ onClaimSubmit }/>;
+				} else {
+					View = <DrawWinner drawItem={ drawItem }/>;
+				}
 			}
 		}
 		else if (view === 'success') {
@@ -112,6 +124,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		openAuthPopup: () => dispatch(requestAuth()),
 		postDrawBet: (drawId, points) => dispatch(postDrawBet(drawId, points)),
+		postDrawClaim: (drawId, formData) => dispatch(postDrawClaim(drawId, formData)),
 	};
 };
 

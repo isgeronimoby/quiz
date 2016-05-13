@@ -51,7 +51,7 @@ export function draws(state = {
 		case FETCH_PLAYED_DRAWS_SUCCESS:
 			return {
 				...state,
-				// Adding betAmount, isWinner, ...
+				// Adding betAmount, isWinner, needToClaim...
 				list: state.list.map((item) => {
 					const playedItem = action.payload.find(({ drawId }) => item.drawId === drawId);
 					if (playedItem) {
@@ -68,8 +68,8 @@ export function draws(state = {
 		case FETCH_PLAYED_DRAWS_ERROR:
 			return {
 				...state,
-				// Removing betAmount, isWinner
-				list: state.list.map(({ betAmount, isWinner, ...rest }) => {
+				// Removing betAmount, isWinner, needToClaim
+				list: state.list.map(({ betAmount, isWinner, needToClaim, ...rest }) => {
 					return {
 						...rest
 					};

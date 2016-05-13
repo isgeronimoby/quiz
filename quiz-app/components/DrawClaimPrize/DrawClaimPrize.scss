@@ -1,0 +1,38 @@
+@import '../variables.scss';
+@import '../DrawBet/DrawBet.scss';
+.draw-claim {
+  .draw-details {
+    position: relative; /*for label*/
+  }
+}
+.draw-claim-title {
+  font-size: 1.9rem;
+  color: $color-grey-dark;
+  text-align: center;
+  padding: 10px 0 20px;
+}
+.draw-claim-form {
+  padding: 0 40px;
+  .input-group {
+    margin-bottom: 0;
+  }
+  input {
+    background: transparent;
+  }
+  .big-btn {
+    margin: 10px -25px;
+  }
+}
+
+.draw-details-label {
+  position: absolute;
+  bottom: 15px; left: 33px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  border-radius: 10px;
+  &.orange {
+    background: $color-winner;
+  }
+}
+
