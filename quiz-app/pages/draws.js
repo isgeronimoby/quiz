@@ -25,8 +25,8 @@ class Draws extends Component {
 	}
 
 	componentWillReceiveProps({isLoggedIn}) {
-		const authorized = !this.props.isLoggedIn && isLoggedIn;
-		if (authorized) {
+		const loginOrLogout = this.props.isLoggedIn !== isLoggedIn;
+		if (loginOrLogout) {
 			this.props.fetchPlayedDraws();
 		}
 	}

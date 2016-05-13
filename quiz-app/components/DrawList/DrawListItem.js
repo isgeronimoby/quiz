@@ -25,7 +25,7 @@ class DrawListItem extends Component {
 		profile: PropTypes.object.isRequired,
 	};
 
-	getItemState(subTitle, betAmount) {
+	getItemState(subTitle, betAmount, isWinner) {
 		const { userId } = this.props.profile;
 		const { isDrawn, winner } = this.props.data;
 		const isFinished = subTitle.indexOf('ended') >= 0;
@@ -42,10 +42,10 @@ class DrawListItem extends Component {
 				return STATE_FINISHED_WAITING_WINNER;
 			} else if (!winner) {
 				return STATE_FINISHED_NO_WINNER;
-			} else if (winner.UserId !== userId) {
-				return STATE_FINISHED_HAS_WINNER;
-			} else {
+			} else if (isWinner) {
 				return STATE_FINISHED_HAS_WINNER_USER;
+			} else {
+				return STATE_FINISHED_HAS_WINNER;
 			}
 		}
 	}
@@ -68,19 +68,18 @@ class DrawListItem extends Component {
 	}
 
 	render() {
-		const { drawId, endDate, prizeTitle, prizeImageUrl, betAmount, winner } = this.props.data;
+		const { drawId, endDate, prizeTitle, prizeImageUrl, betAmount, winner, isWinner } = this.props.data;
 		const subTitle = dateFormat(endDate);
-		const itemState = this.getItemState(subTitle, betAmount);
+		const itemState = this.getItemState(subTitle, betAmount, isWinner);
 		const itemClasses = this.getItemClass(itemState);
 		const betLabelText = `You bet ${betAmount} point${betAmount > 1 ? 's' : ''}`;
 		const userWinnerImg = require('../../static/images/user-winner.svg');
-		const userIsWinner = (itemState === STATE_FINISHED_HAS_WINNER_USER);
 
 		let winnerImg = '';
 		if (winner) {
 			winnerImg = (
 				<div className="draw-item-winner-image">
-					<img src={ userIsWinner ? userWinnerImg : winner.ImageUrl }/>
+					<img src={ isWinner ? userWinnerImg : winner.ImageUrl }/>
 				</div>
 			);
 		}
@@ -91,7 +90,7 @@ class DrawListItem extends Component {
 			)
 		}
 		let wonLabel = '';
-		if (userIsWinner) {
+		if (isWinner) {
 			betLabel = '';
 			wonLabel = (
 				<div className="list-label winner">You won!</div>
