@@ -14,6 +14,10 @@ export const POST_LOGIN = 'POST_LOGIN';
 export const POST_LOGIN_ERROR = 'POST_LOGIN_ERROR';
 export const POST_SIGNUP = 'POST_SIGNUP';
 export const POST_SIGNUP_ERROR = 'POST_SIGNUP_ERROR';
+export const POST_RESTORE = 'POST_RESTORE';
+export const POST_RESTORE_ERROR = 'POST_RESTORE_ERROR';
+export const POST_RESTORE_SUCCESS = 'POST_RESTORE_SUCCESS';
+
 
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
@@ -123,6 +127,47 @@ export function postSignup({name, email, password}) {
 		});
 	};
 }
+
+/*
+ Restore
+ */
+function postRestoreStart() {
+	return {
+		type: POST_SIGNUP
+	};
+}
+
+function postRestoreError(error) {
+	return {
+		type: POST_RESTORE_ERROR,
+		error
+	};
+}
+function postRestoreSuccess() {
+	return {
+		type: POST_RESTORE_SUCCESS,
+		// TODO: need to show some success message - need deign
+	};
+}
+
+export function postRestore({email}) {
+	return (dispatch) => {
+		dispatch(postRestoreStart());
+
+		return fetch({
+			method: 'POST',
+			endpoint: 'auth/forgotpassword',
+			data: {
+				Email: email,
+			}
+		}).then((json) => {
+			dispatch(postRestoreSuccess());
+		}).catch(({ Message: error = 'Invalid'}) => {
+			dispatch(postRestoreError(error));
+		});
+	};
+}
+
 
 /*
  Logout

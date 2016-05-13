@@ -8,6 +8,9 @@ import {
 	POST_LOGIN_ERROR,
 	POST_SIGNUP,
 	POST_SIGNUP_ERROR,
+	POST_RESTORE,
+	POST_RESTORE_ERROR,
+	POST_RESTORE_SUCCESS,
 	LOGOUT_SUCCESS,
 } from '../actions';
 
@@ -86,6 +89,28 @@ export function auth(state = {
 				...state,
 				errors: {
 					signup: action.error
+				},
+				isFetching: {}
+			};
+		case POST_RESTORE:
+			return {
+				...state,
+				errors: {},
+				isFetching: {
+					restore: true
+				}
+			};
+		case POST_RESTORE_SUCCESS:
+			return {
+				...state,
+				errors: {},
+				isFetching: {}
+			};
+		case POST_RESTORE_ERROR:
+			return {
+				...state,
+				errors: {
+					restore: action.error
 				},
 				isFetching: {}
 			};

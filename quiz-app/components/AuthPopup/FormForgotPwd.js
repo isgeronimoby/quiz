@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { postRestore } from '../../flux/actions';
 import Button from '../Button';
 import { EmailInput } from './Controls.js';
 
@@ -7,15 +9,12 @@ class FormForgotPwd extends Component {
 
 	static propTypes = {
 		onNavigate: PropTypes.func.isRequired,
-		onSubmit: PropTypes.func.isRequired,
-		error: PropTypes.string,
-		loading: PropTypes.bool,
+		// from store
+		error: PropTypes.string.isRequired,
+		isFetching: PropTypes.bool.isRequired,
+		postRestore: PropTypes.func.isRequired,
 	};
 
-	static defaultProps = {
-		error: '',
-		loading: false,
-	};
 
 	handleSubmit() {
 		const emailEl = this.refs['email-input'];
@@ -27,7 +26,7 @@ class FormForgotPwd extends Component {
 		const data = {
 			email: emailEl.value()
 		};
-		this.props.onSubmit(data);
+		this.props.postRestore(data);
 	}
 
 	render() {
@@ -65,4 +64,19 @@ class FormForgotPwd extends Component {
 	}
 }
 
-export default FormForgotPwd;
+// Connect to store
+//
+const mapStateToProps = (state) => {
+	const { isFetching, errors } = state.auth;
+	return {
+		error: errors.restore || '',
+		isFetching: isFetching.restore || false,
+	};
+};
+const mapDispatchToProps = (dispatch) => {
+	return {
+		postRestore: (data) => dispatch(postRestore(data)),
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormForgotPwd);
