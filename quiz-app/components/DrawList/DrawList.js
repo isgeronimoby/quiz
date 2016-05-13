@@ -7,14 +7,13 @@ class DrawList extends Component {
 
 	static propTypes = {
 		list: PropTypes.array.isRequired,
-		profile: PropTypes.object.isRequired,
 	};
 
 	render() {
-		const { list, profile } = this.props;
+		const { list } = this.props;
 		const items = list.map((data, i) => {
 			return (
-				<DrawListItem key={'draw-' + i} data={data} profile={profile}/>
+				<DrawListItem key={'draw-' + i} data={data} />
 			);
 		});
 

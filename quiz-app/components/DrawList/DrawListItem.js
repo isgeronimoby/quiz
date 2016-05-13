@@ -22,13 +22,10 @@ class DrawListItem extends Component {
 
 	static propTypes = {
 		data: PropTypes.object.isRequired,
-		profile: PropTypes.object.isRequired,
 	};
 
-	getItemState(subTitle, betAmount, isWinner) {
-		const { userId } = this.props.profile;
-		const { isDrawn, winner } = this.props.data;
-		const isFinished = subTitle.indexOf('ended') >= 0;
+	getItemState(isFinished) {
+		const { isDrawn, winner, betAmount, isWinner } = this.props.data;
 
 		if (!isFinished) {
 			if (betAmount) {
@@ -70,7 +67,7 @@ class DrawListItem extends Component {
 	render() {
 		const { drawId, endDate, prizeTitle, prizeImageUrl, betAmount, winner, isWinner } = this.props.data;
 		const subTitle = dateFormat(endDate);
-		const itemState = this.getItemState(subTitle, betAmount, isWinner);
+		const itemState = this.getItemState(subTitle.indexOf('ended') >= 0);
 		const itemClasses = this.getItemClass(itemState);
 		const betLabelText = `You bet ${betAmount} point${betAmount > 1 ? 's' : ''}`;
 		const userWinnerImg = require('../../static/images/user-winner.svg');

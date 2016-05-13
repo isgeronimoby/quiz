@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { requestAuth, postDrawBet } from '../../flux/actions';
+import DrawWinner from '../DrawWinner';
 import DrawBet from '../DrawBet';
 import BetSuccess from '../BetSuccess'; // TODO - rename
 import DrawBetExit from '../DrawBetExit';
@@ -46,24 +48,42 @@ class DrawContainer extends Component {
 				.then(() => {
 					this.nextView('success');
 				})
-				.catch(() => {});
+				.catch(() => {
+				});
 		}
 	}
 
 
 	render() {
 		const { isLoggedIn, points, drawItem, betError } = this.props;
-		const demoPoints = !isLoggedIn ? 10 : 0;
 		const { view } = this.state;
+		const { prizeTitle, endDate } = drawItem;
+		const isFinished = moment.utc(endDate).fromNow().indexOf('ago') >= 0;
+		console.log(">> isFinished", isFinished, moment.utc(endDate).fromNow());
+
+		const demoPoints = !isLoggedIn ? 10 : 0;
 		const onBetSubmit = (betPoints) => this.submitBet(betPoints);
-		const onSuccessDissmiss = () => this.nextView('exit');
+		const onSuccessDismiss = () => this.nextView('exit');
 
 		let View;
 		if (view === 'bet') {
-			View = <DrawBet points={ points } demoPoints={ demoPoints } drawItem={ drawItem } betError={ betError } onSubmit={ onBetSubmit }/>;
+			if (isFinished) {
+				View = (
+					<DrawWinner drawItem={ drawItem }/>
+				);
+			} else {
+				View = (
+					<DrawBet
+						points={ points }
+						demoPoints={ demoPoints }
+						drawItem={ drawItem }
+						betError={ betError }
+						onSubmit={ onBetSubmit }/>
+				);
+			}
 		}
 		else if (view === 'success') {
-			View = <BetSuccess onDismiss={ onSuccessDissmiss }/>;
+			View = <BetSuccess onDismiss={ onSuccessDismiss }/>;
 		}
 		else if (view === 'exit') {
 			View = <DrawBetExit />
@@ -71,7 +91,7 @@ class DrawContainer extends Component {
 
 		return (
 			<div className="screen">
-				<HeaderOverlay title={ drawItem.prizeTitle }/>
+				<HeaderOverlay title={ prizeTitle }/>
 				{ View }
 			</div>
 		);
