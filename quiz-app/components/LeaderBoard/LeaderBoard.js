@@ -16,25 +16,26 @@ class LeaderBoard extends Component {
 	};
 
 	render() {
-		const { top3, users, profile: {rank: myRank = 0} } = this.props;
-		const rankTitle = `You are ranked ${myRank}`;
+		const { top3, users, profile: {userId: profileUserId} } = this.props;
+		const myUser = users.find(({ userId }) => userId === profileUserId);
+		const rankTitle = myUser ? `You are ranked ${myUser.rank}` : '';
 		const top3cols = top3.map((user, i) => {
-			const {userId, imageUrl, name, points } = user;
+			const {userId, imageUrl, name, points, rank } = user;
 
 			return (
 				<div key={`top-user-${i}`} className="col">
-					<Logo src={ imageUrl } rank={ i + 1 }/>
+					<Logo src={ imageUrl } rank={ rank }/>
 					<div className="user-name">{ name }</div>
 					<div className="user-points">{ points } points</div>
 				</div>
 			);
 		});
 		const playerItems = users.map((user, i) => {
-			const { userId, imageUrl, name, points} = user;
+			const { userId, imageUrl, name, points, rank } = user;
 
 			return (
 				<div key={`user-${i}`} className={"user-list-item"}>
-					<div className="user-rank">{ i + 1 }</div>
+					<div className="user-rank">{ rank }</div>
 					<Logo src={imageUrl}/>
 					<div className="user-details">
 						<div className="user-name large">{ name }</div>

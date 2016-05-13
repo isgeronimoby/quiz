@@ -20,12 +20,13 @@ class Leaders extends Component {
 
 	render() {
 		const { userList: { isFetching, list } } = this.props;
+		const listSorted = list.sort((a, b) => a.rank - b.rank);
 
 		if (isFetching) {
 			return <Fetching/>;
 		}
 		return (
-			<LeaderBoardContainer list={ list }/>
+			<LeaderBoardContainer list={ listSorted }/>
 		);
 	}
 

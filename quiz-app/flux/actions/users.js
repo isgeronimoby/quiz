@@ -28,12 +28,14 @@ function fetchUserListSuccess(json) {
 			UserName: name,
 			ImageUrl: imageUrl,
 			Amount: points,
+			Rank: rank,
 			}) => {
 			return {
 				userId,
 				name,
 				imageUrl,
-				points
+				points,
+				rank
 			};
 		}),
 		receivedAt: Date.now()
