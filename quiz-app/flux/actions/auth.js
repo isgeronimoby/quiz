@@ -1,5 +1,5 @@
-import fetch, { apiPrefix, apiKey } from '../../lib/fetch.js';
-import { Window } from '../../lib/utils.js';
+import fetch, { apiPrefix, iframeSrc, apiKey, rpc } from '../../lib/fetch.js';
+import { Window, isSafari } from '../../lib/utils.js';
 import { fetchProfile, fetchProfileSuccess } from './profile.js'
 const popup = new Window();
 
@@ -18,8 +18,9 @@ export const POST_RESTORE = 'POST_RESTORE';
 export const POST_RESTORE_ERROR = 'POST_RESTORE_ERROR';
 export const POST_RESTORE_SUCCESS = 'POST_RESTORE_SUCCESS';
 
-
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+
+export const SAFARI_COOKIE_HACKED = 'SAFARI_COOKIE_HACKED';
 
 
 /*
@@ -35,10 +36,50 @@ export function toggleWelcome(show) {
 /*
  Common Auth
  */
-export function requestAuth(authPopupView = 'signup') {
+function requestAuthPopup(authPopupView = 'signup') {
 	return {
 		type: REQUEST_AUTH,
 		authPopupView
+	};
+}
+
+function safariCookieHack() {
+	return {
+		type: SAFARI_COOKIE_HACKED
+	};
+}
+
+function requestAuthWithSafariFix(authPopupView) {
+	return (dispatch, getState) => {
+		const { auth: {safariCookieHacked} } = getState();
+
+		if (safariCookieHacked) {
+			return dispatch(requestAuthPopup(authPopupView));
+		}
+
+		// Open window on target domain and let it set cookie (i.e. visit it) and close itself.
+		// A hack for Safari that do not allow setting cookies to unvisited domains, thus breaking session cookies.
+		//
+		const url = `${iframeSrc}?safarifix`; // the page detects this flag, sets 'safarifix' cookie and closes itself
+		const title = '_blank';
+		const settings = 'menubar=no,location=no,resizable=no,scrollbars=no,status=no,width=1,height=1,top=0,left=0';
+
+		popup.open({url, title, settings}, () => {
+			rpc.readClubCookie('safarifix', () => {
+				dispatch(safariCookieHack());
+				dispatch(requestAuthPopup(authPopupView));
+			});
+		});
+	};
+}
+
+export function requestAuth(authPopupView) {
+	return (dispatch) => {
+		if (!isSafari) {
+			dispatch(requestAuthPopup(authPopupView));
+		} else {
+			dispatch(requestAuthWithSafariFix(authPopupView));
+		}
 	};
 }
 

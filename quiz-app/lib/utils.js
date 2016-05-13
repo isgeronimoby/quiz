@@ -4,11 +4,11 @@ export class Window {
 	windowRef = null;
 	windowTimer = null;
 
-	open({url, title}, onClose) {
+	open({url, title, settings}, onClose) {
 		let {windowRef, windowTimer} = this;
 
 		if (windowRef == null || windowRef.closed) {
-			windowRef = window.open(url, title, 'resizable=yes,scrollbars=yes,status=yes');
+			windowRef = window.open(url, title, settings || 'resizable=yes,scrollbars=yes,status=yes');
 			windowRef.focus();
 			windowTimer = setInterval(() => {
 				if (windowRef.closed) {
@@ -23,4 +23,7 @@ export class Window {
 	}
 }
 
+// Ugly browser-sniff
+//
+export const isSafari = navigator.userAgent.indexOf("Safari") > -1;
 
