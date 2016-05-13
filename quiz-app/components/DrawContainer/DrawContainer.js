@@ -68,8 +68,8 @@ class DrawContainer extends Component {
 	render() {
 		const { isLoggedIn, points, drawItem, betError } = this.props;
 		const { view } = this.state;
-		const { prizeTitle, isDrawn, isWinner, needToClaim } = drawItem;
-		//console.log('>>isDrawn=%s, isWinner=%s, needToClaim=%s', isDrawn, isWinner, needToClaim);
+		const { prizeTitle, isDrawn, winner, isWinner, needToClaim } = drawItem;
+		//console.log('>>isDrawn=%s, isWinner=%s, needToClaim=%s, winner=', isDrawn, isWinner, needToClaim, winner);
 
 		const demoPoints = !isLoggedIn ? 10 : 0;
 		const onBetSubmit = (betPoints) => this.submitBet(betPoints);
@@ -86,6 +86,13 @@ class DrawContainer extends Component {
 						drawItem={ drawItem }
 						betError={ betError }
 						onSubmit={ onBetSubmit }/>
+				);
+			} else if (!winner) {
+				View = (
+					<DrawStatic drawItem={ drawItem } withLabel={false}>
+						<h2 className="draw-claim-title">Nobody played this Draw</h2>
+						<h4 className="draw-claim-subtitle">Prize will be played again after some time</h4>
+					</DrawStatic>
 				);
 			} else if (!isWinner) {
 				View = <DrawWinner drawItem={ drawItem }/>;

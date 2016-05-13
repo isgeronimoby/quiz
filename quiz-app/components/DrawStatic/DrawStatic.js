@@ -9,13 +9,15 @@ class DrawStatic extends Component {
 
 	static propTypes = {
 		drawItem: PropTypes.object.isRequired,
+		withLabel: PropTypes.bool.isRequired,
 		children: PropTypes.any.isRequired,
 	};
 
 	render() {
-		const { drawItem: {prizeTitle, prizeImageUrl, prizeDescription, endDate}, children } = this.props;
+		const { drawItem: {prizeTitle, prizeImageUrl, prizeDescription, endDate}, withLabel, children } = this.props;
 		const titleDateEnded = `Finished ${ moment.utc(endDate).fromNow() }`;
 		const dateFormatted = moment.utc(endDate).format('YYYY/MM');
+		const labelMaybe = withLabel ? <div className="draw-details-label orange">You won!</div> : '';
 
 		return (
 			<div className="draw-content draw-static">
@@ -28,7 +30,7 @@ class DrawStatic extends Component {
 						<h3 className="list-title">{ prizeTitle }</h3>
 						<h5 className="list-meta">{ dateFormatted }</h5>
 					</div>
-					<div className="draw-details-label orange">You won!</div>
+					{ labelMaybe }
 				</div>
 
 				<SectionCollapsible>
