@@ -10,8 +10,9 @@ class Draws extends Component {
 	static title = 'Draws';
 
 	static propTypes = {
-		draws: PropTypes.object.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
+		draws: PropTypes.object.isRequired,
+		profile: PropTypes.object.isRequired,
 		fetchProfile: PropTypes.func.isRequired,
 		fetchDraws: PropTypes.func.isRequired,
 		fetchPlayedDraws: PropTypes.func.isRequired,
@@ -32,12 +33,12 @@ class Draws extends Component {
 
 	render() {
 
-		const { draws: { isFetching, list } } = this.props;
+		const { draws: { isFetching, list }, profile } = this.props;
 
 		if (isFetching) {
 			return <Fetching/>;
 		}
-		return <DrawList list={ list }/>;
+		return <DrawList list={ list } profile={ profile }/>;
 	}
 }
 
@@ -45,8 +46,9 @@ class Draws extends Component {
 //
 const mapStateToProps = (state) => {
 	return {
-		draws: state.draws,
 		isLoggedIn: state.auth.isLoggedIn,
+		draws: state.draws,
+		profile: state.profile,
 	};
 };
 const mapDispatchToProps = (dispatch) => {

@@ -83,6 +83,10 @@ Lists
   &.green {
     background: $brand-color;
   }
+  &.winner {
+    background: $color-winner;
+    text-transform: uppercase;
+  }
 }
 .list-item-arrow {
   width: 3.6rem;

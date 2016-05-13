@@ -46,6 +46,7 @@ function fetchDrawsSuccess(json) {
 				Description: prizeDescription,
 				ImageUrl: prizeImageUrl,
 				},
+			Winner: winner,
 			}) => {
 			return {
 				drawId,
@@ -55,6 +56,7 @@ function fetchDrawsSuccess(json) {
 				prizeTitle,
 				prizeDescription,
 				prizeImageUrl,
+				winner,
 			}
 		}),
 		receivedAt: Date.now()
@@ -106,23 +108,18 @@ export function fetchDrawsIfNeeded() {
 /*
  User completed draws
  */
-function fetchPlayedDrawsStart() {
-	return {
-		type: FETCH_PLAYED_DRAWS
-	};
-}
 
 function fetchPlayedDrawsSuccess(json) {
 	return {
 		type: FETCH_PLAYED_DRAWS_SUCCESS,
 		payload: json.DrawEntries.map(({
 			DrawId: drawId,
-			TicketsAmount: ticketsAmount,
+			TicketsAmount: betAmount,
 			IsWinner: isWinner,
 			}) => {
 			return {
 				drawId,
-				ticketsAmount,
+				betAmount,
 				isWinner,
 			}
 		}),
@@ -139,8 +136,6 @@ function fetchPlayedDrawsError(error) {
 
 export function fetchPlayedDraws() {
 	return (dispatch) => {
-		//dispatch(fetchPlayedDrawsStart());
-
 		return fetch({
 			endpoint: 'Draw/GetDrawEntries'
 		}).then((json) => {

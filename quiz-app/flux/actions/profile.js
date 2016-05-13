@@ -59,6 +59,7 @@ export function fetchProfile() {
 			dispatch(successAuth());
 		}).catch(({ Message: error = 'Invalid'}) => {
 			dispatch(fetchProfileError(error)); // TODO
+			throw error;
 		});
 	};
 }
