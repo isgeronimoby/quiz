@@ -4,6 +4,7 @@ import moment from 'moment';
 import { requestAuth, postDrawBet, postDrawClaim } from '../../flux/actions';
 import DrawWinner from '../DrawWinner';
 import DrawClaimPrize from '../DrawClaimPrize';
+import DrawStatic from '../DrawStatic';
 import DrawBet from '../DrawBet';
 import BetSuccess from '../BetSuccess'; // TODO - rename
 import DrawBetExit from '../DrawBetExit';
@@ -67,8 +68,8 @@ class DrawContainer extends Component {
 	render() {
 		const { isLoggedIn, points, drawItem, betError } = this.props;
 		const { view } = this.state;
-		const { prizeTitle, isDrawn, isWinner } = drawItem;
-		console.log('>>isDrawn=%s, isWinner=%s', isDrawn, isWinner);
+		const { prizeTitle, isDrawn, isWinner, needToClaim } = drawItem;
+		//console.log('>>isDrawn=%s, isWinner=%s, needToClaim=%s', isDrawn, isWinner, needToClaim);
 
 		const demoPoints = !isLoggedIn ? 10 : 0;
 		const onBetSubmit = (betPoints) => this.submitBet(betPoints);
@@ -86,12 +87,17 @@ class DrawContainer extends Component {
 						betError={ betError }
 						onSubmit={ onBetSubmit }/>
 				);
+			} else if (!isWinner) {
+				View = <DrawWinner drawItem={ drawItem }/>;
+			} else if (needToClaim) {
+				View = <DrawClaimPrize drawItem={ drawItem } onSubmit={ onClaimSubmit }/>;
 			} else {
-				if (isWinner) {
-					View = <DrawClaimPrize drawItem={ drawItem } onSubmit={ onClaimSubmit }/>;
-				} else {
-					View = <DrawWinner drawItem={ drawItem }/>;
-				}
+				View = (
+					<DrawStatic drawItem={ drawItem } withLabel={true}>
+						<h2 className="draw-claim-title">We'll contact you in 2 days</h2>
+						<h4 className="draw-claim-subtitle">Prize will arrive to you in 1 month</h4>
+					</DrawStatic>
+				);
 			}
 		}
 		else if (view === 'success') {
