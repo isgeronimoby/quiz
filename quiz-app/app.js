@@ -25,6 +25,7 @@ const route = async (path, params = {}, callback) => {
 	const handler = routes[path] || routes['/404'];
 	const Component = await handler();
 	const pageTitle = Component.title || 'Index';
+
 	await callback(
 		<Layout title={pageTitle} path={path}>
 			<Component params={params}/>
@@ -35,8 +36,7 @@ const route = async (path, params = {}, callback) => {
 function run() {
 	const container = document.getElementById('app');
 	Location.listen(location => {
-		const pathname = location.pathname;
-		const state = location.state;
+		const { pathname, state } = location;
 		const path = pathname.slice(pathname.lastIndexOf('/'));
 
 		route(path, state, async (component) => {
