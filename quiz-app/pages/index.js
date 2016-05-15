@@ -24,7 +24,7 @@ class Index extends Component {
 	async componentDidMount() {
 		this.showWelcomeIfNeeded();
 		await this.props.fetchFixtures();
-		this.visitFirstQuiz()
+		setTimeout(() => this.visitFirstQuizOrList(), MIN_DELAY);
 	}
 
 	componentWillReceiveProps({showWelcomePopup}) {
@@ -42,15 +42,17 @@ class Index extends Component {
 		}
 	}
 
-	visitFirstQuiz() {
-		const { matchId } = this.props.fixtureList[0];
+	visitFirstQuizOrList() {
+		const firstQuiz = this.props.fixtureList[0];
 
-		setTimeout(() => {
+		if (firstQuiz) {
 			Location.push({
 				pathname: './quiz',
-				state: {matchId}
+				state: {matchId: firstQuiz.matchId}
 			});
-		}, MIN_DELAY);
+		} else {
+			Location.push({pathname: './fixtures'});
+		}
 	}
 
 	render() {
