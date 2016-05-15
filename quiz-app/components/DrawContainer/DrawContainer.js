@@ -24,6 +24,7 @@ class DrawContainer extends Component {
 
 	static propTypes = {
 		drawItem: PropTypes.object.isRequired,
+		nextDrawItem: PropTypes.object.isRequired,
 		// from store
 		isLoggedIn: PropTypes.bool.isRequired,
 		points: PropTypes.number.isRequired,
@@ -66,11 +67,10 @@ class DrawContainer extends Component {
 	}
 
 	render() {
-		const { isLoggedIn, points, drawItem, betError } = this.props;
+		const { isLoggedIn, points, drawItem, nextDrawItem, betError } = this.props;
 		const { view } = this.state;
 		const { prizeTitle, isDrawn, winner, isWinner, needToClaim } = drawItem;
-		//console.log('>>isDrawn=%s, isWinner=%s, needToClaim=%s, winner=', isDrawn, isWinner, needToClaim, winner);
-
+		const title = (view !== 'exit') ? prizeTitle : nextDrawItem.prizeTitle;
 		const demoPoints = !isLoggedIn ? 10 : 0;
 		const onBetSubmit = (betPoints) => this.submitBet(betPoints);
 		const onClaimSubmit = (formData) => this.submitClaim(formData);
@@ -111,12 +111,12 @@ class DrawContainer extends Component {
 			View = <BetSuccess onDismiss={ onSuccessDismiss }/>;
 		}
 		else if (view === 'exit') {
-			View = <DrawBetExit />
+			View = <DrawBetExit nextDrawItem={ nextDrawItem } />
 		}
 
 		return (
 			<div className="screen">
-				<HeaderOverlay title={ prizeTitle }/>
+				<HeaderOverlay title={ title }/>
 				{ View }
 			</div>
 		);

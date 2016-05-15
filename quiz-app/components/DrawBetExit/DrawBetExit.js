@@ -1,28 +1,22 @@
 import React, { Component, PropTypes } from 'react';
 import Link from '../Link';
-import { SharingPopup } from '../Popup';
 import './DrawBetExit.scss';
 
 
 class DrawBetExit extends Component {
 
 	static propTypes = {
+		nextDrawItem: PropTypes.object.isRequired
 	};
 
-	showPopup() {
-		// TODO
-		this.refs['sharing-popup'].show(3000);
-	}
-
 	render() {
+		const { drawId, prizeImageUrl } = this.props.nextDrawItem;
 
 		return (
-			<div className="draw-exit" >
-				<SharingPopup ref="sharing-popup" />
-
-				<div className="big-image">
-					Amazing illustration here
-				</div>
+			<div className="draw-exit">
+				<Link className="big-image" to="./draw" state={ {drawId} }>
+					<img src={ prizeImageUrl }/>
+				</Link>
 
 				<Link className="big-btn share-btn" to="./earn">
 					Earn more points

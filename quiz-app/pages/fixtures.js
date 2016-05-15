@@ -19,8 +19,12 @@ class Fixtures extends Component {
 
 	async componentDidMount() {
 		this.props.fetchFixtures();
-		await this.props.fetchProfile();
-		this.props.fetchPlayedFixtures();
+		try {
+			await this.props.fetchProfile();
+			this.props.fetchPlayedFixtures();
+		} catch (e) {
+			//nothing
+		}
 	}
 
 	componentWillReceiveProps({isLoggedIn}) {
@@ -35,6 +39,10 @@ class Fixtures extends Component {
 
 		if (isFetching) {
 			return <Fetching/>;
+		}
+
+		if (list.length === 0) {
+			return <div className="text-regular text-center">No items</div>; // TODO - design
 		}
 		return <FixtureList list={ list }/>;
 	}

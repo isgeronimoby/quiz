@@ -27,3 +27,15 @@ export class Window {
 //
 export const isSafari = navigator.userAgent.indexOf("Safari") > -1;
 
+
+// Assuming the list is sorted by endDate, then return the first one that is not selected,
+// so it will be for sure either a) latest live or b) latest drawn.
+//
+export function getNextDrawItem(drawList, selectedDrawItem = {}) {
+	for (let draw of drawList) {
+		if (draw.drawId !== selectedDrawItem.drawId) {
+			return draw;
+		}
+	}
+	return undefined;
+}
