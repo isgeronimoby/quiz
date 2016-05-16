@@ -33,7 +33,7 @@ function parseData(data, selectedOutcomeId) {
 	const otherPlayersSorted = [
 		...players.slice(0, noGoalPlayerIdx),
 		...players.slice(noGoalPlayerIdx + 1)
-	].sort((a, b) => (a.percent < b.percent));
+	].sort((a, b) => (b.percent - a.percent));
 	const adjustedPlayers = [
 		{
 			...noGoalPlayer,
