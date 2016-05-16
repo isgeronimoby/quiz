@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import Link from '../Link';
 import './Header.scss';
 
 
@@ -26,10 +27,10 @@ class Header extends Component {
 					<img className="icon-menu" src={require('./images/icon-menu.svg')}/>
 				</div>
 
-				<div className={ "header-points " + pointsClass }>
+				<Link className={ "header-points " + pointsClass } to="./earn">
 					<img className="icon-points" src={ require('../../static/images/icon-cup.svg') }/>
 					{ points }
-				</div>
+				</Link>
 			</div>
 		);
 	}
