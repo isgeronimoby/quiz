@@ -57,15 +57,21 @@ function requestAuthWithSafariFix(authPopupView) {
 			return dispatch(requestAuthPopup(authPopupView));
 		}
 
-		// Open window on target domain and let it set cookie (i.e. visit it) and close itself.
-		// A hack for Safari that do not allow setting cookies to unvisited domains, thus breaking session cookies.
-		//
-		const url = `${iframeSrc}?safarifix`; // the page detects this flag, sets 'safarifix' cookie and closes itself
-		const title = '_blank';
-		const settings = 'menubar=no,location=no,resizable=no,scrollbars=no,status=no,width=1,height=1,top=0,left=0';
+		rpc.readClubCookie('safarifix', (res) => {
+			if (res) {
+				dispatch(safariCookieHack());
+				return dispatch(requestAuthPopup(authPopupView));
+			}
 
-		popup.open({url, title, settings}, () => {
-			rpc.readClubCookie('safarifix', () => {
+			// Open window on target domain and let it set cookie (i.e. visit it) and close itself.
+			// A hack for Safari that do not allow setting cookies to unvisited domains, thus breaking session cookies.
+			//
+			const url = `${iframeSrc}?safarifix`; // the page detects this flag, sets 'safarifix' cookie and closes itself
+			const title = '_blank';
+			const settings = 'menubar=no,location=no,resizable=no,scrollbars=no,status=no,width=1,height=1,top=0,left=0';
+
+			popup.open({url, title, settings}, () => {
+				// Assume cookie is set after window is closed
 				dispatch(safariCookieHack());
 				dispatch(requestAuthPopup(authPopupView));
 			});

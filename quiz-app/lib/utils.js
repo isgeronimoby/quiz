@@ -23,9 +23,9 @@ export class Window {
 	}
 }
 
-// Ugly browser-sniff
+// is Safari: feature-detect
 //
-export const isSafari = navigator.userAgent.indexOf("Safari") > -1;
+export const isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
 
 
 // Assuming the list is sorted by endDate, then return the first one that is not selected,
