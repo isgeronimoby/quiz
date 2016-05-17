@@ -70,7 +70,9 @@ class QuizScoreControls extends Component {
 		});
 		const scoreBtns = [...Array(10).keys()].map(i => {
 			return (
-				<div key={`btn-${i}`} className="score-btn" onClick={() => this.selectScore(i)}>{ i }</div>
+				<div key={`btn-${i}`} className="score-btn-col">
+					<div className="score-btn" onClick={() => this.selectScore(i)}>{ i }</div>
+				</div>
 			);
 		});
 
