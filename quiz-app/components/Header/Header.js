@@ -19,12 +19,12 @@ class Header extends Component {
 
 		return (
 			<div className="header">
-				<div className="header-title">
-					<h2>{ title }</h2>
-				</div>
-
 				<div className="nav-button" onClick={ onMenuBtnClick }>
 					<img className="icon-menu" src={require('./images/icon-menu.svg')}/>
+				</div>
+
+				<div className="header-title">
+					<h2>{ title }</h2>
 				</div>
 
 				<Link className={ "header-points " + pointsClass } to="./earn">
