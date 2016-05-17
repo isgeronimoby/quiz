@@ -1,12 +1,16 @@
 @import '../variables.scss';
 @import '../utils.scss';
 .quiz-exit {
-  height: 100%;
+  padding: 15px;
   overflow-y: auto;
   text-align: center;
 
   & > .text-regular {
-    margin: -20px 0 15px;
+    margin: -10px 0 15px;
+  }
+
+  .big-btn {
+    margin: 0 0 15px;
   }
 
   .money-btn {
