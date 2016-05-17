@@ -69,14 +69,19 @@ $icon-sz: 55px;
   display: flex;
   justify-content: center;
   align-items: center;
-  .strike.flip {
-    transform: rotate(180deg);
+  .strike {
+    width: 96px;
+    height: 1px;
+    &.flip {
+      transform: rotate(180deg);
+    }
   }
 }
 /*
 Form
 */
 .auth-form {
+  width: 100%;
   margin: 5px 0 10px;
 
   .share-btn {
