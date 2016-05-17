@@ -57,8 +57,7 @@ class Index extends Component {
 			Location.push({
 				pathname: './quiz',
 				state: {
-					matchId: firstNotPlayedQuiz.matchId,
-					fixtureItem: firstNotPlayedQuiz,
+					matchId: firstNotPlayedQuiz.matchId
 				}
 			});
 		} else {

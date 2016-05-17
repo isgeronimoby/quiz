@@ -34,7 +34,7 @@ class FixtureListItem extends Component {
 				<div className={ "fixture-item-header " + headerClass }>
 					<h5>{ header }</h5>
 				</div>
-				<Link className="fixture-item-body" to="./quiz" state={ {matchId, fixtureItem} }>
+				<Link className="fixture-item-body" to="./quiz" state={ {matchId} }>
 					<div className="fixture-item-team-icons">
 						<div className="fixture-item-team">
 							<img src={ teamHomeIcon }/>

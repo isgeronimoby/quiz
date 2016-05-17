@@ -1,10 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { fetchProfileIfNeeded, fetchQuiz, selectQuiz, fetchOdds } from '../flux/actions';
+import Location from '../lib/Location';
+import { fetchProfileIfNeeded, fetchFixturesIfNeeded, fetchPlayedFixtures, fetchQuiz, selectQuiz, fetchOdds } from '../flux/actions';
 import { Fetching } from '../components/Layout';
 import QuizContainer from '../components/QuizContainer';
 import QuizSummaryPlayed from '../components/QuizSummaryPlayed';
+
+function goToFixturesPage() {
+	Location.push({pathname: './fixtures'});
+}
 
 
 class Quiz extends Component {
@@ -15,29 +20,48 @@ class Quiz extends Component {
 		params: PropTypes.object.isRequired,
 		// from store
 		isFetching: PropTypes.bool.isRequired,
+		fixtureItem: PropTypes.object,
 		questionData: PropTypes.object,
 		isValidating: PropTypes.bool,
 		odds: PropTypes.number,
 		invalidOutcomes: PropTypes.array,
 
 		fetchProfile: PropTypes.func.isRequired,
+		fetchFixtures: PropTypes.func.isRequired,
+		fetchPlayedFixtures: PropTypes.func.isRequired,
 		fetchQuiz: PropTypes.func.isRequired,
 		selectQuiz: PropTypes.func.isRequired,
 		fetchOdds: PropTypes.func.isRequired,
 	};
 
-	async componentDidMount() {
-		const { params: { matchId }, fetchProfile, fetchQuiz, selectQuiz } = this.props;
+	componentWillMount() {
+		const { params } = this.props;
 
-		fetchProfile(); // need points for bet, etc
+		// Url copy-paste is not supported
+		if (!params || !params.matchId) {
+			goToFixturesPage();
+		}
+	}
+
+	async componentDidMount() {
+		const { params: { matchId }, fetchProfile, fetchFixtures, fetchPlayedFixtures, fetchQuiz, selectQuiz } = this.props;
+
 		selectQuiz(matchId); // first select, then fetch
 		fetchQuiz(matchId);
+		fetchFixtures(); // for fixtureItem
+		try {
+			fetchProfile(); // need points for bet, etc
+			await fetchPlayedFixtures(); // for fixtureItem
+		} catch (e) {
+			//nothing
+		}
 	}
 
 	render() {
 		const {
-			params: { matchId, fixtureItem },
+			params: { matchId },
 			isFetching,
+			fixtureItem,
 			questionData: { startDate, teamHome, teamAway, questionList} = {},
 			isValidating,
 			odds,
@@ -88,11 +112,19 @@ class Quiz extends Component {
 // Connect to store
 //
 const mapStateToProps = (state) => {
-	return state.quizes[state.selectedQuiz] || {isFetching: true};
+	const quiz = state.quizes[state.selectedQuiz] || {isFetching: true};
+	const fixtureItem = state.fixtures.list.find(f => f.matchId === state.selectedQuiz) || {};
+
+	return {
+		...quiz,
+		fixtureItem,
+	};
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchProfile: () => dispatch(fetchProfileIfNeeded()),
+		fetchFixtures: () => dispatch(fetchFixturesIfNeeded()),
+		fetchPlayedFixtures: () => dispatch(fetchPlayedFixtures()),
 		fetchQuiz: (matchId) => dispatch(fetchQuiz(matchId)),
 		selectQuiz: (matchId) => dispatch(selectQuiz(matchId)),
 		fetchOdds: (matchId, answer) => dispatch(fetchOdds(matchId, answer)),

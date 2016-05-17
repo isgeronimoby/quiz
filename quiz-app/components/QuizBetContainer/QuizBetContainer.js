@@ -1,10 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { requestAuth, postQuizBet, fetchRewards, startSharingFacebook, startSharingTwitter } from '../../flux/actions';
+import { Fetching } from '../Layout';
 import QuizBet from '../QuizBet';
 import BetSuccess from '../BetSuccess';
 import Location from '../../lib/Location';
 import '../QuizContainer/quiz.scss';
+
+function goToQuizPage(matchId) {
+	Location.push({pathname: './quiz', state: {matchId}});
+}
+
+function goToExitPage() {
+	Location.push({pathname: './exit',});
+}
 
 
 class QuizBetContainer extends Component {
@@ -14,11 +23,7 @@ class QuizBetContainer extends Component {
 		// from store
 		isLoggedIn: PropTypes.bool.isRequired,
 		points: PropTypes.number.isRequired,
-		odds: PropTypes.number.isRequired,
-		answers: PropTypes.array.isRequired,
-		isBetting: PropTypes.bool.isRequired,
-		betSuccess: PropTypes.bool.isRequired,
-		betError: PropTypes.string.isRequired,
+		quizData: PropTypes.object.isRequired,
 		openAuthPopup: PropTypes.func.isRequired,
 		postQuizBet: PropTypes.func.isRequired,
 	};
@@ -27,12 +32,27 @@ class QuizBetContainer extends Component {
 		view: 'bet'
 	};
 
+	componentWillMount() {
+		const { params: {matchId}, quizData: { answers } } = this.props;
+
+		// Redirect back to quiz if no data in store (page refresh scenario is not supported)
+		if (!answers) {
+			goToQuizPage(matchId);
+		}
+	}
+
 	nextView(view) {
 		this.setState({view});
 	}
 
 	submitBet(betPoints) {
-		const { params: {matchId}, isLoggedIn, answers, openAuthPopup, postQuizBet } = this.props;
+		const {
+			params: {matchId},
+			isLoggedIn,
+			quizData: { answers },
+			openAuthPopup,
+			postQuizBet
+			} = this.props;
 
 		if (!isLoggedIn) {
 			openAuthPopup();
@@ -43,18 +63,17 @@ class QuizBetContainer extends Component {
 		}
 	}
 
-	goToExitPage() {
-		Location.push({
-			pathname: './exit',
-		});
-	}
-
 	render() {
-		const { isLoggedIn, points, odds, betError } = this.props;
+		const { isLoggedIn, points, quizData: { odds, betError, answers } } = this.props;
 		const demoPoints = !isLoggedIn ? 10 : 0;
 		const oddsList = [odds, 1];
 		const { view } = this.state;
 		const onSubmitBet = (betPoints) => this.submitBet(betPoints);
+		const onDismissSuccess = () => goToExitPage();
+
+		if (!answers) {
+			return <Fetching />;
+		}
 
 		let View;
 		if (view === 'bet') {
@@ -67,7 +86,7 @@ class QuizBetContainer extends Component {
 				onSubmitBet={ onSubmitBet }/>;
 		}
 		else if (view === 'success') {
-			View = <BetSuccess onDismiss={() => this.goToExitPage() }/>;
+			View = <BetSuccess onDismiss={ onDismissSuccess }/>;
 		}
 
 		return (
@@ -83,17 +102,12 @@ class QuizBetContainer extends Component {
 //
 const mapStateToProps = (state) => {
 	const matchId = state.selectedQuiz;
-	const quiz = state.quizes[matchId];
-	const { answers, odds, isBetting, betSuccess, betError } = quiz || {};
+	const quizData = state.quizes[matchId] || {};
 
 	return {
 		isLoggedIn: state.auth.isLoggedIn,
 		points: state.profile.points,
-		answers,
-		odds,
-		isBetting,
-		betSuccess,
-		betError,
+		quizData,
 	};
 };
 const mapDispatchToProps = (dispatch) => {
