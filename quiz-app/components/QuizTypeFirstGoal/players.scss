@@ -39,9 +39,9 @@
   color: $color-grey;
 }
 
-
+$head-h: 140px;
 .stats-spacer {
-  height: 138px;
+  min-height: $head-h;
 }
 .stats-item {
   height: 81px;

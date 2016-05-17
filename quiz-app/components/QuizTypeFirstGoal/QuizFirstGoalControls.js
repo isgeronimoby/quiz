@@ -36,8 +36,10 @@ class QuizFirstGoalControls extends Component {
 
 		return (
 			<div className="quiz-controls">
-				<div className="quiz-info">{ info }</div>
-				<div className="quiz-title">{ title }</div>
+				<div className="stats-spacer">
+					<div className="quiz-info">{ info }</div>
+					<div className="quiz-title">{ title }</div>
+				</div>
 
 				<ul className="players-list">
 					{ playerItems }
