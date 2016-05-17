@@ -18,11 +18,11 @@ class QuizWinOrDrawStats extends Component {
 	render() {
 		const { hidden, order, outcomeId, outcomes, onDismiss } = this.props;
 		const classes = !hidden ? 'reveal' : '';
-		const bottomPercent = 84; // by trial
+		const [fromY, toY] = [80, 10]; // by trial
 		const columns = order
 			.map((key, i) => {
 				const percent = !hidden ? outcomes[key].percent : 0;
-				const sz = !hidden ? bottomPercent - bottomPercent * percent / 100 : 100;
+				const sz = hidden ? 100 : fromY - (fromY - toY) * percent / 100;
 				const winnerClass = (outcomeId === outcomes[key].id ? 'winner' : '');
 
 				return (

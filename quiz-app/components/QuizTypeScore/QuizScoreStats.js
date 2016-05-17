@@ -16,8 +16,8 @@ class QuizScoreStats extends Component {
 	render() {
 		const { hidden, onDismiss, percent } = this.props;
 		const classes = !hidden ? 'reveal' : '';
-		const bottomPercent = 84; // by trial
-		const sz = !percent ? 100 : (bottomPercent - bottomPercent * percent / 100);
+		const [fromY, toY] = [80, 10]; // by trial
+		const sz = !percent ? 100 : fromY - (fromY - toY) * percent / 100;
 
 		const hammerOptions = {
 			recognizers: {
