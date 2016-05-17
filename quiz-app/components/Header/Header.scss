@@ -14,9 +14,24 @@ $title-pad: 6.8rem;
 
 .nav-button {
   width: 5.2rem;
+  font-size: 1.7rem;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &.back {
+    width: 8rem;
+    img {
+      width: 8px;
+      height: 14px;
+      margin-right: 5px;
+    }
+  }
+
+  &.logout {
+    width: 8rem;
+    color: $brand-color-dark;
+  }
 }
 
 .header-title {
@@ -55,40 +70,4 @@ $title-pad: 6.8rem;
 .icon-points {
   width: 1.8rem;
   margin-right: 0.8rem;
-}
-
-/*
-Header overlay - somewhat hacky way to change title/menu btn
-*/
-.header.header-overlay {
-  left: $title-pad; right: $title-pad;
-  background: transparent;
-
-  & > * {
-    background-color: $brand-color;
-  }
-
-  .header-title {
-    left: 0; right: 0;
-  }
-
-  $back-btn-w: 8rem;
-  .nav-button {
-    width: $back-btn-w;
-    margin-left: -7rem;
-    font-size: 1.7rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    img {
-      width: 8px;
-      height: 14px;
-      margin-right: 5px;
-    }
-
-    &.right {
-      margin-right: -7rem;
-      color: $brand-color-dark;
-    }
-  }
 }

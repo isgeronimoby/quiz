@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Fetching } from '../components/Layout';
 import { fetchPartners } from '../flux/actions';
 import PartnersContainer from '../components/PartnersContainer';
 
 
 class Partners extends Component {
 
-	static title = ' '; // set in overlay
+	static title = 'Betting partner';
 
 	static propTypes = {
 		// from store
@@ -22,7 +23,7 @@ class Partners extends Component {
 		const { partners: { isFetching, list } } = this.props;
 
 		if (isFetching) {
-			return <div/>; // TODO: spinner
+			return <Fetching/>;
 		}
 		return <PartnersContainer partnersList={ list }/>;
 	}

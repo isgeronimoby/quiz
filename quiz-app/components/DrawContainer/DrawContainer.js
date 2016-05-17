@@ -10,15 +10,6 @@ import BetSuccess from '../BetSuccess'; // TODO - rename
 import DrawBetExit from '../DrawBetExit';
 import '../Header/Header.scss';
 
-const HeaderOverlay = ({ title }) => {
-	return (
-		<div className="header header-overlay">
-			<div className="header-title">
-				<h2>{ title }</h2>
-			</div>
-		</div>
-	);
-};
 
 class DrawContainer extends Component {
 
@@ -33,10 +24,30 @@ class DrawContainer extends Component {
 		postDrawClaim: PropTypes.func.isRequired,
 		betError: PropTypes.string,
 	};
+	static contextTypes = {
+		updateHeader: PropTypes.func.isRequired,
+	};
 
 	state = {
 		view: 'bet'
 	};
+
+	componentDidMount() {
+		const { drawItem: { prizeTitle }} = this.props;
+
+		this.context.updateHeader({
+			title: prizeTitle
+		});
+	}
+	componentWillUpdate(nextProps, { view }) {
+		const { nextDrawItem: { prizeTitle }} = this.props;
+
+		if (view === 'exit') {
+			this.context.updateHeader({
+				title: prizeTitle
+			});
+		}
+	}
 
 	nextView(view) {
 		this.setState({view});
@@ -69,8 +80,7 @@ class DrawContainer extends Component {
 	render() {
 		const { isLoggedIn, points, drawItem, nextDrawItem, betError } = this.props;
 		const { view } = this.state;
-		const { prizeTitle, isDrawn, winner, isWinner, needToClaim } = drawItem;
-		const title = (view !== 'exit') ? prizeTitle : nextDrawItem.prizeTitle;
+		const { isDrawn, winner, isWinner, needToClaim } = drawItem;
 		const demoPoints = !isLoggedIn ? 10 : 0;
 		const onBetSubmit = (betPoints) => this.submitBet(betPoints);
 		const onClaimSubmit = (formData) => this.submitClaim(formData);
@@ -116,7 +126,6 @@ class DrawContainer extends Component {
 
 		return (
 			<div className="screen">
-				<HeaderOverlay title={ title }/>
 				{ View }
 			</div>
 		);

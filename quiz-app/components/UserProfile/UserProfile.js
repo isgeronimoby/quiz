@@ -4,38 +4,27 @@ import Logo from './Logo.js';
 import './UserProfile.scss';
 
 
-const HeaderOverlay = ({ title, onLogout }) => {
-	return (
-		<div className="header header-overlay">
-			<div className="header-title with-btn">
-				<h2>{ title }</h2>
-			</div>
-			<Link className="nav-button" goBack={true}>
-				<img src={ require('../../static/images/arrow-left-white.svg') } alt="Back"/> Back
-			</Link>
-			<div className="nav-button right" onClick={ onLogout }>
-				Logout
-			</div>
-		</div>
-	);
-};
-
-
 class UserProfile extends Component {
 
 	static propTypes = {
 		user: PropTypes.object.isRequired,
-		onLogout: PropTypes.func.isRequired
+	};
+	static contextTypes = {
+		updateHeader: PropTypes.func.isRequired,
 	};
 
+	componentDidMount() {
+		this.context.updateHeader({
+			hasBack: true,
+			hasLogout: true,
+		});
+	}
+
 	render() {
-		const { user: { name, imageUrl, points, pendingPoints }, onLogout } = this.props;
-		const overlayTitle = 'Profile'; // TODO: user shortName
+		const { user: { name, imageUrl, points, pendingPoints } } = this.props;
 
 		return (
 			<div className="user-profile">
-				<HeaderOverlay title={ overlayTitle } onLogout={ onLogout }/>
-
 				<div className="profile-summary">
 					<div className="summary-aside">
 						<img className="aside-icon" src={require('./images/icon-badge-sm.svg')} alt=""/>

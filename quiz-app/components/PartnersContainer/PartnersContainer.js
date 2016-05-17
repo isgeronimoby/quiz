@@ -4,27 +4,12 @@ import SectionCollapsible from '../SectionCollapsible';
 import './PartnersContainer.scss';
 
 
-const HeaderOverlay = ({ title }) => {
-	return (
-		<div className="header header-overlay">
-			<div className="header-title with-btn">
-				<h2>{ title }</h2>
-			</div>
-			<Link className="nav-button" goBack={true}>
-				<img src={ require('../../static/images/arrow-left-white.svg') } alt="Back"/> Back
-			</Link>
-		</div>
-	);
-};
-
-
 const PartnerSection = ({ partner }) => {
 	const { picture, name, text, signupLink, privacyLink, facebookLink, mailtoLink, smsLink } = partner;
 	let headerContent = name;
 	if (picture) {
 		headerContent = <img className="partner-img" src={ picture }/>;
 	}
-
 
 	return (
 		<div className="partner-section">
@@ -70,8 +55,15 @@ class PartnersContainer extends Component {
 	static propTypes = {
 		partnersList: PropTypes.array.isRequired,
 	};
+	static contextTypes = {
+		updateHeader: PropTypes.func.isRequired,
+	};
 
-	state = {};
+	componentDidMount() {
+		this.context.updateHeader({
+			hasBack: true
+		});
+	}
 
 	render() {
 		const { partnersList } = this.props;
@@ -81,7 +73,6 @@ class PartnersContainer extends Component {
 
 		return (
 			<div className="partners">
-				<HeaderOverlay title="Betting partner"/>
 				{ partnerSections }
 			</div>
 		);

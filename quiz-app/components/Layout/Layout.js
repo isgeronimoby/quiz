@@ -7,10 +7,10 @@ import WelcomePopup from '../WelcomePopup';
 import './Layout.scss';
 
 
-export const Fetching = () =>  {
+export const Fetching = () => {
 	return (
 		<div className="fetching">
-			<img src={ require('../../static/images/loader2.gif') } />
+			<img src={ require('../../static/images/loader2.gif') }/>
 		</div>
 	);
 };
@@ -27,9 +27,33 @@ class Layout extends Component {
 		children: PropTypes.element.isRequired,
 	};
 
+	static childContextTypes = {
+		updateHeader: PropTypes.func.isRequired,
+	};
+
+	getChildContext() {
+		return {
+			updateHeader: (opts) => this.updateHeader(opts)
+		}
+	}
+
 	state = {
 		showMenu: false,
+		header: {
+			title: '',
+			hasBack: false,
+			hasLogout: false,
+		},
 	};
+
+	componentWillReceiveProps({ path, title }) {
+		const hasNavigated = this.props.path !== path;
+		console.log('>>> hasNavigated?', hasNavigated);
+
+		if (hasNavigated) {
+			this.updateHeader({title}); // reset all updates on navigate
+		}
+	}
 
 	toggleMenu(on) {
 		this.setState({
@@ -37,14 +61,26 @@ class Layout extends Component {
 		});
 	}
 
+	updateHeader({ title = '', hasBack = false, hasLogout = false}) {
+		this.setState({
+			header: {
+				title,
+				hasBack,
+				hasLogout
+			}
+		});
+	}
+
 	render() {
-		const {title, path, showAuthPopup, authPopupView, showWelcomePopup, children} = this.props;
-		const { showMenu } = this.state;
+		const {title: pageTitle, path, showAuthPopup, authPopupView, showWelcomePopup, children} = this.props;
+		const { showMenu, header: { title: stateTitle, hasBack, hasLogout } } = this.state;
 
 		return (
 			<div className="layout">
 				<Header
-					title={ title }
+					title={ stateTitle || pageTitle }
+					hasBack={ hasBack }
+					hasLogout={ hasLogout }
 					onMenuBtnClick={ () => this.toggleMenu(true) }/>
 
 				<Menu
@@ -55,7 +91,7 @@ class Layout extends Component {
 				<AuthPopup show={ showAuthPopup }
 					view={ authPopupView }/>
 
-				<WelcomePopup show={ showWelcomePopup } />
+				<WelcomePopup show={ showWelcomePopup }/>
 
 				<div className="content">
 					{ children }
