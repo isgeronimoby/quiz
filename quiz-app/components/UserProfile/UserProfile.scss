@@ -6,6 +6,7 @@
   align-items: stretch;
 }
 .profile-summary {
+  min-height: 80px;
   flex-grow: 1;
   display: flex;
   justify-content: space-around;
