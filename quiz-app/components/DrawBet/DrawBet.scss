@@ -46,18 +46,6 @@ $image-sz: 10rem;
 .bet-description {
   font-size: 1.2rem;
 }
-.bet-error {
-  min-height: 15px; /*hack*/
-  visibility: hidden;
-  padding: 0 15px 5px;
-  font-size: 1rem;
-  color: $color-error;
-  text-align: center;
-
-  &.reveal {
-    visibility: visible;
-  }
-}
 .draw-claim-title {
   font-size: 1.9rem;
   color: $color-grey-dark;

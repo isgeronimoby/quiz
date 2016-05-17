@@ -50,7 +50,7 @@ class QuizBetContainer extends Component {
 	}
 
 	render() {
-		const { isLoggedIn, points, odds } = this.props;
+		const { isLoggedIn, points, odds, betError } = this.props;
 		const demoPoints = !isLoggedIn ? 10 : 0;
 		const oddsList = [odds, 1];
 		const { view } = this.state;
@@ -63,6 +63,7 @@ class QuizBetContainer extends Component {
 				points={ points }
 				demoPoints={ demoPoints }
 				odds={ oddsList }
+				betError={ betError }
 				onSubmitBet={ onSubmitBet }/>;
 		}
 		else if (view === 'success') {

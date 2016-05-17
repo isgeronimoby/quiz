@@ -11,6 +11,7 @@ class QuizBet extends Component {
 		points: PropTypes.number.isRequired,
 		demoPoints: PropTypes.number.isRequired,
 		odds: PropTypes.array.isRequired,
+		betError: PropTypes.string.isRequired,
 		onSubmitBet: PropTypes.func.isRequired,
 	};
 
@@ -27,6 +28,7 @@ class QuizBet extends Component {
 			points,
 			demoPoints,
 			odds,
+			betError,
 			onSubmitBet,
 			} = this.props;
 		const maxPoints = (demoPoints || points);
@@ -36,6 +38,7 @@ class QuizBet extends Component {
 		const winValue = odds[0] * betValue;
 		const disabledBet = (betValue === 0);
 		const disabledBtnClass = disabledBet ? 'disabled' : '';
+		const errorClass = betError ? 'reveal' : '';
 		const onChange = (v) => this.handelBetValueChange(v);
 		const onBetClick = () => !disabledBet && onSubmitBet(betValue);
 
@@ -56,6 +59,8 @@ class QuizBet extends Component {
 					win <span className="text-lg">{ winValue }</span>
 					<span className="text-sm"> points</span>
 				</div>
+
+				<div className={'bet-error ' + errorClass}>{ betError }</div>
 
 				<Button className={"big-btn money-btn " + disabledBtnClass} onClick={onBetClick}>
 					Bet points

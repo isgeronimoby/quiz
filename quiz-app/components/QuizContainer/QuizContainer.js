@@ -82,9 +82,10 @@ class QuizContainer extends Component {
 		const answers = this.props.questionList
 			.map(({ QuestionId: questionId }) => questionId)
 			.reduce((acc, questionId) => {
+				const { outcomeId } = outcomes[questionId] || {};
 				return [
 					...acc,
-					outcomes[questionId].outcomeId
+					outcomeId
 				];
 			}, []);
 

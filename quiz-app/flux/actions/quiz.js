@@ -168,7 +168,8 @@ export function postQuizBet(matchId, points, answers) {
 			dispatch(fetchProfileSuccess(json.User));
 			dispatch(postQuizBetSuccess(matchId));
 		}).catch(({ Message: error = 'Invalid' }) => {
-			dispatch(postQuizBetError(matchId, error)); // TODO
+			dispatch(postQuizBetError(matchId, error));
+			throw error;
 		});
 	};
 }
