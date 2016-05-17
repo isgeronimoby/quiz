@@ -24,9 +24,13 @@ class QuizWinOrDrawStats extends Component {
 				const percent = !hidden ? outcomes[key].percent : 0;
 				const sz = hidden ? 100 : fromY - (fromY - toY) * percent / 100;
 				const winnerClass = (outcomeId === outcomes[key].id ? 'winner' : '');
+				const style = {
+					transform: `translateY(${sz}%)`,
+					WebkitTransform: `translateY(${sz}%)`,
+				};
 
 				return (
-					<div key={`score-${i}`} className="col" style={{transform: `translateY(${sz}%)`}}>
+					<div key={`score-${i}`} className="col" style={ style }>
 						<div className={ "stats-bar " + winnerClass }>{ percent }%</div>
 					</div>
 				);

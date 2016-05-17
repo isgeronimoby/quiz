@@ -31,6 +31,10 @@ class Slider extends Component {
 	render() {
 		const { max, value, step = 10, onChange } = this.props;
 		const posPercent = max ? value / max * 100 : 0;
+		const style = {
+			transform: `translateX(${posPercent}%)`,
+			WebkitTransform: `translateX(${posPercent}%)`,
+		};
 		const onPlusClick = () => onChange(this.getValueByDiff(step));
 		const onMinusClick = () => onChange(this.getValueByDiff(-step));
 		const onLineClick = (e) => onChange(this.getValueByOffset(e.pageX));
@@ -43,7 +47,7 @@ class Slider extends Component {
 
 				<Hammer onPanStart={onPanStart} onPan={onPan}>
 					<div ref={(c) => this._bodyEl = c} className="slider-body" onClick={ onLineClick }>
-						<div className="slider-gripper" style={{transform: `translateX(${posPercent}%)`}}></div>
+						<div className="slider-gripper" style={style}></div>
 					</div>
 				</Hammer>
 

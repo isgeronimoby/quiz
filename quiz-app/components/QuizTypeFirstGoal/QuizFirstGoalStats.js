@@ -27,11 +27,19 @@ class QuizFirstGoalStats extends Component {
 				const statPos = hidden ? 100 : 0;
 				const rowPos = fromX + (toX - fromX) * (100 - percent) / 100;
 				const selectedClass = (isSelected ? 'selected' : '');
+				const statStyle = {
+					transform: `translateX(${statPos}%)`,
+					WebkitTransform: `translateX(${statPos}%)`,
+				};
+				const rowStyle = {
+					transform: `translateX(${rowPos}%)`,
+					WebkitTransform: `translateX(${rowPos}%)`,
+				};
 
 				return (
 					<li key={`stats-${i}`} className={"stats-item " + selectedClass}
-						style={{transform: `translateX(${statPos}%)`}}>
-						<div className="stats-row" style={{transform: `translateX(${rowPos}%)`}}>{ percent }%</div>
+						style={statStyle}>
+						<div className="stats-row" style={rowStyle}>{ percent }%</div>
 					</li>
 				);
 			});

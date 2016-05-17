@@ -20,7 +20,8 @@ class ScreenSwiper extends Component {
 		const scrollX = -100 * idx / total;
 		const containerStyle = {
 			width: `${width}%`,
-			transform: `translateX(${scrollX}%)`
+			transform: `translateX(${scrollX}%)`,
+			WebkitTransform: `translateX(${scrollX}%)`,
 		};
 		const onSwipe = (e) => {
 			if (e.direction === DIRECTION_LEFT) {
