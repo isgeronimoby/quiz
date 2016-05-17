@@ -31,7 +31,7 @@ export function fixtures(state = {
 		case FETCH_PLAYED_FIXTURES_SUCCESS:
 			return {
 				...state,
-				// Adding betAmount, isWinner, ...
+				// Adding betAmount, isWinner, answers...
 				list: state.list.map((item) => {
 					const playedItem = action.payload.find(({ matchId }) => item.matchId === matchId);
 					if (playedItem) {
@@ -48,8 +48,8 @@ export function fixtures(state = {
 		case FETCH_PLAYED_FIXTURES_ERROR:
 			return {
 				...state,
-				// Removing betAmount, isWinner
-				list: state.list.map(({ betAmount, isWinner, ...rest }) => {
+				// Removing betAmount, isWinner, answers
+				list: state.list.map(({ betAmount, isWinner, answers, ...rest }) => {
 					return {
 						...rest
 					};

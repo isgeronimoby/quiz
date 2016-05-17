@@ -1,0 +1,15 @@
+@import '../variables.scss';
+@import '../QuizSummary/summary.scss';
+.summary-played {
+  .team-score {
+    background: $color-grey;
+  }
+  .summary-choice {
+    .choice-check {
+      border: 1px solid $color-grey;
+      &.selected {
+        background-color: $color-grey;
+      }
+    }
+  }
+}

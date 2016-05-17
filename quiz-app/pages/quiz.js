@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { fetchProfileIfNeeded, fetchQuiz, selectQuiz, fetchOdds } from '../flux/actions';
 import { Fetching } from '../components/Layout';
 import QuizContainer from '../components/QuizContainer';
+import QuizSummaryPlayed from '../components/QuizSummaryPlayed';
 
 
 class Quiz extends Component {
@@ -27,14 +29,14 @@ class Quiz extends Component {
 	async componentDidMount() {
 		const { params: { matchId }, fetchProfile, fetchQuiz, selectQuiz } = this.props;
 
-		fetchProfile(); // need points for bet
+		fetchProfile(); // need points for bet, etc
 		selectQuiz(matchId); // first select, then fetch
 		fetchQuiz(matchId);
 	}
 
 	render() {
 		const {
-			params: { matchId },
+			params: { matchId, fixtureItem },
 			isFetching,
 			questionData: { startDate, teamHome, teamAway, questionList} = {},
 			isValidating,
@@ -42,17 +44,35 @@ class Quiz extends Component {
 			invalidOutcomes,
 			fetchOdds
 			} = this.props;
+		const info = moment.utc(startDate).format('D MMMM, HH:mm');
+		const { betAmount, answers, isWinner } = fixtureItem;
+		const isPlayed = !!betAmount;
 		const _fetchOdds = (answers) => fetchOdds(matchId, answers);
 
 		if (isFetching) {
 			return <Fetching/>;
 		}
 
+		if (isPlayed) {
+			return (
+				<QuizSummaryPlayed
+					info={ info }
+					teamNames={ [teamHome, teamAway] }
+					questionList={ questionList }
+					betAmount={ betAmount }
+					isWinner={ isWinner }
+					answers={ answers }
+					odds={ odds }
+					fetchOdds={ _fetchOdds }
+				/>
+			);
+		}
+
 		return (
 			<QuizContainer
 				key={`match-${matchId}`}
 				matchId={ matchId }
-				startDate={ startDate }
+				info={ info }
 				teamNames={ [teamHome, teamAway] }
 				questionList={ questionList }
 				isValidating={ isValidating }

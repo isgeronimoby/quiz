@@ -95,11 +95,18 @@ function fetchPlayedFixturesSuccess(json) {
 			MatchId: matchId,
 			BetAmount: betAmount,
 			IsWinner: isWinner,
+			Answers
 			}) => {
 			return {
 				matchId,
 				betAmount,
 				isWinner,
+				answers: Answers.map(({ OutcomeId: outcomeId, QuestionId: questionId }) => {
+					return {
+						outcomeId,
+						questionId
+					};
+				})
 			}
 		}),
 		receivedAt: Date.now()

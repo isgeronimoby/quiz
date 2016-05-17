@@ -29,7 +29,7 @@ class FixtureList extends Component {
 				const headerMaybe = showHeader ? header : null;
 
 				return (
-					<FixtureListItem key={'fixture-' + i} header={ headerMaybe } match={ others }/>
+					<FixtureListItem key={'fixture-' + i} header={ headerMaybe } fixtureItem={ others }/>
 				);
 			});
 

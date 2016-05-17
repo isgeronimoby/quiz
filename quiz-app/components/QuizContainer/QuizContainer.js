@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import moment from 'moment';
 import ScreenSwiper from '../ScreenSwiper';
 import ProgressBar from '../ProgressBar';
 import QuizTypeWinOrDraw from '../QuizTypeWinOrDraw';
@@ -21,7 +20,7 @@ class QuizContainer extends Component {
 
 	static propTypes = {
 		matchId: PropTypes.string.isRequired,
-		startDate: PropTypes.string.isRequired,
+		info: PropTypes.string.isRequired,
 		teamNames: PropTypes.array.isRequired,
 		questionList: PropTypes.array.isRequired,
 
@@ -118,12 +117,11 @@ class QuizContainer extends Component {
 
 	render() {
 		const { matchId,
-			startDate,
+			info,
 			teamNames,
 			questionList,
 			isValidating,
 			invalidOutcomes } = this.props;
-		const info = moment.utc(startDate).format('D MMMM, HH:mm');
 		const { currentScreenIdx: idx, summary } = this.state;
 		const total = this.totalSteps();
 		const onPrev = () => this.prevScreen();

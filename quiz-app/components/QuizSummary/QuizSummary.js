@@ -58,7 +58,7 @@ class QuizSummary extends Component {
 		const hasInvalids = invalidOutcomes.length > 0;
 		let btnOrError = (
 			<div className="error-text">
-				<h3 className="strong">Answers that marked in red contradict each other.</h3>
+				<h3 className="strong">Answers that marked in red<br/> contradict each other.</h3>
 				Please change your answers
 			</div>
 		);

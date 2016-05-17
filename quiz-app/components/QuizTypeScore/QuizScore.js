@@ -1,30 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+import { parseScoreData } from '../../lib/parseData.js';
 import QuizControls from './QuizScoreControls';
 import QuizStats from './QuizScoreStats';
 import './score.scss';
-
-
-function parseData(data, [teamHome, teamAway], scores = []) {
-	const [scoreHome, scoreAway] = scores;
-	const {
-		TotalAnswersCount: total,
-		QuestionId: questionId,
-		Outcomes: outcomes
-		} = data;
-	const scorePair = (scoreHome >= scoreAway) ? `${scoreHome}-${scoreAway}` : `${scoreAway}-${scoreHome}`;
-	const winningTeam = (scoreHome > scoreAway) ? teamHome :
-		(scoreHome < scoreAway) ? teamAway : 'Draw';
-	const { OutcomeId: outcomeId, AnswersCount: count = 0} = outcomes.find(({ Score, Team }) => {
-		return (Score === scorePair && winningTeam === Team);
-	}) || {};
-	const chance = Math.floor((count + 1) / (total + 1) * 100);
-
-	return {
-		questionId,
-		outcomeId,
-		stats: chance
-	};
-}
 
 
 class QuizScore extends Component {
@@ -41,24 +19,9 @@ class QuizScore extends Component {
 		scores: undefined
 	};
 
-	handleSubmit(questionId, scores) {
-		const { onAnswerSubmit, teamNames, data } = this.props;
-		const { outcomeId } = parseData(data, teamNames, scores);
-		const [scoreHome, scoreAway] = scores;
-		const summary = {
-			score: {
-				questionId,
-				outcomeId,
-				scoreHome,
-				scoreAway,
-			},
-			winner: {
-				questionId,
-				outcomeId,
-				isHome: scoreHome > scoreAway,
-				isAway: scoreHome < scoreAway,
-			}
-		};
+	handleSubmit(scores) {
+		const { data, teamNames, onAnswerSubmit } = this.props;
+		const { questionId, outcomeId, summary } = parseScoreData(data, teamNames, scores);
 
 		this.setState({
 			showStats: true,
@@ -78,8 +41,8 @@ class QuizScore extends Component {
 	render() {
 		const { info, data, teamNames } = this.props;
 		const { showStats, scores } = this.state;
-		const { questionId, outcomeId, stats } = parseData(data, teamNames, scores);
-		const onSubmit = (scores) => this.handleSubmit(questionId, scores);
+		const { stats } = parseScoreData(data, teamNames, scores);
+		const onSubmit = (scores) => this.handleSubmit(scores);
 		const onDismiss = () => this.hideStats();
 
 		return (

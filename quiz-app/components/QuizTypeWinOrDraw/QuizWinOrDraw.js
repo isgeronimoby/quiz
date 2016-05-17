@@ -1,34 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import { parseWinOrDrawData } from '../../lib/parseData.js';
 import QuizControls from './QuizWinOrDrawControls';
 import QuizStats from './QuizWinOrDrawStats';
 import './draw.scss';
 
-
-function parseData(data, [teamHome, teamAway], outcomeId) {
-	const {
-		TotalAnswersCount: total,
-		QuestionId: questionId,
-		} = data;
-	const calcStat = (count, id) => {
-		const selectedCount = (id === outcomeId) ? count + 1 : count;
-		return Math.floor(selectedCount / (total + 1) * 100)
-	};
-
-	return {
-		questionId,
-		outcomes: data.Outcomes.reduce((acc, { OutcomeId: id, Team: name, AnswersCount: count }) => {
-			const percent = calcStat(count, id);
-			switch (name) {
-				case teamHome:
-					return {...acc, home: {id, name, percent}};
-				case teamAway:
-					return {...acc, away: {id, name, percent}};
-				default:
-					return {...acc, draw: {id, name, percent}};
-			}
-		}, {})
-	};
-}
 
 class QuizWinOrDraw extends Component {
 
@@ -44,17 +19,9 @@ class QuizWinOrDraw extends Component {
 		showStats: false
 	};
 
-	handleSubmit(questionId, outcomeId) {
-		const {onAnswerSubmit, data, teamNames} = this.props;
-		const { outcomes: {home, away} } = parseData(data, teamNames, outcomeId);
-		const summary = {
-			halfTimeWinner: {
-				questionId,
-				outcomeId,
-				isHome: home.id === outcomeId,
-				isAway: away.id === outcomeId
-			}
-		};
+	handleSubmit(outcomeId) {
+		const { data, teamNames, onAnswerSubmit } = this.props;
+		const { questionId, summary } = parseWinOrDrawData(data, teamNames, outcomeId);
 
 		this.setState({
 			outcomeId,
@@ -73,12 +40,8 @@ class QuizWinOrDraw extends Component {
 	render() {
 		const { info, data, teamNames } = this.props;
 		const { outcomeId, showStats } = this.state;
-		const {
-			questionId,
-			outcomes
-			} = parseData(data, teamNames, outcomeId);
-		const [teamHome, teamAway] = teamNames;
-		const onSubmit = (outcomeId) => this.handleSubmit(questionId, outcomeId);
+		const { outcomes } = parseWinOrDrawData(data, teamNames, outcomeId);
+		const onSubmit = (outcomeId) => this.handleSubmit(outcomeId);
 		const onDismiss = () => this.hideStats();
 
 		return (

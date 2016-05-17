@@ -7,12 +7,13 @@ class FixtureListItem extends Component {
 
 	static propTypes = {
 		header: PropTypes.string,
-		match: PropTypes.object.isRequired,
+		fixtureItem: PropTypes.object.isRequired,
 	};
 
 
 	render() {
-		const { matchId, teamHome, teamAway, startDate, betAmount } = this.props.match;
+		const { fixtureItem } = this.props;
+		const { matchId, teamHome, teamAway, startDate, betAmount } = fixtureItem;
 		const { header } = this.props;
 		const headerClass = !header ? 'is-collapsed' : '';
 		const title = `${teamHome} vs ${teamAway}`;
@@ -33,7 +34,7 @@ class FixtureListItem extends Component {
 				<div className={ "fixture-item-header " + headerClass }>
 					<h5>{ header }</h5>
 				</div>
-				<Link className="fixture-item-body" to="./quiz" state={ {matchId} }>
+				<Link className="fixture-item-body" to="./quiz" state={ {matchId, fixtureItem} }>
 					<div className="fixture-item-team-icons">
 						<div className="fixture-item-team">
 							<img src={ teamHomeIcon }/>

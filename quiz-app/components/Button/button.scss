@@ -32,5 +32,15 @@
 }
 .btn-text-sm {
   font-size: 1.4rem;
-  color: $brand-color-lite
+  color: $brand-color-lite;
+}
+.grey-btn {
+  padding: 5px 0;
+  font-size: 1.4rem;
+  background: $color-grey-dark;
+  color: $text-color;
+
+  .btn-text-sm {
+    color: $color-grey;
+  }
 }

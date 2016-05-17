@@ -1,52 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import { parseFirstGoalData } from '../../lib/parseData.js';
 import QuizControls from './QuizFirstGoalControls';
 import QuizStats from './QuizFirstGoalStats';
 import './players.scss';
 
-
-function parseData(data, selectedOutcomeId) {
-	const {
-		QuestionId: questionId,
-		TotalAnswersCount: total,
-		Outcomes: outcomes
-		} = data;
-	const players = outcomes.map(({
-		OutcomeId: outcomeId,
-		FirstScorer: name,
-		ScorerTeam: team,
-		AnswersCount: count
-		}) => {
-		const isSelected = (selectedOutcomeId === outcomeId);
-		const countSelected = isSelected ? count + 1 : count;
-		const percent = Math.floor(countSelected / (total + 1) * 100);
-
-		return {
-			outcomeId,
-			name,
-			team,
-			percent,
-			isSelected,
-		};
-	});
-	const noGoalPlayer = players.find(p => p.name === 'No Goalscorer');
-	const noGoalPlayerIdx = players.indexOf(noGoalPlayer);
-	const otherPlayersSorted = [
-		...players.slice(0, noGoalPlayerIdx),
-		...players.slice(noGoalPlayerIdx + 1)
-	].sort((a, b) => (b.percent - a.percent));
-	const adjustedPlayers = [
-		{
-			...noGoalPlayer,
-			team: ''
-		},
-		...otherPlayersSorted
-	];
-
-	return {
-		questionId,
-		players: adjustedPlayers
-	};
-}
 
 class QuizFirstGoal extends Component {
 
@@ -62,20 +19,9 @@ class QuizFirstGoal extends Component {
 		outcomeId: null,
 	};
 
-	handleSubmit(questionId, outcomeId) {
-		const { data, teamNames: [teamHome, teamAway], onAnswerSubmit } = this.props;
-		const { players } = parseData(data, outcomeId);
-		const { name, team } = players.find(p => p.isSelected);
-
-		const summary = {
-			firstGoalScorer: {
-				questionId,
-				outcomeId,
-				name: name,
-				isHome: team === teamHome,
-				isAway: team === teamAway,
-			}
-		};
+	handleSubmit(outcomeId) {
+		const { data, teamNames, onAnswerSubmit } = this.props;
+		const { questionId, summary } = parseFirstGoalData(data, teamNames, outcomeId);
 
 		this.setState({
 			outcomeId,
@@ -92,9 +38,9 @@ class QuizFirstGoal extends Component {
 	}
 
 	render() {
-		const { info, data } = this.props;
+		const { info, data, teamNames } = this.props;
 		const { showStats, outcomeId } = this.state;
-		const { questionId, players } = parseData(data, outcomeId);
+		const { players } = parseFirstGoalData(data, teamNames, outcomeId);
 		const stats = players.map(({ outcomeId, percent }) => {
 			return {
 				outcomeId,
@@ -104,7 +50,7 @@ class QuizFirstGoal extends Component {
 
 		const container = this.refs['container'];
 		const offsetHeight = container ? container.offsetHeight : 0;
-		const onSubmit = (outcomeId) => this.handleSubmit(questionId, outcomeId);
+		const onSubmit = (outcomeId) => this.handleSubmit(outcomeId);
 		const onDismiss = () => this.hideStats();
 
 		return (

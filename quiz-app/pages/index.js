@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { toggleWelcome, fetchFixturesIfNeeded } from '../flux/actions';
+import { toggleWelcome, fetchFixturesIfNeeded, fetchPlayedFixtures } from '../flux/actions';
 import Cookies from 'js-cookie';
 import Location from '../lib/Location';
 
@@ -19,12 +19,20 @@ class Index extends Component {
 		openWelcomePopup: PropTypes.func.isRequired,
 		fixtureList: PropTypes.array.isRequired,
 		fetchFixtures: PropTypes.func.isRequired,
+		fetchPlayedFixtures: PropTypes.func.isRequired,
 	};
 
 	async componentDidMount() {
+		const { fetchFixtures, fetchPlayedFixtures } = this.props;
+
 		this.showWelcomeIfNeeded();
-		await this.props.fetchFixtures();
-		setTimeout(() => this.visitFirstQuizOrList(), MIN_DELAY);
+		try {
+			fetchFixtures();
+			await fetchPlayedFixtures(); // need to know which quizes are played
+		} catch (e) {
+			//nothing
+		}
+		setTimeout(() => this.visitFirstNotPlayedQuizOrList(), MIN_DELAY);
 	}
 
 	componentWillReceiveProps({showWelcomePopup}) {
@@ -42,13 +50,16 @@ class Index extends Component {
 		}
 	}
 
-	visitFirstQuizOrList() {
-		const firstQuiz = this.props.fixtureList[0];
+	visitFirstNotPlayedQuizOrList() {
+		const firstNotPlayedQuiz = this.props.fixtureList.find(({ betAmount }) => !betAmount);
 
-		if (firstQuiz) {
+		if (firstNotPlayedQuiz) {
 			Location.push({
 				pathname: './quiz',
-				state: {matchId: firstQuiz.matchId}
+				state: {
+					matchId: firstNotPlayedQuiz.matchId,
+					fixtureItem: firstNotPlayedQuiz,
+				}
 			});
 		} else {
 			Location.push({pathname: './fixtures'});
@@ -75,6 +86,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchFixtures: () => dispatch(fetchFixturesIfNeeded()),
+		fetchPlayedFixtures: () => dispatch(fetchPlayedFixtures()),
 		openWelcomePopup: () => dispatch(toggleWelcome(true)),
 	};
 };

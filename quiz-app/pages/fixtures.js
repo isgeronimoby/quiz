@@ -18,10 +18,11 @@ class Fixtures extends Component {
 	};
 
 	async componentDidMount() {
-		this.props.fetchFixtures();
+		const { fetchFixtures, fetchProfile, fetchPlayedFixtures } = this.props;
 		try {
-			await this.props.fetchProfile();
-			this.props.fetchPlayedFixtures();
+			fetchFixtures();
+			await fetchProfile();
+			fetchPlayedFixtures();
 		} catch (e) {
 			//nothing
 		}
