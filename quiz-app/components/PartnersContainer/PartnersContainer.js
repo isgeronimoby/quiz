@@ -18,7 +18,7 @@ const PartnerSection = ({ partner }) => {
 			</div>
 
 			<a className="big-btn money-btn" href={ signupLink } target="_blank">
-				SignUp & get +10000 points<br/>
+				SignUp & get +500 points<br/>
 				<span className="btn-text-sm">get +10 points for each pound you bet</span>
 			</a>
 
