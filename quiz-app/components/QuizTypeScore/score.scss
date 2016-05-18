@@ -1,9 +1,10 @@
 @import '../variables.scss';
 @import '../utils.scss';
 .teams-idle-wrapper {
+  min-height: 130px;
+  margin-bottom: 20px;
   display: flex;
   align-items: baseline;
-  margin-bottom: 3rem;
 }
 .team-idle {
   display: flex;
