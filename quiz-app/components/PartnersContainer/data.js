@@ -18,7 +18,7 @@ const partners = [
 	{
 		partnerId: 2,
 		name: 'Sky bet',
-		picture: null,
+		picture: require("../../static/images/partner-picture2.png"),
 		text: text,
 		signupLink: 'http://affiliatehub.skybet.com/processing/clickthrgh.asp?btag=a_19010b_2',
 		privacyLink: '//google.com',
