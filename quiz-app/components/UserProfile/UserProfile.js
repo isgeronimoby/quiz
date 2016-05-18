@@ -63,7 +63,7 @@ class UserProfile extends Component {
 						<div className="todo-image">
 							<img className="big-icon" src={require('./images/icon-groups.svg')} alt=""/>
 						</div>
-						<h3>Badges</h3>
+						<h3>Groups</h3>
 					</li>
 					<li>
 						<h2>And much more...</h2>
