@@ -24,6 +24,7 @@ DGW.main.elements.pages.earnMain = document.createElement('div');
 DGW.main.elements.pages.earnMain.innerHTML = DGW.templates.earnMain;
 DGW.main.elements.pages.drawsMain = document.createElement('div');
 DGW.main.elements.pages.drawsMain.innerHTML = DGW.templates.drawsMain;
+DGW.main.elements.pages.singleDraw = document.createElement('div');
 DGW.main.elements.pages.activitiesMain = document.createElement('div');
 DGW.main.elements.pages.activitiesMain.innerHTML = DGW.templates.activitiesMain;
 DGW.main.elements.activitiesSliderParent = DGW.main.elements.pages.activitiesMain.querySelector('.dg-o-w-activities');
@@ -31,7 +32,9 @@ DGW.main.elements.pages.profileMain = document.createElement('div');
 DGW.main.elements.pages.profileMain.innerHTML = DGW.templates.profileMain;
 DGW.main.elements.pages.loginMain = document.createElement('div');
 DGW.main.elements.pages.loginMain.innerHTML = DGW.templates.loginMain;
-DGW.main.elements.pages.singleDraw = document.createElement('div');
+DGW.main.elements.pages.friendsMain = document.createElement('div');
+DGW.main.elements.pages.friendsMain.innerHTML = DGW.templates.friendsMain;
+
 DGW.main.elements.pages.videoHolder = document.createElement('div');
 DGW.main.elements.pages.videoHolder.innerHTML = DGW.templates.videoHolder;
 

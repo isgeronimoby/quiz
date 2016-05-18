@@ -95,6 +95,7 @@ var DGW = function () {
                     widgetPathName: widgetPathName,
                     userStats: {},
                     debug: debugMode,
+                    gaSend: '',
                     safariFixFirstOpen: false
                 },
                 states: {},
@@ -525,6 +526,34 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         case 'shareRewardAction':
             endpoint = 'draw/getsharelinks?drawid=' + requestBody;
             break;
+        case 'friendsGet':
+            endpoint = 'friend/getfriends';
+            break;
+        case 'friendFollow':
+            method = 'POST';
+            endpoint = 'friend/follow';
+            requestBody = JSON.stringify(requestBody);
+            break;
+        case 'friendUnfollow':
+            method = 'POST';
+            endpoint = 'friend/unfollow';
+            requestBody = JSON.stringify(requestBody);
+            break;
+        case 'friendRequestSend':
+            method = 'POST';
+            endpoint = 'friend/sendfriendrequest';
+            requestBody = JSON.stringify(requestBody);
+            break;
+        case 'friendRequestAccept':
+            method = 'POST';
+            endpoint = 'friend/acceptfriendrequest';
+            requestBody = JSON.stringify(requestBody);
+            break;
+        case 'friendRequestDecline':
+            method = 'POST';
+            endpoint = 'friend/declinefriendrequest';
+            requestBody = JSON.stringify(requestBody);
+            break;
         default:
             DGW.helpers.console.log('Api default occured');
     }
@@ -575,6 +604,7 @@ DGW.global.api.requests.checkServerAvailability = function(){
             //TODO: refactor later
             DGW.global.club.name = result.data.FoundationName;
             DGW.global.api.requests.getDraws(DGW.global.api.requests.initMainFlow);
+            DGW.helpers.gaCheckPut(DGW.global.club.name);
         }
     });
 };
@@ -977,9 +1007,92 @@ DGW.global.api.requests.shareRewardAction = function(drawId, onSuccess, onError)
             DGW.helpers.console.error('shareRewardedAction: ', result.error);
             if (onError) onError(result.error);
         }
-    }, drawId)
+    }, drawId);
+};
+
+DGW.global.api.requests.friendsGet = function(onSuccess, onError){
+    DGW.global.api.generic('friendsGet', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('Get friends API: ', result.data);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            DGW.helpers.console.error('Get friends API: ', result.error);
+            if (onError) onError(result.error);
+        }
+    });
+};
+
+DGW.global.api.requests.friendFollow = function(userId, onSuccess, onError){
+    DGW.global.api.generic('friendFollow', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('friendFollow ', result.data);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            DGW.helpers.console.error('friendFollow ', result.error);
+            if (onError) onError(result.error);
+        }
+    }, {
+        UserId: userId
+    });
+};
+
+DGW.global.api.requests.friendUnfollow = function(userId, onSuccess, onError){
+    DGW.global.api.generic('friendUnfollow', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('friendUnfollow ', result.data);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            DGW.helpers.console.error('friendUnfollow ', result.error);
+            if (onError) onError(result.error);
+        }
+    }, {
+        UserId: userId
+    });
+};
+
+DGW.global.api.requests.friendRequestSend = function(userId, onSuccess, onError){
+    DGW.global.api.generic('friendRequestSend', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('friendRequestSend ', result.data);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            DGW.helpers.console.error('friendRequestSend ', result.error);
+            if (onError) onError(result.error);
+        }
+    }, {
+        UserId: userId
+    });
+};
+
+DGW.global.api.requests.friendRequestAccept = function(userId, onSuccess, onError){
+    DGW.global.api.generic('friendRequestAccept', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('friendRequestAccept ', result.data);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            DGW.helpers.console.error('friendRequestAccept ', result.error);
+            if (onError) onError(result.error);
+        }
+    }, {
+        UserId: userId
+    });
+};
+
+DGW.global.api.requests.friendRequestDecline = function(userId, onSuccess, onError){
+    DGW.global.api.generic('friendRequestDecline', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('friendRequestDecline ', result.data);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            DGW.helpers.console.error('friendRequestDecline ', result.error);
+            if (onError) onError(result.error);
+        }
+    }, {
+        UserId: userId
+    });
 };
 DGW.helpers.addClass = function(obj, className){
+    if (!obj) return;
     if (!(new RegExp(className).test(obj.className))) {
         if (obj.className.length === 0) {
             obj.className += className;
@@ -1306,14 +1419,27 @@ DGW.helpers.showFramedSrc = function(src){
     wb.appendChild(h);
 };
 
-DGW.helpers.getElementsFromAllPlaces = function(selector){
+DGW.helpers.getElementsFromAllPlaces = function(selector, place){
     if (!selector) return;
+    var places;
 
-    var places = [
-        DGW.main.elements.widgetBody,
-        DGW.side.elements.widgetBody,
-        DGW.main.elements.pages
-    ];
+    if (place === 'main') {
+        places = [
+            DGW.main.elements.widgetBody,
+            DGW.main.elements.pages
+        ];
+    } else if (place === 'side') {
+        places = [
+            DGW.side.elements.widgetBody
+        ];
+    } else {
+        places = [
+            DGW.main.elements.widgetBody,
+            DGW.side.elements.widgetBody,
+            DGW.main.elements.pages
+        ];
+    }
+
     var placesArr = [];
     var elements = [];
 
@@ -1335,6 +1461,44 @@ DGW.helpers.getElementsFromAllPlaces = function(selector){
 
     return elements;
 };
+
+DGW.helpers.gaCheckPut = function(name){
+    name = name || DGW.global.club.name;
+    DGW.helpers.console.log('GA script launched');
+    if (!window.ga) {
+        DGW.helpers.console.log('Adding GA script');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        DGW.helpers.gaCheckPut();
+    } else {
+        DGW.global.gaSend = name + '.send';
+        if (ga.getByName) {
+            if (!ga.getByName(name)) {
+                DGW.helpers.console.log('GA is ready, creating DGW');
+                ga('create', {
+                    trackingId: 'UA-51923524-37',
+                    cookieDomain: 'auto',
+                    name: name
+                });
+            } else {
+                DGW.helpers.console.log('GA is ready, DGW is created');
+            }
+        } else {
+            DGW.helpers.console.log('GA is ready, loading');
+            var interval = window.setInterval(function(){
+                if (ga.getByName) {
+                    window.clearInterval(interval);
+                    DGW.helpers.gaCheckPut();
+                }
+            }, 50);
+        }
+    }
+};
 DGW.templates.side.profileInfo ='<div class="dg-side-section">' +
                                     '<div class="dg-side-user-img-holder"><img data-userstats-userimage class="dg-o-w-side-image-floating" src=""/></div>' +
                                     '<div class="dg-side-collapsed dg-side-floating-text"><p><span data-userstats-points-c class="dg-o-w-points-text">00</span></p><h5>Earn more</h5></div>' +
@@ -1352,14 +1516,44 @@ DGW.templates.side.prizeGeneric =   '<div class="dg-side-section">' +
                                     '<div class="dg-side-collapsed"><div data-page="profile" class="dg-side-cta">Sign Up</div></div>' +
                                     '<div class="dg-side-expanded"><div data-page="profile" class="dg-side-cta">Sign up & get +10 points</div></div>';
 
-DGW.templates.side.clickCatcher = '<div data-page="earn" class="dg-side-click-holder"></div>';
-
 DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body">' +
                                         '<div class="dg-side-widget-content"></div>' +
-                                        '<div class="dg-side-widget-resizer"></div>' +
+                                        '<div data-page="earn" class="dg-side-click-holder"></div>' +
                                     '</div>' +
                                 '</div>';
+
+DGW.templates.side.draw =  '<div class="dg-side-section">' +
+                                        '<img data-image="temp-green-tee.png" class="dg-side-image-bg" src=""/>' +
+                                        '<div class="dg-side-content">' +
+                                            '<p>Get<br/>t-shirt</p>' +
+                                            '<div class="dg-side-cta">Play</div>' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="dg-side-bottom-floating"><div class="dg-side-progress-bar"><div class="dg-side-progress-bar-inner"></div></div></div>';
+
+DGW.templates.side.anonymousSignUp =  '<div class="dg-side-section dg-full-size">' +
+                                        '<img data-image="temp-signup-bg.png" class="dg-side-image-bg" src=""/>' +
+                                        '<div class="dg-side-content">' +
+                                            '<p>Join<br/>Everton<br/>&<br/><span class="dg-o-w-font-smaller dg-o-w-color-brand">get prizes</span></p>' +
+                                            '<div class="dg-side-cta">Join</div>' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="dg-side-bottom-floating"><div class="dg-side-progress-bar"><div class="dg-side-progress-bar-inner"></div></div></div>';
+
+DGW.templates.side.registeredProfile =  '<div class="dg-side-section dg-small-size">' +
+                                            '<img data-userstats-userimage class="dg-side-image-bg" src=""/>' +
+                                            '<div class="dg-side-content">' +
+                                                '<div class="dg-side-progress-bar"><div class="dg-side-progress-bar-inner"></div></div>' +
+                                                '<p data-userstats-points-c class="dg-o-w-points-text">00</p>' +
+                                            '</div>' +
+                                        '</div>';
+
+DGW.templates.side.actions = {
+    share: '<div class="dg-side-bottom-floating dg-side-action" data-page="earn">Share</div>',
+    play: '<div class="dg-side-bottom-floating dg-side-action" data-page="draws">Play</div>',
+    stats: '<div class="dg-side-bottom-floating dg-side-action" data-page="profile">Stats</div>'
+};
 DGW.templates.spinner = '<div class="dg-o-w-spinner">' +
                             '<div class="sk-circle1 sk-circle"></div><div class="sk-circle2 sk-circle"></div><div class="sk-circle3 sk-circle"></div>' +
                             '<div class="sk-circle4 sk-circle"></div><div class="sk-circle5 sk-circle"></div><div class="sk-circle6 sk-circle"></div>' +
@@ -1447,10 +1641,7 @@ DGW.templates.earnMain = '<div class="dg-o-w-submenu">' +
                                 '<li>Visit</li>' +
                                 '<li>Download</li>' +
                                 '<li>Invite</li></ul>' +
-                            '<select><option>All sponsors</option>' +
-                                '<option>Coca-Cola</option>' +
-                                '<option>Nike</option>' +
-                                '<option>Telco</option></select>' +
+                            '<select class="single-select"></select>' +
                         '</div>' +
                         '<div class="dg-o-w-section-content">' +
                             '<h3>Complete the tasks and earn +<span></span> points today</h3>' +
@@ -1475,8 +1666,8 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' 
                                     '<div class="dg-o-w-profile-stats-holder">' +
                                         '<h3 data-userstats-username class="dg-o-w-profile-name">Captain Deadpool</h3>' +
                                         '<div class="dg-o-w-profile-stats-holder-rest">' +
-                                            //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p>19</p></div></div>' +
-                                            //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p>3</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-userstats-friends-c>210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-friends-p class="green-highlighter">19</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand" data-userstats-groups-c>20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-groups-p class="green-highlighter">3</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 data-userstats-points-c>520</h3><p>points</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 data-userstats-credits-c>40</h3><p>credits</p></div></div>' +
                                         '</div>' +
@@ -1523,7 +1714,7 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul>' +
                                         '</div>' +
                                     '</div>' +
                                     '<div class="dg-o-w-section-content content-static dg-o-w-white-section">' +
-                                        '<div class="dg-o-w-activities-header">' +
+                                        '<div class="dg-o-w-section-header">' +
                                             '<p class="dg-o-w-float-left">Activities for today</p>' +
                                             // TODO: don't show until we have invite friends functionality
                                             // '<p class="dg-o-w-floating-link"><a href="#">Invite more friends</a> and get +<span id="dg-o-w-friends-sign-up-reward" class="dg-o-w-rewarded-action">50</span> points for each</p>' +
@@ -1532,7 +1723,34 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul>' +
                                                 '<option value="my-activities">My Activities</option>' +
                                             '</select>' +
                                         '</div>' +
-                                        '<div class="dg-o-w-activities-holder"><ul></ul></div>' +
+                                        '<div class="dg-o-w-section-list-holder"><ul data-activities></ul></div>' +
+                                    '</div>' +
+                                '</div>';
+
+DGW.templates.friendsMain = '<div class="dg-o-w-submenu"><ul>' +
+                                    '<li class="dg-o-w-active">My friends</li></ul>' +
+                                '<div class="dg-o-w-float-right dg-o-w-inline-form dg-o-w-right-padding">' +
+                                    '<select class="search-dropdown"><option>Global</option></select>' +
+                                    '<form class="search-form"><input class="search-field" type="text" placeholder="Search" /><input class="search-submit" type="submit" value=""/></form>' +
+                                '</div></div>' +
+                                '<div class="dg-o-w-section-scroller">' +
+                                    '<div class="dg-o-w-section-content content-static dg-o-w-white-section">' +
+                                        '<div class="dg-o-w-section-header">' +
+                                            '<div class="dg-o-w-float-left"><p><a href="#" class="btn-dg-o-w btn-dg-o-w-brand">Invite more friends</a> and get points per each</p></div>' +
+                                            '<div class="dg-o-w-float-right"><p class="line-height-btn">You have 132 friends <span class="green-highlighter">12</span></p></div>' +
+                                        '</div>' +
+                                        '<div class="dg-o-w-section-list-holder"><ul data-friends>' +
+                                            '<li class="dg-o-w-table-display">' +
+                                                '<div class="dg-o-w-cell"><img src="./dist/imgs/avatar-placeholder.png" /><div class="dg-o-w-details"><p class="dg-o-w-color-brand">Name Surname</p><p class="dg-o-w-color-grey">2 common groups</p></div></div>' +
+                                                '<div class="dg-o-w-cell"><div class="dg-o-w-users-done"></div></div>' +
+                                                '<div class="dg-o-w-cell"><a href="#" class="btn-dg-o-w btn-dg-o-w-stroked">Accept</a><a href="#" class="btn-dg-o-w btn-dg-o-w-stroked-okay">Friends</a></div>' +
+                                            '</li>' +
+                                            '<li class="dg-o-w-table-display">' +
+                                                '<div class="dg-o-w-cell"><img src="./dist/imgs/avatar-placeholder.png" /><div class="dg-o-w-details"><p class="dg-o-w-color-brand">Name Surname</p><p class="dg-o-w-color-grey">2 common groups</p></div></div>' +
+                                                '<div class="dg-o-w-cell"><div class="dg-o-w-users-done"></div></div>' +
+                                                '<div class="dg-o-w-cell"><p class="dg-o-w-color-grey">Request sent</p><a href="#" class="btn-dg-o-w btn-dg-o-w-stroked-okay">Friends</a></div>' +
+                                            '</li>' +
+                                        '</ul></div>' +
                                     '</div>' +
                                 '</div>';
 
@@ -1544,7 +1762,6 @@ DGW.side.elements.widget.id = 'dg-side-widget';
 DGW.side.elements.widget.innerHTML = DGW.templates.sideWidgetCore;
 DGW.side.elements.widgetBody = DGW.side.elements.widget.querySelector('.dg-side-widget-body');
 DGW.side.elements.widgetContent = DGW.side.elements.widgetBody.querySelector('.dg-side-widget-content');
-DGW.side.elements.widgetInner = null;
 
 DGW.side.elements.clickCatcher = document.createElement('div');
 DGW.side.elements.clickCatcher.className = 'dg-side-click-holder';
@@ -1574,6 +1791,7 @@ DGW.main.elements.pages.earnMain = document.createElement('div');
 DGW.main.elements.pages.earnMain.innerHTML = DGW.templates.earnMain;
 DGW.main.elements.pages.drawsMain = document.createElement('div');
 DGW.main.elements.pages.drawsMain.innerHTML = DGW.templates.drawsMain;
+DGW.main.elements.pages.singleDraw = document.createElement('div');
 DGW.main.elements.pages.activitiesMain = document.createElement('div');
 DGW.main.elements.pages.activitiesMain.innerHTML = DGW.templates.activitiesMain;
 DGW.main.elements.activitiesSliderParent = DGW.main.elements.pages.activitiesMain.querySelector('.dg-o-w-activities');
@@ -1581,7 +1799,9 @@ DGW.main.elements.pages.profileMain = document.createElement('div');
 DGW.main.elements.pages.profileMain.innerHTML = DGW.templates.profileMain;
 DGW.main.elements.pages.loginMain = document.createElement('div');
 DGW.main.elements.pages.loginMain.innerHTML = DGW.templates.loginMain;
-DGW.main.elements.pages.singleDraw = document.createElement('div');
+DGW.main.elements.pages.friendsMain = document.createElement('div');
+DGW.main.elements.pages.friendsMain.innerHTML = DGW.templates.friendsMain;
+
 DGW.main.elements.pages.videoHolder = document.createElement('div');
 DGW.main.elements.pages.videoHolder.innerHTML = DGW.templates.videoHolder;
 
@@ -1621,6 +1841,7 @@ DGW.main.methods.hideWidget = function(){
     setTimeout(function(){
         DGW.global.elements.documentBody.removeChild(DGW.main.elements.widget);
         DGW.helpers.removeClass(DGW.global.elements.documentBody, 'dg-o-w-body-fixed');
+        ga(DGW.global.gaSend, 'pageview', 'Holder page');
     }, 310);
 };
 
@@ -1635,6 +1856,7 @@ DGW.main.methods.loadingFinished = function(){
 // Side widget global methods
 DGW.side.methods.showWidget = function(){
     DGW.global.elements.documentBody.appendChild(DGW.side.elements.widget);
+    ga(DGW.global.gaSend, 'pageview', 'Holder page');
 };
 DGW.side.methods.hideWidget = function(){
     DGW.global.elements.documentBody.removeChild(DGW.side.elements.widget);
@@ -1660,7 +1882,7 @@ DGW.global.methods.authorize = function(){
         DGW.global.api.requests.getUserOffers();
     }
 
-    DGW.side.methods.changeSideWidgetState('profile');
+    DGW.side.methods.changeSideWidgetState();
 
     DGW.global.api.requests.getUserActions();
 };
@@ -1725,6 +1947,8 @@ DGW.global.methods.init = function(){
     if (DGW.global.safariFixFirstOpen) {
         DGW.main.methods.showWidget();
     }
+
+
 };
 
 DGW.main.methods.showNotificationBar = function(type){
@@ -1900,38 +2124,22 @@ DGW.side.methods.initEvents = function(){
     }
 
     var wBody = DGW.side.elements.widgetBody;
-    var resizerBtn = wBody.querySelector('.dg-side-widget-resizer');
-    var ctas = Array.prototype.slice.call(wBody.querySelectorAll('.dg-side-cta, .dg-side-cta-floating'));
-    var registeredArea = wBody.querySelector('.dg-side-click-holder');
-    ctas.push(registeredArea);
+    var cta = wBody.querySelector('.dg-side-click-holder');
 
     wBody.removeEventListener('click', DGW.global.api.requests.safariFix);
 
-    var sideWidgetCollapse = function(){
-        DGW.helpers.zeroTimeout(function(){DGW.helpers.removeClass(wBody, 'dg-side-widget-expanded');});
-    };
-    var sideWidgetExpand = function(){
-        DGW.helpers.zeroTimeout(function(){DGW.helpers.addClass(wBody, 'dg-side-widget-expanded')});
-    };
-
-    resizerBtn.addEventListener('click', sideWidgetCollapse);
-
-    ctas.forEach(function(cta){
-        if (cta) {
-            cta.addEventListener('click', function () {
-                if (cta.getAttribute('data-page') != null) {
-                    DGW.main.currentState = cta.getAttribute('data-page');
-                }
-                if (!DGW.main.shown) {
-                    DGW.main.methods.showWidget();
-                    sideWidgetExpand();
-                } else {
-                    DGW.main.methods.changeMainState(DGW.main.currentState);
-                    sideWidgetExpand();
-                }
-            });
-        }
-    });
+    if (cta) {
+        cta.addEventListener('click', function () {
+            if (cta.getAttribute('data-page') != null) {
+                DGW.main.currentState = cta.getAttribute('data-page');
+            }
+            if (!DGW.main.shown) {
+                DGW.main.methods.showWidget();
+            } else {
+                DGW.main.methods.changeMainState(DGW.main.currentState);
+            }
+        });
+    }
 
     DGW.helpers.imagesResponsivePaths(wBody.querySelectorAll('[data-image]'));
 };
@@ -1948,26 +2156,38 @@ DGW.side.methods.initSafariFixEvents = function(){
 DGW.side.methods.changeSideWidgetState = function(state) {
     var swc = DGW.side.elements.widgetContent;
     var wb = DGW.side.elements.widgetBody;
+    var cc = wb.querySelector('.dg-side-click-holder');
+    var mainCta;
 
     var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
 
-    DGW.side.elements.widgetInner = null;
-    DGW.side.elements.widgetInner = document.createElement('div');
-    DGW.side.elements.widgetInner.className = 'dg-side-widget-content-inner';
     swc.innerHTML = '';
-    if (wb.children.length > 2) wb.removeChild(DGW.side.elements.clickCatcher);
+
+    //TODO: TEMP place with randomized states
+    var states = ['profile', 'draws'];
+    if(!state) state = states[Math.floor(Math.random())];
+    var actions = ['share', 'play', 'stats'];
+    var curAction = actions[Math.floor(Math.random() * 3)];
+
     switch(state){
-        case 'profile':
-            DGW.side.elements.widgetInner.innerHTML = DGW.templates.side.profileInfo;
-            DGW.side.elements.clickCatcher.setAttribute('data-page', 'earn');
-            wb.appendChild(DGW.side.elements.clickCatcher);
-            swc.appendChild(DGW.side.elements.widgetInner);
-            DGW.global.api.requests.getUser();
+        case 'draws':
+            cc.setAttribute('data-page', 'draws');
+            swc.innerHTML = DGW.templates.side.draw;
             break;
         default:
-            DGW.side.elements.widgetInner.innerHTML = DGW.templates.side.prizeGeneric;
-            swc.appendChild(DGW.side.elements.widgetInner);
+            // PROFILE or SIGNUP pages
+            cc.setAttribute('data-page', 'profile');
+            if (DGW.global.authorized) {
+                swc.innerHTML = DGW.templates.side.registeredProfile;
+                swc.innerHTML += DGW.templates.side.actions[curAction];
+                DGW.global.api.requests.getUser();
+            } else {
+                swc.innerHTML = DGW.templates.side.anonymousSignUp;
+            }
     }
+
+    mainCta = swc.querySelector('[data-page]');
+    if (mainCta) cc.setAttribute('data-page', mainCta.getAttribute('data-page'));
 
     if (isSafari && !DGW.global.safariFix) {
         DGW.side.methods.initSafariFixEvents();
@@ -1991,6 +2211,9 @@ DGW.main.methods.checkSectionHeight = function() {
 };
 
 DGW.main.methods.changeMainState = function(state){
+
+    ga(DGW.global.gaSend, 'pageview', state);
+
     for (var item in DGW.main.elements.menuItems) {
         DGW.helpers.removeClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');
     }
@@ -2072,6 +2295,9 @@ DGW.main.methods.changeMainState = function(state){
                 DGW.helpers.addClass(DGW.main.elements.widgetBody, 'profile-anon');
                 DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.loginMain);
             }
+            break;
+        case 'friends':
+            DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.friendsMain);
             break;
         default:
 
@@ -2368,10 +2594,20 @@ DGW.main.methods.initEvents = function () {
         DGW.global.api.requests.signOut();
     });
 
+    DGW.helpers.getElementsFromAllPlaces('[data-page]', 'main').forEach(function(el){
+        el.addEventListener('click', function(ev){
+            ev.preventDefault();
+            DGW.main.methods.changeMainState(el.getAttribute('data-page'));
+        });
+
+    });
+
+
 //Notification clicks
     DGW.main.elements.pages.notificationHolder.querySelector('.dg-o-w-notification-close').addEventListener('click', function(){
         DGW.main.methods.hideNotificationBar();
     });
+
 };
 
 DGW.main.methods.resetStates = function(){
@@ -2478,8 +2714,8 @@ DGW.main.methods.profileSetData = function(data, draw) {
     credits.confirmed.forEach(function(credit){
         if (credit) {
             if (credit.getAttribute('data-round'))
-                credit.innerHTML = data.Wallet.PointsConfirmed.toFixed(credit.getAttribute('data-round'));
-            else credit.innerHTML = data.Wallet.PointsConfirmed;
+                credit.innerHTML = data.Wallet.CreditsConfirmed.toFixed(credit.getAttribute('data-round'));
+            else credit.innerHTML = data.Wallet.CreditsConfirmed;
         }
     });
     credits.pending.forEach(function(credit){
@@ -2962,7 +3198,7 @@ DGW.main.methods.activitiesConstructor = function(activities){
     activities.sort(function(a, b){
         return new Date(b.Date) - new Date(a.Date);
     });
-    var activitiesHolder = DGW.main.elements.pages.activitiesMain.querySelector('.dg-o-w-activities-holder ul');
+    var activitiesHolder = DGW.helpers.getElementsFromAllPlaces('[data-activities]')[0];
     activitiesHolder.innerHTML = '';
 
     activities.forEach(function(activity){
@@ -3262,6 +3498,72 @@ DGW.main.methods.notificationConstructor = function(lis, _type) {
     } else {
         DGW.helpers.console.warn('Notification parameters are not of the type of [Array] or String');
     }
+};
+
+
+DGW.main.methods.friendsConstructor = function(){
+    var dp = DGW.main.elements.pages.friendsMain;
+    var friendsHolder = DGW.helpers.getElementsFromAllPlaces('[data-friends]')[0];
+
+    var friends = [1, 2, 3, 4, 5, 6, 7];
+
+    var recentCompleters = [1];
+
+
+    friendsHolder.innerHTML = '';
+    friends.forEach(function(el, ind){
+        var li = document.createElement('li');
+        DGW.helpers.addClass(li, 'dg-o-w-table-display');
+
+        li.innerHTML =
+            '<div class="dg-o-w-cell">' +
+                '<img src="./dist/imgs/avatar-placeholder.png" />' +
+                '<div class="dg-o-w-details">' +
+                    '<p class="dg-o-w-color-brand">Name Surname</p>' +
+                    '<p class="dg-o-w-color-grey">2 common groups</p>' +
+                '</div>' +
+            '</div>' +
+            '<div class="dg-o-w-cell">' +
+                '<div class="dg-o-w-users-done"></div>' +
+            '</div>' +
+            '<div class="dg-o-w-cell">' +
+                '<a href="#" class="btn-dg-o-w btn-dg-o-w-stroked">Accept</a>' +
+                '<a href="#" class="btn-dg-o-w btn-dg-o-w-stroked-okay">Friends</a>' +
+            '</div>';
+
+        if (recentCompleters.length > 0) {
+            var commonFriends = li.querySelector('.dg-o-w-users-done');
+            var commonFriendsNumber = 1 + ind;
+            var commonImgsHolder = document.createElement('div');
+            recentCompleters.forEach(function(user, ind){
+                if (ind > 2) return;
+                var img = document.createElement('img');
+                img.src = './dist/imgs/avatar-placeholder.png';
+
+                commonImgsHolder.appendChild(img);
+            });
+            commonFriends.appendChild(commonImgsHolder);
+
+            var p = document.createElement('p');
+            DGW.helpers.addClass(li, 'dg-o-w-table-display');
+            if (commonFriendsNumber == 1) {
+                p.innerHTML = '1 user has done this';
+            } else {
+                p.innerHTML = commonFriendsNumber + ' users have done this';
+                p.className = ((recentCompleters.length == 2) ? 'dg-o-w-two-images' : 'dg-o-w-three-images');
+            }
+            commonFriends.appendChild(p);
+        }
+
+
+        friendsHolder.appendChild(li);
+
+
+        recentCompleters.push(ind + 1);
+    });
+
+
+
 };
 var widgetStyles = document.createElement('link');
     widgetStyles.rel = 'stylesheet';

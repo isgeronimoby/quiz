@@ -15,11 +15,41 @@ DGW.templates.side.prizeGeneric =   '<div class="dg-side-section">' +
                                     '<div class="dg-side-collapsed"><div data-page="profile" class="dg-side-cta">Sign Up</div></div>' +
                                     '<div class="dg-side-expanded"><div data-page="profile" class="dg-side-cta">Sign up & get +10 points</div></div>';
 
-DGW.templates.side.clickCatcher = '<div data-page="earn" class="dg-side-click-holder"></div>';
-
 DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body">' +
                                         '<div class="dg-side-widget-content"></div>' +
-                                        '<div class="dg-side-widget-resizer"></div>' +
+                                        '<div data-page="earn" class="dg-side-click-holder"></div>' +
                                     '</div>' +
                                 '</div>';
+
+DGW.templates.side.draw =  '<div class="dg-side-section">' +
+                                        '<img data-image="temp-green-tee.png" class="dg-side-image-bg" src=""/>' +
+                                        '<div class="dg-side-content">' +
+                                            '<p>Get<br/>t-shirt</p>' +
+                                            '<div class="dg-side-cta">Play</div>' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="dg-side-bottom-floating"><div class="dg-side-progress-bar"><div class="dg-side-progress-bar-inner"></div></div></div>';
+
+DGW.templates.side.anonymousSignUp =  '<div class="dg-side-section dg-full-size">' +
+                                        '<img data-image="temp-signup-bg.png" class="dg-side-image-bg" src=""/>' +
+                                        '<div class="dg-side-content">' +
+                                            '<p>Join<br/>Everton<br/>&<br/><span class="dg-o-w-font-smaller dg-o-w-color-brand">get prizes</span></p>' +
+                                            '<div class="dg-side-cta">Join</div>' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="dg-side-bottom-floating"><div class="dg-side-progress-bar"><div class="dg-side-progress-bar-inner"></div></div></div>';
+
+DGW.templates.side.registeredProfile =  '<div class="dg-side-section dg-small-size">' +
+                                            '<img data-userstats-userimage class="dg-side-image-bg" src=""/>' +
+                                            '<div class="dg-side-content">' +
+                                                '<div class="dg-side-progress-bar"><div class="dg-side-progress-bar-inner"></div></div>' +
+                                                '<p data-userstats-points-c class="dg-o-w-points-text">00</p>' +
+                                            '</div>' +
+                                        '</div>';
+
+DGW.templates.side.actions = {
+    share: '<div class="dg-side-bottom-floating dg-side-action" data-page="earn">Share</div>',
+    play: '<div class="dg-side-bottom-floating dg-side-action" data-page="draws">Play</div>',
+    stats: '<div class="dg-side-bottom-floating dg-side-action" data-page="profile">Stats</div>'
+};

@@ -110,6 +110,34 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         case 'shareRewardAction':
             endpoint = 'draw/getsharelinks?drawid=' + requestBody;
             break;
+        case 'friendsGet':
+            endpoint = 'friend/getfriends';
+            break;
+        case 'friendFollow':
+            method = 'POST';
+            endpoint = 'friend/follow';
+            requestBody = JSON.stringify(requestBody);
+            break;
+        case 'friendUnfollow':
+            method = 'POST';
+            endpoint = 'friend/unfollow';
+            requestBody = JSON.stringify(requestBody);
+            break;
+        case 'friendRequestSend':
+            method = 'POST';
+            endpoint = 'friend/sendfriendrequest';
+            requestBody = JSON.stringify(requestBody);
+            break;
+        case 'friendRequestAccept':
+            method = 'POST';
+            endpoint = 'friend/acceptfriendrequest';
+            requestBody = JSON.stringify(requestBody);
+            break;
+        case 'friendRequestDecline':
+            method = 'POST';
+            endpoint = 'friend/declinefriendrequest';
+            requestBody = JSON.stringify(requestBody);
+            break;
         default:
             DGW.helpers.console.log('Api default occured');
     }
@@ -160,6 +188,7 @@ DGW.global.api.requests.checkServerAvailability = function(){
             //TODO: refactor later
             DGW.global.club.name = result.data.FoundationName;
             DGW.global.api.requests.getDraws(DGW.global.api.requests.initMainFlow);
+            DGW.helpers.gaCheckPut(DGW.global.club.name);
         }
     });
 };
@@ -562,5 +591,87 @@ DGW.global.api.requests.shareRewardAction = function(drawId, onSuccess, onError)
             DGW.helpers.console.error('shareRewardedAction: ', result.error);
             if (onError) onError(result.error);
         }
-    }, drawId)
+    }, drawId);
+};
+
+DGW.global.api.requests.friendsGet = function(onSuccess, onError){
+    DGW.global.api.generic('friendsGet', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('Get friends API: ', result.data);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            DGW.helpers.console.error('Get friends API: ', result.error);
+            if (onError) onError(result.error);
+        }
+    });
+};
+
+DGW.global.api.requests.friendFollow = function(userId, onSuccess, onError){
+    DGW.global.api.generic('friendFollow', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('friendFollow ', result.data);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            DGW.helpers.console.error('friendFollow ', result.error);
+            if (onError) onError(result.error);
+        }
+    }, {
+        UserId: userId
+    });
+};
+
+DGW.global.api.requests.friendUnfollow = function(userId, onSuccess, onError){
+    DGW.global.api.generic('friendUnfollow', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('friendUnfollow ', result.data);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            DGW.helpers.console.error('friendUnfollow ', result.error);
+            if (onError) onError(result.error);
+        }
+    }, {
+        UserId: userId
+    });
+};
+
+DGW.global.api.requests.friendRequestSend = function(userId, onSuccess, onError){
+    DGW.global.api.generic('friendRequestSend', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('friendRequestSend ', result.data);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            DGW.helpers.console.error('friendRequestSend ', result.error);
+            if (onError) onError(result.error);
+        }
+    }, {
+        UserId: userId
+    });
+};
+
+DGW.global.api.requests.friendRequestAccept = function(userId, onSuccess, onError){
+    DGW.global.api.generic('friendRequestAccept', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('friendRequestAccept ', result.data);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            DGW.helpers.console.error('friendRequestAccept ', result.error);
+            if (onError) onError(result.error);
+        }
+    }, {
+        UserId: userId
+    });
+};
+
+DGW.global.api.requests.friendRequestDecline = function(userId, onSuccess, onError){
+    DGW.global.api.generic('friendRequestDecline', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('friendRequestDecline ', result.data);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            DGW.helpers.console.error('friendRequestDecline ', result.error);
+            if (onError) onError(result.error);
+        }
+    }, {
+        UserId: userId
+    });
 };

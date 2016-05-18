@@ -6,38 +6,22 @@ DGW.side.methods.initEvents = function(){
     }
 
     var wBody = DGW.side.elements.widgetBody;
-    var resizerBtn = wBody.querySelector('.dg-side-widget-resizer');
-    var ctas = Array.prototype.slice.call(wBody.querySelectorAll('.dg-side-cta, .dg-side-cta-floating'));
-    var registeredArea = wBody.querySelector('.dg-side-click-holder');
-    ctas.push(registeredArea);
+    var cta = wBody.querySelector('.dg-side-click-holder');
 
     wBody.removeEventListener('click', DGW.global.api.requests.safariFix);
 
-    var sideWidgetCollapse = function(){
-        DGW.helpers.zeroTimeout(function(){DGW.helpers.removeClass(wBody, 'dg-side-widget-expanded');});
-    };
-    var sideWidgetExpand = function(){
-        DGW.helpers.zeroTimeout(function(){DGW.helpers.addClass(wBody, 'dg-side-widget-expanded')});
-    };
-
-    resizerBtn.addEventListener('click', sideWidgetCollapse);
-
-    ctas.forEach(function(cta){
-        if (cta) {
-            cta.addEventListener('click', function () {
-                if (cta.getAttribute('data-page') != null) {
-                    DGW.main.currentState = cta.getAttribute('data-page');
-                }
-                if (!DGW.main.shown) {
-                    DGW.main.methods.showWidget();
-                    sideWidgetExpand();
-                } else {
-                    DGW.main.methods.changeMainState(DGW.main.currentState);
-                    sideWidgetExpand();
-                }
-            });
-        }
-    });
+    if (cta) {
+        cta.addEventListener('click', function () {
+            if (cta.getAttribute('data-page') != null) {
+                DGW.main.currentState = cta.getAttribute('data-page');
+            }
+            if (!DGW.main.shown) {
+                DGW.main.methods.showWidget();
+            } else {
+                DGW.main.methods.changeMainState(DGW.main.currentState);
+            }
+        });
+    }
 
     DGW.helpers.imagesResponsivePaths(wBody.querySelectorAll('[data-image]'));
 };
@@ -54,26 +38,38 @@ DGW.side.methods.initSafariFixEvents = function(){
 DGW.side.methods.changeSideWidgetState = function(state) {
     var swc = DGW.side.elements.widgetContent;
     var wb = DGW.side.elements.widgetBody;
+    var cc = wb.querySelector('.dg-side-click-holder');
+    var mainCta;
 
     var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
 
-    DGW.side.elements.widgetInner = null;
-    DGW.side.elements.widgetInner = document.createElement('div');
-    DGW.side.elements.widgetInner.className = 'dg-side-widget-content-inner';
     swc.innerHTML = '';
-    if (wb.children.length > 2) wb.removeChild(DGW.side.elements.clickCatcher);
+
+    //TODO: TEMP place with randomized states
+    var states = ['profile', 'draws'];
+    if(!state) state = states[Math.floor(Math.random())];
+    var actions = ['share', 'play', 'stats'];
+    var curAction = actions[Math.floor(Math.random() * 3)];
+
     switch(state){
-        case 'profile':
-            DGW.side.elements.widgetInner.innerHTML = DGW.templates.side.profileInfo;
-            DGW.side.elements.clickCatcher.setAttribute('data-page', 'earn');
-            wb.appendChild(DGW.side.elements.clickCatcher);
-            swc.appendChild(DGW.side.elements.widgetInner);
-            DGW.global.api.requests.getUser();
+        case 'draws':
+            cc.setAttribute('data-page', 'draws');
+            swc.innerHTML = DGW.templates.side.draw;
             break;
         default:
-            DGW.side.elements.widgetInner.innerHTML = DGW.templates.side.prizeGeneric;
-            swc.appendChild(DGW.side.elements.widgetInner);
+            // PROFILE or SIGNUP pages
+            cc.setAttribute('data-page', 'profile');
+            if (DGW.global.authorized) {
+                swc.innerHTML = DGW.templates.side.registeredProfile;
+                swc.innerHTML += DGW.templates.side.actions[curAction];
+                DGW.global.api.requests.getUser();
+            } else {
+                swc.innerHTML = DGW.templates.side.anonymousSignUp;
+            }
     }
+
+    mainCta = swc.querySelector('[data-page]');
+    if (mainCta) cc.setAttribute('data-page', mainCta.getAttribute('data-page'));
 
     if (isSafari && !DGW.global.safariFix) {
         DGW.side.methods.initSafariFixEvents();

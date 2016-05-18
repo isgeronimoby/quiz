@@ -16,6 +16,7 @@ DGW.main.methods.hideWidget = function(){
     setTimeout(function(){
         DGW.global.elements.documentBody.removeChild(DGW.main.elements.widget);
         DGW.helpers.removeClass(DGW.global.elements.documentBody, 'dg-o-w-body-fixed');
+        ga(DGW.global.gaSend, 'pageview', 'Holder page');
     }, 310);
 };
 
@@ -30,6 +31,7 @@ DGW.main.methods.loadingFinished = function(){
 // Side widget global methods
 DGW.side.methods.showWidget = function(){
     DGW.global.elements.documentBody.appendChild(DGW.side.elements.widget);
+    ga(DGW.global.gaSend, 'pageview', 'Holder page');
 };
 DGW.side.methods.hideWidget = function(){
     DGW.global.elements.documentBody.removeChild(DGW.side.elements.widget);
@@ -55,7 +57,7 @@ DGW.global.methods.authorize = function(){
         DGW.global.api.requests.getUserOffers();
     }
 
-    DGW.side.methods.changeSideWidgetState('profile');
+    DGW.side.methods.changeSideWidgetState();
 
     DGW.global.api.requests.getUserActions();
 };
@@ -120,6 +122,8 @@ DGW.global.methods.init = function(){
     if (DGW.global.safariFixFirstOpen) {
         DGW.main.methods.showWidget();
     }
+
+
 };
 
 DGW.main.methods.showNotificationBar = function(type){

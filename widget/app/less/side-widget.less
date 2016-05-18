@@ -93,59 +93,34 @@
 			line-height: 18px;
 		}
 
+		.dg-o-w-color-brand {
+			color: @color-brand;
+		}
+
+		.dg-side-shadow {
+			box-shadow: -1px 1px 2px rgba(0,0,0,.2);
+		}
+
 		.dg-side-widget-body {
 			position: relative;
-			width: @dg-side-widget-collapsed-width;
-			height: 140px;
-			background-color: @color-grey-light;
-			border-bottom-left-radius: 3px;
-			border-top-left-radius: 3px;
-			box-shadow: -1px 1px 4px rgba(0,0,0,.2);
-			transition: width 0.3s ease;
-			overflow: hidden;
-
 			animation: dg-o-w-slide-right 0.4s ease forwards 1;
-
-			.dg-side-widget-resizer {
-				position: absolute;
-				top: 14px;
-				right: -8px;
-				width: 22px;
-				height: 22px;
-				line-height: 22px;
-				font-size: 28px;
-				font-weight: 100;
-				background-color: rgba(0,0,0,0.3);
-				color: @color-grey-light;
-				border-radius: 50%;
-				transform: translate(-50%, -50%);
-				cursor: pointer;
-				text-align: center;
-
-				display: none;
-
-				&:after {
-					content: '-';
-				}
-			}
-
-			.dg-side-collapsed {
-				display: block;
-			}
-
-			.dg-side-expanded {
-				display: none;
-			}
 
 			.dg-side-section {
 				overflow: hidden;
+				width: @dg-side-widget-width;
+				height: @dg-side-widget-height;
+				.dg-side-shadow;
+				background-color: @color-white;
+				border-bottom-left-radius: 3px;
+				border-top-left-radius: 3px;
+				position: relative;
 
 				.dg-o-w-points-text {
-					font-size: 16px;
+					font-size: 12px;
 					line-height: 18px;
+
 					&:after {
-						font-size: 12px;
-						content: ' points';
+						content: ' pts';
 					}
 				}
 
@@ -158,50 +133,82 @@
 					}
 				}
 
-				.dg-o-w-side-image-floating {
-					height: 100%;
-					width: auto;
-					max-width: none;
-				}
-
-				.dg-side-img-holder {
-					position: absolute;
-					right: -16px;
-					bottom: 0;
-					width: 100%;
-					height: 100%;
-					transition: right 0.3s ease;
-					z-index: -1;
-				}
-
-				.dg-side-user-img-holder {
-					position: absolute;
-					left: 0;
-					top: 0;
-					width: @dg-side-widget-collapsed-width;
-					height: @dg-side-widget-collapsed-width;
-					overflow: hidden;
-					transition: left 0.3s ease,
-								top 0.3s ease,
-								border-radius 0.3s ease;
-					z-index: -1;
-
+				.dg-side-image-bg {
+					max-width: 100%;
+					height: auto;
 				}
 
 				.dg-side-content {
-					max-width: 95px;
-					float: right;
-					margin-top: 20px;
-					padding-right: 10px;
-					font-size: 15px;
-					transform: translateX(-200%);
-					transition: transform 0.3s ease;
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					background-color: rgba(0,0,0,0.4);
+					padding: 5px 5px 8px;
 
-					h4 {
+					p {
 						margin-bottom: 5px;
-						max-height: 40px;
-						overflow: hidden;
+						color: @color-white;
+						text-align: center;
+						text-transform: uppercase;
 					}
+				}
+
+				&.dg-full-size {
+					.dg-side-content {
+						top: 0;
+						background-color: transparent;
+						padding: 35px 5px 8px 5px;
+
+						p {
+							color: @color-grey-darkest;
+						}
+					}
+				}
+
+				&.dg-small-size {
+					height: @dg-side-widget-height-small;
+
+					.dg-side-content {
+						background-color: transparent;
+						padding: 5px 5px 2px;
+
+						p {
+							color: @color-brand;
+							margin-bottom: 0;
+						}
+					}
+
+					.dg-side-progress-bar {
+						background-color: @color-grey-light;
+						margin-bottom: 6px;
+
+						.dg-side-progress-bar-inner {
+							background-color: @color-green;
+						}
+					}
+				}
+			}
+
+
+
+			.dg-side-bottom-floating {
+				background: #fff;
+				padding: 7px 5px;
+				margin-top: 5px;
+				.dg-side-shadow;
+				border-bottom-left-radius: 3px;
+				border-top-left-radius: 3px;
+
+				&.dg-side-action {
+					padding: 0 5px;
+					line-height: 25px;
+					height: 25px;
+					text-align: center;
+					background-color: @color-brand;
+					color: @color-white;
+					text-transform: uppercase;
+					font-size: 13px;
 				}
 			}
 
@@ -212,133 +219,34 @@
 				right: 0;
 				bottom: 0;
 				cursor: pointer;
-				display: none;
 				background: transparent;
-			}
-
-			.dg-side-floating-text {
-				position: absolute;
-				bottom: 5px;
-				left: 5px;
-				right: 5px;
-				display: block;
-				text-align: center;
+				z-index: 100;
 			}
 
 			.dg-side-cta {
-				position: absolute;
-				bottom: 5px;
-				left: 5px;
-				right: 5px;
 				display: block;
 				background-color: @color-green;
 				text-align: center;
 				color: @color-white;
-				line-height: 30px;
-				font-size: 16px;
-				border-radius: 3px;
+				line-height: 24px;
+				font-size: 12px;
+				text-transform: uppercase;
+				border-radius: 12px;
 				white-space: nowrap;
-				cursor: pointer;
-				z-index: 20;
 			}
 
-			.dg-side-cta-floating {
-				position: absolute;
-				top: @dg-side-widget-collapsed-width;
-				left: 50%;
-				background-color: @color-green;
-				transform: translate(-50%, -50%);
-				border-radius: 50%;
-				width: 40px;
-				height: 40px;
-				line-height: 40px;
-				text-align: center;
-				white-space: nowrap;
-				color: @color-white;
-				font-size: 16px;
-				cursor: pointer;
+			.dg-side-progress-bar {
+				height: 8px;
+				width: 100%;
+				border-radius: 4px;
+				background-color: @color-grey-light;
 				overflow: hidden;
-				transition: all 0.3s ease;
 
-				&:after {
-					content: '';
-					position: absolute;
-				}
-			}
-
-			.dg-o-w-authorized {
-				display: none;
-			}
-			.dg-o-w-anonymous {
-				display: block;
-			}
-
-			&.dg-o-w-authorized {
-
-				.dg-side-click-holder {
-					display: block;
-				}
-
-				.dg-side-widget-content {
-					padding: 0;
-				}
-
-				.dg-o-w-authorized {
-					display: block;
-				}
-				.dg-o-w-anonymous {
-					display: none;
-				}
-			}
-
-			&.dg-side-widget-expanded {
-				width: @dg-side-widget-expanded-width;
-
-				.dg-side-click-holder {
-					display: none;
-				}
-
-				.dg-side-widget-resizer {
-					display: block;
-				}
-
-				.dg-side-widget-content {
-					text-align: left;
-
-					.dg-side-section {
-						.dg-side-img-holder {
-							right: 55px;
-						}
-						.dg-side-content {
-							transform: translateX(0);
-						}
-
-						.dg-side-user-img-holder {
-							left: 10px;
-							top: 10px;
-							border-radius: 50%;
-						}
-					}
-				}
-
-				.dg-side-collapsed {
-					display: none;
-				}
-
-				.dg-side-expanded {
-					display: block;
-				}
-
-				.dg-side-cta-floating {
-					top: initial;
-					bottom: 5px;
-					left: 5px;
-					right: 5px;
-					line-height: 30px;
-					width: auto;
-					height: auto;
-					border-radius: 3px;
-					transform: translate(0, 0);
+				.dg-side-progress-bar-inner {
+					height: 100%;
+					width: 40%;
+					background-color: @color-brand;
+					border-radius: 4px;
 				}
 			}
 		}

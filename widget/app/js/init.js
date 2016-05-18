@@ -94,6 +94,7 @@ var DGW = function () {
                     widgetPathName: widgetPathName,
                     userStats: {},
                     debug: debugMode,
+                    gaSend: '',
                     safariFixFirstOpen: false
                 },
                 states: {},

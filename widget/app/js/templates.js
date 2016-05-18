@@ -85,10 +85,7 @@ DGW.templates.earnMain = '<div class="dg-o-w-submenu">' +
                                 '<li>Visit</li>' +
                                 '<li>Download</li>' +
                                 '<li>Invite</li></ul>' +
-                            '<select><option>All sponsors</option>' +
-                                '<option>Coca-Cola</option>' +
-                                '<option>Nike</option>' +
-                                '<option>Telco</option></select>' +
+                            '<select class="single-select"></select>' +
                         '</div>' +
                         '<div class="dg-o-w-section-content">' +
                             '<h3>Complete the tasks and earn +<span></span> points today</h3>' +
@@ -113,8 +110,8 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' 
                                     '<div class="dg-o-w-profile-stats-holder">' +
                                         '<h3 data-userstats-username class="dg-o-w-profile-name">Captain Deadpool</h3>' +
                                         '<div class="dg-o-w-profile-stats-holder-rest">' +
-                                            //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p>19</p></div></div>' +
-                                            //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand">20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p>3</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-userstats-friends-c>210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-friends-p class="green-highlighter">19</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand" data-userstats-groups-c>20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-groups-p class="green-highlighter">3</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 data-userstats-points-c>520</h3><p>points</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 data-userstats-credits-c>40</h3><p>credits</p></div></div>' +
                                         '</div>' +
@@ -161,7 +158,7 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul>' +
                                         '</div>' +
                                     '</div>' +
                                     '<div class="dg-o-w-section-content content-static dg-o-w-white-section">' +
-                                        '<div class="dg-o-w-activities-header">' +
+                                        '<div class="dg-o-w-section-header">' +
                                             '<p class="dg-o-w-float-left">Activities for today</p>' +
                                             // TODO: don't show until we have invite friends functionality
                                             // '<p class="dg-o-w-floating-link"><a href="#">Invite more friends</a> and get +<span id="dg-o-w-friends-sign-up-reward" class="dg-o-w-rewarded-action">50</span> points for each</p>' +
@@ -170,7 +167,34 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul>' +
                                                 '<option value="my-activities">My Activities</option>' +
                                             '</select>' +
                                         '</div>' +
-                                        '<div class="dg-o-w-activities-holder"><ul></ul></div>' +
+                                        '<div class="dg-o-w-section-list-holder"><ul data-activities></ul></div>' +
+                                    '</div>' +
+                                '</div>';
+
+DGW.templates.friendsMain = '<div class="dg-o-w-submenu"><ul>' +
+                                    '<li class="dg-o-w-active">My friends</li></ul>' +
+                                '<div class="dg-o-w-float-right dg-o-w-inline-form dg-o-w-right-padding">' +
+                                    '<select class="search-dropdown"><option>Global</option></select>' +
+                                    '<form class="search-form"><input class="search-field" type="text" placeholder="Search" /><input class="search-submit" type="submit" value=""/></form>' +
+                                '</div></div>' +
+                                '<div class="dg-o-w-section-scroller">' +
+                                    '<div class="dg-o-w-section-content content-static dg-o-w-white-section">' +
+                                        '<div class="dg-o-w-section-header">' +
+                                            '<div class="dg-o-w-float-left"><p><a href="#" class="btn-dg-o-w btn-dg-o-w-brand">Invite more friends</a> and get points per each</p></div>' +
+                                            '<div class="dg-o-w-float-right"><p class="line-height-btn">You have 132 friends <span class="green-highlighter">12</span></p></div>' +
+                                        '</div>' +
+                                        '<div class="dg-o-w-section-list-holder"><ul data-friends>' +
+                                            '<li class="dg-o-w-table-display">' +
+                                                '<div class="dg-o-w-cell"><img src="./dist/imgs/avatar-placeholder.png" /><div class="dg-o-w-details"><p class="dg-o-w-color-brand">Name Surname</p><p class="dg-o-w-color-grey">2 common groups</p></div></div>' +
+                                                '<div class="dg-o-w-cell"><div class="dg-o-w-users-done"></div></div>' +
+                                                '<div class="dg-o-w-cell"><a href="#" class="btn-dg-o-w btn-dg-o-w-stroked">Accept</a><a href="#" class="btn-dg-o-w btn-dg-o-w-stroked-okay">Friends</a></div>' +
+                                            '</li>' +
+                                            '<li class="dg-o-w-table-display">' +
+                                                '<div class="dg-o-w-cell"><img src="./dist/imgs/avatar-placeholder.png" /><div class="dg-o-w-details"><p class="dg-o-w-color-brand">Name Surname</p><p class="dg-o-w-color-grey">2 common groups</p></div></div>' +
+                                                '<div class="dg-o-w-cell"><div class="dg-o-w-users-done"></div></div>' +
+                                                '<div class="dg-o-w-cell"><p class="dg-o-w-color-grey">Request sent</p><a href="#" class="btn-dg-o-w btn-dg-o-w-stroked-okay">Friends</a></div>' +
+                                            '</li>' +
+                                        '</ul></div>' +
                                     '</div>' +
                                 '</div>';
 

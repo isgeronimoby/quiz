@@ -13,6 +13,9 @@ DGW.main.methods.checkSectionHeight = function() {
 };
 
 DGW.main.methods.changeMainState = function(state){
+
+    ga(DGW.global.gaSend, 'pageview', state);
+
     for (var item in DGW.main.elements.menuItems) {
         DGW.helpers.removeClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');
     }
@@ -94,6 +97,9 @@ DGW.main.methods.changeMainState = function(state){
                 DGW.helpers.addClass(DGW.main.elements.widgetBody, 'profile-anon');
                 DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.loginMain);
             }
+            break;
+        case 'friends':
+            DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.friendsMain);
             break;
         default:
 
@@ -390,10 +396,20 @@ DGW.main.methods.initEvents = function () {
         DGW.global.api.requests.signOut();
     });
 
+    DGW.helpers.getElementsFromAllPlaces('[data-page]', 'main').forEach(function(el){
+        el.addEventListener('click', function(ev){
+            ev.preventDefault();
+            DGW.main.methods.changeMainState(el.getAttribute('data-page'));
+        });
+
+    });
+
+
 //Notification clicks
     DGW.main.elements.pages.notificationHolder.querySelector('.dg-o-w-notification-close').addEventListener('click', function(){
         DGW.main.methods.hideNotificationBar();
     });
+
 };
 
 DGW.main.methods.resetStates = function(){

@@ -1,4 +1,5 @@
 DGW.helpers.addClass = function(obj, className){
+    if (!obj) return;
     if (!(new RegExp(className).test(obj.className))) {
         if (obj.className.length === 0) {
             obj.className += className;
@@ -325,14 +326,27 @@ DGW.helpers.showFramedSrc = function(src){
     wb.appendChild(h);
 };
 
-DGW.helpers.getElementsFromAllPlaces = function(selector){
+DGW.helpers.getElementsFromAllPlaces = function(selector, place){
     if (!selector) return;
+    var places;
 
-    var places = [
-        DGW.main.elements.widgetBody,
-        DGW.side.elements.widgetBody,
-        DGW.main.elements.pages
-    ];
+    if (place === 'main') {
+        places = [
+            DGW.main.elements.widgetBody,
+            DGW.main.elements.pages
+        ];
+    } else if (place === 'side') {
+        places = [
+            DGW.side.elements.widgetBody
+        ];
+    } else {
+        places = [
+            DGW.main.elements.widgetBody,
+            DGW.side.elements.widgetBody,
+            DGW.main.elements.pages
+        ];
+    }
+
     var placesArr = [];
     var elements = [];
 
@@ -353,4 +367,42 @@ DGW.helpers.getElementsFromAllPlaces = function(selector){
     });
 
     return elements;
+};
+
+DGW.helpers.gaCheckPut = function(name){
+    name = name || DGW.global.club.name;
+    DGW.helpers.console.log('GA script launched');
+    if (!window.ga) {
+        DGW.helpers.console.log('Adding GA script');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        DGW.helpers.gaCheckPut();
+    } else {
+        DGW.global.gaSend = name + '.send';
+        if (ga.getByName) {
+            if (!ga.getByName(name)) {
+                DGW.helpers.console.log('GA is ready, creating DGW');
+                ga('create', {
+                    trackingId: 'UA-51923524-37',
+                    cookieDomain: 'auto',
+                    name: name
+                });
+            } else {
+                DGW.helpers.console.log('GA is ready, DGW is created');
+            }
+        } else {
+            DGW.helpers.console.log('GA is ready, loading');
+            var interval = window.setInterval(function(){
+                if (ga.getByName) {
+                    window.clearInterval(interval);
+                    DGW.helpers.gaCheckPut();
+                }
+            }, 50);
+        }
+    }
 };
