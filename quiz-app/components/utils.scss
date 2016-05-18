@@ -65,6 +65,18 @@ Mixins
   overflow: hidden;
 }
 
+@define-mixin center-image {
+  position: relative;
+  overflow: hidden;
+  img {
+    position: absolute;
+    max-height: 100%;
+    width: auto;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%)
+  }
+}
+
 /*
 Lists
 */

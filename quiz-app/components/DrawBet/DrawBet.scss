@@ -1,4 +1,5 @@
 @import '../variables.scss';
+@import '../utils.scss';
 @import '../QuizBet/bet.scss';
 .draw-content {
   height: 100%;
@@ -33,15 +34,9 @@ $image-sz: 10rem;
   height: $image-sz;
   margin: 15px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
   background: #fff;
-  img {
-    height: $image-sz;
-    width: auto;
-  }
+  @mixin center-image
+;
 }
 .bet-description {
   font-size: 1.2rem;
