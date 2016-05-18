@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { getNextDrawItem } from '../lib/utils.js';
 import { fetchProfileIfNeeded, fetchDrawsIfNeeded, selectDraw } from '../flux/actions';
+import { Fetching } from '../components/Layout';
 import DrawContainer from '../components/DrawContainer';
 
 
@@ -11,10 +13,8 @@ class Draw extends Component {
 	static propTypes = {
 		params: PropTypes.object.isRequired,
 		// from store
-		maxPoints: PropTypes.number.isRequired,
 		drawItem: PropTypes.object.isRequired,
-		isBetting: PropTypes.bool.isRequired,
-
+		nextDrawItem: PropTypes.object.isRequired,
 		fetchProfile: PropTypes.func.isRequired,
 		fetchDraws: PropTypes.func.isRequired,
 		selectDraw: PropTypes.func.isRequired,
@@ -29,14 +29,14 @@ class Draw extends Component {
 	}
 
 	render() {
-		const { params: { drawId }, maxPoints, drawItem } = this.props;
+		const { drawItem, nextDrawItem } = this.props;
 
 		if (drawItem.isFetching) {
-			return <div/>; // TODO: spinner
+			return <Fetching/>;
 		}
 
 		return (
-			<DrawContainer points={ maxPoints } drawItem={ drawItem } />
+			<DrawContainer drawItem={ drawItem } nextDrawItem={ nextDrawItem }/>
 		);
 	}
 
@@ -45,10 +45,10 @@ class Draw extends Component {
 // Connect to store
 //
 const mapStateToProps = (state) => {
+	const selectedDrawItem = state.draws.list.find(({ drawId }) => drawId === state.selectedDraw);
 	return {
-		maxPoints: state.profile.points,
-		drawItem: state.draws.list.find(({ drawId }) => drawId === state.selectedDraw) || { isFetching: true },
-		isBetting: false, // TODO
+		drawItem: selectedDrawItem || {isFetching: true},
+		nextDrawItem: getNextDrawItem(state.draws.list, selectedDrawItem),
 	};
 };
 const mapDispatchToProps = (dispatch) => {

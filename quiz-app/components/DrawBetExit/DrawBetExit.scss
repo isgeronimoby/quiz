@@ -1,40 +1,21 @@
 @import '../variables.scss';
 .draw-exit {
-  height: 100%;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  padding: 15px;
 
-  & > * {
-    text-align: center;
+  .big-btn {
+    margin: 0 0 15px
   }
 }
 .big-image {
-  margin: 15px;
-  background: $color-grey;
-  height: 300px;
-  line-height: 300px;
-}
-.social-link {
-  font-size: 1.9rem;
+  width: 100%;
   margin-bottom: 15px;
+  overflow: hidden;
   display: flex;
-  justify-content: center;
   align-items: center;
-  cursor: pointer;
-
+  justify-content: center;
   img {
-    margin-right: 10px;
-  }
-
-  &.facebook {
-    color: $color-facebook;
-  }
-  &.twitter {
-    color: $color-twitter;
-  }
-  &.disabled {
-    opacity: .3;
+    height: 280px;
+    width: auto;
   }
 }

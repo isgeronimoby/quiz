@@ -1,5 +1,8 @@
-import fetch, { apiPrefix, apiKey } from '../../lib/fetch.js';
-import { fetchProfileIfNeeded, fetchProfileSuccess } from './profile.js'
+import fetch, { apiPrefix, iframeSrc, apiKey, rpc } from '../../lib/fetch.js';
+import { Window, isSafari } from '../../lib/utils.js';
+import { fetchProfile, fetchProfileSuccess } from './profile.js'
+const popup = new Window();
+
 
 export const TOGGLE_WELCOME = 'TOGGLE_WELCOME';
 
@@ -11,8 +14,13 @@ export const POST_LOGIN = 'POST_LOGIN';
 export const POST_LOGIN_ERROR = 'POST_LOGIN_ERROR';
 export const POST_SIGNUP = 'POST_SIGNUP';
 export const POST_SIGNUP_ERROR = 'POST_SIGNUP_ERROR';
+export const POST_RESTORE = 'POST_RESTORE';
+export const POST_RESTORE_ERROR = 'POST_RESTORE_ERROR';
+export const POST_RESTORE_SUCCESS = 'POST_RESTORE_SUCCESS';
 
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+
+export const SAFARI_COOKIE_HACKED = 'SAFARI_COOKIE_HACKED';
 
 
 /*
@@ -28,10 +36,56 @@ export function toggleWelcome(show) {
 /*
  Common Auth
  */
-export function requestAuth(authPopupView = 'signup') {
+function requestAuthPopup(authPopupView = 'signup') {
 	return {
 		type: REQUEST_AUTH,
 		authPopupView
+	};
+}
+
+function safariCookieHack() {
+	return {
+		type: SAFARI_COOKIE_HACKED
+	};
+}
+
+function requestAuthWithSafariFix(authPopupView) {
+	return (dispatch, getState) => {
+		const { auth: {safariCookieHacked} } = getState();
+
+		if (safariCookieHacked) {
+			return dispatch(requestAuthPopup(authPopupView));
+		}
+
+		rpc.readClubCookie('safarifix', (res) => {
+			if (res) {
+				dispatch(safariCookieHack());
+				return dispatch(requestAuthPopup(authPopupView));
+			}
+
+			// Open window on target domain and let it set cookie (i.e. visit it) and close itself.
+			// A hack for Safari that do not allow setting cookies to unvisited domains, thus breaking session cookies.
+			//
+			const url = `${iframeSrc}?safarifix`; // the page detects this flag, sets 'safarifix' cookie and closes itself
+			const title = '_blank';
+			const settings = 'menubar=no,location=no,resizable=no,scrollbars=no,status=no,width=1,height=1,top=0,left=0';
+
+			popup.open({url, title, settings}, () => {
+				// Assume cookie is set after window is closed
+				dispatch(safariCookieHack());
+				dispatch(requestAuthPopup(authPopupView));
+			});
+		});
+	};
+}
+
+export function requestAuth(authPopupView) {
+	return (dispatch) => {
+		if (!isSafari) {
+			dispatch(requestAuthPopup(authPopupView));
+		} else {
+			dispatch(requestAuthWithSafariFix(authPopupView));
+		}
 	};
 }
 
@@ -122,6 +176,47 @@ export function postSignup({name, email, password}) {
 }
 
 /*
+ Restore
+ */
+function postRestoreStart() {
+	return {
+		type: POST_SIGNUP
+	};
+}
+
+function postRestoreError(error) {
+	return {
+		type: POST_RESTORE_ERROR,
+		error
+	};
+}
+function postRestoreSuccess() {
+	return {
+		type: POST_RESTORE_SUCCESS,
+		// TODO: need to show some success message - need deign
+	};
+}
+
+export function postRestore({email}) {
+	return (dispatch) => {
+		dispatch(postRestoreStart());
+
+		return fetch({
+			method: 'POST',
+			endpoint: 'auth/forgotpassword',
+			data: {
+				Email: email,
+			}
+		}).then((json) => {
+			dispatch(postRestoreSuccess());
+		}).catch(({ Message: error = 'Invalid'}) => {
+			dispatch(postRestoreError(error));
+		});
+	};
+}
+
+
+/*
  Logout
  */
 function postLogoutSuccess() {
@@ -145,30 +240,14 @@ export function postLogout() {
 /*
  Facebook
  */
-let windowRef = null;
-let windowTimer = null;
-function openPopup(url, onClose) {
-	if (windowRef == null || windowRef.closed) {
-		windowRef = window.open(url, 'Facebook', 'resizable=yes,scrollbars=yes,status=yes');
-		windowRef.focus();
-		windowTimer = setInterval(() => {
-			if (windowRef.closed) {
-				clearInterval(windowTimer);
-				windowRef = null;
-				onClose();
-			}
-		}, 500);
-	} else {
-		windowRef.focus();
-	}
-}
 
 export function authWithFacebook() {
 	return (dispatch) => {
-		const windowUrl = `${apiPrefix}auth/facebook?api_key=${apiKey}`;
+		const url = `${apiPrefix}auth/facebook?api_key=${apiKey}`;
+		const title = 'Facebook';
 
-		openPopup(windowUrl, () => {
-			dispatch(fetchProfileIfNeeded());
+		popup.open({url, title}, () => {
+			dispatch(fetchProfile());
 		});
 	};
 }

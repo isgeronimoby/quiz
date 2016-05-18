@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Link from '../Link';
-import { SharingPopup } from '../Popup';
 import Button from '../Button';
+import SharingControls from '../SharingControls';
 import './summary.scss';
 
 
@@ -15,12 +15,6 @@ class QuizSummary extends Component {
 		invalidOutcomes: PropTypes.array.isRequired,
 		onShowScreen: PropTypes.func.isRequired,
 	};
-
-	state = {};
-
-	showPopup() {
-		this.refs['sharing-popup'].show(3000);
-	}
 
 	render() {
 		const { matchId, info, teamNames, invalidOutcomes, onShowScreen, summary: {
@@ -76,8 +70,6 @@ class QuizSummary extends Component {
 
 		return (
 			<div className="quiz-content">
-				<SharingPopup ref="sharing-popup"/>
-
 				<div className="quiz-info">{ info }</div>
 
 				<div className="summary-banner" onClick={ showScoreScreen }>
@@ -102,11 +94,7 @@ class QuizSummary extends Component {
 
 				{ btnOrError }
 
-				{/*
-				 <Button className="big-btn share-btn" onClick={ () => this.showPopup() }>
-				 Share and get +10 points
-				 </Button>
-				 */}
+				<SharingControls />
 			</div>
 		);
 	}

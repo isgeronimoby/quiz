@@ -6,7 +6,7 @@
     padding: 0 1.5rem;
     display: flex;
     align-items: center;
-    border-top: 0.1rem solid $color-grey-lite;
+    border-top: 0.1rem solid $color-grey-opaque;
 
     &.selected {
       background: $color-selection;

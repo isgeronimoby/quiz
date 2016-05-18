@@ -32,7 +32,7 @@ class QuizScoreStats extends Component {
 			<Hammer onSwipe={onSwipeUp} options={ hammerOptions }>
 				<div className={"quiz-stats cols-2 " + classes } onClick={ onDismiss }>
 					<div className="col" style={{transform: `translateY(${sz}%)`}}>
-						<div className="stats-bar">{ percent }%</div>
+						<div className="stats-bar winner">{ percent }%</div>
 					</div>
 				</div>
 			</Hammer>

@@ -5,3 +5,4 @@ export * from './partners.js';
 export * from './fixtures.js';
 export * from './quiz.js';
 export * from './draws.js';
+export * from './rewards.js';

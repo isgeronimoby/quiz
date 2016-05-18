@@ -30,13 +30,16 @@ function parseData(data, selectedOutcomeId) {
 	});
 	const noGoalPlayer = players.find(p => p.name === 'No Goalscorer');
 	const noGoalPlayerIdx = players.indexOf(noGoalPlayer);
+	const otherPlayersSorted = [
+		...players.slice(0, noGoalPlayerIdx),
+		...players.slice(noGoalPlayerIdx + 1)
+	].sort((a, b) => (a.percent < b.percent));
 	const adjustedPlayers = [
 		{
 			...noGoalPlayer,
 			team: ''
 		},
-		...players.slice(0, noGoalPlayerIdx),
-		...players.slice(noGoalPlayerIdx + 1)
+		...otherPlayersSorted
 	];
 
 	return {

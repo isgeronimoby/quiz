@@ -23,7 +23,7 @@ export function selectedQuiz(state = null, action) {
 
 function quizDataById(state = {
 	isFetching: false,
-	questionList: {},
+	questionData: {},
 
 	isValidating: false,
 	odds: 0,
@@ -44,7 +44,7 @@ function quizDataById(state = {
 			return {
 				...state,
 				isFetching: false,
-				questionList: action.payload,
+				questionData: action.payload,
 				lastUpdated: action.receivedAt,
 			};
 		case FETCH_ODDS:

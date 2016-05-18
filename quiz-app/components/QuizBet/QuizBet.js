@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { SharingPopup } from '../Popup';
 import Button from '../Button';
 import Slider from '../Slider';
+import SharingControls from '../SharingControls';
 import './bet.scss';
 
 
@@ -9,34 +9,38 @@ class QuizBet extends Component {
 
 	static propTypes = {
 		points: PropTypes.number.isRequired,
+		demoPoints: PropTypes.number.isRequired,
 		odds: PropTypes.array.isRequired,
-		onSubmit: PropTypes.func.isRequired,
+		onSubmitBet: PropTypes.func.isRequired,
 	};
 
 	state = {
 		betValue: undefined
 	};
 
-	showPopup() {
-		this.refs['sharing-popup'].show(3000);
-	}
-
 	handelBetValueChange(betValue) {
-		this.setState({ betValue });
+		this.setState({betValue});
 	}
 
 	render() {
-		const { points, odds, onSubmit } = this.props;
-		const { betValue = points } = this.state;
+		const {
+			points,
+			demoPoints,
+			odds,
+			onSubmitBet,
+			} = this.props;
+		const maxPoints = (demoPoints || points);
+		let { betValue = maxPoints } = this.state;
+		betValue = Math.min(maxPoints, betValue); // after login user can got points < demoPoints
+
 		const winValue = odds[0] * betValue;
 		const disabledBet = (betValue === 0);
 		const disabledBtnClass = disabledBet ? 'disabled' : '';
 		const onChange = (v) => this.handelBetValueChange(v);
-		const onBtnClick = () => !disabledBet && onSubmit(betValue);
+		const onBetClick = () => !disabledBet && onSubmitBet(betValue);
 
 		return (
 			<div className="quiz-content">
-				<SharingPopup ref="sharing-popup" />
 
 				<div className="bet-subtitle">How much you want to bet?</div>
 
@@ -45,7 +49,7 @@ class QuizBet extends Component {
 					<span> points</span>
 				</div>
 
-				<Slider max={ points } value={ betValue } step={ 1 } onChange={ onChange } />
+				<Slider max={ maxPoints } value={ betValue } step={ 1 } onChange={ onChange }/>
 
 				<div className="bet-subtitle">
 					Odds: <span className="text-lg">{ odds.join('-') }</span>
@@ -53,15 +57,11 @@ class QuizBet extends Component {
 					<span className="text-sm"> points</span>
 				</div>
 
-				<Button className={"big-btn money-btn " + disabledBtnClass} onClick={onBtnClick} >
+				<Button className={"big-btn money-btn " + disabledBtnClass} onClick={onBetClick}>
 					Bet points
 				</Button>
 
-				{/*
-				 <Button className="big-btn share-btn" onClick={ () => this.showPopup() }>
-				 Share and get +10 points
-				 </Button>
-				*/}
+				<SharingControls />
 			</div>
 		);
 	}

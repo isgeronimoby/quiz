@@ -8,7 +8,11 @@ import {
 	POST_LOGIN_ERROR,
 	POST_SIGNUP,
 	POST_SIGNUP_ERROR,
+	POST_RESTORE,
+	POST_RESTORE_ERROR,
+	POST_RESTORE_SUCCESS,
 	LOGOUT_SUCCESS,
+	SAFARI_COOKIE_HACKED,
 } from '../actions';
 
 /*
@@ -33,7 +37,8 @@ export function auth(state = {
 	showAuthPopup: false,
 	authPopupView: 'login',
 	errors: {},
-	isFetching: {}
+	isFetching: {},
+	safariCookieHacked: false,
 }, action) {
 	switch (action.type) {
 		case REQUEST_AUTH:
@@ -89,10 +94,37 @@ export function auth(state = {
 				},
 				isFetching: {}
 			};
+		case POST_RESTORE:
+			return {
+				...state,
+				errors: {},
+				isFetching: {
+					restore: true
+				}
+			};
+		case POST_RESTORE_SUCCESS:
+			return {
+				...state,
+				errors: {},
+				isFetching: {}
+			};
+		case POST_RESTORE_ERROR:
+			return {
+				...state,
+				errors: {
+					restore: action.error
+				},
+				isFetching: {}
+			};
 		case LOGOUT_SUCCESS:
 			return {
 				...state,
 				isLoggedIn: false
+			};
+		case SAFARI_COOKIE_HACKED:
+			return {
+				...state,
+				safariCookieHacked: true
 			};
 		default:
 			return state;

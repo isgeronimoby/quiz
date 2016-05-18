@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fetchFixturesIfNeeded, fetchProfileIfNeeded, fetchPlayedFixtures } from '../flux/actions';
+import { Fetching } from '../components/Layout';
 import FixtureList from '../components/FixtureList';
 
 
@@ -18,8 +19,12 @@ class Fixtures extends Component {
 
 	async componentDidMount() {
 		this.props.fetchFixtures();
-		await this.props.fetchProfile();
-		this.props.fetchPlayedFixtures();
+		try {
+			await this.props.fetchProfile();
+			this.props.fetchPlayedFixtures();
+		} catch (e) {
+			//nothing
+		}
 	}
 
 	componentWillReceiveProps({isLoggedIn}) {
@@ -33,7 +38,11 @@ class Fixtures extends Component {
 		const { fixtures: { isFetching, list } } = this.props;
 
 		if (isFetching) {
-			return <div/>; // TODO: spinner
+			return <Fetching/>;
+		}
+
+		if (list.length === 0) {
+			return <div className="text-regular text-center">No items</div>; // TODO - design
 		}
 		return <FixtureList list={ list }/>;
 	}

@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import './Controls.scss';
+
 
 const EMAIL_RE = /.*@.*?\..*?/;
 

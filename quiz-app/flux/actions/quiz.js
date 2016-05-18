@@ -27,11 +27,21 @@ function fetchQuizStart(matchId) {
 	};
 }
 
-function fetchQuizSuccess(matchId, { Questions }) {
+function fetchQuizSuccess(matchId, {
+	StartDate: startDate,
+	HomeTeam: teamHome,
+	AwayTeam: teamAway,
+	Questions: questionList,
+	}) {
 	return {
 		type: FETCH_QUIZ_SUCCESS,
 		matchId,
-		payload: Questions,
+		payload: {
+			startDate,
+			teamHome,
+			teamAway,
+			questionList,
+		},
 		receivedAt: Date.now()
 	};
 }
@@ -83,11 +93,12 @@ function fetchOddsSuccess(matchId, { Odds: odds }) {
 	};
 }
 
-function fetchOddsError(matchId, { InvalidAnswers: invalidOutcomes }) {
+function fetchOddsError(matchId, { InvalidAnswers: invalidOutcomes = [], Message: validationError }) {
 	return {
 		type: FETCH_ODDS_ERROR,
 		matchId,
 		invalidOutcomes,
+		validationError, // Unused
 	};
 }
 

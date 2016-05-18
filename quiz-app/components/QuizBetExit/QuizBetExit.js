@@ -6,14 +6,17 @@ import './bet-exit.scss';
 class QuizBetExit extends Component {
 
 	static propTypes = {
+		nextDrawItem: PropTypes.object.isRequired
 	};
 
 	render() {
+		const { drawId, prizeImageUrl } = this.props.nextDrawItem;
+
 		return (
-			<div className="quiz-exit" >
-				<div className="big-image">
-					Amazing illustration here
-				</div>
+			<div className="quiz-exit">
+				<Link className="big-image" to="./draw" state={ {drawId} }>
+					<img src={ prizeImageUrl }/>
+				</Link>
 
 				<Link className="big-btn money-btn" to="./partners">
 					SignUp to our betting partners<br/>

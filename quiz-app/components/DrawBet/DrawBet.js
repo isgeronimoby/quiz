@@ -11,8 +11,9 @@ import './DrawBet.scss';
 class DrawBet extends Component {
 
 	static propTypes = {
-		points: PropTypes.number.isRequired,
 		drawItem: PropTypes.object.isRequired,
+		points: PropTypes.number.isRequired,
+		demoPoints: PropTypes.number.isRequired,
 		onSubmit: PropTypes.func.isRequired,
 		betError: PropTypes.string,
 	};
@@ -27,12 +28,16 @@ class DrawBet extends Component {
 
 	render() {
 		const {
-			points,
 			drawItem: {prizeTitle, prizeImageUrl, prizeDescription, endDate},
+			points,
+			demoPoints,
 			onSubmit,
 			betError = ''
 			} = this.props;
-		const { betValue = points } = this.state;
+		const maxPoints = (demoPoints || points);
+		let { betValue = maxPoints } = this.state;
+		betValue = Math.min(maxPoints, betValue);
+
 		const disabledBet = (betValue === 0);
 		const disabledBtnClass = disabledBet ? 'disabled' : '';
 		const dateFormatted = moment.utc(endDate).format('YYYY/MM');
@@ -64,7 +69,7 @@ class DrawBet extends Component {
 					<span> points</span>
 				</div>
 
-				<Slider max={ points } value={ betValue } step={ 1 } onChange={ onChange }/>
+				<Slider max={ maxPoints } value={ betValue } step={ 1 } onChange={ onChange }/>
 
 				<div className={"bet-error " + errorClass}>{ betError }</div>
 

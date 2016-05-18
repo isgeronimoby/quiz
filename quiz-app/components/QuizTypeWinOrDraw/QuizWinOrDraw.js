@@ -4,22 +4,10 @@ import QuizStats from './QuizWinOrDrawStats';
 import './draw.scss';
 
 
-function parseData(data, outcomeId) {
+function parseData(data, [teamHome, teamAway], outcomeId) {
 	const {
 		TotalAnswersCount: total,
 		QuestionId: questionId,
-		Outcomes: [{
-			AnswersCount: count1,
-			OutcomeId: id1,
-			Team: teamHome
-			}, {
-			AnswersCount: count2,
-			OutcomeId: id2,
-			Team: teamAway
-			}, {
-			AnswersCount: count3,
-			OutcomeId: id3
-			}]
 		} = data;
 	const calcStat = (count, id) => {
 		const selectedCount = (id === outcomeId) ? count + 1 : count;
@@ -28,18 +16,17 @@ function parseData(data, outcomeId) {
 
 	return {
 		questionId,
-		teamHome,
-		teamAway,
-		outcomes: [
-			{name: teamHome, id: id1},
-			{name: teamAway, id: id2},
-			{name: 'Draw', id: id3}
-		],
-		stats: {
-			[teamHome]: calcStat(count1, id1),
-			[teamAway]: calcStat(count2, id2),
-			'-': calcStat(count3, id3),
-		}
+		outcomes: data.Outcomes.reduce((acc, { OutcomeId: id, Team: name, AnswersCount: count }) => {
+			const percent = calcStat(count, id);
+			switch (name) {
+				case teamHome:
+					return {...acc, home: {id, name, percent}};
+				case teamAway:
+					return {...acc, away: {id, name, percent}};
+				default:
+					return {...acc, draw: {id, name, percent}};
+			}
+		}, {})
 	};
 }
 
@@ -48,6 +35,7 @@ class QuizWinOrDraw extends Component {
 	static propTypes = {
 		info: PropTypes.string.isRequired,
 		data: PropTypes.object.isRequired,
+		teamNames: PropTypes.array.isRequired,
 		onAnswerSubmit: PropTypes.func.isRequired,
 	};
 
@@ -57,14 +45,14 @@ class QuizWinOrDraw extends Component {
 	};
 
 	handleSubmit(questionId, outcomeId) {
-		const {onAnswerSubmit, data} = this.props;
-		const { outcomes } = parseData(data, outcomeId);
+		const {onAnswerSubmit, data, teamNames} = this.props;
+		const { outcomes: {home, away} } = parseData(data, teamNames, outcomeId);
 		const summary = {
 			halfTimeWinner: {
 				questionId,
 				outcomeId,
-				isHome: outcomes[0].id === outcomeId,
-				isAway: outcomes[1].id === outcomeId
+				isHome: home.id === outcomeId,
+				isAway: away.id === outcomeId
 			}
 		};
 
@@ -83,15 +71,13 @@ class QuizWinOrDraw extends Component {
 	}
 
 	render() {
-		const { info, data } = this.props; //'23 March, 19:00, 3rd tour, London';
+		const { info, data, teamNames } = this.props;
 		const { outcomeId, showStats } = this.state;
 		const {
 			questionId,
-			teamHome,
-			teamAway,
-			stats,
 			outcomes
-			} = parseData(data, outcomeId);
+			} = parseData(data, teamNames, outcomeId);
+		const [teamHome, teamAway] = teamNames;
 		const onSubmit = (outcomeId) => this.handleSubmit(questionId, outcomeId);
 		const onDismiss = () => this.hideStats();
 
@@ -104,9 +90,9 @@ class QuizWinOrDraw extends Component {
 					onSubmit={ onSubmit }/>
 				<QuizStats
 					hidden={ !showStats }
-					order={ [ teamHome, '-', teamAway ] }
+					order={ [ 'home', 'draw', 'away' ] }
 					outcomeId={ outcomeId }
-					stats={ stats }
+					outcomes={ outcomes }
 					onDismiss={ onDismiss }/>
 			</div>
 		);

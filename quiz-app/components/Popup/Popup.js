@@ -4,16 +4,24 @@ import './popup.scss';
 
 export class SharingPopup extends Component {
 
-	show(autoHide) {
-		this.refs['sharing-popup'].show(autoHide);
+	state = {
+		points: 0
+	};
+
+	show(points, autoHide) {
+		this.setState({ points }, () => {
+			this.refs['sharing-popup'].show(autoHide);
+		})
 	}
 
 	render() {
+		const { points } = this.state;
+
 		return (
 			<Popup ref="sharing-popup" className="blue">
 				<div className="popup-icon"></div>
 				<div className="popup-content">
-					<div className="popup-title">You got +10 points!</div>
+					<div className="popup-title">You got +{ points } points!</div>
 					<div className="popup-text">Thank you for sharing</div>
 				</div>
 			</Popup>

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fetchDrawsIfNeeded, fetchProfileIfNeeded, fetchPlayedDraws } from '../flux/actions';
+import { Fetching } from '../components/Layout';
 import DrawList from '../components/DrawList';
 
 
@@ -9,8 +10,8 @@ class Draws extends Component {
 	static title = 'Draws';
 
 	static propTypes = {
-		draws: PropTypes.object.isRequired,
 		isLoggedIn: PropTypes.bool.isRequired,
+		draws: PropTypes.object.isRequired,
 		fetchProfile: PropTypes.func.isRequired,
 		fetchDraws: PropTypes.func.isRequired,
 		fetchPlayedDraws: PropTypes.func.isRequired,
@@ -23,8 +24,8 @@ class Draws extends Component {
 	}
 
 	componentWillReceiveProps({isLoggedIn}) {
-		const authorized = !this.props.isLoggedIn && isLoggedIn;
-		if (authorized) {
+		const loginOrLogout = this.props.isLoggedIn !== isLoggedIn;
+		if (loginOrLogout) {
 			this.props.fetchPlayedDraws();
 		}
 	}
@@ -34,7 +35,7 @@ class Draws extends Component {
 		const { draws: { isFetching, list } } = this.props;
 
 		if (isFetching) {
-			return <div/>; // TODO: spinner
+			return <Fetching/>;
 		}
 		return <DrawList list={ list }/>;
 	}
@@ -44,8 +45,8 @@ class Draws extends Component {
 //
 const mapStateToProps = (state) => {
 	return {
-		draws: state.draws,
 		isLoggedIn: state.auth.isLoggedIn,
+		draws: state.draws,
 	};
 };
 const mapDispatchToProps = (dispatch) => {

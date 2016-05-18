@@ -1,4 +1,5 @@
 @import '../variables.scss';
+@import '../utils.scss';
 .quiz-exit {
   height: 100%;
   overflow-y: auto;
@@ -13,13 +14,15 @@
   }
 }
 .big-image {
-  margin: 15px;
-  background: $color-grey;
-  height: 300px;
-  line-height: 300px;
+  width: 100%;
+  margin-bottom: 15px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    height: 280px;
+    width: auto;
+  }
 }
-/*TODO - to util*/
-.text-regular {
-  font-size: 1.8rem;
-  color: $color-grey-dark
-}
+

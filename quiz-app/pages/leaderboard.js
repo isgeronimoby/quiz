@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fetchUserList } from '../flux/actions';
+import { Fetching } from '../components/Layout';
 import LeaderBoardContainer from '../components/LeaderBoardContainer';
 
 
@@ -19,12 +20,13 @@ class Leaders extends Component {
 
 	render() {
 		const { userList: { isFetching, list } } = this.props;
+		const listSorted = list.sort((a, b) => a.rank - b.rank);
 
 		if (isFetching) {
-			return <div/>; // TODO: spinner
+			return <Fetching/>;
 		}
 		return (
-			<LeaderBoardContainer list={ list }/>
+			<LeaderBoardContainer list={ listSorted }/>
 		);
 	}
 

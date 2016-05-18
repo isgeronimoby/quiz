@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { requestAuth, postQuizBet } from '../../flux/actions';
+import { requestAuth, postQuizBet, fetchRewards, startSharingFacebook, startSharingTwitter } from '../../flux/actions';
 import QuizBet from '../QuizBet';
 import BetSuccess from '../BetSuccess';
 import Location from '../../lib/Location';
-
 import '../QuizContainer/quiz.scss';
 
 
@@ -14,7 +13,7 @@ class QuizBetContainer extends Component {
 		params: PropTypes.object.isRequired,
 		// from store
 		isLoggedIn: PropTypes.bool.isRequired,
-		maxPoints: PropTypes.number.isRequired,
+		points: PropTypes.number.isRequired,
 		odds: PropTypes.number.isRequired,
 		answers: PropTypes.array.isRequired,
 		isBetting: PropTypes.bool.isRequired,
@@ -51,14 +50,20 @@ class QuizBetContainer extends Component {
 	}
 
 	render() {
-		const { maxPoints, odds } = this.props;
+		const { isLoggedIn, points, odds } = this.props;
+		const demoPoints = !isLoggedIn ? 10 : 0;
 		const oddsList = [odds, 1];
 		const { view } = this.state;
-		const onSubmit = (betPoints) => this.submitBet(betPoints);
+		const onSubmitBet = (betPoints) => this.submitBet(betPoints);
 
 		let View;
 		if (view === 'bet') {
-			View = <QuizBet points={maxPoints} odds={oddsList} onSubmit={ onSubmit }/>;
+			View = <QuizBet
+				isLoggedIn={ isLoggedIn }
+				points={ points }
+				demoPoints={ demoPoints }
+				odds={ oddsList }
+				onSubmitBet={ onSubmitBet }/>;
 		}
 		else if (view === 'success') {
 			View = <BetSuccess onDismiss={() => this.goToExitPage() }/>;
@@ -75,14 +80,14 @@ class QuizBetContainer extends Component {
 
 // Connect to store
 //
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
 	const matchId = state.selectedQuiz;
 	const quiz = state.quizes[matchId];
 	const { answers, odds, isBetting, betSuccess, betError } = quiz || {};
 
 	return {
 		isLoggedIn: state.auth.isLoggedIn,
-		maxPoints: state.profile.points,
+		points: state.profile.points,
 		answers,
 		odds,
 		isBetting,

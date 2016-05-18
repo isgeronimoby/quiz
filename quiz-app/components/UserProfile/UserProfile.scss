@@ -1,7 +1,12 @@
 @import '../variables.scss';
 .user-profile {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 .profile-summary {
+  flex-grow: 1;
   display: flex;
   justify-content: space-around;
   padding: 15px 0;

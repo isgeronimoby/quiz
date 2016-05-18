@@ -11,14 +11,25 @@
   }
 }
 .draw-item-body {
+  position: relative;
   display: flex;
   height: 8rem;
   color: #fff;
   text-decoration: none;
 
-  &.completed {
+  &.has-bet {
     background: $color-selection;
-    pointer-events: none;
+  }
+
+  &.has-finished {
+    background: $color-grey-opaque;
+    border-bottom: 1px solid rgba(182, 182, 182, .4);
+    &.waiting-winner {
+      pointer-events: none; /* TODO - enable when details design is available*/
+    }
+    &.is-winner {
+      background: $color-winner-opaque;
+    }
   }
 
   .draw-item-aside {
@@ -41,6 +52,26 @@
     overflow: hidden;
     img {
       height: $image-sz;
+      width: auto;
+    }
+  }
+
+  $winner-image-sz: 2.2rem;
+  .draw-item-winner-image {
+    position: absolute;
+    top: 10px; left: 15px;
+    width: $winner-image-sz;
+    height: $winner-image-sz;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    img {
+      height: 2rem;
+      width: auto;
+      border-radius: 50%;
     }
   }
   .draw-item-content {

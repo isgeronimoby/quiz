@@ -6,16 +6,16 @@ import './DrawList.scss';
 class DrawList extends Component {
 
 	static propTypes = {
-		list: PropTypes.array.isRequired
+		list: PropTypes.array.isRequired,
 	};
 
 	render() {
-		const items = this.props.list
-			.map((data, i) => {
-				return (
-					<DrawListItem key={'draw-' + i} data={data}/>
-				);
-			});
+		const { list } = this.props;
+		const items = list.map((data, i) => {
+			return (
+				<DrawListItem key={'draw-' + i} data={data} />
+			);
+		});
 
 		return (
 			<ul className="draw-list">
