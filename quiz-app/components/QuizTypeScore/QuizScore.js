@@ -15,9 +15,13 @@ class QuizScore extends Component {
 	};
 
 	state = {
+		scores: undefined,
 		showStats: false,
-		scores: undefined
 	};
+
+	isAnswered() {
+		return (typeof this.state.scores !== 'undefined');
+	}
 
 	handleSubmit(scores) {
 		const { data, teamNames, onAnswerSubmit } = this.props;
@@ -34,7 +38,6 @@ class QuizScore extends Component {
 	hideStats() {
 		this.setState({
 			showStats: false,
-			scores: undefined
 		});
 	}
 

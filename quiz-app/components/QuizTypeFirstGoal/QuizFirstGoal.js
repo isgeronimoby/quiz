@@ -15,9 +15,13 @@ class QuizFirstGoal extends Component {
 	};
 
 	state = {
-		showStats: false,
 		outcomeId: null,
+		showStats: false,
 	};
+
+	isAnswered() {
+		return (this.state.outcomeId !== null);
+	}
 
 	handleSubmit(outcomeId) {
 		const { data, teamNames, onAnswerSubmit } = this.props;

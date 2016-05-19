@@ -16,8 +16,12 @@ class QuizWinOrDraw extends Component {
 
 	state = {
 		outcomeId: null,
-		showStats: false
+		showStats: false,
 	};
+
+	isAnswered() {
+		return (this.state.outcomeId !== null);
+	}
 
 	handleSubmit(outcomeId) {
 		const { data, teamNames, onAnswerSubmit } = this.props;

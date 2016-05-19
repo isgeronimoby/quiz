@@ -43,8 +43,9 @@ class QuizContainer extends Component {
 	nextScreen() {
 		const { currentScreenIdx: idx } = this.state;
 		const totalSteps = this.totalSteps();
+		const isAnswered = this.refs[`type-${idx}`].isAnswered();
 
-		if (idx + 1 < totalSteps) {
+		if (isAnswered && idx + 1 < totalSteps) {
 			this.setState({
 				currentScreenIdx: idx + 1
 			}, () => {
@@ -131,8 +132,9 @@ class QuizContainer extends Component {
 
 		const quizScreens = questionList.map(({ Type, ...data }, i) => {
 			const Quiz = type2componet[Type];
+			const id = `type-${i}`;
 			return (
-				<Quiz key={ `type-${i}` } info={info} teamNames={teamNames} data={data}
+				<Quiz key={ id } ref={ id } info={info} teamNames={teamNames} data={data}
 					onAnswerSubmit={ onAnswerSubmit }/>
 			);
 		}).concat(
