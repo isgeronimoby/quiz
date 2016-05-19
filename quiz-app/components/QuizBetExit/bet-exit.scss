@@ -18,15 +18,10 @@
   }
 }
 .big-image {
+  display: block;
   width: 100%;
+  height: 280px;
   margin-bottom: 15px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  img {
-    height: 280px;
-    width: auto;
-  }
+  @mixin center-image;
 }
 
