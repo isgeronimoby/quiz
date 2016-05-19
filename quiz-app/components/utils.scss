@@ -68,6 +68,7 @@ Mixins
 @define-mixin center-image {
   position: relative;
   overflow: hidden;
+  transform: translate(0); /* overflow doesn't work without this */
   img {
     position: absolute;
     max-height: 100%;

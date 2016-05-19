@@ -47,7 +47,6 @@
     height: $image-sz;
     border-radius: 50%;
     background: #fff;
-    z-index: 1; /* strange, but without it overflow is not respected*/
     @mixin center-image;
   }
 
@@ -63,7 +62,6 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    z-index: 2;
     img {
       height: 2rem;
       width: auto;
