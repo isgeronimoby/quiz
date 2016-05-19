@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getNextDrawItem } from '../lib/utils.js';
 import { fetchProfileIfNeeded, fetchDrawsIfNeeded, selectDraw } from '../flux/actions';
 import { Fetching } from '../components/Layout';
 import DrawContainer from '../components/DrawContainer';
@@ -14,7 +13,6 @@ class Draw extends Component {
 		params: PropTypes.object.isRequired,
 		// from store
 		drawItem: PropTypes.object.isRequired,
-		nextDrawItem: PropTypes.object.isRequired,
 		fetchProfile: PropTypes.func.isRequired,
 		fetchDraws: PropTypes.func.isRequired,
 		selectDraw: PropTypes.func.isRequired,
@@ -29,14 +27,14 @@ class Draw extends Component {
 	}
 
 	render() {
-		const { drawItem, nextDrawItem } = this.props;
+		const { drawItem } = this.props;
 
 		if (drawItem.isFetching) {
 			return <Fetching/>;
 		}
 
 		return (
-			<DrawContainer drawItem={ drawItem } nextDrawItem={ nextDrawItem }/>
+			<DrawContainer drawItem={ drawItem }/>
 		);
 	}
 
@@ -48,7 +46,6 @@ const mapStateToProps = (state) => {
 	const selectedDrawItem = state.draws.list.find(({ drawId }) => drawId === state.selectedDraw);
 	return {
 		drawItem: selectedDrawItem || {isFetching: true},
-		nextDrawItem: getNextDrawItem(state.draws.list, selectedDrawItem),
 	};
 };
 const mapDispatchToProps = (dispatch) => {

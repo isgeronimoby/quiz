@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import Location from '../../lib/Location';
 import { requestAuth, postDrawBet, postDrawClaim } from '../../flux/actions';
 import DrawWinner from '../DrawWinner';
 import DrawClaimPrize from '../DrawClaimPrize';
@@ -11,11 +12,14 @@ import DrawBetExit from '../DrawBetExit';
 import '../Header/Header.scss';
 
 
+function goToExitPage() {
+	Location.push({pathname: './draw-exit',});
+}
+
 class DrawContainer extends Component {
 
 	static propTypes = {
 		drawItem: PropTypes.object.isRequired,
-		nextDrawItem: PropTypes.object.isRequired,
 		// from store
 		isLoggedIn: PropTypes.bool.isRequired,
 		points: PropTypes.number.isRequired,
@@ -38,15 +42,6 @@ class DrawContainer extends Component {
 		this.context.updateHeader({
 			title: prizeTitle
 		});
-	}
-	componentWillUpdate(nextProps, { view }) {
-		const { nextDrawItem: { prizeTitle }} = this.props;
-
-		if (view === 'exit') {
-			this.context.updateHeader({
-				title: prizeTitle
-			});
-		}
 	}
 
 	nextView(view) {
@@ -78,13 +73,13 @@ class DrawContainer extends Component {
 	}
 
 	render() {
-		const { isLoggedIn, points, drawItem, nextDrawItem, betError } = this.props;
+		const { isLoggedIn, points, drawItem, betError } = this.props;
 		const { view } = this.state;
 		const { isDrawn, winner, isWinner, needToClaim } = drawItem;
 		const demoPoints = !isLoggedIn ? 10 : 0;
 		const onBetSubmit = (betPoints) => this.submitBet(betPoints);
 		const onClaimSubmit = (formData) => this.submitClaim(formData);
-		const onSuccessDismiss = () => this.nextView('exit');
+		const onDismissSuccess = () => goToExitPage();
 
 		let View;
 		if (view === 'bet') {
@@ -118,10 +113,7 @@ class DrawContainer extends Component {
 			}
 		}
 		else if (view === 'success') {
-			View = <BetSuccess onDismiss={ onSuccessDismiss }/>;
-		}
-		else if (view === 'exit') {
-			View = <DrawBetExit nextDrawItem={ nextDrawItem } />
+			View = <BetSuccess onDismiss={ onDismissSuccess }/>;
 		}
 
 		return (

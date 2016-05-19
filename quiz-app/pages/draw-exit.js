@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { getNextDrawItem } from '../lib/utils.js';
 import { fetchDrawsIfNeeded, selectDraw } from '../flux/actions';
 import { Fetching } from '../components/Layout';
-import QuizBetExit from '../components/QuizBetExit';
+import DrawBetExit from '../components/DrawBetExit';
 
 class Exit extends Component {
 
-	static title = 'Match Quiz';
+	static title = 'Score Predictor';
 
 	static propTypes = {
 		// from store
@@ -27,7 +27,7 @@ class Exit extends Component {
 		}
 
 		return (
-			<QuizBetExit nextDrawItem={ nextDrawItem }/>
+			<DrawBetExit nextDrawItem={ nextDrawItem } />
 		);
 	}
 }

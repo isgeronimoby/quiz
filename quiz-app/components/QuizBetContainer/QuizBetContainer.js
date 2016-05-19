@@ -12,7 +12,7 @@ function goToQuizPage(matchId) {
 }
 
 function goToExitPage() {
-	Location.push({pathname: './exit',});
+	Location.push({pathname: './bet-exit',});
 }
 
 

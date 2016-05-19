@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Link from '../Link';
-import './bet-exit.scss';
+import './QuizBetExit.scss';
 
 
 class QuizBetExit extends Component {
