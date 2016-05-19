@@ -48,8 +48,6 @@ class Layout extends Component {
 
 	componentWillReceiveProps({ path, title }) {
 		const hasNavigated = this.props.path !== path;
-		console.log('>>> hasNavigated?', hasNavigated);
-
 		if (hasNavigated) {
 			this.updateHeader({title}); // reset all updates on navigate
 		}

@@ -58,9 +58,13 @@ function requestAuthWithSafariFix(authPopupView) {
 		}
 
 		rpc.readClubCookie('safarifix', (res) => {
-			if (res) {
+			const done = () => {
 				dispatch(safariCookieHack());
-				return dispatch(requestAuthPopup(authPopupView));
+				dispatch(requestAuthPopup(authPopupView));
+			};
+
+			if (res) {
+				return done();
 			}
 
 			// Open window on target domain and let it set cookie (i.e. visit it) and close itself.
@@ -70,11 +74,10 @@ function requestAuthWithSafariFix(authPopupView) {
 			const title = '_blank';
 			const settings = 'menubar=no,location=no,resizable=no,scrollbars=no,status=no,width=1,height=1,top=0,left=0';
 
-			popup.open({url, title, settings}, () => {
-				// Assume cookie is set after window is closed
-				dispatch(safariCookieHack());
-				dispatch(requestAuthPopup(authPopupView));
-			});
+			setTimeout(done, 500); // Hack for iPhone, no timers are firing after popup.open call for unknown reason
+
+			// Assume cookie is set after window is closed
+			popup.open({url, title, settings}, done);
 		});
 	};
 }
