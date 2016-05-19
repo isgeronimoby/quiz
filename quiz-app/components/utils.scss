@@ -114,3 +114,16 @@ Lists
     width: 0.8rem;
   }
 }
+
+/*Common*/
+$success-icon-sz: 105px;
+.icon-success {
+  width: $success-icon-sz;
+  height: $success-icon-sz;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  background-color: $brand-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

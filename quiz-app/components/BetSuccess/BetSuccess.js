@@ -20,7 +20,7 @@ class BetSuccess extends Component {
 		return (
 			<div className="quiz-success" onClick={onClick}>
 				<div className="icon-success">
-					<img src={ require('./images/icon-success.svg') }/>
+					<img src={ require('../../static/images/icon-success.svg') }/>
 				</div>
 
 				<div className="success-subtitle">Accepted</div>

@@ -4,6 +4,7 @@ import { cancelAuth } from '../../flux/actions';
 import FormSignUp from './FormSignUp.js';
 import FormLogIn from './FormLogIn.js';
 import FormForgotPwd from './FormForgotPwd.js';
+import ForgotPwdSuccess from './ForgotPwdSuccess.js';
 import './AuthPopup.scss';
 
 
@@ -11,6 +12,7 @@ const view2comp = {
 	'signup': FormSignUp,
 	'login': FormLogIn,
 	'forgot': FormForgotPwd,
+	'forgot-success': ForgotPwdSuccess,
 };
 
 

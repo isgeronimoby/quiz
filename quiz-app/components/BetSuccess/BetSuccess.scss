@@ -1,4 +1,5 @@
 @import '../variables.scss';
+@import '../utils.scss';
 .quiz-success {
   height: 100%;
   display: flex;
@@ -7,19 +8,6 @@
   align-items: center;
   color: $color-grey-dark;
 }
-
-$success-icon-sz: 105px;
-.icon-success {
-  width: $success-icon-sz;
-  height: $success-icon-sz;
-  border-radius: 50%;
-  margin-bottom: 15px;
-  background-color: $brand-color;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .success-subtitle {
   font-size: 2.4rem;
 }

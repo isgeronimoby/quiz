@@ -1,4 +1,5 @@
 @import '../variables.scss';
+@import '../utils.scss';
 .auth-screen {
   position: absolute;
   top: 0; bottom: 0;
@@ -94,7 +95,6 @@ Form
     position: absolute; /*inside form*/
   }
 }
-
 .link-small {
   font-size: 1.2rem;
   text-decoration: underline;
@@ -105,7 +105,6 @@ Form
   line-height: 1rem;
   margin-top: 4px;
 }
-
 /*
 Footer
 */
@@ -114,4 +113,14 @@ Footer
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+/*
+Restore Success
+*/
+.success-subtitle {
+  font-size: 2.2rem;
+  text-align: center;
+}
+.success-text {
+  margin-bottom: 30px;
 }

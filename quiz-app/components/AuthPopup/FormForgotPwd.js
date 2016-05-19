@@ -16,7 +16,7 @@ class FormForgotPwd extends Component {
 	};
 
 
-	handleSubmit() {
+	async handleSubmit() {
 		const emailEl = this.refs['email-input'];
 		if (!emailEl.validate()) {
 			emailEl.focus();
@@ -26,7 +26,13 @@ class FormForgotPwd extends Component {
 		const data = {
 			email: emailEl.value()
 		};
-		this.props.postRestore(data);
+
+		try {
+			await this.props.postRestore(data);
+			this.props.onNavigate('forgot-success');
+		} catch (e) {
+			//nothing
+		}
 	}
 
 	render() {

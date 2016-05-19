@@ -214,6 +214,7 @@ export function postRestore({email}) {
 			dispatch(postRestoreSuccess());
 		}).catch(({ Message: error = 'Invalid'}) => {
 			dispatch(postRestoreError(error));
+			throw error;
 		});
 	};
 }
