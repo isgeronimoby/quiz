@@ -19,7 +19,7 @@ class Header extends Component {
 
 	handleLogout() {
 		this.props.postLogout().then(() => {
-			Location.goBack();
+			Location.push({pathname: './fixtures'});
 		});
 	}
 
