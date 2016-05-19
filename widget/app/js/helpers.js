@@ -371,9 +371,7 @@ DGW.helpers.getElementsFromAllPlaces = function(selector, place){
 
 DGW.helpers.gaCheckPut = function(name){
     name = name || DGW.global.club.name;
-    DGW.helpers.console.log('GA script launched');
     if (!window.ga) {
-        DGW.helpers.console.log('Adding GA script');
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
@@ -386,7 +384,6 @@ DGW.helpers.gaCheckPut = function(name){
         DGW.global.gaSend = name + '.send';
         if (ga.getByName) {
             if (!ga.getByName(name)) {
-                DGW.helpers.console.log('GA is ready, creating DGW');
                 ga('create', {
                     trackingId: 'UA-51923524-37',
                     cookieDomain: 'auto',
@@ -396,7 +393,6 @@ DGW.helpers.gaCheckPut = function(name){
                 DGW.helpers.console.log('GA is ready, DGW is created');
             }
         } else {
-            DGW.helpers.console.log('GA is ready, loading');
             var interval = window.setInterval(function(){
                 if (ga.getByName) {
                     window.clearInterval(interval);

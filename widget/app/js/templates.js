@@ -99,8 +99,6 @@ DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
                         '</div>' +
                         '<div class="dg-o-w-section-content">' +
                             '<div class="dg-o-w-draws-active"><ul class="dg-o-w-list-draws"></ul></div>' +
-                            /*'<div class="dg-o-w-draws-no-active"><h2>Sorry, but there are no draws running at the moment.</h2><br/><div class="dg-o-w-draws-refresh"></div></div>' +
-                            '<div class="dg-o-w-draws-no-in-draws"><h2>Seems like you don\'t playing any current draw :(</h2></div>' +*/
                         '</div>';
 
 DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' +
@@ -110,10 +108,10 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' 
                                     '<div class="dg-o-w-profile-stats-holder">' +
                                         '<h3 data-userstats-username class="dg-o-w-profile-name">Captain Deadpool</h3>' +
                                         '<div class="dg-o-w-profile-stats-holder-rest">' +
-                                            '<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-userstats-friends-c>210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-friends-p class="green-highlighter">19</p></div></div>' +
-                                            '<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand" data-userstats-groups-c>20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-groups-p class="green-highlighter">3</p></div></div>' +
+                                            //'<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-userstats-friends-c>210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-friends-p class="green-highlighter">19</p></div></div>' +
+                                            //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand" data-userstats-groups-c>20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-groups-p class="green-highlighter">3</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 data-userstats-points-c>520</h3><p>points</p></div></div>' +
-                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 data-userstats-credits-c>40</h3><p>credits</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 data-userstats-credits-c>40</h3></div></div>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +

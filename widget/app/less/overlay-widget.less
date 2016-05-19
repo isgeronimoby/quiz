@@ -464,8 +464,8 @@
 							}
 						}
 						[data-userstats-credits-c]{
-							&:after{
-								content: ' cts';
+							&:before{
+								content: '£ ';
 							}
 						}
 
@@ -2201,6 +2201,12 @@
 							& > div {
 								display: inline-block;
 								vertical-align: middle;
+							}
+
+							[data-userstats-credits-c] {
+								&:before {
+									content: '£ ';
+								}
 							}
 
 							.dg-o-w-profile-stats-icon {

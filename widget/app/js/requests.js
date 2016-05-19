@@ -186,9 +186,13 @@ DGW.global.api.requests.checkServerAvailability = function(){
             DGW.helpers.console.info('checkServerAvailability: ', result);
 
             //TODO: refactor later
-            DGW.global.club.name = result.data.FoundationName;
-            DGW.global.api.requests.getDraws(DGW.global.api.requests.initMainFlow);
-            DGW.helpers.gaCheckPut(DGW.global.club.name);
+            if (result.data.IsActive) {
+                DGW.global.club.name = result.data.FoundationName;
+                DGW.global.api.requests.initMainFlow();
+                DGW.helpers.gaCheckPut(DGW.global.club.name);
+            } else {
+                DGW.helpers.console.warn('Widget is disabled');
+            }
         }
     });
 };
@@ -343,7 +347,9 @@ DGW.global.api.requests.getDrawEntries = function(onSuccess, onError){
         if (result.status == 200) {
             DGW.helpers.console.info('getDrawEntries ', result.data);
             DGW.main.cache.drawsEntries = result.data.DrawEntries;
-            //DGW.main.methods.drawsConstructor(DGW.main.cache);
+            if ( DGW.main.cache.drawsEntries.some(function(entry){return entry.NeedToClaimPrize}) ) {
+                DGW.side.methods.showNotification('winner');
+            }
             if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getDrawEntries ', result.error);

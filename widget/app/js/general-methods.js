@@ -44,21 +44,16 @@ DGW.global.methods.authorize = function(){
     DGW.global.authorized = true;
     DGW.helpers.addClass(DGW.side.elements.widgetBody, 'dg-o-w-authorized');
     // ********
-    if (DGW.main.currentState === 'profile') {
-        DGW.main.methods.changeMainState('profile');
-        // ********
-    } else if (DGW.main.currentState === 'draws') {
-        DGW.global.api.requests.getDraws(function(){
-            DGW.global.api.requests.getDrawEntries(function(){
-                DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
-            });
-        });
-    } else if (DGW.main.currentState === 'earn') {
-        DGW.global.api.requests.getUserOffers();
+    if (DGW.main.currentState !== 'draws') {
+        DGW.main.methods.changeMainState('earn');
     }
+    DGW.global.api.requests.getDraws(function(){
+        DGW.global.api.requests.getDrawEntries(function(){
+            DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+        });
+    });
 
     DGW.side.methods.changeSideWidgetState();
-
     DGW.global.api.requests.getUserActions();
 };
 
@@ -73,6 +68,7 @@ DGW.global.methods.unAuthorize = function(){
     DGW.global.methods.userStatsReset();
 
     DGW.side.methods.changeSideWidgetState();
+    DGW.side.methods.hideNotification();
 };
 
 DGW.global.methods.userStatsReset = function(){
@@ -104,26 +100,18 @@ DGW.global.methods.init = function(){
     // filling user default data
     DGW.global.methods.userStatsReset();
 
-    // requesting basic apis to get some cached data
-    DGW.global.api.requests.getDraws(function(){
-        if (DGW.global.authorized) {
-            DGW.global.api.requests.getDrawEntries(function(){
-                DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
-            });
-        } else {
-            DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
-        }
-    });
-    DGW.global.api.requests.getActions();
-
     //Initializing or checking user
-    DGW.global.api.requests.getUser();
+    DGW.global.api.requests.getUser(
+        function registered(){},
+        function anonymous(){
+            DGW.global.api.requests.getDraws();
+            DGW.global.api.requests.getActions();
+        }
+    );
 
     if (DGW.global.safariFixFirstOpen) {
         DGW.main.methods.showWidget();
     }
-
-
 };
 
 DGW.main.methods.showNotificationBar = function(type){

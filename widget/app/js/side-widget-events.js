@@ -46,10 +46,10 @@ DGW.side.methods.changeSideWidgetState = function(state) {
     swc.innerHTML = '';
 
     //TODO: TEMP place with randomized states
-    var states = ['profile', 'draws'];
-    if(!state) state = states[Math.floor(Math.random())];
-    var actions = ['share', 'play', 'stats'];
-    var curAction = actions[Math.floor(Math.random() * 3)];
+    /*var states = ['profile', 'draws'];
+    if(!state) state = states[Math.round(Math.random())];*/
+    var actions = ['earn', 'play'];
+    var curAction = actions[Math.floor(Math.random() * actions.length)];
 
     switch(state){
         case 'draws':
@@ -62,9 +62,8 @@ DGW.side.methods.changeSideWidgetState = function(state) {
             if (DGW.global.authorized) {
                 swc.innerHTML = DGW.templates.side.registeredProfile;
                 swc.innerHTML += DGW.templates.side.actions[curAction];
-                DGW.global.api.requests.getUser();
             } else {
-                swc.innerHTML = DGW.templates.side.anonymousSignUp;
+                swc.innerHTML = DGW.templates.side.draw;
             }
     }
 
@@ -76,5 +75,14 @@ DGW.side.methods.changeSideWidgetState = function(state) {
     } else {
         DGW.side.methods.initEvents();
     }
+};
 
+DGW.side.methods.showNotification = function(notification) {
+    var wb = DGW.side.elements.widgetBody;
+    var nh = wb.querySelector('.dg-side-notification-holder');
+    nh.innerHTML = DGW.templates.side.notifications[notification];
+};
+
+DGW.side.methods.hideNotification = function() {
+    DGW.side.elements.widgetBody.querySelector('.dg-side-notification-holder').innerHTML = '';
 };

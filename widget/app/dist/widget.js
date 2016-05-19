@@ -602,9 +602,13 @@ DGW.global.api.requests.checkServerAvailability = function(){
             DGW.helpers.console.info('checkServerAvailability: ', result);
 
             //TODO: refactor later
-            DGW.global.club.name = result.data.FoundationName;
-            DGW.global.api.requests.getDraws(DGW.global.api.requests.initMainFlow);
-            DGW.helpers.gaCheckPut(DGW.global.club.name);
+            if (result.data.IsActive) {
+                DGW.global.club.name = result.data.FoundationName;
+                DGW.global.api.requests.initMainFlow();
+                DGW.helpers.gaCheckPut(DGW.global.club.name);
+            } else {
+                DGW.helpers.console.warn('Widget is disabled');
+            }
         }
     });
 };
@@ -759,7 +763,9 @@ DGW.global.api.requests.getDrawEntries = function(onSuccess, onError){
         if (result.status == 200) {
             DGW.helpers.console.info('getDrawEntries ', result.data);
             DGW.main.cache.drawsEntries = result.data.DrawEntries;
-            //DGW.main.methods.drawsConstructor(DGW.main.cache);
+            if ( DGW.main.cache.drawsEntries.some(function(entry){return entry.NeedToClaimPrize}) ) {
+                DGW.side.methods.showNotification('winner');
+            }
             if (onSuccess) onSuccess(result.data);
         } else {
             DGW.helpers.console.error('getDrawEntries ', result.error);
@@ -1464,9 +1470,7 @@ DGW.helpers.getElementsFromAllPlaces = function(selector, place){
 
 DGW.helpers.gaCheckPut = function(name){
     name = name || DGW.global.club.name;
-    DGW.helpers.console.log('GA script launched');
     if (!window.ga) {
-        DGW.helpers.console.log('Adding GA script');
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
                 (i[r].q = i[r].q || []).push(arguments)
@@ -1479,7 +1483,6 @@ DGW.helpers.gaCheckPut = function(name){
         DGW.global.gaSend = name + '.send';
         if (ga.getByName) {
             if (!ga.getByName(name)) {
-                DGW.helpers.console.log('GA is ready, creating DGW');
                 ga('create', {
                     trackingId: 'UA-51923524-37',
                     cookieDomain: 'auto',
@@ -1489,7 +1492,6 @@ DGW.helpers.gaCheckPut = function(name){
                 DGW.helpers.console.log('GA is ready, DGW is created');
             }
         } else {
-            DGW.helpers.console.log('GA is ready, loading');
             var interval = window.setInterval(function(){
                 if (ga.getByName) {
                     window.clearInterval(interval);
@@ -1520,13 +1522,14 @@ DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body">' +
                                         '<div class="dg-side-widget-content"></div>' +
                                         '<div data-page="earn" class="dg-side-click-holder"></div>' +
+                                        '<div class="dg-side-notification-holder"></div>' +
                                     '</div>' +
                                 '</div>';
 
 DGW.templates.side.draw =  '<div class="dg-side-section">' +
                                         '<img data-image="temp-green-tee.png" class="dg-side-image-bg" src=""/>' +
                                         '<div class="dg-side-content">' +
-                                            '<p>Get<br/>t-shirt</p>' +
+                                            '<p>Win<br/>prizes</p>' +
                                             '<div class="dg-side-cta">Play</div>' +
                                         '</div>' +
                                     '</div>' +
@@ -1550,9 +1553,13 @@ DGW.templates.side.registeredProfile =  '<div class="dg-side-section dg-small-si
                                         '</div>';
 
 DGW.templates.side.actions = {
-    share: '<div class="dg-side-bottom-floating dg-side-action" data-page="earn">Share</div>',
+    earn: '<div class="dg-side-bottom-floating dg-side-action" data-page="earn">Earn</div>',
     play: '<div class="dg-side-bottom-floating dg-side-action" data-page="draws">Play</div>',
     stats: '<div class="dg-side-bottom-floating dg-side-action" data-page="profile">Stats</div>'
+};
+
+DGW.templates.side.notifications = {
+    winner: '<div class="dg-side-notification dg-side-claim-prize"></div>'
 };
 DGW.templates.spinner = '<div class="dg-o-w-spinner">' +
                             '<div class="sk-circle1 sk-circle"></div><div class="sk-circle2 sk-circle"></div><div class="sk-circle3 sk-circle"></div>' +
@@ -1655,8 +1662,6 @@ DGW.templates.drawsMain = '<div class="dg-o-w-submenu">' +
                         '</div>' +
                         '<div class="dg-o-w-section-content">' +
                             '<div class="dg-o-w-draws-active"><ul class="dg-o-w-list-draws"></ul></div>' +
-                            /*'<div class="dg-o-w-draws-no-active"><h2>Sorry, but there are no draws running at the moment.</h2><br/><div class="dg-o-w-draws-refresh"></div></div>' +
-                            '<div class="dg-o-w-draws-no-in-draws"><h2>Seems like you don\'t playing any current draw :(</h2></div>' +*/
                         '</div>';
 
 DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' +
@@ -1666,10 +1671,10 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' 
                                     '<div class="dg-o-w-profile-stats-holder">' +
                                         '<h3 data-userstats-username class="dg-o-w-profile-name">Captain Deadpool</h3>' +
                                         '<div class="dg-o-w-profile-stats-holder-rest">' +
-                                            '<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-userstats-friends-c>210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-friends-p class="green-highlighter">19</p></div></div>' +
-                                            '<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand" data-userstats-groups-c>20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-groups-p class="green-highlighter">3</p></div></div>' +
+                                            //'<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-userstats-friends-c>210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-friends-p class="green-highlighter">19</p></div></div>' +
+                                            //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand" data-userstats-groups-c>20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-groups-p class="green-highlighter">3</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 data-userstats-points-c>520</h3><p>points</p></div></div>' +
-                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 data-userstats-credits-c>40</h3><p>credits</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 data-userstats-credits-c>40</h3></div></div>' +
                                         '</div>' +
                                     '</div>' +
                                 '</div>' +
@@ -1869,21 +1874,16 @@ DGW.global.methods.authorize = function(){
     DGW.global.authorized = true;
     DGW.helpers.addClass(DGW.side.elements.widgetBody, 'dg-o-w-authorized');
     // ********
-    if (DGW.main.currentState === 'profile') {
-        DGW.main.methods.changeMainState('profile');
-        // ********
-    } else if (DGW.main.currentState === 'draws') {
-        DGW.global.api.requests.getDraws(function(){
-            DGW.global.api.requests.getDrawEntries(function(){
-                DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
-            });
-        });
-    } else if (DGW.main.currentState === 'earn') {
-        DGW.global.api.requests.getUserOffers();
+    if (DGW.main.currentState !== 'draws') {
+        DGW.main.methods.changeMainState('earn');
     }
+    DGW.global.api.requests.getDraws(function(){
+        DGW.global.api.requests.getDrawEntries(function(){
+            DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+        });
+    });
 
     DGW.side.methods.changeSideWidgetState();
-
     DGW.global.api.requests.getUserActions();
 };
 
@@ -1898,6 +1898,7 @@ DGW.global.methods.unAuthorize = function(){
     DGW.global.methods.userStatsReset();
 
     DGW.side.methods.changeSideWidgetState();
+    DGW.side.methods.hideNotification();
 };
 
 DGW.global.methods.userStatsReset = function(){
@@ -1929,26 +1930,18 @@ DGW.global.methods.init = function(){
     // filling user default data
     DGW.global.methods.userStatsReset();
 
-    // requesting basic apis to get some cached data
-    DGW.global.api.requests.getDraws(function(){
-        if (DGW.global.authorized) {
-            DGW.global.api.requests.getDrawEntries(function(){
-                DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
-            });
-        } else {
-            DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
-        }
-    });
-    DGW.global.api.requests.getActions();
-
     //Initializing or checking user
-    DGW.global.api.requests.getUser();
+    DGW.global.api.requests.getUser(
+        function registered(){},
+        function anonymous(){
+            DGW.global.api.requests.getDraws();
+            DGW.global.api.requests.getActions();
+        }
+    );
 
     if (DGW.global.safariFixFirstOpen) {
         DGW.main.methods.showWidget();
     }
-
-
 };
 
 DGW.main.methods.showNotificationBar = function(type){
@@ -2164,10 +2157,10 @@ DGW.side.methods.changeSideWidgetState = function(state) {
     swc.innerHTML = '';
 
     //TODO: TEMP place with randomized states
-    var states = ['profile', 'draws'];
-    if(!state) state = states[Math.floor(Math.random())];
-    var actions = ['share', 'play', 'stats'];
-    var curAction = actions[Math.floor(Math.random() * 3)];
+    /*var states = ['profile', 'draws'];
+    if(!state) state = states[Math.round(Math.random())];*/
+    var actions = ['earn', 'play'];
+    var curAction = actions[Math.floor(Math.random() * actions.length)];
 
     switch(state){
         case 'draws':
@@ -2180,9 +2173,8 @@ DGW.side.methods.changeSideWidgetState = function(state) {
             if (DGW.global.authorized) {
                 swc.innerHTML = DGW.templates.side.registeredProfile;
                 swc.innerHTML += DGW.templates.side.actions[curAction];
-                DGW.global.api.requests.getUser();
             } else {
-                swc.innerHTML = DGW.templates.side.anonymousSignUp;
+                swc.innerHTML = DGW.templates.side.draw;
             }
     }
 
@@ -2194,7 +2186,16 @@ DGW.side.methods.changeSideWidgetState = function(state) {
     } else {
         DGW.side.methods.initEvents();
     }
+};
 
+DGW.side.methods.showNotification = function(notification) {
+    var wb = DGW.side.elements.widgetBody;
+    var nh = wb.querySelector('.dg-side-notification-holder');
+    nh.innerHTML = DGW.templates.side.notifications[notification];
+};
+
+DGW.side.methods.hideNotification = function() {
+    DGW.side.elements.widgetBody.querySelector('.dg-side-notification-holder').innerHTML = '';
 };
 DGW.main.methods.checkSectionHeight = function() {
     var section = DGW.main.elements.widgetBody.querySelector('.dg-o-w-section');
@@ -2918,7 +2919,9 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
                     return de.DrawId == draw.DrawId;
                 })[0] || null;
             var winnerExist = draw.Winner;
+            var isWinner = (drawEntry) ? drawEntry.IsWinner : false;
             var winnerHtml = '',
+                winnerInnerText = '',
                 drawEntryHtml = '',
                 countdownHtml = '&nbsp;';
             var activeDraw = false;
@@ -2936,8 +2939,9 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
             }
 
             if (winnerExist) {
+                winnerInnerText = (isWinner === true) ? ('You\'ve won this draw!') : (draw.Winner.UserName + ' has won');
                 winnerHtml = '<div class="dg-o-w-draw-list-winner"><img src="' + draw.Winner.ImageUrl + '" />' +
-                '<p>' + draw.Winner.UserName + ' has won</p></div>';
+                '<p>' + winnerInnerText + '</p></div>';
             }
 
             if (DGW.helpers.drawIsFinished(draw)) {

@@ -440,8 +440,8 @@
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-header .dg-o-w-menu-profile [data-userstats-points-c]:after {
   content: ' pts';
 }
-#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-header .dg-o-w-menu-profile [data-userstats-credits-c]:after {
-  content: ' cts';
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-header .dg-o-w-menu-profile [data-userstats-credits-c]:before {
+  content: '£ ';
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-header .dg-o-w-menu-profile img {
   width: 40px;
@@ -2047,6 +2047,9 @@
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-profile .dg-o-w-profile-stats-inner > div {
   display: inline-block;
   vertical-align: middle;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-profile .dg-o-w-profile-stats-inner [data-userstats-credits-c]:before {
+  content: '£ ';
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-profile .dg-o-w-profile-stats-inner .dg-o-w-profile-stats-icon {
   width: 50px;

@@ -19,13 +19,14 @@ DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                     '<div class="dg-side-widget-body">' +
                                         '<div class="dg-side-widget-content"></div>' +
                                         '<div data-page="earn" class="dg-side-click-holder"></div>' +
+                                        '<div class="dg-side-notification-holder"></div>' +
                                     '</div>' +
                                 '</div>';
 
 DGW.templates.side.draw =  '<div class="dg-side-section">' +
                                         '<img data-image="temp-green-tee.png" class="dg-side-image-bg" src=""/>' +
                                         '<div class="dg-side-content">' +
-                                            '<p>Get<br/>t-shirt</p>' +
+                                            '<p>Win<br/>prizes</p>' +
                                             '<div class="dg-side-cta">Play</div>' +
                                         '</div>' +
                                     '</div>' +
@@ -49,7 +50,11 @@ DGW.templates.side.registeredProfile =  '<div class="dg-side-section dg-small-si
                                         '</div>';
 
 DGW.templates.side.actions = {
-    share: '<div class="dg-side-bottom-floating dg-side-action" data-page="earn">Share</div>',
+    earn: '<div class="dg-side-bottom-floating dg-side-action" data-page="earn">Earn</div>',
     play: '<div class="dg-side-bottom-floating dg-side-action" data-page="draws">Play</div>',
     stats: '<div class="dg-side-bottom-floating dg-side-action" data-page="profile">Stats</div>'
+};
+
+DGW.templates.side.notifications = {
+    winner: '<div class="dg-side-notification dg-side-claim-prize"></div>'
 };

@@ -273,7 +273,9 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
                     return de.DrawId == draw.DrawId;
                 })[0] || null;
             var winnerExist = draw.Winner;
+            var isWinner = (drawEntry) ? drawEntry.IsWinner : false;
             var winnerHtml = '',
+                winnerInnerText = '',
                 drawEntryHtml = '',
                 countdownHtml = '&nbsp;';
             var activeDraw = false;
@@ -291,8 +293,9 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
             }
 
             if (winnerExist) {
+                winnerInnerText = (isWinner === true) ? ('You\'ve won this draw!') : (draw.Winner.UserName + ' has won');
                 winnerHtml = '<div class="dg-o-w-draw-list-winner"><img src="' + draw.Winner.ImageUrl + '" />' +
-                '<p>' + draw.Winner.UserName + ' has won</p></div>';
+                '<p>' + winnerInnerText + '</p></div>';
             }
 
             if (DGW.helpers.drawIsFinished(draw)) {
