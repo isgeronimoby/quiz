@@ -102,7 +102,7 @@ class QuizBetContainer extends Component {
 // Connect to store
 //
 const mapStateToProps = (state) => {
-	const matchId = state.selectedQuiz;
+	const matchId = state.selectedMatchId;
 	const quizData = state.quizes[matchId] || {};
 
 	return {

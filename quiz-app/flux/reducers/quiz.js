@@ -12,7 +12,7 @@ import {
 } from '../actions';
 
 
-export function selectedQuiz(state = null, action) {
+export function selectedMatchId(state = null, action) {
 	switch (action.type) {
 		case SELECT_QUIZ:
 			return action.matchId;

@@ -114,8 +114,8 @@ class Quiz extends Component {
 // Connect to store
 //
 const mapStateToProps = (state) => {
-	const quiz = state.quizes[state.selectedQuiz] || {isFetching: true};
-	const fixtureItem = state.fixtures.list.find(f => f.matchId === state.selectedQuiz) || {};
+	const quiz = state.quizes[state.selectedMatchId] || {isFetching: true};
+	const fixtureItem = state.fixtures.list.find(f => f.matchId === state.selectedMatchId) || {};
 
 	return {
 		...quiz,

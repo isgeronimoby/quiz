@@ -77,10 +77,10 @@ class DrawClaimPrize extends Component {
 				</div>
 
 				<form className="draw-claim-form">
-					<TextInput ref="input-city" required={true} label="City"/>
-					<TextInput ref="input-address" required={true} label="Address"/>
-					<TextInput ref="input-county" required={true} label="County"/>
-					<TextInput ref="input-postcode" required={true} label="Postcode"/>
+					<TextInput ref="input-city" required={true} name="city" label="City"/>
+					<TextInput ref="input-address" required={true} name="address" label="Address"/>
+					<TextInput ref="input-county" required={true} name="country" label="County"/>
+					<TextInput ref="input-postcode" required={true} name="postcode" label="Postcode"/>
 
 					<Button className="big-btn money-btn" onClick={ onSubmit }>Submit</Button>
 				</form>

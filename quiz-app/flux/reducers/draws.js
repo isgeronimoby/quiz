@@ -15,7 +15,7 @@ import {
 } from '../actions';
 
 
-export function selectedDraw(state = null, action) {
+export function selectedDrawId(state = null, action) {
 	switch (action.type) {
 		case SELECT_DRAW:
 			return action.drawId;

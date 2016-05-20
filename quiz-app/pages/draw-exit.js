@@ -36,7 +36,7 @@ class Exit extends Component {
 //
 const mapStateToProps = (state) => {
 	return {
-		nextDrawItem: getNextDrawItem(state.draws.list) || {isFetching: true},
+		nextDrawItem: getNextDrawItem(state.draws.list, state.selectedDrawId) || {isFetching: true},
 	};
 };
 const mapDispatchToProps = (dispatch) => {

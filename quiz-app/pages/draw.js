@@ -43,7 +43,7 @@ class Draw extends Component {
 // Connect to store
 //
 const mapStateToProps = (state) => {
-	const selectedDrawItem = state.draws.list.find(({ drawId }) => drawId === state.selectedDraw);
+	const selectedDrawItem = state.draws.list.find(({ drawId }) => drawId === state.selectedDrawId);
 	return {
 		drawItem: selectedDrawItem || {isFetching: true},
 	};

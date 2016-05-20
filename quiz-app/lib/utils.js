@@ -28,14 +28,12 @@ export class Window {
 export const isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
 
 
-// Assuming the list is sorted by endDate, then return the first one that is not selected,
-// so it will be for sure either a) latest live or b) latest drawn.
+// Return next draw item after selected, if selected is the last, then the first item in list.
+// Do not consider items status. For bet-exit this is always the first draw item.
 //
-export function getNextDrawItem(drawList, selectedDrawItem = {}) {
-	for (let draw of drawList) {
-		if (draw.drawId !== selectedDrawItem.drawId) {
-			return draw;
-		}
-	}
-	return undefined;
+export function getNextDrawItem(drawList, selectedDrawId) {
+	const selectedDraw = drawList.find(({ drawId }) => drawId === selectedDrawId);
+	const selectedDrawIdx = drawList.indexOf(selectedDraw);
+
+	return drawList[selectedDrawIdx + 1]; // first if idx === -1
 }
