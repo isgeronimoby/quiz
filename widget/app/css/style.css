@@ -2,6 +2,9 @@
 .dg-o-w-element-shadow {
   box-shadow: 1px 0 3px rgba(0, 0, 0, 0.1);
 }
+.page-animation {
+  animation: dg-o-w-slide-left-in 0.3s ease 0s 1 forwards;
+}
 #dg-side-widget #dg-side-widget-wrapper {
   position: fixed;
   bottom: 100px;
@@ -491,9 +494,6 @@
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-forms.success .success-message {
   display: block;
-}
-#dg-o-w #dg-o-w-wrapper .page-animation {
-  animation: dg-o-w-slide-left-in 0.3s ease 0s 1 forwards;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-arrow {
   display: inline-block;
