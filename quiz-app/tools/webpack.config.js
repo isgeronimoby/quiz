@@ -19,7 +19,7 @@ const AUTOPREFIXER_BROWSERS = [
 	'Explorer >= 9',
 	'iOS >= 7',
 	'Opera >= 12',
-	'Safari >= 7.1',
+	'Safari >= 7.0',
 ];
 const JS_LOADER = {
 	test: /\.jsx?$/,
