@@ -1,6 +1,6 @@
 export default {
-	title: 'Match Quiz',
-	description: 'Match Quiz Description - TODO',
+	title: 'Score Predictor',
+	description: 'Score Predictor',
 	googleAnalyticsId: 'UA-XXXXX-X',
 };
 

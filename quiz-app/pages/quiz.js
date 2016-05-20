@@ -15,7 +15,7 @@ function goToFixturesPage() {
 
 class Quiz extends Component {
 
-	static title = 'Match Quiz';
+	static title = 'Score Predictor';
 
 	static propTypes = {
 		params: PropTypes.object.isRequired,

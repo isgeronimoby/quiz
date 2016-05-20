@@ -10,6 +10,8 @@ const WELCOME_COOKIE_EXPIRES = 365; //days
 function withWelcome(ComposedComponent) {
 	class WithWelcome extends Component {
 
+		static title = ComposedComponent.title;
+
 		static propTypes = {
 			// from store
 			showWelcomePopup: PropTypes.bool.isRequired,

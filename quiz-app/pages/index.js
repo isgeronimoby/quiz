@@ -16,7 +16,7 @@ function goToFixturesPage() {
 
 class Index extends Component {
 
-	static title = 'Match Quiz';
+	static title = 'Score Predictor';
 
 	static propTypes = {
 		// from store
