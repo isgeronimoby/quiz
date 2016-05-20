@@ -1113,7 +1113,7 @@ DGW.global.api.requests.friendSearch = function(queryString, onSuccess, onError)
             if (onError) onError(result.error);
         }
     }, {
-        Keywords: [queryString]
+        Username: queryString
     });
 };
 DGW.helpers.addClass = function(obj, className){
@@ -1520,6 +1520,38 @@ DGW.helpers.gaCheckPut = function(name){
         }
     }
 };
+
+DGW.helpers.createUserListAction = function(actionType) {
+    var action = document.createElement('div');
+    switch (actionType) {
+        case 'follow':
+            action.innerHTML = DGW.templates.userListActions.follow;
+            break;
+        case 'following':
+            action.innerHTML = DGW.templates.userListActions.following;
+            break;
+        case 'friends':
+            action.innerHTML = DGW.templates.userListActions.friends;
+            break;
+        case 'request':
+            action.innerHTML = DGW.templates.userListActions.request;
+            break;
+        case 'requestSent':
+            action.innerHTML = DGW.templates.userListActions.requestSent;
+            break;
+        case 'accept':
+            action.innerHTML = DGW.templates.userListActions.accept;
+            break;
+        case 'decline':
+            action.innerHTML = DGW.templates.userListActions.decline;
+            break;
+        default:
+            return action;
+    }
+
+    action = action.childNodes[0];
+    return action;
+};
 DGW.templates.side.profileInfo ='<div class="dg-side-section">' +
                                     '<div class="dg-side-user-img-holder"><img data-userstats-userimage class="dg-o-w-side-image-floating" src=""/></div>' +
                                     '<div class="dg-side-collapsed dg-side-floating-text"><p><span data-userstats-points-c class="dg-o-w-points-text">00</span></p><h5>Earn more</h5></div>' +
@@ -1690,8 +1722,8 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' 
                                     '<div class="dg-o-w-profile-stats-holder">' +
                                         '<h3 data-userstats-username class="dg-o-w-profile-name">Captain Deadpool</h3>' +
                                         '<div class="dg-o-w-profile-stats-holder-rest">' +
-                                            //'<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-userstats-friends-c>210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-friends-p class="green-highlighter">19</p></div></div>' +
-                                            //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand" data-userstats-groups-c>20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-groups-p class="green-highlighter">3</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-userstats-friends-c>210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-friends-p class="green-highlighter">19</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand" data-userstats-groups-c>20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-groups-p class="green-highlighter">3</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 data-userstats-points-c>520</h3><p>points</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 data-userstats-credits-c>40</h3></div></div>' +
                                         '</div>' +
@@ -1752,10 +1784,9 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul>' +
                                 '</div>';
 
 DGW.templates.friendsMain = '<div class="dg-o-w-submenu"><ul>' +
-                                    '<li class="dg-o-w-active">My friends</li></ul>' +
+                                    '<li class="dg-o-w-active">Friends</li><li>Following</li></ul>' +
                                 '<div class="dg-o-w-float-right dg-o-w-inline-form dg-o-w-right-padding">' +
-                                    '<select class="search-dropdown"><option>Global</option></select>' +
-                                    '<form class="search-form"><input class="search-field" type="text" placeholder="Search" /><input class="search-submit" type="submit" value=""/></form>' +
+                                    '<form class="search-form"><input class="search-field" type="text" placeholder="Search" /></form>' +
                                 '</div></div>' +
                                 '<div class="dg-o-w-section-scroller">' +
                                     '<div class="dg-o-w-section-content content-static dg-o-w-white-section">' +
@@ -1763,7 +1794,7 @@ DGW.templates.friendsMain = '<div class="dg-o-w-submenu"><ul>' +
                                             '<div class="dg-o-w-float-left"><p><a href="#" class="btn-dg-o-w btn-dg-o-w-brand">Invite more friends</a> and get points per each</p></div>' +
                                             '<div class="dg-o-w-float-right"><p class="line-height-btn">You have 132 friends <span class="green-highlighter">12</span></p></div>' +
                                         '</div>' +
-                                        '<div class="dg-o-w-section-list-holder"><ul data-friends>' +
+                                        '<div class="dg-o-w-section-list-holder"><ul data-friends-list>' +
                                             '<li class="dg-o-w-table-display">' +
                                                 '<div class="dg-o-w-cell"><img src="./dist/imgs/avatar-placeholder.png" /><div class="dg-o-w-details"><p class="dg-o-w-color-brand">Name Surname</p><p class="dg-o-w-color-grey">2 common groups</p></div></div>' +
                                                 '<div class="dg-o-w-cell"><div class="dg-o-w-users-done"></div></div>' +
@@ -1777,6 +1808,28 @@ DGW.templates.friendsMain = '<div class="dg-o-w-submenu"><ul>' +
                                         '</ul></div>' +
                                     '</div>' +
                                 '</div>';
+
+DGW.templates.userListItem = '<div class="dg-o-w-cell">' +
+                                    '<img src="" data-user-image/>' +
+                                    '<div class="dg-o-w-details">' +
+                                        '<p class="dg-o-w-color-brand" data-user-name></p>' +
+                                            //'<p class="dg-o-w-color-grey">2 common groups</p>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div class="dg-o-w-cell">' +
+                                    '<div class="dg-o-w-users-done" data-user-common-users></div>' +
+                                '</div>' +
+                                '<div class="dg-o-w-cell" data-user-actions></div>';
+
+DGW.templates.userListActions = {
+    follow: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Follow</div>',
+    following: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked-okay">Following</div>',
+    friends: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked-okay">Friends</div>',
+    request: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Add to friends</div>',
+    requestSent: '<p class="dg-o-w-color-grey">Request sent</p>',
+    accept: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Accept</div>',
+    decline: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Decline</div>'
+};
 
 DGW.templates.videoHolder = '<div class="dg-o-w-video-holder"><div id="dg-o-w-video-playing"></div><div class="dg-o-w-video-text"><span></span></div></div>';
 
@@ -2628,7 +2681,6 @@ DGW.main.methods.initEvents = function () {
         });
 
     });
-
 
 //Notification clicks
     DGW.main.elements.pages.notificationHolder.querySelector('.dg-o-w-notification-close').addEventListener('click', function(){
@@ -3536,72 +3588,117 @@ DGW.main.methods.notificationConstructor = function(lis, _type) {
         DGW.helpers.console.warn('Notification parameters are not of the type of [Array] or String');
     }
 };
+DGW.main.methods.userListItemConstructor = function(users, group){
+    'use strict';
+    if (!users) return;
 
-
-DGW.main.methods.friendsConstructor = function(){
-    var dp = DGW.main.elements.pages.friendsMain;
-    var friendsHolder = DGW.helpers.getElementsFromAllPlaces('[data-friends]')[0];
-
-    var friends = [1, 2, 3, 4, 5, 6, 7];
-
-    var recentCompleters = [1];
-
-
-    friendsHolder.innerHTML = '';
-    friends.forEach(function(el, ind){
+    var usersArray = [];
+    users.forEach(function(userObj){
+        var commonUsers = userObj.MutualFriends;
+        var commonUsersCount = +userObj.MutualFriendsCount;
+        var user = userObj.User;
+        var commonUsersText = document.createElement('p');
         var li = document.createElement('li');
-        DGW.helpers.addClass(li, 'dg-o-w-table-display');
 
-        li.innerHTML =
-            '<div class="dg-o-w-cell">' +
-                '<img src="./dist/imgs/avatar-placeholder.png" />' +
-                '<div class="dg-o-w-details">' +
-                    '<p class="dg-o-w-color-brand">Name Surname</p>' +
-                    '<p class="dg-o-w-color-grey">2 common groups</p>' +
-                '</div>' +
-            '</div>' +
-            '<div class="dg-o-w-cell">' +
-                '<div class="dg-o-w-users-done"></div>' +
-            '</div>' +
-            '<div class="dg-o-w-cell">' +
-                '<a href="#" class="btn-dg-o-w btn-dg-o-w-stroked">Accept</a>' +
-                '<a href="#" class="btn-dg-o-w btn-dg-o-w-stroked-okay">Friends</a>' +
-            '</div>';
+        li.className = 'dg-o-w-table-display';
+        li.innerHTML = DGW.templates.userListItem;
 
-        if (recentCompleters.length > 0) {
-            var commonFriends = li.querySelector('.dg-o-w-users-done');
-            var commonFriendsNumber = 1 + ind;
+        var commonUsersHolder = li.querySelector('[data-user-common-users]');
+        var userActionsHolder = li.querySelector('[data-user-actions]');
+
+        // Filling user name, image, groups
+        li.querySelector('[data-user-image]').src = user.ImageUrl;
+        li.querySelector('[data-user-name]').innerHTML = user.UserName;
+
+
+        //Filling common users section
+        if (commonUsers.length > 0) {
             var commonImgsHolder = document.createElement('div');
-            recentCompleters.forEach(function(user, ind){
+            commonUsers.forEach(function(cUser, ind){
                 if (ind > 2) return;
                 var img = document.createElement('img');
-                img.src = './dist/imgs/avatar-placeholder.png';
-
+                img.src = cUser.ImageUrl;
                 commonImgsHolder.appendChild(img);
             });
-            commonFriends.appendChild(commonImgsHolder);
+            commonUsersHolder.appendChild(commonImgsHolder);
 
-            var p = document.createElement('p');
-            DGW.helpers.addClass(li, 'dg-o-w-table-display');
-            if (commonFriendsNumber == 1) {
-                p.innerHTML = '1 user has done this';
+            if (commonUsersCount === 1) {
+                commonUsersText.innerHTML = '1 common user';
             } else {
-                p.innerHTML = commonFriendsNumber + ' users have done this';
-                p.className = ((recentCompleters.length == 2) ? 'dg-o-w-two-images' : 'dg-o-w-three-images');
+                commonUsersText.innerHTML = commonUsersCount + ' common users';
+                commonUsersText.className = ((commonUsers.length == 2) ? 'dg-o-w-two-images' : 'dg-o-w-three-images');
             }
-            commonFriends.appendChild(p);
+        } else {
+            commonUsersText.innerHTML = 'No common users';
+        }
+        commonUsersHolder.appendChild(commonUsersText);
+
+
+        // Filling actions available with this user
+        if (group === 'requestFrom') {
+            userActionsHolder.appendChild(DGW.helpers.createUserListAction('accept'));
+            userActionsHolder.appendChild(DGW.helpers.createUserListAction('decline'));
+        } else if (group === 'friends') {
+            userActionsHolder.appendChild(DGW.helpers.createUserListAction('friends'));
+        } else if (group === 'requestTo') {
+            userActionsHolder.appendChild(DGW.helpers.createUserListAction('requestSent'));
         }
 
-
-        friendsHolder.appendChild(li);
-
-
-        recentCompleters.push(ind + 1);
+        usersArray.push(li);
     });
 
-
-
+    return usersArray;
 };
+
+
+DGW.main.methods.friendsConstructor = function(usersObj){
+    if (!usersObj) return;
+
+    var userListHolder = DGW.helpers.getElementsFromAllPlaces('[data-friends-list]')[0];
+    userListHolder.innerHTML = '';
+
+    DGW.main.methods.userListItemConstructor(usersObj.FriendRequestsFrom, 'requestFrom').forEach(function(userItem){
+        userListHolder.appendChild(userItem);
+    });
+    DGW.main.methods.userListItemConstructor(usersObj.Friends, 'friends').forEach(function(userItem){
+        userListHolder.appendChild(userItem);
+    });
+    DGW.main.methods.userListItemConstructor(usersObj.FriendRequestsTo, 'requestTo').forEach(function(userItem){
+        userListHolder.appendChild(userItem);
+    });
+};
+
+
+(function(){
+
+    (function searchFriends(){
+        var dp = DGW.main.elements.pages.friendsMain;
+        var friendSearch = dp.querySelector('.search-form .search-field');
+        var searchTimeout;
+        var searchDelay = 1000;
+
+        friendSearch.addEventListener('input', function(){
+            var that = this;
+            DGW.helpers.console.info('input');
+            if (searchTimeout) window.clearTimeout(searchTimeout);
+            searchTimeout = window.setTimeout(function(){
+                DGW.helpers.console.info('search');
+                DGW.global.api.requests.friendSearch(that.value,
+                    function(response){
+                        DGW.helpers.console.log(response);
+                    }
+                );
+            }, searchDelay);
+        });
+
+    })();
+
+    setTimeout(function(){
+        DGW.global.api.requests.friendsGet(function(response){
+            DGW.main.methods.friendsConstructor(response);
+        });
+    }, 3000);
+})();
 var widgetStyles = document.createElement('link');
     widgetStyles.rel = 'stylesheet';
     widgetStyles.type = 'text/css';

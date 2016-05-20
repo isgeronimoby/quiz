@@ -1,0 +1,10 @@
+Followers: Array[25]
+FollowersCount: 25
+Following: Array[23]
+FollowingCount: 23
+FriendRequestsFrom: Array[35]
+FriendRequestsFromCount: 35
+FriendRequestsTo: Array[20]
+FriendRequestsToCount: 20
+Friends: Array[19]
+FriendsCount: 19

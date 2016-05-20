@@ -402,3 +402,35 @@ DGW.helpers.gaCheckPut = function(name){
         }
     }
 };
+
+DGW.helpers.createUserListAction = function(actionType) {
+    var action = document.createElement('div');
+    switch (actionType) {
+        case 'follow':
+            action.innerHTML = DGW.templates.userListActions.follow;
+            break;
+        case 'following':
+            action.innerHTML = DGW.templates.userListActions.following;
+            break;
+        case 'friends':
+            action.innerHTML = DGW.templates.userListActions.friends;
+            break;
+        case 'request':
+            action.innerHTML = DGW.templates.userListActions.request;
+            break;
+        case 'requestSent':
+            action.innerHTML = DGW.templates.userListActions.requestSent;
+            break;
+        case 'accept':
+            action.innerHTML = DGW.templates.userListActions.accept;
+            break;
+        case 'decline':
+            action.innerHTML = DGW.templates.userListActions.decline;
+            break;
+        default:
+            return action;
+    }
+
+    action = action.childNodes[0];
+    return action;
+};

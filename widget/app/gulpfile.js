@@ -24,6 +24,8 @@ var scripts = [
     'js/side-widget-events.js',
     'js/page-events.js',
     'js/fill-methods.js',
+    'js/pages/friends-constructor.js',
+    'js/pages/friends-events.js',
     'js/launch.js'
 ];
 
@@ -54,6 +56,7 @@ gulp.task('styles', function(){
 
 gulp.task('watch', function() {
     gulp.watch('js/*.js', ['scripts']);
+    gulp.watch('js/pages/*.js', ['scripts']);
     gulp.watch('css/*.css', ['styles']);
 });
 

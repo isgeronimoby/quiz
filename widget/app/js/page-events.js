@@ -404,7 +404,6 @@ DGW.main.methods.initEvents = function () {
 
     });
 
-
 //Notification clicks
     DGW.main.elements.pages.notificationHolder.querySelector('.dg-o-w-notification-close').addEventListener('click', function(){
         DGW.main.methods.hideNotificationBar();
