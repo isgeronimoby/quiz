@@ -39,6 +39,7 @@ function getSummary(questionList, teamNames, answers) {
 class QuizSummaryPlayed extends Component {
 
 	static propTypes = {
+		matchId: PropTypes.string.isRequired,
 		info: PropTypes.string.isRequired,
 		questionList: PropTypes.array.isRequired,
 		teamNames: PropTypes.array.isRequired,
@@ -55,7 +56,7 @@ class QuizSummaryPlayed extends Component {
 	}
 
 	render() {
-		const { info, questionList, teamNames, betAmount, isWinner, answers, odds } = this.props;
+		const { matchId, info, questionList, teamNames, betAmount, isWinner, answers, odds } = this.props;
 		const { score, winner, halfTimeWinner, firstGoalScorer} = getSummary(questionList, teamNames, answers);
 
 		const [teamHome, teamAway] = teamNames;
@@ -133,7 +134,7 @@ class QuizSummaryPlayed extends Component {
 
 				{ greyBtn }
 
-				<SharingControls />
+				<SharingControls matchId={ matchId }/>
 			</div>
 		);
 	}

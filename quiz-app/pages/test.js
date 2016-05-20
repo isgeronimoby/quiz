@@ -22,9 +22,6 @@ class Test extends Component {
 					<li>
 						<Link to="./fixtures">Fixtures</Link>
 					</li>
-					<li>
-						<Link to="./quiz" state={{id: 1}}>Quiz 1 (1 step)</Link>
-					</li>
 					<li >
 						<a href="#" onClick={ onAuthPopupClick }>Toggle Auth</a>
 					</li>

@@ -96,7 +96,7 @@ class DrawListItem extends Component {
 
 		return (
 			<li className="draw-item">
-				<Link className={"draw-item-body " + itemClasses} to="./draw" state={ {drawId} }>
+				<Link className={"draw-item-body " + itemClasses} to="./draw" query={ {drawId} }>
 					<div className="draw-item-aside">
 						<div className="draw-item-image">
 							<img src={ prizeImageUrl }/>

@@ -8,6 +8,7 @@ import './bet.scss';
 class QuizBet extends Component {
 
 	static propTypes = {
+		matchId: PropTypes.string.isRequired,
 		points: PropTypes.number.isRequired,
 		demoPoints: PropTypes.number.isRequired,
 		odds: PropTypes.array.isRequired,
@@ -25,6 +26,7 @@ class QuizBet extends Component {
 
 	render() {
 		const {
+			matchId,
 			points,
 			demoPoints,
 			odds,
@@ -66,7 +68,7 @@ class QuizBet extends Component {
 					Bet points
 				</Button>
 
-				<SharingControls />
+				<SharingControls matchId={ matchId }/>
 			</div>
 		);
 	}

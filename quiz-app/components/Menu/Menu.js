@@ -30,11 +30,11 @@ const MenuItem = (props) => {
 
 
 const ProfileHeader = ({ profile }) => {
-	const { userId, name, imageUrl, points, pendingPoints } = profile;
+	const { name, imageUrl, points, pendingPoints } = profile;
 
 
 	return (
-		<Link className="menu-header" to="./profile" state={{ userId }}>
+		<Link className="menu-header" to="./profile">
 			<div className="user-picture">
 				<img src={imageUrl}/>
 			</div>

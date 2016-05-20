@@ -8,7 +8,7 @@ import Location from '../../lib/Location';
 import '../QuizContainer/quiz.scss';
 
 function goToQuizPage(matchId) {
-	Location.push({pathname: './quiz', state: {matchId}});
+	Location.push({pathname: './quiz', query: {matchId}});
 }
 
 function goToExitPage() {
@@ -64,7 +64,7 @@ class QuizBetContainer extends Component {
 	}
 
 	render() {
-		const { isLoggedIn, points, quizData: { odds, betError, answers } } = this.props;
+		const { params: {matchId}, isLoggedIn, points, quizData: { odds, betError, answers } } = this.props;
 		const demoPoints = !isLoggedIn ? 10 : 0;
 		const oddsList = [odds, 1];
 		const { view } = this.state;
@@ -78,6 +78,7 @@ class QuizBetContainer extends Component {
 		let View;
 		if (view === 'bet') {
 			View = <QuizBet
+				matchId={ matchId }
 				isLoggedIn={ isLoggedIn }
 				points={ points }
 				demoPoints={ demoPoints }

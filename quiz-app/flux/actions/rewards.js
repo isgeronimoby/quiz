@@ -1,13 +1,13 @@
-import fetch from '../../lib/fetch.js';
+import fetch, { apiPrefix, apiKey } from '../../lib/fetch.js';
 import { Window } from '../../lib/utils.js';
-import { fetchProfileSuccess } from './profile.js';
+import { fetchProfile, fetchProfileSuccess } from './profile.js'
 
 export const FETCH_REWARDS = 'FETCH_REWARDS';
 export const FETCH_REWARDS_SUCCESS = 'FETCH_REWARDS_SUCCESS';
 export const FETCH_REWARDS_ERROR = 'FETCH_REWARDS_ERROR';
 
 const REWARD_FACEBOOK_SHARE_TYPE = 'MatchQuizFacebookShare';
-const REWARD_FACEBOOK_SHARE_ID = 8;
+//const REWARD_FACEBOOK_SHARE_ID = 8;
 const REWARD_TWITTER_SHARE_TYPE = 'MatchQuizTwitterShare';
 const REWARD_TWITTER_SHARE_ID = 9;
 
@@ -89,38 +89,29 @@ function postTrackRewards(typeId) {
 			});
 		}).catch(() => {
 			//TODO
-			/*dispatch(fetchRewards()).then(() => {
-				dispatch(fetchProfileSuccess({
-					UserId: '123',
-					UserName: 'XXX',
-					ImageUrl: 'http://spr-static-test.cloudapp.net/content/main/assets/images/default-profile.png',
-					Wallet: {
-						PointsConfirmed: 150,
-						PointsPending: 0
-					}
-				}));
-			})*/
 		});
 	};
 }
 
-export function startSharingFacebook() {
+export function startSharingFacebook(matchId) {
 	return (dispatch) => {
 		const { origin } = document.location;
-		const url = `http://www.facebook.com/sharer/sharer.php?u=${ encodeURIComponent(origin) }`;
+		const sharedUrl = `${origin}/quiz?matchId=${matchId}`;
+		const url = `${apiPrefix}rewardedaction/facebookshare?api_key=${apiKey}&shareurl=${ encodeURIComponent(sharedUrl) }`;
 		const title = 'Facebook';
 
 		popup.open({url, title}, () => {
-			dispatch(postTrackRewards(REWARD_FACEBOOK_SHARE_ID));
+			dispatch(fetchProfile());
 		});
 	};
 }
 
-export function startSharingTwitter() {
+export function startSharingTwitter(matchId) {
 	return (dispatch) => {
 		const tweet = 'I have just predicted this match, can you predict better?';
 		const { origin } = document.location;
-		const url = `https://twitter.com/intent/tweet?text=${ encodeURI(tweet) }&url=${ encodeURIComponent(origin) }&hashtags=everton,matchquiz`;
+		const sharedUrl = `${origin}/quiz?matchId=${matchId}`;
+		const url = `https://twitter.com/intent/tweet?text=${ encodeURI(tweet) }&url=${ encodeURIComponent(sharedUrl) }&hashtags=everton,matchquiz`;
 		const title = 'Twitter';
 
 		popup.open({url, title}, () => {

@@ -7,6 +7,7 @@ import SocialLink from '../SocialLink';
 
 class SharingControls extends Component {
 	static propTypes = {
+		matchId: PropTypes.string.isRequired,
 		// from store:
 		isLoggedIn: PropTypes.bool.isRequired,
 		points: PropTypes.number.isRequired,
@@ -36,12 +37,12 @@ class SharingControls extends Component {
 	}
 
 	submitShare(name) {
-		const {startSharingFacebook, startSharingTwitter} = this.props;
+		const {matchId, startSharingFacebook, startSharingTwitter} = this.props;
 
 		if (name === 'facebook') {
-			startSharingFacebook();
+			startSharingFacebook(matchId);
 		} else if (name === 'twitter') {
-			startSharingTwitter();
+			startSharingTwitter(matchId);
 		}
 	}
 
@@ -50,11 +51,7 @@ class SharingControls extends Component {
 	}
 
 	render() {
-		const {
-			isLoggedIn,
-			rewards,
-			onSubmitShare
-			} = this.props;
+		const { isLoggedIn, rewards } = this.props;
 		const {
 			facebookShare: {rewardPoints: facebookSharePoints} = {},
 			twitterShare: {rewardPoints: twitterSharePoints} = {},
@@ -88,8 +85,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchRewards: () => dispatch(fetchRewards()),
-		startSharingFacebook: () => dispatch(startSharingFacebook()),
-		startSharingTwitter: () => dispatch(startSharingTwitter()),
+		startSharingFacebook: (matchId) => dispatch(startSharingFacebook(matchId)),
+		startSharingTwitter: (matchId) => dispatch(startSharingTwitter(matchId)),
 	};
 };
 

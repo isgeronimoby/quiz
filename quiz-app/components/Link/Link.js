@@ -11,6 +11,7 @@ function isModifiedEvent(event) {
 	return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 }
 
+
 class Link extends Component {
 
 	static defaultProps = {
@@ -21,6 +22,7 @@ class Link extends Component {
 		goBack: PropTypes.bool,
 		to: PropTypes.string,
 		state: PropTypes.object,
+		query: PropTypes.object,
 		children: PropTypes.any.isRequired,
 		onClick: PropTypes.func,
 	};
@@ -50,10 +52,13 @@ class Link extends Component {
 		}
 		else {
 			const link = event.currentTarget;
-			const state = this.props && this.props.state || null;
-			const pathname = this.props && this.props.to || (link.pathname + link.search);
+			const {
+				to: pathname = (link.pathname + link.search),
+				query = null,
+				state = null,
+				} = this.props || {};
 
-			Location.push({pathname, state});
+			Location.push({pathname, query, state});
 		}
 	}
 

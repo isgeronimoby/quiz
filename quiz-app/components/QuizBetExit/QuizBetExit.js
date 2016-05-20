@@ -14,7 +14,7 @@ class QuizBetExit extends Component {
 
 		return (
 			<div className="quiz-exit">
-				<Link className="big-image" to="./draw" state={ {drawId} }>
+				<Link className="big-image" to="./draw" query={ {drawId} }>
 					<img src={ prizeImageUrl }/>
 				</Link>
 

@@ -64,7 +64,7 @@ class QuizSummary extends Component {
 		);
 		if (!hasInvalids) {
 			btnOrError = (
-				<Link className="big-btn money-btn" to="./bet" state={{matchId}}>Submit Prediction</Link>
+				<Link className="big-btn money-btn" to="./bet" query={ {matchId} }>Submit Prediction</Link>
 			);
 		}
 
@@ -94,7 +94,7 @@ class QuizSummary extends Component {
 
 				{ btnOrError }
 
-				<SharingControls />
+				<SharingControls matchId={ matchId }/>
 			</div>
 		);
 	}

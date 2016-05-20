@@ -4,6 +4,7 @@ import moment from 'moment';
 import Location from '../lib/Location';
 import { fetchProfileIfNeeded, fetchFixturesIfNeeded, fetchPlayedFixtures, fetchQuiz, selectQuiz, fetchOdds } from '../flux/actions';
 import { Fetching } from '../components/Layout';
+import withWelcome from '../components/withWelcome';
 import QuizContainer from '../components/QuizContainer';
 import QuizSummaryPlayed from '../components/QuizSummaryPlayed';
 
@@ -80,6 +81,7 @@ class Quiz extends Component {
 		if (isPlayed) {
 			return (
 				<QuizSummaryPlayed
+					matchId={ matchId }
 					info={ info }
 					teamNames={ [teamHome, teamAway] }
 					questionList={ questionList }
@@ -131,4 +133,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Quiz);
+export default withWelcome(connect(mapStateToProps, mapDispatchToProps)(Quiz));

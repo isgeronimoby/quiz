@@ -36,10 +36,10 @@ const route = async (path, params = {}, callback) => {
 function run() {
 	const container = document.getElementById('app');
 	Location.listen(location => {
-		const { pathname, state } = location;
+		const { pathname, query } = location;
 		const path = pathname.slice(pathname.lastIndexOf('/'));
 
-		route(path, state, async (component) => {
+		route(path, query, async (component) => {
 			ReactDOM.render(
 				<Provider store={store}>
 					{ component }
