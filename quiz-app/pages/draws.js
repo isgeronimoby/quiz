@@ -19,8 +19,10 @@ class Draws extends Component {
 
 	async componentDidMount() {
 		this.props.fetchDraws();
-		await this.props.fetchProfile();
-		this.props.fetchPlayedDraws();
+		try {
+			await this.props.fetchProfile();
+			this.props.fetchPlayedDraws();
+		} catch (e) {}
 	}
 
 	componentWillReceiveProps({isLoggedIn}) {
@@ -31,7 +33,6 @@ class Draws extends Component {
 	}
 
 	render() {
-
 		const { draws: { isFetching, list } } = this.props;
 
 		if (isFetching) {

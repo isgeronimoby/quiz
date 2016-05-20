@@ -108,10 +108,10 @@ export function startSharingFacebook(matchId) {
 
 export function startSharingTwitter(matchId) {
 	return (dispatch) => {
-		const tweet = 'I have just predicted this match, can you predict better?';
+		const tweetText = 'I have just predicted this match, can you predict better?';
 		const { origin } = document.location;
 		const sharedUrl = `${origin}/quiz?matchId=${matchId}`;
-		const url = `https://twitter.com/intent/tweet?text=${ encodeURI(tweet) }&url=${ encodeURIComponent(sharedUrl) }&hashtags=everton,matchquiz`;
+		const url = `https://twitter.com/intent/tweet?text=${ encodeURI(tweetText) }&url=${ encodeURIComponent(sharedUrl) }&hashtags=everton,matchquiz`;
 		const title = 'Twitter';
 
 		popup.open({url, title}, () => {

@@ -7,6 +7,7 @@ import { partners } from './partners.js';
 import { userList, userProfiles, selectedUserProfile } from './users.js';
 import { draws, selectedDraw } from './draws.js';
 import { rewards } from './rewards.js';
+import { earns } from './earns.js';
 
 
 const rootReducer = combineReducers({
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
 	draws,
 	selectedDraw,
 	rewards,
+	earns,
 
 	// Somewhat shaky:
 	partners,

@@ -1,4 +1,5 @@
 @import '../variables.scss';
+@import '../utils.scss';
 .earn-list-item {
   display: flex;
   align-items: center;
@@ -10,21 +11,23 @@
     background: $color-selection;
   }
 }
-$logo-sz: 55px;
-.earn-logo-cont {
-  width: $logo-sz;
-  height: $logo-sz;
-  margin: 0 10px 0 15px;
-  border-radius: 50%;
-  background: #fff;
+.earn-item-aside {
+  padding-left: 15px;
+  margin-right: 10px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  justify-content: flex-start;
+}
 
-  .earn-logo {
-    width: 45px;
-    height: auto;
+$image-sz: 5.5rem;
+.earn-item-image {
+  width: $image-sz;
+  height: $image-sz;
+  border-radius: 50%;
+  background: #fff;
+  @mixin center-image;
+  img {
+    max-height: 102%; /* hack to fix cut circle edges*/
   }
 }
 .earn-details {
