@@ -39,9 +39,15 @@ class DrawContainer extends Component {
 	componentDidMount() {
 		const { drawItem: { prizeTitle }} = this.props;
 
-		this.context.updateHeader({
-			title: prizeTitle
-		});
+		this.context.updateHeader({title: prizeTitle});
+	}
+
+	componentWillReceiveProps({ drawItem: { prizeTitle: nextPrizeTitle } }) {
+		const { drawItem: { prizeTitle }} = this.props;
+
+		if (prizeTitle !== nextPrizeTitle) {
+			this.context.updateHeader({title: nextPrizeTitle});
+		}
 	}
 
 	nextView(view) {
@@ -58,7 +64,8 @@ class DrawContainer extends Component {
 				.then(() => {
 					this.nextView('success');
 				})
-				.catch(() => {});
+				.catch(() => {
+				});
 		}
 	}
 
@@ -69,7 +76,8 @@ class DrawContainer extends Component {
 			.then(() => {
 				this.nextView('success');
 			})
-			.catch(() => {});
+			.catch(() => {
+			});
 	}
 
 	render() {

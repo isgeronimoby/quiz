@@ -22,8 +22,8 @@ class Draw extends Component {
 		const { params: { drawId }, fetchProfile, fetchDraws, selectDraw } = this.props;
 
 		fetchProfile(); // need points for bet
-		await fetchDraws(); // have data in list only
 		selectDraw(drawId);
+		fetchDraws(); // have data in list only
 	}
 
 	render() {
@@ -44,6 +44,7 @@ class Draw extends Component {
 //
 const mapStateToProps = (state) => {
 	const selectedDrawItem = state.draws.list.find(({ drawId }) => drawId === state.selectedDrawId);
+
 	return {
 		drawItem: selectedDrawItem || {isFetching: true},
 	};
