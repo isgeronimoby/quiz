@@ -2,22 +2,22 @@
 DGW.main.methods.showWidget = function(){
     DGW.helpers.zeroTimeout(function(){ DGW.main.shown = true; }); // Fixing IE button click
     DGW.helpers.removeClass(DGW.main.elements.widget, 'hiding');
-    DGW.helpers.addClass(DGW.global.elements.documentBody, 'dg-o-w-body-fixed');
     DGW.global.elements.documentBody.appendChild(DGW.main.elements.widget);
     if (DGW.main.currentState === '') {
         DGW.main.methods.changeMainState('earn');
     } else {
         DGW.main.methods.changeMainState(DGW.main.currentState);
     }
+    DGW.main.methods.pageBodyLock();
 };
 DGW.main.methods.hideWidget = function(){
     DGW.helpers.zeroTimeout(function(){ DGW.main.shown = false; });
     DGW.helpers.addClass(DGW.main.elements.widget, 'hiding');
     setTimeout(function(){
         DGW.global.elements.documentBody.removeChild(DGW.main.elements.widget);
-        DGW.helpers.removeClass(DGW.global.elements.documentBody, 'dg-o-w-body-fixed');
         ga(DGW.global.gaSend, 'pageview', 'Holder page');
     }, 310);
+    DGW.main.methods.pageBodyUnlock();
 };
 
 DGW.main.methods.loadingStarted = function(){
@@ -122,4 +122,11 @@ DGW.main.methods.showNotificationBar = function(type){
 DGW.main.methods.hideNotificationBar = function(){
     DGW.helpers.removeClass(DGW.main.elements.pages.notificationHolder, 'success');
     DGW.helpers.removeClass(DGW.main.elements.pages.notificationHolder, 'error');
+};
+
+DGW.main.methods.pageBodyLock = function(){
+    DGW.helpers.addClass(DGW.global.elements.documentBody, 'dg-o-w-body-fixed');
+};
+DGW.main.methods.pageBodyUnlock = function(){
+    DGW.helpers.removeClass(DGW.global.elements.documentBody, 'dg-o-w-body-fixed');
 };
