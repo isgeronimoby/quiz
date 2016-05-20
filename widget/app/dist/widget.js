@@ -554,6 +554,11 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             endpoint = 'friend/declinefriendrequest';
             requestBody = JSON.stringify(requestBody);
             break;
+        case 'friendSearch':
+            method = 'POST';
+            endpoint = 'friend/findusers';
+            requestBody = JSON.stringify(requestBody);
+            break;
         default:
             DGW.helpers.console.log('Api default occured');
     }
@@ -1095,6 +1100,20 @@ DGW.global.api.requests.friendRequestDecline = function(userId, onSuccess, onErr
         }
     }, {
         UserId: userId
+    });
+};
+
+DGW.global.api.requests.friendSearch = function(queryString, onSuccess, onError){
+    DGW.global.api.generic('friendSearch', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('friendSearch ', result.data);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            DGW.helpers.console.error('friendSearch ', result.error);
+            if (onError) onError(result.error);
+        }
+    }, {
+        Keywords: [queryString]
     });
 };
 DGW.helpers.addClass = function(obj, className){
