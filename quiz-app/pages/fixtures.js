@@ -21,7 +21,7 @@ class Fixtures extends Component {
 		const { fetchFixtures, fetchProfile, fetchPlayedFixtures } = this.props;
 		try {
 			fetchFixtures();
-			await fetchProfile();
+			fetchProfile();
 			fetchPlayedFixtures();
 		} catch (e) {
 			//nothing
@@ -29,8 +29,8 @@ class Fixtures extends Component {
 	}
 
 	componentWillReceiveProps({isLoggedIn}) {
-		const authorized = !this.props.isLoggedIn && isLoggedIn;
-		if (authorized) {
+		const loginOrLogout = this.props.isLoggedIn !== isLoggedIn;
+		if (loginOrLogout) {
 			this.props.fetchPlayedFixtures();
 		}
 	}
