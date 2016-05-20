@@ -228,6 +228,9 @@
 #dg-o-w #dg-o-w-wrapper .dg-o-w-forms.success .success-message {
   display: block;
 }
+#dg-o-w #dg-o-w-wrapper .page-animation {
+  animation: dg-o-w-slide-left-in 0.3s ease 0s 1 forwards;
+}
 #dg-o-w #dg-o-w-wrapper .dg-o-w-arrow {
   display: inline-block;
   width: 32px;
@@ -1352,6 +1355,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  animation: dg-o-w-slide-left-in 0.3s ease 0s 1 forwards;
   -webkit-transition: top 0.3s ease, bottom 0.3s ease;
   transition: top 0.3s ease, bottom 0.3s ease;
 }
@@ -2017,6 +2021,7 @@
   position: relative;
   margin: 0 25px;
   overflow: hidden;
+  animation: dg-o-w-slide-left-in 0.3s ease 0s 1 forwards;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-profile .dg-o-w-profile-name {
   margin-bottom: 10px;
@@ -2158,6 +2163,7 @@
   top: 0;
   -webkit-transition: top 0.3s ease;
   transition: top 0.3s ease;
+  animation: dg-o-w-slide-left-in 0.3s ease 0s 1 forwards;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-activities.collapsed {
   top: -145px;
@@ -2235,6 +2241,7 @@
   background: #ededed;
   overflow: hidden;
   z-index: 5;
+  animation: dg-o-w-slide-left-in 0.3s ease 0s 1 forwards;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-badge-single-page.missed-badges .dg-o-w-badge-single li {
   display: block;

@@ -321,8 +321,9 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
                 elem: li.querySelector('.dg-o-w-draw-countdown')
             });
 
-            li.addEventListener('click', function () {
-                DGW.main.methods.singleDrawConstructor(draw.DrawId);
+            li.addEventListener('click', function() {
+                if (DGW.global.authorized || !activeDraw) DGW.main.methods.singleDrawConstructor(draw.DrawId);
+                else DGW.main.methods.headerLoginShow('Please, enter to play the draw');
             });
 
             drawsList.appendChild(li);
@@ -611,6 +612,12 @@ DGW.main.methods.activitiesConstructor = function(activities){
                     break;
                 case 'CommissionConfirmed':
                     message += ' for making a great purchase';
+                    break;
+                case 'MatchQuizFacebookShare':
+                    message += ' for sharing Score Predictor results on Facebook';
+                    break;
+                case 'MatchQuizTwitterShare':
+                    message += ' for sharing Score Predictor results on Twitter';
                     break;
                 default:
             }

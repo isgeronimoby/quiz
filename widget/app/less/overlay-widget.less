@@ -224,6 +224,10 @@
 
 		}
 
+		.page-animation {
+			animation: dg-o-w-slide-left-in 0.3s ease 0s 1 forwards;
+		}
+
 		.dg-o-w-arrow {
 			display: inline-block;
 			width: 32px;
@@ -1434,6 +1438,7 @@
 						left: 0;
 						right: 0;
 						bottom: 0;
+						.page-animation;
 
 						transition: top 0.3s ease, bottom 0.3s ease;
 
@@ -2166,6 +2171,7 @@
 						position: relative;
 						margin: 0 25px;
 						overflow: hidden;
+						.page-animation;
 
 						.dg-o-w-profile-name {
 							margin-bottom: 10px;
@@ -2324,6 +2330,7 @@
 						height: @dg-widget-overlay-activities-slider-height;
 						top: 0;
 						transition: top 0.3s ease;
+						.page-animation;
 
 						&.collapsed {
 							top: -@dg-widget-overlay-activities-slider-height
@@ -2415,6 +2422,7 @@
 						background: @color-grey-light;
 						overflow: hidden;
 						z-index: 5;
+						.page-animation;
 
 						&.missed-badges {
 							.dg-o-w-badge-single {
