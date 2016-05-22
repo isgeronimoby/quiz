@@ -51,10 +51,10 @@ class QuizScoreControls extends Component {
 
 	render() {
 		const { info, teamNames } = this.props;
-		const { currentTeam } = this.state;
+		const { currentTeam, scores } = this.state;
 		const title = <span>Select a score<br/>for {currentTeam}</span>;
 		const [ teamBtn1, teamBtn2 ] = teamNames.map((name, i) => {
-			const score = this.state.scores[name];
+			const score = scores[name];
 			const scoreLabel = (score === undefined) ? '?' : score;
 			const touchedClass = (name === currentTeam) ? 'touched' : '';
 			const selectedClass = (score !== undefined) ? 'selected' : '';
@@ -68,10 +68,16 @@ class QuizScoreControls extends Component {
 				</div>
 			);
 		});
+		const otherTeam = teamNames.find(name => name !== currentTeam);
+		const otherTeamScore = scores[otherTeam] || 0;
+		const maxAllowedScore = 9 - otherTeamScore; // Max sum is 9
 		const scoreBtns = [...Array(10).keys()].map(i => {
+			const isDisabled = (i > maxAllowedScore);
+			const disabledClass = isDisabled ? 'disabled' : '';
+			const onClick = !isDisabled ? () => this.selectScore(i) : ()=> {};
 			return (
 				<div key={`btn-${i}`} className="score-btn-col">
-					<div className="score-btn" onClick={() => this.selectScore(i)}>{ i }</div>
+					<div className={ "score-btn " + disabledClass } onClick={ onClick }>{ i }</div>
 				</div>
 			);
 		});
