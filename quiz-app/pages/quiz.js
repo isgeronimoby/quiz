@@ -21,6 +21,7 @@ class Quiz extends Component {
 	static propTypes = {
 		params: PropTypes.object.isRequired,
 		// from store
+		isLoggedIn: PropTypes.bool.isRequired,
 		isFetching: PropTypes.bool.isRequired,
 		fixtureItem: PropTypes.object,
 		questionData: PropTypes.object,
@@ -46,14 +47,27 @@ class Quiz extends Component {
 	}
 
 	async componentDidMount() {
-		const { params: { matchId }, fetchProfile, fetchFixtures, fetchPlayedFixtures, fetchQuiz, selectQuiz } = this.props;
+		const { params: { matchId }, fetchFixtures, fetchQuiz, selectQuiz } = this.props;
 
 		selectQuiz(matchId); // first select, then fetch
 		fetchQuiz(matchId);
 		fetchFixtures(); // for fixtureItem
+		this.fetchPrivateData();
+	}
+
+	componentWillReceiveProps({ isLoggedIn }) {
+		const { isLoggedIn: wasLoggedIn } = this.props;
+		const justAuthorized = !wasLoggedIn && isLoggedIn;
+		if (justAuthorized) {
+			this.fetchPrivateData()
+		}
+	}
+
+	fetchPrivateData() {
+		const { fetchProfile, fetchPlayedFixtures } = this.props;
 		try {
 			fetchProfile(); // need points for bet, etc
-			await fetchPlayedFixtures(); // for fixtureItem
+			fetchPlayedFixtures(); // for fixtureItem
 		} catch (e) {
 			//nothing
 		}
@@ -135,6 +149,7 @@ const mapStateToProps = (state) => {
 	const fixtureItem = state.fixtures.list.find(f => f.matchId === state.selectedMatchId) || {};
 
 	return {
+		isLoggedIn: state.auth.isLoggedIn,
 		...quiz,
 		fixtureItem,
 	};

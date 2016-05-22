@@ -34,11 +34,11 @@ class Index extends Component {
 		} catch (e) {
 			//nothing
 		}
-		setTimeout(() => this.visitFirstNotPlayedQuizOrList(), MIN_DELAY);
+		setTimeout(() => this.visitFirstPlayableQuizOrList(), MIN_DELAY);
 	}
 
-	visitFirstNotPlayedQuizOrList() {
-		const firstNotPlayedQuiz = this.props.fixtureList.find(({ betAmount }) => !betAmount);
+	visitFirstPlayableQuizOrList() {
+		const firstNotPlayedQuiz = this.props.fixtureList.find(({ isOpenForBetting, betAmount }) => isOpenForBetting && !betAmount);
 
 		if (firstNotPlayedQuiz) {
 			goToQuizPage(firstNotPlayedQuiz.matchId);
