@@ -10,22 +10,45 @@ class FixtureListItem extends Component {
 		fixtureItem: PropTypes.object.isRequired,
 	};
 
+	getItemClass({ isOpenForBetting, isWinner }) {
+		if (isWinner) {
+			return 'has-finished is-winner';
+		} else if (!isOpenForBetting) {
+			return 'has-finished';
+		}
+		return '';
+	}
 
 	render() {
-		const { fixtureItem } = this.props;
-		const { matchId, teamHome, teamAway, startDate, betAmount } = fixtureItem;
-		const { header } = this.props;
+		const { fixtureItem, header } = this.props;
+		const { matchId, teamHome, teamAway, startDate, betAmount, isOpenForBetting, isEnded, isWinner, wonAmount } = fixtureItem;
+		const itemClass = this.getItemClass(fixtureItem);
 		const headerClass = !header ? 'is-collapsed' : '';
 		const title = `${teamHome} vs ${teamAway}`;
-		const subTitle = moment.utc(startDate).format('HH:mm');
+		const timeStr = moment.utc(startDate).format('HH:mm');
+		const isPending = !isOpenForBetting && !isEnded;
 		const teamHomeIcon = require(`../../static/images/team-${teamHome}.svg`);
 		const teamAwayIcon = require(`../../static/images/team-${teamAway}.svg`);
-		const betLabelText = `You bet ${betAmount} point${betAmount > 1 ? 's' : ''}`;
 
-		let betLabel = '';
+		let subTitle = timeStr;
+		if (isPending) {
+			subTitle += ' - in progress';
+		} else if (isEnded) {
+			subTitle = `Finished ${ moment.utc(startDate).fromNow() }`;
+		}
+
+		let betLabel = ''; // TODO - need wonAmount?
 		if (betAmount) {
 			betLabel = (
-				<div className="list-label green">{ betLabelText }</div>
+				<div className="list-label green">
+					{ `You bet ${betAmount} point${betAmount > 1 ? 's' : ''}` }
+				</div>
+			);
+		}
+		let wonLabel = '';
+		if (isWinner) {
+			wonLabel = (
+				<div className="list-label winner">You won!</div>
 			)
 		}
 
@@ -35,7 +58,7 @@ class FixtureListItem extends Component {
 					<h5>{ header }</h5>
 				</div>
 
-				<Link className="fixture-item-body" to="./quiz" query={ {matchId} }>
+				<Link className={ "fixture-item-body " + itemClass } to="./quiz" query={ {matchId} }>
 					<div className="fixture-item-team-icons">
 						<div className="fixture-item-team">
 							<img src={ teamHomeIcon }/>
@@ -47,7 +70,10 @@ class FixtureListItem extends Component {
 					<div className="fixture-item-content">
 						<h3 className="list-title">{ title }</h3>
 						<h5 className="list-meta">{ subTitle }</h5>
-						{ betLabel }
+						<div className="list-label-cont">
+							{ betLabel }
+							{ wonLabel }
+						</div>
 					</div>
 					<div className="list-item-arrow">
 						<img src={require('../../static/images/arrow-right-grey.svg')}/>

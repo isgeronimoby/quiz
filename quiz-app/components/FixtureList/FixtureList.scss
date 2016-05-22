@@ -35,9 +35,11 @@
     border-bottom: 1px solid $color-grey-opaque;
   }
 
-  &.completed {
-    background: $color-selection;
-    pointer-events: none;
+  &.has-finished {
+    background: $color-grey-opaque;
+    &.is-winner {
+      background: $color-winner-opaque;
+    }
   }
 
   .fixture-item-team-icons {

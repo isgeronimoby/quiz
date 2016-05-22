@@ -25,12 +25,16 @@ function fetchFixturesSuccess(json) {
 			StartDate: startDate,
 			HomeTeam: teamHome,
 			AwayTeam: teamAway,
+			IsOpenForBetting: isOpenForBetting,
+			IsEnded: isEnded
 			}) => {
 			return {
 				matchId,
 				startDate,
 				teamHome,
 				teamAway,
+				isOpenForBetting,
+				isEnded
 			}
 		}),
 		receivedAt: Date.now()
@@ -95,12 +99,14 @@ function fetchPlayedFixturesSuccess(json) {
 			MatchId: matchId,
 			BetAmount: betAmount,
 			IsWinner: isWinner,
+			WonAmount: wonAmount,
 			Answers
 			}) => {
 			return {
 				matchId,
 				betAmount,
 				isWinner,
+				wonAmount,
 				answers: Answers.map(({ OutcomeId: outcomeId, QuestionId: questionId }) => {
 					return {
 						outcomeId,

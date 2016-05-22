@@ -92,8 +92,12 @@ Lists
   color: $color-grey;
   text-transform: uppercase;
 }
+.list-label-cont {
+  margin-right: -40px; /*Let it go to right edge*/
+}
 .list-label {
   display: inline-block;
+  margin-right: 5px;
   font-size: 1rem;
   line-height: 1.7; /* 17/10 */
   padding: 0 7px;

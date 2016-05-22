@@ -6,7 +6,7 @@ import './QuizSummaryPlayed.scss';
 
 
 function getSummary(questionList, teamNames, answers) {
-	return questionList.reduce((acc, questionData, i) => {
+	return questionList.reduce((acc, questionData) => {
 		const { outcomeId } = answers.find(({ questionId })=> questionId === questionData.QuestionId);
 		switch (questionData.Type) {
 			case 'FirstHalfResult':
@@ -45,8 +45,11 @@ class QuizSummaryPlayed extends Component {
 		teamNames: PropTypes.array.isRequired,
 		betAmount: PropTypes.number.isRequired,
 		isWinner: PropTypes.bool.isRequired,
+		isEnded: PropTypes.bool.isRequired,
 		answers: PropTypes.array.isRequired,
 		odds: PropTypes.number.isRequired,
+		maxWonOdds: PropTypes.number.isRequired,
+		maxWonPoints: PropTypes.number.isRequired,
 		fetchOdds: PropTypes.func.isRequired,
 	};
 
@@ -55,13 +58,10 @@ class QuizSummaryPlayed extends Component {
 		this.props.fetchOdds(answersArr);
 	}
 
-	render() {
-		const { matchId, info, questionList, teamNames, betAmount, isWinner, answers, odds } = this.props;
-		const { score, winner, halfTimeWinner, firstGoalScorer} = getSummary(questionList, teamNames, answers);
 
-		const [teamHome, teamAway] = teamNames;
-		const {scoreHome, scoreAway} = score;
-		const scoreStr = `${scoreHome}:${scoreAway}`;
+	renderChoiceItems() {
+		const { questionList, teamNames, answers } = this.props;
+		const { score, winner, halfTimeWinner, firstGoalScorer} = getSummary(questionList, teamNames, answers);
 		const choiceData = [
 			{
 				title: 'Winner of the match',
@@ -88,25 +88,48 @@ class QuizSummaryPlayed extends Component {
 			);
 		});
 
+		return {
+			score,
+			choiceItems,
+		};
+	}
+
+	renderGreyBtn(scoreStr) {
+		const { isEnded, isWinner, betAmount, odds, maxWonOdds, maxWonPoints } = this.props;
 		const oddsList = [odds, 1];
 		const oddsStr = oddsList.join('-');
 		const winAmount = betAmount * odds;
-		let greyBtn;
-		if (!isWinner) {
-			greyBtn = (
-				<div className="big-btn grey-btn">
-					{ `You bet ${betAmount} pts` }<br/>
-					<span className="btn-text-sm">{ `Odds: ${oddsStr}  win ${winAmount} pts` }</span>
-				</div>
-			);
+		let title = '';
+		let subText = '';
+
+		if (isEnded) {
+			title = `Match ended ${scoreStr}`;
+			if (isWinner) {
+				subText = `Your bet: ${betAmount}  You won: ${winAmount} pts`;
+			} else {
+				subText = `Odds: ${maxWonOdds}  Max won ${maxWonPoints} pts`;
+			}
 		} else {
-			greyBtn = (
-				<div className="big-btn grey-btn">
-					You won!<br/>
-					<span className="btn-text-sm">{ `Your bet: ${betAmount}  You won: ${winAmount} pts` }</span>
-				</div>
-			);
+			title = `You bet ${betAmount} pts`;
+			subText = `Odds: ${oddsStr}  win ${winAmount} pts`;
 		}
+
+		return (
+			<div className="big-btn grey-btn">
+				{ title }<br/>
+				<span className="btn-text-sm">{ subText }</span>
+			</div>
+		);
+	}
+
+
+	render() {
+		const { matchId, info, teamNames } = this.props;
+		const { score, choiceItems } = this.renderChoiceItems();
+		const [ teamHome, teamAway ] = teamNames;
+		const { scoreHome, scoreAway } = score;
+		const scoreStr = `${scoreHome}:${scoreAway}`;
+		const greyBtn = this.renderGreyBtn(scoreStr);
 
 		return (
 			<div className="quiz-content summary-played">

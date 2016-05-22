@@ -7,6 +7,7 @@ import { Fetching } from '../components/Layout';
 import withWelcome from '../components/withWelcome';
 import QuizContainer from '../components/QuizContainer';
 import QuizSummaryPlayed from '../components/QuizSummaryPlayed';
+import QuizSummaryNotPlayed from '../components/QuizSummaryNotPlayed';
 
 function goToFixturesPage() {
 	Location.push({pathname: './fixtures'});
@@ -38,7 +39,7 @@ class Quiz extends Component {
 	componentWillMount() {
 		const { params } = this.props;
 
-		// Url copy-paste is not supported
+		// Url without matchId is not supported
 		if (!params || !params.matchId) {
 			goToFixturesPage();
 		}
@@ -63,7 +64,7 @@ class Quiz extends Component {
 			params: { matchId },
 			isFetching,
 			fixtureItem,
-			questionData: { startDate, teamHome, teamAway, questionList} = {},
+			questionData: { startDate, teamHome, teamAway, isOpenForBetting, isEnded, maxWonOdds, maxWonPoints, questionList} = {},
 			isValidating,
 			odds,
 			invalidOutcomes,
@@ -78,6 +79,19 @@ class Quiz extends Component {
 			return <Fetching/>;
 		}
 
+		if (!isOpenForBetting && !isPlayed) {
+			return (
+				<QuizSummaryNotPlayed
+					matchId={ matchId }
+					info={ info }
+					teamNames={ [teamHome, teamAway] }
+					questionList={ questionList }
+					maxWonOdds={ maxWonOdds }
+					maxWonPoints={ maxWonPoints }
+				/>
+			);
+		}
+
 		if (isPlayed) {
 			return (
 				<QuizSummaryPlayed
@@ -87,8 +101,11 @@ class Quiz extends Component {
 					questionList={ questionList }
 					betAmount={ betAmount }
 					isWinner={ isWinner }
+					isEnded={ isEnded }
 					answers={ answers }
 					odds={ odds }
+					maxWonOdds={ maxWonOdds }
+					maxWonPoints={ maxWonPoints }
 					fetchOdds={ _fetchOdds }
 				/>
 			);

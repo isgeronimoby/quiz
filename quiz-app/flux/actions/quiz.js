@@ -31,6 +31,10 @@ function fetchQuizSuccess(matchId, {
 	StartDate: startDate,
 	HomeTeam: teamHome,
 	AwayTeam: teamAway,
+	IsOpenForBetting: isOpenForBetting,
+	IsEnded: isEnded,
+	MaxWon: maxWonPoints,
+	WinOdds: maxWonOdds,
 	Questions: questionList,
 	}) {
 	return {
@@ -40,6 +44,10 @@ function fetchQuizSuccess(matchId, {
 			startDate,
 			teamHome,
 			teamAway,
+			isOpenForBetting,
+			isEnded,
+			maxWonPoints,
+			maxWonOdds,
 			questionList,
 		},
 		receivedAt: Date.now()
