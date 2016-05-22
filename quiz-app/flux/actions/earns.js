@@ -176,6 +176,8 @@ export function startEarnSharingFacebook(earnId, customData) {
 		const url = `${apiPrefix}Offer/FacebookShare?api_key=${apiKey}&OfferId=${ encodeURIComponent(earnId) }`;
 		const title = 'Facebook';
 
+		//console.log('>>[%s]', url);
+
 		popup.open({url, title}, () => {
 			dispatch(fetchProfile());
 			dispatch(fetchPlayedEarns());

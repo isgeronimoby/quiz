@@ -6,10 +6,10 @@ export const FETCH_REWARDS = 'FETCH_REWARDS';
 export const FETCH_REWARDS_SUCCESS = 'FETCH_REWARDS_SUCCESS';
 export const FETCH_REWARDS_ERROR = 'FETCH_REWARDS_ERROR';
 
-const REWARD_FACEBOOK_SHARE_TYPE = 'MatchQuizFacebookShare';
+const REWARD_FACEBOOK_SHARE_TYPE = 'FacebookShare';
 //const REWARD_FACEBOOK_SHARE_ID = 8;
-const REWARD_TWITTER_SHARE_TYPE = 'MatchQuizTwitterShare';
-const REWARD_TWITTER_SHARE_ID = 9;
+const REWARD_TWITTER_SHARE_TYPE = 'TwitterShare';
+const REWARD_TWITTER_SHARE_ID = 5;
 
 const popup = new Window();
 
@@ -100,7 +100,10 @@ export function startSharingFacebook(matchId) {
 		const url = `${apiPrefix}rewardedaction/facebookshare?api_key=${apiKey}&shareurl=${ encodeURIComponent(sharedUrl) }`;
 		const title = 'Facebook';
 
+		//console.log('>>[%s]', url);
+
 		popup.open({url, title}, () => {
+			dispatch(fetchRewards());
 			dispatch(fetchProfile());
 		});
 	};
