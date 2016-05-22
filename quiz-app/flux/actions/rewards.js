@@ -96,7 +96,7 @@ function postTrackRewards(typeId) {
 export function startSharingFacebook(matchId) {
 	return (dispatch) => {
 		const { origin } = document.location;
-		const sharedUrl = 'http://google.com'; //`${origin}/quiz?matchId=${matchId}`;
+		const sharedUrl = `${origin}/quiz?matchId=${matchId}`;
 		const url = `${apiPrefix}rewardedaction/facebookshare?api_key=${apiKey}&shareurl=${ encodeURIComponent(sharedUrl) }`;
 		const title = 'Facebook';
 
