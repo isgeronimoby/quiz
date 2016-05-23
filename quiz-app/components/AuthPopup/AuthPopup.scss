@@ -41,6 +41,15 @@ Popup
     margin: 25px 0 0;
   }
 }
+@media (max-height: 440px) {
+  /*Fix FAN-2275*/
+  .auth-popup.signup {
+    padding-top: 20px;
+    .auth-icon {
+      display: none;
+    }
+  }
+}
 $icon-sz: 55px;
 .auth-icon {
   position: absolute;

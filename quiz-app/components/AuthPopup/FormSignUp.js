@@ -46,7 +46,7 @@ class FormSignIn extends Component {
 		const onSubmit = () => this.handleSubmit();
 
 		return (
-			<div className="auth-popup">
+			<div className="auth-popup signup">
 				<div className="auth-icon">
 					<img src={ require('./images/icon-ball-lg.svg') }/>
 				</div>
