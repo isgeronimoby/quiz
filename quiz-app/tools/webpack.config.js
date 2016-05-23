@@ -58,7 +58,7 @@ const common = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			title: 'Quizz app',
+			title: 'Score Predictor',
 			template: 'components/index.html',
 			inject: 'body'
 		}),
@@ -92,7 +92,7 @@ const common = {
 			},
 			{
 				test: /\.scss$/,
-				loaders: ['style-loader', 'css-loader', 'postcss-loader'],
+				loaders: ['style-loader', 'css-loader?-autoprefixer', 'postcss-loader'],
 			},
 		],
 		noParse: [
@@ -100,15 +100,11 @@ const common = {
 			//path.join(__dirname, './lib/easyXDM.min.js'),
 		]
 	},
-	postcss: function plugins() {
+	postcss(bundler) {
 		return [
-			require('postcss-import')({
-				onImport: files => files.forEach(this.addDependency),
-			}),
+			require('postcss-import')({ addDependencyTo: bundler }),
 			require('precss')(),
-			require('autoprefixer')({
-				browsers: AUTOPREFIXER_BROWSERS
-			}),
+			require('autoprefixer')({ browsers: AUTOPREFIXER_BROWSERS, cascade: false, remove: false })
 		];
 	},
 };
@@ -134,8 +130,8 @@ if (/build|build-prod|deploy/.test(NPM_SCRIPT)) {
 					warnings: VERBOSE
 				}
 			}),
-			//new webpack.optimize.AggressiveMergingPlugin(),
-			new webpack.optimize.LimitChunkCountPlugin({maxChunks: 1}), // TODO - figure out relative chunk paths
+			new webpack.optimize.AggressiveMergingPlugin(),
+			new webpack.optimize.LimitChunkCountPlugin({maxChunks: 6})
 		],
 		module: {
 			loaders: [
