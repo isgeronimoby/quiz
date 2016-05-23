@@ -23,7 +23,7 @@ class ForgotPwdSuccess extends Component {
 		return (
 			<div className="auth-popup" onClick={ onClick }>
 				<div className="auth-icon">
-					<img src={ require('./images/icon-ball-lg.svg') }/>
+					<img src={ require('../../static/images/icon-ball-lg.svg') }/>
 				</div>
 
 				<div className="icon-success">
