@@ -105,9 +105,7 @@ DGW.main.methods.changeMainState = function(state){
 
     }
 
-    Array.prototype.slice.call(DGW.main.elements.widgetContent.querySelectorAll('.avatar')).forEach(function(img){
-        img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
-    });
+    DGW.helpers.hideFramedSrc();
 
     DGW.main.methods.hideNotificationBar();
 
@@ -120,11 +118,6 @@ DGW.main.methods.initEvents = function () {
     DGW.main.methods.fillDefaultValues();
 
 // Login header
-    // filling avatar images with default pictures
-    Array.prototype.slice.call(DGW.main.elements.widget.querySelectorAll('.avatar')).forEach(function(img){
-        img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
-    });
-
     // handling close button
     DGW.main.elements.widget.querySelector('.dg-o-w-close').addEventListener('click', DGW.main.methods.hideWidget);
 
@@ -149,23 +142,6 @@ DGW.main.methods.initEvents = function () {
 
 //Widget internal links
     DGW.helpers.openDataLinks(Array.prototype.slice.call(DGW.main.elements.widgetBody.querySelectorAll('[data-link]')));
-
-//Notification clicks
-    DGW.main.elements.pages.notificationHolder.querySelector('.dg-o-w-notification-close').addEventListener('click', function(){
-        DGW.main.methods.hideNotificationBar();
-    });
-
-//Frame/iframe holder back button init
-    DGW.main.elements.frameHolder.querySelector('.dg-o-w-back-btn').addEventListener('click', function(){
-        var fh = DGW.main.elements.frameHolder,
-            wb = DGW.main.elements.widgetBodyWrapper;
-        DGW.helpers.addClass(fh, 'dg-o-w-hidden');
-        setTimeout(function(){
-            fh.querySelector('.dg-o-w-iframe-holder').innerHTML = '';
-            DGW.helpers.removeClass(fh, 'dg-o-w-hidden');
-            wb.removeChild(fh);
-        }, 300);
-    });
 };
 
 DGW.main.methods.resetStates = function(){

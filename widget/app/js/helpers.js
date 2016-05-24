@@ -309,9 +309,11 @@ DGW.helpers.openDataLinks = function(elems){
 
 };
 
-DGW.helpers.showFramedSrc = function(src){
+DGW.helpers.showFramedSrc = function(src, domEl){
     var h = DGW.main.elements.frameHolder,
         ih = h.querySelector('.dg-o-w-iframe-holder'),
+        sm = h.querySelector('.dg-o-w-submenu'),
+        bb = h.querySelector('.dg-o-w-back-btn'),
         wb = DGW.main.elements.widgetBodyWrapper;
     ih.innerHTML = '';
     var iframe = document.createElement('iframe');
@@ -320,10 +322,34 @@ DGW.helpers.showFramedSrc = function(src){
         DGW.main.methods.loadingFinished();
     };
     iframe.src = src;
+    if (sm.childNodes.length > 1) sm.removeChild(sm.childNodes[sm.childNodes.length - 1]);
+
+    if (domEl && domEl.nodeName) {
+        var rightSide = document.createElement('div');
+        rightSide.className = 'right-side';
+        rightSide.appendChild(domEl);
+        sm.appendChild(rightSide);
+    }
+
+    bb.addEventListener('click', DGW.helpers.hideFramedSrc);
 
     DGW.main.methods.hideNotificationBar();
     ih.appendChild(iframe);
     wb.appendChild(h);
+};
+
+DGW.helpers.hideFramedSrc = function(){
+    var fh = DGW.main.elements.frameHolder,
+        wb = DGW.main.elements.widgetBodyWrapper;
+
+    if (fh.parentNode == wb) {
+        DGW.helpers.addClass(fh, 'dg-o-w-hidden');
+        setTimeout(function () {
+            fh.querySelector('.dg-o-w-iframe-holder').innerHTML = '';
+            DGW.helpers.removeClass(fh, 'dg-o-w-hidden');
+            wb.removeChild(fh);
+        }, 300);
+    }
 };
 
 DGW.helpers.getElementsFromAllPlaces = function(selector, place){

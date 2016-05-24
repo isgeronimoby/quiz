@@ -1427,9 +1427,11 @@ DGW.helpers.openDataLinks = function(elems){
 
 };
 
-DGW.helpers.showFramedSrc = function(src){
+DGW.helpers.showFramedSrc = function(src, domEl){
     var h = DGW.main.elements.frameHolder,
         ih = h.querySelector('.dg-o-w-iframe-holder'),
+        sm = h.querySelector('.dg-o-w-submenu'),
+        bb = h.querySelector('.dg-o-w-back-btn'),
         wb = DGW.main.elements.widgetBodyWrapper;
     ih.innerHTML = '';
     var iframe = document.createElement('iframe');
@@ -1438,10 +1440,34 @@ DGW.helpers.showFramedSrc = function(src){
         DGW.main.methods.loadingFinished();
     };
     iframe.src = src;
+    if (sm.childNodes.length > 1) sm.removeChild(sm.childNodes[sm.childNodes.length - 1]);
+
+    if (domEl && domEl.nodeName) {
+        var rightSide = document.createElement('div');
+        rightSide.className = 'right-side';
+        rightSide.appendChild(domEl);
+        sm.appendChild(rightSide);
+    }
+
+    bb.addEventListener('click', DGW.helpers.hideFramedSrc);
 
     DGW.main.methods.hideNotificationBar();
     ih.appendChild(iframe);
     wb.appendChild(h);
+};
+
+DGW.helpers.hideFramedSrc = function(){
+    var fh = DGW.main.elements.frameHolder,
+        wb = DGW.main.elements.widgetBodyWrapper;
+
+    if (fh.parentNode == wb) {
+        DGW.helpers.addClass(fh, 'dg-o-w-hidden');
+        setTimeout(function () {
+            fh.querySelector('.dg-o-w-iframe-holder').innerHTML = '';
+            DGW.helpers.removeClass(fh, 'dg-o-w-hidden');
+            wb.removeChild(fh);
+        }, 300);
+    }
 };
 
 DGW.helpers.getElementsFromAllPlaces = function(selector, place){
@@ -1975,8 +2001,10 @@ DGW.global.methods.init = function(){
 };
 
 DGW.main.methods.showNotificationBar = function(type){
+    var nh = DGW.main.elements.pages.notificationHolder;
     if (!type) type = 'success';
-    DGW.helpers.addClass(DGW.main.elements.pages.notificationHolder, type);
+    DGW.helpers.addClass(nh, type);
+    nh.querySelector('.dg-o-w-notification-close').addEventListener('click', DGW.main.methods.hideNotificationBar);
 };
 
 DGW.main.methods.hideNotificationBar = function(){
@@ -2492,13 +2520,58 @@ DGW.main.methods.gamesConstructor = function(){
     var gamesList = dp.querySelector('.dg-o-w-list-draws');
     gamesList.innerHTML = '';
 
-    var emptyMessageEl = document.createElement('div');
-    DGW.helpers.addClass(emptyMessageEl, 'dg-o-w-draws-empty');
+    var games = [1];
 
-    if (dpCont.children.length > 1) dpCont.removeChild(dpCont.childNodes[1]);
+    //var emptyMessageEl = document.createElement('div');
+    //DGW.helpers.addClass(emptyMessageEl, 'dg-o-w-draws-empty');
+    //if (dpCont.children.length > 1) dpCont.removeChild(dpCont.childNodes[1]);
+    //emptyMessageEl.innerHTML = '<h2>Hi, we are glad to see you here, games will be available very soon!</h2></div>';
+    //dpCont.appendChild(emptyMessageEl);
 
-    emptyMessageEl.innerHTML = '<h2>Hi, we are glad to see you here, games will be available very soon!</h2></div>';
-    dpCont.appendChild(emptyMessageEl);
+
+
+
+
+    games.forEach(function(game){
+        var li = document.createElement('li');
+        li.innerHTML =  '<div class="dg-o-w-draw">' +
+                            '<div class="dg-o-w-draw-image-holder">' +
+                                '<img src="" data-image="temp-score-predictor-logo.png"/>' +
+                            '</div>' +
+                            '<div class="dg-o-w-draw-text">' +
+                                '<h2 class="dg-o-w-draw-countdown">Score predictor Game</h2>' +
+                                '<p>Make predictions for your favourite matches, earn tons of points</p>' +
+                            '</div>' +
+                        '</div>';
+
+        DGW.helpers.imagesResponsivePaths(li.querySelectorAll('img'));
+
+        var a = document.createElement('a');
+        a.href = 'http://spr-matchquiz-test.cloudapp.net/';
+        a.target = '_blank';
+        a.innerHTML = 'Open link in the new tab';
+
+        li.addEventListener('click', function(){DGW.helpers.showFramedSrc(a.href, a)});
+
+        gamesList.appendChild(li);
+    });
+
+    // TEMP PART
+    var li = document.createElement('li');
+    li.innerHTML =  '<div class="dg-o-w-draw">' +
+                        '<div class="dg-o-w-draw-image-holder">' +
+                            '<img src="" data-image="everton-bg.svg"/>' +
+                        '</div>' +
+                        '<div class="dg-o-w-draw-text">' +
+                            '<h2 class="dg-o-w-draw-countdown">More games coming soon</h2>' +
+                            '<p></p>' +
+                        '</div>' +
+                    '</div>';
+    li.style.opacity = 0.4;
+    li.style.cursor = 'default';
+
+    DGW.helpers.imagesResponsivePaths(li.querySelectorAll('img'));
+    gamesList.appendChild(li);
 };
 DGW.main.methods.drawsConstructor = function(cacheObj, _context){
     var dp = DGW.main.elements.pages.drawsMain;
@@ -3411,9 +3484,7 @@ DGW.main.methods.changeMainState = function(state){
 
     }
 
-    Array.prototype.slice.call(DGW.main.elements.widgetContent.querySelectorAll('.avatar')).forEach(function(img){
-        img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
-    });
+    DGW.helpers.hideFramedSrc();
 
     DGW.main.methods.hideNotificationBar();
 
@@ -3426,11 +3497,6 @@ DGW.main.methods.initEvents = function () {
     DGW.main.methods.fillDefaultValues();
 
 // Login header
-    // filling avatar images with default pictures
-    Array.prototype.slice.call(DGW.main.elements.widget.querySelectorAll('.avatar')).forEach(function(img){
-        img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
-    });
-
     // handling close button
     DGW.main.elements.widget.querySelector('.dg-o-w-close').addEventListener('click', DGW.main.methods.hideWidget);
 
@@ -3455,23 +3521,6 @@ DGW.main.methods.initEvents = function () {
 
 //Widget internal links
     DGW.helpers.openDataLinks(Array.prototype.slice.call(DGW.main.elements.widgetBody.querySelectorAll('[data-link]')));
-
-//Notification clicks
-    DGW.main.elements.pages.notificationHolder.querySelector('.dg-o-w-notification-close').addEventListener('click', function(){
-        DGW.main.methods.hideNotificationBar();
-    });
-
-//Frame/iframe holder back button init
-    DGW.main.elements.frameHolder.querySelector('.dg-o-w-back-btn').addEventListener('click', function(){
-        var fh = DGW.main.elements.frameHolder,
-            wb = DGW.main.elements.widgetBodyWrapper;
-        DGW.helpers.addClass(fh, 'dg-o-w-hidden');
-        setTimeout(function(){
-            fh.querySelector('.dg-o-w-iframe-holder').innerHTML = '';
-            DGW.helpers.removeClass(fh, 'dg-o-w-hidden');
-            wb.removeChild(fh);
-        }, 300);
-    });
 };
 
 DGW.main.methods.resetStates = function(){

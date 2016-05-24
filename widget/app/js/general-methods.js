@@ -115,8 +115,10 @@ DGW.global.methods.init = function(){
 };
 
 DGW.main.methods.showNotificationBar = function(type){
+    var nh = DGW.main.elements.pages.notificationHolder;
     if (!type) type = 'success';
-    DGW.helpers.addClass(DGW.main.elements.pages.notificationHolder, type);
+    DGW.helpers.addClass(nh, type);
+    nh.querySelector('.dg-o-w-notification-close').addEventListener('click', DGW.main.methods.hideNotificationBar);
 };
 
 DGW.main.methods.hideNotificationBar = function(){

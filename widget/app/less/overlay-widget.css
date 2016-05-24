@@ -363,6 +363,14 @@
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-frame-holder .dg-o-w-submenu .dg-o-w-back-btn:hover {
   border-bottom-color: #00309b;
 }
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-frame-holder .dg-o-w-submenu .right-side {
+  position: absolute;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  top: 50%;
+  right: 25px;
+  font-size: 13px;
+}
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-frame-holder .dg-o-w-iframe-holder {
   height: 100%;
   padding-bottom: 50px;
