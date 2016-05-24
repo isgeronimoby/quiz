@@ -45,7 +45,7 @@ class QuizBet extends Component {
 		const onBetClick = () => !disabledBet && onSubmitBet(betValue);
 
 		return (
-			<div className="quiz-content">
+			<div className="quiz-content bet">
 
 				<div className="bet-subtitle">How much you want to bet?</div>
 

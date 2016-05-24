@@ -1,6 +1,8 @@
 @import '../variables.scss';
 @import '../QuizSummary/summary.scss';
 .summary-played {
+  overflow-y: auto;
+
   .team-score {
     background: $color-grey;
   }
