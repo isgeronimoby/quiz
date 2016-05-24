@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { postSignup, authWithFacebook } from '../../flux/actions';
+import { fetchRewardsNotLoggedIn, postSignup, authWithFacebook } from '../../flux/actions';
 import Button from '../Button';
 import { SeparatorOrError, TextInput, EmailInput, PasswordInput } from './Controls.js';
 
@@ -13,7 +13,13 @@ class FormSignIn extends Component {
 		isFetching: PropTypes.bool.isRequired,
 		postSignup: PropTypes.func.isRequired,
 		authWithFacebook: PropTypes.func.isRequired,
+		fetchRewardsNotLoggedIn: PropTypes.func.isRequired,
+		rewards: PropTypes.object.isRequired,
 	};
+
+	componentDidMount() {
+		this.props.fetchRewardsNotLoggedIn();
+	}
 
 	handleSubmit() {
 		const nameEl = this.refs['name-input'];
@@ -41,9 +47,12 @@ class FormSignIn extends Component {
 	}
 
 	render() {
-		const { onNavigate, error, authWithFacebook } = this.props;
+		const { onNavigate, error, authWithFacebook, rewards } = this.props;
 		const toSignup = () => onNavigate('login');
 		const onSubmit = () => this.handleSubmit();
+		const {
+			facebookConnect: {rewardPoints: facebookSignupPoints = 0} = {}
+			} = rewards;
 
 		return (
 			<div className="auth-popup signup">
@@ -53,7 +62,9 @@ class FormSignIn extends Component {
 
 				<div className="big-btn facebook-btn" onClick={ authWithFacebook }>SignUp with Facebook</div>
 				<div className="auth-p">
-					<div className="auth-text">and get <span className="text-brand">+10 points</span></div>
+					<div className="auth-text">
+						and get <span className="text-brand">{ `+${facebookSignupPoints} points` }</span>
+					</div>
 				</div>
 
 				<SeparatorOrError error={error} />
@@ -84,10 +95,12 @@ const mapStateToProps = (state) => {
 	return {
 		error: errors.signup || '',
 		isFetching: isFetching.signup || false,
+		rewards: state.rewards.map,
 	};
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
+		fetchRewardsNotLoggedIn: () => dispatch(fetchRewardsNotLoggedIn()),
 		postSignup: (data) => dispatch(postSignup(data)),
 		authWithFacebook: () => dispatch(authWithFacebook()),
 	};

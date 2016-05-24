@@ -7,7 +7,7 @@ export const FETCH_REWARDS_SUCCESS = 'FETCH_REWARDS_SUCCESS';
 export const FETCH_REWARDS_ERROR = 'FETCH_REWARDS_ERROR';
 
 const REWARD_FACEBOOK_SHARE_TYPE = 'FacebookShare';
-//const REWARD_FACEBOOK_SHARE_ID = 8;
+const REWARD_FACEBOOK_CONNECT_TYPE = 'FacebookConnect';
 const REWARD_TWITTER_SHARE_TYPE = 'TwitterShare';
 const REWARD_TWITTER_SHARE_ID = 5;
 
@@ -33,6 +33,14 @@ function fetchRewardsSuccess(json) {
 					return {
 						...acc,
 						facebookShare: {
+							rewardId,
+							rewardPoints
+						}
+					};
+				case REWARD_FACEBOOK_CONNECT_TYPE:
+					return {
+						...acc,
+						facebookConnect: {
 							rewardId,
 							rewardPoints
 						}
@@ -66,6 +74,21 @@ export function fetchRewards() {
 
 		return fetch({
 			endpoint: 'rewardedaction/getuseractions'
+		}).then((json) => {
+			dispatch(fetchRewardsSuccess(json));
+		}).catch(({ Message: error = 'Invalid'}) => {
+			dispatch(fetchRewardsError(error)); // TODO
+			//throw error;
+		});
+	};
+}
+
+export function fetchRewardsNotLoggedIn() {
+	return (dispatch) => {
+		dispatch(fetchRewardsStart());
+
+		return fetch({
+			endpoint: 'rewardedaction/getactions'
 		}).then((json) => {
 			dispatch(fetchRewardsSuccess(json));
 		}).catch(({ Message: error = 'Invalid'}) => {
