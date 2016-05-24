@@ -41,3 +41,13 @@ export function getNextDrawItem(drawList, selectedDrawId) {
 
 	return drawList[selectedDrawIdx + 1]; // first if idx === -1
 }
+
+
+export function findPublicPath() {
+	const appScript = document.getElementById('entry');
+	if (appScript) {
+		return appScript.src.substring(appScript.src.indexOf('/'), appScript.src.lastIndexOf('/') + 1);
+	} else {
+		return './';
+	}
+}

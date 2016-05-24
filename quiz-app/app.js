@@ -9,6 +9,7 @@ import rootReducer from './flux/reducers';
 import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
 import Location from './lib/Location';
 import Layout from './components/Layout';
+import { findPublicPath } from './lib/utils.js';
 
 const loggerMiddleware = createLogger();
 let store = createStore(
@@ -61,6 +62,9 @@ if (canUseDOM) {
 	} else {
 		window.attachEvent('onload', run);
 	}
+
+	// See http://webpack.github.io/docs/configuration.html#output-publicpath
+	__webpack_public_path__ = findPublicPath();
 }
 
 export default {route, routes};
