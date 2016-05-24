@@ -35,6 +35,7 @@ class DrawBet extends Component {
 			betError = ''
 			} = this.props;
 		const maxPoints = (demoPoints || points);
+		const minPoints = maxPoints > 0 ? 1 : 0;
 		let { betValue = maxPoints } = this.state;
 		betValue = Math.min(maxPoints, betValue);
 
@@ -66,10 +67,10 @@ class DrawBet extends Component {
 
 				<div className="bet-value">
 					<span className="bet-points">{ betValue }</span>
-					<span> points</span>
+					<span> { `point${ betValue === 1 ? '' : 's' }` }</span>
 				</div>
 
-				<Slider max={ maxPoints } value={ betValue } step={ 1 } onChange={ onChange }/>
+				<Slider min={ minPoints } max={ maxPoints } value={ betValue } step={ 1 } onChange={ onChange }/>
 
 				<div className={"bet-error " + errorClass}>{ betError }</div>
 

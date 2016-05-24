@@ -6,6 +6,7 @@ import './slider.scss';
 class Slider extends Component {
 
 	static propTypes = {
+		min: PropTypes.number.isRequired,
 		max: PropTypes.number.isRequired,
 		value: PropTypes.number.isRequired,
 		step: PropTypes.number,
@@ -15,17 +16,17 @@ class Slider extends Component {
 	_bodyEl = null;
 
 	getValueByOffset(pageX) {
-		const { max } = this.props;
+		const { min, max } = this.props;
 		const width = this._bodyEl.offsetWidth;
 		let offset = pageX - this._bodyEl.offsetLeft;
 		offset = Math.max(0, Math.min(width, offset));
 
-		return Math.floor(offset / width * max);
+		return min + Math.floor(offset / width * max);
 	}
 
 	getValueByDiff(diff) {
-		const { value, max } = this.props;
-		return Math.max(0, Math.min(max, value + diff))
+		const { value, min, max } = this.props;
+		return Math.max(min, Math.min(max, value + diff))
 	}
 
 	render() {
