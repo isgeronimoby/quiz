@@ -14,9 +14,15 @@ class DrawBetExit extends Component {
 
 		return (
 			<div className="draw-exit">
-				<Link className="big-image" to="./draw" query={ {drawId} }>
-					<img src={ prizeImageUrl }/>
-				</Link>
+				<div className="big-image-panel">
+					<div className="big-image">
+						<img src={ prizeImageUrl }/>
+					</div>
+
+					<Link className="big-btn money-btn" to="./draw" query={ {drawId} }>
+						Enter next draw
+					</Link>
+				</div>
 
 				<Link className="big-btn share-btn" to="./earn">
 					Earn more points
