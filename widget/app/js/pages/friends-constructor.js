@@ -2,6 +2,38 @@ DGW.main.methods.userListItemConstructor = function(users, group){
     'use strict';
     if (!users) return;
 
+    function createUserListAction (actionType) {
+        var action = document.createElement('div');
+        switch (actionType) {
+            case 'follow':
+                action.innerHTML = DGW.templates.userListActions.follow;
+                break;
+            case 'following':
+                action.innerHTML = DGW.templates.userListActions.following;
+                break;
+            case 'friends':
+                action.innerHTML = DGW.templates.userListActions.friends;
+                break;
+            case 'request':
+                action.innerHTML = DGW.templates.userListActions.request;
+                break;
+            case 'requestSent':
+                action.innerHTML = DGW.templates.userListActions.requestSent;
+                break;
+            case 'accept':
+                action.innerHTML = DGW.templates.userListActions.accept;
+                break;
+            case 'decline':
+                action.innerHTML = DGW.templates.userListActions.decline;
+                break;
+            default:
+                return action;
+        }
+
+        action = action.childNodes[0];
+        return action;
+    }
+
     var usersArray = [];
     users.forEach(function(userObj){
         var commonUsers = userObj.MutualFriends;
@@ -46,12 +78,12 @@ DGW.main.methods.userListItemConstructor = function(users, group){
 
         // Filling actions available with this user
         if (group === 'requestFrom') {
-            userActionsHolder.appendChild(DGW.helpers.createUserListAction('accept'));
-            userActionsHolder.appendChild(DGW.helpers.createUserListAction('decline'));
+            userActionsHolder.appendChild(createUserListAction('accept'));
+            userActionsHolder.appendChild(createUserListAction('decline'));
         } else if (group === 'friends') {
-            userActionsHolder.appendChild(DGW.helpers.createUserListAction('friends'));
+            userActionsHolder.appendChild(createUserListAction('friends'));
         } else if (group === 'requestTo') {
-            userActionsHolder.appendChild(DGW.helpers.createUserListAction('requestSent'));
+            userActionsHolder.appendChild(createUserListAction('requestSent'));
         }
 
         usersArray.push(li);

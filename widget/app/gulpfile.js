@@ -9,23 +9,59 @@ var gulp = require('gulp'),
 
 
 var scripts = [
+    // Creating DGW global object and initializing its parameters
     'js/init.js',
+
+    // Proxy object
     'js/easyXDM.min.js',
+
+    // 3rd party slider - should be changed
     'js/vanilla-slider.js',
+
+    // Server and cookie requests
     'js/requests.js',
+
+    // General helpers for the whole platform
     'js/helpers.js',
+
+    // Templates
     'js/templates-side.js',
     'js/templates.js',
+
+    // Initializing/creating main elements
     'js/dom-elements-side-init.js',
     'js/dom-elements-init.js',
-    'js/dom-elements-events.js',
+
+    // General events and methods
     'js/general-methods.js',
-    'js/offers-requests.js',
+
+    // Side widget event initializer
     'js/side-widget-events.js',
-    'js/page-events.js',
-    'js/fill-methods.js',
-    'js/pages/friends-constructor.js',
+
+    // Page specific event initializer
+    'js/pages/activities-events.js',
+    'js/pages/draws-events.js',
     'js/pages/friends-events.js',
+    'js/pages/login-events.js',
+    'js/pages/profile-events.js',
+
+    // Page specific constructors
+    'js/pages/activities-constructor.js',
+    'js/pages/games-constructor.js',
+    'js/pages/draws-constructor.js',
+    'js/pages/earn-constructor.js',
+    'js/pages/friends-constructor.js',
+    'js/pages/leaderboard-constructor.js',
+    'js/pages/profile-constructor.js',
+
+    // Common events and constructors
+    'js/page-events.js',
+    'js/page-constructors.js',
+
+    // Offers methods
+    'js/offers-requests.js',
+
+    // Launcher
     'js/launch.js'
 ];
 

@@ -1520,38 +1520,6 @@ DGW.helpers.gaCheckPut = function(name){
         }
     }
 };
-
-DGW.helpers.createUserListAction = function(actionType) {
-    var action = document.createElement('div');
-    switch (actionType) {
-        case 'follow':
-            action.innerHTML = DGW.templates.userListActions.follow;
-            break;
-        case 'following':
-            action.innerHTML = DGW.templates.userListActions.following;
-            break;
-        case 'friends':
-            action.innerHTML = DGW.templates.userListActions.friends;
-            break;
-        case 'request':
-            action.innerHTML = DGW.templates.userListActions.request;
-            break;
-        case 'requestSent':
-            action.innerHTML = DGW.templates.userListActions.requestSent;
-            break;
-        case 'accept':
-            action.innerHTML = DGW.templates.userListActions.accept;
-            break;
-        case 'decline':
-            action.innerHTML = DGW.templates.userListActions.decline;
-            break;
-        default:
-            return action;
-    }
-
-    action = action.childNodes[0];
-    return action;
-};
 DGW.templates.side.profileInfo ='<div class="dg-side-section">' +
                                     '<div class="dg-side-user-img-holder"><img data-userstats-userimage class="dg-o-w-side-image-floating" src=""/></div>' +
                                     '<div class="dg-side-collapsed dg-side-floating-text"><p><span data-userstats-points-c class="dg-o-w-points-text">00</span></p><h5>Earn more</h5></div>' +
@@ -1890,16 +1858,6 @@ DGW.main.elements.frameHolder = document.createElement('div');
 DGW.main.elements.frameHolder.className = 'dg-o-w-frame-holder';
 DGW.main.elements.frameHolder.innerHTML = '<div class="dg-o-w-submenu"><div class="dg-o-w-back-btn">&larr; Back</div></div>' +
                                           '<div class="dg-o-w-iframe-holder"></div>';
-DGW.main.elements.frameHolder.querySelector('.dg-o-w-back-btn').addEventListener('click', function(){
-    var fh = DGW.main.elements.frameHolder,
-        wb = DGW.main.elements.widgetBodyWrapper;
-    DGW.helpers.addClass(fh, 'dg-o-w-hidden');
-    setTimeout(function(){
-        fh.querySelector('.dg-o-w-iframe-holder').innerHTML = '';
-        DGW.helpers.removeClass(fh, 'dg-o-w-hidden');
-        wb.removeChild(fh);
-    }, 300);
-});
 // Main widget global methods
 DGW.main.methods.showWidget = function(){
     DGW.helpers.zeroTimeout(function(){ DGW.main.shown = true; }); // Fixing IE button click
@@ -2031,6 +1989,1569 @@ DGW.main.methods.pageBodyLock = function(){
 };
 DGW.main.methods.pageBodyUnlock = function(){
     DGW.helpers.removeClass(DGW.global.elements.documentBody, 'dg-o-w-body-fixed');
+};
+DGW.side.methods.initEvents = function(){
+    if (!DGW.global.launched) {
+        // Showing side widget
+        DGW.side.methods.showWidget();
+        DGW.global.launched = true;
+    }
+
+    var wBody = DGW.side.elements.widgetBody;
+    var cta = wBody.querySelector('.dg-side-click-holder');
+
+    wBody.removeEventListener('click', DGW.global.api.requests.safariFix);
+
+    if (cta) {
+        cta.addEventListener('click', function () {
+            if (cta.getAttribute('data-page') != null) {
+                DGW.main.currentState = cta.getAttribute('data-page');
+            }
+            if (!DGW.main.shown) {
+                DGW.main.methods.showWidget();
+            } else {
+                DGW.main.methods.changeMainState(DGW.main.currentState);
+            }
+        });
+    }
+
+    DGW.helpers.imagesResponsivePaths(wBody.querySelectorAll('[data-image]'));
+};
+
+DGW.side.methods.initSafariFixEvents = function(){
+    var wBody = DGW.side.elements.widgetBody;
+    DGW.side.methods.showWidget();
+
+    wBody.addEventListener('click', DGW.global.api.requests.safariFix);
+
+    DGW.helpers.imagesResponsivePaths(wBody.querySelectorAll('[data-image]'));
+};
+
+DGW.side.methods.changeSideWidgetState = function(state) {
+    var swc = DGW.side.elements.widgetContent;
+    var wb = DGW.side.elements.widgetBody;
+    var cc = wb.querySelector('.dg-side-click-holder');
+    var mainCta;
+
+    var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+
+    swc.innerHTML = '';
+
+    //TODO: TEMP place with randomized states
+    /*var states = ['profile', 'draws'];
+    if(!state) state = states[Math.round(Math.random())];*/
+    var actions = ['earn', 'play'];
+    var curAction = actions[Math.floor(Math.random() * actions.length)];
+
+    switch(state){
+        case 'draws':
+            cc.setAttribute('data-page', 'draws');
+            swc.innerHTML = DGW.templates.side.draw;
+            break;
+        default:
+            // PROFILE or SIGNUP pages
+            cc.setAttribute('data-page', 'profile');
+            if (DGW.global.authorized) {
+                swc.innerHTML = DGW.templates.side.registeredProfile;
+                swc.innerHTML += DGW.templates.side.actions[curAction];
+            } else {
+                swc.innerHTML = DGW.templates.side.draw;
+            }
+    }
+
+    mainCta = swc.querySelector('[data-page]');
+    if (mainCta) cc.setAttribute('data-page', mainCta.getAttribute('data-page'));
+
+    if (isSafari && !DGW.global.safariFix) {
+        DGW.side.methods.initSafariFixEvents();
+    } else {
+        DGW.side.methods.initEvents();
+    }
+};
+
+DGW.side.methods.showNotification = function(notification) {
+    var wb = DGW.side.elements.widgetBody;
+    var nh = wb.querySelector('.dg-side-notification-holder');
+    nh.innerHTML = DGW.templates.side.notifications[notification];
+};
+
+DGW.side.methods.hideNotification = function() {
+    DGW.side.elements.widgetBody.querySelector('.dg-side-notification-holder').innerHTML = '';
+};
+DGW.main.methods.activitiesInit = function(){
+
+    DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').addEventListener('change', function(){
+        if (this.value === 'all-activities') {
+            DGW.global.api.requests.getAllActivities(function(response){
+                DGW.main.methods.activitiesConstructor(response.Activities);
+            });
+        } else {
+            DGW.global.api.requests.getUserActivities(function(response){
+                DGW.main.methods.activitiesConstructor(response.Activities);
+            });
+        }
+    });
+
+};
+DGW.main.methods.drawsInit = function(){
+
+    DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired').addEventListener('change', function (ev) {
+        DGW.main.settings.draws.showExpired = this.checked;
+        DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+    });
+
+//Draw filters
+    (function(){
+        var hiddenDrawsChkBox = DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired');
+        var submenuItems = Array.prototype.slice.call(DGW.main.elements.pages.drawsMain.querySelectorAll('.dg-o-w-submenu ul li'));
+        function removeActive(){
+            submenuItems.forEach(function(item){
+                DGW.helpers.removeClass(item, 'dg-o-w-active');
+            });
+        }
+
+        function hideFinishedDraws(){
+            hiddenDrawsChkBox.checked = false;
+            DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'draws-expired');
+            hiddenDrawsChkBox.parentNode.style.display = 'none';
+        }
+        function showFinishedDraws(){
+            if (DGW.main.settings.draws.showExpired) {
+                hiddenDrawsChkBox.checked = true;
+                DGW.helpers.addClass(DGW.main.elements.widgetBody, 'draws-expired');
+            }
+            hiddenDrawsChkBox.parentNode.style.display = 'block';
+        }
+
+        DGW.main.methods.changeDrawsSubmenu = function(state){
+            submenuItems.filter(function(item){
+                return item.id == state;
+            })[0].click();
+        };
+
+        submenuItems.forEach(function(item){
+            item.addEventListener('click', function(){
+                removeActive();
+                DGW.helpers.addClass(this, 'dg-o-w-active');
+                DGW.main.settings.draws.currentSubMenu = this.id;
+                switch (this.id) {
+                    case 'dg-o-w-show-all-draws':
+                        DGW.main.cache.drawsList.sort(function(a,b){
+                            return new Date(b.EndDate) - new Date(a.EndDate)
+                        });
+
+                        showFinishedDraws();
+
+                        DGW.main.methods.drawsConstructor(DGW.main.cache);
+                        break;
+                    case 'dg-o-w-show-finished-soon':
+                        var expArr = DGW.main.cache.drawsList.filter(function(draw){
+                            return DGW.helpers.dateDiff(draw.EndDate) <= 0;
+                        });
+                        var actArr = DGW.main.cache.drawsList.filter(function(draw){
+                            return DGW.helpers.dateDiff(draw.EndDate) > 0;
+                        }).sort(function(a, b){
+                            return new Date(a.EndDate) - new Date(b.EndDate);
+                        });
+
+                        DGW.main.cache.drawsList = actArr.concat(expArr);
+
+                        hideFinishedDraws();
+                        DGW.main.methods.drawsConstructor(DGW.main.cache, 'close-to-finish');
+                        break;
+                    case 'dg-o-w-show-my-draws':
+                        var myDraws = [];
+                        DGW.main.cache.drawsEntries.forEach(function(drawE){
+                            DGW.main.cache.drawsList.filter(function(draw){
+                                if (draw.DrawId == drawE.DrawId) {
+                                    myDraws.push(draw);
+                                }
+                            });
+                        });
+                        DGW.main.cache.drawsList = DGW.main.cache.drawsList.sort(function(a,b){
+                            return new Date(b.EndDate) - new Date(a.EndDate)
+                        });
+
+                        showFinishedDraws();
+                        DGW.main.methods.drawsConstructor({drawsList: myDraws, drawsEntries: DGW.main.cache.drawsEntries}, 'my-draws');
+                        break;
+                    case 'dg-o-w-show-games':
+                        hideFinishedDraws();
+                        DGW.main.methods.gamesConstructor();
+                        break;
+                }
+            });
+        });
+        DGW.main.methods.drawSubmenuReset = function(){
+            removeActive();
+            DGW.helpers.addClass(DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-all-draws'), 'dg-o-w-active');
+        };
+    })();
+
+};
+(function(){
+
+    (function searchFriends(){
+        var dp = DGW.main.elements.pages.friendsMain;
+        var friendSearch = dp.querySelector('.search-form .search-field');
+        var searchTimeout;
+        var searchDelay = 1000;
+
+        friendSearch.addEventListener('input', function(){
+            var that = this;
+            DGW.helpers.console.info('input');
+            if (searchTimeout) window.clearTimeout(searchTimeout);
+            searchTimeout = window.setTimeout(function(){
+                DGW.helpers.console.info('search');
+                DGW.global.api.requests.friendSearch(that.value,
+                    function(response){
+                        DGW.helpers.console.log(response);
+                    }
+                );
+            }, searchDelay);
+        });
+
+    })();
+
+    setTimeout(function(){
+        DGW.global.api.requests.friendsGet(function(response){
+            DGW.main.methods.friendsConstructor(response);
+        });
+    }, 3000);
+})();
+DGW.main.methods.loginInit = function(){
+
+    // login dropdown menu
+    (function headerLoginFormTriggers(){
+        var link = DGW.main.elements.loginMenuButton;
+        var linkP = link.parentNode;
+        var form = linkP.querySelector('.dg-o-w-email-login-form');
+        var formClose = form.querySelector('#dg-o-w-header-form-close');
+        var heading = form.querySelector('#dg-o-w-login-heading');
+
+        DGW.main.methods.headerLoginShow = function(headingText){
+            headingText = headingText || 'Welcome!';
+            heading.innerHTML = headingText;
+            DGW.helpers.addClass(form, 'visible');
+            setTimeout(function () {
+                DGW.helpers.addClass(linkP, 'shown');
+                form.querySelector('input').focus();
+            }, 100);
+        };
+        DGW.main.methods.headerLoginHide = function(){
+            DGW.helpers.removeClass(linkP, 'shown');
+            setTimeout(function () {
+                DGW.helpers.removeClass(form, 'visible');
+                Array.prototype.slice.call(form.querySelectorAll(':not([type=submit])'))
+                    .forEach(function(input){
+                        input.value = '';
+                    });
+                DGW.main.methods.headerLoginReset();
+            }, 310);
+        };
+
+        function triggerLoginForm(){
+            if (DGW.helpers.hasClass(linkP, 'shown')) {
+                DGW.main.methods.headerLoginHide();
+            } else {
+                DGW.main.methods.headerLoginShow();
+            }
+        }
+
+
+        link.addEventListener('click', triggerLoginForm);
+        formClose.addEventListener('click', DGW.main.methods.headerLoginHide);
+    })();
+
+    DGW.main.elements.widget.querySelector('#dg-o-w-header-fb-connect').addEventListener('click', function(ev){
+        ev.preventDefault();
+        DGW.global.api.requests.connectFB();
+    });
+
+    // login form submit
+    var topLoginForm = DGW.main.elements.widgetBody.querySelector('#dg-o-w-form-login-top');
+    var topForgotForm = DGW.main.elements.widgetBody.querySelector('#dg-o-w-form-forgot-top');
+
+    (function topLoginInit(){
+        var noUserRXP = /not\sfound/;
+        var emailF = topLoginForm.querySelector('[type=email]'),
+            passF = topLoginForm.querySelector('[type=password]'),
+            nameF = topLoginForm.querySelector('[type=text]'),
+            btn = topLoginForm.querySelector('[type=submit]');
+        var btnVal = btn.value;
+        var trySignIn = function(ev){
+                ev.preventDefault();
+                DGW.main.methods.hideNotificationBar();
+                DGW.global.api.requests.signIn({
+                    Email: emailF.value,
+                    Password: passF.value
+                }, function onSuccess(){
+                    DGW.main.methods.notificationConstructor(['Welcome back, ' + DGW.global.userStats.name, 'Have a look at our new offers!']);
+                }, function onError(result){
+                    var err = DGW.helpers.errorParser(result).messages;
+                    if (noUserRXP.test(err)) {
+                        DGW.helpers.removeClass(nameF.parentNode, 'dg-o-w-hidden');
+                        nameF.focus();
+                        topLoginForm.removeEventListener('submit', trySignIn);
+                        topLoginForm.addEventListener('submit', trySignUp);
+                        btn.value = 'Sign up with email';
+                    } else {
+                        DGW.main.methods.notificationConstructor(err, 'error');
+                    }
+                });
+            },
+            trySignUp = function(ev){
+                ev.preventDefault();
+
+                DGW.main.methods.hideNotificationBar();
+                DGW.global.api.requests.signUp({
+                    Email: emailF.value,
+                    Password: passF.value,
+                    Username: nameF.value
+                }, function onSuccess(){
+                    DGW.main.methods.notificationConstructor(['Hi, ' + nameF.value + '! ', 'Welcome to ' + DGW.global.club.name + ' rewarded widget.']);
+                }, function onError(result){
+                    var err = DGW.helpers.errorParser(result).messages;
+                    DGW.main.methods.notificationConstructor(err, 'error');
+                });
+            };
+
+        topLoginForm.addEventListener('submit', trySignIn);
+
+        DGW.main.methods.headerLoginReset = function(){
+            topLoginForm.removeEventListener('submit', trySignUp);
+            topLoginForm.addEventListener('submit', trySignIn);
+            DGW.helpers.addClass(nameF.parentNode, 'dg-o-w-hidden');
+            btn.value = btnVal;
+        };
+    })();
+
+    topForgotForm.addEventListener('submit', function(ev){
+        ev.preventDefault();
+        var that = this;
+        var emailF = that.querySelector('[type=email]').value;
+        DGW.global.api.requests.forgotPass(emailF,
+            function onSuccess(){
+                DGW.main.methods.notificationConstructor('Check your email to confirm the new password.');
+            }, function onError(result){
+                DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
+            });
+    });
+    topLoginForm.querySelector('#dg-o-w-header-forgot-pass').addEventListener('click', function(ev){
+        ev.preventDefault();
+        DGW.helpers.removeClass(topLoginForm, 'shown');
+        DGW.helpers.addClass(topForgotForm, 'shown');
+    });
+    topForgotForm.querySelector('a').addEventListener('click', function(ev){
+        ev.preventDefault();
+        DGW.helpers.removeClass(topForgotForm, 'shown');
+        DGW.helpers.addClass(topLoginForm, 'shown');
+    });
+
+    //Footer login init
+    DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-email-login').addEventListener('click', function (ev) {
+        ev.preventDefault();
+        DGW.main.methods.headerLoginShow();
+    });
+    DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-fb-connect').addEventListener('click', function(ev){
+        ev.preventDefault();
+        DGW.global.api.requests.connectFB();
+    });
+};
+DGW.main.methods.profileInit = function(){
+
+    //Profile page clicks
+    DGW.main.elements.pages.profileMain.querySelector('#dg-o-w-login-fb-text').addEventListener('click', function(){
+        DGW.global.api.requests.connectFB();
+    });
+    DGW.main.elements.pages.profileMain.querySelector('#dg-o-w-sign-out-btn').addEventListener('click', function (ev) {
+        ev.preventDefault();
+        DGW.global.api.requests.signOut();
+    });
+
+    DGW.helpers.getElementsFromAllPlaces('[data-page]', 'main').forEach(function(el){
+        el.addEventListener('click', function(ev){
+            ev.preventDefault();
+            DGW.main.methods.changeMainState(el.getAttribute('data-page'));
+        });
+    });
+
+};
+DGW.main.methods.activitiesConstructor = function(activities){
+    activities.sort(function(a, b){
+        return new Date(b.Date) - new Date(a.Date);
+    });
+    var activitiesHolder = DGW.helpers.getElementsFromAllPlaces('[data-activities]')[0];
+    activitiesHolder.innerHTML = '';
+
+    activities.forEach(function(activity){
+        var ownStats = false;
+        if (!activity.User) {
+            ownStats = true;
+            activity.User = {
+                //UserName: DGW.global.userStats.name,
+                UserName: 'You',
+                ImageUrl: DGW.global.userStats.imageUrl
+            }
+        }
+        var li = document.createElement('li');
+        var message = '';
+        message += activity.User.UserName;
+        message += (ownStats !== true) ? ' has ' : ' have ';
+        message += (activity.Direction === 'Outflow') ? 'spent ' : 'earned ';
+        message += '<span>';
+        message += activity.PointsAmount;
+        message += ' points';
+        message += '</span>';
+
+
+        if (activity.ActivityType === 'GamePurchase') {
+            if (activity.GameOrder.GameType === 'Draw') {
+                message += ' playing the draw';
+                message += (' to win ' + activity.GameOrder.PrizeTitle);
+            } else if (activity.GameOrder.GameType === 'MatchQuiz') {
+                message += ' placing a bet in ' + DGW.global.club.name + ' Match Quiz';
+            }
+        }
+
+        if (activity.ActivityType === 'RewardedActionReward') {
+            switch (activity.RewardedAction.Type) {
+                case 'UserRegister':
+                    message += ' for joining our rewarded program';
+                    break;
+                case 'FacebookConnect':
+                    message += ' for connecting with Facebook';
+                    break;
+                case 'FriendSignUp':
+                    message += ' inviting a friend to our rewarding program';
+                    break;
+                case 'ConnectNewApp':
+                    message += ' connecting another app';
+                    break;
+                case 'FacebookShare':
+                    message += ' shouting out about us on Facebook';
+                    break;
+                case 'TwitterShare':
+                    message += ' tweeting about us';
+                    break;
+                case 'CommissionConfirmed':
+                    message += ' for making a great purchase';
+                    break;
+                case 'MatchQuizFacebookShare':
+                    message += ' for sharing Score Predictor results on Facebook';
+                    break;
+                case 'MatchQuizTwitterShare':
+                    message += ' for sharing Score Predictor results on Twitter';
+                    break;
+                default:
+            }
+        }
+
+        if (activity.ActivityType === 'OfferActionReward') {
+            if (activity.OfferAction.Type.Group.Name === 'Share') {
+                switch (activity.OfferAction.Type.Name) {
+                    case 'FacebookShare':
+                        message += ' finishing Facebook share offer';
+                        break;
+                    case 'TwitterShare':
+                        message += ' finishing Twitter share offer';
+                }
+            } else if (activity.OfferAction.Type.Group.Name === 'Watch') {
+                message += ' watching a video';
+            } else if (activity.OfferAction.Type.Group.Name === 'Discover') {
+                message += ' downloading an app';
+            }
+        }
+
+
+        if (activity.ActivityType === 'BadgeReward') {
+            message += ' getting a shiny new badge "' + activity.BadgeReward.Title + '"';
+        }
+
+        li.innerHTML =
+            '<div class="dg-o-w-single-activity">' +
+            '<img src="' + DGW.helpers.checkImagesForSrc(activity.User.ImageUrl) + '" alt=""/>' +
+            '<div class="dg-o-w-activity-message-holder">' +
+            '<p>' + message + '</p>' +
+            '</div>' +
+            '</div>' +
+            '<h6>' + DGW.helpers.getDateFromNow(activity.Date) + '</h6>';
+        if (activity.Direction === 'Outflow') {
+            DGW.helpers.addClass(li, 'spent');
+        }
+
+        activitiesHolder.appendChild(li);
+    });
+    DGW.main.methods.setRewardedActions();
+};
+
+
+DGW.main.methods.gamesConstructor = function(){
+    var dp = DGW.main.elements.pages.drawsMain;
+    var dpCont = dp.querySelector('.dg-o-w-section-content');
+    var gamesList = dp.querySelector('.dg-o-w-list-draws');
+    gamesList.innerHTML = '';
+
+    var emptyMessageEl = document.createElement('div');
+    DGW.helpers.addClass(emptyMessageEl, 'dg-o-w-draws-empty');
+
+    if (dpCont.children.length > 1) dpCont.removeChild(dpCont.childNodes[1]);
+
+    emptyMessageEl.innerHTML = '<h2>Hi, we are glad to see you here, games will be available very soon!</h2></div>';
+    dpCont.appendChild(emptyMessageEl);
+};
+DGW.main.methods.drawsConstructor = function(cacheObj, _context){
+    var dp = DGW.main.elements.pages.drawsMain;
+    var dpCont = dp.querySelector('.dg-o-w-section-content');
+    var drawsList = dp.querySelector('.dg-o-w-list-draws');
+    drawsList.innerHTML = '';
+    DGW.global.activeDrawsExist = false;
+    var showExpiredDraws = DGW.main.settings.draws.showExpired;
+    var draws = [];
+
+    var emptyMessage = '';
+    var emptyMessageEl = document.createElement('div');
+    DGW.helpers.addClass(emptyMessageEl, 'dg-o-w-draws-empty');
+
+    if (dpCont.children.length > 1) dpCont.removeChild(dpCont.childNodes[1]);
+
+
+    function filterDrawsByChkBox(showActiveOnly){
+        if (!showExpiredDraws || showActiveOnly) {
+            draws = cacheObj.drawsList.filter(function (draw) {
+                return !DGW.helpers.drawIsFinished(draw);
+            });
+        } else {
+            draws = cacheObj.drawsList;
+        }
+    }
+
+    if (cacheObj) {
+        if (!_context || _context == 'my-draws') filterDrawsByChkBox();
+        else filterDrawsByChkBox(true);
+
+        if (draws.length == 0) {
+            if (!_context) {
+                emptyMessage = 'Sorry, but there are no draws running at the moment.';
+            } else {
+                if (_context == 'close-to-finish') {
+                    emptyMessage = 'Sorry, but seems like there are no draws that will be completed soon.';
+                }
+                if (_context == 'my-draws') {
+                    emptyMessage = 'Hey, seems like you are not taking a part in any of running draws';
+                }
+            }
+            emptyMessageEl.innerHTML = '<h2>' + emptyMessage + '</h2><br/><div class="dg-o-w-draws-refresh"></div>';
+            emptyMessageEl.querySelector('.dg-o-w-draws-refresh').addEventListener('click', function(){
+                DGW.global.api.requests.getDraws(function(){
+                    if (DGW.global.authorized) {
+                        DGW.global.api.requests.getDrawEntries(function(){
+                            DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+                        });
+                    } else {
+                        DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+                    }
+                });
+            });
+
+            dpCont.appendChild(emptyMessageEl);
+        }
+
+
+        draws.forEach(function (draw) {
+
+            var li = document.createElement('li');
+            var drawEntry = cacheObj.drawsEntries.filter(function (de) {
+                    return de.DrawId == draw.DrawId;
+                })[0] || null;
+            var winnerExist = draw.Winner;
+            var isWinner = (drawEntry) ? drawEntry.IsWinner : false;
+            var winnerHtml = '',
+                winnerInnerText = '',
+                drawEntryHtml = '',
+                countdownHtml = '&nbsp;';
+            var activeDraw = false;
+
+            if (drawEntry) {
+                var ticketsInDraw = drawEntry.TicketsAmount;
+                var secondLineClass = (winnerExist ? ' dg-o-w-draw-bet-second' : '');
+                drawEntryHtml = '<div class="dg-o-w-draw-bet' + secondLineClass + '"><p>You\'ve placed: <span>' + ticketsInDraw + '</span> points</p></div>';
+                if (drawEntry.IsWinner) {
+                    DGW.helpers.addClass(li, 'winner');
+                    if (drawEntry.NeedToClaimPrize) {
+                        DGW.helpers.addClass(li, 'claim-prize');
+                    }
+                }
+            }
+
+            if (winnerExist) {
+                winnerInnerText = (isWinner === true) ? ('You\'ve won this draw!') : (draw.Winner.UserName + ' has won');
+                winnerHtml = '<div class="dg-o-w-draw-list-winner"><img src="' + draw.Winner.ImageUrl + '" />' +
+                '<p>' + winnerInnerText + '</p></div>';
+            }
+
+            if (DGW.helpers.drawIsFinished(draw)) {
+                DGW.helpers.addClass(li, 'expired');
+                countdownHtml = 'Finished ' + DGW.helpers.getDateFromNow(draw.EndDate);
+            } else {
+                activeDraw = true;
+            }
+
+            li.innerHTML = '<div class="dg-o-w-draw">' +
+            '<div class="dg-o-w-draw-image-holder">' +
+            '<img src="' + draw.Prize.ImageUrl + '" />' +
+            '</div>' +
+            '<div class="dg-o-w-draw-text">' +
+            '<h2 class="dg-o-w-draw-countdown">' + countdownHtml + '</h2>' +
+            '<p>' + draw.Prize.Description + '</p>' +
+            '</div>' +
+            winnerHtml + drawEntryHtml +
+            '</div>';
+
+            if (activeDraw) DGW.helpers.drawsTimer.push({
+                dt: draw.EndDate,
+                elem: li.querySelector('.dg-o-w-draw-countdown')
+            });
+
+            li.addEventListener('click', function() {
+                if (DGW.global.authorized || !activeDraw) DGW.main.methods.singleDrawConstructor(draw.DrawId);
+                else DGW.main.methods.headerLoginShow('Please, enter to play the draw');
+            });
+
+            drawsList.appendChild(li);
+        });
+    }
+
+    DGW.main.methods.setRewardedActions();
+};
+
+DGW.main.methods.singleDrawConstructor = function(drawId){
+
+    var draw = DGW.main.cache.drawsList.filter(function(draws){
+        return draws.DrawId === drawId;
+    })[0];
+    var drawEntry = DGW.main.cache.drawsEntries.filter(function(draws){
+        return draws.DrawId === drawId;
+    })[0];
+
+    var el = DGW.main.elements.pages.singleDraw;
+    var prizeSect = '<div class="dg-o-w-draw-left-side">' +
+        '<div class="prize-image"><div><img src="' + draw.Prize.ImageUrl + '" /></div></div>' +
+        '</div>';
+    var shareSect = '<div class="dg-o-w-draw-share dg-o-w-draw-auth-show">' +
+        '<a href="#" class="dg-o-w-like dg-o-w-facebook-like">Share <span class="dg-o-w-rewarded-action" id="dg-o-w-facebook-like-reward"></span></a>' +
+        '<a href="#" class="dg-o-w-like dg-o-w-twitter-like">Tweet <span class="dg-o-w-rewarded-action" id="dg-o-w-tweeter-like-reward"></span></a>' +
+        '</div>';
+    var submenu = '<div class="dg-o-w-submenu">' +
+        '<ul><li class="dg-o-w-back-draws">&larr; Back</li></ul><div class="right-side">' +
+        (!(drawEntry != undefined && drawEntry.IsWinner) ? /*'Minimum bet is 10'*/ '' : 'You\'ve placed ' + drawEntry.TicketsAmount + ' points and won!') +
+        '</div>' +
+        '</div>';
+    var drawnState = '';
+
+    var playersInDraw = document.createElement('div');
+    playersInDraw.className = 'dg-o-w-users-done';
+
+
+    // Cleaning viewport from other sections
+    if (DGW.main.elements.widgetContent.children.length > 0) {
+        DGW.main.elements.widgetContent.removeChild(DGW.main.elements.widgetContent.childNodes[0]);
+    }
+
+    if (DGW.helpers.dateDiff(draw.EndDate) <= 0) {
+        DGW.helpers.console.info('isdrawn: ', draw.IsDrawn);
+        // Draw is finished
+        if (draw.IsDrawn == false) {
+            // Draw has been finished and not drawn
+            drawnState = '<p>Winner will be announced very soon!</p>';
+            DGW.helpers.console.info('isdrawn: ', draw.IsDrawn);
+        } else {
+            // Draw has been finished and drawn
+            DGW.helpers.console.info(draw.IsDrawn);
+            if (draw.Winner == null) {
+                // No one has participated in the draw
+                drawnState = '<p>Unfortunately, no one has participated in this Draw</p>';
+            } else {
+                drawnState = '<div class="dg-o-w-draw-winner"><img src="' + (draw.Winner.ImageUrl || DGW.helpers.checkImagesForSrc()) + '" />' +
+                '<p>' + draw.Winner.UserName + ' has won this draw. Our congratulations!</p></div>';
+            }
+        }
+    }
+    //DGW.helpers.console.log('draw state: ', drawState);
+    el.innerHTML =  submenu +
+    '<div class="dg-o-w-section-content">' +
+    '<div class="dg-o-w-single-draw">' +
+    prizeSect +
+    '<div class="dg-o-w-draw-right-side">' +
+    '<h2 class="dg-o-w-countdown">&nbsp;</h2>' +
+    '<h3>' + draw.Prize.Title + '</h3>' +
+    '<p>' + draw.Prize.Description + '</p>' +
+    '<div class="dg-o-w-draw-bet-info dg-o-w-draw-auth-show">' +
+    '<div class="dg-o-w-your-bet dg-o-w-points-bet"><p>You\'ve placed <span data-draw-betpoints>' + ((drawEntry) ? drawEntry.TicketsAmount : 0 ) + '</span> points</p></div>' +
+    '</div>' +
+    ((DGW.helpers.dateDiff(draw.EndDate) > 0) ? '<h2 class="dg-o-w-draw-login-show">Please, log in to play the draw</h2>' : '') +
+    '<div class="dg-o-w-draw-bet-action dg-o-w-draw-auth-show">' +
+    '<h4>How much do you want to place?</h4>' +
+    '<form id="bet-form" class="dg-o-w-one-field-form">' +
+    '<input type="number" min="1" max="1000" placeholder="50"/>' +
+    '<input class="btn-dg-o-w btn-dg-o-w-brand" type="submit" value="Place points" />' +
+    '</form>' +
+    '<div id="dg-o-w-get-points-btn" class="btn-dg-o-w btn-dg-o-w-brand-l">Get additional points</div>' +
+    '</div>' +
+    drawnState +
+    shareSect +
+    '</div>' +
+    '</div>' +
+    '</div>';
+
+    if (drawEntry && drawEntry.IsWinner) {
+        var claimPrizeHtml = '';
+        if (drawEntry.NeedToClaimPrize == true) {
+            claimPrizeHtml ='<p class="hide-claimed">Put your address to get the prize</p>' +
+            '<form id="claim-prize" class="dg-o-w-form hide-claimed">' +
+            '<input type="text" name="Address1" placeholder="Address line 1" />' +
+            '<input type="text" name="Address2" placeholder="Address line 2" />' +
+            '<input type="text" name="County" placeholder="County" />' +
+            '<input type="text" name="Postcode" placeholder="Postcode" />' +
+            '<input class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large" type="submit" value="Submit " />' +
+            '</form>';
+        } else {
+            claimPrizeHtml ='<h2>You\'ve already claimed your prize!</h2>';
+        }
+        el.innerHTML = submenu +
+        '<div class="dg-o-w-section-content">' +
+        '<div class="dg-o-w-single-draw">' +
+        prizeSect +
+        '<div class="dg-o-w-draw-right-side won">' +
+        '<h2>Congrats, you\'ve won!!!</h2>' +
+        '<h3>' + draw.Prize.Title + '</h3>' +
+        '<p>' + draw.Prize.Description + '</p>' +
+        '<div>' + claimPrizeHtml + '</div>' +
+        shareSect +
+        '</div>' +
+        '</div>' +
+        '</div>';
+    }
+
+    if (el.querySelector('.dg-o-w-draw-bet-info')) {
+        DGW.global.api.requests.drawPlayers(drawId,
+            function onSuccess(result){
+                if (result.RecentPlayers.length > 0) {
+                    var playerImgsHolder = document.createElement('div');
+                    result.RecentPlayers.forEach(function(player, ind){
+                        if (ind > 2) return;
+                        var img = document.createElement('img');
+                        img.src = player.ImageUrl;
+
+                        playerImgsHolder.appendChild(img);
+                    });
+                    playersInDraw.appendChild(playerImgsHolder);
+
+                    var p = document.createElement('p');
+                    if (result.TotalCount == 1) {
+                        p.innerHTML = '1 user has done this';
+                    } else {
+                        p.innerHTML = result.TotalCount + ' user has done this';
+                        p.className = ((result.RecentPlayers.length == 2) ? 'dg-o-w-two-images' : 'dg-o-w-three-images');
+                    }
+                    playersInDraw.appendChild(p);
+
+                    el.querySelector('.dg-o-w-draw-bet-info').appendChild(playersInDraw);
+                }
+            }
+        );
+    }
+
+    if (el.querySelector('#dg-o-w-get-points-btn')) {
+        el.querySelector('#dg-o-w-get-points-btn').addEventListener('click', function(){
+            DGW.main.methods.changeMainState('earn');
+        });
+    }
+
+    el.querySelector('.dg-o-w-submenu li.dg-o-w-back-draws').addEventListener('click', function(){
+        DGW.main.methods.changeMainState('draws');
+    });
+
+    if (el.querySelector('#bet-form')) {
+        el.querySelector('#bet-form').addEventListener('submit', function (ev) {
+            ev.preventDefault();
+            var that = this;
+            var betBtn = that.querySelector('input[type=submit]');
+            var pointsToBet = +that.querySelector('input[type=number]').value;
+
+            DGW.global.api.requests.drawBet(drawId, pointsToBet,
+                function onSuccess(result){
+                    betBtn.disabled = false;
+                    DGW.main.methods.notificationConstructor('We\'ve received your ' + pointsToBet + ' points. Bet more!');
+                    that.querySelector('input[type=number]').value = '';
+
+                    DGW.main.cache.drawsEntries.forEach(function(de){
+                        if (de.DrawId == result.DrawEntry.DrawId) de.TicketsAmount = result.DrawEntry.TicketsAmount;
+                    });
+                    DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+
+                    DGW.main.methods.profileSetData(result.User, result.DrawEntry);
+                }, function onError(result){
+                    betBtn.disabled = false;
+                    DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
+                });
+            betBtn.disabled = true;
+        });
+    }
+    if (el.querySelector('#claim-prize')) {
+        el.querySelector('#claim-prize').addEventListener('submit', function(ev){
+            ev.preventDefault();
+            var that = this;
+            var address = {};
+
+            Array.prototype.slice.call(that.querySelectorAll('input:not([type=submit])')).forEach(function(field){
+                if (field.value == '' && field.name != 'Address1') field.value = '-';
+                address[field.name] = field.value;
+            });
+
+            DGW.global.api.requests.claimPrize(drawId, address, function onSuccess(){
+                DGW.helpers.addClass(el.querySelector('.dg-o-w-single-draw'), 'claimed');
+                DGW.main.methods.notificationConstructor(['We\'ve received your address', 'And will contact you very soon!']);
+            }, function onError(result){
+                DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
+            });
+        });
+    }
+
+
+    if (!DGW.helpers.drawsTimer.push({dt:draw.EndDate, elem:el.querySelector('.dg-o-w-countdown')})) {
+        DGW.helpers.addClass(el.querySelector('.dg-o-w-single-draw'), 'expired');
+        if (el.querySelector('.dg-o-w-countdown')) {
+            el.querySelector('.dg-o-w-countdown').innerHTML = 'Finished ' + String(DGW.helpers.getDateFromNow(draw.EndDate));
+        }
+    }
+
+    // Setting sharing buttons
+    var isWinner = false;
+    if (drawEntry && drawEntry.IsWinner) isWinner = true;
+
+    el.querySelector('.dg-o-w-like.dg-o-w-facebook-like').addEventListener('click', function(ev){
+        ev.preventDefault();
+        DGW.global.actions.requests.shareFb(drawId, isWinner);
+    });
+    el.querySelector('.dg-o-w-like.dg-o-w-twitter-like').addEventListener('click', function(ev){
+        ev.preventDefault();
+        DGW.global.actions.requests.shareTw(drawId, (!isWinner) ? 'Win ' : 'I\'ve just won ' + draw.Prize.Title, isWinner);
+    });
+
+    DGW.main.elements.widgetContent.appendChild(el);
+    DGW.main.methods.checkSectionHeight();
+    DGW.main.methods.setRewardedActions();
+};
+DGW.main.methods.offersConstructor = function(offers) {
+    var offersHolder = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-list-offers'),
+        offersSubmenu = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-submenu ul'),
+        offersSponsors = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-submenu select'),
+        pointsSum = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-section-content h3 span');
+    var lists = {
+        offers: offers.Offers,
+        sponsors: ['All offers'],
+        categories: ['All']
+    };
+    var sponsorsAllString = lists.sponsors[0].toLowerCase(),
+        categoriesAllString = lists.categories[0].toLowerCase();
+    var currentCategory = categoriesAllString,
+        currentSponsor = sponsorsAllString;
+
+    pointsSum.innerHTML = offers.TotalPointsReward;
+    DGW.global.userStats.earnToday = offers.TotalPointsReward;
+    offersSubmenu.innerHTML = '';
+    offersSponsors.innerHTML = '';
+
+    lists.offers.forEach(function(offer){
+        offer = offer.Offer;
+        if (lists.sponsors.filter(function(sponsor){return sponsor === offer.Sponsor.Name;}).length == 0) {
+            lists.sponsors.push(offer.Sponsor.Name);
+        }
+        if (lists.categories.filter(function(category){return category === offer.Type.Group.Name;}).length == 0) {
+            lists.categories.push(offer.Type.Group.Name);
+        }
+    });
+
+
+    lists.sponsors.forEach(function(sponsor){
+        var option = document.createElement('option');
+        option.innerHTML = sponsor;
+        option.value = sponsor.toLowerCase();
+
+        offersSponsors.appendChild(option);
+    });
+
+    lists.categories.forEach(function(category, ind){
+        var li = document.createElement('li');
+        li.innerHTML = category;
+        li.addEventListener('click', function(){
+            Array.prototype.slice.call(offersSubmenu.querySelectorAll('li')).forEach(function(item){
+                DGW.helpers.removeClass(item, 'dg-o-w-active');
+            });
+            DGW.helpers.addClass(this, 'dg-o-w-active');
+            currentCategory = category.toLowerCase();
+            showOffersPanels(filterOffers())
+        });
+        if (category.toLowerCase() == 'all') {DGW.helpers.addClass(li, 'dg-o-w-active')}
+        offersSubmenu.appendChild(li);
+    });
+
+    if (lists.sponsors.length > 2) {
+        offersSponsors.addEventListener('change', function () {
+            var that = this;
+            DGW.helpers.console.log(that.value);
+            currentSponsor = that.value.toLowerCase();
+            showOffersPanels(filterOffers());
+        });
+    } else {
+        offersSponsors.style.display = 'none';
+    }
+
+    function filterOffers(){
+        return lists.offers.filter(function(offer){
+            offer = offer.Offer;
+            if (currentSponsor == sponsorsAllString &&
+                currentCategory == categoriesAllString) {
+                return true;
+            } else if (currentSponsor == sponsorsAllString) {
+                return offer.Type.Group.Name.toLowerCase() == currentCategory;
+            } else if (currentCategory == categoriesAllString) {
+                return offer.Sponsor.Name.toLowerCase() == currentSponsor;
+            }
+            return offer.Sponsor.Name.toLowerCase() == currentSponsor &&
+                offer.Type.Group.Name.toLowerCase() == currentCategory;
+        });
+    }
+
+    function showOffersPanels(filteredOffers) {
+        offersHolder.innerHTML = '';
+
+        filteredOffers.forEach(function (offer) {
+            var recentCompleters = offer.RecentCompleters,
+                completersCount = offer.TotalCompletersCount;
+
+            offer = offer.Offer;
+
+            var li = document.createElement('li');
+            li.innerHTML =
+                '<a href="" target="_blank"><div class="dg-o-w-offer">' +
+                '<div class="dg-o-w-offer-left">' +
+                '<img class="dg-o-w-offer-image" src="' + (offer.ImageUrl || offer.Type.ImageUrl) + '" />' +
+                '<p class="dg-o-w-color-green">' + offer.PointsReward + '</p>' +
+                '</div>' +
+                '<div class="dg-o-w-offer-right">' +
+                '<h4>' + '<img class="dg-o-w-offer-group" src="' + offer.Type.Group.ImageUrl + '"/>' + offer.Title + '</h4>' +
+                '<p>' + offer.Description + '</p>' +
+                '<div class="dg-o-w-users-done"></div>' +
+                '</div>' +
+                '</div></a>';
+            if (offer.Type.Name == 'DownloadMobileApp') {
+                li.querySelector('a').href = offer.CustomData.Url;
+            }
+            if (offer.Type.Name == 'DownloadToolbar') {
+                li.querySelector('a').href = offer.CustomData.Url
+                    .replace(/\{0}/, offer.Id)
+                    .replace(/\{1}/, DGW.global.userStats.userId);
+            }
+            li.querySelector('a').addEventListener('click', function(ev){
+                if (DGW.global.authorized) {
+                    if (offer.Type.Name != 'DownloadMobileApp' && offer.Type.Name != 'DownloadToolbar') {
+                        ev.preventDefault();
+                    }
+                    if (offer.Type.Name == 'FacebookShare') {
+                        DGW.global.offers.requests.shareOfferFb(offer.Id);
+                    } else if (offer.Type.Name == 'TwitterShare'){
+                        DGW.global.offers.requests.shareOfferTw(offer.Id, offer.CustomData.Url, offer.CustomData.TweetText, offer.CustomData.Hashtags);
+                    } else if (offer.Type.Name == 'WatchVideo'){
+                        DGW.global.offers.requests.watchVideo(offer.Id, offer.CustomData.Url);
+                    } else if (offer.Type.Name == 'DownloadToolbar') {
+                        DGW.global.api.requests.trackOffer(offer.Id);
+                    }
+                } else {
+                    ev.preventDefault();
+                    DGW.main.methods.headerLoginShow('Enter to earn points');
+                }
+            });
+
+
+            if (recentCompleters.length > 0) {
+                var usersCompletedDiv = li.querySelector('.dg-o-w-users-done');
+                var playerImgsHolder = document.createElement('div');
+                recentCompleters.forEach(function(user, ind){
+                    if (ind > 2) return;
+                    var img = document.createElement('img');
+                    img.src = user.ImageUrl;
+
+                    playerImgsHolder.appendChild(img);
+                });
+                usersCompletedDiv.appendChild(playerImgsHolder);
+
+                var p = document.createElement('p');
+                if (completersCount == 1) {
+                    p.innerHTML = '1 user has done this';
+                } else {
+                    p.innerHTML = completersCount + ' users have done this';
+                    p.className = ((recentCompleters.length == 2) ? 'dg-o-w-two-images' : 'dg-o-w-three-images');
+                }
+                usersCompletedDiv.appendChild(p);
+            }
+
+
+            offersHolder.appendChild(li);
+        });
+    }
+
+    showOffersPanels(lists.offers);
+    DGW.main.methods.setRewardedActions();
+};
+DGW.main.methods.userListItemConstructor = function(users, group){
+    'use strict';
+    if (!users) return;
+
+    function createUserListAction (actionType) {
+        var action = document.createElement('div');
+        switch (actionType) {
+            case 'follow':
+                action.innerHTML = DGW.templates.userListActions.follow;
+                break;
+            case 'following':
+                action.innerHTML = DGW.templates.userListActions.following;
+                break;
+            case 'friends':
+                action.innerHTML = DGW.templates.userListActions.friends;
+                break;
+            case 'request':
+                action.innerHTML = DGW.templates.userListActions.request;
+                break;
+            case 'requestSent':
+                action.innerHTML = DGW.templates.userListActions.requestSent;
+                break;
+            case 'accept':
+                action.innerHTML = DGW.templates.userListActions.accept;
+                break;
+            case 'decline':
+                action.innerHTML = DGW.templates.userListActions.decline;
+                break;
+            default:
+                return action;
+        }
+
+        action = action.childNodes[0];
+        return action;
+    }
+
+    var usersArray = [];
+    users.forEach(function(userObj){
+        var commonUsers = userObj.MutualFriends;
+        var commonUsersCount = +userObj.MutualFriendsCount;
+        var user = userObj.User;
+        var commonUsersText = document.createElement('p');
+        var li = document.createElement('li');
+
+        li.className = 'dg-o-w-table-display';
+        li.innerHTML = DGW.templates.userListItem;
+
+        var commonUsersHolder = li.querySelector('[data-user-common-users]');
+        var userActionsHolder = li.querySelector('[data-user-actions]');
+
+        // Filling user name, image, groups
+        li.querySelector('[data-user-image]').src = user.ImageUrl;
+        li.querySelector('[data-user-name]').innerHTML = user.UserName;
+
+
+        //Filling common users section
+        if (commonUsers.length > 0) {
+            var commonImgsHolder = document.createElement('div');
+            commonUsers.forEach(function(cUser, ind){
+                if (ind > 2) return;
+                var img = document.createElement('img');
+                img.src = cUser.ImageUrl;
+                commonImgsHolder.appendChild(img);
+            });
+            commonUsersHolder.appendChild(commonImgsHolder);
+
+            if (commonUsersCount === 1) {
+                commonUsersText.innerHTML = '1 common user';
+            } else {
+                commonUsersText.innerHTML = commonUsersCount + ' common users';
+                commonUsersText.className = ((commonUsers.length == 2) ? 'dg-o-w-two-images' : 'dg-o-w-three-images');
+            }
+        } else {
+            commonUsersText.innerHTML = 'No common users';
+        }
+        commonUsersHolder.appendChild(commonUsersText);
+
+
+        // Filling actions available with this user
+        if (group === 'requestFrom') {
+            userActionsHolder.appendChild(createUserListAction('accept'));
+            userActionsHolder.appendChild(createUserListAction('decline'));
+        } else if (group === 'friends') {
+            userActionsHolder.appendChild(createUserListAction('friends'));
+        } else if (group === 'requestTo') {
+            userActionsHolder.appendChild(createUserListAction('requestSent'));
+        }
+
+        usersArray.push(li);
+    });
+
+    return usersArray;
+};
+
+
+DGW.main.methods.friendsConstructor = function(usersObj){
+    if (!usersObj) return;
+
+    var userListHolder = DGW.helpers.getElementsFromAllPlaces('[data-friends-list]')[0];
+    userListHolder.innerHTML = '';
+
+    DGW.main.methods.userListItemConstructor(usersObj.FriendRequestsFrom, 'requestFrom').forEach(function(userItem){
+        userListHolder.appendChild(userItem);
+    });
+    DGW.main.methods.userListItemConstructor(usersObj.Friends, 'friends').forEach(function(userItem){
+        userListHolder.appendChild(userItem);
+    });
+    DGW.main.methods.userListItemConstructor(usersObj.FriendRequestsTo, 'requestTo').forEach(function(userItem){
+        userListHolder.appendChild(userItem);
+    });
+};
+
+
+DGW.main.methods.leaderboardConstructor = function(earners) {
+    var s = DGW.main.elements.pages.activitiesMain;
+    var ul = s.querySelector('.dg-o-w-activity-slider ul');
+
+    ul.innerHTML = '';
+    earners.forEach(function(earner){
+        var li = document.createElement('li');
+        li.innerHTML = '<div><img src="' + earner.ImageUrl +'"><p>' + earner.Amount + '</p></div><p class="dg-o-w-color-brand">' + earner.UserName + '</p>';
+
+        ul.appendChild(li);
+    });
+
+    DGW.global.elements.leaderboardSlider = new Slider(ul.parentNode, {
+        visibles: 5,
+        controlNext: '.dg-o-w-activity-slider-next',
+        controlPrev: '.dg-o-w-activity-slider-prev'
+    });
+};
+DGW.main.methods.profileSetData = function(data, draw) {
+    var pr = DGW.main.elements.pages.profileMain;
+    var wb = DGW.main.elements.widgetBody;
+    var sb = DGW.side.elements.widgetBody;
+    var profileImageHolders = DGW.helpers.getElementsFromAllPlaces('[data-userstats-userimage]'),
+        profileNames = DGW.helpers.getElementsFromAllPlaces('[data-userstats-username]'),
+        friendsNumber = pr.querySelector('#profileFriendsAmount');
+
+    var points = {
+            confirmed: DGW.helpers.getElementsFromAllPlaces('[data-userstats-points-c]'),
+            pending: [pr.querySelector('.dg-o-w-profile-points h5')]
+        },
+        credits = {
+            confirmed: DGW.helpers.getElementsFromAllPlaces('[data-userstats-credits-c]'),
+            pending: [pr.querySelector('.dg-o-w-profile-credits h5')]
+        };
+
+    var fbAddText = pr.querySelector('#dg-o-w-login-fb-text');
+
+    DGW.global.userStats.userId = data.UserId;
+
+    profileImageHolders.forEach(function(image){
+        if (image) image.src = data.ImageUrl || DGW.helpers.checkImagesForSrc(image.getAttribute('src'));
+    });
+
+    DGW.global.userStats.imageUrl = data.ImageUrl || DGW.global.userStats.imageUrl;
+
+    profileNames.forEach(function(name){
+        if (name) name.innerHTML = data.UserName;
+    });
+
+    DGW.global.userStats.name = data.UserName || DGW.global.userStats.name;
+    DGW.global.userStats.facebookId = data.FacebookId;
+
+    points.confirmed.forEach(function(point){
+        if (point) {
+            point.innerHTML = data.Wallet.PointsConfirmed;
+        }
+    });
+    points.pending.forEach(function(point){
+        if (point) point.innerHTML = data.Wallet.PointsPending;
+    });
+
+    credits.confirmed.forEach(function(credit){
+        if (credit) {
+            if (credit.getAttribute('data-round'))
+                credit.innerHTML = data.Wallet.CreditsConfirmed.toFixed(credit.getAttribute('data-round'));
+            else credit.innerHTML = data.Wallet.CreditsConfirmed;
+        }
+    });
+    credits.pending.forEach(function(credit){
+        if (credit) credit.innerHTML = data.Wallet.CreditsPending;
+    });
+
+    DGW.global.userStats.pointsC = data.Wallet.PointsConfirmed;
+    DGW.global.userStats.pointsP = data.Wallet.PointsPending;
+    DGW.global.userStats.creditsC = data.Wallet.CreditsConfirmed;
+    DGW.global.userStats.creditsP = data.Wallet.CreditsPending;
+
+    if (fbAddText && DGW.global.userStats.facebookId !== null) {
+        fbAddText.parentNode.removeChild(fbAddText);
+    }
+
+    if (DGW.global.userStats.earnToday && pr.querySelector('#dg-o-w-profile-earn-today'))
+        pr.querySelector('#dg-o-w-profile-earn-today').innerHTML = 'You can <span class="dg-o-w-color-brand">earn +' + DGW.global.userStats.earnToday + ' points</span> more';
+
+    if (draw) {
+        var betPoints = DGW.main.elements.pages.singleDraw.querySelector('[data-draw-betpoints]');
+        if (betPoints) {
+            betPoints.innerHTML = draw.TicketsAmount || 0;
+        }
+    }
+};
+
+
+DGW.main.methods.updateBadgesInfo = function(){
+    var ba = DGW.global.userStats.badges.all,
+        be = DGW.global.userStats.badges.earned;
+    var pr = DGW.main.elements.pages.profileMain;
+    var wc = DGW.main.elements.widgetContent;
+    var ul = pr.querySelector('.dg-o-w-badges-holder ul');
+
+    ul.innerHTML = '';
+    ba.forEach(function(b){
+        var li = document.createElement('li');
+        li.innerHTML = '<img src="' + b.ImageUrl + '" alt=""/><p class="dg-o-w-color-brand">' + b.Title + '</p>';
+
+        if ( be.filter(function(earned){return earned.BadgeId == b.BadgeId;}).length > 0 ) {
+            //badge was earned
+            DGW.helpers.addClass(li, 'dg-o-w-earned');
+        }
+
+        li.addEventListener('click', function(){
+            showFullBadgePage(ba, b.BadgeId);
+        });
+
+        ul.appendChild(li);
+    });
+
+    function showFullBadgePage(badges, curBadgeId){
+        var submenu = '<div class="dg-o-w-submenu"><ul><li class="dg-o-w-back-draws">&larr; Back</li></ul></div>';
+        var pageContent = '<div class="dg-o-w-badge-single dg-o-w-white-section">' +
+            '<ul></ul><div class="dg-o-w-badge-single-left dg-o-w-arrow dg-o-w-arrow-left"></div><div class="dg-o-w-badge-single-right dg-o-w-arrow dg-o-w-arrow-right"></div></div>';
+        var page = document.createElement('div');
+        page.className = 'dg-o-w-badge-single-page';
+        page.innerHTML = submenu + pageContent;
+        var ul = page.querySelector('.dg-o-w-badge-single ul');
+        var leftBtn = page.querySelector('.dg-o-w-badge-single-left'),
+            rightBtn = page.querySelector('.dg-o-w-badge-single-right');
+
+        var badgesArr = [];
+
+        function hideBadges(){
+            badgesArr.forEach(function(li){
+                DGW.helpers.removeClass(li, 'dg-o-w-active');
+            });
+        }
+
+        function slideBadges(direction){
+            var curB = badgesArr.indexOf(badgesArr.filter(function(b, ind){
+                return DGW.helpers.hasClass(b, 'dg-o-w-active');
+            })[0]);
+
+            // TODO: add slideLeft and slideRight animations
+            hideBadges();
+            if (direction === 'left') {
+                if (curB > 0) {
+                    DGW.helpers.addClass(badgesArr[curB - 1], 'dg-o-w-active');
+                } else {
+                    DGW.helpers.addClass(badgesArr[badgesArr.length - 1], 'dg-o-w-active');
+                }
+            } else {
+                if (curB < badgesArr.length - 1) {
+                    DGW.helpers.addClass(badgesArr[curB + 1], 'dg-o-w-active');
+                } else {
+                    DGW.helpers.addClass(badgesArr[0], 'dg-o-w-active');
+                }
+            }
+        }
+
+        badges.forEach(function(badge){
+            var li = document.createElement('li');
+            li.innerHTML = '<div><img src="' + badge.ImageUrl + '" /><h3>' + badge.Title + '</h3><p>' + badge.Description + '</p></div>';
+            if (badge.BadgeId === curBadgeId) {
+                li.className = 'dg-o-w-active';
+            }
+            if ( be.filter(function(earned){return earned.BadgeId == badge.BadgeId;}).length > 0 ) {
+                //badge was earned
+                DGW.helpers.addClass(li, 'dg-o-w-earned');
+            }
+            badgesArr.push(li);
+            ul.appendChild(li);
+        });
+
+        page.querySelector('.dg-o-w-submenu li').addEventListener('click', function(){
+            wc.removeChild(page);
+        });
+
+        leftBtn.addEventListener('click', function(){
+            slideBadges('left');
+        });
+        rightBtn.addEventListener('click', function(){
+            slideBadges('right');
+        });
+
+        wc.appendChild(page);
+    }
+};
+DGW.main.methods.checkSectionHeight = function() {
+    var section = DGW.main.elements.widgetBody.querySelector('.dg-o-w-section');
+    var sectionContent = DGW.main.elements.widgetBody.querySelector('.dg-o-w-section-content');
+
+    if ( section.querySelector('.dg-o-w-submenu') ) {
+        DGW.helpers.addClass(sectionContent, 'dg-o-w-submenu-only');
+        DGW.helpers.removeClass(sectionContent, 'dg-o-w-submenu-activities');
+        if ( section.querySelector('.dg-o-w-activity-slider-holder') && !DGW.helpers.hasClass(section.querySelector('.dg-o-w-activities'), 'collapsed') ) {
+            DGW.helpers.addClass(sectionContent, 'dg-o-w-submenu-activities');
+            DGW.helpers.removeClass(sectionContent, 'dg-o-w-submenu-only');
+        }
+    }
+};
+
+DGW.main.methods.changeMainState = function(state){
+
+    ga(DGW.global.gaSend, 'pageview', state);
+
+    for (var item in DGW.main.elements.menuItems) {
+        DGW.helpers.removeClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');
+    }
+    DGW.helpers.removeClass(DGW.main.elements.menuItems['profile'].parentNode.parentNode, 'dg-o-w-active');
+
+    if (state === 'profile') {
+        DGW.helpers.addClass(DGW.main.elements.menuItems['profile'].parentNode.parentNode, 'dg-o-w-active');
+    } else {
+        DGW.helpers.addClass(DGW.main.elements.menuItems[state], 'dg-o-w-active');
+    }
+
+    if (DGW.main.elements.widgetContent.children.length > 0) {
+        Array.prototype.slice.call(DGW.main.elements.widgetContent.children).forEach(function(ch){
+            DGW.main.elements.widgetContent.removeChild(ch);
+        });
+    }
+
+    if (DGW.main.currentState !== 'draws') {
+        DGW.helpers.drawsTimer.setDraws([]);
+    }
+    DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'profile-anon');
+    switch (state) {
+        case 'earn':
+            if (DGW.global.authorized) {
+                DGW.global.api.requests.getUserOffers(function(response){
+                    DGW.main.methods.offersConstructor(response);
+                    DGW.global.userStats.earnToday = response.TotalPointsReward;
+                });
+            } else {
+                DGW.global.api.requests.getOffers(function(response){
+                    DGW.main.methods.offersConstructor(response);
+                });
+            }
+            DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.earnMain);
+            break;
+        case 'draws':
+            //TODO: work on this further
+            if (DGW.main.currentState !== 'draws') {
+                DGW.global.api.requests.getDraws(function(){
+                    if (DGW.global.authorized) {
+                        DGW.global.api.requests.getDrawEntries(function(){
+                            DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+                        });
+                    } else {
+                        DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
+                    }
+                });
+                DGW.main.methods.drawSubmenuReset();
+            }
+            DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.drawsMain);
+            break;
+        case 'activities':
+            if (DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').value === 'all-activities') {
+                DGW.global.api.requests.getAllActivities(function(response){
+                    DGW.main.methods.activitiesConstructor(response.Activities);
+                });
+            } else {
+                DGW.global.api.requests.getUserActivities(function(response){
+                    DGW.main.methods.activitiesConstructor(response.Activities);
+                });
+            }
+            DGW.global.api.requests.getLeaderboard(function(response){
+                DGW.main.methods.leaderboardConstructor(response.Earners);
+            });
+            DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.activitiesMain);
+            break;
+        case 'profile':
+            if ( DGW.global.authorized ) {
+                DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.profileMain);
+                DGW.global.api.requests.getUser();
+                DGW.global.api.requests.getAllBadges(function(response){
+                    DGW.global.userStats.badges.all = response.Badges;
+                    DGW.global.api.requests.getEarnedBadges(function(response){
+                        DGW.global.userStats.badges.earned = response.EarnedBadges;
+                        DGW.main.methods.updateBadgesInfo();
+                    });
+                });
+            } else {
+                DGW.helpers.addClass(DGW.main.elements.widgetBody, 'profile-anon');
+                DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.loginMain);
+            }
+            break;
+        case 'friends':
+            DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.friendsMain);
+            break;
+        default:
+
+    }
+
+    Array.prototype.slice.call(DGW.main.elements.widgetContent.querySelectorAll('.avatar')).forEach(function(img){
+        img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
+    });
+
+    DGW.main.methods.hideNotificationBar();
+
+    DGW.main.currentState = state;
+    DGW.main.methods.setRewardedActions();
+    DGW.main.methods.checkSectionHeight();
+};
+
+DGW.main.methods.initEvents = function () {
+    DGW.main.methods.fillDefaultValues();
+
+// Login header
+    // filling avatar images with default pictures
+    Array.prototype.slice.call(DGW.main.elements.widget.querySelectorAll('.avatar')).forEach(function(img){
+        img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
+    });
+
+    // handling close button
+    DGW.main.elements.widget.querySelector('.dg-o-w-close').addEventListener('click', DGW.main.methods.hideWidget);
+
+    // main widget, main menu clicks
+    for (var item in DGW.main.elements.menuItems) {
+        DGW.main.elements.menuItems[item].addEventListener('click', function(item){
+            return function(){
+                if (item == 'profileRegistered') item = 'profile';
+                DGW.main.methods.changeMainState(item);
+            };
+        }(item));
+    }
+
+//Login page and form
+    DGW.main.methods.loginInit();
+//Activities page
+    DGW.main.methods.activitiesInit();
+//Draws page clicks
+    DGW.main.methods.drawsInit();
+//Profile page clicks
+    DGW.main.methods.profileInit();
+
+//Widget internal links
+    DGW.helpers.openDataLinks(Array.prototype.slice.call(DGW.main.elements.widgetBody.querySelectorAll('[data-link]')));
+
+//Notification clicks
+    DGW.main.elements.pages.notificationHolder.querySelector('.dg-o-w-notification-close').addEventListener('click', function(){
+        DGW.main.methods.hideNotificationBar();
+    });
+
+//Frame/iframe holder back button init
+    DGW.main.elements.frameHolder.querySelector('.dg-o-w-back-btn').addEventListener('click', function(){
+        var fh = DGW.main.elements.frameHolder,
+            wb = DGW.main.elements.widgetBodyWrapper;
+        DGW.helpers.addClass(fh, 'dg-o-w-hidden');
+        setTimeout(function(){
+            fh.querySelector('.dg-o-w-iframe-holder').innerHTML = '';
+            DGW.helpers.removeClass(fh, 'dg-o-w-hidden');
+            wb.removeChild(fh);
+        }, 300);
+    });
+};
+
+DGW.main.methods.resetStates = function(){
+    DGW.main.elements.widgetBody.querySelector('.dg-o-w-menu-profile .profile-menu-item img').src = DGW.helpers.checkImagesForSrc();
+    DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').value = 'all-activities';
+    DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'email-sign-up');
+    DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'password');
+    DGW.main.methods.headerLoginHide();
+    DGW.main.methods.fillDefaultValues();
+
+    // clearing private cache
+    DGW.main.cache.drawsEntries = [];
+};
+
+DGW.main.methods.fillDefaultValues = function(){
+
+    var hiddenDrawsChkBox = DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired');
+    var getWinnerInterval = setInterval(function(){
+        if (DGW.global.cache.last.prize) {
+            var l = DGW.main.elements.pages.loginMain.querySelector('#dg-o-w-login-prize-title');
+            if (l) l.innerHTML = 'Today you can win ' + DGW.global.cache.last.prize.Title;
+            clearInterval(getWinnerInterval);
+        }
+    }, 50);
+
+    if (DGW.main.settings.draws.showExpired) {
+        hiddenDrawsChkBox.checked = true;
+        DGW.helpers.addClass(DGW.main.elements.widgetBody, 'draws-expired');
+    } else {
+        hiddenDrawsChkBox.checked = false;
+        DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'draws-expired');
+    }
+};
+
+
+DGW.main.methods.setRewardedActions = function(w, a){
+    if (!w) w = DGW.main.elements.widget;
+    if (!a) a = DGW.main.cache.rewardedActions;
+    if (w.querySelector('.dg-o-w-rewarded-action') && a.length > 0) {
+        if (w.querySelector('#dg-o-w-login-fb-reward')) {
+            if (a.filter(function(action){return action.Type == 'FacebookConnect'}).length > 0)
+                w.querySelector('#dg-o-w-login-fb-reward').innerHTML = a.filter(function(action){return action.Type == 'FacebookConnect'})[0].PointsReward;
+        }
+        if (w.querySelector('#dg-o-w-friends-sign-up-reward')) {
+            if (a.filter(function(action){return action.Type == 'FriendSignUp'}).length > 0)
+                w.querySelector('#dg-o-w-friends-sign-up-reward').innerHTML = a.filter(function(action){return action.Type == 'FriendSignUp'})[0].PointsReward;
+        }
+        if (w.querySelector('#dg-o-w-facebook-like-reward')) {
+            if (a.filter(function(action){return action.Type == 'FacebookShare'}).length > 0)
+                w.querySelector('#dg-o-w-facebook-like-reward').innerHTML = ' and get +' + a.filter(function(action){return action.Type == 'FacebookShare'})[0].PointsReward + ' points';
+            else w.querySelector('#dg-o-w-facebook-like-reward').innerHTML = '';
+        }
+        if (w.querySelector('#dg-o-w-tweeter-like-reward')) {
+            if (a.filter(function(action){return action.Type == 'TwitterShare'}).length > 0)
+                w.querySelector('#dg-o-w-tweeter-like-reward').innerHTML = ' and get +' + a.filter(function(action){return action.Type == 'TwitterShare'})[0].PointsReward + ' points';
+            else w.querySelector('#dg-o-w-tweeter-like-reward').innerHTML = '';
+        }
+    }
+};
+
+DGW.main.methods.notificationConstructor = function(lis, _type) {
+    var ul = DGW.main.elements.pages.notificationHolder.querySelector('ul');
+        ul.innerHTML = '';
+    if (!_type) _type = 'success';
+
+    if (DGW.helpers.isArray(lis)) {
+        lis.forEach(function(el){
+            var li = document.createElement('li');
+            li.innerHTML = el;
+            ul.appendChild(li);
+        });
+        DGW.main.methods.showNotificationBar(_type);
+    } else if (typeof lis == 'string'){
+        var li = document.createElement('li');
+        li.innerHTML = lis;
+        ul.appendChild(li);
+        DGW.main.methods.showNotificationBar(_type);
+    } else {
+        DGW.helpers.console.warn('Notification parameters are not of the type of [Array] or String');
+    }
 };
 DGW.global.offers.requests.shareOfferFb = function(offerId){
     DGW.helpers.centerWindowPopup(DGW.global.envPath +
@@ -2188,1517 +3709,6 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
 DGW.global.offers.requests.openExternalLink = function(src){
     DGW.helpers.showFramedSrc(src);
 };
-DGW.side.methods.initEvents = function(){
-    if (!DGW.global.launched) {
-        // Showing side widget
-        DGW.side.methods.showWidget();
-        DGW.global.launched = true;
-    }
-
-    var wBody = DGW.side.elements.widgetBody;
-    var cta = wBody.querySelector('.dg-side-click-holder');
-
-    wBody.removeEventListener('click', DGW.global.api.requests.safariFix);
-
-    if (cta) {
-        cta.addEventListener('click', function () {
-            if (cta.getAttribute('data-page') != null) {
-                DGW.main.currentState = cta.getAttribute('data-page');
-            }
-            if (!DGW.main.shown) {
-                DGW.main.methods.showWidget();
-            } else {
-                DGW.main.methods.changeMainState(DGW.main.currentState);
-            }
-        });
-    }
-
-    DGW.helpers.imagesResponsivePaths(wBody.querySelectorAll('[data-image]'));
-};
-
-DGW.side.methods.initSafariFixEvents = function(){
-    var wBody = DGW.side.elements.widgetBody;
-    DGW.side.methods.showWidget();
-
-    wBody.addEventListener('click', DGW.global.api.requests.safariFix);
-
-    DGW.helpers.imagesResponsivePaths(wBody.querySelectorAll('[data-image]'));
-};
-
-DGW.side.methods.changeSideWidgetState = function(state) {
-    var swc = DGW.side.elements.widgetContent;
-    var wb = DGW.side.elements.widgetBody;
-    var cc = wb.querySelector('.dg-side-click-holder');
-    var mainCta;
-
-    var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
-
-    swc.innerHTML = '';
-
-    //TODO: TEMP place with randomized states
-    /*var states = ['profile', 'draws'];
-    if(!state) state = states[Math.round(Math.random())];*/
-    var actions = ['earn', 'play'];
-    var curAction = actions[Math.floor(Math.random() * actions.length)];
-
-    switch(state){
-        case 'draws':
-            cc.setAttribute('data-page', 'draws');
-            swc.innerHTML = DGW.templates.side.draw;
-            break;
-        default:
-            // PROFILE or SIGNUP pages
-            cc.setAttribute('data-page', 'profile');
-            if (DGW.global.authorized) {
-                swc.innerHTML = DGW.templates.side.registeredProfile;
-                swc.innerHTML += DGW.templates.side.actions[curAction];
-            } else {
-                swc.innerHTML = DGW.templates.side.draw;
-            }
-    }
-
-    mainCta = swc.querySelector('[data-page]');
-    if (mainCta) cc.setAttribute('data-page', mainCta.getAttribute('data-page'));
-
-    if (isSafari && !DGW.global.safariFix) {
-        DGW.side.methods.initSafariFixEvents();
-    } else {
-        DGW.side.methods.initEvents();
-    }
-};
-
-DGW.side.methods.showNotification = function(notification) {
-    var wb = DGW.side.elements.widgetBody;
-    var nh = wb.querySelector('.dg-side-notification-holder');
-    nh.innerHTML = DGW.templates.side.notifications[notification];
-};
-
-DGW.side.methods.hideNotification = function() {
-    DGW.side.elements.widgetBody.querySelector('.dg-side-notification-holder').innerHTML = '';
-};
-DGW.main.methods.checkSectionHeight = function() {
-    var section = DGW.main.elements.widgetBody.querySelector('.dg-o-w-section');
-    var sectionContent = DGW.main.elements.widgetBody.querySelector('.dg-o-w-section-content');
-
-    if ( section.querySelector('.dg-o-w-submenu') ) {
-        DGW.helpers.addClass(sectionContent, 'dg-o-w-submenu-only');
-        DGW.helpers.removeClass(sectionContent, 'dg-o-w-submenu-activities');
-        if ( section.querySelector('.dg-o-w-activity-slider-holder') && !DGW.helpers.hasClass(section.querySelector('.dg-o-w-activities'), 'collapsed') ) {
-            DGW.helpers.addClass(sectionContent, 'dg-o-w-submenu-activities');
-            DGW.helpers.removeClass(sectionContent, 'dg-o-w-submenu-only');
-        }
-    }
-};
-
-DGW.main.methods.changeMainState = function(state){
-
-    ga(DGW.global.gaSend, 'pageview', state);
-
-    for (var item in DGW.main.elements.menuItems) {
-        DGW.helpers.removeClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');
-    }
-    DGW.helpers.removeClass(DGW.main.elements.menuItems['profile'].parentNode.parentNode, 'dg-o-w-active');
-
-    if (state === 'profile') {
-        DGW.helpers.addClass(DGW.main.elements.menuItems['profile'].parentNode.parentNode, 'dg-o-w-active');
-    } else {
-        DGW.helpers.addClass(DGW.main.elements.menuItems[state], 'dg-o-w-active');
-    }
-
-    if (DGW.main.elements.widgetContent.children.length > 0) {
-        Array.prototype.slice.call(DGW.main.elements.widgetContent.children).forEach(function(ch){
-            DGW.main.elements.widgetContent.removeChild(ch);
-        });
-    }
-
-    if (DGW.main.currentState !== 'draws') {
-        DGW.helpers.drawsTimer.setDraws([]);
-    }
-    DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'profile-anon');
-    switch (state) {
-        case 'earn':
-            if (DGW.global.authorized) {
-                DGW.global.api.requests.getUserOffers(function(response){
-                    DGW.main.methods.offersConstructor(response);
-                    DGW.global.userStats.earnToday = response.TotalPointsReward;
-                });
-            } else {
-                DGW.global.api.requests.getOffers(function(response){
-                    DGW.main.methods.offersConstructor(response);
-                });
-            }
-            DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.earnMain);
-            break;
-        case 'draws':
-            //TODO: work on this further
-            if (DGW.main.currentState !== 'draws') {
-                DGW.global.api.requests.getDraws(function(){
-                    if (DGW.global.authorized) {
-                        DGW.global.api.requests.getDrawEntries(function(){
-                            DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
-                        });
-                    } else {
-                        DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
-                    }
-                });
-                DGW.main.methods.drawSubmenuReset();
-            }
-            DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.drawsMain);
-            break;
-        case 'activities':
-            if (DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').value === 'all-activities') {
-                DGW.global.api.requests.getAllActivities(function(response){
-                    DGW.main.methods.activitiesConstructor(response.Activities);
-                });
-            } else {
-                DGW.global.api.requests.getUserActivities(function(response){
-                    DGW.main.methods.activitiesConstructor(response.Activities);
-                });
-            }
-            DGW.global.api.requests.getLeaderboard(function(response){
-                DGW.main.methods.leaderboardConstructor(response.Earners);
-            });
-            DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.activitiesMain);
-            break;
-        case 'profile':
-            if ( DGW.global.authorized ) {
-                DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.profileMain);
-                DGW.global.api.requests.getUser();
-                DGW.global.api.requests.getAllBadges(function(response){
-                    DGW.global.userStats.badges.all = response.Badges;
-                    DGW.global.api.requests.getEarnedBadges(function(response){
-                        DGW.global.userStats.badges.earned = response.EarnedBadges;
-                        DGW.main.methods.updateBadgesInfo();
-                    });
-                });
-            } else {
-                DGW.helpers.addClass(DGW.main.elements.widgetBody, 'profile-anon');
-                DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.loginMain);
-            }
-            break;
-        case 'friends':
-            DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.friendsMain);
-            break;
-        default:
-
-    }
-
-    Array.prototype.slice.call(DGW.main.elements.widgetContent.querySelectorAll('.avatar')).forEach(function(img){
-        img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
-    });
-
-    DGW.main.methods.hideNotificationBar();
-
-    DGW.main.currentState = state;
-    DGW.main.methods.setRewardedActions();
-    DGW.main.methods.checkSectionHeight();
-};
-
-DGW.main.methods.initEvents = function () {
-    DGW.main.methods.fillDefaultValues();
-
-// Login header
-    // filling avatar images with default pictures
-    Array.prototype.slice.call(DGW.main.elements.widget.querySelectorAll('.avatar')).forEach(function(img){
-        img.src = DGW.helpers.checkImagesForSrc(img.getAttribute('src'));
-    });
-
-    // handling close button
-    DGW.main.elements.widget.querySelector('.dg-o-w-close').addEventListener('click', DGW.main.methods.hideWidget);
-
-    // main widget, main menu clicks
-    for (var item in DGW.main.elements.menuItems) {
-        DGW.main.elements.menuItems[item].addEventListener('click', function(item){
-            return function(){
-                if (item == 'profileRegistered') item = 'profile';
-                DGW.main.methods.changeMainState(item);
-            };
-        }(item));
-    }
-
-    // login dropdown menu
-    (function headerLoginFormTriggers(){
-        var link = DGW.main.elements.loginMenuButton;
-        var linkP = link.parentNode;
-        var form = linkP.querySelector('.dg-o-w-email-login-form');
-        var formClose = form.querySelector('#dg-o-w-header-form-close');
-        var heading = form.querySelector('#dg-o-w-login-heading');
-
-        DGW.main.methods.headerLoginShow = function(headingText){
-            headingText = headingText || 'Welcome!';
-            heading.innerHTML = headingText;
-            DGW.helpers.addClass(form, 'visible');
-            setTimeout(function () {
-                DGW.helpers.addClass(linkP, 'shown');
-                form.querySelector('input').focus();
-            }, 100);
-        };
-        DGW.main.methods.headerLoginHide = function(){
-            DGW.helpers.removeClass(linkP, 'shown');
-            setTimeout(function () {
-                DGW.helpers.removeClass(form, 'visible');
-                Array.prototype.slice.call(form.querySelectorAll(':not([type=submit])'))
-                    .forEach(function(input){
-                        input.value = '';
-                    });
-                DGW.main.methods.headerLoginReset();
-            }, 310);
-        };
-
-        function triggerLoginForm(){
-            if (DGW.helpers.hasClass(linkP, 'shown')) {
-                DGW.main.methods.headerLoginHide();
-            } else {
-                DGW.main.methods.headerLoginShow();
-            }
-        }
-
-
-        link.addEventListener('click', triggerLoginForm);
-        formClose.addEventListener('click', DGW.main.methods.headerLoginHide);
-    })();
-
-    DGW.main.elements.widget.querySelector('#dg-o-w-header-fb-connect').addEventListener('click', function(ev){
-        ev.preventDefault();
-        DGW.global.api.requests.connectFB();
-    });
-
-    // login form submit
-    var topLoginForm = DGW.main.elements.widgetBody.querySelector('#dg-o-w-form-login-top');
-    var topForgotForm = DGW.main.elements.widgetBody.querySelector('#dg-o-w-form-forgot-top');
-
-    (function topLoginInit(){
-        var noUserRXP = /not\sfound/;
-        var emailF = topLoginForm.querySelector('[type=email]'),
-            passF = topLoginForm.querySelector('[type=password]'),
-            nameF = topLoginForm.querySelector('[type=text]'),
-            btn = topLoginForm.querySelector('[type=submit]');
-        var btnVal = btn.value;
-        var trySignIn = function(ev){
-                ev.preventDefault();
-                DGW.main.methods.hideNotificationBar();
-                DGW.global.api.requests.signIn({
-                    Email: emailF.value,
-                    Password: passF.value
-                }, function onSuccess(){
-                    DGW.main.methods.notificationConstructor(['Welcome back, ' + DGW.global.userStats.name, 'Have a look at our new offers!']);
-                }, function onError(result){
-                    var err = DGW.helpers.errorParser(result).messages;
-                    if (noUserRXP.test(err)) {
-                        DGW.helpers.removeClass(nameF.parentNode, 'dg-o-w-hidden');
-                        nameF.focus();
-                        topLoginForm.removeEventListener('submit', trySignIn);
-                        topLoginForm.addEventListener('submit', trySignUp);
-                        btn.value = 'Sign up with email';
-                    } else {
-                        DGW.main.methods.notificationConstructor(err, 'error');
-                    }
-                });
-            },
-            trySignUp = function(ev){
-                ev.preventDefault();
-
-                DGW.main.methods.hideNotificationBar();
-                DGW.global.api.requests.signUp({
-                    Email: emailF.value,
-                    Password: passF.value,
-                    Username: nameF.value
-                }, function onSuccess(){
-                    DGW.main.methods.notificationConstructor(['Hi, ' + nameF.value + '! ', 'Welcome to ' + DGW.global.club.name + ' rewarded widget.']);
-                }, function onError(result){
-                    var err = DGW.helpers.errorParser(result).messages;
-                    DGW.main.methods.notificationConstructor(err, 'error');
-                });
-            };
-
-        topLoginForm.addEventListener('submit', trySignIn);
-
-        DGW.main.methods.headerLoginReset = function(){
-            topLoginForm.removeEventListener('submit', trySignUp);
-            topLoginForm.addEventListener('submit', trySignIn);
-            DGW.helpers.addClass(nameF.parentNode, 'dg-o-w-hidden');
-            btn.value = btnVal;
-        };
-    })();
-
-    topForgotForm.addEventListener('submit', function(ev){
-        ev.preventDefault();
-        var that = this;
-        var emailF = that.querySelector('[type=email]').value;
-        DGW.global.api.requests.forgotPass(emailF,
-            function onSuccess(){
-                DGW.main.methods.notificationConstructor('Check your email to confirm the new password.');
-            }, function onError(result){
-                DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
-            });
-    });
-    topLoginForm.querySelector('#dg-o-w-header-forgot-pass').addEventListener('click', function(ev){
-        ev.preventDefault();
-        DGW.helpers.removeClass(topLoginForm, 'shown');
-        DGW.helpers.addClass(topForgotForm, 'shown');
-    });
-    topForgotForm.querySelector('a').addEventListener('click', function(ev){
-        ev.preventDefault();
-        DGW.helpers.removeClass(topForgotForm, 'shown');
-        DGW.helpers.addClass(topLoginForm, 'shown');
-    });
-
-//Activities page
-    DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').addEventListener('change', function(){
-        if (this.value === 'all-activities') {
-            DGW.global.api.requests.getAllActivities(function(response){
-                DGW.main.methods.activitiesConstructor(response.Activities);
-            });
-        } else {
-            DGW.global.api.requests.getUserActivities(function(response){
-                DGW.main.methods.activitiesConstructor(response.Activities);
-            });
-        }
-    });
-
-
-//Footer login init
-    DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-email-login').addEventListener('click', function (ev) {
-        ev.preventDefault();
-        DGW.main.methods.headerLoginShow();
-    });
-    DGW.main.elements.loginFooter.querySelector('#dg-o-w-footer-fb-connect').addEventListener('click', function(ev){
-        ev.preventDefault();
-        DGW.global.api.requests.connectFB();
-    });
-
-// widget internal links
-    DGW.helpers.openDataLinks(Array.prototype.slice.call(DGW.main.elements.widgetBody.querySelectorAll('[data-link]')));
-
-
-//Draws page clicks
-    DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired').addEventListener('change', function (ev) {
-        DGW.main.settings.draws.showExpired = this.checked;
-        DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
-    });
-
-//Draw filters
-    (function(){
-        var hiddenDrawsChkBox = DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired');
-        var submenuItems = Array.prototype.slice.call(DGW.main.elements.pages.drawsMain.querySelectorAll('.dg-o-w-submenu ul li'));
-        function removeActive(){
-            submenuItems.forEach(function(item){
-                DGW.helpers.removeClass(item, 'dg-o-w-active');
-            });
-        }
-
-        function hideFinishedDraws(){
-            hiddenDrawsChkBox.checked = false;
-            DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'draws-expired');
-            hiddenDrawsChkBox.parentNode.style.display = 'none';
-        }
-        function showFinishedDraws(){
-            if (DGW.main.settings.draws.showExpired) {
-                hiddenDrawsChkBox.checked = true;
-                DGW.helpers.addClass(DGW.main.elements.widgetBody, 'draws-expired');
-            }
-            hiddenDrawsChkBox.parentNode.style.display = 'block';
-        }
-
-        DGW.main.methods.changeDrawsSubmenu = function(state){
-            submenuItems.filter(function(item){
-                return item.id == state;
-            })[0].click();
-        };
-
-        submenuItems.forEach(function(item){
-            item.addEventListener('click', function(){
-                removeActive();
-                DGW.helpers.addClass(this, 'dg-o-w-active');
-                DGW.main.settings.draws.currentSubMenu = this.id;
-                switch (this.id) {
-                    case 'dg-o-w-show-all-draws':
-                        DGW.main.cache.drawsList.sort(function(a,b){
-                            return new Date(b.EndDate) - new Date(a.EndDate)
-                        });
-
-                        showFinishedDraws();
-
-                        DGW.main.methods.drawsConstructor(DGW.main.cache);
-                        break;
-                    case 'dg-o-w-show-finished-soon':
-                        var expArr = DGW.main.cache.drawsList.filter(function(draw){
-                            return DGW.helpers.dateDiff(draw.EndDate) <= 0;
-                        });
-                        var actArr = DGW.main.cache.drawsList.filter(function(draw){
-                            return DGW.helpers.dateDiff(draw.EndDate) > 0;
-                        }).sort(function(a, b){
-                            return new Date(a.EndDate) - new Date(b.EndDate);
-                        });
-
-                        DGW.main.cache.drawsList = actArr.concat(expArr);
-
-                        hideFinishedDraws();
-                        DGW.main.methods.drawsConstructor(DGW.main.cache, 'close-to-finish');
-                        break;
-                    case 'dg-o-w-show-my-draws':
-                        var myDraws = [];
-                        DGW.main.cache.drawsEntries.forEach(function(drawE){
-                            DGW.main.cache.drawsList.filter(function(draw){
-                                if (draw.DrawId == drawE.DrawId) {
-                                    myDraws.push(draw);
-                                }
-                            });
-                        });
-                        DGW.main.cache.drawsList = DGW.main.cache.drawsList.sort(function(a,b){
-                            return new Date(b.EndDate) - new Date(a.EndDate)
-                        });
-
-                        showFinishedDraws();
-                        DGW.main.methods.drawsConstructor({drawsList: myDraws, drawsEntries: DGW.main.cache.drawsEntries}, 'my-draws');
-                        break;
-                    case 'dg-o-w-show-games':
-                        hideFinishedDraws();
-                        DGW.main.methods.gamesConstructor();
-                        break;
-                }
-            });
-        });
-        DGW.main.methods.drawSubmenuReset = function(){
-            removeActive();
-            DGW.helpers.addClass(DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-all-draws'), 'dg-o-w-active');
-        };
-    })();
-
-//Profile page clicks
-    DGW.main.elements.pages.profileMain.querySelector('#dg-o-w-login-fb-text').addEventListener('click', function(){
-        DGW.global.api.requests.connectFB();
-    });
-    DGW.main.elements.pages.profileMain.querySelector('#dg-o-w-sign-out-btn').addEventListener('click', function (ev) {
-        ev.preventDefault();
-        DGW.global.api.requests.signOut();
-    });
-
-    DGW.helpers.getElementsFromAllPlaces('[data-page]', 'main').forEach(function(el){
-        el.addEventListener('click', function(ev){
-            ev.preventDefault();
-            DGW.main.methods.changeMainState(el.getAttribute('data-page'));
-        });
-
-    });
-
-//Notification clicks
-    DGW.main.elements.pages.notificationHolder.querySelector('.dg-o-w-notification-close').addEventListener('click', function(){
-        DGW.main.methods.hideNotificationBar();
-    });
-
-};
-
-DGW.main.methods.resetStates = function(){
-    DGW.main.elements.widgetBody.querySelector('.dg-o-w-menu-profile .profile-menu-item img').src = DGW.helpers.checkImagesForSrc();
-    DGW.main.elements.pages.activitiesMain.querySelector('#dg-o-w-activities-filter').value = 'all-activities';
-    DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'email-sign-up');
-    DGW.helpers.removeClass(DGW.main.elements.loginFooter, 'password');
-    DGW.main.methods.headerLoginHide();
-    DGW.main.methods.fillDefaultValues();
-
-    // clearing private cache
-    DGW.main.cache.drawsEntries = [];
-};
-
-DGW.main.methods.fillDefaultValues = function(){
-
-    var hiddenDrawsChkBox = DGW.main.elements.pages.drawsMain.querySelector('#dg-o-w-show-expired');
-    var getWinnerInterval = setInterval(function(){
-        if (DGW.global.cache.last.prize) {
-            var l = DGW.main.elements.pages.loginMain.querySelector('#dg-o-w-login-prize-title');
-            if (l) l.innerHTML = 'Today you can win ' + DGW.global.cache.last.prize.Title;
-            clearInterval(getWinnerInterval);
-        }
-    }, 50);
-
-    if (DGW.main.settings.draws.showExpired) {
-        hiddenDrawsChkBox.checked = true;
-        DGW.helpers.addClass(DGW.main.elements.widgetBody, 'draws-expired');
-    } else {
-        hiddenDrawsChkBox.checked = false;
-        DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'draws-expired');
-    }
-};
-
-
-DGW.main.methods.setRewardedActions = function(w, a){
-    if (!w) w = DGW.main.elements.widget;
-    if (!a) a = DGW.main.cache.rewardedActions;
-    if (w.querySelector('.dg-o-w-rewarded-action') && a.length > 0) {
-        if (w.querySelector('#dg-o-w-login-fb-reward')) {
-            if (a.filter(function(action){return action.Type == 'FacebookConnect'}).length > 0)
-                w.querySelector('#dg-o-w-login-fb-reward').innerHTML = a.filter(function(action){return action.Type == 'FacebookConnect'})[0].PointsReward;
-        }
-        if (w.querySelector('#dg-o-w-friends-sign-up-reward')) {
-            if (a.filter(function(action){return action.Type == 'FriendSignUp'}).length > 0)
-                w.querySelector('#dg-o-w-friends-sign-up-reward').innerHTML = a.filter(function(action){return action.Type == 'FriendSignUp'})[0].PointsReward;
-        }
-        if (w.querySelector('#dg-o-w-facebook-like-reward')) {
-            if (a.filter(function(action){return action.Type == 'FacebookShare'}).length > 0)
-                w.querySelector('#dg-o-w-facebook-like-reward').innerHTML = ' and get +' + a.filter(function(action){return action.Type == 'FacebookShare'})[0].PointsReward + ' points';
-            else w.querySelector('#dg-o-w-facebook-like-reward').innerHTML = '';
-        }
-        if (w.querySelector('#dg-o-w-tweeter-like-reward')) {
-            if (a.filter(function(action){return action.Type == 'TwitterShare'}).length > 0)
-                w.querySelector('#dg-o-w-tweeter-like-reward').innerHTML = ' and get +' + a.filter(function(action){return action.Type == 'TwitterShare'})[0].PointsReward + ' points';
-            else w.querySelector('#dg-o-w-tweeter-like-reward').innerHTML = '';
-        }
-    }
-};
-
-DGW.main.methods.profileSetData = function(data, draw) {
-    var pr = DGW.main.elements.pages.profileMain;
-    var wb = DGW.main.elements.widgetBody;
-    var sb = DGW.side.elements.widgetBody;
-    var profileImageHolders = DGW.helpers.getElementsFromAllPlaces('[data-userstats-userimage]'),
-        profileNames = DGW.helpers.getElementsFromAllPlaces('[data-userstats-username]'),
-        friendsNumber = pr.querySelector('#profileFriendsAmount');
-
-    var points = {
-            confirmed: DGW.helpers.getElementsFromAllPlaces('[data-userstats-points-c]'),
-            pending: [pr.querySelector('.dg-o-w-profile-points h5')]
-        },
-        credits = {
-            confirmed: DGW.helpers.getElementsFromAllPlaces('[data-userstats-credits-c]'),
-            pending: [pr.querySelector('.dg-o-w-profile-credits h5')]
-        };
-
-    var fbAddText = pr.querySelector('#dg-o-w-login-fb-text');
-
-    DGW.global.userStats.userId = data.UserId;
-
-    profileImageHolders.forEach(function(image){
-        if (image) image.src = data.ImageUrl || DGW.helpers.checkImagesForSrc(image.getAttribute('src'));
-    });
-
-    DGW.global.userStats.imageUrl = data.ImageUrl || DGW.global.userStats.imageUrl;
-
-    profileNames.forEach(function(name){
-        if (name) name.innerHTML = data.UserName;
-    });
-
-    DGW.global.userStats.name = data.UserName || DGW.global.userStats.name;
-    DGW.global.userStats.facebookId = data.FacebookId;
-
-    points.confirmed.forEach(function(point){
-        if (point) {
-            point.innerHTML = data.Wallet.PointsConfirmed;
-        }
-    });
-    points.pending.forEach(function(point){
-        if (point) point.innerHTML = data.Wallet.PointsPending;
-    });
-
-    credits.confirmed.forEach(function(credit){
-        if (credit) {
-            if (credit.getAttribute('data-round'))
-                credit.innerHTML = data.Wallet.CreditsConfirmed.toFixed(credit.getAttribute('data-round'));
-            else credit.innerHTML = data.Wallet.CreditsConfirmed;
-        }
-    });
-    credits.pending.forEach(function(credit){
-        if (credit) credit.innerHTML = data.Wallet.CreditsPending;
-    });
-
-    DGW.global.userStats.pointsC = data.Wallet.PointsConfirmed;
-    DGW.global.userStats.pointsP = data.Wallet.PointsPending;
-    DGW.global.userStats.creditsC = data.Wallet.CreditsConfirmed;
-    DGW.global.userStats.creditsP = data.Wallet.CreditsPending;
-
-    if (fbAddText && DGW.global.userStats.facebookId !== null) {
-        fbAddText.parentNode.removeChild(fbAddText);
-    }
-
-    if (DGW.global.userStats.earnToday && pr.querySelector('#dg-o-w-profile-earn-today'))
-        pr.querySelector('#dg-o-w-profile-earn-today').innerHTML = 'You can <span class="dg-o-w-color-brand">earn +' + DGW.global.userStats.earnToday + ' points</span> more';
-
-    if (draw) {
-        var betPoints = DGW.main.elements.pages.singleDraw.querySelector('[data-draw-betpoints]');
-        if (betPoints) {
-            betPoints.innerHTML = draw.TicketsAmount || 0;
-        }
-    }
-};
-
-
-DGW.main.methods.updateBadgesInfo = function(){
-    var ba = DGW.global.userStats.badges.all,
-        be = DGW.global.userStats.badges.earned;
-    var pr = DGW.main.elements.pages.profileMain;
-    var wc = DGW.main.elements.widgetContent;
-    var ul = pr.querySelector('.dg-o-w-badges-holder ul');
-
-    ul.innerHTML = '';
-    ba.forEach(function(b){
-        var li = document.createElement('li');
-        li.innerHTML = '<img src="' + b.ImageUrl + '" alt=""/><p class="dg-o-w-color-brand">' + b.Title + '</p>';
-
-        if ( be.filter(function(earned){return earned.BadgeId == b.BadgeId;}).length > 0 ) {
-            //badge was earned
-            DGW.helpers.addClass(li, 'dg-o-w-earned');
-        }
-
-        li.addEventListener('click', function(){
-            showFullBadgePage(ba, b.BadgeId);
-        });
-
-        ul.appendChild(li);
-    });
-
-    function showFullBadgePage(badges, curBadgeId){
-        var submenu = '<div class="dg-o-w-submenu"><ul><li class="dg-o-w-back-draws">&larr; Back</li></ul></div>';
-        var pageContent = '<div class="dg-o-w-badge-single dg-o-w-white-section">' +
-            '<ul></ul><div class="dg-o-w-badge-single-left dg-o-w-arrow dg-o-w-arrow-left"></div><div class="dg-o-w-badge-single-right dg-o-w-arrow dg-o-w-arrow-right"></div></div>';
-        var page = document.createElement('div');
-            page.className = 'dg-o-w-badge-single-page';
-            page.innerHTML = submenu + pageContent;
-        var ul = page.querySelector('.dg-o-w-badge-single ul');
-        var leftBtn = page.querySelector('.dg-o-w-badge-single-left'),
-            rightBtn = page.querySelector('.dg-o-w-badge-single-right');
-
-        var badgesArr = [];
-
-        function hideBadges(){
-            badgesArr.forEach(function(li){
-                DGW.helpers.removeClass(li, 'dg-o-w-active');
-            });
-        }
-
-        function slideBadges(direction){
-            var curB = badgesArr.indexOf(badgesArr.filter(function(b, ind){
-               return DGW.helpers.hasClass(b, 'dg-o-w-active');
-            })[0]);
-
-            // TODO: add slideLeft and slideRight animations
-            hideBadges();
-            if (direction === 'left') {
-                if (curB > 0) {
-                    DGW.helpers.addClass(badgesArr[curB - 1], 'dg-o-w-active');
-                } else {
-                    DGW.helpers.addClass(badgesArr[badgesArr.length - 1], 'dg-o-w-active');
-                }
-            } else {
-                if (curB < badgesArr.length - 1) {
-                    DGW.helpers.addClass(badgesArr[curB + 1], 'dg-o-w-active');
-                } else {
-                    DGW.helpers.addClass(badgesArr[0], 'dg-o-w-active');
-                }
-            }
-        }
-
-        badges.forEach(function(badge){
-            var li = document.createElement('li');
-            li.innerHTML = '<div><img src="' + badge.ImageUrl + '" /><h3>' + badge.Title + '</h3><p>' + badge.Description + '</p></div>';
-            if (badge.BadgeId === curBadgeId) {
-                li.className = 'dg-o-w-active';
-            }
-            if ( be.filter(function(earned){return earned.BadgeId == badge.BadgeId;}).length > 0 ) {
-                //badge was earned
-                DGW.helpers.addClass(li, 'dg-o-w-earned');
-            }
-            badgesArr.push(li);
-            ul.appendChild(li);
-        });
-
-        page.querySelector('.dg-o-w-submenu li').addEventListener('click', function(){
-            wc.removeChild(page);
-        });
-
-        leftBtn.addEventListener('click', function(){
-            slideBadges('left');
-        });
-        rightBtn.addEventListener('click', function(){
-            slideBadges('right');
-        });
-
-        wc.appendChild(page);
-    }
-
-};
-
-DGW.main.methods.gamesConstructor = function(){
-    var dp = DGW.main.elements.pages.drawsMain;
-    var dpCont = dp.querySelector('.dg-o-w-section-content');
-    var gamesList = dp.querySelector('.dg-o-w-list-draws');
-    gamesList.innerHTML = '';
-
-    var emptyMessageEl = document.createElement('div');
-    DGW.helpers.addClass(emptyMessageEl, 'dg-o-w-draws-empty');
-
-    if (dpCont.children.length > 1) dpCont.removeChild(dpCont.childNodes[1]);
-
-    emptyMessageEl.innerHTML = '<h2>Hi, we are glad to see you here, games will be available very soon!</h2></div>';
-    dpCont.appendChild(emptyMessageEl);
-};
-
-DGW.main.methods.drawsConstructor = function(cacheObj, _context){
-    var dp = DGW.main.elements.pages.drawsMain;
-    var dpCont = dp.querySelector('.dg-o-w-section-content');
-    var drawsList = dp.querySelector('.dg-o-w-list-draws');
-    drawsList.innerHTML = '';
-    DGW.global.activeDrawsExist = false;
-    var showExpiredDraws = DGW.main.settings.draws.showExpired;
-    var draws = [];
-
-    var emptyMessage = '';
-    var emptyMessageEl = document.createElement('div');
-    DGW.helpers.addClass(emptyMessageEl, 'dg-o-w-draws-empty');
-
-    if (dpCont.children.length > 1) dpCont.removeChild(dpCont.childNodes[1]);
-
-
-    function filterDrawsByChkBox(showActiveOnly){
-        if (!showExpiredDraws || showActiveOnly) {
-            draws = cacheObj.drawsList.filter(function (draw) {
-                return !DGW.helpers.drawIsFinished(draw);
-            });
-        } else {
-            draws = cacheObj.drawsList;
-        }
-    }
-
-    if (cacheObj) {
-        if (!_context || _context == 'my-draws') filterDrawsByChkBox();
-        else filterDrawsByChkBox(true);
-
-        if (draws.length == 0) {
-            if (!_context) {
-                emptyMessage = 'Sorry, but there are no draws running at the moment.';
-            } else {
-                if (_context == 'close-to-finish') {
-                    emptyMessage = 'Sorry, but seems like there are no draws that will be completed soon.';
-                }
-                if (_context == 'my-draws') {
-                    emptyMessage = 'Hey, seems like you are not taking a part in any of running draws';
-                }
-            }
-            emptyMessageEl.innerHTML = '<h2>' + emptyMessage + '</h2><br/><div class="dg-o-w-draws-refresh"></div>';
-            emptyMessageEl.querySelector('.dg-o-w-draws-refresh').addEventListener('click', function(){
-                DGW.global.api.requests.getDraws(function(){
-                    if (DGW.global.authorized) {
-                        DGW.global.api.requests.getDrawEntries(function(){
-                            DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
-                        });
-                    } else {
-                        DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
-                    }
-                });
-            });
-
-            dpCont.appendChild(emptyMessageEl);
-        }
-
-
-        draws.forEach(function (draw) {
-
-            var li = document.createElement('li');
-            var drawEntry = cacheObj.drawsEntries.filter(function (de) {
-                    return de.DrawId == draw.DrawId;
-                })[0] || null;
-            var winnerExist = draw.Winner;
-            var isWinner = (drawEntry) ? drawEntry.IsWinner : false;
-            var winnerHtml = '',
-                winnerInnerText = '',
-                drawEntryHtml = '',
-                countdownHtml = '&nbsp;';
-            var activeDraw = false;
-
-            if (drawEntry) {
-                var ticketsInDraw = drawEntry.TicketsAmount;
-                var secondLineClass = (winnerExist ? ' dg-o-w-draw-bet-second' : '');
-                drawEntryHtml = '<div class="dg-o-w-draw-bet' + secondLineClass + '"><p>You\'ve placed: <span>' + ticketsInDraw + '</span> points</p></div>';
-                if (drawEntry.IsWinner) {
-                    DGW.helpers.addClass(li, 'winner');
-                    if (drawEntry.NeedToClaimPrize) {
-                        DGW.helpers.addClass(li, 'claim-prize');
-                    }
-                }
-            }
-
-            if (winnerExist) {
-                winnerInnerText = (isWinner === true) ? ('You\'ve won this draw!') : (draw.Winner.UserName + ' has won');
-                winnerHtml = '<div class="dg-o-w-draw-list-winner"><img src="' + draw.Winner.ImageUrl + '" />' +
-                '<p>' + winnerInnerText + '</p></div>';
-            }
-
-            if (DGW.helpers.drawIsFinished(draw)) {
-                DGW.helpers.addClass(li, 'expired');
-                countdownHtml = 'Finished ' + DGW.helpers.getDateFromNow(draw.EndDate);
-            } else {
-                activeDraw = true;
-            }
-
-            li.innerHTML = '<div class="dg-o-w-draw">' +
-                                '<div class="dg-o-w-draw-image-holder">' +
-                                    '<img src="' + draw.Prize.ImageUrl + '" />' +
-                                '</div>' +
-                                '<div class="dg-o-w-draw-text">' +
-                                    '<h2 class="dg-o-w-draw-countdown">' + countdownHtml + '</h2>' +
-                                    '<p>' + draw.Prize.Description + '</p>' +
-                                '</div>' +
-                                winnerHtml + drawEntryHtml +
-                            '</div>';
-
-            if (activeDraw) DGW.helpers.drawsTimer.push({
-                dt: draw.EndDate,
-                elem: li.querySelector('.dg-o-w-draw-countdown')
-            });
-
-            li.addEventListener('click', function() {
-                if (DGW.global.authorized || !activeDraw) DGW.main.methods.singleDrawConstructor(draw.DrawId);
-                else DGW.main.methods.headerLoginShow('Please, enter to play the draw');
-            });
-
-            drawsList.appendChild(li);
-        });
-    }
-
-    DGW.main.methods.setRewardedActions();
-};
-
-DGW.main.methods.singleDrawConstructor = function(drawId){
-
-    var draw = DGW.main.cache.drawsList.filter(function(draws){
-        return draws.DrawId === drawId;
-    })[0];
-    var drawEntry = DGW.main.cache.drawsEntries.filter(function(draws){
-        return draws.DrawId === drawId;
-    })[0];
-
-    var el = DGW.main.elements.pages.singleDraw;
-    var prizeSect = '<div class="dg-o-w-draw-left-side">' +
-                        '<div class="prize-image"><div><img src="' + draw.Prize.ImageUrl + '" /></div></div>' +
-                    '</div>';
-    var shareSect = '<div class="dg-o-w-draw-share dg-o-w-draw-auth-show">' +
-                        '<a href="#" class="dg-o-w-like dg-o-w-facebook-like">Share <span class="dg-o-w-rewarded-action" id="dg-o-w-facebook-like-reward"></span></a>' +
-                        '<a href="#" class="dg-o-w-like dg-o-w-twitter-like">Tweet <span class="dg-o-w-rewarded-action" id="dg-o-w-tweeter-like-reward"></span></a>' +
-                    '</div>';
-    var submenu = '<div class="dg-o-w-submenu">' +
-                        '<ul><li class="dg-o-w-back-draws">&larr; Back</li></ul><div class="right-side">' +
-        (!(drawEntry != undefined && drawEntry.IsWinner) ? /*'Minimum bet is 10'*/ '' : 'You\'ve placed ' + drawEntry.TicketsAmount + ' points and won!') +
-                            '</div>' +
-                    '</div>';
-    var drawnState = '';
-
-    var playersInDraw = document.createElement('div');
-        playersInDraw.className = 'dg-o-w-users-done';
-
-
-    // Cleaning viewport from other sections
-    if (DGW.main.elements.widgetContent.children.length > 0) {
-        DGW.main.elements.widgetContent.removeChild(DGW.main.elements.widgetContent.childNodes[0]);
-    }
-
-    if (DGW.helpers.dateDiff(draw.EndDate) <= 0) {
-        DGW.helpers.console.info('isdrawn: ', draw.IsDrawn);
-        // Draw is finished
-        if (draw.IsDrawn == false) {
-            // Draw has been finished and not drawn
-            drawnState = '<p>Winner will be announced very soon!</p>';
-            DGW.helpers.console.info('isdrawn: ', draw.IsDrawn);
-        } else {
-            // Draw has been finished and drawn
-            DGW.helpers.console.info(draw.IsDrawn);
-            if (draw.Winner == null) {
-                // No one has participated in the draw
-                drawnState = '<p>Unfortunately, no one has participated in this Draw</p>';
-            } else {
-                drawnState = '<div class="dg-o-w-draw-winner"><img src="' + (draw.Winner.ImageUrl || DGW.helpers.checkImagesForSrc()) + '" />' +
-                            '<p>' + draw.Winner.UserName + ' has won this draw. Our congratulations!</p></div>';
-            }
-        }
-    }
-    //DGW.helpers.console.log('draw state: ', drawState);
-    el.innerHTML =  submenu +
-                    '<div class="dg-o-w-section-content">' +
-                        '<div class="dg-o-w-single-draw">' +
-                                prizeSect +
-                            '<div class="dg-o-w-draw-right-side">' +
-                                '<h2 class="dg-o-w-countdown">&nbsp;</h2>' +
-                                '<h3>' + draw.Prize.Title + '</h3>' +
-                                '<p>' + draw.Prize.Description + '</p>' +
-                                '<div class="dg-o-w-draw-bet-info dg-o-w-draw-auth-show">' +
-                                    '<div class="dg-o-w-your-bet dg-o-w-points-bet"><p>You\'ve placed <span data-draw-betpoints>' + ((drawEntry) ? drawEntry.TicketsAmount : 0 ) + '</span> points</p></div>' +
-                                '</div>' +
-                                ((DGW.helpers.dateDiff(draw.EndDate) > 0) ? '<h2 class="dg-o-w-draw-login-show">Please, log in to play the draw</h2>' : '') +
-                                '<div class="dg-o-w-draw-bet-action dg-o-w-draw-auth-show">' +
-                                    '<h4>How much do you want to place?</h4>' +
-                                    '<form id="bet-form" class="dg-o-w-one-field-form">' +
-                                        '<input type="number" min="1" max="1000" placeholder="50"/>' +
-                                        '<input class="btn-dg-o-w btn-dg-o-w-brand" type="submit" value="Place points" />' +
-                                    '</form>' +
-                                    '<div id="dg-o-w-get-points-btn" class="btn-dg-o-w btn-dg-o-w-brand-l">Get additional points</div>' +
-                                '</div>' +
-                                    drawnState +
-                                shareSect +
-                            '</div>' +
-                        '</div>' +
-                    '</div>';
-
-    if (drawEntry && drawEntry.IsWinner) {
-        var claimPrizeHtml = '';
-        if (drawEntry.NeedToClaimPrize == true) {
-            claimPrizeHtml ='<p class="hide-claimed">Put your address to get the prize</p>' +
-                            '<form id="claim-prize" class="dg-o-w-form hide-claimed">' +
-                                '<input type="text" name="Address1" placeholder="Address line 1" />' +
-                                '<input type="text" name="Address2" placeholder="Address line 2" />' +
-                                '<input type="text" name="County" placeholder="County" />' +
-                                '<input type="text" name="Postcode" placeholder="Postcode" />' +
-                                '<input class="btn-dg-o-w btn-dg-o-w-brand btn-dg-o-w-large" type="submit" value="Submit " />' +
-                            '</form>';
-        } else {
-            claimPrizeHtml ='<h2>You\'ve already claimed your prize!</h2>';
-        }
-        el.innerHTML = submenu +
-        '<div class="dg-o-w-section-content">' +
-            '<div class="dg-o-w-single-draw">' +
-                prizeSect +
-                '<div class="dg-o-w-draw-right-side won">' +
-                    '<h2>Congrats, you\'ve won!!!</h2>' +
-                    '<h3>' + draw.Prize.Title + '</h3>' +
-                    '<p>' + draw.Prize.Description + '</p>' +
-                    '<div>' + claimPrizeHtml + '</div>' +
-                    shareSect +
-                '</div>' +
-            '</div>' +
-        '</div>';
-    }
-
-    if (el.querySelector('.dg-o-w-draw-bet-info')) {
-        DGW.global.api.requests.drawPlayers(drawId,
-            function onSuccess(result){
-                if (result.RecentPlayers.length > 0) {
-                    var playerImgsHolder = document.createElement('div');
-                    result.RecentPlayers.forEach(function(player, ind){
-                        if (ind > 2) return;
-                        var img = document.createElement('img');
-                        img.src = player.ImageUrl;
-
-                        playerImgsHolder.appendChild(img);
-                    });
-                    playersInDraw.appendChild(playerImgsHolder);
-
-                    var p = document.createElement('p');
-                    if (result.TotalCount == 1) {
-                        p.innerHTML = '1 user has done this';
-                    } else {
-                        p.innerHTML = result.TotalCount + ' user has done this';
-                        p.className = ((result.RecentPlayers.length == 2) ? 'dg-o-w-two-images' : 'dg-o-w-three-images');
-                    }
-                    playersInDraw.appendChild(p);
-
-                    el.querySelector('.dg-o-w-draw-bet-info').appendChild(playersInDraw);
-                }
-            }
-        );
-    }
-
-    if (el.querySelector('#dg-o-w-get-points-btn')) {
-        el.querySelector('#dg-o-w-get-points-btn').addEventListener('click', function(){
-            DGW.main.methods.changeMainState('earn');
-        });
-    }
-
-    el.querySelector('.dg-o-w-submenu li.dg-o-w-back-draws').addEventListener('click', function(){
-        DGW.main.methods.changeMainState('draws');
-    });
-
-    if (el.querySelector('#bet-form')) {
-        el.querySelector('#bet-form').addEventListener('submit', function (ev) {
-            ev.preventDefault();
-            var that = this;
-            var betBtn = that.querySelector('input[type=submit]');
-            var pointsToBet = +that.querySelector('input[type=number]').value;
-
-            DGW.global.api.requests.drawBet(drawId, pointsToBet,
-                function onSuccess(result){
-                    betBtn.disabled = false;
-                    DGW.main.methods.notificationConstructor('We\'ve received your ' + pointsToBet + ' points. Bet more!');
-                    that.querySelector('input[type=number]').value = '';
-
-                    DGW.main.cache.drawsEntries.forEach(function(de){
-                        if (de.DrawId == result.DrawEntry.DrawId) de.TicketsAmount = result.DrawEntry.TicketsAmount;
-                    });
-                    DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
-
-                    DGW.main.methods.profileSetData(result.User, result.DrawEntry);
-                }, function onError(result){
-                    betBtn.disabled = false;
-                    DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
-                });
-            betBtn.disabled = true;
-        });
-    }
-    if (el.querySelector('#claim-prize')) {
-        el.querySelector('#claim-prize').addEventListener('submit', function(ev){
-            ev.preventDefault();
-            var that = this;
-            var address = {};
-
-            Array.prototype.slice.call(that.querySelectorAll('input:not([type=submit])')).forEach(function(field){
-                if (field.value == '' && field.name != 'Address1') field.value = '-';
-                address[field.name] = field.value;
-            });
-
-            DGW.global.api.requests.claimPrize(drawId, address, function onSuccess(){
-                DGW.helpers.addClass(el.querySelector('.dg-o-w-single-draw'), 'claimed');
-                DGW.main.methods.notificationConstructor(['We\'ve received your address', 'And will contact you very soon!']);
-            }, function onError(result){
-                DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
-            });
-        });
-    }
-
-
-    if (!DGW.helpers.drawsTimer.push({dt:draw.EndDate, elem:el.querySelector('.dg-o-w-countdown')})) {
-        DGW.helpers.addClass(el.querySelector('.dg-o-w-single-draw'), 'expired');
-        if (el.querySelector('.dg-o-w-countdown')) {
-            el.querySelector('.dg-o-w-countdown').innerHTML = 'Finished ' + String(DGW.helpers.getDateFromNow(draw.EndDate));
-        }
-    }
-
-    // Setting sharing buttons
-    var isWinner = false;
-    if (drawEntry && drawEntry.IsWinner) isWinner = true;
-
-    el.querySelector('.dg-o-w-like.dg-o-w-facebook-like').addEventListener('click', function(ev){
-        ev.preventDefault();
-        DGW.global.actions.requests.shareFb(drawId, isWinner);
-    });
-    el.querySelector('.dg-o-w-like.dg-o-w-twitter-like').addEventListener('click', function(ev){
-        ev.preventDefault();
-        DGW.global.actions.requests.shareTw(drawId, (!isWinner) ? 'Win ' : 'I\'ve just won ' + draw.Prize.Title, isWinner);
-    });
-
-    DGW.main.elements.widgetContent.appendChild(el);
-    DGW.main.methods.checkSectionHeight();
-    DGW.main.methods.setRewardedActions();
-};
-
-
-DGW.main.methods.activitiesConstructor = function(activities){
-    activities.sort(function(a, b){
-        return new Date(b.Date) - new Date(a.Date);
-    });
-    var activitiesHolder = DGW.helpers.getElementsFromAllPlaces('[data-activities]')[0];
-    activitiesHolder.innerHTML = '';
-
-    activities.forEach(function(activity){
-        var ownStats = false;
-        if (!activity.User) {
-            ownStats = true;
-            activity.User = {
-                //UserName: DGW.global.userStats.name,
-                UserName: 'You',
-                ImageUrl: DGW.global.userStats.imageUrl
-            }
-        }
-        var li = document.createElement('li');
-        var message = '';
-        message += activity.User.UserName;
-        message += (ownStats !== true) ? ' has ' : ' have ';
-        message += (activity.Direction === 'Outflow') ? 'spent ' : 'earned ';
-        message += '<span>';
-        message += activity.PointsAmount;
-        message += ' points';
-        message += '</span>';
-
-
-        if (activity.ActivityType === 'GamePurchase') {
-            if (activity.GameOrder.GameType === 'Draw') {
-                message += ' playing the draw';
-                message += (' to win ' + activity.GameOrder.PrizeTitle);
-            } else if (activity.GameOrder.GameType === 'MatchQuiz') {
-                message += ' placing a bet in ' + DGW.global.club.name + ' Match Quiz';
-            }
-        }
-
-        if (activity.ActivityType === 'RewardedActionReward') {
-            switch (activity.RewardedAction.Type) {
-                case 'UserRegister':
-                    message += ' for joining our rewarded program';
-                    break;
-                case 'FacebookConnect':
-                    message += ' for connecting with Facebook';
-                    break;
-                case 'FriendSignUp':
-                    message += ' inviting a friend to our rewarding program';
-                    break;
-                case 'ConnectNewApp':
-                    message += ' connecting another app';
-                    break;
-                case 'FacebookShare':
-                    message += ' shouting out about us on Facebook';
-                    break;
-                case 'TwitterShare':
-                    message += ' tweeting about us';
-                    break;
-                case 'CommissionConfirmed':
-                    message += ' for making a great purchase';
-                    break;
-                case 'MatchQuizFacebookShare':
-                    message += ' for sharing Score Predictor results on Facebook';
-                    break;
-                case 'MatchQuizTwitterShare':
-                    message += ' for sharing Score Predictor results on Twitter';
-                    break;
-                default:
-            }
-        }
-
-        if (activity.ActivityType === 'OfferActionReward') {
-            if (activity.OfferAction.Type.Group.Name === 'Share') {
-                switch (activity.OfferAction.Type.Name) {
-                    case 'FacebookShare':
-                        message += ' finishing Facebook share offer';
-                        break;
-                    case 'TwitterShare':
-                        message += ' finishing Twitter share offer';
-                }
-            } else if (activity.OfferAction.Type.Group.Name === 'Watch') {
-                message += ' watching a video';
-            } else if (activity.OfferAction.Type.Group.Name === 'Discover') {
-                message += ' downloading an app';
-            }
-        }
-
-
-        if (activity.ActivityType === 'BadgeReward') {
-            message += ' getting a shiny new badge "' + activity.BadgeReward.Title + '"';
-        }
-
-        li.innerHTML =
-            '<div class="dg-o-w-single-activity">' +
-                '<img src="' + DGW.helpers.checkImagesForSrc(activity.User.ImageUrl) + '" alt=""/>' +
-                '<div class="dg-o-w-activity-message-holder">' +
-                    '<p>' + message + '</p>' +
-                '</div>' +
-            '</div>' +
-            '<h6>' + DGW.helpers.getDateFromNow(activity.Date) + '</h6>';
-        if (activity.Direction === 'Outflow') {
-            DGW.helpers.addClass(li, 'spent');
-        }
-
-        activitiesHolder.appendChild(li);
-    });
-    DGW.main.methods.setRewardedActions();
-};
-
-DGW.main.methods.offersConstructor = function(offers) {
-    var offersHolder = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-list-offers'),
-        offersSubmenu = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-submenu ul'),
-        offersSponsors = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-submenu select'),
-        pointsSum = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-section-content h3 span');
-    var lists = {
-        offers: offers.Offers,
-        sponsors: ['All offers'],
-        categories: ['All']
-    };
-    var sponsorsAllString = lists.sponsors[0].toLowerCase(),
-        categoriesAllString = lists.categories[0].toLowerCase();
-    var currentCategory = categoriesAllString,
-        currentSponsor = sponsorsAllString;
-
-    pointsSum.innerHTML = offers.TotalPointsReward;
-    DGW.global.userStats.earnToday = offers.TotalPointsReward;
-    offersSubmenu.innerHTML = '';
-    offersSponsors.innerHTML = '';
-
-    lists.offers.forEach(function(offer){
-        offer = offer.Offer;
-        if (lists.sponsors.filter(function(sponsor){return sponsor === offer.Sponsor.Name;}).length == 0) {
-            lists.sponsors.push(offer.Sponsor.Name);
-        }
-        if (lists.categories.filter(function(category){return category === offer.Type.Group.Name;}).length == 0) {
-            lists.categories.push(offer.Type.Group.Name);
-        }
-    });
-
-
-    lists.sponsors.forEach(function(sponsor){
-        var option = document.createElement('option');
-        option.innerHTML = sponsor;
-        option.value = sponsor.toLowerCase();
-
-        offersSponsors.appendChild(option);
-    });
-
-    lists.categories.forEach(function(category, ind){
-        var li = document.createElement('li');
-        li.innerHTML = category;
-        li.addEventListener('click', function(){
-            Array.prototype.slice.call(offersSubmenu.querySelectorAll('li')).forEach(function(item){
-                DGW.helpers.removeClass(item, 'dg-o-w-active');
-            });
-            DGW.helpers.addClass(this, 'dg-o-w-active');
-            currentCategory = category.toLowerCase();
-            showOffersPanels(filterOffers())
-        });
-        if (category.toLowerCase() == 'all') {DGW.helpers.addClass(li, 'dg-o-w-active')}
-        offersSubmenu.appendChild(li);
-    });
-
-    if (lists.sponsors.length > 2) {
-        offersSponsors.addEventListener('change', function () {
-            var that = this;
-            DGW.helpers.console.log(that.value);
-            currentSponsor = that.value.toLowerCase();
-            showOffersPanels(filterOffers());
-        });
-    } else {
-        offersSponsors.style.display = 'none';
-    }
-
-    function filterOffers(){
-        return lists.offers.filter(function(offer){
-            offer = offer.Offer;
-            if (currentSponsor == sponsorsAllString &&
-                currentCategory == categoriesAllString) {
-                return true;
-            } else if (currentSponsor == sponsorsAllString) {
-                return offer.Type.Group.Name.toLowerCase() == currentCategory;
-            } else if (currentCategory == categoriesAllString) {
-                return offer.Sponsor.Name.toLowerCase() == currentSponsor;
-            }
-            return offer.Sponsor.Name.toLowerCase() == currentSponsor &&
-                offer.Type.Group.Name.toLowerCase() == currentCategory;
-        });
-    }
-
-    function showOffersPanels(filteredOffers) {
-        offersHolder.innerHTML = '';
-
-        filteredOffers.forEach(function (offer) {
-            var recentCompleters = offer.RecentCompleters,
-                completersCount = offer.TotalCompletersCount;
-
-            offer = offer.Offer;
-
-            var li = document.createElement('li');
-            li.innerHTML =
-                '<a href="" target="_blank"><div class="dg-o-w-offer">' +
-                    '<div class="dg-o-w-offer-left">' +
-                        '<img class="dg-o-w-offer-image" src="' + (offer.ImageUrl || offer.Type.ImageUrl) + '" />' +
-                        '<p class="dg-o-w-color-green">' + offer.PointsReward + '</p>' +
-                    '</div>' +
-                    '<div class="dg-o-w-offer-right">' +
-                        '<h4>' + '<img class="dg-o-w-offer-group" src="' + offer.Type.Group.ImageUrl + '"/>' + offer.Title + '</h4>' +
-                        '<p>' + offer.Description + '</p>' +
-                        '<div class="dg-o-w-users-done"></div>' +
-                    '</div>' +
-                '</div></a>';
-            if (offer.Type.Name == 'DownloadMobileApp') {
-                li.querySelector('a').href = offer.CustomData.Url;
-            }
-            if (offer.Type.Name == 'DownloadToolbar') {
-                li.querySelector('a').href = offer.CustomData.Url
-                    .replace(/\{0}/, offer.Id)
-                    .replace(/\{1}/, DGW.global.userStats.userId);
-            }
-            li.querySelector('a').addEventListener('click', function(ev){
-                if (DGW.global.authorized) {
-                    if (offer.Type.Name != 'DownloadMobileApp' && offer.Type.Name != 'DownloadToolbar') {
-                        ev.preventDefault();
-                    }
-                    if (offer.Type.Name == 'FacebookShare') {
-                        DGW.global.offers.requests.shareOfferFb(offer.Id);
-                    } else if (offer.Type.Name == 'TwitterShare'){
-                        DGW.global.offers.requests.shareOfferTw(offer.Id, offer.CustomData.Url, offer.CustomData.TweetText, offer.CustomData.Hashtags);
-                    } else if (offer.Type.Name == 'WatchVideo'){
-                        DGW.global.offers.requests.watchVideo(offer.Id, offer.CustomData.Url);
-                    } else if (offer.Type.Name == 'DownloadToolbar') {
-                        DGW.global.api.requests.trackOffer(offer.Id);
-                    }
-                } else {
-                    ev.preventDefault();
-                    DGW.main.methods.headerLoginShow('Enter to earn points');
-                }
-            });
-
-
-            if (recentCompleters.length > 0) {
-                var usersCompletedDiv = li.querySelector('.dg-o-w-users-done');
-                var playerImgsHolder = document.createElement('div');
-                recentCompleters.forEach(function(user, ind){
-                    if (ind > 2) return;
-                    var img = document.createElement('img');
-                    img.src = user.ImageUrl;
-
-                    playerImgsHolder.appendChild(img);
-                });
-                usersCompletedDiv.appendChild(playerImgsHolder);
-
-                var p = document.createElement('p');
-                if (completersCount == 1) {
-                    p.innerHTML = '1 user has done this';
-                } else {
-                    p.innerHTML = completersCount + ' users have done this';
-                    p.className = ((recentCompleters.length == 2) ? 'dg-o-w-two-images' : 'dg-o-w-three-images');
-                }
-                usersCompletedDiv.appendChild(p);
-            }
-
-
-            offersHolder.appendChild(li);
-        });
-    }
-
-    showOffersPanels(lists.offers);
-    DGW.main.methods.setRewardedActions();
-};
-
-DGW.main.methods.leaderboardConstructor = function(earners) {
-    var s = DGW.main.elements.pages.activitiesMain;
-    var ul = s.querySelector('.dg-o-w-activity-slider ul');
-
-    ul.innerHTML = '';
-    earners.forEach(function(earner){
-        var li = document.createElement('li');
-        li.innerHTML = '<div><img src="' + earner.ImageUrl +'"><p>' + earner.Amount + '</p></div><p class="dg-o-w-color-brand">' + earner.UserName + '</p>';
-
-        ul.appendChild(li);
-    });
-
-    DGW.global.elements.leaderboardSlider = new Slider(ul.parentNode, {
-        visibles: 5,
-        controlNext: '.dg-o-w-activity-slider-next',
-        controlPrev: '.dg-o-w-activity-slider-prev'
-    });
-};
-
-DGW.main.methods.notificationConstructor = function(lis, _type) {
-    var ul = DGW.main.elements.pages.notificationHolder.querySelector('ul');
-        ul.innerHTML = '';
-    if (!_type) _type = 'success';
-
-    if (DGW.helpers.isArray(lis)) {
-        lis.forEach(function(el){
-            var li = document.createElement('li');
-            li.innerHTML = el;
-            ul.appendChild(li);
-        });
-        DGW.main.methods.showNotificationBar(_type);
-    } else if (typeof lis == 'string'){
-        var li = document.createElement('li');
-        li.innerHTML = lis;
-        ul.appendChild(li);
-        DGW.main.methods.showNotificationBar(_type);
-    } else {
-        DGW.helpers.console.warn('Notification parameters are not of the type of [Array] or String');
-    }
-};
-DGW.main.methods.userListItemConstructor = function(users, group){
-    'use strict';
-    if (!users) return;
-
-    var usersArray = [];
-    users.forEach(function(userObj){
-        var commonUsers = userObj.MutualFriends;
-        var commonUsersCount = +userObj.MutualFriendsCount;
-        var user = userObj.User;
-        var commonUsersText = document.createElement('p');
-        var li = document.createElement('li');
-
-        li.className = 'dg-o-w-table-display';
-        li.innerHTML = DGW.templates.userListItem;
-
-        var commonUsersHolder = li.querySelector('[data-user-common-users]');
-        var userActionsHolder = li.querySelector('[data-user-actions]');
-
-        // Filling user name, image, groups
-        li.querySelector('[data-user-image]').src = user.ImageUrl;
-        li.querySelector('[data-user-name]').innerHTML = user.UserName;
-
-
-        //Filling common users section
-        if (commonUsers.length > 0) {
-            var commonImgsHolder = document.createElement('div');
-            commonUsers.forEach(function(cUser, ind){
-                if (ind > 2) return;
-                var img = document.createElement('img');
-                img.src = cUser.ImageUrl;
-                commonImgsHolder.appendChild(img);
-            });
-            commonUsersHolder.appendChild(commonImgsHolder);
-
-            if (commonUsersCount === 1) {
-                commonUsersText.innerHTML = '1 common user';
-            } else {
-                commonUsersText.innerHTML = commonUsersCount + ' common users';
-                commonUsersText.className = ((commonUsers.length == 2) ? 'dg-o-w-two-images' : 'dg-o-w-three-images');
-            }
-        } else {
-            commonUsersText.innerHTML = 'No common users';
-        }
-        commonUsersHolder.appendChild(commonUsersText);
-
-
-        // Filling actions available with this user
-        if (group === 'requestFrom') {
-            userActionsHolder.appendChild(DGW.helpers.createUserListAction('accept'));
-            userActionsHolder.appendChild(DGW.helpers.createUserListAction('decline'));
-        } else if (group === 'friends') {
-            userActionsHolder.appendChild(DGW.helpers.createUserListAction('friends'));
-        } else if (group === 'requestTo') {
-            userActionsHolder.appendChild(DGW.helpers.createUserListAction('requestSent'));
-        }
-
-        usersArray.push(li);
-    });
-
-    return usersArray;
-};
-
-
-DGW.main.methods.friendsConstructor = function(usersObj){
-    if (!usersObj) return;
-
-    var userListHolder = DGW.helpers.getElementsFromAllPlaces('[data-friends-list]')[0];
-    userListHolder.innerHTML = '';
-
-    DGW.main.methods.userListItemConstructor(usersObj.FriendRequestsFrom, 'requestFrom').forEach(function(userItem){
-        userListHolder.appendChild(userItem);
-    });
-    DGW.main.methods.userListItemConstructor(usersObj.Friends, 'friends').forEach(function(userItem){
-        userListHolder.appendChild(userItem);
-    });
-    DGW.main.methods.userListItemConstructor(usersObj.FriendRequestsTo, 'requestTo').forEach(function(userItem){
-        userListHolder.appendChild(userItem);
-    });
-};
-
-
-(function(){
-
-    (function searchFriends(){
-        var dp = DGW.main.elements.pages.friendsMain;
-        var friendSearch = dp.querySelector('.search-form .search-field');
-        var searchTimeout;
-        var searchDelay = 1000;
-
-        friendSearch.addEventListener('input', function(){
-            var that = this;
-            DGW.helpers.console.info('input');
-            if (searchTimeout) window.clearTimeout(searchTimeout);
-            searchTimeout = window.setTimeout(function(){
-                DGW.helpers.console.info('search');
-                DGW.global.api.requests.friendSearch(that.value,
-                    function(response){
-                        DGW.helpers.console.log(response);
-                    }
-                );
-            }, searchDelay);
-        });
-
-    })();
-
-    setTimeout(function(){
-        DGW.global.api.requests.friendsGet(function(response){
-            DGW.main.methods.friendsConstructor(response);
-        });
-    }, 3000);
-})();
 var widgetStyles = document.createElement('link');
     widgetStyles.rel = 'stylesheet';
     widgetStyles.type = 'text/css';
