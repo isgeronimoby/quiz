@@ -2,7 +2,7 @@ import fetch, { apiPrefix, apiKey } from '../../lib/fetch.js';
 import { Window } from '../../lib/utils.js';
 import { fetchProfile, fetchProfileSuccess } from './profile.js';
 
-const popup = new Window();
+const popup = Window();
 
 export const FETCH_EARNS = 'FETCH_EARNS';
 export const FETCH_EARNS_SUCCESS = 'FETCH_EARNS_SUCCESS';
@@ -160,11 +160,10 @@ export function startEarnSharingTwitter(earnId, customData) {
 	return (dispatch) => {
 		const { Hashtags, TweetText, Url } = customData;
 		const url = `https://twitter.com/intent/tweet?text=${ encodeURI(TweetText) }&url=${ encodeURIComponent(Url) }&hashtags=${ Hashtags }`;
-		const title = 'Twitter';
 
 		dispatch(postTrackOffer(earnId));
 
-		popup.open({url, title}, () => {
+		popup.open({url}, () => {
 			dispatch(postCompleteOffer(earnId));
 		});
 	};
@@ -174,11 +173,9 @@ export function startEarnSharingFacebook(earnId, customData) {
 	return (dispatch) => {
 		const { Url } = customData; // TODO - unused?
 		const url = `${apiPrefix}Offer/FacebookShare?api_key=${apiKey}&OfferId=${ encodeURIComponent(earnId) }`;
-		const title = 'Facebook';
-
 		//console.log('>>[%s]', url);
 
-		popup.open({url, title}, () => {
+		popup.open({url}, () => {
 			dispatch(fetchProfile());
 			dispatch(fetchPlayedEarns());
 		});

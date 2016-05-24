@@ -1,26 +1,30 @@
 // Wrapper for window.open()
 //
-export class Window {
-	windowRef = null;
-	windowTimer = null;
+export function Window() {
+	var W = {};
+	var windowRef = null;
+	var windowTimer = null;
 
-	open({url, title, settings}, onClose) {
-		let {windowRef, windowTimer} = this;
-
+	W.open = function ({url, settings}, onClose) {
 		if (windowRef == null || windowRef.closed) {
-			windowRef = window.open(url, title, settings || 'resizable=yes,scrollbars=yes,status=yes');
-			windowRef.focus();
-			windowTimer = setInterval(() => {
-				if (windowRef.closed) {
-					clearInterval(windowTimer);
+			windowTimer = window.setInterval(function () {
+				if (!windowRef || windowRef.closed) {
+					window.clearInterval(windowTimer);
 					windowRef = null;
 					onClose();
 				}
 			}, 500);
+
+			// Note: only '_blank' is supported by old Chrome/iOS
+			// See: https://bugs.chromium.org/p/chromium/issues/detail?id=136610#c68
+			windowRef = window.open(url, '_blank', settings || 'resizable=yes,scrollbars=yes,status=yes');
+			windowRef.focus();
 		} else {
 			windowRef.focus();
 		}
-	}
+	};
+
+	return W;
 }
 
 // is Safari: feature-detect

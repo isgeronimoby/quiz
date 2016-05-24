@@ -1,7 +1,7 @@
 import fetch, { apiPrefix, iframeSrc, apiKey, rpc } from '../../lib/fetch.js';
 import { Window, isSafari } from '../../lib/utils.js';
 import { fetchProfile, fetchProfileSuccess } from './profile.js'
-const popup = new Window();
+const popup = Window();
 
 
 export const TOGGLE_WELCOME = 'TOGGLE_WELCOME';
@@ -71,13 +71,12 @@ function requestAuthWithSafariFix(authPopupView) {
 			// A hack for Safari that do not allow setting cookies to unvisited domains, thus breaking session cookies.
 			//
 			const url = `${iframeSrc}?safarifix`; // the page detects this flag, sets 'safarifix' cookie and closes itself
-			const title = '_blank';
 			const settings = 'menubar=no,location=no,resizable=no,scrollbars=no,status=no,width=1,height=1,top=0,left=0';
 
 			setTimeout(done, 500); // Hack for iPhone, no timers are firing after popup.open call for unknown reason
 
 			// Assume cookie is set after window is closed
-			popup.open({url, title, settings}, done);
+			popup.open({url, settings}, done);
 		});
 	};
 }
@@ -248,9 +247,8 @@ export function postLogout() {
 export function authWithFacebook() {
 	return (dispatch) => {
 		const url = `${apiPrefix}auth/facebook?api_key=${apiKey}`;
-		const title = 'Facebook';
 
-		popup.open({url, title}, () => {
+		popup.open({url}, () => {
 			dispatch(fetchProfile());
 		});
 	};

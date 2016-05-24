@@ -11,7 +11,7 @@ const REWARD_FACEBOOK_SHARE_TYPE = 'FacebookShare';
 const REWARD_TWITTER_SHARE_TYPE = 'TwitterShare';
 const REWARD_TWITTER_SHARE_ID = 5;
 
-const popup = new Window();
+const popup = Window();
 
 
 function fetchRewardsStart() {
@@ -98,11 +98,10 @@ export function startSharingFacebook(matchId) {
 		const { origin } = document.location;
 		const sharedUrl = `${origin}/quiz?matchId=${matchId}`;
 		const url = `${apiPrefix}rewardedaction/facebookshare?api_key=${apiKey}&shareurl=${ encodeURIComponent(sharedUrl) }`;
-		const title = 'Facebook';
 
 		//console.log('>>[%s]', url);
 
-		popup.open({url, title}, () => {
+		popup.open({url}, () => {
 			dispatch(fetchRewards());
 			dispatch(fetchProfile());
 		});
@@ -117,7 +116,7 @@ export function startSharingTwitter(matchId) {
 		const url = `https://twitter.com/intent/tweet?text=${ encodeURI(tweetText) }&url=${ encodeURIComponent(sharedUrl) }&hashtags=everton,matchquiz`;
 		const title = 'Twitter';
 
-		popup.open({url, title}, () => {
+		popup.open({url}, () => {
 			dispatch(postTrackRewards(REWARD_TWITTER_SHARE_ID));
 		});
 	};
