@@ -32,14 +32,23 @@ export function Window() {
 export const isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
 
 
-// Return next draw item after selected, if selected is the last, then the first item in list.
-// Do not consider items status. For bet-exit this is always the first draw item.
+// Returns next *active* draw item after selected item: [a]
+//  - if selected is the last active, then the first (active) item in list (loop). [b]
+//  - if selected is the only active, then next item (despite it is inactive). [c]
+//  - if selected is inactive, then first item. [d]
 //
 export function getNextDrawItem(drawList, selectedDrawId) {
-	const selectedDraw = drawList.find(({ drawId }) => drawId === selectedDrawId);
-	const selectedDrawIdx = drawList.indexOf(selectedDraw);
+	const selectedItem = drawList.find(({ drawId }) => drawId === selectedDrawId);
+	const nextItem = drawList[drawList.indexOf(selectedItem) + 1];
+	const firstItem = drawList[0];
 
-	return drawList[selectedDrawIdx + 1]; // first if idx === -1
+	if (!nextItem.isDrawn) {
+		return nextItem; //a
+	} else if (firstItem === selectedItem) {
+		return nextItem; //c
+	} else {
+		return firstItem; //b, d
+	}
 }
 
 

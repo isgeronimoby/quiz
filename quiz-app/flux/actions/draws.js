@@ -62,6 +62,16 @@ function fetchDrawsSuccess(json) {
 				prizeImageUrl,
 				winner,
 			}
+		}).sort((a, b) => {
+			if (a.isDrawn === b.isDrawn && b.isDrawn === false) {
+				// Not drawn are sorted from old to new
+				return new Date(a.endDate) - new Date(b.endDate);
+			} else if (a.isDrawn === b.isDrawn && b.isDrawn === true) {
+				// Not drawn are sorted from new to old
+				return new Date(b.endDate) - new Date(a.endDate);
+			}
+			// Not drawn are on top
+			return a.isDrawn ? 1 : -1;
 		}),
 		receivedAt: Date.now()
 	};
