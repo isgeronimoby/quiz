@@ -1716,8 +1716,8 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' 
                                     '<div class="dg-o-w-profile-stats-holder">' +
                                         '<h3 data-userstats-username class="dg-o-w-profile-name">Captain Deadpool</h3>' +
                                         '<div class="dg-o-w-profile-stats-holder-rest">' +
-                                            '<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-userstats-friends-c>210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-friends-p class="green-highlighter">19</p></div></div>' +
-                                            '<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand" data-userstats-groups-c>20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-groups-p class="green-highlighter">3</p></div></div>' +
+                                            //'<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-userstats-friends-c>210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-friends-p class="green-highlighter">19</p></div></div>' +
+                                            //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand" data-userstats-groups-c>20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-groups-p class="green-highlighter">3</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 data-userstats-points-c>520</h3><p>points</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 data-userstats-credits-c>40</h3></div></div>' +
                                         '</div>' +
@@ -2315,6 +2315,8 @@ DGW.main.methods.loginInit = function(){
                     Password: passF.value
                 }, function onSuccess(){
                     DGW.main.methods.notificationConstructor(['Welcome back, ' + DGW.global.userStats.name, 'Have a look at our new offers!']);
+
+                    ga(DGW.global.gaSend, 'event', 'UserActions', 'SignIn');
                 }, function onError(result){
                     var err = DGW.helpers.errorParser(result).messages;
                     if (noUserRXP.test(err)) {
@@ -2338,6 +2340,8 @@ DGW.main.methods.loginInit = function(){
                     Username: nameF.value
                 }, function onSuccess(){
                     DGW.main.methods.notificationConstructor(['Hi, ' + nameF.value + '! ', 'Welcome to ' + DGW.global.club.name + ' rewarded widget.']);
+
+                    ga(DGW.global.gaSend, 'event', 'UserActions', 'SignUp');
                 }, function onError(result){
                     var err = DGW.helpers.errorParser(result).messages;
                     DGW.main.methods.notificationConstructor(err, 'error');
@@ -2361,6 +2365,8 @@ DGW.main.methods.loginInit = function(){
         DGW.global.api.requests.forgotPass(emailF,
             function onSuccess(){
                 DGW.main.methods.notificationConstructor('Check your email to confirm the new password.');
+
+                ga(DGW.global.gaSend, 'event', 'UserActions', 'PasswordRestoring');
             }, function onError(result){
                 DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
             });
@@ -2700,6 +2706,8 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
 
 DGW.main.methods.singleDrawConstructor = function(drawId){
 
+    ga(DGW.global.gaSend, 'pageview', 'drawId=' + drawId);
+
     var draw = DGW.main.cache.drawsList.filter(function(draws){
         return draws.DrawId === drawId;
     })[0];
@@ -2838,11 +2846,13 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
     if (el.querySelector('#dg-o-w-get-points-btn')) {
         el.querySelector('#dg-o-w-get-points-btn').addEventListener('click', function(){
             DGW.main.methods.changeMainState('earn');
+            ga(DGW.global.gaSend, 'event', 'DrawActions', 'GetAdditionalPoints');
         });
     }
 
     el.querySelector('.dg-o-w-submenu li.dg-o-w-back-draws').addEventListener('click', function(){
         DGW.main.methods.changeMainState('draws');
+        ga(DGW.global.gaSend, 'event', 'DrawActions', 'BackToDrawsList');
     });
 
     if (el.querySelector('#bet-form')) {
@@ -2864,9 +2874,13 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                     DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
 
                     DGW.main.methods.profileSetData(result.User, result.DrawEntry);
+
+                    ga(DGW.global.gaSend, 'event', 'DrawActions', 'Betting', 'success');
                 }, function onError(result){
                     betBtn.disabled = false;
                     DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
+
+                    ga(DGW.global.gaSend, 'event', 'DrawActions', 'Betting', 'error');
                 });
             betBtn.disabled = true;
         });
@@ -2885,6 +2899,8 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
             DGW.global.api.requests.claimPrize(drawId, address, function onSuccess(){
                 DGW.helpers.addClass(el.querySelector('.dg-o-w-single-draw'), 'claimed');
                 DGW.main.methods.notificationConstructor(['We\'ve received your address', 'And will contact you very soon!']);
+
+                ga(DGW.global.gaSend, 'event', 'DrawActions', 'ClaimPrize', 'AddressSent');
             }, function onError(result){
                 DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
             });
@@ -2906,10 +2922,14 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
     el.querySelector('.dg-o-w-like.dg-o-w-facebook-like').addEventListener('click', function(ev){
         ev.preventDefault();
         DGW.global.actions.requests.shareFb(drawId, isWinner);
+
+        ga(DGW.global.gaSend, 'event', 'DrawActions', 'Sharing', 'Facebook');
     });
     el.querySelector('.dg-o-w-like.dg-o-w-twitter-like').addEventListener('click', function(ev){
         ev.preventDefault();
         DGW.global.actions.requests.shareTw(drawId, (!isWinner) ? 'Win ' : 'I\'ve just won ' + draw.Prize.Title, isWinner);
+
+        ga(DGW.global.gaSend, 'event', 'DrawActions', 'Sharing', 'Twitter');
     });
 
     DGW.main.elements.widgetContent.appendChild(el);
@@ -3041,11 +3061,15 @@ DGW.main.methods.offersConstructor = function(offers) {
                     } else if (offer.Type.Name == 'DownloadToolbar') {
                         DGW.global.api.requests.trackOffer(offer.Id);
                     }
+
+                    ga(DGW.global.gaSend, 'event', 'EarningPoints', offer.Type.Group.Name, offer.Sponsor.Name);
                 } else {
                     ev.preventDefault();
                     DGW.main.methods.headerLoginShow('Enter to earn points');
+                    ga(DGW.global.gaSend, 'event', 'EarningPointsAnonymous', offer.Type.Group.Name, offer.Sponsor.Name);
                 }
             });
+
 
 
             if (recentCompleters.length > 0) {
@@ -3393,7 +3417,17 @@ DGW.main.methods.checkSectionHeight = function() {
 
 DGW.main.methods.changeMainState = function(state){
 
-    ga(DGW.global.gaSend, 'pageview', state);
+    // Sending analytics
+    // * * * * * *
+
+    if (!DGW.global.authorized && state === 'profile') {
+        ga(DGW.global.gaSend, 'pageview', 'landing');
+    } else {
+        ga(DGW.global.gaSend, 'pageview', state);
+    }
+
+    // * * * * * *
+    // End of analytics
 
     for (var item in DGW.main.elements.menuItems) {
         DGW.helpers.removeClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');

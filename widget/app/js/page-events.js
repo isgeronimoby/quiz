@@ -14,7 +14,17 @@ DGW.main.methods.checkSectionHeight = function() {
 
 DGW.main.methods.changeMainState = function(state){
 
-    ga(DGW.global.gaSend, 'pageview', state);
+    // Sending analytics
+    // * * * * * *
+
+    if (!DGW.global.authorized && state === 'profile') {
+        ga(DGW.global.gaSend, 'pageview', 'landing');
+    } else {
+        ga(DGW.global.gaSend, 'pageview', state);
+    }
+
+    // * * * * * *
+    // End of analytics
 
     for (var item in DGW.main.elements.menuItems) {
         DGW.helpers.removeClass(DGW.main.elements.menuItems[item], 'dg-o-w-active');

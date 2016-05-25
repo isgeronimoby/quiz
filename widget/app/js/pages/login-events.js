@@ -66,6 +66,8 @@ DGW.main.methods.loginInit = function(){
                     Password: passF.value
                 }, function onSuccess(){
                     DGW.main.methods.notificationConstructor(['Welcome back, ' + DGW.global.userStats.name, 'Have a look at our new offers!']);
+
+                    ga(DGW.global.gaSend, 'event', 'UserActions', 'SignIn');
                 }, function onError(result){
                     var err = DGW.helpers.errorParser(result).messages;
                     if (noUserRXP.test(err)) {
@@ -89,6 +91,8 @@ DGW.main.methods.loginInit = function(){
                     Username: nameF.value
                 }, function onSuccess(){
                     DGW.main.methods.notificationConstructor(['Hi, ' + nameF.value + '! ', 'Welcome to ' + DGW.global.club.name + ' rewarded widget.']);
+
+                    ga(DGW.global.gaSend, 'event', 'UserActions', 'SignUp');
                 }, function onError(result){
                     var err = DGW.helpers.errorParser(result).messages;
                     DGW.main.methods.notificationConstructor(err, 'error');
@@ -112,6 +116,8 @@ DGW.main.methods.loginInit = function(){
         DGW.global.api.requests.forgotPass(emailF,
             function onSuccess(){
                 DGW.main.methods.notificationConstructor('Check your email to confirm the new password.');
+
+                ga(DGW.global.gaSend, 'event', 'UserActions', 'PasswordRestoring');
             }, function onError(result){
                 DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
             });

@@ -123,11 +123,15 @@ DGW.main.methods.offersConstructor = function(offers) {
                     } else if (offer.Type.Name == 'DownloadToolbar') {
                         DGW.global.api.requests.trackOffer(offer.Id);
                     }
+
+                    ga(DGW.global.gaSend, 'event', 'EarningPoints', offer.Type.Group.Name, offer.Sponsor.Name);
                 } else {
                     ev.preventDefault();
                     DGW.main.methods.headerLoginShow('Enter to earn points');
+                    ga(DGW.global.gaSend, 'event', 'EarningPointsAnonymous', offer.Type.Group.Name, offer.Sponsor.Name);
                 }
             });
+
 
 
             if (recentCompleters.length > 0) {

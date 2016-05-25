@@ -125,6 +125,8 @@ DGW.main.methods.drawsConstructor = function(cacheObj, _context){
 
 DGW.main.methods.singleDrawConstructor = function(drawId){
 
+    ga(DGW.global.gaSend, 'pageview', 'drawId=' + drawId);
+
     var draw = DGW.main.cache.drawsList.filter(function(draws){
         return draws.DrawId === drawId;
     })[0];
@@ -263,11 +265,13 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
     if (el.querySelector('#dg-o-w-get-points-btn')) {
         el.querySelector('#dg-o-w-get-points-btn').addEventListener('click', function(){
             DGW.main.methods.changeMainState('earn');
+            ga(DGW.global.gaSend, 'event', 'DrawActions', 'GetAdditionalPoints');
         });
     }
 
     el.querySelector('.dg-o-w-submenu li.dg-o-w-back-draws').addEventListener('click', function(){
         DGW.main.methods.changeMainState('draws');
+        ga(DGW.global.gaSend, 'event', 'DrawActions', 'BackToDrawsList');
     });
 
     if (el.querySelector('#bet-form')) {
@@ -289,9 +293,13 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
                     DGW.main.methods.changeDrawsSubmenu(DGW.main.settings.draws.currentSubMenu);
 
                     DGW.main.methods.profileSetData(result.User, result.DrawEntry);
+
+                    ga(DGW.global.gaSend, 'event', 'DrawActions', 'Betting', 'success');
                 }, function onError(result){
                     betBtn.disabled = false;
                     DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
+
+                    ga(DGW.global.gaSend, 'event', 'DrawActions', 'Betting', 'error');
                 });
             betBtn.disabled = true;
         });
@@ -310,6 +318,8 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
             DGW.global.api.requests.claimPrize(drawId, address, function onSuccess(){
                 DGW.helpers.addClass(el.querySelector('.dg-o-w-single-draw'), 'claimed');
                 DGW.main.methods.notificationConstructor(['We\'ve received your address', 'And will contact you very soon!']);
+
+                ga(DGW.global.gaSend, 'event', 'DrawActions', 'ClaimPrize', 'AddressSent');
             }, function onError(result){
                 DGW.main.methods.notificationConstructor(DGW.helpers.errorParser(result).messages, 'error');
             });
@@ -331,10 +341,14 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
     el.querySelector('.dg-o-w-like.dg-o-w-facebook-like').addEventListener('click', function(ev){
         ev.preventDefault();
         DGW.global.actions.requests.shareFb(drawId, isWinner);
+
+        ga(DGW.global.gaSend, 'event', 'DrawActions', 'Sharing', 'Facebook');
     });
     el.querySelector('.dg-o-w-like.dg-o-w-twitter-like').addEventListener('click', function(ev){
         ev.preventDefault();
         DGW.global.actions.requests.shareTw(drawId, (!isWinner) ? 'Win ' : 'I\'ve just won ' + draw.Prize.Title, isWinner);
+
+        ga(DGW.global.gaSend, 'event', 'DrawActions', 'Sharing', 'Twitter');
     });
 
     DGW.main.elements.widgetContent.appendChild(el);
