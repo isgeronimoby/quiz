@@ -1,4 +1,7 @@
 @import '../variables.scss';
+.summary {
+  overflow-y: auto;
+}
 .summary-banner {
   position: relative;
   display: flex;

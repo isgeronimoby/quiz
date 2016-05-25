@@ -69,7 +69,7 @@ class QuizSummary extends Component {
 		}
 
 		return (
-			<div className="quiz-content">
+			<div className="quiz-content summary">
 				<div className="quiz-info">{ info }</div>
 
 				<div className="summary-banner" onClick={ showScoreScreen }>
