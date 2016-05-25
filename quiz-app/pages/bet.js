@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import withFetch from '../components/withFetch';
 import QuizBetContainer from '../components/QuizBetContainer';
 
 

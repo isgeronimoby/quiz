@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { fetchFixturesIfNeeded, fetchPlayedFixtures } from '../flux/actions';
 import withWelcome from '../components/withWelcome';
+import { Fetching } from '../components/Layout';
 import Location from '../lib/Location';
 
 const MIN_DELAY = 2000;
@@ -49,9 +50,7 @@ class Index extends Component {
 
 	render() {
 		return (
-			<div className="preloader">
-				<div className="loader-image"></div>
-			</div>
+			<Fetching/>
 		);
 	}
 }

@@ -10,7 +10,7 @@ import './Layout.scss';
 export const Fetching = () => {
 	return (
 		<div className="fetching">
-			<img src={ require('../../static/images/loader2.gif') }/>
+			<img src={ require('../../static/images/loader.gif') }/>
 		</div>
 	);
 };
