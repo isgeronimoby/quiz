@@ -42,6 +42,11 @@
             font-size: 10px;
             font-family: 'Roboto', 'Helvetica', sans-serif;
         }
+        a {
+            font-size: inherit;
+            color: inherit;
+            text-decoration: none;
+        }
         h2 {
             font-size: 2.4rem;
             font-weight: 300;
@@ -179,6 +184,11 @@
             }
         }
     </style>
+
+    <script>
+        var href = document.location.origin;
+        var link = '<a href="' + href + '">' + href + '</a>';
+    </script>
 </head>
 <body>
 <div id="app">
@@ -189,7 +199,7 @@
             <h4 class="color-brand-lite">
                 <span class="boxed">Welcome to Everton Score Predictor!</span>
             </h4>
-            <h2>Please go to this page from your mobile.</h2>
+            <h2>Please go to this page from your mobile - <script>document.write(link)</script></h2>
             <p class="text-x color-brand-lite">Desktop version is coming very soon.</p>
         </div>
     </header>
@@ -210,7 +220,7 @@
                 <div class="col-text">
                     <h3 class="col-title">Win Everton Prizes</h3>
                     <p class="text-x opacity-80">exclusive merchandise</p>
-                    <p class="text-x opacity-60">money can't buy experiences</p>
+                    <p class="text-x opacity-60">money can’t buy experiences</p>
                 </div>
             </li>
             <li class="col">
