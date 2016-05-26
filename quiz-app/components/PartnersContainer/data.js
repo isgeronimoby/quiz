@@ -10,13 +10,13 @@ const partners = [
 		name: 'Coral',
 		picture: require("../../static/images/partner-picture.png"),
 		text: text('Coral'),
-		signupLink: '//affiliate.coral.co.uk/processing/clickthrgh.asp?btag=a_20912b_2',
+		signupLink: '//affiliate.coral.co.uk/processing/clickthrgh.asp?btag=a_20912b_11330',
 		privacyLink: '//coral-eng.custhelp.com/app/answers/detail/a_id/2132/~/privacy-policy',
 		facebookLink: '//facebook.com',
 		mailtoLink: mailto,
 		smsLink: sms,
 	},
-	{
+	/*{
 		partnerId: 2,
 		name: 'Sky bet',
 		picture: require("../../static/images/partner-picture2.png"),
@@ -26,7 +26,7 @@ const partners = [
 		facebookLink: '//facebook.com',
 		mailtoLink: mailto,
 		smsLink: sms,
-	}
+	}*/
 ];
 
 
