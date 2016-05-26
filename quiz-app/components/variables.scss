@@ -7,14 +7,14 @@ $color-grey-opaque: rgba(182, 182, 182, .3);
 $color-grey-dark: #727272; /* 114, 114, 114 */
 
 $text-color: #fff;
-$brand-color-lite: #C8E6C9;
-$brand-color: #4CAF50; /* 76, 175, 80 */
-$brand-color-opaque: rgba(76, 175, 80, .5);
-$brand-color-dark: #388E3C;
-$brand-color-darkest: #2E422F;
+$brand-color-lite: #8392c0;
+$brand-color: #082581;  /* Old: #4CAF50; */
+$brand-color-opaque: rgba(8, 37, 129, .5); /*Old rgba(76, 175, 80, .5);*/
+$brand-color-dark: #07205d; /*Old #388E3C;*/
+$brand-color-darkest: #0f0690; /*Old #2E422F;*/
 $body-bg: $color-grey-lite;
 $popup-bg: rgba(63, 81, 181, 0.9);
-$color-selection: rgba(200, 230, 201, 0.5);
+$color-selection: #e6e9f2; /*Old rgba(200, 230, 201, 0.5);*/
 $color-facebook: #3B5998;
 $color-twitter: #1DA1F2;
 $color-email: #D6C047;
@@ -23,7 +23,7 @@ $color-error: #FF5258; /*255, 82, 88*/
 $color-error-opaque: rgba(255, 82, 88, .5);
 $color-winner: #F6921E;
 $color-winner-opaque: rgba(246, 196, 138, 0.5);
-
+$color-bet: #4CAF50;
 /*
 Sizes
 */
