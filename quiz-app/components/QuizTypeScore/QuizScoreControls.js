@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import './score.scss';
 
+const MAX_SCORE_SUM = 6;
 
 class QuizScoreControls extends Component {
 
@@ -70,7 +71,7 @@ class QuizScoreControls extends Component {
 		});
 		const otherTeam = teamNames.find(name => name !== currentTeam);
 		const otherTeamScore = scores[otherTeam] || 0;
-		const maxAllowedScore = 9 - otherTeamScore; // Max sum is 9
+		const maxAllowedScore = MAX_SCORE_SUM - otherTeamScore;
 		const scoreBtns = [...Array(10).keys()].map(i => {
 			const isDisabled = (i > maxAllowedScore);
 			const disabledClass = isDisabled ? 'disabled' : '';
