@@ -57,27 +57,30 @@ function requestAuthWithSafariFix(authPopupView) {
 			return dispatch(requestAuthPopup(authPopupView));
 		}
 
-		rpc.readClubCookie('safarifix', (res) => {
-			const done = () => {
-				dispatch(safariCookieHack());
-				dispatch(requestAuthPopup(authPopupView));
-			};
-
-			if (res) {
-				return done();
-			}
-
+		let interval = null;
+		const done = () => {
+			window.clearInterval(interval);
+			dispatch(safariCookieHack());
+			dispatch(requestAuthPopup(authPopupView));
+		};
+		const openCookiePopup = (cb) => {
 			// Open window on target domain and let it set cookie (i.e. visit it) and close itself.
 			// A hack for Safari that do not allow setting cookies to unvisited domains, thus breaking session cookies.
 			//
 			const url = `${iframeSrc}?safarifix`; // the page detects this flag, sets 'safarifix' cookie and closes itself
 			const settings = 'menubar=no,location=no,resizable=no,scrollbars=no,status=no,width=1,height=1,top=0,left=0';
 
-			setTimeout(done, 500); // Hack for iPhone, no timers are firing after popup.open call for unknown reason
-
 			// Assume cookie is set after window is closed
-			popup.open({url, settings}, done);
-		});
+			popup.open({url, settings}, () => cb());
+		};
+
+		openCookiePopup(() => done());
+
+		interval = window.setInterval(() => {
+			rpc.readClubCookie('safarifix', (res) => {
+				if (res) { return done(); }
+			});
+		}, 500);
 	};
 }
 
