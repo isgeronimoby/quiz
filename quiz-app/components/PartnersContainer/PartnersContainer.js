@@ -22,10 +22,8 @@ const PartnerSection = ({ partner }) => {
 				<span className="btn-text-sm">and win great prizes</span>
 			</a>
 
-			<h3 className="invite-text">Invite a friend and get +50000pts</h3>
-
 			<SectionCollapsible>
-				<div className="partner-text">{ text }</div>
+				<div className="partner-text" dangerouslySetInnerHTML={{__html: text }}></div>
 				<a className="partner-privacy-link link-normal" href={ privacyLink }>Privacy Policy</a>
 
 				{/*

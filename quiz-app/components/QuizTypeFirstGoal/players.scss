@@ -25,6 +25,9 @@
   background: #fff;
   img {
     width: 40px;
+    &:not(fist-child) {
+      border-radius: 50%; /*First is no goalscorer*/
+    }
   }
 }
 .player-info {
