@@ -15,9 +15,6 @@ var scripts = [
     // Proxy object
     'js/easyXDM.min.js',
 
-    // 3rd party slider - should be cha//nged
-    //'js/vanilla-slider.js',
-
     // Server and cookie requests
     'js/requests.js',
 

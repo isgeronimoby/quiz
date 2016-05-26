@@ -2435,7 +2435,7 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
 
     var el = DGW.main.elements.pages.singleDraw;
     var prizeSect = '<div class="dg-o-w-draw-left-side">' +
-        '<div class="prize-image"><div><img src="' + draw.Prize.ImageUrl + '" /></div></div>' +
+        '<div class="prize-image"><img src="' + draw.Prize.ImageUrl + '" /></div>' +
         '</div>';
     var shareSect = '<div class="dg-o-w-draw-share dg-o-w-draw-auth-show">' +
         '<a href="#" class="dg-o-w-like dg-o-w-facebook-like">Share <span class="dg-o-w-rewarded-action" id="dg-o-w-facebook-like-reward"></span></a>' +
@@ -2653,6 +2653,8 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
     DGW.main.elements.widgetContent.appendChild(el);
     DGW.main.methods.checkSectionHeight();
     DGW.main.methods.setRewardedActions();
+
+    el.querySelector('.dg-o-w-single-draw').style.height = el.querySelector('.dg-o-w-single-draw').clientHeight + 'px';
 };
 DGW.main.methods.offersConstructor = function(offers) {
     var offersHolder = DGW.main.elements.pages.earnMain.querySelector('.dg-o-w-list-offers'),
