@@ -17,7 +17,7 @@ class QuizBetExit extends Component {
 					</div>
 
 					<Link className="big-btn money-btn" to="./partners">
-						SignUp to our betting partners<br/>
+						SignUp to our betting partner<br/>
 						<span className="btn-text-sm">and win great prizes</span>
 					</Link>
 				</div>

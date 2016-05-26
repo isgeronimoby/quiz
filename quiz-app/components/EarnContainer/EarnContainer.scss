@@ -11,17 +11,19 @@
     background: $color-selection;
   }
 }
+
+$image-sz: 5.5rem;
 .earn-item-aside {
-  padding-left: 15px;
-  margin-right: 10px;
+  min-width: $image-sz;
+  padding: 0 10px 0 15px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
-
-$image-sz: 5.5rem;
 .earn-item-image {
   width: $image-sz;
+  min-width: $image-sz;
+  max-width: $image-sz;
   height: $image-sz;
   border-radius: 50%;
   background: #fff;

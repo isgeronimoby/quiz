@@ -8,7 +8,11 @@
     align-items: center;
     border-top: 0.1rem solid $color-grey-opaque;
 
-    &.selected {
+    &.no-goalscorer {
+      background: $color-no-goalscorer;
+    }
+
+    &.selected:not(.no-goalscorer) {
       background: $color-selection;
     }
   }
@@ -23,10 +27,16 @@
   font-size: 2.4rem;
   color: $brand-color;
   background: #fff;
+  overflow: hidden;
   img {
     width: 40px;
-    &:not(fist-child) {
-      border-radius: 50%; /*First is no goalscorer*/
+    border-radius: 50%;
+  }
+
+  .no-goalscorer & {
+    img {
+      width: 5.6rem; height: 5.6rem;
+      border-radius: 0;
     }
   }
 }
@@ -36,6 +46,10 @@
 .player-name {
   font-size: 1.7rem;
   color: $color-grey-dark;
+
+  .no-goalscorer & {
+    color: $color-grey;
+  }
 }
 .player-position {
   font-size: 1.2rem;

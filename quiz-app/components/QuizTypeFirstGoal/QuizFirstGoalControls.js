@@ -19,9 +19,10 @@ class QuizFirstGoalControls extends Component {
 		let playerItems = players.map(({outcomeId, name, team}, i) => {
 			const icon =  team ? require(`../../static/images/team-${team}.svg`) :
 				require(`../../static/images/icon-friendship.svg`);
+			const noGoalscorerClass = !team ? 'no-goalscorer ' : ' ';
 
 			return (
-				<li key={`player-${i}`} className={"player-item " + selectedClass(outcomeId)}
+				<li key={`player-${i}`} className={"player-item " + noGoalscorerClass + selectedClass(outcomeId)}
 					onClick={ () => onSubmit(outcomeId) }>
 					<div className="player-icon">
 						<img src={ icon }/>
