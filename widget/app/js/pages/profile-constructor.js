@@ -57,8 +57,16 @@ DGW.main.methods.profileSetData = function(data, draw) {
     DGW.global.userStats.creditsC = data.Wallet.CreditsConfirmed;
     DGW.global.userStats.creditsP = data.Wallet.CreditsPending;
 
-    if (fbAddText && DGW.global.userStats.facebookId !== null) {
+    /*if (fbAddText && DGW.global.userStats.facebookId !== null) {
         fbAddText.parentNode.removeChild(fbAddText);
+    }*/
+
+    if (fbAddText) {
+        if (DGW.global.userStats.facebookId !== null) {
+            fbAddText.style.display = 'none';
+        } else {
+            fbAddText.style.display = 'block';
+        }
     }
 
     if (DGW.global.userStats.earnToday && pr.querySelector('#dg-o-w-profile-earn-today'))
