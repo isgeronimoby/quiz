@@ -41,7 +41,7 @@ class DrawBet extends Component {
 
 		const disabledBet = (betValue === 0);
 		const disabledBtnClass = disabledBet ? 'disabled' : '';
-		const dateFormatted = moment.utc(endDate).format('YYYY/MM');
+		const dateFormatted = moment(endDate).format('YYYY/MM');
 		const errorClass = betError ? 'reveal' : '';
 		const onChange = (v) => this.handelBetValueChange(v);
 		const onBtnClick = () => !disabledBet && onSubmit(betValue);

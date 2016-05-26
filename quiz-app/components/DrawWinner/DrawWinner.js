@@ -21,8 +21,8 @@ class DrawWinner extends Component {
 					}
 				}
 			} = this.props;
-		const titleDateEnded = `Finished ${ moment.utc(endDate).fromNow() }`;
-		const dateFormatted = moment.utc(endDate).format('YYYY/MM');
+		const titleDateEnded = `Finished ${ moment(endDate).fromNow() }`;
+		const dateFormatted = moment(endDate).format('YYYY/MM');
 
 		return (
 			<div className="draw-content">

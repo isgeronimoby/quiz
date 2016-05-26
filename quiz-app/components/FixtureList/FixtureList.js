@@ -19,7 +19,7 @@ class FixtureList extends Component {
 			.sort(sortFixturesByDate)
 			.map((match) => {
 				const { startDate } = match;
-				const header = moment.utc(startDate).format('D MMMM').toUpperCase();
+				const header = moment(startDate).format('D MMMM').toUpperCase();
 				return {...match, header};
 			})
 			.map((match, i, array) => {

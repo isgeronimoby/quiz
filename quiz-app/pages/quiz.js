@@ -84,7 +84,7 @@ class Quiz extends Component {
 			invalidOutcomes,
 			fetchOdds
 			} = this.props;
-		const info = moment.utc(startDate).format('D MMMM, HH:mm');
+		const info = moment(startDate).format('D MMMM, HH:mm');
 		const { betAmount, answers, isWinner } = fixtureItem;
 		const isPlayed = !!betAmount;
 		const _fetchOdds = (answers) => fetchOdds(matchId, answers);

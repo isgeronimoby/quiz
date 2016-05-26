@@ -3,7 +3,7 @@ import moment from 'moment';
 import './Countdown.scss';
 
 function parseDate(str) {
-	const target = moment.utc(str);
+	const target = moment(str);
 	const diff = target.diff(moment());
 	const duration = moment.duration(diff);
 	const format = (num) => {

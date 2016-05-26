@@ -25,7 +25,7 @@ class FixtureListItem extends Component {
 		const itemClass = this.getItemClass(fixtureItem);
 		const headerClass = !header ? 'is-collapsed' : '';
 		const title = `${teamHome} vs ${teamAway}`;
-		const timeStr = moment.utc(startDate).format('HH:mm');
+		const timeStr = moment(startDate).format('HH:mm');
 		const isPending = !isOpenForBetting && !isEnded;
 		const teamHomeIcon = require(`../../static/images/team-${teamHome}.svg`);
 		const teamAwayIcon = require(`../../static/images/team-${teamAway}.svg`);
@@ -34,7 +34,7 @@ class FixtureListItem extends Component {
 		if (isPending) {
 			subTitle += ' - in progress';
 		} else if (isEnded) {
-			subTitle = `Finished ${ moment.utc(startDate).fromNow() }`;
+			subTitle = `Finished ${ moment(startDate).fromNow() }`;
 		}
 
 		let betLabel = ''; // TODO - need wonAmount?

@@ -12,7 +12,7 @@ const STATE_FINISHED_HAS_WINNER_USER = 'STATE_FINISHED_HAS_WINNER_USER';
 
 
 function dateFormat(str) {
-	const formatted = moment.utc(str).fromNow();
+	const formatted = moment(str).fromNow();
 	const ended = formatted.indexOf('ago') > -1;
 	const prefix = ended ? 'ended' : 'ends';
 	return `${prefix} ${formatted}`;
