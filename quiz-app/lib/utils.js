@@ -54,6 +54,11 @@ export function getNextDrawItem(drawList, selectedDrawId) {
 	}
 }
 
+export function getLatestStartedDrawItem(drawList) {
+	const drawListSorted = drawList.slice().sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+	const latestNotDrawn = drawListSorted.find(({ isDrawn }) => !isDrawn);
+	return latestNotDrawn || drawListSorted[0];
+}
 
 export function findPublicPath() {
 	const appScript = document.getElementById('entry');

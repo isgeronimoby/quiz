@@ -6,14 +6,17 @@ import './QuizBetExit.scss';
 class QuizBetExit extends Component {
 
 	static propTypes = {
+		latestDrawItem: PropTypes.object.isRequired,
 	};
 
 	render() {
+		const { prizeImageUrl } = this.props.latestDrawItem;
+
 		return (
 			<div className="quiz-exit">
 				<div className="big-image-panel">
 					<div className="big-image">
-						<img src={ require('../../static/images/mug.png') }/>
+						<img src={ prizeImageUrl }/>
 					</div>
 
 					<Link className="big-btn money-btn" to="./partners">
