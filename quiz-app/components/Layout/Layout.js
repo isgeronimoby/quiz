@@ -72,6 +72,7 @@ class Layout extends Component {
 	render() {
 		const {title: pageTitle, path, showAuthPopup, authPopupView, showWelcomePopup, children} = this.props;
 		const { showMenu, header: { title: stateTitle, hasBack, hasLogout } } = this.state;
+		const contentClass = (path === '/partners') ? 'safari-scroll-fix' : '';
 
 		return (
 			<div className="layout">
@@ -91,7 +92,7 @@ class Layout extends Component {
 
 				<WelcomePopup show={ showWelcomePopup }/>
 
-				<div className="content">
+				<div className={"content " + contentClass}>
 					{ children }
 				</div>
 			</div>
