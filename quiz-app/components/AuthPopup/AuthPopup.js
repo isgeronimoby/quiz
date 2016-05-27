@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { cancelAuth } from '../../flux/actions';
+import { cancelAuth, checkSafariCookieHack } from '../../flux/actions';
 import FormSignUp from './FormSignUp.js';
 import FormLogIn from './FormLogIn.js';
 import FormForgotPwd from './FormForgotPwd.js';
@@ -23,11 +23,16 @@ class AuthPopup extends Component {
 		view: PropTypes.string,
 		//from store
 		onCancel: PropTypes.func.isRequired,
+		checkSafariCookieHack: PropTypes.func.isRequired,
 	};
 
 	state = {
 		view: 'signup',
 	};
+
+	componentDidMount() {
+		this.props.checkSafariCookieHack();
+	}
 
 	componentWillReceiveProps({view}) {
 		if (!view) { return; }
@@ -68,6 +73,7 @@ class AuthPopup extends Component {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onCancel: () => dispatch(cancelAuth()),
+		checkSafariCookieHack: () => dispatch(checkSafariCookieHack()),
 	};
 };
 
