@@ -289,7 +289,7 @@ DGW.helpers.zeroTimeout = function(callback){
     window.setTimeout(callback, 0);
 };
 
-DGW.helpers.openDataLinks = function(elems){
+DGW.helpers.openDataLinks = function(elems, domEl){
     var array = [];
     if (!DGW.helpers.isArray(elems)) {
         array.push(elems);
@@ -302,7 +302,7 @@ DGW.helpers.openDataLinks = function(elems){
         if (link) {
             link.addEventListener('click', function(ev){
                 ev.preventDefault();
-                DGW.helpers.showFramedSrc(url);
+                DGW.helpers.showFramedSrc(url, (domEl) ? domEl : null);
             });
         }
     });

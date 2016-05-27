@@ -1125,7 +1125,7 @@ DGW.helpers.zeroTimeout = function(callback){
     window.setTimeout(callback, 0);
 };
 
-DGW.helpers.openDataLinks = function(elems){
+DGW.helpers.openDataLinks = function(elems, domEl){
     var array = [];
     if (!DGW.helpers.isArray(elems)) {
         array.push(elems);
@@ -1138,7 +1138,7 @@ DGW.helpers.openDataLinks = function(elems){
         if (link) {
             link.addEventListener('click', function(ev){
                 ev.preventDefault();
-                DGW.helpers.showFramedSrc(url);
+                DGW.helpers.showFramedSrc(url, (domEl) ? domEl : null);
             });
         }
     });
@@ -2271,11 +2271,12 @@ DGW.main.methods.gamesConstructor = function(){
         DGW.helpers.imagesResponsivePaths(li.querySelectorAll('img'));
 
         var a = document.createElement('a');
-        a.href = 'http://spr-matchquiz-test.cloudapp.net/';
-        a.target = '_blank';
-        a.innerHTML = 'Open link in the new tab';
+            a.href = 'http://everton.scorepredictor.club/';
+            a.target = '_blank';
+            a.innerHTML = 'Open link in the new tab';
+        li.setAttribute('data-link', 'score-predictor');
 
-        li.addEventListener('click', function(){DGW.helpers.showFramedSrc(a.href, a)});
+        DGW.helpers.openDataLinks(li, a);
 
         gamesList.appendChild(li);
     });
