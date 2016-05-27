@@ -1,3 +1,6 @@
+import MobileDetect from "mobile-detect";
+const md = new MobileDetect(window.navigator.userAgent);
+
 // Wrapper for window.open()
 //
 export function Window() {
@@ -29,7 +32,7 @@ export function Window() {
 
 // is Safari: feature-detect
 //
-export const isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+export const isSafari = md.is('iPhone') && md.userAgent() === 'Safari'; //Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
 
 
 // Returns next *active* draw item after selected item: [a]
