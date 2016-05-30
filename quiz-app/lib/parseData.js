@@ -140,3 +140,16 @@ export function parseScoreData(data, [teamHome, teamAway], scores = [], selected
 }
 
 
+export function getFinalMatchScore(questionList, [teamHome, teamAway]) {
+	const noResult = ['?', '?'];
+	const scoreQuestion = questionList.find(({ Type }) => 'CorrectScore' === Type);
+	if (!scoreQuestion) { return noResult; }
+
+	const winingResult = scoreQuestion.Outcomes.find(({ ResultCode }) => 'W' === ResultCode);
+	if (!winingResult) { return noResult; }
+
+	const { Score: score, Team: team } = winingResult;
+	const scoreArr = score.split('-');
+
+	return (team === teamHome ? scoreArr : scoreArr.reverse());
+}

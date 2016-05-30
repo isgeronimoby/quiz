@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { parseWinOrDrawData, parseFirstGoalData, parseScoreData } from '../../lib/parseData.js';
+import { parseWinOrDrawData, parseFirstGoalData, parseScoreData, getFinalMatchScore } from '../../lib/parseData.js';
 import Link from '../Link';
 import SharingControls from '../SharingControls';
 import './QuizSummaryPlayed.scss';
@@ -94,8 +94,11 @@ class QuizSummaryPlayed extends Component {
 		};
 	}
 
-	renderGreyBtn(scoreStr) {
-		const { isEnded, isWinner, betAmount, odds, maxWonOdds, maxWonPoints } = this.props;
+	renderGreyBtn() {
+		const { questionList, teamNames, isEnded, isWinner, betAmount, odds, maxWonOdds, maxWonPoints } = this.props;
+		const [realScoreHome, realScoreAway] = getFinalMatchScore(questionList, teamNames);
+		const realScoreStr = `${realScoreHome}:${realScoreAway}`;
+
 		const oddsList = [odds, 1];
 		const oddsStr = oddsList.join('-');
 		const winAmount = betAmount * odds;
@@ -103,7 +106,7 @@ class QuizSummaryPlayed extends Component {
 		let subText = '';
 
 		if (isEnded) {
-			title = `Match ended ${scoreStr}`;
+			title = `Match ended ${realScoreStr}`;
 			if (isWinner) {
 				subText = `Your bet: ${betAmount}  You won: ${winAmount} pts`;
 			} else {
@@ -125,11 +128,11 @@ class QuizSummaryPlayed extends Component {
 
 	render() {
 		const { matchId, info, teamNames } = this.props;
-		const { score, choiceItems } = this.renderChoiceItems();
+		const { score: betScore, choiceItems } = this.renderChoiceItems();
 		const [ teamHome, teamAway ] = teamNames;
-		const { scoreHome, scoreAway } = score;
-		const scoreStr = `${scoreHome}:${scoreAway}`;
-		const greyBtn = this.renderGreyBtn(scoreStr);
+		const { scoreHome: betScoreHome, scoreAway: betScoreAway } = betScore;
+		const scoreStr = `${betScoreHome}:${betScoreAway}`;
+		const greyBtn = this.renderGreyBtn();
 
 		return (
 			<div className="quiz-content summary-played">

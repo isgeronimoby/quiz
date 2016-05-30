@@ -1,22 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { parseWinOrDrawData, parseFirstGoalData, parseScoreData } from '../../lib/parseData.js';
+import { getFinalMatchScore } from '../../lib/parseData.js';
 import Link from '../Link';
 import SharingControls from '../SharingControls';
 import './QuizSummaryNotPlayed.scss';
-
-function getScore(questionList, [teamHome, teamAway]) {
-	const noResult = ['?', '?'];
-	const scoreQuestion = questionList.find(({ Type }) => 'CorrectScore' === Type);
-	if (!scoreQuestion) { return noResult; }
-
-	const winingResult = scoreQuestion.Outcomes.find(({ ResultCode }) => 'W' === ResultCode);
-	if (!winingResult) { return noResult; }
-
-	const { Score: score, Team: team } = winingResult;
-	const scoreArr = score.split('-');
-
-	return (team === teamHome ? scoreArr : scoreArr.reverse());
-}
 
 
 class QuizSummaryNotPlayed extends Component {
@@ -32,7 +18,7 @@ class QuizSummaryNotPlayed extends Component {
 
 	render() {
 		const { matchId, info, questionList, teamNames, maxWonOdds, maxWonPoints } = this.props;
-		const score = getScore(questionList, teamNames);
+		const score = getFinalMatchScore(questionList, teamNames);
 		const [teamHome, teamAway] = teamNames;
 		const [scoreHome, scoreAway] = score;
 		const scoreStr = `${scoreHome}:${scoreAway}`;
