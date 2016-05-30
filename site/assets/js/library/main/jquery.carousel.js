@@ -41,6 +41,21 @@ function initCarousel() {
         step: 1
     });
 
+    jQuery('div.carouselRetailers').scrollGallery({
+        mask: 'div.gmask',
+        slider: '>ul',
+        slides: '>li',
+        disableWhileAnimating: true,
+        generatePagination: 'div.pagination',
+        circularRotation: true,
+        pauseOnHover: false,
+        autoRotation: false,
+        maskAutoSize: false,
+        switchTime: 1000,
+        animSpeed: 500,
+        step: 1
+    });
+
 }
 
 
