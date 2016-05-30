@@ -4,6 +4,7 @@ import './SectionCollapsible.scss';
 class SectionCollapsible extends Component {
 
 	static propTypes = {
+		renderToggle: PropTypes.func
 	};
 
 	state = {
@@ -17,7 +18,7 @@ class SectionCollapsible extends Component {
 	}
 
 	render() {
-		const { children } = this.props;
+		const { children, renderToggle = () => '' } = this.props;
 		const { collapsed } = this.state;
 		const expandedClass = !collapsed ? 'expanded' : '';
 		const iconSrc = require('./images/icon-gripper.svg');
@@ -26,6 +27,7 @@ class SectionCollapsible extends Component {
 		return (
 			<div className={"section-collapsible " + expandedClass} >
 				<div className="collapsible-content">{ children }</div>
+				<div className="collapsible-toggler" onClick={ onClick }>{ renderToggle(collapsed) }</div>
 				<div className="collapsible-gripper" onClick={ onClick }>
 					<div className="icon-gripper">
 						<img src={iconSrc} alt="gripper"/>

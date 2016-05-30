@@ -5,7 +5,7 @@ import './FixtureList.scss';
 
 
 function sortFixturesByDate(a, b) {
-	return new Date(a.startDate) - new Date(b.startDate);
+	return new Date(b.startDate) - new Date(a.startDate);
 }
 
 class FixtureList extends Component {

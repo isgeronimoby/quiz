@@ -11,6 +11,10 @@ const PartnerSection = ({ partner }) => {
 		headerContent = <img className="partner-img" src={ picture }/>;
 	}
 
+	const renderToggle = (collapsed) => (
+		<h3 className="toggle-text">{ `${!collapsed ? 'Hide ' : '' }Terms & Conditions` }</h3>
+	);
+
 	return (
 		<div className="partner-section">
 			<div className="partner-title">
@@ -22,7 +26,7 @@ const PartnerSection = ({ partner }) => {
 				<span className="btn-text-sm">and win great prizes</span>
 			</a>
 
-			<SectionCollapsible>
+			<SectionCollapsible renderToggle={ renderToggle }>
 				<div className="partner-text" dangerouslySetInnerHTML={{__html: text }}></div>
 				<a className="partner-privacy-link link-normal" href={ privacyLink }>Privacy Policy</a>
 
