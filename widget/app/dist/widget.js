@@ -52,7 +52,8 @@ var DGW = function () {
                     cache: {
                         drawsList: [],
                         drawsEntries: [],
-                        rewardedActions: []
+                        rewardedActions: [],
+                        userRelations: {}
                     },
                     shown: false,
                     settings: {
@@ -244,35 +245,40 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         case 'shareRewardAction':
             endpoint = 'draw/getsharelinks?drawid=' + requestBody;
             break;
-        case 'friendsGet':
-            endpoint = 'friend/getfriends';
+        case 'usersGet':
+            endpoint = 'friend/getuserrelations';
             break;
-        case 'friendFollow':
+        case 'userFollow':
             method = 'POST';
             endpoint = 'friend/follow';
             requestBody = JSON.stringify(requestBody);
             break;
-        case 'friendUnfollow':
+        case 'userUnfollow':
             method = 'POST';
             endpoint = 'friend/unfollow';
             requestBody = JSON.stringify(requestBody);
             break;
-        case 'friendRequestSend':
+        case 'userRequestSend':
             method = 'POST';
             endpoint = 'friend/sendfriendrequest';
             requestBody = JSON.stringify(requestBody);
             break;
-        case 'friendRequestAccept':
+        case 'userRequestAccept':
             method = 'POST';
             endpoint = 'friend/acceptfriendrequest';
             requestBody = JSON.stringify(requestBody);
             break;
-        case 'friendRequestDecline':
+        case 'userRequestDecline':
             method = 'POST';
             endpoint = 'friend/declinefriendrequest';
             requestBody = JSON.stringify(requestBody);
             break;
-        case 'friendSearch':
+        case 'userUnfriend':
+            method = 'POST';
+            endpoint = 'friend/unfriend';
+            requestBody = JSON.stringify(requestBody);
+            break;
+        case 'userSearch':
             method = 'POST';
             endpoint = 'friend/findusers';
             requestBody = JSON.stringify(requestBody);
@@ -739,8 +745,8 @@ DGW.global.api.requests.shareRewardAction = function(drawId, onSuccess, onError)
     }, drawId);
 };
 
-DGW.global.api.requests.friendsGet = function(onSuccess, onError){
-    DGW.global.api.generic('friendsGet', function(result){
+DGW.global.api.requests.usersGet = function(onSuccess, onError){
+    DGW.global.api.generic('usersGet', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('Get friends API: ', result.data);
             if (onSuccess) onSuccess(result.data);
@@ -751,8 +757,8 @@ DGW.global.api.requests.friendsGet = function(onSuccess, onError){
     });
 };
 
-DGW.global.api.requests.friendFollow = function(userId, onSuccess, onError){
-    DGW.global.api.generic('friendFollow', function(result){
+DGW.global.api.requests.userFollow = function(userId, onSuccess, onError){
+    DGW.global.api.generic('userFollow', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('friendFollow ', result.data);
             if (onSuccess) onSuccess(result.data);
@@ -765,8 +771,8 @@ DGW.global.api.requests.friendFollow = function(userId, onSuccess, onError){
     });
 };
 
-DGW.global.api.requests.friendUnfollow = function(userId, onSuccess, onError){
-    DGW.global.api.generic('friendUnfollow', function(result){
+DGW.global.api.requests.userUnfollow = function(userId, onSuccess, onError){
+    DGW.global.api.generic('userUnfollow', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('friendUnfollow ', result.data);
             if (onSuccess) onSuccess(result.data);
@@ -779,8 +785,8 @@ DGW.global.api.requests.friendUnfollow = function(userId, onSuccess, onError){
     });
 };
 
-DGW.global.api.requests.friendRequestSend = function(userId, onSuccess, onError){
-    DGW.global.api.generic('friendRequestSend', function(result){
+DGW.global.api.requests.userRequestSend = function(userId, onSuccess, onError){
+    DGW.global.api.generic('userRequestSend', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('friendRequestSend ', result.data);
             if (onSuccess) onSuccess(result.data);
@@ -793,8 +799,8 @@ DGW.global.api.requests.friendRequestSend = function(userId, onSuccess, onError)
     });
 };
 
-DGW.global.api.requests.friendRequestAccept = function(userId, onSuccess, onError){
-    DGW.global.api.generic('friendRequestAccept', function(result){
+DGW.global.api.requests.userRequestAccept = function(userId, onSuccess, onError){
+    DGW.global.api.generic('userRequestAccept', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('friendRequestAccept ', result.data);
             if (onSuccess) onSuccess(result.data);
@@ -807,8 +813,8 @@ DGW.global.api.requests.friendRequestAccept = function(userId, onSuccess, onErro
     });
 };
 
-DGW.global.api.requests.friendRequestDecline = function(userId, onSuccess, onError){
-    DGW.global.api.generic('friendRequestDecline', function(result){
+DGW.global.api.requests.userRequestDecline = function(userId, onSuccess, onError){
+    DGW.global.api.generic('userRequestDecline', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('friendRequestDecline ', result.data);
             if (onSuccess) onSuccess(result.data);
@@ -821,8 +827,23 @@ DGW.global.api.requests.friendRequestDecline = function(userId, onSuccess, onErr
     });
 };
 
-DGW.global.api.requests.friendSearch = function(queryString, onSuccess, onError){
-    DGW.global.api.generic('friendSearch', function(result){
+DGW.global.api.requests.userUnfriend = function(userId, onSuccess, onError){
+    DGW.global.api.generic('userUnfriend', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('friendUnfriend ', result.data);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            DGW.helpers.console.error('friendUnfriend ', result.error);
+            if (onError) onError(result.error);
+        }
+    }, {
+        UserId: userId
+    });
+};
+
+
+DGW.global.api.requests.userSearch = function(queryString, onSuccess, onError){
+    DGW.global.api.generic('userSearch', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('friendSearch ', result.data);
             if (onSuccess) onSuccess(result.data);
@@ -831,7 +852,7 @@ DGW.global.api.requests.friendSearch = function(queryString, onSuccess, onError)
             if (onError) onError(result.error);
         }
     }, {
-        Username: queryString
+        Query: queryString
     });
 };
 DGW.helpers.addClass = function(obj, className){
@@ -1434,7 +1455,7 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' 
                                     '<div class="dg-o-w-profile-stats-holder">' +
                                         '<h3 data-userstats-username class="dg-o-w-profile-name">Captain Deadpool</h3>' +
                                         '<div class="dg-o-w-profile-stats-holder-rest">' +
-                                            //'<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-userstats-friends-c>210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-friends-p class="green-highlighter">19</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-userstats-friends-c>210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-friends-p class="green-highlighter">19</p></div></div>' +
                                             //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand" data-userstats-groups-c>20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-groups-p class="green-highlighter">3</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 data-userstats-points-c>520</h3><p>points</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 data-userstats-credits-c>40</h3></div></div>' +
@@ -1496,7 +1517,7 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul>' +
                                 '</div>';
 
 DGW.templates.friendsMain = '<div class="dg-o-w-submenu"><ul>' +
-                                    '<li class="dg-o-w-active">Friends</li><li>Following</li></ul>' +
+                                    '<li class="dg-o-w-active" data-submenu="friends">Friends</li><li data-submenu="following">Following</li></ul>' +
                                 '<div class="dg-o-w-float-right dg-o-w-inline-form dg-o-w-right-padding">' +
                                     '<form class="search-form"><input class="search-field" type="text" placeholder="Search" /></form>' +
                                 '</div></div>' +
@@ -1536,6 +1557,7 @@ DGW.templates.userListItem = '<div class="dg-o-w-cell">' +
 DGW.templates.userListActions = {
     follow: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Follow</div>',
     following: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked-okay">Following</div>',
+    followsYou: '<p class="dg-o-w-color-grey">Follows you</p>',
     friends: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked-okay">Friends</div>',
     request: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Add to friends</div>',
     requestSent: '<p class="dg-o-w-color-grey">Request sent</p>',
@@ -1936,9 +1958,9 @@ DGW.main.methods.drawsInit = function(){
 
 };
 (function(){
+    var dp = DGW.main.elements.pages.friendsMain;
 
     (function searchFriends(){
-        var dp = DGW.main.elements.pages.friendsMain;
         var friendSearch = dp.querySelector('.search-form .search-field');
         var searchTimeout;
         var searchDelay = 1000;
@@ -1949,7 +1971,7 @@ DGW.main.methods.drawsInit = function(){
             if (searchTimeout) window.clearTimeout(searchTimeout);
             searchTimeout = window.setTimeout(function(){
                 DGW.helpers.console.info('search');
-                DGW.global.api.requests.friendSearch(that.value,
+                DGW.global.api.requests.userSearch(that.value,
                     function(response){
                         DGW.helpers.console.log(response);
                     }
@@ -1959,11 +1981,26 @@ DGW.main.methods.drawsInit = function(){
 
     })();
 
-    setTimeout(function(){
-        DGW.global.api.requests.friendsGet(function(response){
-            DGW.main.methods.friendsConstructor(response);
+    // Submenu clicks
+    (function handlingSubmenu(){
+        var items = Array.prototype.slice.call(dp.querySelectorAll('.dg-o-w-submenu li'));
+        function noActive() {
+            items.forEach(function(item){
+                DGW.helpers.removeClass(item, 'dg-o-w-active');
+            });
+        }
+
+        items.forEach(function(item){
+            item.addEventListener('click', function(){
+                noActive();
+                DGW.helpers.addClass(this, 'dg-o-w-active');
+                DGW.main.methods.usersConstructor(this.getAttribute('data-submenu'));
+            });
         });
-    }, 3000);
+
+        //DGW.main.methods.friendsSubmenuReset
+    })();
+
 })();
 DGW.main.methods.loginInit = function(){
 
@@ -2823,55 +2860,180 @@ DGW.main.methods.offersConstructor = function(offers) {
     showOffersPanels(lists.offers);
     DGW.main.methods.setRewardedActions();
 };
-DGW.main.methods.userListItemConstructor = function(users, group){
+DGW.main.methods.usersConstructor = function(state, searchQuery) {
+    // Possible states: 'friends', 'followers', 'search'
     'use strict';
-    if (!users) return;
 
-    function createUserListAction (actionType) {
+    // Elements and variables
+    var userListHolder = DGW.helpers.getElementsFromAllPlaces('[data-friends-list]')[0],
+        usersToShow;
+
+    // Methods
+    var createUserItem, createUserItemActions, createSingleAction;
+
+
+    // Every button logic, later transmitted back to the LI item
+    createSingleAction = function(actionType, userId, li) {
         var action = document.createElement('div');
+
+        function successfulUpdate(userObj, li) {
+            DGW.helpers.insertAfter(createUserItem(userObj), li);
+            userListHolder.removeChild(li);
+        }
+
         switch (actionType) {
             case 'follow':
                 action.innerHTML = DGW.templates.userListActions.follow;
+                action = action.childNodes[0];
+                action.addEventListener('click', function(){
+                    DGW.global.api.requests.userFollow(userId,
+                        function(userObj){
+                            successfulUpdate(userObj, li);
+                        },
+                        function(res){
+                            DGW.helpers.console.warn('Follow ID: ', userId, res.Message);
+                        }
+                    );
+                });
                 break;
             case 'following':
                 action.innerHTML = DGW.templates.userListActions.following;
+                action = action.childNodes[0];
+                action.addEventListener('click', function(){
+                    DGW.global.api.requests.userUnfollow(userId,
+                        function(userObj){
+                            successfulUpdate(userObj, li);
+                        },
+                        function(res){
+                            DGW.helpers.console.warn('Unfollow ID: ', userId, res.Message);
+                        }
+                    );
+                });
+                break;
+            case 'followsYou':
+                action.innerHTML = DGW.templates.userListActions.followsYou;
+                action = action.childNodes[0];
                 break;
             case 'friends':
                 action.innerHTML = DGW.templates.userListActions.friends;
+                action = action.childNodes[0];
+                action.addEventListener('click', function(){
+                    DGW.global.api.requests.userUnfollow(userId,
+                        function(userObj){
+                            successfulUpdate(userObj, li);
+                        },
+                        function(res){
+                            DGW.helpers.console.warn('Unfriend ID: ', userId, res.Message);
+                        }
+                    );
+                });
                 break;
             case 'request':
                 action.innerHTML = DGW.templates.userListActions.request;
+                action = action.childNodes[0];
+                action.addEventListener('click', function(){
+                    DGW.global.api.requests.userRequestSend(userId,
+                        function(userObj){
+                            successfulUpdate(userObj, li);
+                        },
+                        function(res){
+                            DGW.helpers.console.warn('Friend request send ID: ', userId, res.Message);
+                        }
+                    );
+                });
                 break;
             case 'requestSent':
                 action.innerHTML = DGW.templates.userListActions.requestSent;
+                action = action.childNodes[0];
                 break;
             case 'accept':
                 action.innerHTML = DGW.templates.userListActions.accept;
+                action = action.childNodes[0];
+                action.addEventListener('click', function(){
+                    DGW.global.api.requests.userRequestAccept(userId,
+                        function(userObj){
+                            successfulUpdate(userObj, li);
+                        },
+                        function(res){
+                            DGW.helpers.console.warn('Accept ID: ', userId, res.Message);
+                        }
+                    );
+                });
                 break;
             case 'decline':
                 action.innerHTML = DGW.templates.userListActions.decline;
+                action = action.childNodes[0];
+                action.addEventListener('click', function(){
+                    DGW.global.api.requests.userRequestDecline(userId,
+                        function(userObj){
+                            successfulUpdate(userObj, li);
+                        },
+                        function(res){
+                            DGW.helpers.console.warn('Decline ID: ', userId, res.Message);
+                        }
+                    );
+                });
                 break;
             default:
                 return action;
         }
 
-        action = action.childNodes[0];
         return action;
-    }
+    };
 
-    var usersArray = [];
-    users.forEach(function(userObj){
-        var commonUsers = userObj.MutualFriends;
-        var commonUsersCount = +userObj.MutualFriendsCount;
-        var user = userObj.User;
-        var commonUsersText = document.createElement('p');
-        var li = document.createElement('li');
+    // Defining which actions will be needed withing this user (one LI element)
+    createUserItemActions = function(relations, userId, li){
+        if (relations == undefined) return;
+        var actions = [];
 
-        li.className = 'dg-o-w-table-display';
-        li.innerHTML = DGW.templates.userListItem;
+        if (relations.length > 0) {
+            relations.forEach(function (rel) {
+                rel = rel.toLowerCase();
 
-        var commonUsersHolder = li.querySelector('[data-user-common-users]');
-        var userActionsHolder = li.querySelector('[data-user-actions]');
+                if (rel === 'friendrequestto') {
+                    actions.push(createSingleAction('requestSent'));
+                }
+                if (rel === 'friendrequestfrom') {
+                    actions.push(createSingleAction('accept', userId, li));
+                    actions.push(createSingleAction('decline', userId, li));
+                    return;
+                }
+                if (rel === 'friends') {
+                    actions.push(createSingleAction('friends', userId, li));
+                }
+                if (rel === 'followedby') {
+                    actions.push(createSingleAction('followsYou'));
+                    actions.push(createSingleAction('follow', userId, li));
+                }
+                if (rel === 'following') {
+                    actions.push(createSingleAction('following', userId, li));
+                }
+
+            });
+        } else {
+            actions.push(createSingleAction('request', userId, li));
+            actions.push(createSingleAction('follow', userId, li));
+        }
+
+        return actions;
+    };
+
+    // Creating single LI element to put into the page
+    createUserItem = function(userObj){
+        var commonUsers = userObj.MutualFriends,
+            commonUsersCount = +userObj.MutualFriendsCount,
+            user = userObj.User,
+            relations = userObj.Rels,
+            relationsCount = userObj.RelsCount;
+
+        var commonUsersText = document.createElement('p'),
+            li = document.createElement('li');
+            li.className = 'dg-o-w-table-display';
+            li.innerHTML = DGW.templates.userListItem;
+
+        var commonUsersHolder = li.querySelector('[data-user-common-users]'),
+            userActionsHolder = li.querySelector('[data-user-actions]');
+
 
         // Filling user name, image, groups
         li.querySelector('[data-user-image]').src = user.ImageUrl;
@@ -2900,42 +3062,53 @@ DGW.main.methods.userListItemConstructor = function(users, group){
         }
         commonUsersHolder.appendChild(commonUsersText);
 
+        createUserItemActions(relations, user.UserId, li).forEach(function(action){
+            userActionsHolder.appendChild(action);
+        });
 
-        // Filling actions available with this user
-        if (group === 'requestFrom') {
-            userActionsHolder.appendChild(createUserListAction('accept'));
-            userActionsHolder.appendChild(createUserListAction('decline'));
-        } else if (group === 'friends') {
-            userActionsHolder.appendChild(createUserListAction('friends'));
-        } else if (group === 'requestTo') {
-            userActionsHolder.appendChild(createUserListAction('requestSent'));
-        }
-
-        usersArray.push(li);
-    });
-
-    return usersArray;
-};
+        return li;
+    };
 
 
-DGW.main.methods.friendsConstructor = function(usersObj){
-    if (!usersObj) return;
-
-    var userListHolder = DGW.helpers.getElementsFromAllPlaces('[data-friends-list]')[0];
+    // Main logic
+    // cleaning the list of users
     userListHolder.innerHTML = '';
 
-    DGW.main.methods.userListItemConstructor(usersObj.FriendRequestsFrom, 'requestFrom').forEach(function(userItem){
-        userListHolder.appendChild(userItem);
+    // defining which users to show in the list
+    if (state === 'friends') {
+        usersToShow = DGW.main.cache.userRelations.users.filter(function(rels){
+            return rels.Rels.some(function(r){
+                return r === 'FriendRequestTo' || r === 'Friends' || r === 'FriendRequestFrom';
+            });
+        });
+    } else if (state === 'following') {
+        usersToShow = DGW.main.cache.userRelations.users.filter(function(rels){
+            return rels.Rels.some(function(r){
+                return r === 'FollowedBy' || r === 'Following';
+            });
+        });
+    } else if (state === 'search') {
+        usersToShow = searchQuery.Users;
+    } else {
+        // default state
+    }
+
+    // adding users to the list
+    usersToShow.forEach(function(userObj){
+        userListHolder.appendChild(createUserItem(userObj));
     });
-    DGW.main.methods.userListItemConstructor(usersObj.Friends, 'friends').forEach(function(userItem){
-        userListHolder.appendChild(userItem);
-    });
-    DGW.main.methods.userListItemConstructor(usersObj.FriendRequestsTo, 'requestTo').forEach(function(userItem){
-        userListHolder.appendChild(userItem);
-    });
+
+
+    // TEMP part
+    DGW.helpers.console.info(
+        'Number of relations > 0: ',
+        DGW.main.cache.userRelations.users.filter(function(us){return us.Rels.length > 1}).length
+    );
 };
 
-
+// ["FriendRequestTo", "Friends", "FollowedBy", "Following", "FriendRequestFrom"]
+// DGW.main.cache.userRelations.users
+// DGW.main.cache.userRelations.count
 DGW.main.methods.leaderboardConstructor = function(earners) {
     var s = DGW.main.elements.pages.activitiesMain;
     var ul = s.querySelector('.dg-o-w-activity-slider ul'),
@@ -3265,6 +3438,15 @@ DGW.main.methods.changeMainState = function(state){
             break;
         case 'friends':
             DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.friendsMain);
+            DGW.global.api.requests.usersGet(function(response){
+                DGW.main.cache.userRelations.users = response.Users;
+                DGW.main.cache.userRelations.count = response.UsersCount;
+                DGW.main.methods.usersConstructor(
+                    Array.prototype.slice.call(DGW.main.elements.pages.friendsMain.querySelectorAll('[data-submenu]')).filter(function(el){
+                        return DGW.helpers.hasClass(el, 'dg-o-w-active');
+                    })[0].getAttribute('data-submenu')
+                );
+            });
             break;
         default:
 

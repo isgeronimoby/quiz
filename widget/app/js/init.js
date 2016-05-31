@@ -51,7 +51,8 @@ var DGW = function () {
                     cache: {
                         drawsList: [],
                         drawsEntries: [],
-                        rewardedActions: []
+                        rewardedActions: [],
+                        userRelations: {}
                     },
                     shown: false,
                     settings: {

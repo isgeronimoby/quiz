@@ -110,6 +110,15 @@ DGW.main.methods.changeMainState = function(state){
             break;
         case 'friends':
             DGW.main.elements.widgetContent.appendChild(DGW.main.elements.pages.friendsMain);
+            DGW.global.api.requests.usersGet(function(response){
+                DGW.main.cache.userRelations.users = response.Users;
+                DGW.main.cache.userRelations.count = response.UsersCount;
+                DGW.main.methods.usersConstructor(
+                    Array.prototype.slice.call(DGW.main.elements.pages.friendsMain.querySelectorAll('[data-submenu]')).filter(function(el){
+                        return DGW.helpers.hasClass(el, 'dg-o-w-active');
+                    })[0].getAttribute('data-submenu')
+                );
+            });
             break;
         default:
 

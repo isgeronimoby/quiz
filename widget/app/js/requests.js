@@ -110,35 +110,40 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
         case 'shareRewardAction':
             endpoint = 'draw/getsharelinks?drawid=' + requestBody;
             break;
-        case 'friendsGet':
-            endpoint = 'friend/getfriends';
+        case 'usersGet':
+            endpoint = 'friend/getuserrelations';
             break;
-        case 'friendFollow':
+        case 'userFollow':
             method = 'POST';
             endpoint = 'friend/follow';
             requestBody = JSON.stringify(requestBody);
             break;
-        case 'friendUnfollow':
+        case 'userUnfollow':
             method = 'POST';
             endpoint = 'friend/unfollow';
             requestBody = JSON.stringify(requestBody);
             break;
-        case 'friendRequestSend':
+        case 'userRequestSend':
             method = 'POST';
             endpoint = 'friend/sendfriendrequest';
             requestBody = JSON.stringify(requestBody);
             break;
-        case 'friendRequestAccept':
+        case 'userRequestAccept':
             method = 'POST';
             endpoint = 'friend/acceptfriendrequest';
             requestBody = JSON.stringify(requestBody);
             break;
-        case 'friendRequestDecline':
+        case 'userRequestDecline':
             method = 'POST';
             endpoint = 'friend/declinefriendrequest';
             requestBody = JSON.stringify(requestBody);
             break;
-        case 'friendSearch':
+        case 'userUnfriend':
+            method = 'POST';
+            endpoint = 'friend/unfriend';
+            requestBody = JSON.stringify(requestBody);
+            break;
+        case 'userSearch':
             method = 'POST';
             endpoint = 'friend/findusers';
             requestBody = JSON.stringify(requestBody);
@@ -605,8 +610,8 @@ DGW.global.api.requests.shareRewardAction = function(drawId, onSuccess, onError)
     }, drawId);
 };
 
-DGW.global.api.requests.friendsGet = function(onSuccess, onError){
-    DGW.global.api.generic('friendsGet', function(result){
+DGW.global.api.requests.usersGet = function(onSuccess, onError){
+    DGW.global.api.generic('usersGet', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('Get friends API: ', result.data);
             if (onSuccess) onSuccess(result.data);
@@ -617,8 +622,8 @@ DGW.global.api.requests.friendsGet = function(onSuccess, onError){
     });
 };
 
-DGW.global.api.requests.friendFollow = function(userId, onSuccess, onError){
-    DGW.global.api.generic('friendFollow', function(result){
+DGW.global.api.requests.userFollow = function(userId, onSuccess, onError){
+    DGW.global.api.generic('userFollow', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('friendFollow ', result.data);
             if (onSuccess) onSuccess(result.data);
@@ -631,8 +636,8 @@ DGW.global.api.requests.friendFollow = function(userId, onSuccess, onError){
     });
 };
 
-DGW.global.api.requests.friendUnfollow = function(userId, onSuccess, onError){
-    DGW.global.api.generic('friendUnfollow', function(result){
+DGW.global.api.requests.userUnfollow = function(userId, onSuccess, onError){
+    DGW.global.api.generic('userUnfollow', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('friendUnfollow ', result.data);
             if (onSuccess) onSuccess(result.data);
@@ -645,8 +650,8 @@ DGW.global.api.requests.friendUnfollow = function(userId, onSuccess, onError){
     });
 };
 
-DGW.global.api.requests.friendRequestSend = function(userId, onSuccess, onError){
-    DGW.global.api.generic('friendRequestSend', function(result){
+DGW.global.api.requests.userRequestSend = function(userId, onSuccess, onError){
+    DGW.global.api.generic('userRequestSend', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('friendRequestSend ', result.data);
             if (onSuccess) onSuccess(result.data);
@@ -659,8 +664,8 @@ DGW.global.api.requests.friendRequestSend = function(userId, onSuccess, onError)
     });
 };
 
-DGW.global.api.requests.friendRequestAccept = function(userId, onSuccess, onError){
-    DGW.global.api.generic('friendRequestAccept', function(result){
+DGW.global.api.requests.userRequestAccept = function(userId, onSuccess, onError){
+    DGW.global.api.generic('userRequestAccept', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('friendRequestAccept ', result.data);
             if (onSuccess) onSuccess(result.data);
@@ -673,8 +678,8 @@ DGW.global.api.requests.friendRequestAccept = function(userId, onSuccess, onErro
     });
 };
 
-DGW.global.api.requests.friendRequestDecline = function(userId, onSuccess, onError){
-    DGW.global.api.generic('friendRequestDecline', function(result){
+DGW.global.api.requests.userRequestDecline = function(userId, onSuccess, onError){
+    DGW.global.api.generic('userRequestDecline', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('friendRequestDecline ', result.data);
             if (onSuccess) onSuccess(result.data);
@@ -687,8 +692,23 @@ DGW.global.api.requests.friendRequestDecline = function(userId, onSuccess, onErr
     });
 };
 
-DGW.global.api.requests.friendSearch = function(queryString, onSuccess, onError){
-    DGW.global.api.generic('friendSearch', function(result){
+DGW.global.api.requests.userUnfriend = function(userId, onSuccess, onError){
+    DGW.global.api.generic('userUnfriend', function(result){
+        if (result.status == 200) {
+            DGW.helpers.console.info('friendUnfriend ', result.data);
+            if (onSuccess) onSuccess(result.data);
+        } else {
+            DGW.helpers.console.error('friendUnfriend ', result.error);
+            if (onError) onError(result.error);
+        }
+    }, {
+        UserId: userId
+    });
+};
+
+
+DGW.global.api.requests.userSearch = function(queryString, onSuccess, onError){
+    DGW.global.api.generic('userSearch', function(result){
         if (result.status == 200) {
             DGW.helpers.console.info('friendSearch ', result.data);
             if (onSuccess) onSuccess(result.data);
@@ -697,6 +717,6 @@ DGW.global.api.requests.friendSearch = function(queryString, onSuccess, onError)
             if (onError) onError(result.error);
         }
     }, {
-        Username: queryString
+        Query: queryString
     });
 };

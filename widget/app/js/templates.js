@@ -108,7 +108,7 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' 
                                     '<div class="dg-o-w-profile-stats-holder">' +
                                         '<h3 data-userstats-username class="dg-o-w-profile-name">Captain Deadpool</h3>' +
                                         '<div class="dg-o-w-profile-stats-holder-rest">' +
-                                            //'<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-userstats-friends-c>210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-friends-p class="green-highlighter">19</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-userstats-friends-c>210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-friends-p class="green-highlighter">19</p></div></div>' +
                                             //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand" data-userstats-groups-c>20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-groups-p class="green-highlighter">3</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 data-userstats-points-c>520</h3><p>points</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 data-userstats-credits-c>40</h3></div></div>' +
@@ -170,7 +170,7 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul>' +
                                 '</div>';
 
 DGW.templates.friendsMain = '<div class="dg-o-w-submenu"><ul>' +
-                                    '<li class="dg-o-w-active">Friends</li><li>Following</li></ul>' +
+                                    '<li class="dg-o-w-active" data-submenu="friends">Friends</li><li data-submenu="following">Following</li></ul>' +
                                 '<div class="dg-o-w-float-right dg-o-w-inline-form dg-o-w-right-padding">' +
                                     '<form class="search-form"><input class="search-field" type="text" placeholder="Search" /></form>' +
                                 '</div></div>' +
@@ -210,6 +210,7 @@ DGW.templates.userListItem = '<div class="dg-o-w-cell">' +
 DGW.templates.userListActions = {
     follow: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Follow</div>',
     following: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked-okay">Following</div>',
+    followsYou: '<p class="dg-o-w-color-grey">Follows you</p>',
     friends: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked-okay">Friends</div>',
     request: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Add to friends</div>',
     requestSent: '<p class="dg-o-w-color-grey">Request sent</p>',

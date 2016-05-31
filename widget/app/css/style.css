@@ -2264,12 +2264,10 @@
   vertical-align: middle;
   padding: 20px 0;
   text-align: left;
-  /*.btn-dg-o-w {
-										margin-right: 15px;
-									}*/
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-section-list-holder li .dg-o-w-cell:last-child {
   text-align: right;
+  width: 40%;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-content .dg-o-w-section .dg-o-w-section-content .dg-o-w-section-list-holder li .dg-o-w-cell > img {
   margin-right: 10px;

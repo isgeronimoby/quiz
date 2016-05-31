@@ -1,52 +1,177 @@
-DGW.main.methods.userListItemConstructor = function(users, group){
+DGW.main.methods.usersConstructor = function(state, searchQuery) {
+    // Possible states: 'friends', 'followers', 'search'
     'use strict';
-    if (!users) return;
 
-    function createUserListAction (actionType) {
+    // Elements and variables
+    var userListHolder = DGW.helpers.getElementsFromAllPlaces('[data-friends-list]')[0],
+        usersToShow;
+
+    // Methods
+    var createUserItem, createUserItemActions, createSingleAction;
+
+
+    // Every button logic, later transmitted back to the LI item
+    createSingleAction = function(actionType, userId, li) {
         var action = document.createElement('div');
+
+        function successfulUpdate(userObj, li) {
+            DGW.helpers.insertAfter(createUserItem(userObj), li);
+            userListHolder.removeChild(li);
+        }
+
         switch (actionType) {
             case 'follow':
                 action.innerHTML = DGW.templates.userListActions.follow;
+                action = action.childNodes[0];
+                action.addEventListener('click', function(){
+                    DGW.global.api.requests.userFollow(userId,
+                        function(userObj){
+                            successfulUpdate(userObj, li);
+                        },
+                        function(res){
+                            DGW.helpers.console.warn('Follow ID: ', userId, res.Message);
+                        }
+                    );
+                });
                 break;
             case 'following':
                 action.innerHTML = DGW.templates.userListActions.following;
+                action = action.childNodes[0];
+                action.addEventListener('click', function(){
+                    DGW.global.api.requests.userUnfollow(userId,
+                        function(userObj){
+                            successfulUpdate(userObj, li);
+                        },
+                        function(res){
+                            DGW.helpers.console.warn('Unfollow ID: ', userId, res.Message);
+                        }
+                    );
+                });
+                break;
+            case 'followsYou':
+                action.innerHTML = DGW.templates.userListActions.followsYou;
+                action = action.childNodes[0];
                 break;
             case 'friends':
                 action.innerHTML = DGW.templates.userListActions.friends;
+                action = action.childNodes[0];
+                action.addEventListener('click', function(){
+                    DGW.global.api.requests.userUnfollow(userId,
+                        function(userObj){
+                            successfulUpdate(userObj, li);
+                        },
+                        function(res){
+                            DGW.helpers.console.warn('Unfriend ID: ', userId, res.Message);
+                        }
+                    );
+                });
                 break;
             case 'request':
                 action.innerHTML = DGW.templates.userListActions.request;
+                action = action.childNodes[0];
+                action.addEventListener('click', function(){
+                    DGW.global.api.requests.userRequestSend(userId,
+                        function(userObj){
+                            successfulUpdate(userObj, li);
+                        },
+                        function(res){
+                            DGW.helpers.console.warn('Friend request send ID: ', userId, res.Message);
+                        }
+                    );
+                });
                 break;
             case 'requestSent':
                 action.innerHTML = DGW.templates.userListActions.requestSent;
+                action = action.childNodes[0];
                 break;
             case 'accept':
                 action.innerHTML = DGW.templates.userListActions.accept;
+                action = action.childNodes[0];
+                action.addEventListener('click', function(){
+                    DGW.global.api.requests.userRequestAccept(userId,
+                        function(userObj){
+                            successfulUpdate(userObj, li);
+                        },
+                        function(res){
+                            DGW.helpers.console.warn('Accept ID: ', userId, res.Message);
+                        }
+                    );
+                });
                 break;
             case 'decline':
                 action.innerHTML = DGW.templates.userListActions.decline;
+                action = action.childNodes[0];
+                action.addEventListener('click', function(){
+                    DGW.global.api.requests.userRequestDecline(userId,
+                        function(userObj){
+                            successfulUpdate(userObj, li);
+                        },
+                        function(res){
+                            DGW.helpers.console.warn('Decline ID: ', userId, res.Message);
+                        }
+                    );
+                });
                 break;
             default:
                 return action;
         }
 
-        action = action.childNodes[0];
         return action;
-    }
+    };
 
-    var usersArray = [];
-    users.forEach(function(userObj){
-        var commonUsers = userObj.MutualFriends;
-        var commonUsersCount = +userObj.MutualFriendsCount;
-        var user = userObj.User;
-        var commonUsersText = document.createElement('p');
-        var li = document.createElement('li');
+    // Defining which actions will be needed withing this user (one LI element)
+    createUserItemActions = function(relations, userId, li){
+        if (relations == undefined) return;
+        var actions = [];
 
-        li.className = 'dg-o-w-table-display';
-        li.innerHTML = DGW.templates.userListItem;
+        if (relations.length > 0) {
+            relations.forEach(function (rel) {
+                rel = rel.toLowerCase();
 
-        var commonUsersHolder = li.querySelector('[data-user-common-users]');
-        var userActionsHolder = li.querySelector('[data-user-actions]');
+                if (rel === 'friendrequestto') {
+                    actions.push(createSingleAction('requestSent'));
+                }
+                if (rel === 'friendrequestfrom') {
+                    actions.push(createSingleAction('accept', userId, li));
+                    actions.push(createSingleAction('decline', userId, li));
+                    return;
+                }
+                if (rel === 'friends') {
+                    actions.push(createSingleAction('friends', userId, li));
+                }
+                if (rel === 'followedby') {
+                    actions.push(createSingleAction('followsYou'));
+                    actions.push(createSingleAction('follow', userId, li));
+                }
+                if (rel === 'following') {
+                    actions.push(createSingleAction('following', userId, li));
+                }
+
+            });
+        } else {
+            actions.push(createSingleAction('request', userId, li));
+            actions.push(createSingleAction('follow', userId, li));
+        }
+
+        return actions;
+    };
+
+    // Creating single LI element to put into the page
+    createUserItem = function(userObj){
+        var commonUsers = userObj.MutualFriends,
+            commonUsersCount = +userObj.MutualFriendsCount,
+            user = userObj.User,
+            relations = userObj.Rels,
+            relationsCount = userObj.RelsCount;
+
+        var commonUsersText = document.createElement('p'),
+            li = document.createElement('li');
+            li.className = 'dg-o-w-table-display';
+            li.innerHTML = DGW.templates.userListItem;
+
+        var commonUsersHolder = li.querySelector('[data-user-common-users]'),
+            userActionsHolder = li.querySelector('[data-user-actions]');
+
 
         // Filling user name, image, groups
         li.querySelector('[data-user-image]').src = user.ImageUrl;
@@ -75,38 +200,50 @@ DGW.main.methods.userListItemConstructor = function(users, group){
         }
         commonUsersHolder.appendChild(commonUsersText);
 
+        createUserItemActions(relations, user.UserId, li).forEach(function(action){
+            userActionsHolder.appendChild(action);
+        });
 
-        // Filling actions available with this user
-        if (group === 'requestFrom') {
-            userActionsHolder.appendChild(createUserListAction('accept'));
-            userActionsHolder.appendChild(createUserListAction('decline'));
-        } else if (group === 'friends') {
-            userActionsHolder.appendChild(createUserListAction('friends'));
-        } else if (group === 'requestTo') {
-            userActionsHolder.appendChild(createUserListAction('requestSent'));
-        }
-
-        usersArray.push(li);
-    });
-
-    return usersArray;
-};
+        return li;
+    };
 
 
-DGW.main.methods.friendsConstructor = function(usersObj){
-    if (!usersObj) return;
-
-    var userListHolder = DGW.helpers.getElementsFromAllPlaces('[data-friends-list]')[0];
+    // Main logic
+    // cleaning the list of users
     userListHolder.innerHTML = '';
 
-    DGW.main.methods.userListItemConstructor(usersObj.FriendRequestsFrom, 'requestFrom').forEach(function(userItem){
-        userListHolder.appendChild(userItem);
+    // defining which users to show in the list
+    if (state === 'friends') {
+        usersToShow = DGW.main.cache.userRelations.users.filter(function(rels){
+            return rels.Rels.some(function(r){
+                return r === 'FriendRequestTo' || r === 'Friends' || r === 'FriendRequestFrom';
+            });
+        });
+    } else if (state === 'following') {
+        usersToShow = DGW.main.cache.userRelations.users.filter(function(rels){
+            return rels.Rels.some(function(r){
+                return r === 'FollowedBy' || r === 'Following';
+            });
+        });
+    } else if (state === 'search') {
+        usersToShow = searchQuery.Users;
+    } else {
+        // default state
+    }
+
+    // adding users to the list
+    usersToShow.forEach(function(userObj){
+        userListHolder.appendChild(createUserItem(userObj));
     });
-    DGW.main.methods.userListItemConstructor(usersObj.Friends, 'friends').forEach(function(userItem){
-        userListHolder.appendChild(userItem);
-    });
-    DGW.main.methods.userListItemConstructor(usersObj.FriendRequestsTo, 'requestTo').forEach(function(userItem){
-        userListHolder.appendChild(userItem);
-    });
+
+
+    // TEMP part
+    DGW.helpers.console.info(
+        'Number of relations > 0: ',
+        DGW.main.cache.userRelations.users.filter(function(us){return us.Rels.length > 1}).length
+    );
 };
 
+// ["FriendRequestTo", "Friends", "FollowedBy", "Following", "FriendRequestFrom"]
+// DGW.main.cache.userRelations.users
+// DGW.main.cache.userRelations.count
