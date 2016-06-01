@@ -162,6 +162,10 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             if (result.error && result.status == 401) {
                 DGW.global.methods.unAuthorize();
             }
+            if (result.status == 0) {
+                DGW.main.methods.notificationConstructor(['There is no Internet connection'], 'error');
+                return;
+            }
             if(callback) callback(response);
             DGW.main.methods.loadingFinished();
         },

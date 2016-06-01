@@ -1,4 +1,4 @@
-DGW.main.methods.usersConstructor = function(state, searchQuery) {
+DGW.main.methods.usersConstructor = function(state, usersFound) {
     // Possible states: 'friends', 'followers', 'search'
     'use strict';
 
@@ -7,16 +7,31 @@ DGW.main.methods.usersConstructor = function(state, searchQuery) {
         usersToShow;
 
     // Methods
-    var createUserItem, createUserItemActions, createSingleAction;
+    var createUserItem, createUserItemActions, createSingleAction, createSimpleItem;
 
+
+    createSimpleItem = function(){
+        var li = document.createElement('li');
+            li.className = 'dg-o-w-table-display';
+            li.innerHTML = DGW.templates.userListItemNothingFound;
+
+        return li;
+    };
 
     // Every button logic, later transmitted back to the LI item
     createSingleAction = function(actionType, userId, li) {
         var action = document.createElement('div');
 
         function successfulUpdate(userObj, li) {
+            var userIndex = DGW.main.cache.userRelations.users.findIndex(function(el){
+                return (el.User.UserId == userId);
+            });
+
+            DGW.main.cache.userRelations.users[userIndex] = userObj;
             DGW.helpers.insertAfter(createUserItem(userObj), li);
             userListHolder.removeChild(li);
+
+            console.info(userObj.User.UserId, userId)
         }
 
         switch (actionType) {
@@ -108,6 +123,7 @@ DGW.main.methods.usersConstructor = function(state, searchQuery) {
                         },
                         function(res){
                             DGW.helpers.console.warn('Decline ID: ', userId, res.Message);
+                            console.warn(res);
                         }
                     );
                 });
@@ -212,34 +228,64 @@ DGW.main.methods.usersConstructor = function(state, searchQuery) {
     // cleaning the list of users
     userListHolder.innerHTML = '';
 
+    // Sorting types
+    function sortByName(a, b) {
+        var nameA = a.User.UserName.toUpperCase();
+        var nameB = b.User.UserName.toUpperCase();
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+    }
+
     // defining which users to show in the list
     if (state === 'friends') {
         usersToShow = DGW.main.cache.userRelations.users.filter(function(rels){
             return rels.Rels.some(function(r){
-                return r === 'FriendRequestTo' || r === 'Friends' || r === 'FriendRequestFrom';
+                return r === 'FriendRequestFrom' || r === 'Friends' || r === 'FriendRequestTo';
             });
         });
+
+        // Sorting friends in a specific order
+        usersToShow = usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'FriendRequestFrom'})})
+            .sort(sortByName).concat(
+            usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'Friends'})})
+                .sort(sortByName).concat(
+                usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'FriendRequestTo'})})
+                .sort(sortByName)
+            )
+        );
     } else if (state === 'following') {
         usersToShow = DGW.main.cache.userRelations.users.filter(function(rels){
             return rels.Rels.some(function(r){
-                return r === 'FollowedBy' || r === 'Following';
+                return r === 'Following' || r === 'FollowedBy';
             });
         });
+
+        // Sorting followers and followed by
+        usersToShow = usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'Following'})})
+            .sort(sortByName).concat(
+            usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'FollowedBy'})}).sort(sortByName)
+        );
     } else if (state === 'search') {
-        usersToShow = searchQuery.Users;
+        usersToShow = usersFound.Users;
+        usersToShow.sort(sortByName);
     } else {
         // default state
     }
 
     // adding users to the list
-    usersToShow.forEach(function(userObj){
-        userListHolder.appendChild(createUserItem(userObj));
-    });
+    if (usersToShow.length > 1) {
+        usersToShow.forEach(function (userObj) {
+            userListHolder.appendChild(createUserItem(userObj));
+        });
+    } else {
+        userListHolder.appendChild(createSimpleItem());
+    }
 
 
     // TEMP part
     DGW.helpers.console.info(
-        'Number of relations > 0: ',
+        'Number of relations > 1: ',
         DGW.main.cache.userRelations.users.filter(function(us){return us.Rels.length > 1}).length
     );
 };

@@ -44,7 +44,7 @@ DGW.global.methods.authorize = function(){
     DGW.global.authorized = true;
     DGW.helpers.addClass(DGW.side.elements.widgetBody, 'dg-o-w-authorized');
     // ********
-    if (DGW.main.currentState !== 'draws') {
+    if (DGW.main.currentState !== 'draws' && DGW.main.shown) {
         DGW.main.methods.changeMainState('earn');
     }
     DGW.global.api.requests.getDraws(function(){
@@ -61,7 +61,7 @@ DGW.global.methods.unAuthorize = function(){
     DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'authorized');
     DGW.helpers.removeClass(DGW.side.elements.widgetBody, 'dg-o-w-authorized');
     DGW.global.authorized = false;
-    if (DGW.main.currentState === 'profile') {
+    if (DGW.main.currentState === 'profile' && DGW.main.shown) {
         DGW.main.methods.changeMainState('profile');
     }
     DGW.main.methods.resetStates();

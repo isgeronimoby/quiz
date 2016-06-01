@@ -59,6 +59,9 @@ var DGW = function () {
                         draws: {
                             showExpired: true,
                             currentSubMenu: 'dg-o-w-show-all-draws'
+                        },
+                        friends: {
+                            currentSubMenu: 'friends'
                         }
                     }
                 },

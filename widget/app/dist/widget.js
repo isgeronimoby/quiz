@@ -60,6 +60,9 @@ var DGW = function () {
                         draws: {
                             showExpired: true,
                             currentSubMenu: 'dg-o-w-show-all-draws'
+                        },
+                        friends: {
+                            currentSubMenu: 'friends'
                         }
                     }
                 },
@@ -296,6 +299,10 @@ DGW.global.api.generic = function(apiName, callback, requestBody){
             result = response;
             if (result.error && result.status == 401) {
                 DGW.global.methods.unAuthorize();
+            }
+            if (result.status == 0) {
+                DGW.main.methods.notificationConstructor(['There is no Internet connection'], 'error');
+                return;
             }
             if(callback) callback(response);
             DGW.main.methods.loadingFinished();
@@ -1519,7 +1526,7 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul>' +
 DGW.templates.friendsMain = '<div class="dg-o-w-submenu"><ul>' +
                                     '<li class="dg-o-w-active" data-submenu="friends">Friends</li><li data-submenu="following">Following</li></ul>' +
                                 '<div class="dg-o-w-float-right dg-o-w-inline-form dg-o-w-right-padding">' +
-                                    '<form class="search-form"><input class="search-field" type="text" placeholder="Search" /></form>' +
+                                    '<form class="search-form"><input class="search-field" type="text" placeholder="Search" /><span class="form-search-decorator"></span></form>' +
                                 '</div></div>' +
                                 '<div class="dg-o-w-section-scroller">' +
                                     '<div class="dg-o-w-section-content content-static dg-o-w-white-section">' +
@@ -1529,14 +1536,7 @@ DGW.templates.friendsMain = '<div class="dg-o-w-submenu"><ul>' +
                                         '</div>' +
                                         '<div class="dg-o-w-section-list-holder"><ul data-friends-list>' +
                                             '<li class="dg-o-w-table-display">' +
-                                                '<div class="dg-o-w-cell"><img src="./dist/imgs/avatar-placeholder.png" /><div class="dg-o-w-details"><p class="dg-o-w-color-brand">Name Surname</p><p class="dg-o-w-color-grey">2 common groups</p></div></div>' +
-                                                '<div class="dg-o-w-cell"><div class="dg-o-w-users-done"></div></div>' +
-                                                '<div class="dg-o-w-cell"><a href="#" class="btn-dg-o-w btn-dg-o-w-stroked">Accept</a><a href="#" class="btn-dg-o-w btn-dg-o-w-stroked-okay">Friends</a></div>' +
-                                            '</li>' +
-                                            '<li class="dg-o-w-table-display">' +
-                                                '<div class="dg-o-w-cell"><img src="./dist/imgs/avatar-placeholder.png" /><div class="dg-o-w-details"><p class="dg-o-w-color-brand">Name Surname</p><p class="dg-o-w-color-grey">2 common groups</p></div></div>' +
-                                                '<div class="dg-o-w-cell"><div class="dg-o-w-users-done"></div></div>' +
-                                                '<div class="dg-o-w-cell"><p class="dg-o-w-color-grey">Request sent</p><a href="#" class="btn-dg-o-w btn-dg-o-w-stroked-okay">Friends</a></div>' +
+                                                '<div class="dg-o-w-cell dg-o-w-cell-full"><h3>Your friends list is loading... Please, wait a bit</h3></div>' +
                                             '</li>' +
                                         '</ul></div>' +
                                     '</div>' +
@@ -1553,6 +1553,8 @@ DGW.templates.userListItem = '<div class="dg-o-w-cell">' +
                                     '<div class="dg-o-w-users-done" data-user-common-users></div>' +
                                 '</div>' +
                                 '<div class="dg-o-w-cell" data-user-actions></div>';
+
+DGW.templates.userListItemNothingFound = '<div class="dg-o-w-cell dg-o-w-cell-full"><h3>Unfortunately, no matching result was found.</h3></div>';
 
 DGW.templates.userListActions = {
     follow: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Follow</div>',
@@ -1670,7 +1672,7 @@ DGW.global.methods.authorize = function(){
     DGW.global.authorized = true;
     DGW.helpers.addClass(DGW.side.elements.widgetBody, 'dg-o-w-authorized');
     // ********
-    if (DGW.main.currentState !== 'draws') {
+    if (DGW.main.currentState !== 'draws' && DGW.main.shown) {
         DGW.main.methods.changeMainState('earn');
     }
     DGW.global.api.requests.getDraws(function(){
@@ -1687,7 +1689,7 @@ DGW.global.methods.unAuthorize = function(){
     DGW.helpers.removeClass(DGW.main.elements.widgetBody, 'authorized');
     DGW.helpers.removeClass(DGW.side.elements.widgetBody, 'dg-o-w-authorized');
     DGW.global.authorized = false;
-    if (DGW.main.currentState === 'profile') {
+    if (DGW.main.currentState === 'profile' && DGW.main.shown) {
         DGW.main.methods.changeMainState('profile');
     }
     DGW.main.methods.resetStates();
@@ -1758,6 +1760,17 @@ DGW.main.methods.pageBodyLock = function(){
 DGW.main.methods.pageBodyUnlock = function(){
     DGW.helpers.removeClass(DGW.global.elements.documentBody, 'dg-o-w-body-fixed');
 };
+DGW.side.methods.ctaClick = function(){
+    if (this.getAttribute('data-page') != null) {
+        DGW.main.currentState = this.getAttribute('data-page');
+    }
+    if (!DGW.main.shown) {
+        DGW.main.methods.showWidget();
+    } else {
+        DGW.main.methods.changeMainState(DGW.main.currentState);
+    }
+};
+
 DGW.side.methods.initEvents = function(){
     if (!DGW.global.launched) {
         // Showing side widget
@@ -1771,16 +1784,7 @@ DGW.side.methods.initEvents = function(){
     wBody.removeEventListener('click', DGW.global.api.requests.safariFix);
 
     if (cta) {
-        cta.addEventListener('click', function () {
-            if (cta.getAttribute('data-page') != null) {
-                DGW.main.currentState = cta.getAttribute('data-page');
-            }
-            if (!DGW.main.shown) {
-                DGW.main.methods.showWidget();
-            } else {
-                DGW.main.methods.changeMainState(DGW.main.currentState);
-            }
-        });
+        cta.addEventListener('click', DGW.side.methods.ctaClick);
     }
 
     DGW.helpers.imagesResponsivePaths(wBody.querySelectorAll('[data-image]'));
@@ -1962,22 +1966,42 @@ DGW.main.methods.drawsInit = function(){
 
     (function searchFriends(){
         var friendSearch = dp.querySelector('.search-form .search-field');
+        var searchEmpty = dp.querySelector('.search-form .form-search-decorator');
         var searchTimeout;
         var searchDelay = 1000;
 
         friendSearch.addEventListener('input', function(){
             var that = this;
             DGW.helpers.console.info('input');
-            if (searchTimeout) window.clearTimeout(searchTimeout);
-            searchTimeout = window.setTimeout(function(){
-                DGW.helpers.console.info('search');
-                DGW.global.api.requests.userSearch(that.value,
-                    function(response){
-                        DGW.helpers.console.log(response);
-                    }
-                );
-            }, searchDelay);
+            if (that.value.length > 0) {
+                DGW.helpers.addClass(searchEmpty, 'form-search-empty');
+                searchEmpty.addEventListener('click', searchFormReset);
+                if (searchTimeout) window.clearTimeout(searchTimeout);
+                searchTimeout = window.setTimeout(function () {
+                    DGW.helpers.console.info('search');
+                    DGW.helpers.addClass(searchEmpty, 'form-search-progress');
+                    searchEmpty.removeEventListener('click', searchFormReset);
+                    DGW.global.api.requests.userSearch(that.value,
+                        function (searchQuery) {
+                            DGW.main.methods.usersConstructor('search', searchQuery);
+                            DGW.helpers.removeClass(searchEmpty, 'form-search-progress');
+                            searchEmpty.addEventListener('click', searchFormReset);
+                        }
+                    );
+                }, searchDelay);
+            } else {
+                searchFormReset();
+            }
         });
+
+        function searchFormReset(){
+            friendSearch.value = '';
+            if (searchTimeout) window.clearTimeout(searchTimeout);
+            DGW.helpers.removeClass(searchEmpty, 'form-search-empty');
+            DGW.helpers.removeClass(searchEmpty, 'form-search-progress');
+            searchEmpty.removeEventListener('click', searchFormReset);
+            DGW.main.methods.usersConstructor(DGW.main.settings.friends.currentSubMenu);
+        }
 
     })();
 
@@ -1995,10 +2019,9 @@ DGW.main.methods.drawsInit = function(){
                 noActive();
                 DGW.helpers.addClass(this, 'dg-o-w-active');
                 DGW.main.methods.usersConstructor(this.getAttribute('data-submenu'));
+                DGW.main.settings.friends.currentSubMenu = this.getAttribute('data-submenu');
             });
         });
-
-        //DGW.main.methods.friendsSubmenuReset
     })();
 
 })();
@@ -2860,7 +2883,7 @@ DGW.main.methods.offersConstructor = function(offers) {
     showOffersPanels(lists.offers);
     DGW.main.methods.setRewardedActions();
 };
-DGW.main.methods.usersConstructor = function(state, searchQuery) {
+DGW.main.methods.usersConstructor = function(state, usersFound) {
     // Possible states: 'friends', 'followers', 'search'
     'use strict';
 
@@ -2869,16 +2892,31 @@ DGW.main.methods.usersConstructor = function(state, searchQuery) {
         usersToShow;
 
     // Methods
-    var createUserItem, createUserItemActions, createSingleAction;
+    var createUserItem, createUserItemActions, createSingleAction, createSimpleItem;
 
+
+    createSimpleItem = function(){
+        var li = document.createElement('li');
+            li.className = 'dg-o-w-table-display';
+            li.innerHTML = DGW.templates.userListItemNothingFound;
+
+        return li;
+    };
 
     // Every button logic, later transmitted back to the LI item
     createSingleAction = function(actionType, userId, li) {
         var action = document.createElement('div');
 
         function successfulUpdate(userObj, li) {
+            var userIndex = DGW.main.cache.userRelations.users.findIndex(function(el){
+                return (el.User.UserId == userId);
+            });
+
+            DGW.main.cache.userRelations.users[userIndex] = userObj;
             DGW.helpers.insertAfter(createUserItem(userObj), li);
             userListHolder.removeChild(li);
+
+            console.info(userObj.User.UserId, userId)
         }
 
         switch (actionType) {
@@ -2970,6 +3008,7 @@ DGW.main.methods.usersConstructor = function(state, searchQuery) {
                         },
                         function(res){
                             DGW.helpers.console.warn('Decline ID: ', userId, res.Message);
+                            console.warn(res);
                         }
                     );
                 });
@@ -3074,34 +3113,64 @@ DGW.main.methods.usersConstructor = function(state, searchQuery) {
     // cleaning the list of users
     userListHolder.innerHTML = '';
 
+    // Sorting types
+    function sortByName(a, b) {
+        var nameA = a.User.UserName.toUpperCase();
+        var nameB = b.User.UserName.toUpperCase();
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+    }
+
     // defining which users to show in the list
     if (state === 'friends') {
         usersToShow = DGW.main.cache.userRelations.users.filter(function(rels){
             return rels.Rels.some(function(r){
-                return r === 'FriendRequestTo' || r === 'Friends' || r === 'FriendRequestFrom';
+                return r === 'FriendRequestFrom' || r === 'Friends' || r === 'FriendRequestTo';
             });
         });
+
+        // Sorting friends in a specific order
+        usersToShow = usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'FriendRequestFrom'})})
+            .sort(sortByName).concat(
+            usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'Friends'})})
+                .sort(sortByName).concat(
+                usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'FriendRequestTo'})})
+                .sort(sortByName)
+            )
+        );
     } else if (state === 'following') {
         usersToShow = DGW.main.cache.userRelations.users.filter(function(rels){
             return rels.Rels.some(function(r){
-                return r === 'FollowedBy' || r === 'Following';
+                return r === 'Following' || r === 'FollowedBy';
             });
         });
+
+        // Sorting followers and followed by
+        usersToShow = usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'Following'})})
+            .sort(sortByName).concat(
+            usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'FollowedBy'})}).sort(sortByName)
+        );
     } else if (state === 'search') {
-        usersToShow = searchQuery.Users;
+        usersToShow = usersFound.Users;
+        usersToShow.sort(sortByName);
     } else {
         // default state
     }
 
     // adding users to the list
-    usersToShow.forEach(function(userObj){
-        userListHolder.appendChild(createUserItem(userObj));
-    });
+    if (usersToShow.length > 1) {
+        usersToShow.forEach(function (userObj) {
+            userListHolder.appendChild(createUserItem(userObj));
+        });
+    } else {
+        userListHolder.appendChild(createSimpleItem());
+    }
 
 
     // TEMP part
     DGW.helpers.console.info(
-        'Number of relations > 0: ',
+        'Number of relations > 1: ',
         DGW.main.cache.userRelations.users.filter(function(us){return us.Rels.length > 1}).length
     );
 };
@@ -3441,11 +3510,7 @@ DGW.main.methods.changeMainState = function(state){
             DGW.global.api.requests.usersGet(function(response){
                 DGW.main.cache.userRelations.users = response.Users;
                 DGW.main.cache.userRelations.count = response.UsersCount;
-                DGW.main.methods.usersConstructor(
-                    Array.prototype.slice.call(DGW.main.elements.pages.friendsMain.querySelectorAll('[data-submenu]')).filter(function(el){
-                        return DGW.helpers.hasClass(el, 'dg-o-w-active');
-                    })[0].getAttribute('data-submenu')
-                );
+                DGW.main.methods.usersConstructor(DGW.main.settings.friends.currentSubMenu);
             });
             break;
         default:

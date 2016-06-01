@@ -1386,8 +1386,7 @@
 								}
 							}
 
-							&:after {
-								content: '';
+							.form-search-decorator {
 								height: 40px;
 								width: 40px;
 								display: block;
@@ -1398,6 +1397,15 @@
 								background-repeat: no-repeat;
 								background-size: 60%;
 								background-position: center;
+
+								&.form-search-empty {
+									background-image: url('./imgs/empty.svg');
+
+									&.form-search-progress {
+										background-image: url('./imgs/loading.svg');
+										animation: dg-o-wlinear-rotation 1.5s linear forwards infinite;
+									}
+								}
 							}
 						}
 					}
@@ -2137,6 +2145,7 @@
 									display: table;
 									width: 100%;
 									table-layout: fixed;
+									animation: dg-widget-fade-in 0.7s ease forwards 1;
 								}
 
 								.dg-o-w-cell {
@@ -2144,6 +2153,12 @@
 									vertical-align: middle;
 									padding: 20px 0;
 									text-align: left;
+
+									&.dg-o-w-cell-full,
+									&.dg-o-w-cell-full:last-child {
+										width: 100%;
+										text-align: left;
+									}
 
 									&:last-child {
 										text-align: right;

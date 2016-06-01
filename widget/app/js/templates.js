@@ -172,7 +172,7 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul>' +
 DGW.templates.friendsMain = '<div class="dg-o-w-submenu"><ul>' +
                                     '<li class="dg-o-w-active" data-submenu="friends">Friends</li><li data-submenu="following">Following</li></ul>' +
                                 '<div class="dg-o-w-float-right dg-o-w-inline-form dg-o-w-right-padding">' +
-                                    '<form class="search-form"><input class="search-field" type="text" placeholder="Search" /></form>' +
+                                    '<form class="search-form"><input class="search-field" type="text" placeholder="Search" /><span class="form-search-decorator"></span></form>' +
                                 '</div></div>' +
                                 '<div class="dg-o-w-section-scroller">' +
                                     '<div class="dg-o-w-section-content content-static dg-o-w-white-section">' +
@@ -182,14 +182,7 @@ DGW.templates.friendsMain = '<div class="dg-o-w-submenu"><ul>' +
                                         '</div>' +
                                         '<div class="dg-o-w-section-list-holder"><ul data-friends-list>' +
                                             '<li class="dg-o-w-table-display">' +
-                                                '<div class="dg-o-w-cell"><img src="./dist/imgs/avatar-placeholder.png" /><div class="dg-o-w-details"><p class="dg-o-w-color-brand">Name Surname</p><p class="dg-o-w-color-grey">2 common groups</p></div></div>' +
-                                                '<div class="dg-o-w-cell"><div class="dg-o-w-users-done"></div></div>' +
-                                                '<div class="dg-o-w-cell"><a href="#" class="btn-dg-o-w btn-dg-o-w-stroked">Accept</a><a href="#" class="btn-dg-o-w btn-dg-o-w-stroked-okay">Friends</a></div>' +
-                                            '</li>' +
-                                            '<li class="dg-o-w-table-display">' +
-                                                '<div class="dg-o-w-cell"><img src="./dist/imgs/avatar-placeholder.png" /><div class="dg-o-w-details"><p class="dg-o-w-color-brand">Name Surname</p><p class="dg-o-w-color-grey">2 common groups</p></div></div>' +
-                                                '<div class="dg-o-w-cell"><div class="dg-o-w-users-done"></div></div>' +
-                                                '<div class="dg-o-w-cell"><p class="dg-o-w-color-grey">Request sent</p><a href="#" class="btn-dg-o-w btn-dg-o-w-stroked-okay">Friends</a></div>' +
+                                                '<div class="dg-o-w-cell dg-o-w-cell-full"><h3>Your friends list is loading... Please, wait a bit</h3></div>' +
                                             '</li>' +
                                         '</ul></div>' +
                                     '</div>' +
@@ -206,6 +199,8 @@ DGW.templates.userListItem = '<div class="dg-o-w-cell">' +
                                     '<div class="dg-o-w-users-done" data-user-common-users></div>' +
                                 '</div>' +
                                 '<div class="dg-o-w-cell" data-user-actions></div>';
+
+DGW.templates.userListItemNothingFound = '<div class="dg-o-w-cell dg-o-w-cell-full"><h3>Unfortunately, no matching result was found.</h3></div>';
 
 DGW.templates.userListActions = {
     follow: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Follow</div>',

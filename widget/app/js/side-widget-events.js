@@ -1,3 +1,14 @@
+DGW.side.methods.ctaClick = function(){
+    if (this.getAttribute('data-page') != null) {
+        DGW.main.currentState = this.getAttribute('data-page');
+    }
+    if (!DGW.main.shown) {
+        DGW.main.methods.showWidget();
+    } else {
+        DGW.main.methods.changeMainState(DGW.main.currentState);
+    }
+};
+
 DGW.side.methods.initEvents = function(){
     if (!DGW.global.launched) {
         // Showing side widget
@@ -11,16 +22,7 @@ DGW.side.methods.initEvents = function(){
     wBody.removeEventListener('click', DGW.global.api.requests.safariFix);
 
     if (cta) {
-        cta.addEventListener('click', function () {
-            if (cta.getAttribute('data-page') != null) {
-                DGW.main.currentState = cta.getAttribute('data-page');
-            }
-            if (!DGW.main.shown) {
-                DGW.main.methods.showWidget();
-            } else {
-                DGW.main.methods.changeMainState(DGW.main.currentState);
-            }
-        });
+        cta.addEventListener('click', DGW.side.methods.ctaClick);
     }
 
     DGW.helpers.imagesResponsivePaths(wBody.querySelectorAll('[data-image]'));
