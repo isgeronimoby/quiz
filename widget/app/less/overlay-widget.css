@@ -996,6 +996,11 @@
   -webkit-animation-delay: -0.1s;
           animation-delay: -0.1s;
 }
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-dg-o-w-text-small {
+  line-height: 24px;
+  width: 100px;
+  text-align: center;
+}
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-dg-o-w {
   display: inline-block;
   vertical-align: middle;
@@ -1019,7 +1024,9 @@
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-dg-o-w.btn-dg-o-w-small {
   height: 24px;
   line-height: 24px;
-  padding: 0 30px;
+  padding: 0;
+  width: 100px;
+  border-radius: 2px;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-dg-o-w.btn-dg-o-w-brand {
   background-color: #00309b;
@@ -1050,20 +1057,46 @@
   background-color: #0049b2;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-dg-o-w.btn-dg-o-w-stroked-okay {
+  position: relative;
   color: #9ec64e;
   background-color: transparent;
   border: 1px solid;
   border-color: #9ec64e;
-  -webkit-transition: background-color 0.3s ease, color 0.3s ease;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
-#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-dg-o-w.btn-dg-o-w-stroked-okay:before {
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-dg-o-w.btn-dg-o-w-stroked-okay .btn-dg-o-w-dropdown-holder {
+  z-index: 5;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-dg-o-w.btn-dg-o-w-stroked-okay .btn-dg-o-w-dropdown-holder:before {
   content: '\2713';
   padding-right: 4px;
 }
-#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-dg-o-w.btn-dg-o-w-stroked-okay:hover {
-  color: #ffffff;
-  background-color: #9ec64e;
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-dg-o-w.btn-dg-o-w-stroked-okay .btn-dg-o-w-dropdown-holder:after {
+  content: '\25BE';
+  padding-left: 10px;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-dg-o-w.btn-dg-o-w-stroked-okay:hover .btn-dg-o-w-dropdown-action {
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  color: #808080;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-dg-o-w.btn-dg-o-w-stroked-okay .btn-dg-o-w-dropdown-holder,
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-dg-o-w.btn-dg-o-w-stroked-okay .btn-dg-o-w-dropdown-action {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ffffff;
+  border-radius: inherit;
+  text-align: center;
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+}
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .btn-dg-o-w.btn-dg-o-w-stroked-okay .btn-dg-o-w-dropdown-action {
+  z-index: 2;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .line-height-btn {
   line-height: 40px;

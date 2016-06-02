@@ -170,14 +170,14 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul>' +
                                 '</div>';
 
 DGW.templates.friendsMain = '<div class="dg-o-w-submenu"><ul>' +
-                                    '<li class="dg-o-w-active" data-submenu="friends">Friends</li><li data-submenu="following">Following</li></ul>' +
+                                    '<li class="dg-o-w-active" data-submenu="friends">Friends</li><li data-submenu="following">Following</li><li data-submenu="followers">Followers</li></ul>' +
                                 '<div class="dg-o-w-float-right dg-o-w-inline-form dg-o-w-right-padding">' +
                                     '<form class="search-form"><input class="search-field" type="text" placeholder="Search" /><span class="form-search-decorator"></span></form>' +
                                 '</div></div>' +
                                 '<div class="dg-o-w-section-scroller">' +
                                     '<div class="dg-o-w-section-content content-static dg-o-w-white-section">' +
                                         '<div class="dg-o-w-section-header">' +
-                                            '<div class="dg-o-w-float-left"><p><a href="#" class="btn-dg-o-w btn-dg-o-w-brand">Invite more friends</a> and get points per each</p></div>' +
+                                            // '<div class="dg-o-w-float-left"><p><a href="#" class="btn-dg-o-w btn-dg-o-w-brand">Invite more friends</a> and get points per each</p></div>' +
                                             '<div class="dg-o-w-float-right"><p class="line-height-btn">You have 132 friends <span class="green-highlighter">12</span></p></div>' +
                                         '</div>' +
                                         '<div class="dg-o-w-section-list-holder"><ul data-friends-list>' +
@@ -201,16 +201,21 @@ DGW.templates.userListItem = '<div class="dg-o-w-cell">' +
                                 '<div class="dg-o-w-cell" data-user-actions></div>';
 
 DGW.templates.userListItemNothingFound = '<div class="dg-o-w-cell dg-o-w-cell-full"><h3>Unfortunately, no matching result was found.</h3></div>';
+DGW.templates.userListItemNew = '<div class="dg-o-w-cell dg-o-w-cell-full"><h3>Your friends list is loading... Please, wait a bit</h3></div>';
 
 DGW.templates.userListActions = {
-    follow: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Follow</div>',
-    following: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked-okay">Following</div>',
-    followsYou: '<p class="dg-o-w-color-grey">Follows you</p>',
-    friends: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked-okay">Friends</div>',
-    request: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Add to friends</div>',
-    requestSent: '<p class="dg-o-w-color-grey">Request sent</p>',
-    accept: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Accept</div>',
-    decline: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Decline</div>'
+    follow: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked" data-click-holder>Follow</div>',
+    following: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked-okay">' +
+                    '<span class="btn-dg-o-w-dropdown-holder">Following</span><span class="btn-dg-o-w-dropdown-action" data-click-holder>Unfollow</span>' +
+                '</div>',
+    followsYou: '<p class="btn-dg-o-w-text-small dg-o-w-color-grey">Follows you</p>',
+    friends: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked-okay">' +
+                    '<span class="btn-dg-o-w-dropdown-holder">Friends</span><span class="btn-dg-o-w-dropdown-action" data-click-holder>Unfriend</span>' +
+             '</div>',
+    request: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked" data-click-holder>Add to friends</div>',
+    requestSent: '<p class="btn-dg-o-w-text-small dg-o-w-color-grey">Request sent</p>',
+    accept: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked" data-click-holder>Accept</div>',
+    decline: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked" data-click-holder>Decline</div>'
 };
 
 DGW.templates.videoHolder = '<div class="dg-o-w-video-holder"><div id="dg-o-w-video-playing"></div><div class="dg-o-w-video-text"><span></span></div></div>';

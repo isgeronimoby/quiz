@@ -5,7 +5,7 @@
         var friendSearch = dp.querySelector('.search-form .search-field');
         var searchEmpty = dp.querySelector('.search-form .form-search-decorator');
         var searchTimeout;
-        var searchDelay = 1000;
+        var searchDelay = 500;
 
         friendSearch.addEventListener('input', function(){
             var that = this;
@@ -21,6 +21,10 @@
                     DGW.global.api.requests.userSearch(that.value,
                         function (searchQuery) {
                             DGW.main.methods.usersConstructor('search', searchQuery);
+                            DGW.helpers.removeClass(searchEmpty, 'form-search-progress');
+                            searchEmpty.addEventListener('click', searchFormReset);
+                        },
+                        function () {
                             DGW.helpers.removeClass(searchEmpty, 'form-search-progress');
                             searchEmpty.addEventListener('click', searchFormReset);
                         }

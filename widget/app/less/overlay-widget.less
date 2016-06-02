@@ -1058,6 +1058,12 @@
 				}
 			}
 
+			.btn-dg-o-w-text-small {
+				line-height: 24px;
+				width: 100px;
+				text-align: center;
+			}
+
 			.btn-dg-o-w {
 				display: inline-block;
 				vertical-align: middle;
@@ -1082,7 +1088,9 @@
 				&.btn-dg-o-w-small {
 					height: 24px;
 					line-height: 24px;
-					padding: 0 30px;
+					padding: 0;
+					width: 100px;
+					border-radius: 2px;
 				}
 
 				&.btn-dg-o-w-brand {
@@ -1118,21 +1126,49 @@
 				}
 
 				&.btn-dg-o-w-stroked-okay {
+					position: relative;
 					color: @color-green;
 					background-color: transparent;
 					border: 1px solid;
 					border-color: @color-green;
-					transition: background-color 0.3s ease,
-								color 0.3s ease;
 
-					&:before {
-						content: '\2713';
-						padding-right: 4px;
+					.btn-dg-o-w-dropdown-holder {
+						z-index: 5;
+						&:before {
+							content: '\2713';
+							padding-right: 4px;
+						}
+
+						&:after {
+							content: '\25BE';
+							padding-left: 10px;
+						}
 					}
 
 					&:hover {
-						color: @color-white;
-						background-color: @color-green;
+
+						.btn-dg-o-w-dropdown-action {
+							transform: translateY(100%);
+							box-shadow: 0 0 4px rgba(0,0,0,.25);
+							color: @color-grey-dark;
+						}
+					}
+
+					.btn-dg-o-w-dropdown-holder,
+					.btn-dg-o-w-dropdown-action {
+						position: absolute;
+						top: 0;
+						left: 0;
+						right: 0;
+						bottom: 0;
+						background-color: @color-white;
+						border-radius: inherit;
+						text-align: center;
+						transition: transform 0.3s ease;
+					}
+
+					.btn-dg-o-w-dropdown-action {
+						z-index: 2;
 					}
 				}
 			}

@@ -1524,14 +1524,14 @@ DGW.templates.activitiesMain = '<div class="dg-o-w-submenu"><ul>' +
                                 '</div>';
 
 DGW.templates.friendsMain = '<div class="dg-o-w-submenu"><ul>' +
-                                    '<li class="dg-o-w-active" data-submenu="friends">Friends</li><li data-submenu="following">Following</li></ul>' +
+                                    '<li class="dg-o-w-active" data-submenu="friends">Friends</li><li data-submenu="following">Following</li><li data-submenu="followers">Followers</li></ul>' +
                                 '<div class="dg-o-w-float-right dg-o-w-inline-form dg-o-w-right-padding">' +
                                     '<form class="search-form"><input class="search-field" type="text" placeholder="Search" /><span class="form-search-decorator"></span></form>' +
                                 '</div></div>' +
                                 '<div class="dg-o-w-section-scroller">' +
                                     '<div class="dg-o-w-section-content content-static dg-o-w-white-section">' +
                                         '<div class="dg-o-w-section-header">' +
-                                            '<div class="dg-o-w-float-left"><p><a href="#" class="btn-dg-o-w btn-dg-o-w-brand">Invite more friends</a> and get points per each</p></div>' +
+                                            // '<div class="dg-o-w-float-left"><p><a href="#" class="btn-dg-o-w btn-dg-o-w-brand">Invite more friends</a> and get points per each</p></div>' +
                                             '<div class="dg-o-w-float-right"><p class="line-height-btn">You have 132 friends <span class="green-highlighter">12</span></p></div>' +
                                         '</div>' +
                                         '<div class="dg-o-w-section-list-holder"><ul data-friends-list>' +
@@ -1555,16 +1555,21 @@ DGW.templates.userListItem = '<div class="dg-o-w-cell">' +
                                 '<div class="dg-o-w-cell" data-user-actions></div>';
 
 DGW.templates.userListItemNothingFound = '<div class="dg-o-w-cell dg-o-w-cell-full"><h3>Unfortunately, no matching result was found.</h3></div>';
+DGW.templates.userListItemNew = '<div class="dg-o-w-cell dg-o-w-cell-full"><h3>Your friends list is loading... Please, wait a bit</h3></div>';
 
 DGW.templates.userListActions = {
-    follow: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Follow</div>',
-    following: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked-okay">Following</div>',
-    followsYou: '<p class="dg-o-w-color-grey">Follows you</p>',
-    friends: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked-okay">Friends</div>',
-    request: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Add to friends</div>',
-    requestSent: '<p class="dg-o-w-color-grey">Request sent</p>',
-    accept: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Accept</div>',
-    decline: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked">Decline</div>'
+    follow: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked" data-click-holder>Follow</div>',
+    following: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked-okay">' +
+                    '<span class="btn-dg-o-w-dropdown-holder">Following</span><span class="btn-dg-o-w-dropdown-action" data-click-holder>Unfollow</span>' +
+                '</div>',
+    followsYou: '<p class="btn-dg-o-w-text-small dg-o-w-color-grey">Follows you</p>',
+    friends: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked-okay">' +
+                    '<span class="btn-dg-o-w-dropdown-holder">Friends</span><span class="btn-dg-o-w-dropdown-action" data-click-holder>Unfriend</span>' +
+             '</div>',
+    request: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked" data-click-holder>Add to friends</div>',
+    requestSent: '<p class="btn-dg-o-w-text-small dg-o-w-color-grey">Request sent</p>',
+    accept: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked" data-click-holder>Accept</div>',
+    decline: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked" data-click-holder>Decline</div>'
 };
 
 DGW.templates.videoHolder = '<div class="dg-o-w-video-holder"><div id="dg-o-w-video-playing"></div><div class="dg-o-w-video-text"><span></span></div></div>';
@@ -1968,7 +1973,7 @@ DGW.main.methods.drawsInit = function(){
         var friendSearch = dp.querySelector('.search-form .search-field');
         var searchEmpty = dp.querySelector('.search-form .form-search-decorator');
         var searchTimeout;
-        var searchDelay = 1000;
+        var searchDelay = 500;
 
         friendSearch.addEventListener('input', function(){
             var that = this;
@@ -1984,6 +1989,10 @@ DGW.main.methods.drawsInit = function(){
                     DGW.global.api.requests.userSearch(that.value,
                         function (searchQuery) {
                             DGW.main.methods.usersConstructor('search', searchQuery);
+                            DGW.helpers.removeClass(searchEmpty, 'form-search-progress');
+                            searchEmpty.addEventListener('click', searchFormReset);
+                        },
+                        function () {
                             DGW.helpers.removeClass(searchEmpty, 'form-search-progress');
                             searchEmpty.addEventListener('click', searchFormReset);
                         }
@@ -2895,10 +2904,11 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
     var createUserItem, createUserItemActions, createSingleAction, createSimpleItem;
 
 
-    createSimpleItem = function(){
+    createSimpleItem = function(type){
         var li = document.createElement('li');
             li.className = 'dg-o-w-table-display';
-            li.innerHTML = DGW.templates.userListItemNothingFound;
+        if (type === 'empty' || !type) li.innerHTML = DGW.templates.userListItemNothingFound;
+        if (type === 'new') li.innerHTML = DGW.templates.userListItemNew;
 
         return li;
     };
@@ -2919,11 +2929,16 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
             console.info(userObj.User.UserId, userId)
         }
 
+        function passEvent(actionObj, event, fn) {
+            var clickHolder = (actionObj.getAttribute('data-click-holder') != null) ? actionObj : actionObj.querySelector('[data-click-holder]');
+            clickHolder.addEventListener(event, fn);
+        }
+
         switch (actionType) {
             case 'follow':
                 action.innerHTML = DGW.templates.userListActions.follow;
                 action = action.childNodes[0];
-                action.addEventListener('click', function(){
+                passEvent(action, 'click', function(){
                     DGW.global.api.requests.userFollow(userId,
                         function(userObj){
                             successfulUpdate(userObj, li);
@@ -2937,7 +2952,7 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
             case 'following':
                 action.innerHTML = DGW.templates.userListActions.following;
                 action = action.childNodes[0];
-                action.addEventListener('click', function(){
+                passEvent(action, 'click', function(){
                     DGW.global.api.requests.userUnfollow(userId,
                         function(userObj){
                             successfulUpdate(userObj, li);
@@ -2955,7 +2970,7 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
             case 'friends':
                 action.innerHTML = DGW.templates.userListActions.friends;
                 action = action.childNodes[0];
-                action.addEventListener('click', function(){
+                passEvent(action, 'click', function(){
                     DGW.global.api.requests.userUnfollow(userId,
                         function(userObj){
                             successfulUpdate(userObj, li);
@@ -2969,7 +2984,7 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
             case 'request':
                 action.innerHTML = DGW.templates.userListActions.request;
                 action = action.childNodes[0];
-                action.addEventListener('click', function(){
+                passEvent(action, 'click', function(){
                     DGW.global.api.requests.userRequestSend(userId,
                         function(userObj){
                             successfulUpdate(userObj, li);
@@ -2987,7 +3002,7 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
             case 'accept':
                 action.innerHTML = DGW.templates.userListActions.accept;
                 action = action.childNodes[0];
-                action.addEventListener('click', function(){
+                passEvent(action, 'click', function(){
                     DGW.global.api.requests.userRequestAccept(userId,
                         function(userObj){
                             successfulUpdate(userObj, li);
@@ -3001,7 +3016,7 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
             case 'decline':
                 action.innerHTML = DGW.templates.userListActions.decline;
                 action = action.childNodes[0];
-                action.addEventListener('click', function(){
+                passEvent(action, 'click', function(){
                     DGW.global.api.requests.userRequestDecline(userId,
                         function(userObj){
                             successfulUpdate(userObj, li);
@@ -3026,10 +3041,16 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
         var actions = [];
 
         if (relations.length > 0) {
+            var followTwoSides = (relations.some(function(r){r=r.toLowerCase(); return r === 'followedby'}) &&
+                                relations.some(function(r){r=r.toLowerCase(); return r === 'following'}));
+            var friendsRelations = relations.some(function(r){return r === 'FriendRequestFrom' || r === 'Friends' || r === 'FriendRequestTo'});
+            var followRelations = relations.some(function(r){ return r === 'Following' || r === 'FollowedBy'});
+
             relations.forEach(function (rel) {
                 rel = rel.toLowerCase();
 
                 if (rel === 'friendrequestto') {
+                    if (!followRelations) actions.push(createSingleAction('follow', userId, li));
                     actions.push(createSingleAction('requestSent'));
                 }
                 if (rel === 'friendrequestfrom') {
@@ -3040,18 +3061,19 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
                 if (rel === 'friends') {
                     actions.push(createSingleAction('friends', userId, li));
                 }
-                if (rel === 'followedby') {
-                    actions.push(createSingleAction('followsYou'));
+                if (rel === 'followedby' && !followTwoSides) {
                     actions.push(createSingleAction('follow', userId, li));
+                    if (!friendsRelations) actions.push(createSingleAction('request', userId, li));
                 }
                 if (rel === 'following') {
                     actions.push(createSingleAction('following', userId, li));
+                    if (!friendsRelations) actions.push(createSingleAction('request', userId, li));
                 }
-
             });
+
         } else {
-            actions.push(createSingleAction('request', userId, li));
             actions.push(createSingleAction('follow', userId, li));
+            actions.push(createSingleAction('request', userId, li));
         }
 
         return actions;
@@ -3060,7 +3082,7 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
     // Creating single LI element to put into the page
     createUserItem = function(userObj){
         var commonUsers = userObj.MutualFriends,
-            commonUsersCount = +userObj.MutualFriendsCount,
+            commonUsersCount = +userObj.MutualFriendsTotalCount,
             user = userObj.User,
             relations = userObj.Rels,
             relationsCount = userObj.RelsCount;
@@ -3142,18 +3164,43 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
     } else if (state === 'following') {
         usersToShow = DGW.main.cache.userRelations.users.filter(function(rels){
             return rels.Rels.some(function(r){
-                return r === 'Following' || r === 'FollowedBy';
+                return r === 'Following';
             });
         });
 
-        // Sorting followers and followed by
+        // Sorting followers
+        usersToShow = usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'Following'})}).sort(sortByName);
+
+    }else if (state === 'followers') {
+        usersToShow = DGW.main.cache.userRelations.users.filter(function(rels){
+            return rels.Rels.some(function(r){
+                return r === 'FollowedBy';
+            });
+        });
+
+        // Sorting followed by
         usersToShow = usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'Following'})})
-            .sort(sortByName).concat(
-            usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'FollowedBy'})}).sort(sortByName)
+            .sort(sortByName)
+            .concat(
+            usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'FollowedBy'}) &&
+                f.Rels.every(function(r){return r !== 'Following'})}).sort(sortByName)
         );
     } else if (state === 'search') {
         usersToShow = usersFound.Users;
-        usersToShow.sort(sortByName);
+        usersToShow = usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'FriendRequestFrom'})})
+            .sort(sortByName)
+            .concat(
+            usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'Friends'})})
+                .sort(sortByName).concat(
+                usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'FriendRequestTo'})})
+                    .sort(sortByName)
+            )).concat(
+            usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'Following'})})
+                .sort(sortByName)
+                .concat(
+                usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'FollowedBy'}) &&
+                    f.Rels.every(function(r){return r !== 'Following'})}).sort(sortByName)
+            )).concat(usersToShow.filter(function(f){return f.Rels.length === 0}).sort(sortByName));
     } else {
         // default state
     }
