@@ -2,6 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 import merge from 'lodash.merge';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const NPM_SCRIPT = process.env.npm_lifecycle_event;
 const DEBUG = !process.argv.includes('release');
@@ -82,18 +83,6 @@ const common = {
 				test: /\.txt$/,
 				loader: 'raw-loader',
 			},
-			{
-				test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-				loader: 'url-loader?prefix=./?limit=10000', // prefix is required until we are on gh-pages
-			},
-			{
-				test: /\.(eot|ttf|wav|mp3)$/,
-				loader: 'file-loader',
-			},
-			{
-				test: /\.scss$/,
-				loaders: ['style-loader', 'css-loader?-autoprefixer', 'postcss-loader'],
-			},
 		],
 		noParse: [
 			//path.join(__dirname, './lib/easyXDM.debug.js'),
@@ -131,12 +120,21 @@ if (/build|build-prod|deploy/.test(NPM_SCRIPT)) {
 				}
 			}),
 			new webpack.optimize.AggressiveMergingPlugin(),
-			new webpack.optimize.LimitChunkCountPlugin({maxChunks: 6})
+			new webpack.optimize.LimitChunkCountPlugin({maxChunks: 6}),
+			new ExtractTextPlugin("styles/all.css", {allChunks: true}),
 		],
 		module: {
 			loaders: [
 				JS_LOADER,
-				...common.module.loaders
+				...common.module.loaders,
+				{
+					test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+					loader: 'file-loader?name=images/[name].[ext]',
+				},
+				{
+					test: /\.scss$/,
+					loader: ExtractTextPlugin.extract('css-loader?-autoprefixer!postcss-loader', {publicPath: '../'}),
+				},
 			],
 		},
 	});
@@ -185,7 +183,15 @@ if (NPM_SCRIPT === 'start') {
 						},
 					},
 				}),
-				...common.module.loaders
+				...common.module.loaders,
+				{
+					test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+					loader: 'url-loader?prefix=./?limit=10000', // prefix is required until we are on gh-pages
+				},
+				{
+					test: /\.scss$/,
+					loaders: ['style-loader', 'css-loader?-autoprefixer', 'postcss-loader'],
+				},
 			],
 		},
 	});
