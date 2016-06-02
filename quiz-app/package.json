@@ -39,6 +39,7 @@
     "precss": "^1.2.3",
     "raw-loader": "^0.5.1",
     "react": "^0.14.0",
+    "react-autofill": "^1.1.2",
     "react-dom": "^0.14.0",
     "react-hammerjs": "^0.4.5",
     "react-redux": "^4.4.5",

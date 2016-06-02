@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { postLogin, authWithFacebook } from '../../flux/actions';
 import Button from '../Button';
 import { SeparatorOrError, EmailInput, PasswordInput } from './Controls.js';
+import autofill from 'react-autofill';
 
 
+@autofill
 class FormLogIn extends Component {
 	static propTypes = {
 		onNavigate: PropTypes.func.isRequired,

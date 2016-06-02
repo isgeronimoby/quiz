@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { postRestore } from '../../flux/actions';
 import Button from '../Button';
 import { EmailInput } from './Controls.js';
+import autofill from 'react-autofill';
 
 
+@autofill
 class FormForgotPwd extends Component {
 
 	static propTypes = {
