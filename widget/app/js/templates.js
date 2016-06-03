@@ -74,7 +74,9 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                             '</div>' +
                                             '<div class="dg-o-w-close">&times;</div>' +
                                             DGW.templates.spinner +
-                                        '<footer class="dg-o-w-main-footer">Powered by Loyalty Rewarded, 2016 &nbsp;&nbsp;-&nbsp;&nbsp; <a data-link="faq" href="#">FAQ</a></footer></div>' +
+                                        '<footer class="dg-o-w-main-footer">Powered by Loyalty Rewarded, 2016 &nbsp;&nbsp;-&nbsp;&nbsp; ' +
+                                            '<a data-link="faq" href="#">FAQ</a>, <a data-link="privacy" href="#">Privacy Policy</a>, <a data-link="terms" href="#">Terms & Conditions</a>' +
+                                        '</footer></div>' +
                                     '</div>' +
                                 '</div>';
 
@@ -108,7 +110,7 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' 
                                     '<div class="dg-o-w-profile-stats-holder">' +
                                         '<h3 data-userstats-username class="dg-o-w-profile-name">Captain Deadpool</h3>' +
                                         '<div class="dg-o-w-profile-stats-holder-rest">' +
-                                            '<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-userstats-friends-c>210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-friends-p class="green-highlighter">19</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-friends-c></h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-friends-requests class="green-highlighter"></p></div></div>' +
                                             //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand" data-userstats-groups-c>20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-groups-p class="green-highlighter">3</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 data-userstats-points-c>520</h3><p>points</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 data-userstats-credits-c>40</h3></div></div>' +
@@ -178,7 +180,7 @@ DGW.templates.friendsMain = '<div class="dg-o-w-submenu"><ul>' +
                                     '<div class="dg-o-w-section-content content-static dg-o-w-white-section">' +
                                         '<div class="dg-o-w-section-header">' +
                                             // '<div class="dg-o-w-float-left"><p><a href="#" class="btn-dg-o-w btn-dg-o-w-brand">Invite more friends</a> and get points per each</p></div>' +
-                                            '<div class="dg-o-w-float-right"><p class="line-height-btn">You have 132 friends <span class="green-highlighter">12</span></p></div>' +
+                                            '<div class="dg-o-w-float-right"><p class="line-height-btn">You have <span data-friends-c></span> friends <span class="green-highlighter" data-friends-requests></span></p></div>' +
                                         '</div>' +
                                         '<div class="dg-o-w-section-list-holder"><ul data-friends-list>' +
                                             '<li class="dg-o-w-table-display">' +
@@ -218,6 +220,7 @@ DGW.templates.userListActions = {
     decline: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked" data-click-holder>Decline</div>'
 };
 
-DGW.templates.videoHolder = '<div class="dg-o-w-video-holder"><div id="dg-o-w-video-playing"></div><div class="dg-o-w-video-text"><span></span></div></div>';
+DGW.templates.videoHolderInner = '<div id="dg-o-w-video-playing"></div><div class="dg-o-w-video-text"><span></span></div>';
+DGW.templates.videoHolder = '<div class="dg-o-w-video-holder">' + DGW.templates.videoHolderInner + '</div>';
 
 DGW.templates.notificationHolder = '<div class="dg-o-w-notification-holder"><ul></ul><div class="dg-o-w-notification-close">&times;</div></div>';

@@ -54,6 +54,7 @@ DGW.global.actions.requests.shareTw = function(drawId, text, _winner){
 DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
     var player;
     var scriptCheckingInterval, widgetShownInterval, playbackInterval;
+    var errorHandlerCounter = 0;
     var wCloseBtn = DGW.main.elements.widget.querySelector('.dg-o-w-close');
 
     if (!window.YT) {
@@ -68,6 +69,7 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
     } else {
         showVideoOffer();
     }
+
 
     function onYouTubePlayerAPIReady() {
         player = new YT.Player('dg-o-w-video-playing', {
@@ -88,20 +90,36 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
         });
     }
 
+    function destroyVideo(callback){
+        player.destroy();
+        DGW.main.elements.pages.videoHolder.querySelector('.dg-o-w-video-holder').innerHTML = DGW.templates.videoHolderInner;
+        if(callback) setTimeout(callback, 10);
+    }
+
     // autoplay video
     function onPlayerReady(event) {
         event.target.playVideo();
+
         DGW.global.api.requests.trackOffer(offerId);
         widgetShownInterval = window.setInterval(function(){
             if (DGW.main.shown == false) {
                 cancelVideoOffer();
             }
         }, 100);
-        playbackInterval = window.setInterval(function(){
-            DGW.main.elements.pages.videoHolder.querySelector('span').innerHTML =
-                Math.floor(player.getDuration() - player.getCurrentTime());
-        }, 1000);
-        DGW.helpers.console.log('Video has started')
+        DGW.helpers.console.info('Video duration available: ', !!player.getDuration);
+        if (errorHandlerCounter <= 2) {
+            if (!player.getDuration) {
+                destroyVideo(onYouTubePlayerAPIReady);
+                errorHandlerCounter += 1;
+                DGW.helpers.console.info('No duration');
+            } else {
+                playbackInterval = window.setInterval(function () {
+                    DGW.main.elements.pages.videoHolder.querySelector('span').innerHTML =
+                        Math.floor(player.getDuration() - player.getCurrentTime());
+                }, 1000);
+                DGW.helpers.console.log('Video has started');
+            }
+        }
     }
 
     // when video ends
@@ -124,15 +142,16 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
     function hidePlayer(){
         DGW.helpers.addClass(DGW.main.elements.pages.videoHolder.querySelector('.dg-o-w-video-holder'), 'dg-video-hidden');
         setTimeout(function(){
-            DGW.main.elements.widgetBody.removeChild(DGW.main.elements.pages.videoHolder);
+            if (DGW.main.elements.pages.videoHolder.parentNode)
+                DGW.main.elements.widgetBody.removeChild(DGW.main.elements.pages.videoHolder);
             DGW.helpers.removeClass(DGW.main.elements.pages.videoHolder.querySelector('.dg-o-w-video-holder'), 'dg-video-hidden');
+            destroyVideo();
+            wCloseBtn.removeEventListener('click', cancelVideoOffer);
+            wCloseBtn.addEventListener('click', DGW.main.methods.hideWidget);
         }, 320);
         DGW.main.elements.pages.videoHolder.querySelector('span').innerHTML = '';
         window.clearInterval(widgetShownInterval);
         window.clearInterval(playbackInterval);
-
-        wCloseBtn.removeEventListener('click', cancelVideoOffer);
-        wCloseBtn.addEventListener('click', DGW.main.methods.hideWidget);
     }
 
     function showVideoOffer(){

@@ -1428,7 +1428,9 @@ DGW.templates.mainWidgetCore = '<div id="dg-o-w-wrapper">' +
                                             '</div>' +
                                             '<div class="dg-o-w-close">&times;</div>' +
                                             DGW.templates.spinner +
-                                        '<footer class="dg-o-w-main-footer">Powered by Loyalty Rewarded, 2016 &nbsp;&nbsp;-&nbsp;&nbsp; <a data-link="faq" href="#">FAQ</a></footer></div>' +
+                                        '<footer class="dg-o-w-main-footer">Powered by Loyalty Rewarded, 2016 &nbsp;&nbsp;-&nbsp;&nbsp; ' +
+                                            '<a data-link="faq" href="#">FAQ</a>, <a data-link="privacy" href="#">Privacy Policy</a>, <a data-link="terms" href="#">Terms & Conditions</a>' +
+                                        '</footer></div>' +
                                     '</div>' +
                                 '</div>';
 
@@ -1462,7 +1464,7 @@ DGW.templates.profileMain = '<div class="dg-o-w-profile dg-o-w-white-section">' 
                                     '<div class="dg-o-w-profile-stats-holder">' +
                                         '<h3 data-userstats-username class="dg-o-w-profile-name">Captain Deadpool</h3>' +
                                         '<div class="dg-o-w-profile-stats-holder-rest">' +
-                                            '<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-userstats-friends-c>210</h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-friends-p class="green-highlighter">19</p></div></div>' +
+                                            '<div class="dg-o-w-profile-stats-inner" data-page="friends"><div><h3 class="dg-o-w-color-brand" data-friends-c></h3><p>friends</p></div><div class="dg-o-w-profile-stats-pend"><p data-friends-requests class="green-highlighter"></p></div></div>' +
                                             //'<div class="dg-o-w-profile-stats-inner"><div><h3 class="dg-o-w-color-brand" data-userstats-groups-c>20</h3><p>groups</p></div><div class="dg-o-w-profile-stats-pend"><p data-userstats-groups-p class="green-highlighter">3</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-points-icon"></div><div><h3 data-userstats-points-c>520</h3><p>points</p></div></div>' +
                                             '<div class="dg-o-w-profile-stats-inner"><div class="dg-o-w-profile-stats-icon dg-o-w-credits-icon"></div><div><h3 data-userstats-credits-c>40</h3></div></div>' +
@@ -1532,7 +1534,7 @@ DGW.templates.friendsMain = '<div class="dg-o-w-submenu"><ul>' +
                                     '<div class="dg-o-w-section-content content-static dg-o-w-white-section">' +
                                         '<div class="dg-o-w-section-header">' +
                                             // '<div class="dg-o-w-float-left"><p><a href="#" class="btn-dg-o-w btn-dg-o-w-brand">Invite more friends</a> and get points per each</p></div>' +
-                                            '<div class="dg-o-w-float-right"><p class="line-height-btn">You have 132 friends <span class="green-highlighter">12</span></p></div>' +
+                                            '<div class="dg-o-w-float-right"><p class="line-height-btn">You have <span data-friends-c></span> friends <span class="green-highlighter" data-friends-requests></span></p></div>' +
                                         '</div>' +
                                         '<div class="dg-o-w-section-list-holder"><ul data-friends-list>' +
                                             '<li class="dg-o-w-table-display">' +
@@ -1572,7 +1574,8 @@ DGW.templates.userListActions = {
     decline: '<div class="btn-dg-o-w btn-dg-o-w-small btn-dg-o-w-stroked" data-click-holder>Decline</div>'
 };
 
-DGW.templates.videoHolder = '<div class="dg-o-w-video-holder"><div id="dg-o-w-video-playing"></div><div class="dg-o-w-video-text"><span></span></div></div>';
+DGW.templates.videoHolderInner = '<div id="dg-o-w-video-playing"></div><div class="dg-o-w-video-text"><span></span></div>';
+DGW.templates.videoHolder = '<div class="dg-o-w-video-holder">' + DGW.templates.videoHolderInner + '</div>';
 
 DGW.templates.notificationHolder = '<div class="dg-o-w-notification-holder"><ul></ul><div class="dg-o-w-notification-close">&times;</div></div>';
 DGW.side.elements.widget = document.createElement('div');
@@ -1718,6 +1721,8 @@ DGW.global.methods.userStatsReset = function(){
         all: {},
         earned: {}
     };
+    DGW.global.userStats.friends = 0;
+    DGW.global.userStats.friendsRequests = 0;
 };
 
 DGW.global.methods.init = function(){
@@ -2004,13 +2009,17 @@ DGW.main.methods.drawsInit = function(){
         });
 
         function searchFormReset(){
+            DGW.main.methods.friendsResetSearch();
+            DGW.main.methods.usersConstructor(DGW.main.settings.friends.currentSubMenu);
+        }
+
+        DGW.main.methods.friendsResetSearch = function(){
             friendSearch.value = '';
             if (searchTimeout) window.clearTimeout(searchTimeout);
             DGW.helpers.removeClass(searchEmpty, 'form-search-empty');
             DGW.helpers.removeClass(searchEmpty, 'form-search-progress');
             searchEmpty.removeEventListener('click', searchFormReset);
-            DGW.main.methods.usersConstructor(DGW.main.settings.friends.currentSubMenu);
-        }
+        };
 
     })();
 
@@ -2032,6 +2041,25 @@ DGW.main.methods.drawsInit = function(){
             });
         });
     })();
+
+    DGW.main.methods.friendsSetData = function(friends, requests){
+        var friendsHolders = DGW.helpers.getElementsFromAllPlaces('[data-friends-c]'),
+            requestsHolders = DGW.helpers.getElementsFromAllPlaces('[data-friends-requests]');
+
+        if (!friends) friends = DGW.main.cache.userRelations.users.filter(function(u){return u.Rels.some(function(r){return r==='Friends'})}).length;
+        if (!requests) requests = DGW.main.cache.userRelations.users.filter(function(u){return u.Rels.some(function(r){return r==='FriendRequestFrom'})}).length;
+
+        DGW.global.userStats.friends = friends;
+        DGW.global.userStats.friendsRequests = requests;
+
+        friendsHolders.forEach(function(f){
+            f.innerHTML = DGW.global.userStats.friends;
+        });
+
+        requestsHolders.forEach(function(r){
+            r.innerHTML = DGW.global.userStats.friendsRequests;
+        });
+    };
 
 })();
 DGW.main.methods.loginInit = function(){
@@ -2210,7 +2238,6 @@ DGW.main.methods.activitiesConstructor = function(activities){
         if (!activity.User) {
             ownStats = true;
             activity.User = {
-                //UserName: DGW.global.userStats.name,
                 UserName: 'You',
                 ImageUrl: DGW.global.userStats.imageUrl
             }
@@ -2231,7 +2258,7 @@ DGW.main.methods.activitiesConstructor = function(activities){
                 message += ' playing the draw';
                 message += (' to win ' + activity.GameOrder.PrizeTitle);
             } else if (activity.GameOrder.GameType === 'MatchQuiz') {
-                message += ' placing a bet in ' + DGW.global.club.name + ' Match Quiz';
+                message += ' placing a bet in ' + DGW.global.club.name + ' Score Predictor';
             }
         }
 
@@ -2278,7 +2305,7 @@ DGW.main.methods.activitiesConstructor = function(activities){
                         message += ' finishing Twitter share offer';
                 }
             } else if (activity.OfferAction.Type.Group.Name === 'Watch') {
-                message += ' watching a video';
+                message += ' watching "' + activity.OfferAction.Title + '" video';
             } else if (activity.OfferAction.Type.Group.Name === 'Discover') {
                 message += ' downloading an app';
             }
@@ -2322,7 +2349,8 @@ DGW.main.methods.gamesConstructor = function(){
     //dpCont.appendChild(emptyMessageEl);
 
 
-
+    if (dpCont.querySelector('.dg-o-w-draws-empty'))
+        dpCont.removeChild(dpCont.querySelector('.dg-o-w-draws-empty'));
 
 
     games.forEach(function(game){
@@ -2926,6 +2954,8 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
             DGW.helpers.insertAfter(createUserItem(userObj), li);
             userListHolder.removeChild(li);
 
+            DGW.main.methods.friendsSetData();
+
             console.info(userObj.User.UserId, userId)
         }
 
@@ -3041,35 +3071,34 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
         var actions = [];
 
         if (relations.length > 0) {
-            var followTwoSides = (relations.some(function(r){r=r.toLowerCase(); return r === 'followedby'}) &&
-                                relations.some(function(r){r=r.toLowerCase(); return r === 'following'}));
-            var friendsRelations = relations.some(function(r){return r === 'FriendRequestFrom' || r === 'Friends' || r === 'FriendRequestTo'});
-            var followRelations = relations.some(function(r){ return r === 'Following' || r === 'FollowedBy'});
+            relations = relations.map(function(r){return r.toLowerCase()});
+            var requestFrom = relations.some(function(r){return r === 'friendrequestfrom'}),
+                requestTo = relations.some(function(r){return r === 'friendrequestto'}),
+                friends = relations.some(function(r){return r === 'friends'}),
+                following = relations.some(function(r){return r === 'following'}),
+                followedBy = relations.some(function(r){return r === 'followedby'});
 
-            relations.forEach(function (rel) {
-                rel = rel.toLowerCase();
-
-                if (rel === 'friendrequestto') {
-                    if (!followRelations) actions.push(createSingleAction('follow', userId, li));
-                    actions.push(createSingleAction('requestSent'));
-                }
-                if (rel === 'friendrequestfrom') {
-                    actions.push(createSingleAction('accept', userId, li));
-                    actions.push(createSingleAction('decline', userId, li));
-                    return;
-                }
-                if (rel === 'friends') {
-                    actions.push(createSingleAction('friends', userId, li));
-                }
-                if (rel === 'followedby' && !followTwoSides) {
-                    actions.push(createSingleAction('follow', userId, li));
-                    if (!friendsRelations) actions.push(createSingleAction('request', userId, li));
-                }
-                if (rel === 'following') {
+            if (requestFrom) {
+                actions.push(createSingleAction('accept', userId, li));
+                actions.push(createSingleAction('decline', userId, li));
+            } else if (requestTo) {
+                if (following) {
                     actions.push(createSingleAction('following', userId, li));
-                    if (!friendsRelations) actions.push(createSingleAction('request', userId, li));
+                } else if (followedBy) {
+                    actions.push(createSingleAction('follow', userId, li));
+                } else {
+                    actions.push(createSingleAction('follow', userId, li));
                 }
-            });
+                actions.push(createSingleAction('requestSent'));
+            } else if (friends) {
+                actions.push(createSingleAction('friends', userId, li));
+            } else if (following) {
+                actions.push(createSingleAction('following', userId, li));
+                actions.push(createSingleAction('request', userId, li));
+            } else {
+                actions.push(createSingleAction('follow', userId, li));
+                actions.push(createSingleAction('request', userId, li));
+            }
 
         } else {
             actions.push(createSingleAction('follow', userId, li));
@@ -3171,7 +3200,7 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
         // Sorting followers
         usersToShow = usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'Following'})}).sort(sortByName);
 
-    }else if (state === 'followers') {
+    } else if (state === 'followers') {
         usersToShow = DGW.main.cache.userRelations.users.filter(function(rels){
             return rels.Rels.some(function(r){
                 return r === 'FollowedBy';
@@ -3206,7 +3235,7 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
     }
 
     // adding users to the list
-    if (usersToShow.length > 1) {
+    if (usersToShow.length > 0) {
         usersToShow.forEach(function (userObj) {
             userListHolder.appendChild(createUserItem(userObj));
         });
@@ -3214,6 +3243,7 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
         userListHolder.appendChild(createSimpleItem());
     }
 
+    DGW.main.methods.friendsSetData();
 
     // TEMP part
     DGW.helpers.console.info(
@@ -3271,8 +3301,7 @@ DGW.main.methods.profileSetData = function(data, draw) {
     var wb = DGW.main.elements.widgetBody;
     var sb = DGW.side.elements.widgetBody;
     var profileImageHolders = DGW.helpers.getElementsFromAllPlaces('[data-userstats-userimage]'),
-        profileNames = DGW.helpers.getElementsFromAllPlaces('[data-userstats-username]'),
-        friendsNumber = pr.querySelector('#profileFriendsAmount');
+        profileNames = DGW.helpers.getElementsFromAllPlaces('[data-userstats-username]');
 
     var points = {
             confirmed: DGW.helpers.getElementsFromAllPlaces('[data-userstats-points-c]'),
@@ -3325,9 +3354,9 @@ DGW.main.methods.profileSetData = function(data, draw) {
     DGW.global.userStats.creditsC = data.Wallet.CreditsConfirmed;
     DGW.global.userStats.creditsP = data.Wallet.CreditsPending;
 
-    /*if (fbAddText && DGW.global.userStats.facebookId !== null) {
-        fbAddText.parentNode.removeChild(fbAddText);
-    }*/
+
+    DGW.main.methods.friendsSetData(data.FriendsCount, data.FriendRequestsCount);
+
 
     if (fbAddText) {
         if (DGW.global.userStats.facebookId !== null) {
@@ -3557,6 +3586,7 @@ DGW.main.methods.changeMainState = function(state){
             DGW.global.api.requests.usersGet(function(response){
                 DGW.main.cache.userRelations.users = response.Users;
                 DGW.main.cache.userRelations.count = response.UsersCount;
+                DGW.main.methods.friendsResetSearch();
                 DGW.main.methods.usersConstructor(DGW.main.settings.friends.currentSubMenu);
             });
             break;
@@ -3736,8 +3766,9 @@ DGW.global.actions.requests.shareTw = function(drawId, text, _winner){
 };
 
 DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
-    var player;
+    window.player;
     var scriptCheckingInterval, widgetShownInterval, playbackInterval;
+    var errorHandlerCounter = 0;
     var wCloseBtn = DGW.main.elements.widget.querySelector('.dg-o-w-close');
 
     if (!window.YT) {
@@ -3752,6 +3783,7 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
     } else {
         showVideoOffer();
     }
+
 
     function onYouTubePlayerAPIReady() {
         player = new YT.Player('dg-o-w-video-playing', {
@@ -3772,20 +3804,36 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
         });
     }
 
+    function destroyVideo(callback){
+        player.destroy();
+        DGW.main.elements.pages.videoHolder.querySelector('.dg-o-w-video-holder').innerHTML = DGW.templates.videoHolderInner;
+        if(callback) setTimeout(callback, 10);
+    }
+
     // autoplay video
     function onPlayerReady(event) {
         event.target.playVideo();
+
         DGW.global.api.requests.trackOffer(offerId);
         widgetShownInterval = window.setInterval(function(){
             if (DGW.main.shown == false) {
                 cancelVideoOffer();
             }
         }, 100);
-        playbackInterval = window.setInterval(function(){
-            DGW.main.elements.pages.videoHolder.querySelector('span').innerHTML =
-                Math.floor(player.getDuration() - player.getCurrentTime());
-        }, 1000);
-        DGW.helpers.console.log('Video has started')
+        DGW.helpers.console.info('Video duration available: ', !!player.getDuration);
+        if (errorHandlerCounter <= 2) {
+            if (!player.getDuration) {
+                destroyVideo(onYouTubePlayerAPIReady);
+                errorHandlerCounter += 1;
+                DGW.helpers.console.info('No duration');
+            } else {
+                playbackInterval = window.setInterval(function () {
+                    DGW.main.elements.pages.videoHolder.querySelector('span').innerHTML =
+                        Math.floor(player.getDuration() - player.getCurrentTime());
+                }, 1000);
+                DGW.helpers.console.log('Video has started');
+            }
+        }
     }
 
     // when video ends
@@ -3808,15 +3856,16 @@ DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
     function hidePlayer(){
         DGW.helpers.addClass(DGW.main.elements.pages.videoHolder.querySelector('.dg-o-w-video-holder'), 'dg-video-hidden');
         setTimeout(function(){
-            DGW.main.elements.widgetBody.removeChild(DGW.main.elements.pages.videoHolder);
+            if (DGW.main.elements.pages.videoHolder.parentNode)
+                DGW.main.elements.widgetBody.removeChild(DGW.main.elements.pages.videoHolder);
             DGW.helpers.removeClass(DGW.main.elements.pages.videoHolder.querySelector('.dg-o-w-video-holder'), 'dg-video-hidden');
+            destroyVideo();
+            wCloseBtn.removeEventListener('click', cancelVideoOffer);
+            wCloseBtn.addEventListener('click', DGW.main.methods.hideWidget);
         }, 320);
         DGW.main.elements.pages.videoHolder.querySelector('span').innerHTML = '';
         window.clearInterval(widgetShownInterval);
         window.clearInterval(playbackInterval);
-
-        wCloseBtn.removeEventListener('click', cancelVideoOffer);
-        wCloseBtn.addEventListener('click', DGW.main.methods.hideWidget);
     }
 
     function showVideoOffer(){

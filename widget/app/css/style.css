@@ -588,6 +588,9 @@
   font-weight: 400;
   border-top: 1px solid #ffffff;
 }
+#dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-main-footer a:hover {
+  color: #00309b;
+}
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-body-wrapper {
   position: relative;
   overflow: hidden;
@@ -1076,12 +1079,20 @@
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-video-holder .dg-o-w-video-text {
   position: absolute;
-  bottom: -20px;
+  bottom: -26px;
+  left: 0;
   right: 0;
-  color: #323232;
+  color: #ffffff;
+  line-height: 26px;
+  text-align: right;
+  padding: 0 10px;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 16px;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-video-holder .dg-o-w-video-text:after {
-  content: 's left';
+  content: ' seconds left';
+  font-size: 12px;
+  font-weight: 100;
 }
 #dg-o-w #dg-o-w-wrapper .dg-o-w-overlay .dg-o-w-body .dg-o-w-notification-holder {
   position: absolute;

@@ -113,6 +113,7 @@ DGW.main.methods.changeMainState = function(state){
             DGW.global.api.requests.usersGet(function(response){
                 DGW.main.cache.userRelations.users = response.Users;
                 DGW.main.cache.userRelations.count = response.UsersCount;
+                DGW.main.methods.friendsResetSearch();
                 DGW.main.methods.usersConstructor(DGW.main.settings.friends.currentSubMenu);
             });
             break;

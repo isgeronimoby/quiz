@@ -322,6 +322,10 @@
 					font-size: 10px;
 					font-weight: 400;
 					border-top: 1px solid @color-white;
+
+					a:hover {
+						color: @color-brand;
+					}
 				}
 
 				.dg-o-w-body-wrapper {
@@ -876,12 +880,20 @@
 
 					.dg-o-w-video-text {
 						position: absolute;
-						bottom: -20px;
+						bottom: -26px;
+						left: 0;
 						right: 0;
-						color: @color-grey-darkest;
+						color: @color-white;
+						line-height: 26px;
+						text-align: right;
+						padding: 0 10px;
+						background: rgba(0,0,0,0.5);
+						font-size: 16px;
 
 						&:after {
-							content: 's left';
+							content: ' seconds left';
+							font-size: 12px;
+							font-weight: 100;
 						}
 					}
 				}

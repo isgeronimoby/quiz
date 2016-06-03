@@ -10,7 +10,6 @@ DGW.main.methods.activitiesConstructor = function(activities){
         if (!activity.User) {
             ownStats = true;
             activity.User = {
-                //UserName: DGW.global.userStats.name,
                 UserName: 'You',
                 ImageUrl: DGW.global.userStats.imageUrl
             }
@@ -31,7 +30,7 @@ DGW.main.methods.activitiesConstructor = function(activities){
                 message += ' playing the draw';
                 message += (' to win ' + activity.GameOrder.PrizeTitle);
             } else if (activity.GameOrder.GameType === 'MatchQuiz') {
-                message += ' placing a bet in ' + DGW.global.club.name + ' Match Quiz';
+                message += ' placing a bet in ' + DGW.global.club.name + ' Score Predictor';
             }
         }
 
@@ -78,7 +77,7 @@ DGW.main.methods.activitiesConstructor = function(activities){
                         message += ' finishing Twitter share offer';
                 }
             } else if (activity.OfferAction.Type.Group.Name === 'Watch') {
-                message += ' watching a video';
+                message += ' watching "' + activity.OfferAction.Title + '" video';
             } else if (activity.OfferAction.Type.Group.Name === 'Discover') {
                 message += ' downloading an app';
             }

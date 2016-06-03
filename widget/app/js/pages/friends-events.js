@@ -36,13 +36,17 @@
         });
 
         function searchFormReset(){
+            DGW.main.methods.friendsResetSearch();
+            DGW.main.methods.usersConstructor(DGW.main.settings.friends.currentSubMenu);
+        }
+
+        DGW.main.methods.friendsResetSearch = function(){
             friendSearch.value = '';
             if (searchTimeout) window.clearTimeout(searchTimeout);
             DGW.helpers.removeClass(searchEmpty, 'form-search-empty');
             DGW.helpers.removeClass(searchEmpty, 'form-search-progress');
             searchEmpty.removeEventListener('click', searchFormReset);
-            DGW.main.methods.usersConstructor(DGW.main.settings.friends.currentSubMenu);
-        }
+        };
 
     })();
 
@@ -64,5 +68,24 @@
             });
         });
     })();
+
+    DGW.main.methods.friendsSetData = function(friends, requests){
+        var friendsHolders = DGW.helpers.getElementsFromAllPlaces('[data-friends-c]'),
+            requestsHolders = DGW.helpers.getElementsFromAllPlaces('[data-friends-requests]');
+
+        if (!friends) friends = DGW.main.cache.userRelations.users.filter(function(u){return u.Rels.some(function(r){return r==='Friends'})}).length;
+        if (!requests) requests = DGW.main.cache.userRelations.users.filter(function(u){return u.Rels.some(function(r){return r==='FriendRequestFrom'})}).length;
+
+        DGW.global.userStats.friends = friends;
+        DGW.global.userStats.friendsRequests = requests;
+
+        friendsHolders.forEach(function(f){
+            f.innerHTML = DGW.global.userStats.friends;
+        });
+
+        requestsHolders.forEach(function(r){
+            r.innerHTML = DGW.global.userStats.friendsRequests;
+        });
+    };
 
 })();

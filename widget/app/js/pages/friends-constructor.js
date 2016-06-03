@@ -32,6 +32,8 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
             DGW.helpers.insertAfter(createUserItem(userObj), li);
             userListHolder.removeChild(li);
 
+            DGW.main.methods.friendsSetData();
+
             console.info(userObj.User.UserId, userId)
         }
 
@@ -147,35 +149,34 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
         var actions = [];
 
         if (relations.length > 0) {
-            var followTwoSides = (relations.some(function(r){r=r.toLowerCase(); return r === 'followedby'}) &&
-                                relations.some(function(r){r=r.toLowerCase(); return r === 'following'}));
-            var friendsRelations = relations.some(function(r){return r === 'FriendRequestFrom' || r === 'Friends' || r === 'FriendRequestTo'});
-            var followRelations = relations.some(function(r){ return r === 'Following' || r === 'FollowedBy'});
+            relations = relations.map(function(r){return r.toLowerCase()});
+            var requestFrom = relations.some(function(r){return r === 'friendrequestfrom'}),
+                requestTo = relations.some(function(r){return r === 'friendrequestto'}),
+                friends = relations.some(function(r){return r === 'friends'}),
+                following = relations.some(function(r){return r === 'following'}),
+                followedBy = relations.some(function(r){return r === 'followedby'});
 
-            relations.forEach(function (rel) {
-                rel = rel.toLowerCase();
-
-                if (rel === 'friendrequestto') {
-                    if (!followRelations) actions.push(createSingleAction('follow', userId, li));
-                    actions.push(createSingleAction('requestSent'));
-                }
-                if (rel === 'friendrequestfrom') {
-                    actions.push(createSingleAction('accept', userId, li));
-                    actions.push(createSingleAction('decline', userId, li));
-                    return;
-                }
-                if (rel === 'friends') {
-                    actions.push(createSingleAction('friends', userId, li));
-                }
-                if (rel === 'followedby' && !followTwoSides) {
-                    actions.push(createSingleAction('follow', userId, li));
-                    if (!friendsRelations) actions.push(createSingleAction('request', userId, li));
-                }
-                if (rel === 'following') {
+            if (requestFrom) {
+                actions.push(createSingleAction('accept', userId, li));
+                actions.push(createSingleAction('decline', userId, li));
+            } else if (requestTo) {
+                if (following) {
                     actions.push(createSingleAction('following', userId, li));
-                    if (!friendsRelations) actions.push(createSingleAction('request', userId, li));
+                } else if (followedBy) {
+                    actions.push(createSingleAction('follow', userId, li));
+                } else {
+                    actions.push(createSingleAction('follow', userId, li));
                 }
-            });
+                actions.push(createSingleAction('requestSent'));
+            } else if (friends) {
+                actions.push(createSingleAction('friends', userId, li));
+            } else if (following) {
+                actions.push(createSingleAction('following', userId, li));
+                actions.push(createSingleAction('request', userId, li));
+            } else {
+                actions.push(createSingleAction('follow', userId, li));
+                actions.push(createSingleAction('request', userId, li));
+            }
 
         } else {
             actions.push(createSingleAction('follow', userId, li));
@@ -277,7 +278,7 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
         // Sorting followers
         usersToShow = usersToShow.filter(function(f){return f.Rels.some(function(r){return r === 'Following'})}).sort(sortByName);
 
-    }else if (state === 'followers') {
+    } else if (state === 'followers') {
         usersToShow = DGW.main.cache.userRelations.users.filter(function(rels){
             return rels.Rels.some(function(r){
                 return r === 'FollowedBy';
@@ -312,7 +313,7 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
     }
 
     // adding users to the list
-    if (usersToShow.length > 1) {
+    if (usersToShow.length > 0) {
         usersToShow.forEach(function (userObj) {
             userListHolder.appendChild(createUserItem(userObj));
         });
@@ -320,6 +321,7 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
         userListHolder.appendChild(createSimpleItem());
     }
 
+    DGW.main.methods.friendsSetData();
 
     // TEMP part
     DGW.helpers.console.info(

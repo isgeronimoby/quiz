@@ -13,7 +13,8 @@ DGW.main.methods.gamesConstructor = function(){
     //dpCont.appendChild(emptyMessageEl);
 
 
-
+    if (dpCont.querySelector('.dg-o-w-draws-empty'))
+        dpCont.removeChild(dpCont.querySelector('.dg-o-w-draws-empty'));
 
 
     games.forEach(function(game){

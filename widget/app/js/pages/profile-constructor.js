@@ -3,8 +3,7 @@ DGW.main.methods.profileSetData = function(data, draw) {
     var wb = DGW.main.elements.widgetBody;
     var sb = DGW.side.elements.widgetBody;
     var profileImageHolders = DGW.helpers.getElementsFromAllPlaces('[data-userstats-userimage]'),
-        profileNames = DGW.helpers.getElementsFromAllPlaces('[data-userstats-username]'),
-        friendsNumber = pr.querySelector('#profileFriendsAmount');
+        profileNames = DGW.helpers.getElementsFromAllPlaces('[data-userstats-username]');
 
     var points = {
             confirmed: DGW.helpers.getElementsFromAllPlaces('[data-userstats-points-c]'),
@@ -57,9 +56,9 @@ DGW.main.methods.profileSetData = function(data, draw) {
     DGW.global.userStats.creditsC = data.Wallet.CreditsConfirmed;
     DGW.global.userStats.creditsP = data.Wallet.CreditsPending;
 
-    /*if (fbAddText && DGW.global.userStats.facebookId !== null) {
-        fbAddText.parentNode.removeChild(fbAddText);
-    }*/
+
+    DGW.main.methods.friendsSetData(data.FriendsCount, data.FriendRequestsCount);
+
 
     if (fbAddText) {
         if (DGW.global.userStats.facebookId !== null) {

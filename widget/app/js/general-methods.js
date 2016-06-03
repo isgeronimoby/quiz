@@ -85,6 +85,8 @@ DGW.global.methods.userStatsReset = function(){
         all: {},
         earned: {}
     };
+    DGW.global.userStats.friends = 0;
+    DGW.global.userStats.friendsRequests = 0;
 };
 
 DGW.global.methods.init = function(){
