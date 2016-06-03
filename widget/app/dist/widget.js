@@ -2046,17 +2046,35 @@ DGW.main.methods.drawsInit = function(){
         var friendsHolders = DGW.helpers.getElementsFromAllPlaces('[data-friends-c]'),
             requestsHolders = DGW.helpers.getElementsFromAllPlaces('[data-friends-requests]');
 
-        if (!friends) friends = DGW.main.cache.userRelations.users.filter(function(u){return u.Rels.some(function(r){return r==='Friends'})}).length;
-        if (!requests) requests = DGW.main.cache.userRelations.users.filter(function(u){return u.Rels.some(function(r){return r==='FriendRequestFrom'})}).length;
+        if (!friends) {
+            if (DGW.main.cache.userRelations.users) {
+                friends = DGW.main.cache.userRelations.users.filter(function(u){return u.Rels.some(function(r){return r==='Friends'})}).length;
+            } else {
+                friends = 0;
+            }
+        }
+        if (!requests) {
+            if (DGW.main.cache.userRelations.users) {
+                requests = DGW.main.cache.userRelations.users.filter(function(u){return u.Rels.some(function(r){return r==='FriendRequestFrom'})}).length;
+            }
+            requests = 0;
+        }
 
         DGW.global.userStats.friends = friends;
         DGW.global.userStats.friendsRequests = requests;
+
+
 
         friendsHolders.forEach(function(f){
             f.innerHTML = DGW.global.userStats.friends;
         });
 
         requestsHolders.forEach(function(r){
+            if (DGW.global.userStats.friendsRequests === 0) {
+                r.style.display = 'none';
+            } else {
+                r.style.display = 'inline-block';
+            }
             r.innerHTML = DGW.global.userStats.friendsRequests;
         });
     };
@@ -3766,7 +3784,7 @@ DGW.global.actions.requests.shareTw = function(drawId, text, _winner){
 };
 
 DGW.global.offers.requests.watchVideo = function(offerId, videoUrl){
-    window.player;
+    var player;
     var scriptCheckingInterval, widgetShownInterval, playbackInterval;
     var errorHandlerCounter = 0;
     var wCloseBtn = DGW.main.elements.widget.querySelector('.dg-o-w-close');
