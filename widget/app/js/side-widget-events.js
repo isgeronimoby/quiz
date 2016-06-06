@@ -14,6 +14,15 @@ DGW.side.methods.initEvents = function(){
         // Showing side widget
         DGW.side.methods.showWidget();
         DGW.global.launched = true;
+
+        // Sending event with load time
+        ga(DGW.global.gaSend, {
+            hitType: 'event',
+            eventCategory: 'TimeTrack',
+            eventAction: 'WidgetLoadTime',
+            eventValue: (new Date()).getTime() - DGW.global.loadTime
+        });
+        DGW.helpers.console.info('Script loading time: ' + ((new Date()).getTime() - DGW.global.loadTime) + 'ms');
     }
 
     var wBody = DGW.side.elements.widgetBody;

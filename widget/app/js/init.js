@@ -99,7 +99,8 @@ var DGW = function () {
                     userStats: {},
                     debug: debugMode,
                     gaSend: '',
-                    safariFixFirstOpen: false
+                    safariFixFirstOpen: false,
+                    loadTime: null
                 },
                 states: {},
                 helpers: {}

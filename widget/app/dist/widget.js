@@ -100,7 +100,8 @@ var DGW = function () {
                     userStats: {},
                     debug: debugMode,
                     gaSend: '',
-                    safariFixFirstOpen: false
+                    safariFixFirstOpen: false,
+                    loadTime: null
                 },
                 states: {},
                 helpers: {}
@@ -1787,6 +1788,15 @@ DGW.side.methods.initEvents = function(){
         // Showing side widget
         DGW.side.methods.showWidget();
         DGW.global.launched = true;
+
+        // Sending event with load time
+        ga(DGW.global.gaSend, {
+            hitType: 'event',
+            eventCategory: 'TimeTrack',
+            eventAction: 'WidgetLoadTime',
+            eventValue: (new Date()).getTime() - DGW.global.loadTime
+        });
+        DGW.helpers.console.info('Script loading time: ' + ((new Date()).getTime() - DGW.global.loadTime) + 'ms');
     }
 
     var wBody = DGW.side.elements.widgetBody;
@@ -2596,28 +2606,28 @@ DGW.main.methods.singleDrawConstructor = function(drawId){
     //DGW.helpers.console.log('draw state: ', drawState);
     el.innerHTML =  submenu +
     '<div class="dg-o-w-section-content">' +
-    '<div class="dg-o-w-single-draw">' +
-    prizeSect +
-    '<div class="dg-o-w-draw-right-side">' +
-    '<h2 class="dg-o-w-countdown">&nbsp;</h2>' +
-    '<h3>' + draw.Prize.Title + '</h3>' +
-    '<p>' + draw.Prize.Description + '</p>' +
-    '<div class="dg-o-w-draw-bet-info dg-o-w-draw-auth-show">' +
-    '<div class="dg-o-w-your-bet dg-o-w-points-bet"><p>You\'ve placed <span data-draw-betpoints>' + ((drawEntry) ? drawEntry.TicketsAmount : 0 ) + '</span> points</p></div>' +
-    '</div>' +
-    ((DGW.helpers.dateDiff(draw.EndDate) > 0) ? '<h2 class="dg-o-w-draw-login-show">Please, log in to play the draw</h2>' : '') +
-    '<div class="dg-o-w-draw-bet-action dg-o-w-draw-auth-show">' +
-    '<h4>How much do you want to place?</h4>' +
-    '<form id="bet-form" class="dg-o-w-one-field-form">' +
-    '<input type="number" min="1" max="1000" placeholder="50"/>' +
-    '<input class="btn-dg-o-w btn-dg-o-w-brand" type="submit" value="Place points" />' +
-    '</form>' +
-    '<div id="dg-o-w-get-points-btn" class="btn-dg-o-w btn-dg-o-w-brand-l">Get additional points</div>' +
-    '</div>' +
-    drawnState +
-    shareSect +
-    '</div>' +
-    '</div>' +
+        '<div class="dg-o-w-single-draw">' +
+            prizeSect +
+            '<div class="dg-o-w-draw-right-side">' +
+                '<h2 class="dg-o-w-countdown">&nbsp;</h2>' +
+                '<h3>' + draw.Prize.Title + '</h3>' +
+                '<p>' + draw.Prize.Description + '</p>' +
+                '<div class="dg-o-w-draw-bet-info dg-o-w-draw-auth-show">' +
+                    '<div class="dg-o-w-your-bet dg-o-w-points-bet"><p>You\'ve placed <span data-draw-betpoints>' + ((drawEntry) ? drawEntry.TicketsAmount : 0 ) + '</span> points</p></div>' +
+                '</div>' +
+                ((DGW.helpers.dateDiff(draw.EndDate) > 0) ? '<h2 class="dg-o-w-draw-login-show">Please, log in to play the draw</h2>' : '') +
+                '<div class="dg-o-w-draw-bet-action dg-o-w-draw-auth-show">' +
+                    '<h4>How much do you want to place?</h4>' +
+                    '<form id="bet-form" class="dg-o-w-one-field-form">' +
+                        '<input type="number" min="1" max="1000" placeholder="50"/>' +
+                        '<input class="btn-dg-o-w btn-dg-o-w-brand" type="submit" value="Place points" />' +
+                    '</form>' +
+                    '<div id="dg-o-w-get-points-btn" class="btn-dg-o-w btn-dg-o-w-brand-l">Get additional points</div>' +
+                '</div>' +
+                drawnState +
+                shareSect +
+            '</div>' +
+        '</div>' +
     '</div>';
 
     if (drawEntry && drawEntry.IsWinner) {
@@ -3912,6 +3922,7 @@ var widgetStyles = document.createElement('link');
 
 widgetStyles.addEventListener('load', function(){
     DGW.global.api.requests.checkServerAvailability();
+    DGW.global.loadTime = (new Date()).getTime();
 });
 
 widgetStyles.href = DGW.global.widgetPathName + 'style.min.css';

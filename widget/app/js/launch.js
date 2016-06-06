@@ -4,6 +4,7 @@ var widgetStyles = document.createElement('link');
 
 widgetStyles.addEventListener('load', function(){
     DGW.global.api.requests.checkServerAvailability();
+    DGW.global.loadTime = (new Date()).getTime();
 });
 
 widgetStyles.href = DGW.global.widgetPathName + 'style.min.css';
