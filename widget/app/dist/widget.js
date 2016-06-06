@@ -1640,7 +1640,8 @@ DGW.main.methods.showWidget = function(){
     DGW.helpers.removeClass(DGW.main.elements.widget, 'hiding');
     DGW.global.elements.documentBody.appendChild(DGW.main.elements.widget);
     if (DGW.main.currentState === '') {
-        DGW.main.methods.changeMainState('earn');
+        if (DGW.global.authorized) DGW.main.methods.changeMainState('earn');
+        else DGW.main.methods.changeMainState('profile');
     } else {
         DGW.main.methods.changeMainState(DGW.main.currentState);
     }
