@@ -24,7 +24,7 @@ DGW.templates.sideWidgetCore = '<div id="dg-side-widget-wrapper">' +
                                 '</div>';
 
 DGW.templates.side.draw =  '<div class="dg-side-section">' +
-                                        '<img data-image="temp-green-tee.png" class="dg-side-image-bg" src=""/>' +
+                                        '<img data-image="temp-new-kit.png" class="dg-side-image-bg" src=""/>' +
                                         '<div class="dg-side-content">' +
                                             '<p>Win<br/>prizes</p>' +
                                             '<div class="dg-side-cta">Play</div>' +

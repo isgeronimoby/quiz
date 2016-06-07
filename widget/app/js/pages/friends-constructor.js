@@ -226,7 +226,7 @@ DGW.main.methods.usersConstructor = function(state, usersFound) {
                 commonUsersText.className = ((commonUsers.length == 2) ? 'dg-o-w-two-images' : 'dg-o-w-three-images');
             }
         } else {
-            commonUsersText.innerHTML = 'No common users';
+            commonUsersText.innerHTML = '';
         }
         commonUsersHolder.appendChild(commonUsersText);
 
